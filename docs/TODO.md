@@ -73,8 +73,8 @@
 |-------|-------|
 | **Objective** | Configure Elementor Site Settings with brand colors, fonts, and global styles |
 | **Acceptance Criteria** | - Global colors defined<br>- Global fonts set (Rubik)<br>- Custom CSS added<br>- Experiments enabled |
-| **Status** | `TODO` |
-| **Artifact** | `/docs/ELEMENTOR_SETUP.md` (instructions ready) |
+| **Status** | `IN PROGRESS` |
+| **Artifact** | `/docs/IMPLEMENTATION_C2-C4.md` (detailed step-by-step guide) |
 
 ### C3: Header Template
 | Field | Value |
@@ -179,8 +179,9 @@
 | [TECH_DECISIONS.md](./TECH_DECISIONS.md) | ADR-style architectural decisions | Updated |
 | [STYLE_GUIDE.md](./STYLE_GUIDE.md) | Design tokens, components | Complete |
 | [SITEMAP.md](./SITEMAP.md) | Site structure, navigation | Approved |
-| [HOMEPAGE_SPEC.md](./HOMEPAGE_SPEC.md) | Homepage section breakdown | Pending approval |
-| [ELEMENTOR_SETUP.md](./ELEMENTOR_SETUP.md) | Global setup + templates | Pending approval |
+| [HOMEPAGE_SPEC.md](./HOMEPAGE_SPEC.md) | Homepage section breakdown | Approved |
+| [ELEMENTOR_SETUP.md](./ELEMENTOR_SETUP.md) | Global setup + templates | Approved |
+| [IMPLEMENTATION_C2-C4.md](./IMPLEMENTATION_C2-C4.md) | Step-by-step build guide | Ready |
 | [TODO.md](./TODO.md) | This file | Current |
 
 ---

@@ -246,8 +246,9 @@ Site uses **Lenis** for smooth scrolling with physics-based easing.
 
 ## ADR-009: Homepage Architecture
 
-**Status:** Confirmed
+**Status:** Confirmed + Approved
 **Date:** 2026-01-22
+**Approved:** 2026-01-22
 
 ### Context
 Need to define the homepage structure that serves both B2B (Services) and B2C (Academy) audiences.
@@ -308,6 +309,35 @@ Need to define the homepage structure that serves both B2B (Services) and B2C (A
 | Secondary Text | #d7cdef |
 | Primary Accent | #a855f7 → #ec4899 gradient |
 | Borders | rgba(185, 107, 254, 0.25) |
+
+---
+
+## ADR-011: Dual-Path UX Strategy
+
+**Status:** Confirmed
+**Date:** 2026-01-22
+
+### Context
+Client feedback emphasized that sections 03-06 must support two parallel user journeys without either feeling secondary.
+
+### Decision
+**"One Company, Two Pillars" Approach**
+
+### Implementation Rules
+1. **Hero:** Present Focus AI as ONE unified company, not a split personality
+2. **Value Prop Cards:** Equal visual weight to Services and Academy paths
+3. **Services Preview (B2B):** Dedicated section for business decision-makers
+4. **Academy Preview (B2C):** Dedicated section for individuals and teams
+5. **Testimonials:** Mix B2B and B2C voices, but clearly label context
+6. **Team Section:** Authentic presentation, not corporate stock content
+
+### Form Field Requirement Update
+- "Interest" field changed from optional to **required**
+- Enables lead routing and segmentation
+
+### Header CTA Strategy
+- Primary: "לשיחת אפיון" (consultation call)
+- Secondary (optional): "האקדמיה" (softer B2C path)
 
 ---
 
