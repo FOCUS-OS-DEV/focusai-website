@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <!-- Fixdigital Code -->
+<script>
+var fixdigital_params = {
+defaultphone:'', 
+phoneSelector:'.fix_smartphone, .fix_smartphone1 , .fix_smartphone2', 
+phoneSelectorHref:'.fix_smartphone_href, .fix_smartphone_href1 , .fix_smartphone_href2',
+api_type: 8, 
+api_clientkey: '25784', 
+api_tenantkey:'{api_tenantkey}', 
+api_projectid: '{api_projectid}', 
+api_projecttypeid: '{api_projecttypeid}',  
+sync:true,  
+forms:[], 
+cookie_expired:43200
+};</script>
+<script>
+!function(e){if(e.fixdigital=e.fixdigital||{},!e.fixdigital.cookie){e.fixdigital.cookie=e.fixdigital.cookie||{};var i,r=e.fixdigital.cookie;r.cookie_query="fixdigital.queryparams",r.cookie_hash="fixdigital.hashparams",r.cookie_referer="fixdigital.referer",r.cookie_original_referer="fixdigital.origin_referer",r.cookie_expired=10,r.cookie_original_expired=e.fixdigital_params.cookie_expired,r.crossdomain=(i=function(e){var i=e.split(".");"www"!==i[0]&&"m"!==i[0]&&"mobile"!==i[0]||i.shift();return i.join(".")}(location.hostname),"."+location.hostname.substring(location.hostname.indexOf(i))),r.getCookie=function(e){var i=document.cookie.match(new RegExp("(?:^|; )"+e.replace(/([\.$?|{}\(\)\[\]\\\/\+^])/g,"\\$1")+"=([^;])"));return i?decodeURIComponent(i[1]):void 0},r.deleteCookie=function(e){for(var i=r.crossdomain.split(".");i&&0<i.length;){var o=i.join(".");r.setCookie(e,"",{expires:-1,domain:o,path:"/"}),i.shift()}},r.setCookie=function(e,i,o){var r=(o=o||{}).expires;if("number"==typeof r&&r){var a=new Date;a.setTime(a.getTime()+1e3*r),r=o.expires=a}r&&r.toUTCString&&(o.expires=r.toUTCString());var t=e+"="+(i=encodeURIComponent(i));for(var n in o){t+="; "+n;var c=o[n];!0!==c&&(t+="="+c)}document.cookie=t},void 0===r.getCookie(r.cookie_referer)&&(r.setCookie(r.cookie_query,location.search,{expires:r.cookie_expired,domain:r.crossdomain}),r.setCookie(r.cookie_hash,location.hash,{expires:r.cookie_expired,domain:r.crossdomain}),r.setCookie(r.cookie_referer,document.referrer,{expires:r.cookie_expired,domain:r.crossdomain}))}}(window);
+</script>
+<script id="fixdigital_script" src="https://lpc.fixdigital.co.il/external_files/scripts/clp/fixdigital_integrate.js" async></script>
+<!-- End Fixdigital Code -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="AI FIRST - ההכשרה הישומית לשימוש בכלי AI מתקדמים. צעדים ראשונים בעולם ה-AI ב-5 מפגשים מעשיים דרך Zoom Live." />
+    <title>AI FIRST | צעדים ראשונים בעולם ה-AI | Focus AI</title>
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://focusai.co.il/ai-first" />
+    <meta property="og:title" content="AI FIRST | צעדים ראשונים בעולם ה-AI" />
+    <meta property="og:description" content="הכשרה יישומית לכלי AI מתקדמים למתחילים. 5 מפגשים מעשיים דרך Zoom שישנו את הדרך שבה אתם עובדים." />
+    <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/c_crop,g_center,z_1.08/v1765302030/Gemini_Generated_Image_bsjx1jbsjx1jbsjx_phattj.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Rubik', 'sans-serif'] },
+            colors: {
+              brand: { dark: '#ffffff', purple: '#a855f7', pink: '#ec4899', secondary: '#f3e8ff' }
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+            },
+            keyframes: {
+              float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } },
+              'pulse-glow': { '0%, 100%': { opacity: 1, filter: 'brightness(1)' }, '50%': { opacity: .7, filter: 'brightness(1.2)' } },
+              fadeIn: { '0%': { opacity: 0, transform: 'translateY(10px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      }
+      
+      select option { background-color: white; color: #1f2937; padding: 10px; }
+      
+      .nav-link:focus, .nav-link:focus-visible { outline: none; background: rgba(168, 85, 247, 0.1); }
+      
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #faf8ff; }
+      ::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 5px; }
+      ::-webkit-scrollbar-thumb:hover { background: #a855f7; }
+      
+      .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+      }
+      
+      :focus-visible { outline: 2px solid #a855f7; outline-offset: 2px; }
+      
+      /* Sticky AI Banner */
+      .ai-banner {
+        background: linear-gradient(90deg, #f3e8ff 0%, #e9d5ff 50%, #fce7f3 100%);
+        border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+        box-shadow: 0 2px 10px rgba(168, 85, 247, 0.1);
+      }
+      .ai-banner::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.25), transparent);
+        animation: shimmerBanner 3s ease-in-out infinite;
+      }
+      @keyframes shimmerBanner {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+      }
+      
+      /* Mobile Menu */
+      #mobile-menu {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      
+      /* Hero Gradient Text */
+      .gradient-text {
+        background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+      
+      @keyframes shimmer {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      
+      /* Price Card Highlight */
+      .price-highlight {
+        animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      
+      /* Floating Animation */
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      /* Scroll Fade In */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Typing Animation */
+      .typing-cursor::after {
+        content: '|';
+        display: inline-block;
+        width: 3px;
+        height: 1em;
+        background-color: #a855f7;
+        margin-left: 2px;
+        animation: cursorBlink 0.8s step-end infinite;
+        vertical-align: middle;
+      }
+      
+      @keyframes cursorBlink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+      
+      #rotating-text {
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+      }
+      
+      /* Glitch/Pixelate effect for headlines */
+      @keyframes glitchOut {
+        0% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: none;
+        }
+        10% {
+          transform: translateX(-2px);
+          filter: contrast(150%) brightness(120%);
+        }
+        20% {
+          transform: translateX(2px);
+          filter: contrast(80%) brightness(90%);
+        }
+        30% {
+          transform: translateX(-3px) skewX(5deg);
+          filter: contrast(200%) saturate(200%);
+        }
+        40% {
+          transform: translateX(3px) skewX(-5deg);
+          filter: contrast(50%) brightness(150%);
+        }
+        50% {
+          opacity: 0.7;
+          transform: translateX(-1px) scale(1.02);
+          filter: contrast(300%) saturate(0%);
+        }
+        60% {
+          opacity: 0.5;
+          transform: translateX(1px) scale(0.98);
+          filter: contrast(500%) brightness(200%) saturate(0%);
+        }
+        70% {
+          opacity: 0.3;
+          transform: translateX(-2px);
+          filter: contrast(800%) saturate(0%);
+        }
+        80% {
+          opacity: 0.2;
+          transform: translateX(2px);
+          filter: contrast(1000%) saturate(0%);
+        }
+        90% {
+          opacity: 0.1;
+          transform: scale(0.95);
+          filter: contrast(1500%) saturate(0%);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.9);
+          filter: contrast(2000%) saturate(0%);
+        }
+      }
+      
+      @keyframes glitchIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.9);
+          filter: contrast(2000%) saturate(0%);
+        }
+        10% {
+          opacity: 0.1;
+          transform: scale(0.95);
+          filter: contrast(1500%) saturate(0%);
+        }
+        20% {
+          opacity: 0.2;
+          transform: translateX(-2px);
+          filter: contrast(1000%) saturate(0%);
+        }
+        30% {
+          opacity: 0.3;
+          transform: translateX(2px);
+          filter: contrast(800%) saturate(0%);
+        }
+        40% {
+          opacity: 0.5;
+          transform: translateX(-1px) scale(0.98);
+          filter: contrast(500%) brightness(200%) saturate(0%);
+        }
+        50% {
+          opacity: 0.7;
+          transform: translateX(1px) scale(1.02);
+          filter: contrast(300%) saturate(0%);
+        }
+        60% {
+          transform: translateX(-3px) skewX(-5deg);
+          filter: contrast(200%) saturate(100%);
+        }
+        70% {
+          transform: translateX(3px) skewX(5deg);
+          filter: contrast(150%) saturate(150%);
+        }
+        80% {
+          transform: translateX(-2px);
+          filter: contrast(120%) brightness(110%);
+        }
+        90% {
+          transform: translateX(2px);
+          filter: contrast(100%) brightness(100%);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: none;
+        }
+      }
+      
+      
+      
+      /* Cookie Modal Styles */
+      .cookie-modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      
+      .cookie-toggle {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+      }
+      
+      .cookie-toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      
+      .cookie-toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #cbd5e1;
+        transition: 0.3s;
+        border-radius: 24px;
+      }
+      
+      .cookie-toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      
+      .cookie-toggle input:checked + .cookie-toggle-slider {
+        background: linear-gradient(90deg, #a855f7 0%, #ec4899 100%);
+      }
+      
+      .cookie-toggle input:checked + .cookie-toggle-slider:before {
+        transform: translateX(20px);
+      }
+      
+      .cookie-toggle input:disabled + .cookie-toggle-slider {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      .cookie-category {
+        border: 1px solid rgba(168, 85, 247, 0.2);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+        background: rgba(243, 232, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+      
+      .cookie-category:hover {
+        background: rgba(243, 232, 255, 0.5);
+        border-color: rgba(168, 85, 247, 0.4);
+      }
+    </style>
+      <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1934350780483890');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1934350780483890&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+  <body class="font-sans antialiased bg-white text-gray-900">
+    
+    <!-- ========== HEADER ========== -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4" id="main-header">
+      <div class="container mx-auto max-w-7xl">
+        <!-- Glassmorphism navbar container -->
+        <div id="navbar-container" class="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 rounded-2xl transition-all duration-300" style="background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(168,85,247,0.08), inset 0 1px 0 rgba(255,255,255,0.6);">
+          
+          <!-- Logo -->
+          <a href="#hero" class="flex-shrink-0">
+            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265416/5_mckdsj.png" alt="Focus AI Logo" class="h-8 sm:h-9 md:h-10 w-auto" width="120" height="40"/>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden lg:flex items-center gap-1">
+            <a href="#about" class="nav-link whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-600 rounded-full transition-all hover:text-gray-900 hover:bg-white/50">על ההכשרה</a>
+            <a href="https://drive.google.com/file/d/1qSX2SiYbuUd_yLOngvFADqsPScRshfkV/view?usp=sharing" target="_blank" class="nav-link whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-600 rounded-full transition-all hover:text-gray-900 hover:bg-white/50">הסילבוס</a>
+            <a href="#pricing" class="nav-link whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-600 rounded-full transition-all hover:text-gray-900 hover:bg-white/50">מחירים</a>
+            <a href="#testimonials" class="nav-link whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-600 rounded-full transition-all hover:text-gray-900 hover:bg-white/50">המלצות</a>
+          </nav>
+
+          <!-- Mobile: CTA + Hamburger -->
+          <div class="flex lg:hidden items-center gap-3">
+            <a href="#pricing" class="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold rounded-full transition-all duration-300 bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_4px_20px_rgba(168,85,247,0.4)]">
+              <span>הרשמו עכשיו</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </a>
+            <button id="mobile-menu-btn" class="flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 text-gray-500 hover:text-gray-700" style="background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.4) 100%); border: 1px solid rgba(168,85,247,0.15); box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+
+          <!-- Desktop CTA -->
+          <a href="#pricing" class="hidden lg:inline-flex group relative overflow-hidden items-center justify-center gap-2 px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-300 transform hover:-translate-y-0.5 bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_8px_25px_rgba(168,85,247,0.4)] hover:shadow-[0_12px_35px_rgba(168,85,247,0.5)]">
+            <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]"></span>
+            <span class="relative">הרשמו עכשיו</span>
+            <svg class="w-4 h-4 relative" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-3 right-3 mt-2 rounded-2xl transition-all duration-300" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.85) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(168,85,247,0.12);">
+        <nav class="px-4 py-4 flex flex-col gap-2">
+          <a href="#about" class="mobile-nav-link px-4 py-3 text-base font-medium text-gray-600 rounded-xl hover:bg-white/50 transition-all">על ההכשרה</a>
+          <a href="https://drive.google.com/file/d/1qSX2SiYbuUd_yLOngvFADqsPScRshfkV/view?usp=sharing" target="_blank" class="mobile-nav-link px-4 py-3 text-base font-medium text-gray-600 rounded-xl hover:bg-white/50 transition-all">הסילבוס</a>
+          <a href="#pricing" class="mobile-nav-link px-4 py-3 text-base font-medium text-gray-600 rounded-xl hover:bg-white/50 transition-all">מחירים</a>
+          <a href="#testimonials" class="mobile-nav-link px-4 py-3 text-base font-medium text-gray-600 rounded-xl hover:bg-white/50 transition-all">המלצות</a>
+          <a href="#contact" class="mobile-nav-link px-4 py-3 text-base font-bold text-white rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink text-center shadow-lg mt-2">הרשמה להכשרה</a>
+        </nav>
+      </div>
+    </header>
+
+    <style>
+      .nav-link.active {
+        background: linear-gradient(to right, #a855f7, #ec4899) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+      }
+      .nav-link:not(.active):hover {
+        background: rgba(168, 85, 247, 0.1);
+      }
+      .mobile-nav-link.active {
+        background: rgba(168, 85, 247, 0.25);
+        color: #7c3aed;
+      }
+    </style>
+    
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="main-content">
+    
+      <!-- ========== HERO SECTION ========== -->
+      <section id="hero" class="relative min-h-[100dvh] flex items-center pt-40 pb-12 lg:pt-36 overflow-hidden" style="background: linear-gradient(135deg, #faf8ff 0%, #f3e8ff 50%, #fce7f3 100%);">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div class="absolute top-[-10%] right-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-purple-200/40 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow will-change-transform"></div>
+          <div class="absolute bottom-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-pink-200/40 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow will-change-transform" style="animation-delay: 1.5s;"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+          <div class="flex flex-col items-center text-center">
+            <!-- Headline -->
+            <h1 id="rotating-text" class="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-6 text-gray-900 leading-tight" dir="rtl">
+              <span class="block">היו הראשונים</span>
+              <span class="block">להוביל עם</span>
+              <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink" style="font-size: 1.2em;">AI FIRST</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-2xl mb-8 md:mb-10 leading-relaxed px-4">
+              פיתוח יכולות דיגיטליות ושיפור תהליכי עבודה ב-5 מפגשים מעשיים
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-col w-full sm:w-auto sm:flex-row gap-4 px-4 sm:px-0 mb-10">
+              <a href="#pricing" class="group relative overflow-hidden inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-white bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_10px_25px_rgba(168,85,247,0.4)] hover:shadow-[0_20px_40px_rgba(168,85,247,0.5)] border border-transparent">
+                <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]" aria-hidden="true"></span>
+                <span class="relative">הצטרפו עכשיו</span>
+              </a>
+              <a href="https://drive.google.com/file/d/16CeGTiZImKxKk4FQF1i-wVMmQOL8o-vg/view?usp=sharing" target="_blank" class="group inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-brand-purple bg-white border-2 border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white shadow-sm hover:shadow-lg">
+                צפייה בסילבוס המלא
+              </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-8 mb-10 max-w-2xl">
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-purple to-brand-pink mb-1">5</div>
+                <div class="text-sm text-gray-600">מפגשים</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-purple to-brand-pink mb-1">100%</div>
+                <div class="text-sm text-gray-600">מעשי</div>
+              </div>
+              <div class="text-center flex flex-col items-center justify-end">
+                <div class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-purple to-brand-pink mb-1 leading-none">∞</div>
+                <div class="text-sm text-gray-600">אפשרויות</div>
+              </div>
+            </div>
+
+            <!-- Next Cohort Badge -->
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-sm font-bold">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+              <span class="text-gray-700">המחזור הקרוב נפתח ב-<span class="text-gray-900 font-bold">18.02.2026</span><span class="hidden sm:inline"> | </span><br class="sm:hidden"/><span class="sm:inline">Zoom Live</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== ABOUT SECTION ========== -->
+      <section id="about" class="relative py-20 lg:py-32 overflow-hidden bg-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          <header class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              למה <span class="text-brand-purple">AI FIRST?</span>
+            </h2>
+            <p class="text-gray-600 text-lg">
+              התכנית שמעניקה לכם את הכלים והידע להתחיל להוביל עם AI
+            </p>
+          </header>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <!-- Card 1 -->
+            <article class="bg-white/80 p-6 rounded-2xl border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 flex flex-col gap-4">
+              <div class="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-pink rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-7 h-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">מעשי ויישומי</h3>
+                <p class="text-gray-600 leading-relaxed">
+                  כל מפגש מלווה בתרגול מעשי. תצאו עם כלים ויכולות שאפשר ליישם מיד בעבודה היומיומית
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="bg-white/80 p-6 rounded-2xl border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 flex flex-col gap-4">
+              <div class="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-pink rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-7 h-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">מרצים מובילים</h3>
+                <p class="text-gray-600 leading-relaxed">
+                  מומחי Focus AI - מרצים שמובילים הכשרות AI בארגונים מובילים בארץ, ומטמיעים בעצמם פתרונות AI בחברות וארגונים מדי יום.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="bg-white/80 p-6 rounded-2xl border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 flex flex-col gap-4">
+              <div class="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-pink rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-7 h-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">גמיש ונוח</h3>
+                <p class="text-gray-600 leading-relaxed">
+                  5 מפגשים ב-Zoom Live - תוכלו להשתתף מכל מקום, עם אינטראקציה מלאה ומענה מיידי. הקלטות זמינות לצפייה חוזרת עד 3 חודשים מתום ההכשרה.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== VIDEO TESTIMONIALS SECTION ========== -->
+      <section id="video-testimonials" class="relative py-16 lg:py-24 overflow-hidden bg-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          
+          <!-- Section Header -->
+          <header class="text-center max-w-3xl mx-auto mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 mb-6">
+              <svg class="w-5 h-5 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+              <span class="text-sm font-bold text-brand-purple">המליצו עלינו</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              הם כבר <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">AI FIRST</span>
+            </h2>
+            <p class="text-gray-600 text-lg">
+              בוגרי ההכשרה משתפים את החוויה שלהם
+            </p>
+          </header>
+
+          <!-- Video Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            
+            <!-- Video 1 - מטר -->
+            <div class="video-card group relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-50 border border-purple-100 hover:border-brand-purple/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] hover:-translate-y-2">
+              <div class="aspect-[9/16] relative">
+                <video 
+                  class="w-full h-full object-cover cursor-pointer"
+                  poster=""
+                  preload="metadata"
+                  playsinline
+                  onclick="toggleVideo(this)"
+                >
+                  <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/%D7%9E%D7%98%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pvninr.mp4#t=0.1" type="video/mp4">
+                </video>
+                <!-- Play Button Overlay -->
+                <div class="video-play-overlay absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300">
+                  <div class="w-14 h-14 md:w-16 md:h-16 bg-white/95 rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-purple mr-[-2px]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+                <!-- Name Badge -->
+                <div class="absolute bottom-3 right-3 left-3 pointer-events-none">
+                  <div class="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg">
+                    <p class="text-sm font-bold text-gray-900 text-center">מטר</p>
+                    <p class="text-xs text-gray-500 text-center">בוגרת הכשרת Focus AI</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 2 - חגית -->
+            <div class="video-card group relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-50 border border-purple-100 hover:border-brand-purple/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] hover:-translate-y-2">
+              <div class="aspect-[9/16] relative">
+                <video 
+                  class="w-full h-full object-cover cursor-pointer"
+                  poster=""
+                  preload="metadata"
+                  playsinline
+                  onclick="toggleVideo(this)"
+                >
+                  <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1768547859/IMG_0753_iah7ft.mov#t=0.1" type="video/mp4">
+                </video>
+                <div class="video-play-overlay absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300">
+                  <div class="w-14 h-14 md:w-16 md:h-16 bg-white/95 rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-purple mr-[-2px]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="absolute bottom-3 right-3 left-3 pointer-events-none">
+                  <div class="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2.5 shadow-lg">
+                    <p class="text-sm font-bold text-gray-900 text-center">חגית</p>
+                    <p class="text-xs text-gray-500 text-center leading-tight">מנהלת המרכז לפיתוח קריירה, אוניברסיטת חיפה</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 3 - שניר -->
+            <div class="video-card group relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-50 border border-purple-100 hover:border-brand-purple/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] hover:-translate-y-2">
+              <div class="aspect-[9/16] relative">
+                <video 
+                  class="w-full h-full object-cover cursor-pointer"
+                  poster=""
+                  preload="metadata"
+                  playsinline
+                  onclick="toggleVideo(this)"
+                >
+                  <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483262/%D7%A9%D7%A0%D7%99%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_mxbzrj.mp4#t=0.1" type="video/mp4">
+                </video>
+                <div class="video-play-overlay absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300">
+                  <div class="w-14 h-14 md:w-16 md:h-16 bg-white/95 rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-purple mr-[-2px]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="absolute bottom-3 right-3 left-3 pointer-events-none">
+                  <div class="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg">
+                    <p class="text-sm font-bold text-gray-900 text-center">שניר</p>
+                    <p class="text-xs text-gray-500 text-center">בוגר הכשרת Focus AI</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 4 - בני -->
+            <div class="video-card group relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-50 border border-purple-100 hover:border-brand-purple/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] hover:-translate-y-2">
+              <div class="aspect-[9/16] relative">
+                <video 
+                  class="w-full h-full object-cover cursor-pointer"
+                  poster=""
+                  preload="metadata"
+                  playsinline
+                  onclick="toggleVideo(this)"
+                >
+                  <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1767274566/IMG_3467_pg6tos.mp4#t=0.1" type="video/mp4">
+                </video>
+                <div class="video-play-overlay absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300">
+                  <div class="w-14 h-14 md:w-16 md:h-16 bg-white/95 rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-purple mr-[-2px]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="absolute bottom-3 right-3 left-3 pointer-events-none">
+                  <div class="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg">
+                    <p class="text-sm font-bold text-gray-900 text-center">בני</p>
+                    <p class="text-xs text-gray-500 text-center">בוגר הכשרת Focus AI</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 5 - ארטיום -->
+            <div class="video-card group relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-50 border border-purple-100 hover:border-brand-purple/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] hover:-translate-y-2 col-span-2 md:col-span-1">
+              <div class="aspect-[9/16] relative">
+                <video 
+                  class="w-full h-full object-cover cursor-pointer"
+                  poster=""
+                  preload="metadata"
+                  playsinline
+                  onclick="toggleVideo(this)"
+                >
+                  <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/%D7%90%D7%A8%D7%98%D7%99%D7%95%D7%9D_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pzkt2y.mp4#t=0.1" type="video/mp4">
+                </video>
+                <div class="video-play-overlay absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300">
+                  <div class="w-14 h-14 md:w-16 md:h-16 bg-white/95 rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-purple mr-[-2px]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="absolute bottom-3 right-3 left-3 pointer-events-none">
+                  <div class="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg">
+                    <p class="text-sm font-bold text-gray-900 text-center">ארטיום</p>
+                    <p class="text-xs text-gray-500 text-center">בוגר הכשרת Focus AI</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CTA under videos -->
+          <div class="mt-12 text-center">
+            <p class="text-gray-600 mb-4">רוצים להצטרף לבוגרים שלנו?</p>
+            <a href="#pricing" class="group relative overflow-hidden inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_10px_25px_rgba(168,85,247,0.4)] hover:shadow-[0_20px_40px_rgba(168,85,247,0.5)]">
+              <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]"></span>
+              <span class="relative">אני רוצה להיות AI FIRST</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Background decorations -->
+        <div class="absolute top-1/4 right-0 w-[300px] h-[300px] bg-brand-purple/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-brand-pink/5 rounded-full blur-[80px] pointer-events-none"></div>
+      </section>
+
+      <!-- Video Lightbox Modal -->
+      <div id="videoLightbox" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/90 backdrop-blur-sm" onclick="closeLightbox(event)">
+        <button onclick="closeLightbox(event)" class="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 group">
+          <svg class="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="relative w-full max-w-md mx-4" onclick="event.stopPropagation()">
+          <div class="aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-2xl">
+            <video id="lightboxVideo" class="w-full h-full object-contain" controls playsinline>
+            </video>
+          </div>
+          <div id="lightboxInfo" class="mt-4 text-center">
+            <p id="lightboxName" class="text-white text-lg font-bold"></p>
+            <p id="lightboxDesc" class="text-white/70 text-sm"></p>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Video Testimonials Styles */
+        .video-card video {
+          transition: transform 0.5s ease;
+        }
+        .video-card:hover video {
+          transform: scale(1.05);
+        }
+        .video-card video.playing + .video-play-overlay {
+          opacity: 0;
+        }
+        .video-card video:not(.playing):hover + .video-play-overlay .w-14,
+        .video-card video:not(.playing):hover + .video-play-overlay .w-16 {
+          transform: scale(1.15);
+        }
+        
+        /* Mobile: center the 5th video that spans 2 cols */
+        @media (max-width: 767px) {
+          .video-card.col-span-2 {
+            max-width: 50%;
+            margin: 0 auto;
+          }
+        }
+        
+        /* Lightbox styles */
+        #videoLightbox {
+          animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeInLightbox {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        #videoLightbox video {
+          max-height: 80vh;
+        }
+      </style>
+
+      <script>
+        // Open video in lightbox
+        function toggleVideo(video) {
+          var videoCard = video.closest('.video-card');
+          var videoSrc = video.querySelector('source').src.replace('#t=0.1', '');
+          var nameEl = videoCard.querySelector('.text-sm.font-bold');
+          var descEl = videoCard.querySelector('.text-xs.text-gray-500');
+          
+          var lightbox = document.getElementById('videoLightbox');
+          var lightboxVideo = document.getElementById('lightboxVideo');
+          var lightboxName = document.getElementById('lightboxName');
+          var lightboxDesc = document.getElementById('lightboxDesc');
+          
+          lightboxVideo.src = videoSrc;
+          lightboxName.textContent = nameEl ? nameEl.textContent : '';
+          lightboxDesc.textContent = descEl ? descEl.textContent : '';
+          
+          lightbox.classList.remove('hidden');
+          lightbox.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+          
+          setTimeout(function() {
+            lightboxVideo.play();
+          }, 100);
+        }
+        
+        // Close lightbox
+        function closeLightbox(event) {
+          var lightbox = document.getElementById('videoLightbox');
+          var lightboxVideo = document.getElementById('lightboxVideo');
+          
+          lightboxVideo.pause();
+          lightboxVideo.src = '';
+          
+          lightbox.classList.add('hidden');
+          lightbox.classList.remove('flex');
+          document.body.style.overflow = '';
+        }
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeLightbox(e);
+          }
+        });
+      </script>
+
+      <!-- ========== WHAT YOU'LL LEARN SECTION ========== -->
+      <section id="syllabus" class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-white to-purple-50/50">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-5xl">
+          
+          <!-- Header -->
+          <div class="text-center max-w-4xl mx-auto mb-14">
+            <h2 class="text-3xl md:text-5xl font-black mb-8">
+              מה <span class="text-brand-purple">תלמדו?</span>
+            </h2>
+            <div class="text-gray-600 text-base md:text-lg leading-loose space-y-4">
+              <p>
+                התכנית נבנתה עבור אנשים המעוניינים לפתח <strong class="text-brand-purple">יכולות עבודה מתקדמות עם בינה מלאכותית</strong>, בין אם כחלק מהעבודה ובין אם לצורך למידה וכניסה לעולם ה-AI.
+              </p>
+              <p>
+                במהלך ההכשרה נלמד לעבוד עם כלי ה-AI המתקדמים ביותר בעולם, לבנות סוכני AI עבור תהליכי עבודה יעילים, ליצור תוכן ומצגות להעברת מסרים מקצועיים, לנתח נתונים, להקים דשבורדים חכמים ולאמץ חשיבה חדשנית המותאמת לעולם המשתנה.
+              </p>
+              <p>
+                ההכשרה משלבת <strong class="text-brand-purple">ידע מקצועי, תרגול מעשי ויישום פרקטי</strong>, ומעניקה בסיס רחב וחזק לעבודה עם AI בצורה יצירתית, מדויקת ואפקטיבית – <strong class="text-brand-purple">כבסיס מקצועי משמעותי לעתיד</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Skills Grid - Clean Design -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 max-w-3xl mx-auto mb-10">
+            
+            <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300">
+              <p class="text-gray-800 font-semibold text-sm md:text-base">פיתוח סוכני AI</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300">
+              <p class="text-gray-800 font-semibold text-sm md:text-base">יצירת דשבורדים חכמים</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300">
+              <p class="text-gray-800 font-semibold text-sm md:text-base">יצירת תמונות וסרטונים</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300">
+              <p class="text-gray-800 font-semibold text-sm md:text-base">יצירת מצגות מקצועיות</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300">
+              <p class="text-gray-800 font-semibold text-sm md:text-base">איסוף ועיבוד מידע</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300">
+              <p class="text-gray-800 font-semibold text-sm md:text-base">ייעול תהליכי עבודה</p>
+            </div>
+
+          </div>
+
+          <!-- CTA Button -->
+          <div class="text-center">
+            <a href="https://drive.google.com/file/d/16CeGTiZImKxKk4FQF1i-wVMmQOL8o-vg/view?usp=sharing" target="_blank" 
+               class="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-brand-purple text-brand-purple font-bold rounded-full hover:bg-brand-purple hover:text-white transition-all duration-300">
+              <span>לסילבוס המלא</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+            <!-- ========== PRICING SECTION ========== -->
+      <section id="pricing" class="relative py-20 lg:py-32 overflow-hidden bg-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          <header class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              <span class="text-brand-purple">מחיר השקה</span> מיוחד
+            </h2>
+            <p class="text-gray-600 text-lg">
+              השקעה קטנה שתשנה את הדרך שבה אתם עובדים
+            </p>
+          </header>
+
+          <div class="max-w-lg mx-auto">
+            <div class="group relative bg-white rounded-3xl p-8 md:p-10 border-2 border-brand-purple shadow-2xl hover:shadow-[0_20px_60px_rgba(168,85,247,0.3)] transition-all duration-300 overflow-hidden">
+              <!-- Decorative elements -->
+              <div class="absolute top-0 right-0 w-40 h-40 bg-brand-purple/10 blur-[60px] rounded-full pointer-events-none"></div>
+              <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-pink/10 blur-[50px] rounded-full pointer-events-none"></div>
+              
+              <!-- Launch Price Badge - Top Left Inside Card -->
+              <div class="absolute top-6 left-6">
+                <div class="relative">
+                  <!-- Main badge -->
+                  <div class="bg-gradient-to-r from-brand-purple to-brand-pink text-white px-5 py-2 rounded-xl shadow-lg">
+                    <div class="flex items-center gap-2">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                      <span class="text-sm font-black">מחיר השקה</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Title -->
+              <div class="relative z-10 text-center mb-6 pt-12">
+                <h3 class="text-3xl md:text-4xl font-black text-gray-900 mb-2">AI FIRST</h3>
+                <p class="text-gray-600 text-sm" dir="rtl">5 מפגשים מעשיים • <span dir="ltr">Zoom Live</span></p>
+              </div>
+
+              <!-- Price -->
+              <div class="relative z-10 text-center mb-8 pb-8 border-b-2 border-purple-100">
+                <div class="flex items-baseline justify-center gap-2 mb-3">
+                  <span class="text-xl text-gray-400 line-through">₪2,190</span>
+                </div>
+                <div class="flex items-baseline justify-center gap-2 mb-2">
+                  <span class="text-gray-600 text-xl font-bold">רק</span>
+                  <span class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">1,490</span>
+                  <span class="text-2xl text-gray-600 font-bold">₪</span>
+                </div>
+                <p class="text-sm font-bold text-green-600">💰 חיסכון של 700 ₪</p>
+              </div>
+
+              <!-- Features List -->
+              <div class="relative z-10 space-y-3 mb-8">
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  </div>
+                  <span class="text-gray-700 font-medium">5 מפגשים , ימי רביעי (18:00-21:00)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  </div>
+                  <span class="text-gray-700 font-medium">למידה מרחוק דרך Zoom Live</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  </div>
+                  <span class="text-gray-700 font-medium">סיכומי AI ומדריכים אינטראקטיביים</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  </div>
+                  <span class="text-gray-700 font-medium">תעודת סיום דיגיטלית</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  </div>
+                  <span class="text-gray-700 font-medium">קהילת בוגרים</span>
+                </div>
+              </div>
+
+              <!-- CTA Button -->
+              <div class="relative z-10">
+                <a href="https://mrng.to/sJIFpbLykY" target="_blank" class="group/btn relative overflow-hidden w-full inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_10px_25px_rgba(168,85,247,0.4)] hover:shadow-[0_20px_40px_rgba(168,85,247,0.5)]">
+                  <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover/btn:left-[200%]"></span>
+                  <span class="relative">הרשמו עכשיו</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trust badges -->
+          <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>תשלום מאובטח</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>מקומות מוגבלים</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>מתחילים ב-18.02.2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 right-0 w-[300px] h-[300px] bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-brand-pink/10 rounded-full blur-[80px] pointer-events-none"></div>
+      </section>
+
+
+      
+
+
+      <!-- ========== REASSURANCE SECTION ========== -->
+      <section class="relative py-16 lg:py-20 overflow-hidden bg-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-4xl">
+          
+          <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-black mb-4">
+              איך זה <span class="text-brand-purple">עובד?</span>
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            
+            <!-- Step 1 -->
+            <div class="text-center">
+              <div class="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-pink rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span class="text-white font-black text-xl">1</span>
+              </div>
+              <h3 class="font-bold text-gray-900 mb-2">נרשמים ומשלמים</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                תשלום מאובטח באשראי. מיד אחרי התשלום המקום שלכם שמור.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="text-center">
+              <div class="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-pink rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span class="text-white font-black text-xl">2</span>
+              </div>
+              <h3 class="font-bold text-gray-900 mb-2">מקבלים אישור במייל</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                אישור הרשמה, חשבונית וכל הפרטים להתחברות יישלחו אליכם למייל.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="text-center">
+              <div class="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-pink rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span class="text-white font-black text-xl">3</span>
+              </div>
+              <h3 class="font-bold text-gray-900 mb-2">מתחילים ללמוד</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                ב-18.02 בשעה 18:00 נתחיל יחד. מפגשים בזום לייב כל יום רביעי.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- AI Tools Note -->
+          <div class="mt-10 text-center">
+            <p class="text-gray-500 text-base">
+              <span class="text-gray-400">*</span> במהלך ההכשרה נעבוד עם כלי AI מתקדמים, חלקם בתשלום. העלות תלויה בכמות התרגול האישי שתבחרו.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========== QUICK CONTACT FORM (After Pricing) ========== -->
+      <section id="contact-quick" class="relative py-16 lg:py-20 overflow-hidden bg-gradient-to-b from-white to-purple-50">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-3xl">
+          <div class="bg-white/90 rounded-3xl p-6 md:p-8 border border-purple-100 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-purple/10 blur-[60px] rounded-full pointer-events-none"></div>
+            
+            <header class="text-center mb-6 relative z-10">
+              <h2 class="text-2xl md:text-3xl font-black mb-2">
+                יש שאלות? <span class="text-brand-purple">בואו נדבר</span>
+              </h2>
+              <p class="text-gray-600 text-sm">לא בטוחים אם ההכשרה מתאימה לכם? רוצים לדבר עם יועץ לימודים? השאירו פרטים ונחזור אליכם</p>
+            </header>
+            
+            <form id="contact-form-quick" class="relative z-10">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="space-y-1">
+                  <label for="name-quick" class="text-xs font-medium text-gray-600">שם מלא <span class="text-brand-pink">*</span></label>
+                  <input type="text" id="name-quick" name="name" required class="w-full px-3 py-2.5 bg-purple-50/50 border border-purple-100 rounded-xl focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/50 outline-none transition-all text-gray-900 placeholder-gray-400 text-sm" placeholder="ישראל ישראלי">
+                  <p id="name-quick-error" class="text-red-500 text-xs hidden"></p>
+                </div>
+                <div class="space-y-1">
+                  <label for="phone-quick" class="text-xs font-medium text-gray-600">טלפון <span class="text-brand-pink">*</span></label>
+                  <input type="tel" id="phone-quick" name="phone" required class="w-full px-3 py-2.5 bg-purple-50/50 border border-purple-100 rounded-xl focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/50 outline-none transition-all text-gray-900 placeholder-gray-400 text-sm" placeholder="050-0000000">
+                  <p id="phone-quick-error" class="text-red-500 text-xs hidden"></p>
+                </div>
+                <div class="space-y-1">
+                  <label for="email-quick" class="text-xs font-medium text-gray-600">אימייל</label>
+                  <input type="email" id="email-quick" name="email" class="w-full px-3 py-2.5 bg-purple-50/50 border border-purple-100 rounded-xl focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/50 outline-none transition-all text-gray-900 placeholder-gray-400 text-sm" placeholder="name@email.com">
+                  <p id="email-quick-error" class="text-red-500 text-xs hidden"></p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-2 mb-4">
+                <input type="checkbox" id="consent-quick" name="consent" required class="mt-1 w-4 h-4 rounded border-2 border-purple-200 text-brand-purple focus:ring-2 focus:ring-brand-purple/50 cursor-pointer flex-shrink-0">
+                <label for="consent-quick" class="text-xs text-gray-600 cursor-pointer">
+                  קראתי ואני מאשר/ת את <a href="https://focusai.co.il/privacy-policy/" target="_blank" class="text-brand-purple hover:text-brand-pink underline">מדיניות הפרטיות</a> ואת <a href="https://focusai.co.il/%D7%AA%D7%A0%D7%90%D7%99%20%D7%A9%D7%99%D7%9E%D7%95%D7%A9/" target="_blank" class="text-brand-purple hover:text-brand-pink underline">תנאי השימוש</a>, ומסכים/ה לקבל מידע שיווקי באמצעות הפרטים שמסרתי. <span class="text-brand-pink">*</span>
+                </label>
+              </div>
+              <p id="consent-quick-error" class="text-red-500 text-xs hidden mb-2">יש לאשר את תנאי השימוש</p>
+              
+              <button type="submit" id="submit-btn-quick" class="group relative overflow-hidden w-full inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_8px_20px_rgba(168,85,247,0.4)] hover:shadow-[0_12px_30px_rgba(168,85,247,0.5)]">
+                <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]"></span>
+                <span id="btn-text-quick" class="relative">שלחו פרטים</span>
+                <span id="btn-loading-quick" class="hidden relative">שולח...</span>
+              </button>
+            </form>
+            
+            <div id="success-message-quick" class="hidden text-center py-8 relative z-10">
+              <div class="w-16 h-16 bg-gradient-to-br from-green-500/30 to-brand-purple/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <h3 class="text-xl font-black text-gray-900 mb-2">תודה רבה!</h3>
+              <p class="text-gray-600 text-sm">נחזור אליכם בהקדם</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== TESTIMONIALS SECTION ========== -->
+      <section id="testimonials" class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-purple-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          
+          <!-- Section Header -->
+          <header class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              הסטודנטים שלנו <span class="text-brand-purple">מספרים</span>
+            </h2>
+            <p class="text-gray-600 text-lg">
+              בוגרי ההכשרות שלנו משתפים את החוויה שלהם
+            </p>
+          </header>
+
+          <!-- Testimonials Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            
+            <!-- Testimonial 1 - להב דור -->
+            <div class="group relative bg-white/80 rounded-2xl p-6 border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)]">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-brand-purple/10 blur-[40px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <!-- Quote Icon -->
+              <div class="absolute top-6 left-6 text-brand-purple/20">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <!-- Content -->
+              <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-purple/30 shadow-lg">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765177221/4_qhzbdk.jpg" alt="להב דור" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900">להב דור</h4>
+                    <p class="text-sm text-brand-purple">בוגר הכשרה</p>
+                  </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                  "תודה רבה לכל החבר'ה המדהימים על שבוע מעניין ומאתגר. תודה מיוחדת לאוניל, שחר וכפיר על הובלה דינמית, הקניית כלים וערכים לעתיד ושיתוף הידע. אני המלצתי כבר לכמה חברים על הקורס ולא רק לגבי החומר הנלמד אלא גם לאופי העברת החומר והתמיכה בסטודנטים לאורך הקורס."
+                </p>
+              </div>
+              
+              <!-- Stars -->
+              <div class="flex gap-1 mt-4">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 - בני מוזס -->
+            <div class="group relative bg-white/80 rounded-2xl p-6 border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)]">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-brand-purple/10 blur-[40px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div class="absolute top-6 left-6 text-brand-purple/20">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-purple/30 shadow-lg">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765177222/5_iudgl3.jpg" alt="בני מוזס" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900">בני מוזס</h4>
+                    <p class="text-sm text-brand-purple">בוגר הכשרה</p>
+                  </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                  "הדבר שהכי עוזר לי בלמידה בקורס הוא התמיכה האישית מהמרצים, ההסברים הברורים והיכולת להתנסות במערכת תוך כדי הלמידה. אשתדל ככל יכולתי להניע תהליכים בארגון לטובת הטמעת האוטומציות. כדי להיות ריאלי, אני מקווה לבצע משהו קטן ביחידה אחת עבור הסטודנטים, בכדי להתאמן ולחשוף את הממונים שלי ליכולות האלה."
+                </p>
+              </div>
+              
+              <div class="flex gap-1 mt-4">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 - חגית הלמר הרמן -->
+            <div class="group relative bg-white/80 rounded-2xl p-6 border border-purple-100 hover:border-brand-pink/40 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(236,72,153,0.25)]">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-brand-pink/10 blur-[40px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div class="absolute top-6 left-6 text-brand-pink/20">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-pink/30 shadow-lg">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765177220/3_d351xk.jpg" alt="חגית הלמר הרמן" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900">חגית הלמר הרמן</h4>
+                    <p class="text-sm text-brand-pink">מנהלת המרכז לפיתוח קריירה, אוניברסיטת חיפה</p>
+                  </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                  "החוויה שלנו בעבודה עם צוות Focus הייתה מדהימה. ההכשרה הועברה בצורה מקצועית וברורה, והסטודנטים קיבלו מענה מיידי ומקיף לכל הצרכים שלהם. התגובות של כלל המשתתפים היו מעל המצופה, החל מסטודנטים צעירים ועד לעובדי האוניברסיטה שלקחו חלק בהכשרה."
+                </p>
+              </div>
+              
+              <div class="flex gap-1 mt-4">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 - רימא חלאילה -->
+            <div class="group relative bg-white/80 rounded-2xl p-6 border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)]">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-brand-purple/10 blur-[40px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div class="absolute top-6 left-6 text-brand-purple/20">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-purple/30 shadow-lg">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765177220/1_d3qx5v.jpg" alt="רימא חלאילה" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900">רימא חלאילה</h4>
+                    <p class="text-sm text-brand-purple">בוגרת הכשרה</p>
+                  </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                  "השיעור הראשון היום היה ממש מעניין! פיתחתי סוכן קטן שייעץ בנושא כושר ותזונה וחייבת לכתוב לכם שזה באמת היה מגניב עבורי. החלק המעשי והויזואלי כשחיברנו אותו לממשק היה לי משמעותי בחוויה. חייבת להוסיף שפשוט הייתה זמינות טוטאלית של המרצים ולא היה מקרה שמישהו שנתקל בקושי נשאר מאחור."
+                </p>
+              </div>
+              
+              <div class="flex gap-1 mt-4">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+
+            <!-- Testimonial 5 - סאוסן פרעוני -->
+            <div class="group relative bg-white/80 rounded-2xl p-6 border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)]">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-brand-purple/10 blur-[40px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div class="absolute top-6 left-6 text-brand-purple/20">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-purple/30 shadow-lg">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765177222/6_mngwf3.jpg" alt="סאוסן פרעוני" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900">סאוסן פרעוני</h4>
+                    <p class="text-sm text-brand-purple">בוגרת הכשרה</p>
+                  </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                  "הייתה חוויה נעימה מאוד, נהניתי מהשילוב בין התיאוריה לפרקטיקה ומהאווירה החיובית של הקבוצה. אני מתכננת לשלב את מה שלמדתי בקורס בפרויקטים באוניברסיטה ובעבודה היומיומית שלי, אנסה לשלב בינה מלאכותית ואוטומציות לייעול משימות ועבור למידה עצמאית."
+                </p>
+              </div>
+              
+              <div class="flex gap-1 mt-4">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+
+            <!-- Testimonial 6 - אריס חנא -->
+            <div class="group relative bg-white/80 rounded-2xl p-6 border border-purple-100 hover:border-brand-purple/40 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)]">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-brand-purple/10 blur-[40px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div class="absolute top-6 left-6 text-brand-purple/20">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-purple/30 shadow-lg">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765177221/2_ytkcuf.jpg" alt="אריס חנא" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900">אריס חנא</h4>
+                    <p class="text-sm text-brand-purple">בוגרת הכשרה</p>
+                  </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                  "תודה רבה לכם ולכל הקבוצה! באמת אתם מסבירים מהלב, בסבלנות ובצורה שממש נותנת ביטחון ללמוד. מרגישה שאתם לא רק מלמדים אלא גם מלווים ותומכים, וזה עושה את כל ההבדל. אני ממש שמחה להיות חלק מהקורס הזה! הערך המרכזי שאני מרגישה שקיבלתי הוא היכולת שלי ליישם את הידע בצורה מידית."
+                </p>
+              </div>
+              
+              <div class="flex gap-1 mt-4">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 right-0 w-[300px] h-[300px] bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-brand-pink/10 rounded-full blur-[80px] pointer-events-none"></div>
+      </section>
+
+      <!-- ========== ABOUT SECTION ========== -->
+      <section id="about" class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-purple-50 to-pink-50">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          
+          <header class="text-center max-w-3xl mx-auto mb-10">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              הסיפור של <span class="text-brand-purple">Focus AI</span>
+            </h2>
+          </header>
+
+          <div class="max-w-4xl mx-auto">
+            <div class="bg-white/80 rounded-3xl p-8 md:p-12 border border-purple-100">
+              <div class="text-gray-600 leading-relaxed text-base md:text-lg space-y-6">
+                <p>
+                  החברה הוקמה על־ידי <strong class="text-gray-900">שחר דדיה</strong> ו<strong class="text-gray-900">אוניל סחר</strong>, מומחים לעולמות האוטומציה, החדשנות והעסקים, אשר חיברו בין ניסיון ניהולי עשיר בתחום הקמעונאות, השיווק והייעוץ הארגוני - לבין מומחיות טכנולוגית בפיתוח פתרונות AI מתקדמים.
+                </p>
+                
+                <p>
+                  לאחר שנים של ניהול ועבודה עם ארגונים גדולים, הבנו שחייבים לבנות גשר אמיתי בין עולמות הניהול והאסטרטגיה לבין עולמות הפיתוח והטכנולוגיה. Focus AI מפעילה מערך הכשרה אקדמית והדרכה רחב עבור ארגונים, מוסדות חינוך וגופים ציבוריים, הכולל תכניות לימודי תעודה יוקרתיות בשיתוף מוסדות מובילים כמו <strong class="text-brand-purple">אוניברסיטת חיפה</strong> ו<strong class="text-brand-purple">הטכניון</strong>, וכן סדנאות AI פנים־ארגוניות מותאמות אישית לצרכי כל חברה - משלב האבחון ועד לשילוב כלים חכמים בשגרת העבודה.
+                </p>
+                
+                <p>
+                  <strong class="text-gray-900">ללמוד ממי שעושים את זה בעצמם!</strong> לצד מערך ההכשרות, Focus AI מפעילה <strong class="text-brand-purple">חטיבת אינטגרציה</strong> שמפתחת פתרונות AI מותאמים אישית לחברות וארגונים ממגוון תעשיות. אנחנו מפתחים אוטומציות חכמות, סוכני AI, צ'אטבוטים מתקדמים ומערכות שלמות שמשנות את הדרך שבה עסקים עובדים. הידע שלנו מגיע מהשטח! מפרויקטים ואתגרים אמיתיים ופתרונות שעובדים. חלק ממקרי הבוחן שיוצגו בהכשרה הם מלקוחות אמיתיים שלנו.
+                </p>
+                
+                <p class="text-gray-900 font-medium">
+                  החזון שלנו: להנגיש את מהפכת הבינה המלאכותית לכל אדם ולכל עסק בישראל – ולהוביל שינוי עמוק בדרך שבה אנשים עובדים, יוצרים ומתקדמים בעולם הדיגיטלי החדש.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== TEAM SECTION ========== -->
+      <section id="team" class="relative py-20 lg:py-32 overflow-hidden bg-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+          
+          <header class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              צוות <span class="text-brand-purple">המרצים</span>
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              המומחים שילוו אתכם לאורך ההכשרה
+            </p>
+          </header>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Onil -->
+            <article class="group bg-purple-50/50 rounded-3xl p-8 border border-purple-100 hover:border-brand-purple/50 transition-all duration-300">
+              <div class="flex flex-col items-center text-center">
+                <div class="relative w-32 h-32 mb-5">
+                  <div class="absolute inset-0 bg-brand-purple rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity" aria-hidden="true"></div>
+                  <img 
+                    src="https://focusai.co.il/wp-content/uploads/2025/10/תמונה-אוניל.png" 
+                    alt="אוניל סחר" 
+                    class="w-full h-full object-cover rounded-full border-4 border-purple-100 relative z-10"
+                    loading="lazy"
+                  >
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">אוניל סחר</h3>
+                <span class="inline-block px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[11px] border border-purple-200 font-semibold mb-4">מייסד ומנכ"ל משותף</span>
+                <p class="text-gray-600 leading-relaxed text-sm">יזם וסמנכ"ל תפעול ושיווק לשעבר ברשתות קמעונאיות מובילות, עם ניסיון של למעלה מעשור בניהול מאות עובדים ועשרות סניפים בפריסה ארצית. מומחה לפיתוח עסקי, אפיון תהליכים ובניית פתרונות אוטומציה ו-AI. מרצה בתוכניות לימודי תעודה באוניברסיטת חיפה ובטכניון, ויוצר בתחומי הספרות והשירה.</p>
+              </div>
+            </article>
+            
+            <!-- Shachar -->
+            <article class="group bg-purple-50/50 rounded-3xl p-8 border border-purple-100 hover:border-brand-purple/50 transition-all duration-300">
+              <div class="flex flex-col items-center text-center">
+                <div class="relative w-32 h-32 mb-5">
+                  <div class="absolute inset-0 bg-brand-purple rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity" aria-hidden="true"></div>
+                  <img 
+                    src="https://focusai.co.il/wp-content/uploads/2025/11/63452051.png" 
+                    alt="שחר דדיה" 
+                    class="w-full h-full object-cover rounded-full border-4 border-purple-100 relative z-10"
+                    loading="lazy"
+                  >
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">שחר דדיה, עו"ד</h3>
+                <span class="inline-block px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[11px] border border-purple-200 font-semibold mb-4">מייסד ומנכ"ל משותף</span>
+                <p class="text-gray-600 leading-relaxed text-sm">עורך דין, יזם ובעל ניסיון רב בשיווק, ניהול פרויקטים והפקת מהלכים עסקיים נרחבים בארץ ובעולם. מתמחה באפיון והטמעת מערכי אוטומציה וסוכני AI לעסקים, ומשלב בין ידע משפטי להבנה טכנולוגית עמוקה. כיום מרצה בתחום, מפתח תוכניות ומכשיר מנהלים, צוותים וסטודנטים באוניברסיטת חיפה, בטכניון ובמוסדות חינוך מובילים נוספים.</p>
+              </div>
+            </article>
+            
+            <!-- Kfir -->
+            <article class="group bg-purple-50/50 rounded-3xl p-8 border border-purple-100 hover:border-brand-purple/50 transition-all duration-300">
+              <div class="flex flex-col items-center text-center">
+                <div class="relative w-32 h-32 mb-5">
+                  <div class="absolute inset-0 bg-brand-purple rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity" aria-hidden="true"></div>
+                  <img 
+                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765007114/%D7%9B%D7%A4%D7%99%D7%A8_hipy6q.png" 
+                    alt="כפיר קורן" 
+                    class="w-full h-full object-cover rounded-full border-4 border-purple-100 relative z-10"
+                    loading="lazy"
+                  >
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">כפיר קורן</h3>
+                <span class="inline-block px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[11px] border border-purple-200 font-semibold mb-4">מתכנת ומפתח מערכות</span>
+                <p class="text-gray-600 leading-relaxed text-sm">בוגר תואר ראשון במדעי המחשב בהצטיינות דיקן, עם ניסיון עשיר בהובלת פרויקטים בתחומי הבינה המלאכותית, האוטומציה ופיתוח מערכות חכמות. שירת כמפקד ומדריך בכיר בחיל האוויר, שם ניהל הכשרות מקצועיות וניהל מפקדים בתחום ה-F16. מנחה הכשרות בתחומי ה־AI והאוטומציה, וכיום מפתח מערכות ותוכנות מתקדמות לחברות בתעשייה.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CLIENTS CAROUSEL SECTION ========== -->
+      <section class="relative py-16 lg:py-24 overflow-hidden bg-gradient-to-b from-purple-50 to-white">
+        <style>
+          .brands-section {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            padding: 30px 0;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+          }
+          .carousel-wrapper {
+            width: 100%;
+            overflow: hidden;
+          }
+          .carousel-track {
+            display: flex;
+            width: fit-content;
+            animation: logosScrollRight 35s linear infinite;
+            transform: translateX(-33.333%);
+          }
+          .carousel-track:hover {
+            animation-play-state: paused;
+          }
+          .logos-set {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 10px;
+            flex-shrink: 0;
+          }
+          .logos-set img {
+            flex-shrink: 0;
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.55);
+            padding: 12px;
+            transition: transform 0.3s ease, background 0.3s ease;
+          }
+          .logos-set img:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.75);
+          }
+          @keyframes logosScrollRight {
+            0% { transform: translateX(-33.333%); }
+            100% { transform: translateX(0); }
+          }
+          @media (max-width: 480px) {
+            .logos-set img {
+              width: 160px;
+              height: 160px;
+              padding: 10px;
+              border-radius: 12px;
+            }
+            .logos-set {
+              gap: 12px;
+            }
+          }
+          @media (min-width: 768px) {
+            .logos-set img {
+              width: 260px;
+              height: 260px;
+            }
+            .logos-set {
+              gap: 25px;
+            }
+          }
+        </style>
+
+        <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+          <header class="text-center max-w-3xl mx-auto mb-8">
+            <h2 class="text-3xl md:text-5xl font-black">
+              הלקוחות שלנו כבר<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">AI FIRST</span>, ואתם?
+            </h2>
+          </header>
+        </div>
+
+        <div class="brands-section">
+          <div class="carousel-wrapper" dir="ltr">
+            <div class="carousel-track">
+              <!-- Set 1 -->
+              <div class="logos-set">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="">
+              </div>
+              <!-- Set 2 -->
+              <div class="logos-set">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="">
+              </div>
+              <!-- Set 3 -->
+              <div class="logos-set">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="">
+                <img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== FINAL CTA SECTION ========== -->
+      <section id="final-cta" class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-purple-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-4xl">
+          <div class="text-center">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">
+              מוכנים <span class="text-brand-purple">להתחיל?</span>
+            </h2>
+            <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+              הצטרפו עכשיו להכשרה ותתחילו ליישם AI בעבודה שלכם כבר מהשבוע הראשון
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="https://mrng.to/sJIFpbLykY" target="_blank" class="group relative overflow-hidden inline-flex items-center justify-center px-10 py-4 text-lg font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_10px_30px_rgba(168,85,247,0.4)] hover:shadow-[0_20px_50px_rgba(168,85,247,0.5)]">
+                <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]"></span>
+                <span class="relative">להרשמה ותשלום</span>
+                <svg class="w-5 h-5 mr-2 relative" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </a>
+              
+              <a href="#contact-quick" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 bg-white border-2 border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white shadow-sm hover:shadow-lg">
+                יש לי שאלות
+              </a>
+            </div>
+            
+            <!-- Trust indicators -->
+            <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>תשלום מאובטח</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>מתחילים ב-18.02.2026</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>מקומות מוגבלים</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 right-0 w-[300px] h-[300px] bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-brand-pink/10 rounded-full blur-[80px] pointer-events-none"></div>
+      </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <!-- ========== WHATSAPP FLOATING BUTTON ========== -->
+    <a href="https://wa.me/972539466408" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 left-6 z-[90] w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.5)]"
+       aria-label="פנייה מהירה בוואצאפ">
+      <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+
+    <footer class="relative bg-gradient-to-b from-white to-purple-50 border-t border-purple-100">
+      <div class="container mx-auto px-4 sm:px-6 py-12 relative z-10 max-w-7xl">
+        <div class="flex flex-col items-center gap-6 text-center">
+          <!-- Social Links -->
+          <div class="flex justify-center gap-4">
+            <a href="https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==" target="_blank" rel="noopener" class="w-10 h-10 bg-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-purple-100 shadow-sm hover:shadow-lg group">
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener" class="w-10 h-10 bg-white hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-purple-100 shadow-sm hover:shadow-lg group">
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh" target="_blank" rel="noopener" class="w-10 h-10 bg-white hover:bg-black rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-purple-100 shadow-sm hover:shadow-lg group">
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            </a>
+            <a href="https://did.li/Focus-community" target="_blank" rel="noopener" class="w-10 h-10 bg-white hover:bg-green-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-purple-100 shadow-sm hover:shadow-lg group">
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+          
+          <p class="text-gray-600 text-sm">
+            © 2025 Focus AI. כל הזכויות שמורות.
+          </p>
+          <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-600">
+            <a href="/cdn-cgi/l/email-protection#076861616e6462476168647274666e296468296e6b" class="hover:text-brand-purple transition-colors focus-visible:text-brand-purple"><span class="__cf_email__" data-cfemail="6d020b0b040e082d0b020e181e0c04430e02430401">[email&#160;protected]</span></a>
+            <span class="hidden md:inline text-purple-200">|</span>
+            <a href="https://focusai.co.il/%D7%AA%D7%A0%D7%90%D7%99%20%D7%A9%D7%99%D7%9E%D7%95%D7%A9/" class="hover:text-brand-purple transition-colors focus-visible:text-brand-purple">תנאי שימוש</a>
+            <span class="hidden md:inline text-purple-200">|</span>
+            <a href="https://focusai.co.il/privacy-policy/" class="hover:text-brand-purple transition-colors focus-visible:text-brand-purple">מדיניות פרטיות</a>
+            <span class="hidden md:inline text-purple-200">|</span>
+            <a href="https://focusai.co.il/%d7%9e%d7%93%d7%99%d7%a0%d7%99%d7%95%d7%aa-%d7%a7%d7%95%d7%a7%d7%99%d7%96/" class="hover:text-brand-purple transition-colors focus-visible:text-brand-purple">מדיניות קוקיז</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========== COOKIE CONSENT POPUP ========== -->
+    <div id="cookie-popup" class="fixed bottom-0 left-0 right-0 z-[100] transform translate-y-full transition-transform duration-500 ease-out">
+      <div class="relative w-full bg-white border-t border-purple-100 shadow-[0_-10px_40px_rgba(168,85,247,0.1)]">
+        <!-- Purple glow effects -->
+        <div class="absolute top-0 right-0 w-20 h-20 bg-purple-200/30 rounded-full blur-[40px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-16 h-16 bg-pink-200/30 rounded-full blur-[30px] pointer-events-none"></div>
+        
+        <div class="relative z-10 container mx-auto px-4 py-3 md:py-4 text-center max-w-4xl">
+          <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2">אנו מכבדים את פרטיותך</h3>
+          
+          <p class="text-gray-600 text-xs md:text-sm leading-relaxed mb-3 max-w-2xl mx-auto">
+            אנו משתמשים בקובצי Cookie ובטכנולוגיות דומות לשיפור חוויית הגלישה, אנליטיקה ושיווק. הסכמתך מאפשרת לנו לעבד נתונים כמו התנהגות גלישה באתר.
+          </p>
+          
+          <div class="flex flex-row justify-center gap-2 mb-2">
+            <button id="cookie-accept" class="px-4 py-2 text-sm font-bold rounded-full bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-lg hover:shadow-[0_8px_25px_rgba(168,85,247,0.4)] transition-all duration-300">
+              אשר הכול
+            </button>
+            <button id="cookie-reject" class="px-4 py-2 text-sm font-bold rounded-full bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-all duration-300">
+              דחה הכול
+            </button>
+            <button id="cookie-manage-btn" class="px-4 py-2 text-sm font-bold rounded-full bg-purple-50 text-gray-600 border border-purple-100 hover:bg-purple-100 transition-all duration-300">
+              נהל העדפות
+            </button>
+          </div>
+          
+          <div class="flex justify-center gap-3 text-xs">
+            <a href="https://focusai.co.il/%d7%9e%d7%93%d7%99%d7%a0%d7%99%d7%95%d7%aa-%d7%a7%d7%95%d7%a7%d7%99%d7%96/" target="_blank" class="text-brand-purple hover:text-brand-pink transition-colors">מדיניות קוקיז</a>
+            <a href="https://focusai.co.il/privacy-policy/" target="_blank" class="text-brand-purple hover:text-brand-pink transition-colors">מדיניות פרטיות</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== COOKIE PREFERENCES MODAL ========== -->
+    <div id="cookie-modal" class="fixed inset-0 z-[110] hidden">
+      <!-- Backdrop -->
+      <div class="cookie-modal-backdrop absolute inset-0" onclick="document.getElementById('cookie-modal').classList.add('hidden')"></div>
+      
+      <!-- Modal Content -->
+      <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+          <!-- Header -->
+          <div class="bg-gradient-to-r from-brand-purple to-brand-pink p-6 text-white">
+            <div class="flex justify-between items-start">
+              <div>
+                <h2 class="text-2xl font-bold mb-2">הגדרות פרטיות וקוקיז</h2>
+                <p class="text-sm opacity-90">נהל את העדפות הפרטיות שלך</p>
+              </div>
+              <button onclick="document.getElementById('cookie-modal').classList.add('hidden')" class="text-white hover:bg-white/20 rounded-full p-2 transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Body -->
+          <div class="p-6 overflow-y-auto max-h-[60vh]">
+            <p class="text-gray-600 mb-6">
+              אנו משתמשים בקוקיז כדי לשפר את חוויית הגלישה שלך, לנתח תנועה באתר ולספק תוכן מותאם אישית. ניתן לבחור אילו סוגי קוקיז להפעיל.
+            </p>
+            
+            <!-- Essential Cookies (Always On) -->
+            <div class="cookie-category">
+              <div class="flex justify-between items-center mb-2">
+                <div>
+                  <h3 class="font-bold text-gray-900">קוקיז חיוניים</h3>
+                  <p class="text-sm text-gray-600 mt-1">נחוצים לתפקוד בסיסי של האתר</p>
+                </div>
+                <label class="cookie-toggle">
+                  <input type="checkbox" checked disabled>
+                  <span class="cookie-toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Analytics Cookies -->
+            <div class="cookie-category">
+              <div class="flex justify-between items-center mb-2">
+                <div>
+                  <h3 class="font-bold text-gray-900">קוקיז אנליטיים</h3>
+                  <p class="text-sm text-gray-600 mt-1">עוזרים לנו להבין כיצד המשתמשים משתמשים באתר</p>
+                </div>
+                <label class="cookie-toggle">
+                  <input type="checkbox" id="cookie-analytics" checked>
+                  <span class="cookie-toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Marketing Cookies -->
+            <div class="cookie-category">
+              <div class="flex justify-between items-center mb-2">
+                <div>
+                  <h3 class="font-bold text-gray-900">קוקיז שיווקיים</h3>
+                  <p class="text-sm text-gray-600 mt-1">משמשים למעקב אחר מבקרים ולהצגת פרסומות רלוונטיות</p>
+                </div>
+                <label class="cookie-toggle">
+                  <input type="checkbox" id="cookie-marketing" checked>
+                  <span class="cookie-toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Functional Cookies -->
+            <div class="cookie-category">
+              <div class="flex justify-between items-center mb-2">
+                <div>
+                  <h3 class="font-bold text-gray-900">קוקיז תפקודיים</h3>
+                  <p class="text-sm text-gray-600 mt-1">מאפשרים פונקציות משופרות והתאמה אישית</p>
+                </div>
+                <label class="cookie-toggle">
+                  <input type="checkbox" id="cookie-functional" checked>
+                  <span class="cookie-toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Footer -->
+          <div class="p-6 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row gap-3">
+            <button id="cookie-save-preferences" class="flex-1 px-6 py-3 bg-gradient-to-r from-brand-purple to-brand-pink text-white font-bold rounded-full hover:shadow-lg transition-all">
+              שמור העדפות
+            </button>
+            <button id="cookie-accept-all-modal" class="flex-1 px-6 py-3 bg-white text-gray-700 font-bold rounded-full border-2 border-gray-300 hover:border-brand-purple transition-all">
+              אשר הכול
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+      // ========== MOBILE MENU TOGGLE ==========
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+          
+          // Close menu when clicking on a link
+          mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              mobileMenu.classList.add('hidden');
+            });
+          });
+        }
+      });
+
+      // ========== SCROLL FADE IN ANIMATION ==========
+      const fadeElements = document.querySelectorAll('.fade-in-up');
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+      
+      fadeElements.forEach(el => observer.observe(el));
+
+      // ========== VALIDATION PATTERNS ==========
+      const phoneRegex = /^0(5[0-9]|[2-4]|[8-9]|7[0-9])[0-9]{7}$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const nameRegex = /^[\u0590-\u05FFa-zA-Z\s]{2,50}$/;
+
+      function cleanPhone(phone) {
+        return phone.replace(/[-\s]/g, '');
+      }
+
+      // ========== QUICK FORM SUBMISSION ==========
+      const contactFormQuick = document.getElementById('contact-form-quick');
+      const successMessageQuick = document.getElementById('success-message-quick');
+      const submitBtnQuick = document.getElementById('submit-btn-quick');
+      const btnTextQuick = document.getElementById('btn-text-quick');
+      const btnLoadingQuick = document.getElementById('btn-loading-quick');
+
+      if (contactFormQuick) {
+        contactFormQuick.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('name-quick').value.trim();
+          const phone = cleanPhone(document.getElementById('phone-quick').value.trim());
+          const email = document.getElementById('email-quick').value.trim();
+          const consentCheckbox = document.getElementById('consent-quick');
+          
+          let isValid = true;
+          
+          // Validate name
+          if (!nameRegex.test(name)) {
+            document.getElementById('name-quick-error').textContent = 'יש להזין שם תקין';
+            document.getElementById('name-quick-error').classList.remove('hidden');
+            document.getElementById('name-quick').style.borderColor = '#ef4444';
+            isValid = false;
+          } else {
+            document.getElementById('name-quick-error').classList.add('hidden');
+            document.getElementById('name-quick').style.borderColor = '';
+          }
+          
+          // Validate phone
+          if (!phoneRegex.test(phone)) {
+            document.getElementById('phone-quick-error').textContent = 'יש להזין טלפון תקין';
+            document.getElementById('phone-quick-error').classList.remove('hidden');
+            document.getElementById('phone-quick').style.borderColor = '#ef4444';
+            isValid = false;
+          } else {
+            document.getElementById('phone-quick-error').classList.add('hidden');
+            document.getElementById('phone-quick').style.borderColor = '';
+          }
+          
+          // Validate email only if provided
+          if (email && !emailRegex.test(email)) {
+            document.getElementById('email-quick-error').textContent = 'יש להזין מייל תקין';
+            document.getElementById('email-quick-error').classList.remove('hidden');
+            document.getElementById('email-quick').style.borderColor = '#ef4444';
+            isValid = false;
+          } else {
+            document.getElementById('email-quick-error').classList.add('hidden');
+            document.getElementById('email-quick').style.borderColor = '';
+          }
+          
+          // Validate consent
+          if (!consentCheckbox.checked) {
+            document.getElementById('consent-quick-error').classList.remove('hidden');
+            isValid = false;
+          } else {
+            document.getElementById('consent-quick-error').classList.add('hidden');
+          }
+          
+          if (!isValid) return;
+          
+          btnTextQuick.classList.add('hidden');
+          btnLoadingQuick.classList.remove('hidden');
+          submitBtnQuick.disabled = true;
+          
+          try {
+            await fetch('https://focus2025.app.n8n.cloud/webhook/5175fa64-8fbd-4d64-aa6a-7bb1f950e34a', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                consent: consentCheckbox.checked,
+                source: 'AI FIRST Landing Page',
+                formType: 'quick',
+                timestamp: new Date().toISOString()
+              })
+            });
+          } catch (error) {
+            console.error('Form error:', error);
+          }
+          
+          contactFormQuick.classList.add('hidden');
+          successMessageQuick.classList.remove('hidden');
+          btnTextQuick.classList.remove('hidden');
+          btnLoadingQuick.classList.add('hidden');
+          submitBtnQuick.disabled = false;
+          
+          if (typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
+        });
+      }
+
+      // ========== COOKIE CONSENT ==========
+      const cookiePopup = document.getElementById('cookie-popup');
+      const cookieModal = document.getElementById('cookie-modal');
+      const cookieAccept = document.getElementById('cookie-accept');
+      const cookieReject = document.getElementById('cookie-reject');
+      const cookieManageBtn = document.getElementById('cookie-manage-btn');
+      const cookieSavePreferences = document.getElementById('cookie-save-preferences');
+      const cookieAcceptAllModal = document.getElementById('cookie-accept-all-modal');
+
+      function checkCookieConsent() {
+        const consent = localStorage.getItem('cookieConsent');
+        if (!consent) {
+          setTimeout(() => {
+            cookiePopup.classList.remove('translate-y-full');
+            cookiePopup.classList.add('translate-y-0');
+          }, 1000);
+        }
+      }
+
+      function hideCookiePopup() {
+        cookiePopup.classList.remove('translate-y-0');
+        cookiePopup.classList.add('translate-y-full');
+      }
+
+      function showCookieModal() {
+        hideCookiePopup();
+        cookieModal.classList.remove('hidden');
+        loadCookiePreferences();
+      }
+
+      function hideCookieModal() {
+        cookieModal.classList.add('hidden');
+      }
+
+      function loadCookiePreferences() {
+        const preferences = JSON.parse(localStorage.getItem('cookiePreferences') || '{}');
+        document.getElementById('cookie-analytics').checked = preferences.analytics !== false;
+        document.getElementById('cookie-marketing').checked = preferences.marketing !== false;
+        document.getElementById('cookie-functional').checked = preferences.functional !== false;
+      }
+
+      function saveCookiePreferences() {
+        const preferences = {
+          essential: true,
+          analytics: document.getElementById('cookie-analytics').checked,
+          marketing: document.getElementById('cookie-marketing').checked,
+          functional: document.getElementById('cookie-functional').checked,
+          timestamp: new Date().toISOString()
+        };
+        
+        localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
+        localStorage.setItem('cookieConsent', 'custom');
+        applyCookiePreferences(preferences);
+        hideCookieModal();
+      }
+
+      function applyCookiePreferences(preferences) {
+        if (!preferences.marketing && window.fbq) {
+          console.log('Marketing cookies rejected - Meta Pixel disabled');
+        }
+        if (!preferences.analytics && window.gtag) {
+          console.log('Analytics cookies rejected - Google Analytics disabled');
+        }
+      }
+
+      if (cookieAccept) {
+        cookieAccept.addEventListener('click', function() {
+          const allAccepted = {
+            essential: true,
+            analytics: true,
+            marketing: true,
+            functional: true,
+            timestamp: new Date().toISOString()
+          };
+          localStorage.setItem('cookiePreferences', JSON.stringify(allAccepted));
+          localStorage.setItem('cookieConsent', 'accepted');
+          hideCookiePopup();
+        });
+      }
+
+      if (cookieReject) {
+        cookieReject.addEventListener('click', function() {
+          const allRejected = {
+            essential: true,
+            analytics: false,
+            marketing: false,
+            functional: false,
+            timestamp: new Date().toISOString()
+          };
+          localStorage.setItem('cookiePreferences', JSON.stringify(allRejected));
+          localStorage.setItem('cookieConsent', 'rejected');
+          applyCookiePreferences(allRejected);
+          hideCookiePopup();
+        });
+      }
+
+      if (cookieManageBtn) {
+        cookieManageBtn.addEventListener('click', showCookieModal);
+      }
+
+      if (cookieSavePreferences) {
+        cookieSavePreferences.addEventListener('click', saveCookiePreferences);
+      }
+
+      if (cookieAcceptAllModal) {
+        cookieAcceptAllModal.addEventListener('click', function() {
+          document.getElementById('cookie-analytics').checked = true;
+          document.getElementById('cookie-marketing').checked = true;
+          document.getElementById('cookie-functional').checked = true;
+          saveCookiePreferences();
+        });
+      }
+
+      checkCookieConsent();
+    </script>
+  </body>
+</html>
