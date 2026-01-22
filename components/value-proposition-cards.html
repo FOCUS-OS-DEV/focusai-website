@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus AI - Value Proposition Cards</title>
+
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES (Design Tokens)
+           ============================================ */
+        :root {
+            /* Brand Colors */
+            --focus-purple: #a855f7;
+            --focus-pink: #ec4899;
+            --focus-dark: #0a0612;
+            --focus-surface: #1b0125;
+
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-muted: #d7cdef;
+
+            /* Borders */
+            --border-glass: rgba(185, 107, 254, 0.25);
+
+            /* Border Radius */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Transitions */
+            --transition-normal: 0.3s ease;
+            --transition-spring: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+            background-color: var(--focus-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ============================================
+           VALUE PROPOSITION SECTION
+           ============================================ */
+        .value-props {
+            position: relative;
+            padding: 80px 24px;
+            background: var(--focus-dark);
+        }
+
+        .value-props-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section Header */
+        .value-props-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .value-props-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--focus-purple);
+            margin-bottom: 20px;
+        }
+
+        .value-props-title {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .value-props-title-gradient {
+            background: linear-gradient(135deg, var(--focus-purple) 0%, var(--focus-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .value-props-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards Grid */
+        .value-props-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        /* Individual Card */
+        .value-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transition: var(--transition-normal);
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--focus-purple), var(--focus-pink));
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.15);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Card Icon */
+        .value-card-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--focus-purple) 0%, var(--focus-pink) 100%);
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+        }
+
+        .value-card-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
+            fill: none;
+        }
+
+        /* Card Content */
+        .value-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .value-card-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--focus-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .value-card-title {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .value-card-description {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Card Features List */
+        .value-card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .value-card-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .value-card-feature-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(168, 85, 247, 0.2);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .value-card-feature-icon svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--focus-purple);
+        }
+
+        /* Card CTA */
+        .value-card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--focus-purple);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        .value-card-cta:hover {
+            color: var(--focus-pink);
+        }
+
+        .value-card-cta svg {
+            width: 18px;
+            height: 18px;
+            transition: transform var(--transition-normal);
+        }
+
+        .value-card-cta:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .value-props-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .value-card {
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-props {
+                padding: 60px 20px;
+            }
+
+            .value-card {
+                padding: 24px;
+            }
+
+            .value-card-icon {
+                width: 56px;
+                height: 56px;
+            }
+
+            .value-card-icon svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .value-card-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         VALUE PROPOSITION CARDS SECTION
+         ============================================ -->
+    <section class="value-props" id="value-props">
+        <div class="value-props-container">
+            <!-- Section Header -->
+            <div class="value-props-header">
+                <div class="value-props-badge">
+                    <span>חברה אחת, שני מסלולים</span>
+                </div>
+                <h2 class="value-props-title">
+                    איך נוכל <span class="value-props-title-gradient">לעזור לכם?</span>
+                </h2>
+                <p class="value-props-subtitle">
+                    בין אם אתם ארגון שמחפש להטמיע AI או יחידים שרוצים ללמוד — יש לנו את הפתרון
+                </p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="value-props-grid">
+                <!-- Card 1: B2B Services -->
+                <article class="value-card">
+                    <div class="value-card-icon">
+                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="value-card-content">
+                        <span class="value-card-label">לארגונים וחברות</span>
+                        <h3 class="value-card-title">שירותי AI לארגונים</h3>
+                        <p class="value-card-description">
+                            סדנאות מותאמות אישית, אינטגרציות AI וכלי אוטומציה שמשדרגים את הארגון שלכם לעידן החדש.
+                        </p>
+                        <ul class="value-card-features">
+                            <li class="value-card-feature">
+                                <span class="value-card-feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </span>
+                                <span>סדנאות AI מותאמות לצוות</span>
+                            </li>
+                            <li class="value-card-feature">
+                                <span class="value-card-feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </span>
+                                <span>הטמעת כלי AI בתהליכי העבודה</span>
+                            </li>
+                            <li class="value-card-feature">
+                                <span class="value-card-feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </span>
+                                <span>ליווי והדרכה מתמשכים</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="/services/" class="value-card-cta">
+                        <span>גלו את השירותים שלנו</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Card 2: B2C Academy -->
+                <article class="value-card">
+                    <div class="value-card-icon">
+                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <div class="value-card-content">
+                        <span class="value-card-label">ליחידים ומקצוענים</span>
+                        <h3 class="value-card-title">האקדמיה ל-AI</h3>
+                        <p class="value-card-description">
+                            קורסים מעשיים שיכינו אתכם לעולם העבודה החדש. מכלים בסיסיים ועד פיתוח מתקדם.
+                        </p>
+                        <ul class="value-card-features">
+                            <li class="value-card-feature">
+                                <span class="value-card-feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </span>
+                                <span>AI FIRST — למתחילים</span>
+                            </li>
+                            <li class="value-card-feature">
+                                <span class="value-card-feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </span>
+                                <span>AI READY — למנהלים</span>
+                            </li>
+                            <li class="value-card-feature">
+                                <span class="value-card-feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </span>
+                                <span>AI TECH — למפתחים</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="/academy/" class="value-card-cta">
+                        <span>לכל הקורסים</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

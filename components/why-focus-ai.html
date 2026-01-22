@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus AI - Why Focus AI Section</title>
+
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES (Design Tokens)
+           ============================================ */
+        :root {
+            /* Brand Colors */
+            --focus-purple: #a855f7;
+            --focus-pink: #ec4899;
+            --focus-dark: #0a0612;
+            --focus-surface: #1b0125;
+
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-muted: #d7cdef;
+
+            /* Borders */
+            --border-glass: rgba(185, 107, 254, 0.25);
+
+            /* Border Radius */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Transitions */
+            --transition-normal: 0.3s ease;
+            --transition-spring: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+            background-color: var(--focus-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ============================================
+           WHY FOCUS AI SECTION
+           ============================================ */
+        .why-section {
+            position: relative;
+            padding: 100px 24px;
+            background: var(--focus-surface);
+            overflow: hidden;
+        }
+
+        /* Background decoration */
+        .why-section::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .why-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        /* Section Header */
+        .why-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .why-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--focus-purple);
+            margin-bottom: 20px;
+        }
+
+        .why-title {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .why-title-gradient {
+            background: linear-gradient(135deg, var(--focus-purple) 0%, var(--focus-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .why-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Features Grid */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        /* Feature Card */
+        .why-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(185, 107, 254, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .why-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168, 85, 247, 0.35);
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+        }
+
+        /* Card Icon */
+        .why-card-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(236, 72, 153, 0.15) 100%);
+            border-radius: var(--radius-md);
+            position: relative;
+        }
+
+        .why-card-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-md);
+            padding: 1px;
+            background: linear-gradient(135deg, var(--focus-purple), var(--focus-pink));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+        }
+
+        .why-card-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--focus-purple);
+            fill: none;
+        }
+
+        /* Card Content */
+        .why-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .why-card-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .why-section {
+                padding: 70px 20px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .why-card {
+                padding: 28px 20px;
+            }
+
+            .why-card-icon {
+                width: 64px;
+                height: 64px;
+            }
+
+            .why-card-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         WHY FOCUS AI SECTION
+         ============================================ -->
+    <section class="why-section" id="why-focus">
+        <div class="why-container">
+            <!-- Section Header -->
+            <div class="why-header">
+                <div class="why-badge">
+                    <span>למה לבחור בנו</span>
+                </div>
+                <h2 class="why-title">
+                    הגישה של <span class="why-title-gradient">Focus AI</span>
+                </h2>
+                <p class="why-subtitle">
+                    אנחנו לא רק מלמדים טכנולוגיה — אנחנו מגשרים בין אנשים לכלים, עם דגש על יישום מעשי ותוצאות אמיתיות.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="why-grid">
+                <!-- Feature 1: Practical -->
+                <article class="why-card">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card-title">מעשי ויישומי</h3>
+                    <p class="why-card-description">
+                        לא תיאוריה בלבד. כל מה שנלמד ניתן ליישום מיידי בעבודה השוטפת שלכם.
+                    </p>
+                </article>
+
+                <!-- Feature 2: Expert Instructors -->
+                <article class="why-card">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card-title">מרצים מהשטח</h3>
+                    <p class="why-card-description">
+                        המרצים שלנו הם אנשי מקצוע פעילים שמיישמים AI בארגונים מובילים.
+                    </p>
+                </article>
+
+                <!-- Feature 3: Customized -->
+                <article class="why-card">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card-title">מותאם לארגון</h3>
+                    <p class="why-card-description">
+                        כל תוכנית מותאמת לצרכים הספציפיים של הארגון, התעשייה והאתגרים שלכם.
+                    </p>
+                </article>
+
+                <!-- Feature 4: Ongoing Support -->
+                <article class="why-card">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            <line x1="9" y1="10" x2="15" y2="10"/>
+                            <line x1="12" y1="7" x2="12" y2="13"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card-title">תמיכה מתמשכת</h3>
+                    <p class="why-card-description">
+                        לא נגמר בסדנה. אנחנו ממשיכים ללוות אתכם עם קהילה, עדכונים ותמיכה שוטפת.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

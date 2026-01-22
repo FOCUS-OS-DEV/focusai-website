@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus AI - Academy Preview Section</title>
+
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES (Design Tokens)
+           ============================================ */
+        :root {
+            /* Brand Colors */
+            --focus-purple: #a855f7;
+            --focus-pink: #ec4899;
+            --focus-dark: #0a0612;
+            --focus-surface: #1b0125;
+
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-muted: #d7cdef;
+
+            /* Borders */
+            --border-glass: rgba(185, 107, 254, 0.25);
+
+            /* Border Radius */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Transitions */
+            --transition-normal: 0.3s ease;
+            --transition-spring: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+            background-color: var(--focus-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ============================================
+           ACADEMY PREVIEW SECTION
+           ============================================ */
+        .academy-section {
+            position: relative;
+            padding: 100px 24px;
+            background: var(--focus-surface);
+            overflow: hidden;
+        }
+
+        /* Background decoration */
+        .academy-section::before {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(236, 72, 153, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .academy-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        /* Section Header */
+        .academy-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .academy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--focus-pink);
+            margin-bottom: 20px;
+        }
+
+        .academy-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .academy-title-gradient {
+            background: linear-gradient(135deg, var(--focus-pink) 0%, var(--focus-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .academy-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Course Cards Grid */
+        .academy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        /* Course Card */
+        .course-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: var(--transition-normal);
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--focus-purple), var(--focus-pink));
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 20px 50px rgba(168, 85, 247, 0.12);
+        }
+
+        .course-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Featured Card */
+        .course-card--featured {
+            border-color: rgba(168, 85, 247, 0.4);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%);
+        }
+
+        .course-card--featured::before {
+            opacity: 1;
+        }
+
+        /* Card Header */
+        .course-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .course-card-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .course-badge {
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .course-badge--level {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--focus-purple);
+        }
+
+        .course-badge--duration {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        .course-badge--featured {
+            background: linear-gradient(135deg, var(--focus-purple) 0%, var(--focus-pink) 100%);
+            color: white;
+        }
+
+        /* Card Content */
+        .course-card-name {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--focus-purple) 0%, var(--focus-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .course-card-target {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .course-card-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        /* Card Features */
+        .course-card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .course-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .course-feature svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--focus-purple);
+            flex-shrink: 0;
+        }
+
+        /* Card CTA */
+        .course-card-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-full);
+            transition: var(--transition-normal);
+            margin-top: auto;
+        }
+
+        .course-card-cta--primary {
+            background: linear-gradient(135deg, var(--focus-purple) 0%, var(--focus-pink) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .course-card-cta--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .course-card-cta--secondary {
+            background: transparent;
+            color: var(--focus-purple);
+            border: 2px solid var(--focus-purple);
+        }
+
+        .course-card-cta--secondary:hover {
+            background: var(--focus-purple);
+            color: white;
+        }
+
+        .course-card-cta svg {
+            width: 16px;
+            height: 16px;
+            transition: transform var(--transition-normal);
+        }
+
+        .course-card-cta:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* Section CTA */
+        .academy-cta-wrapper {
+            text-align: center;
+        }
+
+        .academy-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--focus-purple);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        .academy-cta:hover {
+            color: var(--focus-pink);
+        }
+
+        .academy-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform var(--transition-normal);
+        }
+
+        .academy-cta:hover svg {
+            transform: translateX(-6px);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .academy-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .academy-section {
+                padding: 70px 20px;
+            }
+
+            .course-card {
+                padding: 24px 20px;
+            }
+
+            .course-card-name {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         ACADEMY PREVIEW SECTION
+         ============================================ -->
+    <section class="academy-section" id="academy-preview">
+        <div class="academy-container">
+            <!-- Section Header -->
+            <div class="academy-header">
+                <div class="academy-badge">
+                    <span>ליחידים ומקצוענים</span>
+                </div>
+                <h2 class="academy-title">
+                    האקדמיה <span class="academy-title-gradient">ל-AI</span>
+                </h2>
+                <p class="academy-subtitle">
+                    קורסים מעשיים שיכינו אתכם לעולם העבודה החדש — מכלים בסיסיים ועד פיתוח מתקדם
+                </p>
+            </div>
+
+            <!-- Course Cards -->
+            <div class="academy-grid">
+                <!-- Course 1: AI FIRST -->
+                <article class="course-card course-card--featured">
+                    <div class="course-card-header">
+                        <div class="course-card-badges">
+                            <span class="course-badge course-badge--featured">מומלץ</span>
+                            <span class="course-badge course-badge--level">למתחילים</span>
+                        </div>
+                        <span class="course-badge course-badge--duration">5 מפגשים</span>
+                    </div>
+
+                    <h3 class="course-card-name">AI FIRST</h3>
+
+                    <div>
+                        <p class="course-card-target">למי שרוצה להיכנס לעולם ה-AI</p>
+                        <p class="course-card-description">
+                            קורס יסודות שמכניס אתכם לעולם הבינה המלאכותית עם כלים פרקטיים ליום שאחרי.
+                        </p>
+                    </div>
+
+                    <div class="course-card-features">
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>עבודה מעשית עם ChatGPT ו-Claude</span>
+                        </div>
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>כתיבת פרומפטים מקצועיים</span>
+                        </div>
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>קהילת בוגרים פעילה</span>
+                        </div>
+                    </div>
+
+                    <a href="/academy/ai-first/" class="course-card-cta course-card-cta--primary">
+                        <span>למידע נוסף</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Course 2: AI READY -->
+                <article class="course-card">
+                    <div class="course-card-header">
+                        <div class="course-card-badges">
+                            <span class="course-badge course-badge--level">למנהלים</span>
+                        </div>
+                        <span class="course-badge course-badge--duration">8 מפגשים</span>
+                    </div>
+
+                    <h3 class="course-card-name">AI READY</h3>
+
+                    <div>
+                        <p class="course-card-target">למנהלים ומקבלי החלטות</p>
+                        <p class="course-card-description">
+                            קורס מתקדם למנהלים שרוצים להוביל את השינוי הדיגיטלי בארגון שלהם.
+                        </p>
+                    </div>
+
+                    <div class="course-card-features">
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>אסטרטגיית AI לארגונים</span>
+                        </div>
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>ניהול צוותים בעידן ה-AI</span>
+                        </div>
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>מקרי בוחן אמיתיים</span>
+                        </div>
+                    </div>
+
+                    <a href="/academy/ai-ready/" class="course-card-cta course-card-cta--secondary">
+                        <span>למידע נוסף</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Course 3: AI TECH -->
+                <article class="course-card">
+                    <div class="course-card-header">
+                        <div class="course-card-badges">
+                            <span class="course-badge course-badge--level">למפתחים</span>
+                        </div>
+                        <span class="course-badge course-badge--duration">הרצליה</span>
+                    </div>
+
+                    <h3 class="course-card-name">AI TECH</h3>
+
+                    <div>
+                        <p class="course-card-target">למפתחים ואנשי טכנולוגיה</p>
+                        <p class="course-card-description">
+                            קורס טכני מתקדם לפיתוח אפליקציות ואינטגרציות מבוססות AI.
+                        </p>
+                    </div>
+
+                    <div class="course-card-features">
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>עבודה עם APIs של OpenAI</span>
+                        </div>
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>בניית Agents ו-Automations</span>
+                        </div>
+                        <div class="course-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>פרויקט גמר מעשי</span>
+                        </div>
+                    </div>
+
+                    <a href="/academy/ai-tech/" class="course-card-cta course-card-cta--secondary">
+                        <span>למידע נוסף</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </a>
+                </article>
+            </div>
+
+            <!-- Section CTA -->
+            <div class="academy-cta-wrapper">
+                <a href="/academy/" class="academy-cta">
+                    <span>לכל הקורסים באקדמיה</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
