@@ -7,8 +7,8 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://focusai.co.il',
-  base: '/new-site/',
+  site: 'https://staging.focusai.co.il',
+  base: '/',
 
   // RTL Hebrew support
   i18n: {
