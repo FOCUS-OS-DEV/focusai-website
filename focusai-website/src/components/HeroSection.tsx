@@ -329,7 +329,7 @@ export const HeroSection = () => {
                 className="mb-6 md:mb-8 lg:mb-12"
               >
                 <p className="text-base md:text-xl lg:text-2xl text-[#f5f5fa] mb-1 md:mb-2 font-semibold">
-                  אצלנו הפוקוס הוא עלייך.
+                  אצלנו הפוקוס הוא עלייך. <span className="text-[#ff3366]">[בדיקה]</span>
                 </p>
                 <p className="text-sm md:text-lg lg:text-xl text-[#c0c0d0] font-mono leading-relaxed">
                   // הכשרות מקצועיות ופתרונות AI לעסקים
