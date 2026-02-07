@@ -6,7 +6,7 @@
 
 ---
 
-## Table of Contents
+## Table of Contents    
 
 1. [Project Overview](#1-project-overview)
 2. [Business Model & User Journeys](#2-business-model--user-journeys)
