@@ -2,8 +2,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
-// Brand assets
+// Brand assets - with mobile-optimized versions
 const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
+const chavobotMobile = "https://res.cloudinary.com/dfudxxzlj/image/upload/w_400,q_auto/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
 const fingerprint = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png";
 const n8nBadge = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png";
 const focusLogo = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png";
@@ -59,7 +60,7 @@ const CyberGrid = () => (
   />
 );
 
-// HUD Corner Element
+// HUD Corner Element - hidden on mobile
 const HUDCorner = ({ position }: { position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' }) => {
   const positionClasses = {
     'top-left': 'top-4 left-4 border-t-2 border-l-2',
@@ -69,36 +70,37 @@ const HUDCorner = ({ position }: { position: 'top-left' | 'top-right' | 'bottom-
   };
 
   return (
-    <div className={`absolute w-8 h-8 border-[#a855f7]/30 ${positionClasses[position]}`} />
+    <div className={`hidden md:block absolute w-6 md:w-8 h-6 md:h-8 border-[#a855f7]/30 ${positionClasses[position]}`} />
   );
 };
 
-// Floating Data Particles
+// Floating Data Particles - reduced on mobile for performance
 const DataParticles = () => {
-  const particles = Array.from({ length: 15 }, (_, i) => ({
+  // Fewer particles for better mobile performance
+  const particles = Array.from({ length: 8 }, (_, i) => ({
     id: i,
-    char: ['0', '1', '>', '<', '/', '*', '#', '@'][Math.floor(Math.random() * 8)],
+    char: ['0', '1', '>', '<', '/', '*'][Math.floor(Math.random() * 6)],
     x: Math.random() * 100,
     y: Math.random() * 100,
-    duration: Math.random() * 10 + 5,
+    duration: Math.random() * 12 + 8,
     delay: Math.random() * 5,
-    size: Math.random() * 10 + 8,
+    size: Math.random() * 8 + 10,
   }));
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map((p) => (
         <motion.span
           key={p.id}
-          className="absolute font-mono text-[#a855f7]/20"
+          className="absolute font-mono text-[#a855f7]/15"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
             fontSize: p.size,
           }}
           animate={{
-            y: [0, -200],
-            opacity: [0, 0.5, 0],
+            y: [0, -150],
+            opacity: [0, 0.4, 0],
           }}
           transition={{
             duration: p.duration,
@@ -141,7 +143,7 @@ const TerminalText = ({ text, delay = 0 }: { text: string; delay?: number }) => 
   }, []);
 
   return (
-    <span className="font-mono">
+    <span className="font-mono text-sm md:text-base">
       <span className="text-[#a855f7]">&gt; </span>
       {displayed}
       <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} text-[#a855f7]`}>_</span>
@@ -149,7 +151,7 @@ const TerminalText = ({ text, delay = 0 }: { text: string; delay?: number }) => 
   );
 };
 
-// Neon Button
+// Neon Button - Mobile-first with proper touch targets
 const NeonButton = ({
   children,
   href,
@@ -160,24 +162,28 @@ const NeonButton = ({
   variant?: 'primary' | 'secondary'
 }) => {
   const baseClasses = `
-    relative inline-flex items-center justify-center gap-3
-    px-12 py-5 font-bold text-lg md:text-xl tracking-wide
-    transition-all duration-200 rounded-full
+    relative inline-flex items-center justify-center gap-2 md:gap-3
+    px-6 py-3 md:px-10 md:py-4 font-bold text-base md:text-lg tracking-wide
+    transition-all duration-200 rounded-full min-h-[48px]
     focus:outline-none focus:ring-2 focus:ring-[#a855f7] focus:ring-offset-2 focus:ring-offset-[#0a0a0f]
   `;
 
   const variants = {
     primary: `
       bg-[#a855f7] text-white
-      hover:bg-[#9333ea] hover:scale-105
-      shadow-[0_0_25px_rgba(168,85,247,0.5),0_0_50px_rgba(168,85,247,0.3)]
-      hover:shadow-[0_0_35px_rgba(168,85,247,0.7),0_0_70px_rgba(168,85,247,0.4)]
+      hover:bg-[#9333ea] md:hover:scale-105
+      shadow-[0_0_15px_rgba(168,85,247,0.4)]
+      md:shadow-[0_0_25px_rgba(168,85,247,0.5),0_0_50px_rgba(168,85,247,0.3)]
+      hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]
+      md:hover:shadow-[0_0_35px_rgba(168,85,247,0.7),0_0_70px_rgba(168,85,247,0.4)]
     `,
     secondary: `
       bg-transparent text-[#a855f7] border-2 border-[#a855f7]
-      hover:bg-[#a855f7]/15 hover:scale-105
-      shadow-[0_0_15px_rgba(168,85,247,0.3)]
-      hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]
+      hover:bg-[#a855f7]/15 md:hover:scale-105
+      shadow-[0_0_10px_rgba(168,85,247,0.2)]
+      md:shadow-[0_0_15px_rgba(168,85,247,0.3)]
+      hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]
+      md:hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]
     `
   };
 
@@ -185,7 +191,7 @@ const NeonButton = ({
     <motion.a
       href={href}
       className={`${baseClasses} ${variants[variant]}`}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
       {children}
@@ -246,23 +252,23 @@ export const HeroSection = () => {
 
       {/* Main content */}
       <motion.div
-        className="relative z-10 container min-h-screen flex items-center"
+        className="relative z-10 container min-h-[calc(100svh-64px)] md:min-h-screen flex items-center px-4 md:px-6"
         style={{ opacity }}
       >
-        <div className="w-full py-32 lg:py-0">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="w-full py-8 md:py-16 lg:py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
 
             {/* Text Content */}
             <div className="text-center lg:text-right order-2 lg:order-1 relative">
-              {/* Fingerprint behind text */}
+              {/* Fingerprint behind text - hidden on small mobile, visible on larger screens */}
               <motion.img
                 src={fingerprint}
                 alt=""
                 aria-hidden="true"
-                className="absolute top-1/2 right-0 lg:right-[-20%] w-[800px] lg:w-[1000px] h-auto pointer-events-none select-none -z-10"
-                style={{ transform: 'translateY(-50%)' }}
+                className="hidden sm:block absolute top-1/2 right-1/2 sm:right-0 lg:right-[-20%] w-[300px] sm:w-[500px] md:w-[700px] lg:w-[1000px] h-auto pointer-events-none select-none -z-10"
+                style={{ transform: 'translateY(-50%) translateX(50%)', transformOrigin: 'center' }}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.12 }}
+                animate={{ opacity: 0.08 }}
                 transition={{ duration: 2, delay: 1 }}
               />
 
@@ -271,22 +277,22 @@ export const HeroSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mb-8 mt-4 text-base text-[#9090a8]"
+                className="mb-4 md:mb-6 lg:mb-8 mt-2 md:mt-4 text-sm md:text-base text-[#9090a8]"
               >
                 <TerminalText text="initializing focus protocol..." delay={500} />
               </motion.div>
 
               {/* Main Headline with glitch */}
               <motion.div
-                className="mb-6"
-                initial={{ y: 100, opacity: 0 }}
+                className="mb-3 md:mb-4 lg:mb-6"
+                initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <h1 className="text-[clamp(4rem,12vw,10rem)] font-black leading-[0.95] tracking-tighter">
+                <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black leading-[0.95] tracking-tighter">
                   <GlitchText className="block text-[#f5f5fa]">
                     Focus<span
-                      className="text-transparent bg-clip-text ml-4"
+                      className="text-transparent bg-clip-text ml-2 md:ml-4"
                       style={{
                         backgroundImage: 'linear-gradient(90deg, #a855f7, #c084fc, #e879f9)',
                       }}
@@ -296,12 +302,12 @@ export const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                className="mb-8 overflow-hidden"
-                initial={{ y: 100, opacity: 0 }}
+                className="mb-4 md:mb-6 lg:mb-8 overflow-hidden"
+                initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
               >
-                <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-tight">
+                <h2 className="text-[clamp(1.25rem,4vw,4rem)] font-bold leading-tight">
                   <span className="text-[#f5f5fa]">מחברים אנשים </span>
                   <span
                     className="text-transparent bg-clip-text"
@@ -317,25 +323,25 @@ export const HeroSection = () => {
 
               {/* Subtitle */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-                className="mb-12"
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="mb-6 md:mb-8 lg:mb-12"
               >
-                <p className="text-xl md:text-2xl text-[#f5f5fa] mb-2 font-semibold">
+                <p className="text-base md:text-xl lg:text-2xl text-[#f5f5fa] mb-1 md:mb-2 font-semibold">
                   אצלנו הפוקוס הוא עלייך.
                 </p>
-                <p className="text-xl md:text-2xl text-[#c0c0d0] font-mono">
+                <p className="text-sm md:text-lg lg:text-xl text-[#c0c0d0] font-mono leading-relaxed">
                   // הכשרות מקצועיות ופתרונות AI לעסקים
                 </p>
               </motion.div>
 
               {/* CTA Buttons */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-16"
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start mb-8 md:mb-12 lg:mb-16"
               >
                 <NeonButton href="/academy" variant="primary">
                   אקדמיה
@@ -350,34 +356,35 @@ export const HeroSection = () => {
             {/* Chavobot Visual */}
             <motion.div
               className="order-1 lg:order-2 flex justify-center items-center relative lg:-translate-x-12 xl:-translate-x-16"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* n8n Official Partner Badge - Behind Chavobot */}
+              {/* n8n Official Partner Badge - Behind Chavobot, hidden on very small screens */}
               <motion.img
                 src={n8nBadge}
                 alt="n8n Official Partner"
-                className="absolute z-0 w-[180px] sm:w-[220px] md:w-[280px] lg:w-[320px] h-auto"
+                className="hidden sm:block absolute z-0 w-[120px] sm:w-[160px] md:w-[200px] lg:w-[280px] h-auto"
                 style={{
-                  top: '-2%',
-                  right: '-3%',
-                  opacity: 0.8,
-                  transform: 'rotate(20deg)',
+                  top: '0%',
+                  right: '5%',
+                  opacity: 0.7,
+                  transform: 'rotate(15deg)',
                 }}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 0.8, x: 0 }}
-                transition={{ duration: 1, delay: 1.5 }}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 0.7, x: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
               />
 
               {/* Main image - responsive sizing with fade edges */}
               <img
                 src={chavobot}
                 alt="חבובוט - הנציג החכם של Focus AI"
-                className="relative z-10 w-[85vw] max-w-[400px] sm:max-w-[500px] md:max-w-[650px] lg:max-w-[800px] h-auto"
+                className="relative z-10 w-[70vw] max-w-[280px] sm:max-w-[350px] md:max-w-[450px] lg:max-w-[600px] h-auto"
+                loading="eager"
                 style={{
-                  maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
+                  maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)'
                 }}
               />
             </motion.div>
