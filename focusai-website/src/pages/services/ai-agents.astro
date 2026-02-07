@@ -1,0 +1,736 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Page metadata
+const pageTitle = 'Focus AI | נציג AI לעסק - זמין 24/7';
+const pageDescription = 'נציג AI חכם לעסק שלך - עונה במקומך, מתאם שיחות, מוכר. מתחבר לוואטסאפ, אינסטגרם, פייסבוק, טיקטוק ולאתר. זמין 24/7.';
+
+// Platform integrations
+const platforms = [
+  { name: 'WhatsApp', iconType: 'whatsapp' },
+  { name: 'Instagram', iconType: 'instagram' },
+  { name: 'Facebook', iconType: 'facebook' },
+  { name: 'TikTok', iconType: 'tiktok' },
+  { name: 'Website', iconType: 'globe' },
+  { name: 'SMS', iconType: 'phone' }
+];
+
+// Benefits
+const benefits = [
+  {
+    title: 'מענה מיידי 24/7',
+    description: 'כל לקוח מקבל תשובה בשניות – בלי תלות בשעות עבודה או בעומס.',
+    iconType: 'bolt',
+    code: 'ALWAYS_ON'
+  },
+  {
+    title: 'תיאום פגישות אוטומטי',
+    description: 'מתחבר ליומן הארגוני וקובע שיחות/פגישות ישירות מול הלקוח.',
+    iconType: 'calendar',
+    code: 'SCHEDULING'
+  },
+  {
+    title: 'איסוף לידים חכם',
+    description: 'שומר אוטומטית פרטי לקוח ושולח נתונים ל-CRM ולמערכת הזמנות.',
+    iconType: 'target',
+    code: 'LEADS'
+  },
+  {
+    title: 'הפנייה לנציג אנושי',
+    description: 'מזהה מתי דרוש טאצ\'ץ אנושי ומאפשר הפנייה או השתלטות על השיחה.',
+    iconType: 'user',
+    code: 'HANDOFF'
+  },
+  {
+    title: 'חיסכון בזמן ועלויות',
+    description: 'עונה למאות לקוחות, חוסך זמן, כוח אדם ועלויות ומגדיל רווחיות!',
+    iconType: 'currency',
+    code: 'SAVINGS'
+  },
+  {
+    title: 'גמישות והתאמה מלאות',
+    description: 'לומד את השפה והטון של המותג שלך ונותן חוויה אנושית ומותאמת אישית.',
+    iconType: 'sparkles',
+    code: 'CUSTOM'
+  }
+];
+
+// Process steps
+const processSteps = [
+  {
+    step: 1,
+    title: 'אפיון עסקי מדויק',
+    description: 'בשיחת אפיון אישית עם מומחה מטעמנו נתחיל בהבנת העסק שלך לעומק: מי קהלי היעד, מה מסלול המכירה ואיפה נעלמים בד"כ לידים בדרך. נזהה נקודות תורפה בתקשורת ונגדיר אסטרטגיה שתשפר את השירות ותגדיל מכירות.',
+    code: 'DISCOVERY'
+  },
+  {
+    step: 2,
+    title: 'פיתוח והטמעת הסוכן',
+    description: 'נפתח עבורך סוכן AI מותאם אישית למותג שלך. הוא ידע לנהל שיחות חכמות בוואטסאפ, לענות על שאלות, להציג מוצרים, לקבוע פגישות או לסגור מכירה — הכול תוך חיבור מלא למערכות העסק שלך (CRM, טפסים, מערכת הזמנות ועוד).',
+    code: 'BUILD'
+  },
+  {
+    step: 3,
+    title: 'בקרת איכות ואופטימיזציה',
+    description: 'לפני שהסוכן שלך עולה לאוויר, נריץ סימולציות אמיתיות ונבחן תרחישים שונים. נכייל את התגובות, נמדוד את איכות השיח והביצועים ונשפר עד שהכול עובד מדויק! בדיוק כמו נציג אנושי… רק מהיר, יעיל ומדויק פי כמה!',
+    code: 'QA'
+  },
+  {
+    step: 4,
+    title: 'ליווי, ניטור ותוצאות',
+    description: 'עם עליית הסוכן לפעולה, אנחנו ממשיכים ללוות אותך. נבצע בקרה מול נתוני שיחות, נזהה מגמות ונטמיע שיפורים שיחסכו זמן לצוות שלך וימקסמו את הערך מכל פנייה.',
+    code: 'SUPPORT'
+  }
+];
+
+// Value propositions
+const valueProps = [
+  {
+    title: 'מתמודד עם כל כמות של לידים',
+    subtitle: 'בקלות ובאיכות מירבית',
+    description: 'יודע להתמודד גם עם עשרות, מאות או אלפי פניות בכל יום. גם באמצע הלילה, בחגים או בסופי שבוע, נציג ה־AI שלך ממשיך לעבוד ולא מפספס אף לקוח. כל לקוח מקבל יחס אישי, תשובה מדויקת והכוונה לסגירת עסקה - בלי לחכות בתור, בלי לחץ ובלי טעויות אנוש.',
+    iconType: 'chat'
+  },
+  {
+    title: 'מרימים כסף מהרצפה',
+    subtitle: 'כל פנייה = הזדמנות',
+    description: 'מאחורי כל פנייה מסתתרת הזדמנות אמיתית לעסקה. הנציג שלך לא רק עונה לפניות בשפה טבעית, אלא הוא מזהה, שומר וממיין את כל הפרטים החשובים של הליד ב-CRM תוך כדי השיחה. כך, ניתן לבנות מערכת יחסים ממירה לאורך זמן עם הלקוח.',
+    iconType: 'currency'
+  },
+  {
+    title: 'נציג שמרגיש אנושי',
+    subtitle: 'מדבר בשפה שלך',
+    description: 'הלקוחות לא מדברים עם בוט, הם מדברים עם העסק שלך. בשפה טבעית, חמה ואנושית לגמרי. כל מילה, טון ותגובה נבנו כדי לשקף את הערכים, הסגנון וה-DNA של העסק שלך.',
+    iconType: 'user-code'
+  }
+];
+
+// Testimonials
+const testimonials = [
+  {
+    quote: 'במהלך הקיץ האחרון פיתחתם עבורנו סוכן שמנהל את כל המשימות והנסיעות במחנות שלנו ברחבי הארץ. הוא מחובר אצלנו ל-CRM, מעדכן בזמן אמת ומתריע כשיש משהו חריג באחד המחנות. זה הפך את הניהול בשטח ליעיל יותר – הרבה פחות לחץ, ואנחנו כבר מתקדמים לפיתוחים נוספים.',
+    author: 'מחלקת תפעול מחנות',
+    company: 'קיממה',
+    logo: 'https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png'
+  },
+  {
+    quote: 'לאט־לאט גיליתי שאני פחות על הטלפון ויותר עם הלקוחות. הנציג שמחובר אצלי בוואטסאפ באמת תורם לי הרבה, והתפניתי לתת שירות ללקוחות ולעבוד יותר על המוצרים שלי בעסק.',
+    author: 'מטפל',
+    company: 'היסוד הבסיסי',
+    logo: 'https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png'
+  },
+  {
+    quote: 'כמי שמנהל מערך שירות רחב, חיפשתי פתרון שיאפשר לנו לעבוד חכם ועקבי יותר. הסוכן שלכם בוואטסאפ מטפל בשירות לקוחות ועונה לפניות, שולח מידע והסכמים בצורה אוטומטית ומעדכן את הלקוחות אם יש שינויים.',
+    author: 'מחלקת השירות והמכירות',
+    company: 'iJump',
+    logo: 'https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png'
+  },
+  {
+    quote: 'בהתחלה היינו סקפטיים, אבל היום זה כבר חלק מהשגרה. הסוכן בוואטסאפ מטפל במאות פניות של סטודנטים ביום, בלי שנרגיש. כיף שזה פשוט עובד. כשהייתה לנו תקלה שחר מהצוות היה זמין וטיפל מיד.',
+    author: 'אגף הדיגיטל',
+    company: 'אוניברסיטת חיפה',
+    logo: 'https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png'
+  }
+];
+
+// FAQ
+const faq = [
+  {
+    q: 'כמה זמן לוקח להקים נציג AI?',
+    a: 'תהליך ההקמה לוקח בין 2-4 שבועות, תלוי במורכבות הפתרון ובכמות האינטגרציות הנדרשות. נציג בסיסי יכול לעלות לאוויר תוך שבועיים.'
+  },
+  {
+    q: 'האם הנציג מבין עברית?',
+    a: 'בהחלט! הנציגים שלנו מאומנים לעברית מושלמת, כולל סלנג, ביטויים יומיומיים ושפה עסקית. הם מתאימים את עצמם לטון של העסק שלך.'
+  },
+  {
+    q: 'מה קורה כשהנציג לא יודע לענות?',
+    a: 'הנציג יכול להעביר את השיחה לנציג אנושי בצורה חלקה, או לאסוף פרטים ולהבטיח שיחזרו ללקוח. תמיד ניתן להשתלט על השיחה.'
+  },
+  {
+    q: 'לאילו מערכות הנציג מתחבר?',
+    a: 'הנציג מתחבר לוואטסאפ, אינסטגרם, פייסבוק, טיקטוק, האתר שלך ו-SMS. בנוסף, הוא מתממשק עם מערכות CRM, יומנים, מערכות הזמנות ועוד.'
+  },
+  {
+    q: 'האם אפשר לשנות את התשובות והתנהגות הנציג?',
+    a: 'כן, יש לכם גישה לממשק ניהול שבו אפשר לערוך את מאגר הידע, לשפר תשובות ולעדכן מידע. אנחנו גם מלווים אתכם עם אופטימיזציה שוטפת.'
+  },
+  {
+    q: 'כמה עולה השירות?',
+    a: 'המחיר תלוי בהיקף הפתרון ובכמות האינטגרציות. השאירו פרטים ונחזור אליכם עם הצעה מותאמת אישית לעסק שלכם.'
+  }
+];
+
+// Client logos
+const clientLogos = [
+  'https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png',
+  'https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png',
+  'https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png',
+  'https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png',
+  'https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png',
+  'https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png',
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header slot="header" currentPath="/services/ai-agents" />
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-1/4 right-1/3 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#a855f7]/10 rounded-full blur-[120px]"></div>
+      <div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#a855f7]/10 border border-[#a855f7]/30 mb-6">
+            <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+            <span class="font-mono text-[#a855f7] text-sm">חדש! מהפכת ה-AI בשירות הלקוחות והמכירות</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
+            <span class="block text-white">נציג AI</span>
+            <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">לעסק</span>
+          </h1>
+
+          <p class="text-2xl md:text-3xl text-white font-bold mb-4">
+            זמין 24/7
+          </p>
+
+          <p class="text-lg md:text-xl text-[#d0d0e0] mb-4 leading-relaxed">
+            עונה במקומך, מתאם שיחה, מוכר.
+          </p>
+
+          <p class="text-lg text-[#d0d0e0] mb-8">
+            לקוח שולח הודעה, הנציג מטפל בכל היתר.
+          </p>
+
+          <!-- Platform badges -->
+          <div class="mb-8">
+            <p class="text-sm font-mono text-[#b0b0c0] mb-3">מתחבר ל:</p>
+            <div class="flex flex-wrap gap-3">
+              {platforms.map(platform => (
+                <div class="flex items-center gap-2 px-4 py-2 bg-[#12121a] border border-[#2a2a3a]">
+                  <div class="w-5 h-5 flex items-center justify-center">
+                    {platform.iconType === 'whatsapp' && (
+                      <svg class="w-4 h-4 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                      </svg>
+                    )}
+                    {platform.iconType === 'instagram' && (
+                      <svg class="w-4 h-4 text-[#E4405F]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                      </svg>
+                    )}
+                    {platform.iconType === 'facebook' && (
+                      <svg class="w-4 h-4 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                    )}
+                    {platform.iconType === 'tiktok' && (
+                      <svg class="w-4 h-4 text-[#00F2EA]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                      </svg>
+                    )}
+                    {platform.iconType === 'globe' && (
+                      <svg class="w-4 h-4 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                      </svg>
+                    )}
+                    {platform.iconType === 'phone' && (
+                      <svg class="w-4 h-4 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                      </svg>
+                    )}
+                  </div>
+                  <span class="text-[#d0d0e0] text-sm">{platform.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#contact"
+              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center"
+              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            >
+              <span class="flex items-center justify-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+                לשיחת אפיון בחינם
+              </span>
+            </a>
+            <a
+              href="#benefits"
+              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center"
+              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            >
+              איך זה עובד?
+            </a>
+          </div>
+        </div>
+
+        <!-- Visual Element - Chat Demo -->
+        <div class="relative hidden lg:block">
+          <div class="relative p-6 border border-[#2a2a3a] bg-[#12121a]/80 backdrop-blur-sm" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+            <!-- Chat Header -->
+            <div class="flex items-center gap-3 pb-4 border-b border-[#2a2a3a] mb-4">
+              <div class="w-10 h-10 rounded-full bg-[#a855f7] flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#0a0a0f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+              </div>
+              <div>
+                <p class="text-white font-medium">נציג AI - העסק שלך</p>
+                <p class="text-[#a855f7] text-xs flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+                  מחובר לוואטסאפ
+                </p>
+              </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="space-y-4 mb-4">
+              <div class="flex justify-start">
+                <div class="max-w-[80%] p-3 bg-[#1a1a24] border border-[#2a2a3a] text-[#d0d0e0] text-sm rounded-lg">
+                  היי! איך אני יכול לעזור לך היום? 😊
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <div class="max-w-[80%] p-3 bg-[#a855f7]/10 border border-[#a855f7]/30 text-white text-sm rounded-lg">
+                  היי, מתעניין בשירות שלכם
+                </div>
+              </div>
+              <div class="flex justify-start">
+                <div class="max-w-[80%] p-3 bg-[#1a1a24] border border-[#2a2a3a] text-[#d0d0e0] text-sm rounded-lg">
+                  מעולה! אשמח לספר לך על השירותים שלנו. מה הכי מעניין אותך - מחירון, זמינות, או דוגמאות לעבודות קודמות?
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <div class="max-w-[80%] p-3 bg-[#a855f7]/10 border border-[#a855f7]/30 text-white text-sm rounded-lg">
+                  אשמח לראות מחירים
+                </div>
+              </div>
+              <div class="flex justify-start">
+                <div class="max-w-[80%] p-3 bg-[#1a1a24] border border-[#2a2a3a] text-[#d0d0e0] text-sm rounded-lg">
+                  בטח! שולח לך עכשיו את המחירון המלא 📄<br/><br/>
+                  אגב, מה השם שלך? ככה אוכל לשמור את הפרטים שלך למעקב
+                </div>
+              </div>
+              <div class="flex justify-start">
+                <div class="flex items-center gap-2 text-[#b0b0c0] text-sm">
+                  <span class="inline-flex gap-1">
+                    <span class="w-2 h-2 bg-[#a855f7] rounded-full animate-bounce" style="animation-delay: 0ms;"></span>
+                    <span class="w-2 h-2 bg-[#a855f7] rounded-full animate-bounce" style="animation-delay: 150ms;"></span>
+                    <span class="w-2 h-2 bg-[#a855f7] rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
+                  </span>
+                  <span>אוסף פרטים ושולח ל-CRM...</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input -->
+            <div class="flex items-center gap-2 p-3 bg-[#0a0a0f] border border-[#2a2a3a]">
+              <input
+                type="text"
+                placeholder="הקלידו הודעה..."
+                class="flex-1 bg-transparent text-white text-sm focus:outline-none"
+                disabled
+              />
+              <button class="p-2 text-[#a855f7]" disabled>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Decorative elements -->
+          <div class="absolute -top-4 -right-4 w-20 h-20 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 100% 0, 100% 100%);"></div>
+          <div class="absolute -bottom-4 -left-4 w-20 h-20 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 0 100%, 100% 100%);"></div>
+        </div>
+      </div>
+
+      <!-- Client Logos -->
+      <div class="mt-16 pt-8 border-t border-[#2a2a3a]">
+        <p class="text-center text-sm font-mono text-[#b0b0c0] mb-6">[TRUSTED_BY] עסקים שכבר עובדים עם נציג AI</p>
+        <div class="flex flex-wrap justify-center gap-6">
+          {clientLogos.map(logo => (
+            <div class="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center">
+              <img src={logo} alt="לקוח" class="max-h-12 max-w-full object-contain" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="relative py-20 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[BENEFITS]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          איך נציג AI <span class="text-[#a855f7]">משפר את העסק שלך?</span>
+        </h2>
+        <p class="text-[#d0d0e0] max-w-3xl mx-auto">
+          הנציג תמיד פנוי למענה, והופך כל פניה להזדמנות: שירות מהיר, איסוף לידים מסודר, ותיאום פגישות אוטומטי – והכול בהתאמה אישית לעסק שלך.
+        </p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {benefits.map((benefit) => (
+          <div
+            class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
+            style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));"
+          >
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 flex-shrink-0">
+                {benefit.iconType === 'bolt' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                  </svg>
+                )}
+                {benefit.iconType === 'calendar' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                  </svg>
+                )}
+                {benefit.iconType === 'target' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {benefit.iconType === 'user' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                )}
+                {benefit.iconType === 'currency' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {benefit.iconType === 'sparkles' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                  </svg>
+                )}
+              </div>
+              <div>
+                <span class="font-mono text-[#a855f7] text-xs mb-1 block">[{benefit.code}]</span>
+                <h3 class="text-lg font-bold text-white mb-2">{benefit.title}</h3>
+                <p class="text-sm text-[#d0d0e0]">{benefit.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Propositions Section -->
+  <section class="relative py-20">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[VALUE]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          נציג AI שתמיד <span class="text-[#a855f7]">שם עבורך</span>
+        </h2>
+      </header>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {valueProps.map((prop) => (
+          <div
+            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
+            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+          >
+            <div class="w-16 h-16 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4">
+              {prop.iconType === 'chat' && (
+                <svg class="w-8 h-8 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                </svg>
+              )}
+              {prop.iconType === 'currency' && (
+                <svg class="w-8 h-8 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+              {prop.iconType === 'user-code' && (
+                <svg class="w-8 h-8 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-bold text-white mb-1">{prop.title}</h3>
+            <p class="text-[#a855f7] text-sm mb-4">{prop.subtitle}</p>
+            <p class="text-[#d0d0e0]">{prop.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Platforms Section -->
+  <section class="relative py-20 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[INTEGRATIONS]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          חיבור לכל הרשתות <span class="text-[#a855f7]">וערוצי התקשורת!</span>
+        </h2>
+        <p class="text-[#d0d0e0] max-w-3xl mx-auto">
+          לקוחות היום מגיעים מכל מקום: הודעה באינסטגרם, פנייה באתר, וואטסאפ או אימייל. קשה לעקוב, קל לפספס.
+        </p>
+        <p class="text-white mt-4 max-w-3xl mx-auto">
+          הסוכן החכם של Focus AI מאחד את הכול לנציג אחד שמדבר בשמך – בוואטסאפ, אינסטגרם, פייסבוק, טיקטוק ואפילו SMS. הוא עונה מיד, שומר כל פנייה ומעניק חוויה אחידה ואישית, כאילו יש לך צוות שלם שעובד בשבילך – 24/7.
+        </p>
+      </header>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        {platforms.map(platform => (
+          <div class="w-32 h-32 flex flex-col items-center justify-center p-4 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
+            <div class="w-10 h-10 flex items-center justify-center mb-2">
+              {platform.iconType === 'whatsapp' && (
+                <svg class="w-8 h-8 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              )}
+              {platform.iconType === 'instagram' && (
+                <svg class="w-8 h-8 text-[#E4405F]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              )}
+              {platform.iconType === 'facebook' && (
+                <svg class="w-8 h-8 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              )}
+              {platform.iconType === 'tiktok' && (
+                <svg class="w-8 h-8 text-[#00F2EA]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                </svg>
+              )}
+              {platform.iconType === 'globe' && (
+                <svg class="w-8 h-8 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                </svg>
+              )}
+              {platform.iconType === 'phone' && (
+                <svg class="w-8 h-8 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                </svg>
+              )}
+            </div>
+            <span class="text-white font-medium text-sm">{platform.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="relative py-20">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[PROCESS]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          תהליך <span class="text-[#a855f7]">העבודה שלנו</span>
+        </h2>
+        <p class="text-[#d0d0e0] max-w-2xl mx-auto">
+          אפיון ומיפוי של הצרכים, פיתוח, בדיקות איכות, הטמעה... ואנחנו באוויר!<br/>
+          הכול בשקיפות מלאה ובהתאמה אישית לעסק שלך.
+        </p>
+      </header>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {processSteps.map((step) => (
+          <div
+            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
+            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+          >
+            <!-- Step number -->
+            <div class="absolute top-6 left-6 w-12 h-12 flex items-center justify-center bg-[#a855f7] text-[#0a0a0f] font-black text-xl" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
+              {step.step.toString().padStart(2, '0')}
+            </div>
+
+            <div class="mr-16">
+              <span class="font-mono text-[#a855f7] text-xs mb-1 block">[{step.code}]</span>
+              <h3 class="text-xl font-bold text-white mb-3">{step.title}</h3>
+              <p class="text-[#d0d0e0]">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="relative py-20 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[TESTIMONIALS]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          לקוחות <span class="text-[#a855f7]">מספרים</span>
+        </h2>
+        <p class="text-[#d0d0e0]">
+          הנה מה שיש לחלק מהלקוחות שלנו להגיד על נציגי ה-AI הפועלים אצלהם.
+        </p>
+      </header>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {testimonials.map((testimonial) => (
+          <div
+            class="relative p-8 border border-[#2a2a3a] bg-[#12121a]"
+            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+          >
+            <!-- Quote icon -->
+            <div class="text-[#a855f7]/30 text-6xl font-serif absolute top-4 right-4">"</div>
+
+            <blockquote class="text-[#d0d0e0] mb-6 relative z-10">
+              "{testimonial.quote}"
+            </blockquote>
+
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-white rounded-lg p-1 flex items-center justify-center">
+                <img src={testimonial.logo} alt={testimonial.company} class="max-h-10 max-w-full object-contain" loading="lazy" />
+              </div>
+              <div>
+                <p class="text-white font-medium">{testimonial.author}</p>
+                <p class="text-[#a855f7] text-sm">{testimonial.company}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="relative py-20">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[FAQ]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          התשובות לשאלות <span class="text-[#a855f7]">שהכי מעניינות אתכם</span>
+        </h2>
+        <p class="text-[#d0d0e0]">
+          ריכזנו עבורך את התשובות לשאלות הכי חשובות על השירות שלנו.
+        </p>
+      </header>
+
+      <div class="space-y-4">
+        {faq.map((item) => (
+          <details class="group border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
+            <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-[#a855f7]/5 transition-colors">
+              <span class="text-white font-medium">{item.q}</span>
+              <svg class="w-5 h-5 text-[#a855f7] transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-[#d0d0e0]">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="contact" class="relative py-20 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+        <!-- Decorative corners -->
+        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
+        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
+        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]"></div>
+        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]"></div>
+
+        <header class="text-center mb-10">
+          <p class="font-mono text-[#a855f7] text-sm mb-2">[GET_STARTED]</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-4">
+            הגיע הזמן לגייס <span class="text-[#a855f7]">נציג AI לעסק שלך!</span>
+          </h2>
+          <p class="text-[#d0d0e0]">
+            השאירו פרטים ונציג מטעמנו יחזור אליכם עם פתרון מותאם אישית שיגדיל את הרווחיות שלכם ויחסוך לכם זמן יקר וכסף.
+          </p>
+        </header>
+
+        <form class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-mono text-[#d0d0e0] mb-2">טלפון <span class="text-[#a855f7]">*</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+            />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-mono text-[#d0d0e0] mb-2">ספרו לנו על העסק שלכם</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono resize-none"
+              placeholder="באילו ערוצים אתם פועלים היום? מה האתגר הכי גדול בתקשורת עם לקוחות?"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
+            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+          >
+            <span class="flex items-center justify-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+              שלחו ונחזור אליכם עם פתרון מותאם
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+</style>

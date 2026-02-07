@@ -1,0 +1,502 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Page metadata
+const pageTitle = 'Focus AI | אפיון ואסטרטגיית AI לארגונים';
+const pageDescription = 'שירותי אפיון ואסטרטגיה להטמעת AI בארגונים. מיפוי צרכים, בניית תשתית נתונים, ותכנון מפת דרכים מותאמת אישית.';
+
+// Discovery phases
+const discoveryPhases = [
+  {
+    phase: 1,
+    title: 'מיפוי מצב קיים',
+    description: 'ניתוח מעמיק של התהליכים, הכלים והאתגרים הנוכחיים בארגון',
+    items: [
+      'סקירת מערכות קיימות (CRM, אתר, מערכות ניהול)',
+      'זיהוי נקודות כאב ופערים תפעוליים',
+      'מיפוי זרימת מידע ותהליכי עבודה',
+      'הערכת בשלות טכנולוגית'
+    ],
+    code: 'SCAN',
+    iconType: 'search'
+  },
+  {
+    phase: 2,
+    title: 'הגדרת חזון ויעדים',
+    description: 'קביעת מטרות ברורות ומדידות להטמעת AI בארגון',
+    items: [
+      'הגדרת KPIs ומדדי הצלחה',
+      'תעדוף יוזמות לפי ROI ומורכבות',
+      'בניית Value Ladder ארגוני',
+      'זיהוי Quick Wins להוכחת ערך מהירה'
+    ],
+    code: 'VISION',
+    iconType: 'target'
+  },
+  {
+    phase: 3,
+    title: 'בניית ארכיטקטורה',
+    description: 'תכנון התשתית הטכנולוגית והאינטגרציות הנדרשות',
+    items: [
+      'בחירת כלים ופלטפורמות AI מתאימות',
+      'תכנון ארכיטקטורת אינטגרציות',
+      'הגדרת מודל נתונים ואבטחה',
+      'תכנון תשתית לסקיילינג עתידי'
+    ],
+    code: 'ARCH',
+    iconType: 'building'
+  },
+  {
+    phase: 4,
+    title: 'מפת דרכים',
+    description: 'תכנית פעולה מפורטת עם לוחות זמנים ואבני דרך',
+    items: [
+      'פריסה לשלבים (פיילוט, השקה, הרחבה)',
+      'הקצאת משאבים ותקציב',
+      'הגדרת צוותים ואחריות',
+      'תכנית הדרכה והטמעה'
+    ],
+    code: 'ROADMAP',
+    iconType: 'map'
+  }
+];
+
+// Deliverables
+const deliverables = [
+  {
+    title: 'דו"ח אפיון מקיף',
+    description: 'מסמך מפורט עם מיפוי מצב קיים, פערים והזדמנויות',
+    iconType: 'document'
+  },
+  {
+    title: 'ארכיטקטורה טכנולוגית',
+    description: 'תרשים מערכת עם כל הרכיבים והאינטגרציות',
+    iconType: 'wrench'
+  },
+  {
+    title: 'מפת דרכים מפורטת',
+    description: 'תכנית עבודה עם שלבים, לו"ז ואבני דרך',
+    iconType: 'calendar'
+  },
+  {
+    title: 'הערכת ROI',
+    description: 'ניתוח עלות-תועלת והחזר השקעה צפוי',
+    iconType: 'currency'
+  },
+  {
+    title: 'מפרט טכני',
+    description: 'הגדרות טכניות לפיתוח ואינטגרציה',
+    iconType: 'cog'
+  },
+  {
+    title: 'תכנית הדרכה',
+    description: 'מסלול הכשרה מותאם לצוותים הרלוונטיים',
+    iconType: 'academic'
+  }
+];
+
+// Benefits
+const benefits = [
+  {
+    title: 'צמצום סיכונים',
+    description: 'תכנון מקדים מונע טעויות יקרות והשקעות כושלות',
+    stat: '70%',
+    statLabel: 'הפחתה בכישלונות פרויקטים'
+  },
+  {
+    title: 'חיסכון בזמן',
+    description: 'הגדרה ברורה מראש מאיצה את תהליך הפיתוח',
+    stat: '40%',
+    statLabel: 'קיצור זמן פיתוח'
+  },
+  {
+    title: 'תקציב מדויק',
+    description: 'הבנה מלאה של היקף העבודה מאפשרת תמחור מדויק',
+    stat: '±15%',
+    statLabel: 'דיוק בהערכת תקציב'
+  },
+  {
+    title: 'החזר מהיר',
+    description: 'זיהוי Quick Wins מספק ערך כבר בחודשים הראשונים',
+    stat: '30',
+    statLabel: 'יום עד ROI ראשוני'
+  }
+];
+
+// Process steps for visual timeline
+const processSteps = [
+  { week: '1-2', title: 'Discovery', desc: 'ראיונות, מיפוי, ניתוח' },
+  { week: '2-3', title: 'Strategy', desc: 'הגדרת חזון, תעדוף' },
+  { week: '3-4', title: 'Architecture', desc: 'תכנון טכני' },
+  { week: '4-5', title: 'Roadmap', desc: 'תכנית פעולה' },
+  { week: '5-6', title: 'Presentation', desc: 'הצגה ואישור' }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header slot="header" currentPath="/services/strategy" />
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[80vh] flex items-center pt-24 pb-16 overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-[#a855f7]/10 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-purple-500/15 rounded-full blur-[120px]"></div>
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Content -->
+        <div>
+          <p class="font-mono text-[#a855f7] text-sm mb-4 uppercase tracking-wider">[SERVICE_01] STRATEGY & DISCOVERY</p>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
+            <span class="block text-white">אפיון</span>
+            <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">ואסטרטגיה</span>
+          </h1>
+
+          <p class="text-lg md:text-xl text-[#d0d0e0] mb-8 leading-relaxed">
+            לפני שמתחילים לבנות - צריך להבין. אנחנו מלווים ארגונים בתהליך אפיון מקיף שממפה את הצרכים, מגדיר את החזון, ובונה תכנית פעולה ריאלית להטמעת AI.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#contact"
+              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center"
+              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            >
+              <span class="flex items-center justify-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+                לשיחת אפיון
+              </span>
+            </a>
+            <a
+              href="#process"
+              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center"
+              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            >
+              איך זה עובד?
+            </a>
+          </div>
+        </div>
+
+        <!-- Visual Element -->
+        <div class="relative hidden lg:block">
+          <div class="relative p-8 border border-[#2a2a3a] bg-[#12121a]/80 backdrop-blur-sm" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+            <!-- Terminal Style Display -->
+            <div class="font-mono text-sm">
+              <div class="flex items-center gap-2 mb-4 pb-4 border-b border-[#2a2a3a]">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                <span class="text-[#b0b0c0] mr-4">strategy_analysis.sh</span>
+              </div>
+
+              <div class="space-y-2 text-[#d0d0e0]">
+                <p><span class="text-[#a855f7]">$</span> scanning organization_systems...</p>
+                <p class="text-[#b0b0c0]"><span class="text-cyan-400">[INFO]</span> Found: CRM, Website, Legacy DB</p>
+                <p><span class="text-[#a855f7]">$</span> analyzing pain_points...</p>
+                <p class="text-[#b0b0c0]"><span class="text-cyan-400">[INFO]</span> Identified: 12 automation opportunities</p>
+                <p><span class="text-[#a855f7]">$</span> calculating potential_roi...</p>
+                <p class="text-[#b0b0c0]"><span class="text-cyan-400">[INFO]</span> Estimated: 340% yearly ROI</p>
+                <p><span class="text-[#a855f7]">$</span> generating roadmap...</p>
+                <p class="text-green-400"><span class="inline-flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Strategy document ready</span></p>
+                <p class="animate-pulse"><span class="text-[#a855f7]">$</span> _</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decorative elements -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 100% 0, 100% 100%);"></div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 0 100%, 100% 100%);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Strategy Section -->
+  <section class="relative py-20 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[WHY_STRATEGY]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          למה <span class="text-[#a855f7]">לא לקפוץ לפיתוח?</span>
+        </h2>
+        <p class="text-[#d0d0e0] max-w-2xl mx-auto">
+          70% מפרויקטי AI נכשלים בגלל תכנון לקוי. שלב האפיון הוא ההשקעה הכי משתלמת בפרויקט.
+        </p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {benefits.map((benefit, index) => (
+          <div
+            class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300 group"
+            style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));"
+          >
+            <div class="text-4xl font-black text-[#a855f7] mb-2" style="text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);">
+              {benefit.stat}
+            </div>
+            <div class="text-xs font-mono text-[#b0b0c0] mb-4">{benefit.statLabel}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{benefit.title}</h3>
+            <p class="text-sm text-[#d0d0e0]">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="relative py-20">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[PROCESS]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          תהליך <span class="text-[#a855f7]">האפיון</span>
+        </h2>
+        <p class="text-[#d0d0e0] max-w-2xl mx-auto">
+          תהליך מובנה שמוביל לתוצאות ברורות ומדידות
+        </p>
+      </header>
+
+      <!-- Timeline -->
+      <div class="relative mb-16 overflow-x-auto pb-4">
+        <div class="flex gap-4 min-w-max px-4">
+          {processSteps.map((step, index) => (
+            <div class="relative flex flex-col items-center">
+              <div class="w-32 p-4 border border-[#2a2a3a] bg-[#12121a] text-center" style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));">
+                <div class="text-xs font-mono text-[#a855f7] mb-1">שבוע {step.week}</div>
+                <div class="font-bold text-white text-sm">{step.title}</div>
+                <div class="text-xs text-[#b0b0c0] mt-1">{step.desc}</div>
+              </div>
+              {index < processSteps.length - 1 && (
+                <div class="absolute top-1/2 -left-2 w-4 h-0.5 bg-[#a855f7]/50"></div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Discovery Phases -->
+      <div class="grid md:grid-cols-2 gap-8">
+        {discoveryPhases.map((phase) => (
+          <div
+            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
+            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+          >
+            <!-- Corner decorations -->
+            <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#a855f7]"></div>
+            <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#a855f7]"></div>
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-12 h-12 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5">
+                {phase.iconType === 'search' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                )}
+                {phase.iconType === 'target' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {phase.iconType === 'building' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                  </svg>
+                )}
+                {phase.iconType === 'map' && (
+                  <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+                  </svg>
+                )}
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-mono text-[#a855f7] text-xs">[{phase.code}]</span>
+                  <span class="w-6 h-6 flex items-center justify-center bg-[#a855f7] text-[#0a0a0f] font-bold text-xs">{phase.phase}</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">{phase.title}</h3>
+              </div>
+            </div>
+
+            <p class="text-[#d0d0e0] mb-6">{phase.description}</p>
+
+            <ul class="space-y-2">
+              {phase.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-[#d0d0e0]">
+                  <span class="text-[#a855f7] mt-1">›</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Deliverables Section -->
+  <section class="relative py-20 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <header class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-2">[DELIVERABLES]</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">
+          מה <span class="text-[#a855f7]">מקבלים?</span>
+        </h2>
+        <p class="text-[#d0d0e0] max-w-2xl mx-auto">
+          בסיום תהליך האפיון תקבלו חבילה מלאה של מסמכים ותכניות עבודה
+        </p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {deliverables.map((item) => (
+          <div class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300 group" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
+            <div class="w-10 h-10 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4">
+              {item.iconType === 'document' && (
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+              )}
+              {item.iconType === 'wrench' && (
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75a4.5 4.5 0 01-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 11-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 016.336-4.486l-3.276 3.276a3.004 3.004 0 002.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852z" />
+                </svg>
+              )}
+              {item.iconType === 'calendar' && (
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                </svg>
+              )}
+              {item.iconType === 'currency' && (
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+              {item.iconType === 'cog' && (
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+                </svg>
+              )}
+              {item.iconType === 'academic' && (
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#a855f7] transition-colors">{item.title}</h3>
+            <p class="text-sm text-[#d0d0e0]">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="contact" class="relative py-20">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+        <!-- Decorative corners -->
+        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
+        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
+        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]"></div>
+        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]"></div>
+
+        <header class="text-center mb-10">
+          <p class="font-mono text-[#a855f7] text-sm mb-2">[START_NOW]</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-4">
+            בואו <span class="text-[#a855f7]">נתחיל</span>
+          </h2>
+          <p class="text-[#d0d0e0]">
+            שיחת אפיון ראשונית ללא עלות - נבין יחד מה הצרכים ונבדוק התאמה
+          </p>
+        </header>
+
+        <form class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              />
+            </div>
+            <div>
+              <label for="company" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם החברה</label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-mono text-[#d0d0e0] mb-2">טלפון <span class="text-[#a855f7]">*</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-mono text-[#d0d0e0] mb-2">ספרו לנו על האתגר שלכם</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono resize-none"
+              placeholder="מה הבעיה שאתם מנסים לפתור? איפה אתם רואים פוטנציאל ל-AI בארגון?"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
+            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+          >
+            <span class="flex items-center justify-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+              שלחו ונחזור אליכם תוך 24 שעות
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>

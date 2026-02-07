@@ -1,0 +1,456 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTAContact from '../components/CTAContact.astro';
+import { founders, siteConfig } from '../data';
+
+const pageTitle = 'אודות | Focus AI - הסיפור שלנו';
+const pageDescription = 'הכירו את הצוות מאחורי Focus AI - שני מנהלים בכירים שהחליטו לגשר על הפער בין אנשים לטכנולוגיה';
+
+// Founder extended data for About page
+const foundersStory = {
+  shahar: {
+    ...founders[0],
+    journey: [
+      { phase: "LAW", title: "עורך דין", desc: "התחיל את דרכו בעולם המשפט, עם התמחות בפתרון סכסוכים וליווי עסקי" },
+      { phase: "BUSINESS", title: "יזמות וניהול", desc: "הקים וניהל מחנות קיץ בארץ ובעולם, צבר ניסיון בניהול פרויקטים מורכבים" },
+      { phase: "TECH", title: "גילוי הטכנולוגיה", desc: "זיהה את הפוטנציאל של AI לשנות את עולם העסקים ולמד לעומק את התחום" },
+      { phase: "FOCUS", title: "הקמת Focus AI", desc: "שילב את הרקע המשפטי-עסקי עם טכנולוגיה ליצירת פתרונות אמיתיים" },
+    ],
+    highlights: ["עורך דין", "יזם סדרתי", "מומחה AI", "מרצה אקדמי"]
+  },
+  unil: {
+    ...founders[1],
+    journey: [
+      { phase: "RETAIL", title: "עולם הקמעונאות", desc: "סמנכ\"ל תפעול ושיווק ברשתות מובילות, ניהל מאות עובדים ועשרות סניפים" },
+      { phase: "OPERATIONS", title: "מצוינות תפעולית", desc: "פיתח מומחיות בייעול תהליכים, שיפור רווחיות וצמיחה עסקית" },
+      { phase: "DIGITAL", title: "טרנספורמציה דיגיטלית", desc: "הוביל תהליכי דיגיטציה בארגונים גדולים, זיהה את כוחה של האוטומציה" },
+      { phase: "FOCUS", title: "הקמת Focus AI", desc: "הביא את הניסיון התפעולי העשיר לעולם ה-AI והאוטומציה" },
+    ],
+    highlights: ["סמנכ\"ל תפעול לשעבר", "מומחה צמיחה", "פיתוח עסקי", "מרצה אקדמי"]
+  }
+};
+
+const milestones = [
+  {
+    id: "ORIGIN",
+    title: "שני עולמות נפגשים",
+    description: "שחר מעולם המשפט והיזמות, אוניל מעולם הקמעונאות והתפעול. שניהם זיהו את אותה בעיה: ארגונים משקיעים בטכנולוגיה אבל העובדים לא יודעים להשתמש בה.",
+    iconType: "merge"
+  },
+  {
+    id: "VISION",
+    title: "הרעיון נולד",
+    description: "במקום לתת לאנשים כלים - ללמד אותם לדוג. לא רק ייעוץ תיאורטי, אלא הטמעה אמיתית שמביאה תוצאות מדידות.",
+    iconType: "lightbulb"
+  },
+  {
+    id: "ACADEMY",
+    title: "האקדמיה קמה",
+    description: "ליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה. הכשרה מקצועית אמיתית עם תעודה מוכרת.",
+    iconType: "academic"
+  },
+  {
+    id: "GROWTH",
+    title: "500+ בוגרים",
+    description: "תוך זמן קצר, מאות אנשים עברו את ההכשרות. רבים מהם כבר עובדים בתחום או הקימו עסקים משלהם.",
+    iconType: "growth"
+  },
+  {
+    id: "TODAY",
+    title: "Focus AI היום",
+    description: "חברת ייעוץ והכשרה מובילה בתחום ה-AI. משלבים אקדמיה, שירותי B2B, סוכנים חכמים ואוטומציות לארגונים.",
+    iconType: "rocket"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header slot="header" currentPath="/about" />
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[60vh] flex items-center pt-32 pb-16 overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[#c084fc]/10 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[#a855f7]/10 rounded-full blur-[120px]"></div>
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10 max-w-5xl text-center">
+      <!-- Terminal Badge -->
+      <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#a855f7]/30 mb-8">
+        <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+        <span class="font-mono text-xs text-[#a855f7] uppercase tracking-[0.2em]">OUR_STORY</span>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6">
+        <span class="text-[#f5f5fa]">הסיפור של</span>
+        <span class="block mt-2 gradient-text-glow">Focus AI</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl text-[#d0d0e0] max-w-3xl mx-auto font-mono">
+        <span class="text-[#a855f7]">></span> שני מנהלים בכירים. חזון אחד.
+        <span class="text-[#f5f5fa]"> לגשר על הפער בין אנשים לטכנולוגיה.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Journey Timeline - Node Based -->
+  <section class="relative py-20 lg:py-32 overflow-hidden">
+    <div class="container mx-auto px-4 max-w-6xl">
+
+      <!-- Section Header -->
+      <div class="text-center mb-20">
+        <p class="font-mono text-[#c084fc] text-sm mb-4">[JOURNEY_MAP]</p>
+        <h2 class="text-3xl md:text-5xl font-black mb-6">
+          <span class="text-[#f5f5fa]">המסע</span>
+          <span class="text-[#a855f7]"> שלנו</span>
+        </h2>
+      </div>
+
+      <!-- Node-Based Timeline -->
+      <div class="relative">
+        <!-- Central Connection Line -->
+        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#a855f7]/0 via-[#a855f7]/50 to-[#a855f7]/0 transform -translate-x-1/2 hidden lg:block"></div>
+
+        <!-- Milestones -->
+        <div class="space-y-12 lg:space-y-0">
+          {milestones.map((milestone, index) => (
+            <div class={`milestone-node relative lg:flex lg:items-center lg:gap-8 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`} style={`animation-delay: ${index * 0.15}s`}>
+
+              <!-- Node Circle -->
+              <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 w-16 h-16 items-center justify-center z-10">
+                <div class="absolute inset-0 bg-[#0a0a0f] rounded-full border-2 border-[#a855f7] shadow-[0_0_30px_rgba(0,255,136,0.3)]"></div>
+                <div class="relative w-8 h-8 flex items-center justify-center text-[#a855f7]">
+                  {milestone.iconType === 'merge' && (
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                  )}
+                  {milestone.iconType === 'lightbulb' && (
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                  )}
+                  {milestone.iconType === 'academic' && (
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                  )}
+                  {milestone.iconType === 'growth' && (
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                  )}
+                  {milestone.iconType === 'rocket' && (
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                  )}
+                </div>
+              </div>
+
+              <!-- Content Card -->
+              <div class={`lg:w-[calc(50%-4rem)] ${index % 2 === 0 ? 'lg:text-right lg:pr-8' : 'lg:text-left lg:pl-8'}`}>
+                <div class="relative bg-[#12121a] border border-[#2a2a3a] p-6 lg:p-8 hover:border-[#a855f7]/50 transition-all duration-300 group rounded-2xl">
+
+                  <!-- Mobile Node -->
+                  <div class="lg:hidden flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7]">
+                      {milestone.iconType === 'merge' && (
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                      )}
+                      {milestone.iconType === 'lightbulb' && (
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                      )}
+                      {milestone.iconType === 'academic' && (
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg>
+                      )}
+                      {milestone.iconType === 'growth' && (
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                      )}
+                      {milestone.iconType === 'rocket' && (
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                      )}
+                    </div>
+                    <span class="font-mono text-[11px] md:text-xs text-[#a855f7] uppercase tracking-wider">[{milestone.id}]</span>
+                  </div>
+
+                  <!-- Desktop ID Badge -->
+                  <div class="hidden lg:block mb-4">
+                    <span class="font-mono text-[11px] md:text-xs text-[#a855f7] uppercase tracking-wider">[{milestone.id}]</span>
+                  </div>
+
+                  <h3 class="text-xl lg:text-2xl font-bold text-white mb-3 group-hover:text-[#a855f7] transition-colors">
+                    {milestone.title}
+                  </h3>
+                  <p class="text-[#d0d0e0] leading-relaxed">
+                    {milestone.description}
+                  </p>
+
+                  <!-- Connection Line to Node (Desktop) -->
+                  <div class={`hidden lg:block absolute top-1/2 w-8 h-px bg-[#a855f7]/30 ${index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'}`}></div>
+                </div>
+              </div>
+
+              <!-- Spacer for alternating layout -->
+              <div class="hidden lg:block lg:w-[calc(50%-4rem)]"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founders Section -->
+  <section class="relative py-20 lg:py-32 bg-[#0d0d12]">
+    <div class="container mx-auto px-4 max-w-6xl">
+
+      <!-- Section Header -->
+      <div class="text-center mb-20">
+        <p class="font-mono text-[#c084fc] text-sm mb-4">[FOUNDERS]</p>
+        <h2 class="text-3xl md:text-5xl font-black mb-6">
+          <span class="text-[#f5f5fa]">הכירו את</span>
+          <span class="text-[#c084fc]"> המייסדים</span>
+        </h2>
+        <p class="text-[#d0d0e0] text-lg max-w-2xl mx-auto">
+          שני מסלולים שונים, יעד משותף אחד
+        </p>
+      </div>
+
+      <!-- Founders Grid -->
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+
+        <!-- Shahar -->
+        <div class="founder-profile">
+          <div class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden hover:border-[#c084fc]/50 transition-all duration-500 rounded-2xl">
+
+            <!-- Terminal Header -->
+            <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+              </div>
+              <span class="font-mono text-[11px] md:text-xs text-[#b0b0c0] tracking-wider">FOUNDER_001</span>
+            </div>
+
+            <div class="p-8">
+              <!-- Profile Header -->
+              <div class="flex items-start gap-6 mb-8">
+                <div class="relative flex-shrink-0">
+                  <div class="absolute -inset-2 border border-[#c084fc]/30 rounded-xl"></div>
+                  <img
+                    src={foundersStory.shahar.image}
+                    alt={foundersStory.shahar.name}
+                    class="relative w-24 h-24 lg:w-28 lg:h-28 object-cover rounded-xl"
+                  />
+                  <div class="absolute -bottom-1 -right-1 flex items-center gap-1 px-2 py-0.5 bg-[#0a0a0f] border border-[#a855f7]/50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+                    <span class="font-mono text-[10px] md:text-[11px] text-[#a855f7]">ONLINE</span>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-2xl lg:text-3xl font-bold text-white mb-1">{foundersStory.shahar.name}</h3>
+                  <p class="font-mono text-xs text-[#c084fc] uppercase tracking-wider mb-2">{foundersStory.shahar.title}</p>
+                  <p class="text-[#b0b0c0] text-sm">{foundersStory.shahar.role}</p>
+                </div>
+              </div>
+
+              <!-- Highlights -->
+              <div class="flex flex-wrap gap-2 mb-8">
+                {foundersStory.shahar.highlights.map((highlight) => (
+                  <span class="px-3 py-1 bg-[#c084fc]/10 border border-[#c084fc]/30 text-[#c084fc] text-[11px] md:text-xs font-mono uppercase tracking-wider">
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Journey -->
+              <div class="space-y-4">
+                <p class="font-mono text-[11px] md:text-xs text-[#b0b0c0] uppercase tracking-wider mb-4">[CAREER_PATH]</p>
+                {foundersStory.shahar.journey.map((step, i) => (
+                  <div class="flex gap-4 items-start group">
+                    <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[#c084fc]/10 border border-[#c084fc]/30 text-[#c084fc] font-mono text-xs group-hover:bg-[#c084fc]/20 transition-colors">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <p class="text-white font-medium mb-1">{step.title}</p>
+                      <p class="text-[#b0b0c0] text-sm">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unil -->
+        <div class="founder-profile">
+          <div class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden hover:border-[#a855f7]/50 transition-all duration-500 rounded-2xl">
+
+            <!-- Terminal Header -->
+            <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+              </div>
+              <span class="font-mono text-[11px] md:text-xs text-[#b0b0c0] tracking-wider">FOUNDER_002</span>
+            </div>
+
+            <div class="p-8">
+              <!-- Profile Header -->
+              <div class="flex items-start gap-6 mb-8">
+                <div class="relative flex-shrink-0">
+                  <div class="absolute -inset-2 border border-[#a855f7]/30 rounded-xl"></div>
+                  <img
+                    src={foundersStory.unil.image}
+                    alt={foundersStory.unil.name}
+                    class="relative w-24 h-24 lg:w-28 lg:h-28 object-cover rounded-xl"
+                  />
+                  <div class="absolute -bottom-1 -right-1 flex items-center gap-1 px-2 py-0.5 bg-[#0a0a0f] border border-[#a855f7]/50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+                    <span class="font-mono text-[10px] md:text-[11px] text-[#a855f7]">ONLINE</span>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-2xl lg:text-3xl font-bold text-white mb-1">{foundersStory.unil.name}</h3>
+                  <p class="font-mono text-xs text-[#a855f7] uppercase tracking-wider mb-2">{foundersStory.unil.title}</p>
+                  <p class="text-[#b0b0c0] text-sm">{foundersStory.unil.role}</p>
+                </div>
+              </div>
+
+              <!-- Highlights -->
+              <div class="flex flex-wrap gap-2 mb-8">
+                {foundersStory.unil.highlights.map((highlight) => (
+                  <span class="px-3 py-1 bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7] text-[11px] md:text-xs font-mono uppercase tracking-wider">
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Journey -->
+              <div class="space-y-4">
+                <p class="font-mono text-[11px] md:text-xs text-[#b0b0c0] uppercase tracking-wider mb-4">[CAREER_PATH]</p>
+                {foundersStory.unil.journey.map((step, i) => (
+                  <div class="flex gap-4 items-start group">
+                    <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7] font-mono text-xs group-hover:bg-[#a855f7]/20 transition-colors">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <p class="text-white font-medium mb-1">{step.title}</p>
+                      <p class="text-[#b0b0c0] text-sm">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Merge Point -->
+      <div class="mt-16 text-center">
+        <div class="inline-flex items-center gap-4 px-8 py-4 bg-[#12121a] border border-[#2a2a3a] rounded-xl">
+          <div class="w-3 h-3 rounded-full bg-[#c084fc]"></div>
+          <span class="text-[#f5f5fa] font-medium">+</span>
+          <div class="w-3 h-3 rounded-full bg-[#a855f7]"></div>
+          <span class="text-[#f5f5fa] font-medium">=</span>
+          <span class="gradient-text-glow font-bold text-lg">Focus AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="relative py-20 lg:py-32">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="font-mono text-[#a855f7] text-sm mb-4">[CORE_VALUES]</p>
+        <h2 class="text-3xl md:text-5xl font-black mb-6">
+          <span class="text-[#f5f5fa]">מה מניע</span>
+          <span class="text-[#a855f7]"> אותנו</span>
+        </h2>
+      </div>
+
+      <!-- Values Grid -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="value-card p-8 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-2xl">
+          <div class="w-12 h-12 flex items-center justify-center bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7] mb-6 rounded-xl">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">מעשיות מעל הכל</h3>
+          <p class="text-[#d0d0e0]">מה שאנחנו מלמדים - אנחנו עושים בעצמנו. הידע מגיע מפרויקטים אמיתיים, לא מספרי לימוד.</p>
+        </div>
+
+        <div class="value-card p-8 bg-[#12121a] border border-[#2a2a3a] hover:border-[#c084fc]/50 transition-all duration-300 rounded-2xl">
+          <div class="w-12 h-12 flex items-center justify-center bg-[#c084fc]/10 border border-[#c084fc]/30 text-[#c084fc] mb-6 rounded-xl">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">ליווי עד הסוף</h3>
+          <p class="text-[#d0d0e0]">לא נעלמים אחרי הקורס. מחזיקים את היד עד שהתוצאות באות - ואפילו אחרי.</p>
+        </div>
+
+        <div class="value-card p-8 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-2xl">
+          <div class="w-12 h-12 flex items-center justify-center bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7] mb-6 rounded-xl">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">תוצאות מדידות</h3>
+          <p class="text-[#d0d0e0]">לא הבטחות ריקות. ROI תוך 30 יום, עם מספרים אמיתיים שאפשר לבדוק.</p>
+        </div>
+
+        <div class="value-card p-8 bg-[#12121a] border border-[#2a2a3a] hover:border-[#c084fc]/50 transition-all duration-300 rounded-2xl">
+          <div class="w-12 h-12 flex items-center justify-center bg-[#c084fc]/10 border border-[#c084fc]/30 text-[#c084fc] mb-6 rounded-xl">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">טכנולוגיה בשירות האדם</h3>
+          <p class="text-[#d0d0e0]">AI לא מחליף אנשים - הוא מעצים אותם. זו הגישה שמנחה כל מה שאנחנו עושים.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTAContact />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .gradient-text-glow {
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+  }
+
+  .milestone-node {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .founder-profile {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .founder-profile:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .value-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+  }
+
+  .value-card:nth-child(1) { animation-delay: 0s; }
+  .value-card:nth-child(2) { animation-delay: 0.1s; }
+  .value-card:nth-child(3) { animation-delay: 0.2s; }
+  .value-card:nth-child(4) { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

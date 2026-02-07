@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.tsx';
+import ClientLogos from '../components/ClientLogos.tsx';
+import StorySection from '../components/StorySection.astro';
+import ServicesPreview from '../components/ServicesPreview.astro';
+import AcademyPreview from '../components/AcademyPreview.astro';
+import Testimonials from '../components/Testimonials.astro';
+import TeamFounders from '../components/TeamFounders.astro';
+import WhatsAppCommunity from '../components/WhatsAppCommunity.astro';
+import CTAContact from '../components/CTAContact.astro';
+---
+
+<BaseLayout title="Focus AI | מגשרים על הפער בין אנשים לטכנולוגיה">
+  <Header slot="header" currentPath="/" />
+
+  <!-- Hero -->
+  <HeroSection client:load />
+
+  <!-- Client Logos Carousel -->
+  <ClientLogos client:load />
+
+  <!-- Story Section - Problem/Solution/Proof narrative -->
+  <StorySection />
+
+  <!-- Academy Courses Preview - Primary focus -->
+  <AcademyPreview />
+
+  <!-- B2B Services Preview -->
+  <ServicesPreview />
+
+  <!-- Testimonials -->
+  <Testimonials />
+
+  <!-- WhatsApp Community CTA -->
+  <WhatsAppCommunity />
+
+  <!-- Team / Founders -->
+  <TeamFounders />
+
+  <!-- Contact CTA -->
+  <CTAContact />
+
+  <Footer slot="footer" />
+
+  <!-- GSAP Scroll Animations -->
+  <script slot="scripts">
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Generic fade up animations
+      gsap.utils.toArray('[data-animate="fade-up"]').forEach((element: any) => {
+        gsap.fromTo(element,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      });
+
+      // Fade right animations
+      gsap.utils.toArray('[data-animate="fade-right"]').forEach((element: any) => {
+        gsap.fromTo(element,
+          { opacity: 0, x: -50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      });
+
+      // Fade left animations
+      gsap.utils.toArray('[data-animate="fade-left"]').forEach((element: any) => {
+        gsap.fromTo(element,
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      });
+
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+
+      if (header) {
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset;
+
+          if (currentScroll > 100) {
+            if (currentScroll > lastScroll) {
+              header.style.transform = 'translateY(-100%)';
+            } else {
+              header.style.transform = 'translateY(0)';
+            }
+          }
+
+          lastScroll = currentScroll;
+        });
+      }
+    });
+  </script>
+</BaseLayout>

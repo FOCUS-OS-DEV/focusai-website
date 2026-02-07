@@ -1,0 +1,180 @@
+---
+import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
+import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
+import { siteConfig } from '../data/config';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  structuredData?: object | object[];
+}
+
+const {
+  title,
+  description = "Focus AI - מגשרים על הפער בין אנשים לטכנולוגיה. הכשרות מקצועיות ונציגי AI לעסקים.",
+  image = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765302030/focusai-og-image.png",
+  structuredData
+} = Astro.props;
+
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+
+// Organization Schema - present on all pages
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Focus AI",
+  "alternateName": "פוקוס AI",
+  "url": "https://focusai.co.il",
+  "logo": siteConfig.assets.logo,
+  "description": "מגשרים על הפער בין אנשים לטכנולוגיה. הכשרות מקצועיות ופתרונות AI לעסקים.",
+  "email": siteConfig.contact.email,
+  "telephone": siteConfig.contact.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "הרצליה",
+    "addressCountry": "IL"
+  },
+  "sameAs": [
+    siteConfig.social.instagram,
+    siteConfig.social.facebook,
+    siteConfig.social.tiktok
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": siteConfig.contact.phone,
+    "contactType": "customer service",
+    "availableLanguage": ["Hebrew", "English"]
+  }
+};
+
+// WebSite Schema for search box
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Focus AI",
+  "url": "https://focusai.co.il",
+  "inLanguage": "he-IL",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Focus AI"
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="lenis lenis-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0f" />
+
+  <!-- SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:locale" content="he_IL" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Fonts - Cyberpunk Theme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Generator -->
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  {structuredData && Array.isArray(structuredData) ? (
+    structuredData.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))
+  ) : structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+
+  <!-- Analytics (GTM, Clarity) - Respects Cookie Consent -->
+  <Analytics />
+</head>
+<body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased">
+  <!-- GTM noscript fallback -->
+  <AnalyticsBody />
+
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#a855f7] focus:text-white focus:font-mono focus:uppercase focus:tracking-wider">
+    דלג לתוכן הראשי
+  </a>
+
+  <slot name="header" />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <slot name="footer" />
+
+  <!-- Cookie Consent Banner -->
+  <CookieConsent />
+
+  <!-- Lenis Smooth Scroll + GSAP Scroll Animations -->
+  <script>
+    import Lenis from 'lenis';
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { initScrollAnimations } from '../scripts/scroll-animations';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initialize Lenis smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    // Make lenis available globally for other scripts
+    (window as any).lenis = lenis;
+
+    // Initialize scroll animations after DOM is ready
+    setTimeout(() => {
+      initScrollAnimations();
+    }, 200);
+  </script>
+
+  <!-- Scripts slot for page-specific scripts -->
+  <slot name="scripts" />
+</body>
+</html>

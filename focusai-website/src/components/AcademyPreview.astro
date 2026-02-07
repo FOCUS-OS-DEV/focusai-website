@@ -1,0 +1,350 @@
+---
+/**
+ * Academy Preview Section - Cyberpunk Terminal Design
+ * Dark theme with neon accents, glitch effects, and HUD aesthetics
+ */
+
+const courses = [
+  {
+    id: "AI_FIRST_001",
+    name: "AI First",
+    tagline: "// הצעד הראשון",
+    outcome: "מבינים ומתחילים להשתמש",
+    duration: "5 מפגשים",
+    hours: "15 שעות",
+    description: "הכניסה שלכם לעולם ה-AI. לומדים להשתמש ב-ChatGPT, Claude ועוד כלים בצורה מקצועית.",
+    features: [
+      "הכרת כלי AI מרכזיים",
+      "כתיבת פרומפטים אפקטיביים",
+      "שימוש ביום-יום בעבודה",
+      "תעודת השתתפות"
+    ],
+    neonColor: "cyan",
+    featured: false,
+    level: "BEGINNER",
+    href: "/academy/ai-first"
+  },
+  {
+    id: "BOT_CAMP_002",
+    name: "Bot-Camp",
+    tagline: "// ההכשרה המקצועית",
+    outcome: "יוצאים עם תיק עבודות ויכולת להרוויח",
+    duration: "12 מפגשים",
+    hours: "72 שעות",
+    description: "הכשרה מקיפה לבניית סוכני AI, בוטים ואוטומציות. יוצאים עם תעודה אקדמית וידע מעשי.",
+    features: [
+      "פרונטלי / Zoom Live",
+      "2-3 מרצים בכל מפגש",
+      "פורטל לימוד מתקדם + סוכני AI",
+      "קהילת בוגרים ונטוורקינג",
+      "תיק עבודות מוכן",
+      "תעודה בליווי אקדמי"
+    ],
+    neonColor: "green",
+    featured: true,
+    level: "ALL_LEVELS",
+    href: "/academy/bot-camp"
+  },
+  {
+    id: "AI_READY_003",
+    name: "AI Ready",
+    tagline: "// יוצרים בעצמכם",
+    outcome: "בונים הכל בעצמכם",
+    duration: "8 מפגשים",
+    hours: "30 שעות",
+    description: "יצירת תוכן, דפי נחיתה, מצגות, דשבורדים וסרטונים - הכל בעצמכם עם AI.",
+    features: [
+      "יצירת תוכן שיווקי",
+      "עיצוב עם Midjourney",
+      "בניית דפי נחיתה",
+      "אוטומציות בסיסיות",
+      "תעודת השתתפות"
+    ],
+    neonColor: "magenta",
+    featured: false,
+    level: "INTERMEDIATE",
+    href: "/academy/ai-ready"
+  }
+];
+
+const benefits = [
+  { text: "2-3 מרצים בכל מפגש" },
+  { text: "ליווי אקדמי של אוניברסיטת חיפה" },
+  { text: "תיק עבודות אמיתי" },
+  { text: "קהילת בוגרים פעילה" },
+];
+
+const getNeonClasses = (color: string, featured: boolean) => {
+  const colors: Record<string, any> = {
+    green: {
+      border: featured ? 'border-[#a855f7]' : 'border-[#a855f7]/30',
+      text: 'text-[#a855f7]',
+      bg: 'bg-[#a855f7]',
+      glow: 'shadow-[0_0_20px_rgba(168,85,247,0.3)]',
+      glowHover: 'hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]',
+    },
+    cyan: {
+      border: featured ? 'border-[#c084fc]' : 'border-[#c084fc]/30',
+      text: 'text-[#c084fc]',
+      bg: 'bg-[#c084fc]',
+      glow: 'shadow-[0_0_20px_rgba(192,132,252,0.3)]',
+      glowHover: 'hover:shadow-[0_0_30px_rgba(192,132,252,0.5)]',
+    },
+    magenta: {
+      border: featured ? 'border-[#e879f9]' : 'border-[#e879f9]/30',
+      text: 'text-[#e879f9]',
+      bg: 'bg-[#e879f9]',
+      glow: 'shadow-[0_0_20px_rgba(232,121,249,0.3)]',
+      glowHover: 'hover:shadow-[0_0_30px_rgba(232,121,249,0.5)]',
+    },
+  };
+  return colors[color] || colors.green;
+};
+---
+
+<section id="academy" class="py-24 lg:py-32 relative overflow-hidden bg-[#0a0a0f]" data-section>
+  <!-- Background effects -->
+  <div class="absolute inset-0">
+    <!-- Gradient mesh -->
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#e879f9]/5 rounded-full blur-[200px]"></div>
+  </div>
+
+  <!-- Circuit grid -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+
+  <div class="container relative z-10">
+    <!-- Section Header - Terminal Style -->
+    <div class="text-center mb-16 lg:mb-20">
+      <!-- Terminal badge -->
+      <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#a855f7]/30 mb-8" data-animate="fade-up">
+        <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+        <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em]">ACADEMY_PROTOCOLS</span>
+      </div>
+
+      <h2 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6" data-animate="blur-in" data-delay="0.1">
+        <span class="text-[#f5f5fa]">הכשרות שמשנות</span>
+        <span class="block mt-2 gradient-text-glow">קריירות</span>
+      </h2>
+
+      <p class="text-xl text-[#b0b0c0] max-w-3xl mx-auto font-mono" data-animate="fade-up" data-delay="0.2">
+        <span class="text-[#a855f7]">></span> לא קורס מוקלט. הכשרה שבה
+        <span class="text-[#f5f5fa]"> מחזיקים לך את היד עד הסוף.</span>
+      </p>
+    </div>
+
+    <!-- Benefits Bar - HUD Style -->
+    <div class="flex flex-wrap justify-center gap-4 mb-16" data-animate="stagger">
+      {benefits.map((benefit, i) => (
+        <div
+          class="flex items-center gap-3 px-5 py-3 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-full"
+        >
+          <svg class="w-4 h-4 text-[#a855f7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="text-sm text-[#d0d0e0] font-mono">{benefit.text}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="grid lg:grid-cols-3 gap-6 lg:gap-8 mb-16" data-animate="stagger">
+      {courses.map((course, index) => {
+        const neon = getNeonClasses(course.neonColor, course.featured);
+        return (
+          <div
+            class={`course-card group relative ${course.featured ? 'lg:-mt-6 lg:mb-6' : ''}`}
+            style={`animation-delay: ${index * 0.15}s`}
+          >
+            {/* Card */}
+            <div
+              class={`relative h-full bg-[#12121a] border ${neon.border} ${course.featured ? neon.glow : ''} ${neon.glowHover} transition-all duration-300 rounded-2xl overflow-hidden`}
+            >
+              {/* Terminal header */}
+              <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+                </div>
+                <span class="font-mono text-xs font-medium text-[#b0b0c0] tracking-wider">{course.id}</span>
+              </div>
+
+              {/* Featured badge */}
+              {course.featured && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+                  <div class={`px-4 py-1.5 ${neon.bg} text-[#0a0a0f] text-xs font-mono font-bold uppercase tracking-wider rounded-full`}>
+                    RECOMMENDED
+                  </div>
+                </div>
+              )}
+
+              {/* Content */}
+              <div class="p-6 lg:p-8">
+                {/* Header */}
+                <div class="mb-6">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class={`px-3 py-1.5 text-[11px] md:text-xs font-medium font-mono uppercase tracking-wider border ${neon.border} ${neon.text} rounded-full`}>
+                      {course.level}
+                    </span>
+                    <span class="font-mono text-sm text-[#a0a0b8]">{course.tagline}</span>
+                  </div>
+                  <h3 class={`text-3xl lg:text-4xl font-black ${neon.text}`} style={`text-shadow: 0 0 20px ${course.neonColor === 'green' ? 'rgba(168,85,247,0.3)' : course.neonColor === 'cyan' ? 'rgba(0,212,255,0.3)' : 'rgba(255,0,255,0.3)'};`}>
+                    {course.name}
+                  </h3>
+                </div>
+
+                {/* Outcome */}
+                <p class={`text-base font-semibold ${neon.text} mb-4 font-mono`}>
+                  > {course.outcome}
+                </p>
+
+                {/* Description */}
+                <p class="text-[#d0d0e0] leading-relaxed mb-6 text-sm">
+                  {course.description}
+                </p>
+
+                {/* Duration stats */}
+                <div class="flex items-center gap-6 mb-6 pb-6 border-b border-[#2a2a3a]">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#a0a0b8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="text-sm text-[#d0d0e0] font-mono">{course.duration}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#a0a0b8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-sm text-[#d0d0e0] font-mono">{course.hours}</span>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <ul class="space-y-3 mb-8">
+                  {course.features.map((feature) => (
+                    <li class="flex items-start gap-3">
+                      <span class={`${neon.text} font-mono text-sm`}>[+]</span>
+                      <span class="text-sm text-[#d0d0e0]">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Button */}
+                <a
+                  href={course.href}
+                  class={`block w-full text-center py-4 font-mono text-sm uppercase tracking-wider transition-all duration-300 rounded-full ${
+                    course.featured
+                      ? `${neon.bg} text-[#0a0a0f] font-bold ${neon.glow} hover:brightness-110`
+                      : `border ${neon.border} ${neon.text} hover:${neon.bg} hover:text-[#0a0a0f]`
+                  }`}
+                >
+                  {course.featured ? 'התחל עכשיו' : 'לפרטים נוספים'}
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Bottom CTA Section - Terminal Style -->
+    <div class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl" data-animate="terminal">
+      <!-- Glow effects -->
+      <div class="absolute top-0 right-1/4 w-96 h-96 bg-[#a855f7]/10 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-0 left-1/4 w-80 h-80 bg-[#e879f9]/10 rounded-full blur-[150px]"></div>
+
+      <!-- Terminal header -->
+      <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+        </div>
+        <span class="font-mono text-xs font-medium text-[#b0b0c0] tracking-wider">CONSULTATION_MODULE</span>
+      </div>
+
+      <div class="relative z-10 p-8 lg:p-12">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h3 class="text-2xl lg:text-3xl font-bold text-[#f5f5fa] mb-4">
+              <span class="font-mono text-[#a855f7]">></span> לא בטוחים איזה מסלול
+              <span class="gradient-text-glow"> מתאים לכם?</span>
+            </h3>
+            <p class="text-[#b0b0c0] mb-6 font-mono text-sm">
+              // בשיחה קצרה של 15 דקות נבין את הרקע שלכם, את המטרות, ונתאים לכם את המסלול המושלם.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                class="inline-flex items-center gap-3 px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold text-sm uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:shadow-[0_0_40px_rgba(168,85,247,0.7)] hover:brightness-110 transition-all duration-300 rounded-full"
+              >
+                <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+                שיחת ייעוץ בחינם
+              </a>
+              <a
+                href="https://wa.me/972539466408"
+                class="inline-flex items-center gap-3 px-8 py-4 border border-[#a855f7]/30 text-[#a855f7] font-mono text-sm uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 rounded-full"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="hidden md:flex justify-center">
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#a855f7]/20 to-[#e879f9]/10 blur-2xl"></div>
+              <div class="relative bg-[#0a0a0f] border border-[#2a2a3a] p-6 rounded-2xl">
+                <div class="grid grid-cols-2 gap-6">
+                  {[
+                    { num: "500+", label: "בוגרים" },
+                    { num: "98%", label: "שביעות רצון" },
+                    { num: "30", label: "ימים ל-ROI" },
+                    { num: "4.9", label: "דירוג ממוצע" },
+                  ].map((stat) => (
+                    <div class="text-center p-4 border border-[#2a2a3a] rounded-xl">
+                      <div class="text-2xl font-black text-[#a855f7] font-mono" style="text-shadow: 0 0 20px rgba(168,85,247,0.5);">
+                        {stat.num}
+                      </div>
+                      <div class="text-[11px] md:text-xs font-medium text-[#b0b0c0] mt-1 font-mono uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .course-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .course-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .gradient-text-glow {
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+  }
+</style>

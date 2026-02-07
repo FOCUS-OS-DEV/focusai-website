@@ -1,0 +1,294 @@
+---
+/**
+ * Cookie Consent Banner
+ * - Blocks analytics until consent is given
+ * - Stores consent in localStorage
+ * - Compliant with Israeli law and GDPR
+ */
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-bg-surface/95 backdrop-blur-lg border-t border-border-purple transform translate-y-full transition-transform duration-500"
+  role="dialog"
+  aria-labelledby="cookie-title"
+  aria-describedby="cookie-description"
+>
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div class="flex-1">
+      <h3 id="cookie-title" class="text-white font-semibold text-lg mb-1">
+        🍪 אנחנו משתמשים בעוגיות
+      </h3>
+      <p id="cookie-description" class="text-text-muted text-sm">
+        האתר משתמש בעוגיות לצורך שיפור חוויית המשתמש וניתוח תעבורה.
+        <a href="/privacy" class="text-purple-light hover:underline">למידע נוסף</a>
+      </p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button
+        id="cookie-accept-all"
+        class="px-6 py-2 rounded-xl bg-gradient-to-r from-purple-primary to-pink-accent text-white font-medium hover:opacity-90 transition-opacity"
+      >
+        אישור הכל
+      </button>
+      <button
+        id="cookie-accept-essential"
+        class="px-6 py-2 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition-colors"
+      >
+        עוגיות הכרחיות בלבד
+      </button>
+      <button
+        id="cookie-settings"
+        class="p-2 rounded-xl text-text-muted hover:text-white hover:bg-white/10 transition-colors"
+        aria-label="הגדרות עוגיות"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Settings Modal -->
+<div
+  id="cookie-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <div class="bg-bg-surface rounded-2xl p-6 max-w-lg mx-4 max-h-[90vh] overflow-y-auto border border-border-purple">
+    <div class="flex items-center justify-between mb-6">
+      <h3 id="modal-title" class="text-xl font-bold text-white">הגדרות עוגיות</h3>
+      <button id="modal-close" class="text-text-muted hover:text-white" aria-label="סגור">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Essential Cookies -->
+      <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-semibold text-white">עוגיות הכרחיות</h4>
+          <span class="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">תמיד פעיל</span>
+        </div>
+        <p class="text-sm text-text-muted">
+          עוגיות אלה נדרשות לתפעול האתר ולא ניתן לבטל אותן.
+        </p>
+      </div>
+
+      <!-- Analytics Cookies -->
+      <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-semibold text-white">עוגיות אנליטיקס</h4>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="analytics-toggle" class="sr-only peer" />
+            <div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-primary"></div>
+          </label>
+        </div>
+        <p class="text-sm text-text-muted">
+          עוגיות אלה עוזרות לנו להבין כיצד משתמשים באתר ולשפר אותו.
+        </p>
+      </div>
+
+      <!-- Marketing Cookies -->
+      <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-semibold text-white">עוגיות שיווקיות</h4>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="marketing-toggle" class="sr-only peer" />
+            <div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-primary"></div>
+          </label>
+        </div>
+        <p class="text-sm text-text-muted">
+          עוגיות אלה משמשות לצורך הצגת פרסומות רלוונטיות.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex gap-3 mt-6">
+      <button
+        id="save-preferences"
+        class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-primary to-pink-accent text-white font-medium hover:opacity-90 transition-opacity"
+      >
+        שמור העדפות
+      </button>
+      <button
+        id="accept-all-modal"
+        class="flex-1 px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition-colors"
+      >
+        אישור הכל
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cookie Consent Script
+  const CONSENT_KEY = 'focus_ai_cookie_consent';
+
+  interface CookieConsent {
+    essential: boolean;
+    analytics: boolean;
+    marketing: boolean;
+    timestamp: number;
+  }
+
+  // Check if consent already given
+  function getConsent(): CookieConsent | null {
+    const consent = localStorage.getItem(CONSENT_KEY);
+    if (consent) {
+      return JSON.parse(consent);
+    }
+    return null;
+  }
+
+  // Save consent
+  function saveConsent(consent: CookieConsent) {
+    localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    applyConsent(consent);
+    hideBanner();
+  }
+
+  // Apply consent settings
+  function applyConsent(consent: CookieConsent) {
+    // Enable/disable analytics based on consent
+    if (consent.analytics) {
+      // Load Google Analytics or other analytics here
+      // Example: window.gtag && window.gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      document.dispatchEvent(new CustomEvent('analytics-consent-granted'));
+    }
+
+    if (consent.marketing) {
+      // Load marketing pixels here
+      // Example: Load Facebook Pixel, etc.
+      document.dispatchEvent(new CustomEvent('marketing-consent-granted'));
+    }
+  }
+
+  // Show banner
+  function showBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.classList.remove('translate-y-full');
+    }
+  }
+
+  // Hide banner
+  function hideBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.classList.add('translate-y-full');
+    }
+  }
+
+  // Show modal
+  function showModal() {
+    const modal = document.getElementById('cookie-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
+
+  // Hide modal
+  function hideModal() {
+    const modal = document.getElementById('cookie-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    const consent = getConsent();
+
+    if (!consent) {
+      // No consent yet, show banner after 1 second
+      setTimeout(showBanner, 1000);
+    } else {
+      // Apply existing consent
+      applyConsent(consent);
+    }
+
+    // Accept all button
+    document.getElementById('cookie-accept-all')?.addEventListener('click', () => {
+      saveConsent({
+        essential: true,
+        analytics: true,
+        marketing: true,
+        timestamp: Date.now()
+      });
+    });
+
+    // Accept essential only button
+    document.getElementById('cookie-accept-essential')?.addEventListener('click', () => {
+      saveConsent({
+        essential: true,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      });
+    });
+
+    // Settings button
+    document.getElementById('cookie-settings')?.addEventListener('click', () => {
+      hideBanner();
+      showModal();
+
+      // Set toggle states based on current consent
+      const currentConsent = getConsent();
+      const analyticsToggle = document.getElementById('analytics-toggle') as HTMLInputElement;
+      const marketingToggle = document.getElementById('marketing-toggle') as HTMLInputElement;
+
+      if (analyticsToggle) {
+        analyticsToggle.checked = currentConsent?.analytics ?? false;
+      }
+      if (marketingToggle) {
+        marketingToggle.checked = currentConsent?.marketing ?? false;
+      }
+    });
+
+    // Modal close button
+    document.getElementById('modal-close')?.addEventListener('click', hideModal);
+
+    // Save preferences button
+    document.getElementById('save-preferences')?.addEventListener('click', () => {
+      const analyticsToggle = document.getElementById('analytics-toggle') as HTMLInputElement;
+      const marketingToggle = document.getElementById('marketing-toggle') as HTMLInputElement;
+
+      saveConsent({
+        essential: true,
+        analytics: analyticsToggle?.checked ?? false,
+        marketing: marketingToggle?.checked ?? false,
+        timestamp: Date.now()
+      });
+
+      hideModal();
+    });
+
+    // Accept all in modal
+    document.getElementById('accept-all-modal')?.addEventListener('click', () => {
+      saveConsent({
+        essential: true,
+        analytics: true,
+        marketing: true,
+        timestamp: Date.now()
+      });
+
+      hideModal();
+    });
+
+    // Close modal on backdrop click
+    document.getElementById('cookie-modal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        hideModal();
+      }
+    });
+  });
+</script>

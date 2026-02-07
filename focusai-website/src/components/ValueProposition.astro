@@ -1,0 +1,240 @@
+---
+interface Card {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: string;
+  features: string[];
+  cta: { text: string; href: string };
+  gradient: 'purple' | 'pink';
+}
+
+const cards: Card[] = [
+  {
+    title: "נציג AI לעסק",
+    subtitle: "זמין 24/7 | עונה במקומך | מתאם שיחה | מוכר",
+    description: "לקוח שולח הודעה, הנציג מטפל בכל היתר. מתמודד עם כל כמות של לידים - בקלות ובאיכות מירבית.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />`,
+    features: [
+      "מענה מיידי 24/7 - כל לקוח מקבל תשובה בשניות",
+      "תיאום פגישות אוטומטי - מתחבר ליומן",
+      "איסוף לידים חכם - שומר ל-CRM אוטומטית",
+      "WhatsApp, Instagram, Facebook, TikTok, SMS",
+    ],
+    cta: { text: "לשיחת אפיון חינם", href: "#contact" },
+    gradient: 'purple',
+  },
+  {
+    title: "הכשרות מקצועיות",
+    subtitle: "הרולס-רויס של ההכשרות | תעודה בליווי אקדמי",
+    description: "לומדים ממי שעושים את זה בעצמם! הידע מגיע מפרויקטים אמיתיים. 2-3 מרצים בכיתה בכל מפגש.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />`,
+    features: [
+      "Bot-Camp - 12 מפגשים, תעודה אקדמית",
+      "AI Ready - 8 מפגשים, 100% יישומי",
+      "AI First - 5 מפגשים, למתחילים מוחלטים",
+      "ליווי אקדמי - אוניברסיטת חיפה",
+    ],
+    cta: { text: "לשיחת ייעוץ חינם", href: "#contact" },
+    gradient: 'pink',
+  },
+];
+---
+
+<section id="value-proposition" class="section-padding relative overflow-hidden">
+  <!-- Decorative Background Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <!-- Gradient orb -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full opacity-30"
+         style="background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 60%);">
+    </div>
+
+    <!-- Decorative half-circle - left -->
+    <svg class="absolute top-0 -left-16 w-32 h-64 opacity-10" viewBox="0 0 100 200" fill="none">
+      <path d="M100 0 C100 110.457 77.614 200 0 200 L0 0 Z" fill="url(#vpGrad1)"/>
+      <defs>
+        <linearGradient id="vpGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#ec4899"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- Decorative half-circle - right -->
+    <svg class="absolute bottom-0 -right-16 w-32 h-64 opacity-10" viewBox="0 0 100 200" fill="none">
+      <path d="M0 0 C0 110.457 22.386 200 100 200 L100 0 Z" fill="url(#vpGrad2)"/>
+      <defs>
+        <linearGradient id="vpGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ec4899"/>
+          <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <!-- Section Header - Apple style -->
+    <div class="section-header" data-animate="fade-up">
+      <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-purple-primary"></span>
+        <span class="text-sm tracking-wide text-text-muted">איך נוכל לעזור?</span>
+      </div>
+
+      <h2 class="heading-large text-white mb-6">
+        בחרו את
+        <span class="gradient-text">המסלול שלכם</span>
+      </h2>
+
+      <p class="text-body-large max-w-2xl mx-auto">
+        נציג AI שעובד בשבילכם 24/7 או הכשרה מקצועית שתהפוך אתכם למומחי AI
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
+      {cards.map((card, index) => (
+        <div
+          class="value-card group relative"
+          data-animate={index === 0 ? "fade-right" : "fade-left"}
+        >
+          <!-- Card glow effect -->
+          <div class={`absolute -inset-1 rounded-[32px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl ${
+            card.gradient === 'purple'
+              ? 'bg-gradient-to-br from-purple-primary/40 to-purple-dark/40'
+              : 'bg-gradient-to-br from-pink-accent/40 to-pink-light/40'
+          }`}></div>
+
+          <!-- Card container -->
+          <div class={`relative rounded-[28px] p-[1px] overflow-hidden transition-transform duration-500 group-hover:scale-[1.02] ${
+            card.gradient === 'purple'
+              ? 'bg-gradient-to-br from-purple-primary/50 via-purple-dark/30 to-transparent'
+              : 'bg-gradient-to-br from-pink-accent/50 via-pink-light/30 to-transparent'
+          }`}>
+
+            <!-- Inner card -->
+            <div class="relative bg-gradient-to-br from-bg-surface to-bg-dark rounded-[27px] p-8 lg:p-10 h-full flex flex-col overflow-hidden">
+
+              <!-- Decorative inner glow -->
+              <div class={`absolute top-0 right-0 w-64 h-64 rounded-full opacity-20 blur-3xl pointer-events-none ${
+                card.gradient === 'purple' ? 'bg-purple-primary' : 'bg-pink-accent'
+              }`}></div>
+
+              <!-- Icon with glow -->
+              <div class="relative z-10 mb-8">
+                <div class={`w-20 h-20 rounded-2xl flex items-center justify-center relative ${
+                  card.gradient === 'purple'
+                    ? 'bg-gradient-to-br from-purple-primary/30 to-purple-dark/20'
+                    : 'bg-gradient-to-br from-pink-accent/30 to-pink-light/20'
+                }`}>
+                  <!-- Icon glow -->
+                  <div class={`absolute inset-0 rounded-2xl opacity-50 blur-lg ${
+                    card.gradient === 'purple' ? 'bg-purple-primary/30' : 'bg-pink-accent/30'
+                  }`}></div>
+                  <svg
+                    class={`relative w-10 h-10 ${
+                      card.gradient === 'purple' ? 'text-purple-light' : 'text-pink-light'
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    set:html={card.icon}
+                  />
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="relative z-10 flex-grow">
+                <h3 class="text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
+                  {card.title}
+                </h3>
+                <p class={`text-sm font-medium mb-4 tracking-wide ${
+                  card.gradient === 'purple' ? 'text-purple-light' : 'text-pink-light'
+                }`}>
+                  {card.subtitle}
+                </p>
+                <p class="text-text-muted text-lg leading-relaxed mb-8">
+                  {card.description}
+                </p>
+
+                <!-- Features List -->
+                <ul class="space-y-4 mb-10">
+                  {card.features.map((feature, fIndex) => (
+                    <li class="flex items-start gap-4 group/feature">
+                      <div class={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 ${
+                        card.gradient === 'purple'
+                          ? 'bg-purple-primary/20'
+                          : 'bg-pink-accent/20'
+                      }`}>
+                        <svg class={`w-3.5 h-3.5 ${
+                          card.gradient === 'purple' ? 'text-purple-light' : 'text-pink-light'
+                        }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span class="text-text-light/90 text-base leading-relaxed">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- CTA Button -->
+              <a
+                href={card.cta.href}
+                class={`relative z-10 inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 overflow-hidden group/btn ${
+                  card.gradient === 'purple'
+                    ? 'bg-gradient-to-r from-purple-primary to-purple-dark text-white hover:shadow-[0_10px_40px_-10px_rgba(168,85,247,0.5)]'
+                    : 'bg-gradient-to-r from-pink-accent to-pink-light text-white hover:shadow-[0_10px_40px_-10px_rgba(236,72,153,0.5)]'
+                }`}
+              >
+                <!-- Button shimmer effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                <span class="relative">{card.cta.text}</span>
+                <svg class="relative w-5 h-5 rtl:rotate-180 transition-transform duration-300 group-hover/btn:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom accent line -->
+    <div class="mt-20 mx-auto max-w-md">
+      <div class="h-px bg-gradient-to-r from-transparent via-purple-primary/50 to-transparent"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-card {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animate cards on scroll
+    gsap.utils.toArray('.value-card').forEach((card: any, index: number) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: index * 0.2,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+  });
+</script>

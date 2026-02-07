@@ -1,0 +1,21 @@
+---
+/**
+ * Analytics Body Component
+ * GTM noscript fallback - place immediately after opening <body> tag
+ */
+import { siteConfig } from '../data/config';
+
+const { gtmId } = siteConfig.analytics;
+---
+
+{/* Google Tag Manager (noscript) - Body Fallback */}
+{gtmId && (
+  <noscript>
+    <iframe
+      src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden"
+    ></iframe>
+  </noscript>
+)}

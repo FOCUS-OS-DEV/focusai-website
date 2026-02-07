@@ -1,0 +1,71 @@
+---
+/**
+ * Analytics Component
+ * Includes Google Tag Manager, Microsoft Clarity, and respects cookie consent
+ *
+ * To set up:
+ * 1. Get GTM ID from https://tagmanager.google.com (format: GTM-XXXXXXX)
+ * 2. Get Clarity ID from https://clarity.microsoft.com (format: abc123xyz)
+ * 3. Add IDs to src/data/config.ts under analytics section
+ */
+import { siteConfig } from '../data/config';
+
+const { gtmId, clarityId, ga4Id } = siteConfig.analytics;
+---
+
+{/* Google Tag Manager - Head Script */}
+{gtmId && (
+  <script is:inline define:vars={{ gtmId }}>
+    // Only load if user has consented to analytics cookies
+    (function() {
+      const consent = localStorage.getItem('cookie-consent');
+      if (consent === 'accepted') {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      }
+    })();
+  </script>
+)}
+
+{/* Microsoft Clarity - Head Script */}
+{clarityId && (
+  <script is:inline define:vars={{ clarityId }}>
+    // Only load if user has consented to analytics cookies
+    (function() {
+      const consent = localStorage.getItem('cookie-consent');
+      if (consent === 'accepted') {
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window,document,"clarity","script",clarityId);
+      }
+    })();
+  </script>
+)}
+
+{/* Google Analytics 4 Direct (if not using GTM) */}
+{ga4Id && !gtmId && (
+  <>
+    <script is:inline define:vars={{ ga4Id }}>
+      // Only load if user has consented to analytics cookies
+      (function() {
+        const consent = localStorage.getItem('cookie-consent');
+        if (consent === 'accepted') {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4Id;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ga4Id);
+        }
+      })();
+    </script>
+  </>
+)}

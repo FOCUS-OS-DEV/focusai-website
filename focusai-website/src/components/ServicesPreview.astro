@@ -1,0 +1,313 @@
+---
+/**
+ * Services Preview Section - Cyberpunk HUD Design
+ * Development & Integration services with terminal aesthetic
+ */
+
+const services = [
+  {
+    id: "SRV_001",
+    title: "נציג AI לעסק",
+    subtitle: "DIGITAL_AGENT",
+    description: "בוט חכם שמבין את הלקוחות שלכם, עונה על שאלות, קובע פגישות ומטפל בכל ההודעות - גם בשלוש בלילה.",
+    features: ["WhatsApp", "Instagram", "Facebook", "Website"],
+    metric: "90%",
+    metricLabel: "TIME_SAVED",
+    neonColor: "magenta"
+  },
+  {
+    id: "SRV_002",
+    title: "אוטומציות חכמות",
+    subtitle: "SMART_AUTOMATION",
+    description: "ליד נכנס? מיד נפתח כרטיס ב-CRM, נשלח מייל, מתואם פולואפ ביומן. הכל אוטומטי.",
+    features: ["N8N", "Zapier", "API"],
+    metric: "50+",
+    metricLabel: "INTEGRATIONS",
+    neonColor: "cyan"
+  },
+  {
+    id: "SRV_003",
+    title: "סדנאות לארגונים",
+    subtitle: "TEAM_TRAINING",
+    description: "לא עוד מצגות משעממות. סדנאות מעשיות שבהן העובדים יוצאים עם כלים שהם באמת משתמשים בהם.",
+    features: ["ChatGPT", "Claude", "Midjourney", "Automation"],
+    metric: "500+",
+    metricLabel: "GRADUATES",
+    neonColor: "green"
+  }
+];
+
+const processSteps = [
+  { num: "01", code: "DISCOVER", title: "מבינים", desc: "פגישת אפיון עמוקה להבנת הצרכים" },
+  { num: "02", code: "BUILD", title: "בונים", desc: "פיתוח הפתרון המותאם לעסק" },
+  { num: "03", code: "CONNECT", title: "מחברים", desc: "אינטגרציה לכל המערכות הקיימות" },
+  { num: "04", code: "SUPPORT", title: "מלווים", desc: "תמיכה עד שעובד מושלם" },
+];
+
+const getNeonColor = (color: string) => {
+  const colors: Record<string, string> = {
+    green: '#a855f7',
+    cyan: '#c084fc',
+    magenta: '#e879f9',
+  };
+  return colors[color] || colors.green;
+};
+---
+
+<section id="services" class="py-24 lg:py-32 relative overflow-hidden bg-[#0a0a0f]" data-section>
+  <!-- Background effects -->
+  <div class="absolute inset-0 section-bg">
+    <div class="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#e879f9]/5 rounded-full blur-[200px]"></div>
+    <div class="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#c084fc]/5 rounded-full blur-[200px]"></div>
+  </div>
+
+  <!-- Circuit grid -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+
+  <!-- Scan line effect -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="scan-line absolute w-full h-[2px] bg-gradient-to-r from-transparent via-[#a855f7]/50 to-transparent"></div>
+  </div>
+
+  <div class="container relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16 lg:mb-24">
+      <!-- Terminal badge -->
+      <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#e879f9]/30 mb-8" data-animate="fade-up">
+        <span class="w-2 h-2 rounded-full bg-[#e879f9] animate-pulse"></span>
+        <span class="font-mono text-sm font-semibold text-[#e879f9] uppercase tracking-[0.15em]">SERVICES_MODULE</span>
+      </div>
+
+      <h2 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6" data-animate="glitch">
+        <span class="text-[#f5f5fa]">בונים. מחברים.</span>
+        <span class="block mt-2 gradient-text-magenta">מלווים.</span>
+      </h2>
+
+      <p class="text-xl text-[#b0b0c0] max-w-3xl mx-auto font-mono" data-animate="fade-up" data-delay="0.2">
+        <span class="text-[#e879f9]">></span> לא רק מייעצים - בונים את הפתרון ומוודאים שהוא
+        <span class="text-[#f5f5fa]"> עובד מושלם.</span>
+      </p>
+    </div>
+
+    <!-- Services Grid - Bento Style -->
+    <div class="grid lg:grid-cols-3 gap-6 mb-20">
+      {services.map((service, index) => {
+        const neonHex = getNeonColor(service.neonColor);
+        return (
+          <div
+            class="service-card group relative"
+            style={`--neon-color: ${neonHex};`}
+            data-animate="flip"
+            data-delay={`${index * 0.15}`}
+          >
+            {/* Card */}
+            <div
+              class="relative h-full bg-[#12121a] border border-[#2a2a3a] hover:border-[var(--neon-color)] transition-all duration-300 overflow-hidden rounded-2xl"
+            >
+              {/* Glow effect on hover */}
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+                style={`box-shadow: inset 0 0 60px ${neonHex}20;`}
+              ></div>
+
+              {/* Terminal header */}
+              <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+                </div>
+                <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">{service.id}</span>
+              </div>
+
+              {/* Content */}
+              <div class="p-6 lg:p-8">
+                {/* Header with metric */}
+                <div class="flex items-start justify-between mb-6">
+                  <div>
+                    <span class="font-mono text-sm font-medium uppercase tracking-[0.2em] mb-2 block" style={`color: ${neonHex};`}>
+                      {service.subtitle}
+                    </span>
+                    <h3 class="text-2xl font-bold text-[#f5f5fa] group-hover:text-[var(--neon-color)] transition-colors">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <div class="text-left">
+                    <div class="text-3xl font-black font-mono" style={`color: ${neonHex}; text-shadow: 0 0 20px ${neonHex}50;`}>
+                      {service.metric}
+                    </div>
+                    <div class="text-sm font-medium text-[#b0b0c0] font-mono uppercase tracking-wider">{service.metricLabel}</div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p class="text-[#d0d0e0] leading-relaxed mb-6 text-sm">
+                  {service.description}
+                </p>
+
+                {/* Features */}
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {service.features.map((feature) => (
+                    <span
+                      class="px-3 py-1.5 text-sm font-medium font-mono uppercase tracking-wider border rounded-full transition-all duration-300"
+                      style={`border-color: ${neonHex}30; color: ${neonHex};`}
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA Link */}
+                <a
+                  href="#contact"
+                  class="inline-flex items-center gap-2 font-mono text-[11px] md:text-xs uppercase tracking-wider transition-all duration-300 group/link"
+                  style={`color: ${neonHex};`}
+                >
+                  <span class="w-1.5 h-1.5 rounded-full transition-colors" style={`background-color: ${neonHex};`}></span>
+                  <span>ACCESS_DETAILS</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Process Timeline - Terminal Style -->
+    <div class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl">
+      <!-- Glow effects -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>
+
+      <!-- Horizontal lines -->
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#a855f7]/30 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#a855f7]/30 to-transparent"></div>
+
+      {/* Terminal header */}
+      <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+        </div>
+        <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">PROCESS_PROTOCOL</span>
+      </div>
+
+      <div class="relative z-10 p-8 lg:p-16">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl lg:text-4xl font-black text-[#f5f5fa] mb-4">
+            <span class="font-mono text-[#a855f7]">$</span> 4 שלבים - ואתם
+            <span class="gradient-text-glow"> באוויר</span>
+          </h3>
+          <p class="text-[#b0b0c0] max-w-xl mx-auto font-mono text-sm">
+            // תהליך מוכח שמביא תוצאות תוך 30 יום
+          </p>
+        </div>
+
+        <!-- Steps -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {processSteps.map((step, index) => (
+            <div class="process-step relative group" style={`animation-delay: ${index * 0.1}s`}>
+              {/* Connector line */}
+              {index < 3 && (
+                <div class="hidden lg:block absolute top-1/2 left-full w-full h-px">
+                  <div class="w-full h-full bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+                </div>
+              )}
+
+              <div class="relative text-center p-6 bg-[#0a0a0f] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl">
+                {/* Step number */}
+                <div class="font-mono text-6xl font-black text-[#1c1c2e] group-hover:text-[#a855f7]/10 transition-colors absolute top-2 right-4">
+                  {step.num}
+                </div>
+
+                {/* Code badge */}
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
+                  <span class="font-mono text-sm font-medium text-[#a855f7] uppercase tracking-wider">{step.code}</span>
+                </div>
+
+                <h4 class="text-xl font-bold text-[#f5f5fa] mb-2">{step.title}</h4>
+                <p class="text-[#b0b0c0] text-sm font-mono">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-16">
+      <div class="inline-flex flex-col sm:flex-row gap-4">
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)] hover:brightness-110 transition-all duration-300 rounded-full"
+        >
+          <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+          לשיחת אפיון בחינם
+        </a>
+
+        <a
+          href="https://wa.me/972539466408"
+          class="inline-flex items-center justify-center gap-3 px-10 py-5 border border-[#a855f7]/30 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 rounded-full"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 40px var(--neon-color, rgba(168, 85, 247, 0.3));
+  }
+
+  .process-step {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gradient-text-glow {
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+  }
+
+  .gradient-text-magenta {
+    background: linear-gradient(90deg, #e879f9, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(232, 121, 249, 0.5));
+  }
+
+  /* Scan line animation */
+  .scan-line {
+    animation: scanMove 4s linear infinite;
+  }
+
+  @keyframes scanMove {
+    0% { top: -2px; }
+    100% { top: 100%; }
+  }
+</style>

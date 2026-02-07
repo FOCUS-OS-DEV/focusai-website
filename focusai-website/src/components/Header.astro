@@ -1,0 +1,352 @@
+---
+/**
+ * Header Component - Focus AI Cyberpunk Edition
+ * Dark theme with neon accents
+ */
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const logo = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png";
+
+const navLinks = [
+  { href: '/', label: 'בית', code: 'HOME' },
+  { href: '#academy', label: 'אקדמיה', code: 'ACADEMY', hasDropdown: true, dropdownType: 'academy' },
+  { href: '#services', label: 'שירותים', code: 'SERVICES', hasDropdown: true, dropdownType: 'services' },
+  { href: '/sadnaot', label: 'סדנאות', code: 'WORKSHOPS' },
+  { href: '/tools', label: 'כלי AI', code: 'TOOLS' },
+  { href: '/blog', label: 'בלוג', code: 'BLOG' },
+  { href: '/about', label: 'אודות', code: 'ABOUT' },
+];
+
+const academyLinks = [
+  { href: '/academy/ai-ready', label: 'AI Ready', code: 'AI_RDY', description: 'יסודות AI לאנשי מקצוע' },
+  { href: '/academy/bot-camp', label: 'Bot-Camp', code: 'BOT_CMP', description: 'מפתחי אוטומציות וסוכני AI' },
+  { href: '/academy/ai-first', label: 'AI First', code: 'AI_FST', description: 'מובילי טרנספורמציה בארגונים' },
+];
+
+const servicesLinks = [
+  { href: '/services/strategy', label: 'אפיון ואסטרטגיה', code: 'STRAT', description: 'גיבוש אסטרטגיית AI לארגון' },
+  { href: '/services/development', label: 'פיתוח ואינטגרציה', code: 'DEV', description: 'פתרונות AI מותאמים אישית' },
+  { href: '/services/ai-agents', label: 'סוכני AI', code: 'AGENTS', description: 'בוטים ונציגים חכמים לעסקים' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+  <div class="header-bg bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-[#2a2a3a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+
+        <!-- Logo with neon effect -->
+        <a href="/" class="flex items-center gap-3 group relative">
+          <div class="absolute inset-0 bg-[#a855f7]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <img
+            src={logo}
+            alt="Focus AI"
+            class="h-8 lg:h-10 w-auto transition-all group-hover:brightness-125 relative z-10"
+            style="filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.3));"
+          />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-1" aria-label="ניווט ראשי">
+          {navLinks.map(link => (
+            link.hasDropdown ? (
+              <div class="nav-dropdown relative group">
+                <a
+                  href={link.href}
+                  class={`nav-link flex items-center gap-2 px-4 py-2 font-mono text-sm uppercase tracking-wider transition-all duration-200 ${
+                    (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
+                    (link.dropdownType === 'services' && currentPath.startsWith('/services'))
+                      ? 'text-[#a855f7]'
+                      : 'text-[#d0d0e0] hover:text-[#a855f7]'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-current opacity-50 group-hover:opacity-100 transition-opacity"></span>
+                </a>
+                {/* Dropdown Menu - Wide with descriptions */}
+                <div class="dropdown-menu absolute top-full right-0 mt-2 w-80 bg-[#12121a] border border-[#2a2a3a] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-xl overflow-hidden">
+                  {/* Terminal header */}
+                  <div class="flex items-center justify-between px-4 py-2.5 bg-[#0a0a0f] border-b border-[#2a2a3a] rounded-t-xl">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-[#ff3366]"></span>
+                      <span class="w-2 h-2 rounded-full bg-[#ffff00]"></span>
+                      <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
+                    </div>
+                    <span class="font-mono text-[11px] text-[#a855f7] tracking-wider uppercase font-medium">
+                      {link.dropdownType === 'academy' ? 'ACADEMY_MENU' : 'SERVICES_MENU'}
+                    </span>
+                  </div>
+                  {(link.dropdownType === 'academy' ? academyLinks : servicesLinks).map((sublink, i) => (
+                    <a
+                      href={sublink.href}
+                      class={`group/item flex flex-col px-4 py-3.5 transition-all border-b border-[#2a2a3a] last:border-b-0 ${
+                        currentPath === sublink.href
+                          ? 'text-[#a855f7] bg-[#a855f7]/10'
+                          : 'text-[#d0d0e0] hover:text-[#a855f7] hover:bg-[#a855f7]/5'
+                      }`}
+                    >
+                      <div class="flex items-center justify-between mb-1.5">
+                        <span class="font-mono text-[15px] font-semibold">{sublink.label}</span>
+                        <span class="text-[11px] font-mono text-[#8a8a9a] group-hover/item:text-[#a855f7]/70 font-medium">[{sublink.code}]</span>
+                      </div>
+                      <span class="text-[13px] text-[#a0a0b8] group-hover/item:text-[#c0c0d0] transition-colors leading-relaxed">{sublink.description}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a
+                href={link.href}
+                class={`nav-link group relative px-4 py-2 font-mono text-sm uppercase tracking-wider transition-all duration-200 ${
+                  currentPath === link.href
+                    ? 'text-[#a855f7]'
+                    : 'text-[#d0d0e0] hover:text-[#a855f7]'
+                }`}
+                aria-current={currentPath === link.href ? 'page' : undefined}
+              >
+                <span class="relative z-10">{link.label}</span>
+                {/* Hover underline effect */}
+                <span class={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#a855f7] transition-all duration-300 ${
+                  currentPath === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} style="box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);"></span>
+              </a>
+            )
+          ))}
+        </nav>
+
+        <!-- CTA Button (Desktop) -->
+        <div class="hidden lg:flex items-center gap-4">
+          <a
+            href="#contact"
+            class="relative inline-flex items-center gap-2 px-6 py-2.5 bg-[#a855f7] text-white font-mono text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] hover:brightness-110 rounded-full"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            בואו נדבר
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          type="button"
+          class="lg:hidden relative p-2 text-[#d0d0e0] hover:text-[#a855f7] transition-colors"
+          aria-label="פתח תפריט"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          id="mobile-menu-button"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" id="menu-icon-open" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" id="menu-icon-close" class="hidden" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu - Cyberpunk Style (RTL: slides from left) -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-[#0a0a0f]/98 backdrop-blur-xl transform -translate-x-full transition-transform duration-300 ease-in-out z-40 border-t border-[#2a2a3a]"
+    aria-hidden="true"
+  >
+    {/* Grid pattern */}
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+    <nav class="relative z-10 flex flex-col p-6 gap-2" aria-label="ניווט מובייל">
+      {navLinks.map((link, i) => (
+        link.hasDropdown ? (
+          <div class="mobile-nav-link" style={`animation-delay: ${i * 0.05}s`}>
+            <a
+              href={link.href}
+              class={`flex items-center justify-between px-4 py-4 font-mono text-lg transition-all border-b border-[#2a2a3a] ${
+                (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
+                (link.dropdownType === 'services' && currentPath.startsWith('/services'))
+                  ? 'text-[#a855f7] bg-[#a855f7]/5'
+                  : 'text-[#e0e0f0] hover:text-[#a855f7] hover:bg-[#a855f7]/5'
+              }`}
+            >
+              <span class="flex items-center gap-3">
+                <span class="text-[#9a9ab0] text-[11px] font-medium">[{link.code}]</span>
+                <span>{link.label}</span>
+              </span>
+            </a>
+            {/* Sub-links */}
+            <div class="pr-4 bg-[#0a0a0f]/50">
+              {(link.dropdownType === 'academy' ? academyLinks : servicesLinks).map((sublink) => (
+                <a
+                  href={sublink.href}
+                  class={`flex flex-col px-4 py-4 font-mono transition-all border-b border-[#2a2a3a]/50 ${
+                    currentPath === sublink.href
+                      ? 'text-[#a855f7]'
+                      : 'text-[#c0c0d0] hover:text-[#a855f7]'
+                  }`}
+                >
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-base font-semibold">{sublink.label}</span>
+                    <span class="text-[11px] text-[#8a8a9a] font-medium">[{sublink.code}]</span>
+                  </div>
+                  <span class="text-sm text-[#9a9ab0] leading-relaxed">{sublink.description}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={link.href}
+            class={`mobile-nav-link flex items-center gap-3 px-4 py-4 font-mono text-lg transition-all border-b border-[#2a2a3a] ${
+              currentPath === link.href
+                ? 'text-[#a855f7] bg-[#a855f7]/5'
+                : 'text-[#e0e0f0] hover:text-[#a855f7] hover:bg-[#a855f7]/5'
+            }`}
+            style={`animation-delay: ${i * 0.05}s`}
+          >
+            <span class="text-[#9a9ab0] text-[11px] font-medium">[{link.code}]</span>
+            <span>{link.label}</span>
+          </a>
+        )
+      ))}
+
+      <div class="mt-6 pt-6 border-t border-[#2a2a3a]">
+        <a
+          href="#contact"
+          class="flex items-center justify-center gap-2 w-full py-4 bg-[#a855f7] text-white font-mono font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.4)] rounded-full hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all duration-300"
+        >
+          <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+          בואו נדבר
+        </a>
+      </div>
+
+      {/* System status footer */}
+      <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-[13px] font-medium font-mono text-[#a0a0b8]">
+        <span class="flex items-center gap-2.5">
+          <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+          SYSTEM_ONLINE
+        </span>
+        <span>FOCUS_AI_v2.0</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer to prevent content from going under fixed header -->
+<div class="h-16 lg:h-20"></div>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      mobileMenu?.classList.remove('-translate-x-full');
+      mobileMenu?.classList.add('translate-x-0');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      iconOpen?.classList.add('hidden');
+      iconClose?.classList.remove('hidden');
+      menuButton?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu?.classList.add('-translate-x-full');
+      mobileMenu?.classList.remove('translate-x-0');
+      mobileMenu?.setAttribute('aria-hidden', 'true');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+      menuButton?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuButton?.addEventListener('click', toggleMenu);
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen) {
+      toggleMenu();
+    }
+  });
+
+  // Close menu when clicking a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isMenuOpen) toggleMenu();
+    });
+  });
+
+  // Header scroll effect - add glow on scroll
+  const header = document.getElementById('main-header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 50) {
+      header?.classList.add('header-scrolled');
+    } else {
+      header?.classList.remove('header-scrolled');
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
+<style>
+  .header-scrolled .header-bg {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.2);
+  }
+
+  .mobile-nav-link {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  #mobile-menu.translate-x-0 .mobile-nav-link {
+    animation: slideIn 0.3s ease forwards;
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Dropdown menu styles */
+  .dropdown-menu {
+    transform: translateY(-10px);
+  }
+
+  .nav-dropdown:hover .dropdown-menu {
+    transform: translateY(0);
+  }
+
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 30px;
+    border: 8px solid transparent;
+    border-bottom-color: #2a2a3a;
+  }
+
+  .dropdown-menu::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 31px;
+    border: 7px solid transparent;
+    border-bottom-color: #0a0a0f;
+  }
+</style>
