@@ -253,7 +253,63 @@ Both are instructors at University of Haifa & Technion.
 
 ---
 
+## Syllabus System (Lead Capture)
+
+### Components
+
+| Component | Purpose |
+|-----------|---------|
+| `SyllabusGate.tsx` | Form gate - requires form submission before viewing |
+| `SyllabusViewer.tsx` | Gallery modal with keyboard nav & thumbnails |
+| `SyllabusButton.tsx` | Direct access button (no form gate) |
+
+### Flow (SyllabusGate)
+
+1. User clicks "לקבלת הסילבוס"
+2. Modal opens with form (name, phone, email)
+3. Form submits to FormSubmit.co → info@focusai.co.il
+4. Syllabus viewer opens immediately
+
+### Hidden Syllabus Pages
+
+Each course has a hidden syllabus page accessible only via direct link:
+
+| Course | Syllabus Page |
+|--------|---------------|
+| Bot-Camp | `/academy/bot-camp/syllabus` |
+| AI-Ready | `/academy/ai-ready/syllabus` (TODO) |
+| AI-First | `/academy/ai-first/syllabus` (TODO) |
+
+### Syllabus Images (Cloudinary)
+
+```javascript
+// Bot-Camp
+const syllabusImages = [
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470074/111_kyis5b.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470080/222_enxevc.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470082/333_odscrk.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470083/444_icwizs.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470088/555_djukfo.jpg'
+];
+```
+
+---
+
+## Forms & Webhooks
+
+**Current:** FormSubmit.co (AJAX) → Email
+**Future:** N8N webhooks (when ready)
+
+---
+
 ## Recent Updates
+
+### 2026-02-07
+- Created Syllabus system (SyllabusGate, SyllabusViewer, SyllabusButton)
+- Added Chavobot character to Bot-Camp hero
+- Added fingerprint background to Bot-Camp hero
+- Bot-Camp page redesigned with cyberpunk theme
+- Added "למי מתאימה התוכנית" section
 
 ### 2026-02-06
 - Created comprehensive DESIGN_SYSTEM.md
@@ -264,6 +320,14 @@ Both are instructors at University of Haifa & Technion.
 - Aceternity UI integration
 - Framer Motion animations
 - Footer updates
+
+---
+
+## TODO (Next)
+
+- [ ] Create hidden syllabus pages for AI-Ready and AI-First
+- [ ] Replace FormSubmit.co with N8N webhooks when ready
+- [ ] Add syllabus images for other courses
 
 ---
 

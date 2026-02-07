@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
 const fingerprint = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png";
 const n8nBadge = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png";
+const focusLogo = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png";
 
 // Glitch Text Component
 const GlitchText = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -243,21 +244,6 @@ export const HeroSection = () => {
       <HUDCorner position="bottom-left" />
       <HUDCorner position="bottom-right" />
 
-      {/* System status bar */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-        <div className="flex items-center gap-4 px-6 py-2 bg-[#12121a]/80 border border-[#2a2a3a] backdrop-blur-sm">
-          <span className="flex items-center gap-2 text-sm font-mono text-[#9090a8]">
-            <span className="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse" />
-            SYSTEM ONLINE
-          </span>
-          <span className="text-[#2a2a3a]">|</span>
-          <span className="text-sm font-mono text-[#a855f7]">
-            FOCUS_AI v2.0
-          </span>
-        </div>
-      </div>
-
-
       {/* Main content */}
       <motion.div
         className="relative z-10 container min-h-screen flex items-center"
@@ -363,7 +349,7 @@ export const HeroSection = () => {
 
             {/* Chavobot Visual */}
             <motion.div
-              className="order-1 lg:order-2 flex justify-center items-center relative"
+              className="order-1 lg:order-2 flex justify-center items-center relative lg:-translate-x-12 xl:-translate-x-16"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.5 }}
@@ -375,7 +361,7 @@ export const HeroSection = () => {
                 className="absolute z-0 w-[180px] sm:w-[220px] md:w-[280px] lg:w-[320px] h-auto"
                 style={{
                   top: '-2%',
-                  right: '-8%',
+                  right: '-3%',
                   opacity: 0.8,
                   transform: 'rotate(20deg)',
                 }}

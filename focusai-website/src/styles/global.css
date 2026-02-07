@@ -73,7 +73,7 @@
 /* ===== BASE STYLES ===== */
 
 html {
-  font-size: 100%;
+  font-size: 112%; /* ~18px base - better readability */
   scroll-behavior: smooth;
 }
 
@@ -805,6 +805,20 @@ body::after {
   animation: rotate 20s linear infinite;
 }
 
+/* Client logos marquee animation */
+@keyframes clientMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.client-marquee {
+  animation: clientMarquee 30s linear infinite;
+}
+
+.client-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* ===== DIVIDERS ===== */
 
 .divider-cyber {
@@ -1111,6 +1125,48 @@ body::after {
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+/* ===== HERO SECTION STANDARDS ===== */
+
+/* Hero container - fits viewport with navbar consideration */
+.hero-section {
+  min-height: calc(100svh - 80px); /* Account for navbar */
+  padding-top: 1rem; /* Minimal gap after navbar */
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: calc(100svh - 64px);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Hero content wrapper - tighter spacing */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1.25rem); /* 12-20px between elements */
+}
+
+/* Hero title spacing */
+.hero-title {
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem); /* 8-16px */
+}
+
+/* Hero subtitle spacing */
+.hero-subtitle {
+  margin-bottom: clamp(1rem, 3vw, 1.5rem); /* 16-24px */
+}
+
+/* Hero CTA group spacing */
+.hero-cta {
+  margin-top: clamp(1rem, 3vw, 2rem); /* 16-32px */
 }
 
 /* ===== SPACING UTILITIES ===== */

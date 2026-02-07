@@ -39,7 +39,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -58,7 +58,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -77,7 +77,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -96,7 +96,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -120,7 +120,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -132,7 +132,7 @@ const animations = {
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
-        toggleActions: 'play none none reverse'
+        toggleActions: 'play none none none'
       }
     });
 
@@ -224,7 +224,7 @@ const animations = {
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
-        toggleActions: 'play none none reverse'
+        toggleActions: 'play none none none'
       }
     });
 
@@ -267,7 +267,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -317,7 +317,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -354,7 +354,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -377,7 +377,7 @@ const animations = {
           scrollTrigger: {
             trigger: el,
             start: 'top 85%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
           }
         }
       );
@@ -401,7 +401,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -413,7 +413,7 @@ const animations = {
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
-        toggleActions: 'play none none reverse'
+        toggleActions: 'play none none none'
       }
     });
 
@@ -468,7 +468,7 @@ const animations = {
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
-        toggleActions: 'play none none reverse'
+        toggleActions: 'play none none none'
       }
     });
 
@@ -506,7 +506,7 @@ const animations = {
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       }
     );
@@ -550,21 +550,7 @@ function initSectionTransitions() {
         }
       });
     }
-
-    // Add fade between sections
-    gsap.fromTo(section,
-      { opacity: 0.3 },
-      {
-        opacity: 1,
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          end: 'top 30%',
-          scrub: 1
-        }
-      }
-    );
+    // Removed fade between sections - was causing visibility issues
   });
 }
 
