@@ -1,6 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/focusaico/public_html/staging
-    - /bin/mkdir -p $DEPLOYPATH
-    - /bin/cp -R dist/* $DEPLOYPATH/
+    - /bin/cp -R dist/* /home/focusaico/public_html/new-site/
