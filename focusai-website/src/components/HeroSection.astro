@@ -52,7 +52,7 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   </div>
 
   <!-- Main content -->
-  <div class="hero-content relative z-10 container min-h-screen flex items-center px-4 md:px-8 pt-20 md:pt-24">
+  <div class="hero-main relative z-10 container min-h-screen flex items-center px-4 md:px-8 pt-20 md:pt-24">
     <div class="w-full py-12 lg:py-0">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
 
@@ -235,7 +235,7 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   }
 
   /* Scroll parallax fade */
-  .hero-content {
+  .hero-main {
     transition: opacity 0.1s linear;
   }
 </style>
@@ -284,7 +284,7 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   }
 
   // Scroll parallax fade - uses existing GSAP if available, otherwise IntersectionObserver
-  const heroContent = document.querySelector('.hero-content') as HTMLElement;
+  const heroContent = document.querySelector('.hero-main') as HTMLElement;
   const heroSection = document.getElementById('hero');
 
   if (heroContent && heroSection) {
