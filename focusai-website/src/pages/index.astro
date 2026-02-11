@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import HeroSection from '../components/HeroSection.tsx';
+import HeroSection from '../components/HeroSection.astro';
 import ClientLogosGrid from '../components/ClientLogosGrid.astro';
 import StorySection from '../components/StorySection.astro';
 import ServicesPreview from '../components/ServicesPreview.astro';
@@ -19,7 +19,7 @@ import RelatedContent from '../components/RelatedContent.astro';
   <Header slot="header" currentPath="/" />
 
   <!-- Hero -->
-  <HeroSection client:idle />
+  <HeroSection />
 
   <!-- Client Logos Grid -->
   <ClientLogosGrid />
