@@ -299,38 +299,37 @@ export const HeroSection = () => {
 
             </div>
 
-            {/* Chavobot Visual */}
+            {/* Chavobot + n8n Badge - grouped as single unit */}
             <motion.div
-              className="order-1 lg:order-2 flex justify-center items-center relative lg:-translate-x-8"
+              className="order-1 lg:order-2 flex justify-center items-center lg:-translate-x-8"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.5 }}
             >
-              {/* n8n Official Partner Badge - right side, slightly behind Chavobot */}
-              <motion.img
-                src={n8nBadge}
-                alt="n8n Official Partner"
-                className="absolute z-0 w-[160px] sm:w-[200px] md:w-[260px] lg:w-[320px] h-auto"
-                style={{
-                  top: '-5%',
-                  right: '-10%',
-                  transform: 'rotate(8deg)',
-                }}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 1.5 }}
-              />
+              <div className="relative">
+                {/* n8n Official Partner Badge - partially behind Chavobot */}
+                <img
+                  src={n8nBadge}
+                  alt="n8n Official Partner"
+                  className="absolute z-0 w-[160px] sm:w-[200px] md:w-[260px] lg:w-[320px] h-auto"
+                  style={{
+                    top: '-2%',
+                    right: '8%',
+                    transform: 'rotate(8deg)',
+                  }}
+                />
 
-              {/* Main image - bigger */}
-              <img
-                src={chavobot}
-                alt="חבובוט - הנציג החכם של Focus AI"
-                className="relative z-10 w-[90vw] max-w-[420px] sm:max-w-[520px] md:max-w-[600px] lg:max-w-[700px] h-auto"
-                style={{
-                  maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)'
-                }}
-              />
+                {/* Main image */}
+                <img
+                  src={chavobot}
+                  alt="חבובוט - הנציג החכם של Focus AI"
+                  className="relative z-10 w-[90vw] max-w-[420px] sm:max-w-[520px] md:max-w-[600px] lg:max-w-[700px] h-auto"
+                  style={{
+                    maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)'
+                  }}
+                />
+              </div>
             </motion.div>
           </div>
         </div>

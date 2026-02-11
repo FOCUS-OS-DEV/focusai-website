@@ -33,9 +33,13 @@ const courseInfo = {
 const heroBadges = [
   'תעודה מקצועית',
   'תיק עבודות',
+  'פרוייקט גמר',
+  'פורטל לימוד',
+  'סוכני AI ללמידה',
+  'הקלטות למפגשים',
+  'מטלות אינטרקטיביות',
   'פרונטלי או Zoom',
   'ללא ידע בקוד',
-  'יחס חניכה צמוד',
   'הכנה להשמה'
 ];
 
@@ -125,7 +129,7 @@ const courseTracks = [
   {
     id: 'zoom',
     title: 'מסלול Zoom',
-    subtitle: 'למידה מרחוק',
+    subtitle: 'בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה',
     highlighted: false,
     nextDate: '15.03.2026',
     nextDay: 'מחזור הבא מתחיל בקרוב',
@@ -249,7 +253,7 @@ const instructors = [
     name: 'כפיר קורן',
     role: 'מנהלת ופיתוח מערכות',
     bio: 'כבר למעלה משבע שנים שכפיר מנהל קהילה ומלווה עשרות עסקים בפיתוח טכנולוגי. עם ניסיון רב בשטח בתחום הדיגיטל, הוא מתמחה בניתוח צרכים, תכנון אסטרטגי, והטמעת פתרונות No-Code ו-AI. כמפתח עצמאי בחברות קמעונאיות וחברות ביטוח, כפיר צבר ידע מעמיק בהטמעת פתרונות טכנולוגיים מורכבים בסביבות עסקיות.',
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770708833/kfir_qc4dwp.jpg'
+    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1765007114/%D7%9B%D7%A4%D7%99%D7%A8_hipy6q.png'
   }
 ];
 
@@ -433,7 +437,7 @@ const courseSchema = {
   <!-- Target Audience Section -->
   <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
     <div class="container px-4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e] mb-4">
           <span class="text-[#a855f7]">למי מתאימה</span> התוכנית
         </h2>
@@ -442,7 +446,7 @@ const courseSchema = {
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="stagger">
         {targetAudience.map((item) => (
           <div class="bg-white rounded-2xl p-6 shadow-lg border border-[#e0d4f7] hover:shadow-xl transition-shadow">
             <!-- Icon -->
@@ -541,7 +545,7 @@ const courseSchema = {
   <!-- Video Testimonials -->
   <section class="py-6 md:py-8 bg-white">
     <div class="container px-4">
-      <div class="text-center mb-10">
+      <div class="text-center mb-10" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           <span class="text-[#6a6a8a]">מה</span> <span class="text-[#a855f7]">מספרים</span> עלינו?
         </h2>
@@ -553,13 +557,13 @@ const courseSchema = {
   <!-- Why Now Section -->
   <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
     <div class="container px-4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           למה <span class="text-[#a855f7]">דווקא</span> עכשיו?
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto" data-animate="stagger">
         {whyNowReasons.map((reason) => (
           <div class="bg-white rounded-2xl p-6 shadow-lg border border-[#e0d4f7]">
             <h3 class="text-xl font-bold text-[#a855f7] mb-3">{reason.title}</h3>
@@ -572,7 +576,7 @@ const courseSchema = {
 
   <!-- Gartner Quote -->
   <section class="py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef]">
-    <div class="container px-4 text-center">
+    <div class="container px-4 text-center" data-animate="fade-up">
       <p class="text-white text-lg md:text-xl font-medium max-w-3xl mx-auto">
         "הצפי לשנת 2027: 80% מהאינטראקציות עם לקוחות ינוהלו על ידי סוכני AI"
       </p>
@@ -583,21 +587,21 @@ const courseSchema = {
   <!-- Course Tracks / Pricing -->
   <section id="pricing" class="py-6 md:py-8 bg-gradient-to-b from-[#f8f4ff] to-white">
     <div class="container px-4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           <span class="text-[#a855f7]">המסלולים</span> שלנו
         </h2>
       </div>
 
       <!-- Main Tracks - Equal Height Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10" data-animate="stagger">
         {courseTracks.map((track) => (
           <div class={`bg-white rounded-2xl overflow-hidden shadow-lg border-2 flex flex-col ${track.highlighted ? 'border-[#a855f7]' : 'border-[#e0d4f7]'}`}>
-            {/* Header */}
-            <div class={`p-4 text-center ${track.highlighted ? 'bg-gradient-to-r from-[#a855f7] to-[#d946ef]' : 'bg-[#f8f4ff]'}`}>
-              {track.highlighted && (
-                <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white text-xs font-medium mb-2">מומלץ</span>
-              )}
+            {/* Header - fixed height for alignment */}
+            <div class={`p-4 text-center flex flex-col justify-center min-h-[100px] ${track.highlighted ? 'bg-gradient-to-r from-[#a855f7] to-[#d946ef]' : 'bg-[#f8f4ff]'}`}>
+              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-2 ${track.highlighted ? 'bg-white/20 text-white' : 'bg-[#a855f7]/10 text-[#a855f7]'}`}>
+                {track.highlighted ? 'מומלץ' : 'ללמוד מכל מקום'}
+              </span>
               <h3 class={`text-xl font-bold ${track.highlighted ? 'text-white' : 'text-[#1a1a2e]'}`}>{track.title}</h3>
               <p class={`text-sm ${track.highlighted ? 'text-white/80' : 'text-[#6a6a8a]'}`}>{track.subtitle}</p>
             </div>
@@ -660,11 +664,11 @@ const courseSchema = {
             <div class="px-4 pb-4">
               <ul class="space-y-2 mb-4">
                 {track.features.map((f) => (
-                  <li class="flex items-center justify-end gap-2 text-sm text-[#8a8a9a]">
-                    <span>{f}</span>
+                  <li class="flex items-center gap-2 text-sm text-[#8a8a9a]">
                     <svg class="w-4 h-4 text-[#b0b0c0] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                     </svg>
+                    <span>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -681,13 +685,13 @@ const courseSchema = {
   <!-- What You Get - Unified Grid -->
   <section class="py-6 md:py-8 bg-white">
     <div class="container px-4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           מה <span class="text-[#a855f7]">תקבלו</span> בהכשרה?
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto" data-animate="stagger">
         {programBenefits.map((item) => (
           <div class="group bg-gradient-to-br from-[#f8f4ff] to-white rounded-xl p-5 border border-[#e0d4f7] hover:border-[#a855f7]/40 hover:shadow-lg transition-all duration-300">
             <div class="flex items-start gap-4">
@@ -758,14 +762,14 @@ const courseSchema = {
   <!-- Career Paths -->
   <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
     <div class="container px-4">
-      <div class="text-center mb-10">
+      <div class="text-center mb-10" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           מסלולי <span class="text-[#a855f7]">קריירה</span> לבוגרי התוכנית
         </h2>
         <p class="text-[#6a6a8a] mt-3">לאחר סיום התוכנית, הבוגרים יכולים:</p>
       </div>
 
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto" data-animate="stagger">
         <ul class="space-y-3">
           {careerPaths.map((path) => (
             <li class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm border border-[#e0d4f7]">
@@ -785,13 +789,13 @@ const courseSchema = {
   <!-- Lead Form - Syllabus Request -->
   <section id="syllabus-form" class="py-6 md:py-8 bg-white">
     <div class="container px-4">
-      <div class="text-center mb-10">
+      <div class="text-center mb-10" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           לקבלת הסילבוס <span class="text-[#a855f7]">השאירו פרטים</span>
         </h2>
       </div>
 
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto" data-animate="scale-up" data-delay="0.1">
         <form id="syllabus-form-element" class="bg-[#f8f4ff] rounded-3xl p-8 shadow-lg">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <input
@@ -799,10 +803,12 @@ const courseSchema = {
               name="name"
               placeholder="שם מלא"
               required
-              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all"
+              dir="rtl"
+              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
             />
             <input
-              type="tel"
+              type="text"
+              inputmode="tel"
               name="phone"
               placeholder="טלפון"
               required
@@ -810,7 +816,8 @@ const courseSchema = {
               class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
             />
             <input
-              type="email"
+              type="text"
+              inputmode="email"
               name="email"
               placeholder="אימייל"
               dir="rtl"
@@ -845,20 +852,20 @@ const courseSchema = {
   <!-- Team Section -->
   <section class="py-6 md:py-8 bg-[#f8f4ff]">
     <div class="container px-4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           הצוות <span class="text-[#a855f7]">שיפגוש</span> אתכם
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto" data-animate="stagger">
         {instructors.map((instructor) => (
           <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
-            <div class="aspect-[4/3] overflow-hidden">
+            <div class="aspect-square overflow-hidden">
               <img
                 src={instructor.image}
                 alt={instructor.name}
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover object-center"
                 loading="lazy"
               />
             </div>
@@ -875,7 +882,7 @@ const courseSchema = {
 
   <!-- Differentiators -->
   <section class="py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef]">
-    <div class="container px-4 text-center">
+    <div class="container px-4 text-center" data-animate="fade-up">
       <h3 class="text-2xl font-bold text-white mb-2">מה מייחד אותנו?</h3>
       <p class="text-white/80">
         חיבור מעשי בין התעשייה לאקדמיה, ושיטות עבודה פרקטיות על בסיס פרויקטים אמיתיים
@@ -886,14 +893,14 @@ const courseSchema = {
   <!-- Classroom Section -->
   <section class="py-6 md:py-8 bg-white">
     <div class="container px-4">
-      <div class="text-center mb-10">
+      <div class="text-center mb-10" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           כיתה <span class="text-[#a855f7]">חכמה</span> בלב הרצליה פיתוח
         </h2>
       </div>
 
       <div class="max-w-4xl mx-auto">
-        <div class="rounded-2xl overflow-hidden mb-8 shadow-lg">
+        <div class="rounded-2xl overflow-hidden mb-8 shadow-lg" data-animate="scale-up">
           <img
             src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png"
             alt="כיתת הלימוד בהרצליה פיתוח"
@@ -922,13 +929,13 @@ const courseSchema = {
   <!-- FAQ Section -->
   <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
     <div class="container px-4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-animate="fade-up">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
           שאלות <span class="text-[#a855f7]">נפוצות</span>
         </h2>
       </div>
 
-      <div class="max-w-3xl mx-auto space-y-4">
+      <div class="max-w-3xl mx-auto space-y-4" data-animate="stagger">
         {faqs.map((faq, index) => (
           <details class="group bg-white rounded-xl shadow-sm border border-[#e0d4f7] overflow-hidden">
             <summary class="flex items-center justify-between cursor-pointer p-5 bg-gradient-to-r from-[#f8f4ff] to-white hover:from-[#f0e6ff]">
@@ -947,24 +954,20 @@ const courseSchema = {
   </section>
 
   <!-- Chavobot + Community Section -->
-  <section class="py-6 md:py-8 bg-[#f8f4ff] relative">
-    <div class="container px-4 pt-32 md:pt-40 relative">
-      <!-- Purple banner with Chavobot emerging from top -->
-      <div class="relative max-w-4xl mx-auto">
-        <!-- Chavobot - above the banner, legs hidden -->
-        <div class="absolute -top-28 md:-top-36 left-1/2 -translate-x-1/2 w-56 md:w-72 z-20">
+  <section class="pt-8 md:pt-12 pb-6 md:pb-8 bg-[#f8f4ff] relative">
+    <div class="container px-4">
+      <div class="relative max-w-4xl mx-auto pt-48 md:pt-60">
+        <!-- Chavobot - behind the banner, upper body + icons visible above -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 md:w-80 z-10 pointer-events-none">
           <img
-            src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770240148/ec35a0f7-13cc-46c8-8db0-f878cb89c6bd_tdxxpb.png"
-            alt="Chavobot"
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770840878/f0701d6a-0e1e-4a52-9c61-56bda2e67012_rhtdvf.png"
+            alt="Chavobot עם רשתות חברתיות"
             class="w-full"
-            style="clip-path: inset(0 0 30% 0);"
           />
         </div>
-      </div>
-    </div>
 
-    <div class="container px-4 relative z-10">
-      <div class="bg-gradient-to-r from-[#a855f7] to-[#d946ef] rounded-2xl p-8 text-center text-white max-w-4xl mx-auto">
+        <!-- Purple banner - on top of Chavobot's lower body -->
+        <div class="relative z-20 bg-gradient-to-r from-[#a855f7] to-[#d946ef] rounded-2xl p-8 text-center text-white">
         <h3 class="text-2xl md:text-3xl font-bold mb-3">
           מצטרפים <span class="text-white/90">לקהילה שלנו</span> ברשתות
         </h3>
@@ -993,6 +996,7 @@ const courseSchema = {
           </a>
         </div>
       </div>
+      </div>
     </div>
   </section>
 
@@ -1007,13 +1011,9 @@ const courseSchema = {
 
       <div class="max-w-xl mx-auto bg-[#f8f4ff] rounded-2xl p-8 border border-[#e0d4f7]">
         <form
-          action="https://formsubmit.co/ajax/info@focusai.co.il"
-          method="POST"
           class="space-y-4"
           id="contactForm"
         >
-          <input type="hidden" name="_subject" value="פנייה חדשה מדף Bot-Camp">
-          <input type="hidden" name="_template" value="table">
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
@@ -1021,10 +1021,12 @@ const courseSchema = {
               name="name"
               placeholder="שם מלא"
               required
-              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white placeholder:text-[#9a9aaa]"
+              dir="rtl"
+              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-right placeholder:text-[#9a9aaa]"
             />
             <input
-              type="tel"
+              type="text"
+              inputmode="tel"
               name="phone"
               placeholder="טלפון"
               required
@@ -1034,7 +1036,8 @@ const courseSchema = {
           </div>
 
           <input
-            type="email"
+            type="text"
+            inputmode="email"
             name="email"
             placeholder="אימייל"
             required
@@ -1086,27 +1089,41 @@ const courseSchema = {
 </style>
 
 <script>
-  // Form submission handler
-  const form = document.getElementById('contactForm');
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form as HTMLFormElement);
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
 
-    try {
-      const response = await fetch((form as HTMLFormElement).action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        alert('תודה! נחזור אליך בהקדם');
-        (form as HTMLFormElement).reset();
-      } else {
-        alert('שגיאה בשליחה, אנא נסה שוב');
+  async function handleFormSubmit(form: HTMLFormElement, source: string) {
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    params.append('source', source);
+    formData.forEach((value, key) => {
+      if (key !== 'consent' && key !== 'privacy') {
+        params.append(key, value.toString());
       }
+    });
+
+    // Send as form-urlencoded (simple request, no CORS preflight)
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        body: params,
+      });
     } catch {
-      alert('שגיאה בשליחה, אנא נסה שוב');
+      // Even if fetch fails, still redirect
     }
+    window.location.href = '/academy/thank-you';
+  }
+
+  // Syllabus form
+  const syllabusForm = document.getElementById('syllabus-form-element') as HTMLFormElement;
+  syllabusForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleFormSubmit(syllabusForm, 'bot-camp-syllabus');
+  });
+
+  // Contact form
+  const contactForm = document.getElementById('contactForm') as HTMLFormElement;
+  contactForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleFormSubmit(contactForm, 'bot-camp-contact');
   });
 </script>

@@ -275,7 +275,7 @@ const serviceSchema = {
   <!-- Capabilities Section -->
   <section id="capabilities" class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[CAPABILITIES]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           מה אנחנו <span class="text-[#a855f7]">בונים?</span>
@@ -285,7 +285,7 @@ const serviceSchema = {
         </p>
       </header>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
         {integrations.map((item) => (
           <div
             class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
@@ -355,7 +355,7 @@ const serviceSchema = {
   <!-- Tech Stack Section -->
   <section class="relative py-20">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[TECH_STACK]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           הטכנולוגיות <span class="text-[#a855f7]">שלנו</span>
@@ -365,7 +365,7 @@ const serviceSchema = {
         </p>
       </header>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" data-animate="stagger">
         {techStack.map((category) => (
           <div class="p-4 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));">
             <p class="text-xs font-mono text-[#a855f7] mb-3">{category.category}</p>
@@ -383,14 +383,14 @@ const serviceSchema = {
   <!-- Process Section -->
   <section class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[PROCESS]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           איך זה <span class="text-[#a855f7]">עובד?</span>
         </h2>
       </header>
 
-      <div class="relative">
+      <div class="relative" data-animate="stagger">
         <!-- Timeline line -->
         <div class="absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#a855f7]/30 to-transparent hidden md:block"></div>
 
@@ -413,14 +413,14 @@ const serviceSchema = {
   <!-- Use Cases Section -->
   <section class="relative py-20">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[CASE_STUDIES]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           סיפורי <span class="text-[#a855f7]">הצלחה</span>
         </h2>
       </header>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-3 gap-8" data-animate="stagger">
         {useCases.map((useCase) => (
           <div
             class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
@@ -468,7 +468,7 @@ const serviceSchema = {
   <!-- CTA Section -->
   <section id="contact" class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" data-animate="fade-up" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
         <!-- Decorative corners -->
         <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
         <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
@@ -485,7 +485,7 @@ const serviceSchema = {
           </p>
         </header>
 
-        <form class="space-y-6" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="dev-form">
+        <form class="space-y-6" data-animate="scale-up" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="dev-form">
           <input type="hidden" name="_subject" value="פנייה חדשה - פיתוח ואינטגרציה" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />

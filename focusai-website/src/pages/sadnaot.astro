@@ -245,7 +245,7 @@ const galleryImages = [
     <div class="container mx-auto px-4 max-w-4xl">
       <div class="relative p-8 md:p-12 border border-[#a855f7]/30 bg-[#12121a] rounded-2xl">
 
-        <header class="text-center mb-10">
+        <header class="text-center mb-10" data-animate="fade-up">
           <p class="font-mono text-[#a855f7] text-sm mb-2">[CONTACT_FORM]</p>
           <h2 class="text-3xl md:text-4xl font-black mb-4">
             רוצים <span class="text-[#a855f7]">להתחיל?</span>
@@ -255,7 +255,7 @@ const galleryImages = [
           </p>
         </header>
 
-        <form id="contact-form" class="space-y-6">
+        <form id="contact-form" class="space-y-6" data-animate="scale-up">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
@@ -343,7 +343,7 @@ const galleryImages = [
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
           <span class="text-[#9090a8]">למי הסדנאות</span>
           <span class="text-[#f5f5fa]"> מתאימות?</span>
@@ -353,7 +353,7 @@ const galleryImages = [
         </p>
       </header>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" data-animate="stagger">
         {audiences.map((audience) => (
           <article class="group relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden rounded-2xl">
             <div class="p-4 md:p-6">
@@ -410,7 +410,7 @@ const galleryImages = [
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
           <span class="text-[#9090a8]">מה</span>
           <span class="text-[#f5f5fa]"> נלמד?</span>
@@ -420,7 +420,7 @@ const galleryImages = [
         </p>
       </header>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" data-animate="stagger">
         {topics.map((topic, index) => (
           <div class="group p-4 md:p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl">
             <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
@@ -488,14 +488,14 @@ const galleryImages = [
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6">
           <span class="text-[#9090a8]">איך זה</span>
           <span class="text-[#f5f5fa]"> עובד?</span>
         </h2>
       </header>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8" data-animate="stagger">
         {processSteps.map((step) => (
           <div class="relative text-center md:text-right">
             <!-- Step number -->
@@ -523,7 +523,7 @@ const galleryImages = [
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
           <span class="text-[#9090a8]">הצוות</span>
           <span class="text-[#f5f5fa]"> שלנו</span>
@@ -533,7 +533,7 @@ const galleryImages = [
         </p>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto" data-animate="stagger">
         {team.map((member) => (
           <div class="text-center group">
             <div class="relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-4 md:mb-6">
@@ -573,14 +573,14 @@ const galleryImages = [
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6">
           <span class="text-[#9090a8]">מה</span>
           <span class="text-[#f5f5fa]"> אומרים עלינו</span>
         </h2>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8" data-animate="stagger">
         {testimonials.map((testimonial) => (
           <blockquote class="relative p-5 md:p-8 border border-[#2a2a3a] bg-[#12121a] rounded-xl">
             <div class="absolute top-4 right-4 text-[#a855f7]/20 text-4xl md:text-6xl font-serif">"</div>
@@ -610,14 +610,14 @@ const galleryImages = [
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6">
           <span class="text-[#9090a8]">מהסדנאות</span>
           <span class="text-[#f5f5fa]"> שלנו</span>
         </h2>
       </header>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4" data-animate="stagger">
         {galleryImages.map((image, index) => (
           <div class="aspect-[4/3] overflow-hidden border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-colors rounded-lg md:rounded-xl">
             <img
@@ -644,7 +644,7 @@ const galleryImages = [
   <!-- WhatsApp Community Section -->
   <section class="py-10 md:py-12 relative overflow-hidden bg-[#0a0a0f]">
     <div class="container relative z-10 max-w-5xl mx-auto px-4">
-      <div class="relative bg-gradient-to-br from-[#12121a] to-[#1a1a2e] border border-[#a855f7]/30 rounded-2xl overflow-hidden p-6 md:p-10 lg:p-12">
+      <div class="relative bg-gradient-to-br from-[#12121a] to-[#1a1a2e] border border-[#a855f7]/30 rounded-2xl overflow-hidden p-6 md:p-10 lg:p-12" data-animate="fade-up">
         <!-- Background glow -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-[#a855f7]/10 rounded-full blur-[100px]"></div>
 
@@ -695,7 +695,7 @@ const galleryImages = [
 
   <!-- Final CTA Section -->
   <section class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
-    <div class="container mx-auto px-4 max-w-4xl text-center">
+    <div class="container mx-auto px-4 max-w-4xl text-center" data-animate="fade-up">
       <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2.5 bg-[#12121a]/80 border border-[#a855f7]/30 rounded-full backdrop-blur-sm mb-6 md:mb-8">
         <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
         <span class="font-mono text-[10px] md:text-xs text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">READY_TO_START</span>

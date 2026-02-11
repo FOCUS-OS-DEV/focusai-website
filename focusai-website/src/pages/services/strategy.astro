@@ -239,7 +239,7 @@ const serviceSchema = {
   <!-- Why Strategy Section -->
   <section class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[WHY_STRATEGY]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           למה <span class="text-[#a855f7]">לא לקפוץ לפיתוח?</span>
@@ -249,7 +249,7 @@ const serviceSchema = {
         </p>
       </header>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="stagger">
         {benefits.map((benefit, index) => (
           <div
             class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300 group"
@@ -270,7 +270,7 @@ const serviceSchema = {
   <!-- Process Section -->
   <section id="process" class="relative py-20">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[PROCESS]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           תהליך <span class="text-[#a855f7]">האפיון</span>
@@ -281,7 +281,7 @@ const serviceSchema = {
       </header>
 
       <!-- Timeline -->
-      <div class="relative mb-16 overflow-x-auto pb-4">
+      <div class="relative mb-16 overflow-x-auto pb-4" data-animate="stagger">
         <div class="flex gap-4 min-w-max px-4">
           {processSteps.map((step, index) => (
             <div class="relative flex flex-col items-center">
@@ -299,7 +299,7 @@ const serviceSchema = {
       </div>
 
       <!-- Discovery Phases -->
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
         {discoveryPhases.map((phase) => (
           <div
             class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
@@ -360,7 +360,7 @@ const serviceSchema = {
   <!-- Deliverables Section -->
   <section class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16">
+      <header class="text-center mb-16" data-animate="fade-up">
         <p class="font-mono text-[#a855f7] text-sm mb-2">[DELIVERABLES]</p>
         <h2 class="text-3xl md:text-4xl font-black mb-4">
           מה <span class="text-[#a855f7]">מקבלים?</span>
@@ -370,7 +370,7 @@ const serviceSchema = {
         </p>
       </header>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate="stagger">
         {deliverables.map((item) => (
           <div class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300 group" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
             <div class="w-10 h-10 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4">
@@ -416,7 +416,7 @@ const serviceSchema = {
   <!-- CTA Section -->
   <section id="contact" class="relative py-20">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" data-animate="fade-up" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
         <!-- Decorative corners -->
         <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
         <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
@@ -433,7 +433,7 @@ const serviceSchema = {
           </p>
         </header>
 
-        <form class="space-y-6" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="strategy-form">
+        <form class="space-y-6" data-animate="scale-up" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="strategy-form">
           <input type="hidden" name="_subject" value="פנייה חדשה - אפיון ואסטרטגיה" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />

@@ -243,7 +243,7 @@ const courseSchema = {
 
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Text Content -->
-        <div class="order-2 lg:order-1">
+        <div class="order-2 lg:order-1" data-animate="fade-up">
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
             <span class="text-[#9090a8]">לא עוד קורס מוקלט</span>
             <br />
@@ -257,7 +257,7 @@ const courseSchema = {
           </p>
 
           <!-- Feature bullets -->
-          <div class="space-y-4 mb-8">
+          <div class="space-y-4 mb-8" data-animate="stagger">
             <div class="flex items-center gap-3 p-4 bg-[#12121a] border border-[#2a2a3a] rounded-xl hover:border-[#c084fc]/30 transition-colors">
               <span class="text-[#c084fc] font-mono">></span>
               <span class="text-[#d0d0e0]">8 מפגשים חיים עם מרצים מהשטח</span>
@@ -289,7 +289,7 @@ const courseSchema = {
         </div>
 
         <!-- Image Collage -->
-        <div class="order-1 lg:order-2 relative">
+        <div class="order-1 lg:order-2 relative" data-animate="scale-up">
           <div class="absolute inset-0 bg-gradient-to-r from-[#c084fc]/20 to-[#a855f7]/20 blur-3xl rounded-3xl"></div>
 
           <div class="relative">
@@ -350,7 +350,7 @@ const courseSchema = {
       </div>
 
       <!-- Section Header -->
-      <div class="text-center mb-10 md:mb-16">
+      <div class="text-center mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-3 md:mb-4">
           <span class="text-[#9090a8]">מה</span>
           <span class="text-[#f5f5fa]"> תלמדו</span>
@@ -359,7 +359,7 @@ const courseSchema = {
       </div>
 
       <!-- Syllabus Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5" data-animate="stagger">
         {syllabus.map((item, index) => (
           <div class="group relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#c084fc]/50 rounded-2xl transition-all duration-300 overflow-hidden p-5 md:p-6">
             <!-- Session number badge -->
@@ -399,14 +399,14 @@ const courseSchema = {
         <div class="h-px flex-1 bg-gradient-to-r from-[#c084fc]/50 to-transparent"></div>
       </div>
 
-      <div class="text-center mb-10 md:mb-16">
+      <div class="text-center mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4">
           <span class="text-[#9090a8]">למי</span>
           <span class="text-[#f5f5fa]"> מתאים?</span>
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" data-animate="stagger">
         {targetAudience.map((item, index) => (
           <div class="group relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#c084fc]/50 rounded-2xl transition-all duration-300 overflow-hidden p-5 md:p-6">
             <div class="w-12 md:w-14 h-12 md:h-14 bg-[#c084fc]/10 border border-[#c084fc]/30 flex items-center justify-center mb-4 rounded-xl group-hover:bg-[#c084fc]/20 transition-colors">
@@ -454,7 +454,7 @@ const courseSchema = {
         <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
 
-      <div class="text-center mb-6 md:mb-8">
+      <div class="text-center mb-6 md:mb-8" data-animate="fade-up">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-3 md:mb-4">
           <span class="text-[#9090a8]">הם כבר</span>
           <span class="text-[#f5f5fa]"> AI Ready</span>
@@ -474,7 +474,7 @@ const courseSchema = {
     <div class="container relative z-10 max-w-7xl mx-auto px-4">
       <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
         <!-- Content -->
-        <div class="w-full lg:w-1/2 text-center lg:text-right order-2 lg:order-1 lg:pr-8">
+        <div class="w-full lg:w-1/2 text-center lg:text-right order-2 lg:order-1 lg:pr-8" data-animate="fade-up">
           <!-- Badge -->
           <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366]/10 border border-[#25D366]/30 rounded-full mb-8">
             <svg class="w-5 h-5 text-[#25D366]" viewBox="0 0 24 24" fill="currentColor">
@@ -513,7 +513,7 @@ const courseSchema = {
         </div>
 
         <!-- Community Image -->
-        <div class="w-full lg:w-1/2 order-1 lg:order-2">
+        <div class="w-full lg:w-1/2 order-1 lg:order-2" data-animate="scale-up" data-delay="200">
           <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770388356/0e214975-5aab-422d-a865-afb04e3179b7_pjtmso.png" alt="הצטרפו לקהילת הוואטסאפ של Focus AI" class="w-full max-w-xl lg:max-w-none mx-auto drop-shadow-2xl" loading="lazy" />
         </div>
       </div>
@@ -536,14 +536,14 @@ const courseSchema = {
         <div class="h-px flex-1 bg-gradient-to-r from-[#c084fc]/50 to-transparent"></div>
       </div>
 
-      <div class="text-center mb-10 md:mb-16">
+      <div class="text-center mb-10 md:mb-16" data-animate="fade-up">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4">
           <span class="text-[#9090a8]">מחיר</span>
           <span class="text-[#f5f5fa]"> ההשקעה</span>
         </h2>
       </div>
 
-      <div class="relative bg-[#12121a] border border-[#c084fc]/50 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(192,132,252,0.15)]">
+      <div class="relative bg-[#12121a] border border-[#c084fc]/50 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(192,132,252,0.15)]" data-animate="scale-up" data-delay="200">
         <div class="p-6 md:p-8 lg:p-12">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
             <!-- Price -->
