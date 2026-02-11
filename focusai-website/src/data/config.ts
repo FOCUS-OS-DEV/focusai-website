@@ -40,8 +40,8 @@ export const siteConfig = {
 
   // Assets
   assets: {
-    logo: "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png",
-    logoAlt: "https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png",
+    logo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265415/2_fxdcio.png",
+    logoAlt: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265415/2_fxdcio.png",
     cloudinaryBase: "https://res.cloudinary.com/dfudxxzlj/image/upload",
   },
 

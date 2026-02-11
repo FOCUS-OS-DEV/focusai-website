@@ -34,7 +34,7 @@ export const founders: TeamMember[] = [
 מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות.
 מרצה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה.
 מאמין שטכנולוגיה צריכה לשרת את האדם, לא להפך.`,
-    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg",
+    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg",
     credentials: ["אוניברסיטת חיפה", "טכניון", "עורך דין"],
     status: "ONLINE",
     social: {
@@ -51,7 +51,7 @@ export const founders: TeamMember[] = [
 סמנכ"ל תפעול לשעבר ברשתות קמעונאיות מובילות, מביא פרספקטיבה עסקית לפתרונות טכנולוגיים.
 מתמחה בפיתוח עסקי ויישום פתרונות AI עם הבנה עמוקה של צרכי הלקוח.
 מרצה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.`,
-    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/v1770364984/IMG_4898.JPG_uate4o.jpg",
+    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1770364984/IMG_4898.JPG_uate4o.jpg",
     credentials: ["אוניברסיטת חיפה", "טכניון", "ניהול תפעול"],
     status: "ONLINE",
     social: {
