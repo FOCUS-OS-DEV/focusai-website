@@ -323,6 +323,8 @@ export const HeroSection = () => {
                 <img
                   src={chavobot}
                   alt="חבובוט - הנציג החכם של Focus AI"
+                  fetchPriority="high"
+                  decoding="async"
                   className="relative z-10 w-[90vw] max-w-[420px] sm:max-w-[520px] md:max-w-[600px] lg:max-w-[700px] h-auto"
                   style={{
                     maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',

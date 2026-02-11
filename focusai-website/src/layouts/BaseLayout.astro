@@ -151,42 +151,51 @@ const websiteSchema = {
   <BackToTop />
   <WhatsAppFloat />
 
-  <!-- Lenis Smooth Scroll + GSAP Scroll Animations -->
+  <!-- Lenis Smooth Scroll + GSAP Scroll Animations (deferred for performance) -->
   <script>
-    import Lenis from 'lenis';
-    import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    import { initScrollAnimations } from '../scripts/scroll-animations';
+    async function initSmoothScrollAndAnimations() {
+      const [{ default: Lenis }, { gsap }, { ScrollTrigger }, { initScrollAnimations }] = await Promise.all([
+        import('lenis'),
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+        import('../scripts/scroll-animations'),
+      ]);
 
-    gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+      // Initialize Lenis smooth scrolling
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+      });
 
-    // Connect Lenis to GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
+      // Connect Lenis to GSAP ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+      gsap.ticker.add((time: number) => {
+        lenis.raf(time * 1000);
+      });
 
-    gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(0);
 
-    // Make lenis available globally for other scripts
-    (window as any).lenis = lenis;
+      // Make lenis available globally for other scripts
+      (window as any).lenis = lenis;
 
-    // Initialize scroll animations after DOM is ready
-    setTimeout(() => {
+      // Initialize scroll animations
       initScrollAnimations();
-    }, 200);
+    }
+
+    // Defer loading until browser is idle (saves ~135KB from initial load)
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => initSmoothScrollAndAnimations());
+    } else {
+      setTimeout(initSmoothScrollAndAnimations, 200);
+    }
   </script>
 
   <!-- Scripts slot for page-specific scripts -->
