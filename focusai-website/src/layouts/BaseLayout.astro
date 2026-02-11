@@ -190,12 +190,9 @@ const websiteSchema = {
       initScrollAnimations();
     }
 
-    // Defer loading until browser is idle (saves ~135KB from initial load)
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => initSmoothScrollAndAnimations());
-    } else {
-      setTimeout(initSmoothScrollAndAnimations, 200);
-    }
+    // Dynamic imports provide code-splitting (separate chunks loaded in parallel)
+    // No need for requestIdleCallback - dynamic imports are already non-blocking
+    initSmoothScrollAndAnimations();
   </script>
 
   <!-- Scripts slot for page-specific scripts -->

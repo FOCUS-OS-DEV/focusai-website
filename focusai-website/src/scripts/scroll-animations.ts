@@ -554,14 +554,7 @@ function initSectionTransitions() {
   });
 }
 
-// Auto-initialize on DOM load
-if (typeof window !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollAnimations);
-  } else {
-    // Small delay to ensure all elements are rendered
-    setTimeout(initScrollAnimations, 100);
-  }
-}
+// Note: initialization is handled by BaseLayout.astro via dynamic import
+// Do not auto-initialize here to avoid double-init
 
 export { animations };
