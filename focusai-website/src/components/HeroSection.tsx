@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 // Brand assets
-const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
+const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
 const fingerprint = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png";
 const n8nBadge = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png";
 
