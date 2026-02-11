@@ -1,47 +1,9 @@
 ---
 /**
- * Testimonials Section - Cyberpunk Terminal Aesthetic
- * Real feedback displayed as data logs + video testimonials
+ * Testimonials Section - Glass Design
+ * Real feedback displayed as modern glass cards + video testimonials carousel
  */
-
-const videoTestimonials = [
-  {
-    name: "מטר",
-    role: "בוגרת",
-    video: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/מטר_פוקוס_AI_pvninr.mp4",
-    id: "VID_001"
-  },
-  {
-    name: "חגית",
-    role: "מנהלת, אוניברסיטת חיפה",
-    video: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768547859/IMG_0753_iah7ft.mov",
-    id: "VID_002"
-  },
-  {
-    name: "שניר",
-    role: "בוגר",
-    video: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483262/שניר_פוקוס_AI_mxbzrj.mp4",
-    id: "VID_003"
-  },
-  {
-    name: "זוהר יעקב",
-    role: "סטודנט",
-    video: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1770301916/פוקוס_זוהר_יעקב_s4jds5.mp4",
-    id: "VID_004"
-  },
-  {
-    name: "בני",
-    role: "בוגר",
-    video: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1767274566/IMG_3467_pg6tos.mp4",
-    id: "VID_005"
-  },
-  {
-    name: "ארטיום",
-    role: "בוגר",
-    video: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/ארטיום_פוקוס_AI_pzkt2y.mp4",
-    id: "VID_006"
-  },
-];
+import VideoTestimonialsCarousel from './VideoTestimonialsCarousel.astro';
 
 const screenshots = [
   "https://res.cloudinary.com/dfudxxzlj/image/upload/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.33_uxlvn0.jpg",
@@ -53,206 +15,119 @@ const screenshots = [
 ];
 
 const stats = [
-  { value: "98%", label: "SATISFACTION", code: "SAT_RATE" },
-  { value: "4.9", label: "AVG_RATING", code: "SCORE" },
-  { value: "500+", label: "TESTIMONIALS", code: "COUNT" },
+  { value: "98%", label: "שביעות רצון" },
+  { value: "4.9", label: "דירוג ממוצע" },
+  { value: "500+", label: "בוגרים" },
 ];
 ---
 
-<section id="testimonials" class="py-24 lg:py-32 relative overflow-hidden bg-[#0a0a0f]" data-section>
-  <!-- Background effects -->
-  <div class="absolute inset-0 section-bg">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#c084fc]/5 rounded-full blur-[200px]"></div>
+<section id="testimonials" class="py-12 md:py-16 relative overflow-hidden bg-[#0a0a0f]" data-section>
+  <!-- Background -->
+  <div class="absolute inset-0">
+    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-600/20 to-pink-500/10 blur-[120px] animate-pulse-slow"></div>
+    <div class="absolute bottom-0 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-cyan-500/10 to-blue-600/20 blur-[150px] animate-pulse-slow" style="animation-delay: 1s;"></div>
+    <!-- Fingerprint background - left side -->
+    <img
+      src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+      alt=""
+      aria-hidden="true"
+      class="absolute top-1/2 left-0 w-[500px] lg:w-[700px] h-auto -translate-y-1/2 opacity-[0.08] pointer-events-none select-none"
+    />
   </div>
 
-  <!-- Circuit grid -->
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(192, 132, 252, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(192, 132, 252, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
-
-  <div class="container relative z-10">
-    <!-- Section Header - Terminal Style -->
-    <div class="text-center mb-16">
-      <!-- Terminal badge -->
-      <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#c084fc]/30 mb-8" data-animate="fade-up">
-        <span class="w-2 h-2 rounded-full bg-[#c084fc] animate-pulse"></span>
-        <span class="font-mono text-sm font-semibold text-[#c084fc] uppercase tracking-[0.15em]">FEEDBACK_LOG</span>
+  <div class="container relative z-10 px-4 md:px-6">
+    <!-- Header -->
+    <div class="text-center mb-10 md:mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 mb-6">
+        <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+        <span class="text-sm font-medium text-white/70">Testimonials</span>
       </div>
 
-      <h2 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6" data-animate="blur-in">
-        <span class="text-[#f5f5fa]">פידבק</span>
-        <span class="gradient-text-cyan"> אמיתי</span>
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+        פידבק <span class="testimonials-gradient-text">אמיתי</span>
       </h2>
-
-      <p class="text-xl text-[#b0b0c0] max-w-2xl mx-auto font-mono" data-animate="fade-up" data-delay="0.2">
-        <span class="text-[#c084fc]">></span> לא מילים שלנו.
-        <span class="text-[#f5f5fa]"> הודעות אמיתיות</span>
-        מלקוחות ובוגרים.
+      <p class="text-lg text-white/50 max-w-xl mx-auto">
+        לא מילים שלנו. הודעות אמיתיות מלקוחות ובוגרים.
       </p>
     </div>
 
-    <!-- Stats Bar - HUD Style -->
-    <div class="flex flex-wrap justify-center gap-6 lg:gap-12 mb-16" data-animate="stagger">
+    <!-- Stats - Glass Cards -->
+    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-10 md:mb-12">
       {stats.map((stat, i) => (
-        <div
-          class="relative px-8 py-4 bg-[#12121a] border border-[#2a2a3a] hover:border-[#c084fc]/50 transition-all duration-300 rounded-xl"
-        >
-          <div class="text-center">
-            <div class="text-3xl font-black font-mono text-[#c084fc]" style="text-shadow: 0 0 20px rgba(192, 132, 252, 0.5);">
-              {stat.value}
-            </div>
-            <div class="text-sm font-medium text-[#b0b0c0] font-mono uppercase tracking-wider mt-1">
-              <span class="text-[#c084fc]/50">[</span>{stat.label}<span class="text-[#c084fc]/50">]</span>
-            </div>
+        <div class="testimonials-stat-card" style={`--delay: ${i * 0.1}s`}>
+          <div class="text-3xl md:text-4xl font-black testimonials-gradient-text mb-1">
+            {stat.value}
+          </div>
+          <div class="text-sm text-white/50">
+            {stat.label}
           </div>
         </div>
       ))}
     </div>
 
-    <!-- Video Testimonials Grid - Featured -->
-    <div class="mb-20">
-      <div class="flex items-center gap-4 mb-8" data-animate="fade-up">
-        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#c084fc]/50 to-transparent"></div>
-        <span class="font-mono text-sm font-semibold text-[#c084fc] uppercase tracking-[0.15em]">VIDEO_LOGS</span>
-        <div class="h-px flex-1 bg-gradient-to-l from-transparent via-[#c084fc]/50 to-transparent"></div>
+    <!-- Video Testimonials Carousel -->
+    <div class="mb-10 md:mb-12">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
+        <span class="text-sm font-medium text-white/40 uppercase tracking-wider">עדויות וידאו</span>
+        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" data-animate="stagger">
-        {videoTestimonials.map((testimonial, index) => (
-          <div
-            class="video-card group relative"
-            style={`animation-delay: ${index * 0.1}s`}
-          >
-            <div
-              class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden hover:border-[#c084fc]/50 transition-all duration-300 rounded-xl"
-            >
-              {/* Terminal header */}
-              <div class="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-2.5 py-2 bg-[#0a0a0f]/90 border-b border-[#2a2a3a] rounded-t-xl">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#ff3366]"></span>
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#ffff00]"></span>
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-                </div>
-                <span class="font-mono text-[10px] md:text-[11px] text-[#c084fc] tracking-wider font-medium">{testimonial.id}</span>
-              </div>
+      <VideoTestimonialsCarousel />
+    </div>
 
-              {/* Video */}
-              <div class="pt-7 md:pt-8">
-                <video
-                  class="w-full aspect-[9/16] object-cover max-h-[320px] md:max-h-[360px]"
-                  controls
-                  preload="metadata"
-                  poster={`${testimonial.video.replace(/\.[^/.]+$/, '.jpg')}`}
-                >
-                  <source src={testimonial.video} type="video/mp4" />
-                </video>
-              </div>
+    <!-- Screenshots Grid -->
+    <div class="mb-10 md:mb-12">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
+        <span class="text-sm font-medium text-white/40 uppercase tracking-wider">הודעות מלקוחות</span>
+        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
+      </div>
 
-              {/* Person info */}
-              <div class="p-2.5 md:p-3 bg-[#0a0a0f]/80 border-t border-[#2a2a3a]">
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-[#c084fc] animate-pulse"></div>
-                  <div>
-                    <div class="font-mono text-sm text-[#f5f5fa] font-medium">{testimonial.name}</div>
-                    <div class="font-mono text-[11px] md:text-xs text-[#a0a0b8] uppercase tracking-wider">{testimonial.role}</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Glow effect on hover */}
-              <div class="absolute inset-0 bg-gradient-to-t from-[#c084fc]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        {screenshots.map((src, index) => (
+          <div class="testimonials-screenshot-card" style={`--delay: ${index * 0.08}s`}>
+            <div class="testimonials-glass-surface overflow-hidden">
+              <img
+                src={src}
+                alt={`פידבק מלקוח ${index + 1}`}
+                class="w-full h-auto transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+              />
             </div>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Screenshots Grid - Terminal Cards -->
-    <div class="mb-8">
-      <div class="flex items-center gap-4 mb-8">
-        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#c084fc]/50 to-transparent"></div>
-        <span class="font-mono text-sm font-semibold text-[#c084fc] uppercase tracking-[0.15em]">MESSAGE_LOGS</span>
-        <div class="h-px flex-1 bg-gradient-to-l from-transparent via-[#c084fc]/50 to-transparent"></div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-16">
-      {screenshots.map((src, index) => (
-        <div
-          class="testimonial-card group relative"
-          style={`animation-delay: ${index * 0.1}s`}
-        >
-          {/* Card with terminal header */}
-          <div
-            class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden hover:border-[#c084fc]/50 transition-all duration-300 rounded-xl"
-          >
-            {/* Terminal header */}
-            <div class="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-2.5 bg-[#0a0a0f]/90 border-b border-[#2a2a3a] rounded-t-xl">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-[#ff3366]"></span>
-                <span class="w-2 h-2 rounded-full bg-[#ffff00]"></span>
-                <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
-              </div>
-              <span class="font-mono text-[11px] md:text-xs text-[#c084fc] tracking-wider font-medium">MSG_{String(index + 1).padStart(3, '0')}</span>
-            </div>
-
-            {/* Image */}
-            <div class="pt-8">
-              <img
-                src={src}
-                alt={`פידבק מלקוח ${index + 1}`}
-                class="w-full h-auto transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-
-            {/* Hover overlay with scan effect */}
-            <div class="absolute inset-0 bg-gradient-to-t from-[#c084fc]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-
-            {/* Scan line on hover */}
-            <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity overflow-hidden">
-              <div class="scan-line-card absolute w-full h-[2px] bg-gradient-to-r from-transparent via-[#c084fc] to-transparent"></div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <!-- Bottom CTA - Terminal Style -->
+    <!-- Bottom CTA -->
     <div class="text-center">
-      <div
-        class="inline-block bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl"
-      >
-        {/* Terminal header */}
-        <div class="flex items-center justify-between px-6 py-2 bg-[#0a0a0f] border-b border-[#2a2a3a] rounded-t-2xl">
-          <div class="flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-[#ff3366]"></span>
-            <span class="w-2 h-2 rounded-full bg-[#ffff00]"></span>
-            <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
-          </div>
-          <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">JOIN_REQUEST</span>
-        </div>
-
-        <div class="p-8">
-          <p class="text-lg text-[#d0d0e0] mb-6 font-mono">
-            <span class="text-[#c084fc]">></span> רוצים להצטרף לרשימת הלקוחות המרוצים?
+      <div class="testimonials-cta-glass">
+        <div class="relative z-10 p-8 md:p-10">
+          <p class="text-lg text-white/70 mb-6">
+            רוצים להצטרף לרשימת הלקוחות המרוצים?
           </p>
 
           <a
             href="#contact"
-            class="group inline-flex items-center gap-3 px-10 py-4 bg-[#c084fc] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(192,132,252,0.5)] hover:shadow-[0_0_40px_rgba(192,132,252,0.7)] hover:brightness-110 transition-all duration-300 rounded-full"
+            class="testimonials-cta-btn"
           >
-            <span>בואו נדבר</span>
-            <svg class="w-5 h-5 rtl:rotate-180 group-hover:translate-x-[-4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            <span class="testimonials-btn-bg"></span>
+            <span class="testimonials-btn-text">
+              בואו נדבר
+              <svg class="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
           </a>
 
-          <div class="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-[#a0a0b8] font-mono">
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-white/50">
             <span class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
               ללא התחייבות
             </span>
             <span class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
               תגובה תוך 24 שעות
             </span>
           </div>
@@ -263,54 +138,141 @@ const stats = [
 </section>
 
 <style>
-  .video-card,
-  .testimonial-card {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.6s ease forwards;
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
   }
 
-  @keyframes fadeInUp {
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+
+  .testimonials-gradient-text {
+    background: linear-gradient(135deg, #a855f7, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Stat cards */
+  .testimonials-stat-card {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 16px;
+    animation: statAppear 0.5s ease-out var(--delay) both;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .testimonials-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -8px rgba(168, 85, 247, 0.2);
+  }
+
+  @keyframes statAppear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  .video-card:hover {
+  /* Glass surface */
+  .testimonials-glass-surface {
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s;
+  }
+
+  /* Screenshot cards */
+  .testimonials-screenshot-card {
+    animation: cardAppear 0.5s ease-out var(--delay) both;
+  }
+
+  .testimonials-screenshot-card:hover .testimonials-glass-surface {
     transform: translateY(-4px);
-    box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
+    box-shadow: 0 16px 32px -8px rgba(168, 85, 247, 0.2);
   }
 
-  .testimonial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 30px rgba(192, 132, 252, 0.2);
+  @keyframes cardAppear {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Custom video controls styling */
-  .video-card video::-webkit-media-controls-panel {
-    background: linear-gradient(to top, rgba(10, 10, 15, 0.9), transparent);
+  /* CTA Glass */
+  .testimonials-cta-glass {
+    position: relative;
+    display: inline-block;
+    border-radius: 24px;
+    overflow: hidden;
   }
 
-  .video-card video::-webkit-media-controls-play-button {
-    filter: drop-shadow(0 0 5px rgba(192, 132, 252, 0.5));
+  .testimonials-cta-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
   }
 
-  .gradient-text-cyan {
-    background: linear-gradient(90deg, #c084fc, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 20px rgba(192, 132, 252, 0.5));
+  /* CTA Button */
+  .testimonials-cta-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-weight: 600;
+    overflow: hidden;
+    transition: transform 0.3s;
   }
 
-  /* Scan line animation for cards */
-  .scan-line-card {
-    animation: scanMoveCard 2s linear infinite;
+  .testimonials-cta-btn:hover {
+    transform: scale(1.02);
   }
 
-  @keyframes scanMoveCard {
-    0% { top: 0; opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+  .testimonials-cta-btn .testimonials-btn-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    border-radius: 100px;
+    transition: background 0.3s;
+  }
+
+  .testimonials-cta-btn:hover .testimonials-btn-bg {
+    background: linear-gradient(135deg, #9333ea, #db2777);
+  }
+
+  .testimonials-cta-btn .testimonials-btn-text {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+  }
+
+  .testimonials-cta-btn {
+    box-shadow: 0 8px 32px -8px rgba(168, 85, 247, 0.5);
+  }
+
+  .testimonials-cta-btn:hover {
+    box-shadow: 0 12px 40px -8px rgba(168, 85, 247, 0.6);
   }
 </style>

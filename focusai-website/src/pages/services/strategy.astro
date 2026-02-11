@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | אפיון ואסטרטגיית AI לארגונים';
@@ -133,10 +135,26 @@ const processSteps = [
   { week: '4-5', title: 'Roadmap', desc: 'תכנית פעולה' },
   { week: '5-6', title: 'Presentation', desc: 'הצגה ואישור' }
 ];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "אפיון ואסטרטגיית AI לארגונים",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": "Focus AI", "url": "https://focusai.co.il" },
+  "areaServed": { "@type": "Country", "name": "Israel" },
+  "availableChannel": { "@type": "ServiceChannel", "serviceUrl": "https://focusai.co.il/services/strategy" }
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} structuredData={serviceSchema}>
   <Header slot="header" currentPath="/services/strategy" />
+
+  <Breadcrumbs items={[
+    { label: "דף הבית", href: "/" },
+    { label: "שירותים", href: "/#services" },
+    { label: "אפיון ואסטרטגיה" }
+  ]} />
 
   <!-- Hero Section -->
   <section class="relative min-h-[80vh] flex items-center pt-24 pb-16 overflow-hidden">
@@ -415,7 +433,11 @@ const processSteps = [
           </p>
         </header>
 
-        <form class="space-y-6">
+        <form class="space-y-6" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="strategy-form">
+          <input type="hidden" name="_subject" value="פנייה חדשה - אפיון ואסטרטגיה" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
@@ -424,7 +446,7 @@ const processSteps = [
                 id="name"
                 name="name"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
             <div>
@@ -433,7 +455,7 @@ const processSteps = [
                 type="text"
                 id="company"
                 name="company"
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -446,7 +468,7 @@ const processSteps = [
                 id="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
             <div>
@@ -456,7 +478,7 @@ const processSteps = [
                 id="phone"
                 name="phone"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -467,25 +489,31 @@ const processSteps = [
               id="message"
               name="message"
               rows="4"
-              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono resize-none"
+              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors resize-none"
               placeholder="מה הבעיה שאתם מנסים לפתור? איפה אתם רואים פוטנציאל ל-AI בארגון?"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            class="w-full px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
-            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            class="w-full px-8 py-4 bg-[#a855f7] text-white font-bold text-lg rounded-full transition-all duration-300 hover:bg-[#9333ea] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)]"
           >
-            <span class="flex items-center justify-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
-              שלחו ונחזור אליכם תוך 24 שעות
-            </span>
+            שלחו ונחזור אליכם תוך 24 שעות
           </button>
+
+          <div id="strategy-form-status" class="text-center hidden">
+            <p class="text-[#a855f7] font-bold">הפנייה נשלחה בהצלחה! נחזור אליכם בהקדם.</p>
+          </div>
         </form>
       </div>
     </div>
   </section>
+
+  <RelatedContent items={[
+    { title: "נציגי AI לעסקים", description: "נציג AI חכם לשירות לקוחות ומכירות 24/7", href: "/services/ai-agents" },
+    { title: "אוטומציות ופיתוח", description: "אוטומציה של תהליכים עסקיים וחיבור מערכות", href: "/services/development" },
+    { title: "Bot-Camp", description: "קורס מעשי לבניית בוטים וסוכני AI", href: "/academy/bot-camp" }
+  ]} />
 
   <Footer slot="footer" />
 </BaseLayout>
@@ -500,3 +528,28 @@ const processSteps = [
     animation: float 6s ease-in-out infinite;
   }
 </style>
+
+<script>
+  const form = document.getElementById('strategy-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const statusEl = document.getElementById('strategy-form-status');
+      if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          form.style.display = 'none';
+          if (statusEl) statusEl.classList.remove('hidden');
+        }
+      } catch {
+        if (btn) { btn.disabled = false; btn.textContent = 'שלחו ונחזור אליכם תוך 24 שעות'; }
+      }
+    });
+  }
+</script>

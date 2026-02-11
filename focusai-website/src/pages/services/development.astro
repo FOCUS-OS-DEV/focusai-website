@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | פיתוח ואינטגרציה של פתרונות AI';
@@ -154,10 +156,26 @@ const pricingTiers = [
     code: 'TIER_3'
   }
 ];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "פיתוח ואינטגרציה של פתרונות AI",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": "Focus AI", "url": "https://focusai.co.il" },
+  "areaServed": { "@type": "Country", "name": "Israel" },
+  "availableChannel": { "@type": "ServiceChannel", "serviceUrl": "https://focusai.co.il/services/development" }
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} structuredData={serviceSchema}>
   <Header slot="header" currentPath="/services/development" />
+
+  <Breadcrumbs items={[
+    { label: "דף הבית", href: "/" },
+    { label: "שירותים", href: "/#services" },
+    { label: "פיתוח ואינטגרציה" }
+  ]} />
 
   <!-- Hero Section -->
   <section class="relative min-h-[80vh] flex items-center pt-24 pb-16 overflow-hidden">
@@ -467,7 +485,11 @@ const pricingTiers = [
           </p>
         </header>
 
-        <form class="space-y-6">
+        <form class="space-y-6" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="dev-form">
+          <input type="hidden" name="_subject" value="פנייה חדשה - פיתוח ואינטגרציה" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
@@ -476,7 +498,7 @@ const pricingTiers = [
                 id="name"
                 name="name"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
             <div>
@@ -485,7 +507,7 @@ const pricingTiers = [
                 type="text"
                 id="company"
                 name="company"
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -498,7 +520,7 @@ const pricingTiers = [
                 id="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
             <div>
@@ -508,7 +530,7 @@ const pricingTiers = [
                 id="phone"
                 name="phone"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -518,7 +540,7 @@ const pricingTiers = [
             <select
               id="project-type"
               name="project-type"
-              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors"
             >
               <option value="">בחרו קטגוריה</option>
               <option value="automation">אוטומציות עסקיות</option>
@@ -536,25 +558,56 @@ const pricingTiers = [
               id="message"
               name="message"
               rows="4"
-              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono resize-none"
+              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:outline-none transition-colors resize-none"
               placeholder="אילו מערכות יש לכם היום? מה האתגר העיקרי? מה הייתם רוצים להשיג?"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            class="w-full px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
-            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            class="w-full px-8 py-4 bg-[#a855f7] text-white font-bold text-lg rounded-full transition-all duration-300 hover:bg-[#9333ea] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)]"
           >
-            <span class="flex items-center justify-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
-              שלחו פרטים
-            </span>
+            שלחו פרטים
           </button>
+
+          <div id="dev-form-status" class="text-center hidden">
+            <p class="text-[#a855f7] font-bold">הפנייה נשלחה בהצלחה! נחזור אליכם בהקדם.</p>
+          </div>
         </form>
       </div>
     </div>
   </section>
 
+  <RelatedContent items={[
+    { title: "נציגי AI לעסקים", description: "נציג AI חכם שעובד 24/7 על כל הפלטפורמות", href: "/services/ai-agents" },
+    { title: "ייעוץ אסטרטגי", description: "מיפוי ותכנון אסטרטגיית AI לארגון שלך", href: "/services/strategy" },
+    { title: "AI Ready", description: "הכשרה יישומית לכלי AI מתקדמים לצוותים", href: "/academy/ai-ready" }
+  ]} />
+
   <Footer slot="footer" />
 </BaseLayout>
+
+<script>
+  const form = document.getElementById('dev-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const statusEl = document.getElementById('dev-form-status');
+      if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          form.style.display = 'none';
+          if (statusEl) statusEl.classList.remove('hidden');
+        }
+      } catch {
+        if (btn) { btn.disabled = false; btn.textContent = 'שלחו פרטים'; }
+      }
+    });
+  }
+</script>

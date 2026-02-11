@@ -1,0 +1,37 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+interface Props {
+  items: BreadcrumbItem[];
+}
+const { items } = Astro.props;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.label,
+    ...(item.href && { "item": `https://focusai.co.il${item.href}` })
+  }))
+};
+---
+
+<nav aria-label="Breadcrumb" class="py-3 px-4 md:px-6">
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <ol class="container flex items-center gap-2 font-mono text-xs text-[#8080a0]">
+    {items.map((item, index) => (
+      <li class="flex items-center gap-2">
+        {index > 0 && <span class="text-[#a855f7]/40">/</span>}
+        {item.href ? (
+          <a href={item.href} class="hover:text-[#a855f7] transition-colors">{item.label}</a>
+        ) : (
+          <span class="text-[#a855f7]">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

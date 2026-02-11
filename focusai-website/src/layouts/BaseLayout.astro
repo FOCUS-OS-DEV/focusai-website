@@ -3,6 +3,8 @@ import '../styles/global.css';
 import CookieConsent from '../components/CookieConsent.astro';
 import Analytics from '../components/Analytics.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
+import BackToTop from '../components/BackToTop.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { siteConfig } from '../data/config';
 
 interface Props {
@@ -94,10 +96,19 @@ const websiteSchema = {
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Fonts - Cyberpunk Theme -->
+  <!-- Fonts - Cyberpunk Theme (Optimized Loading) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Critical font: Rubik (body text) - loaded immediately -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap">
+  <!-- Non-critical fonts: JetBrains Mono + Orbitron - async loaded -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"></noscript>
+
+  <!-- Cloudinary CDN - Preconnect for faster asset loading -->
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
 
   <!-- Generator -->
   <meta name="generator" content={Astro.generator} />
@@ -135,6 +146,10 @@ const websiteSchema = {
 
   <!-- Cookie Consent Banner -->
   <CookieConsent />
+
+  <!-- Floating UI -->
+  <BackToTop />
+  <WhatsAppFloat />
 
   <!-- Lenis Smooth Scroll + GSAP Scroll Animations -->
   <script>

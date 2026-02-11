@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import HeroSection from '../components/HeroSection.tsx';
-import ClientLogos from '../components/ClientLogos.tsx';
+import ClientLogosGrid from '../components/ClientLogosGrid.astro';
 import StorySection from '../components/StorySection.astro';
 import ServicesPreview from '../components/ServicesPreview.astro';
 import AcademyIntro from '../components/AcademyIntro.astro';
@@ -12,6 +12,7 @@ import Testimonials from '../components/Testimonials.astro';
 import TeamFounders from '../components/TeamFounders.astro';
 import WhatsAppCommunity from '../components/WhatsAppCommunity.astro';
 import CTAContact from '../components/CTAContact.astro';
+import RelatedContent from '../components/RelatedContent.astro';
 ---
 
 <BaseLayout title="Focus AI | מגשרים על הפער בין אנשים לטכנולוגיה">
@@ -20,8 +21,8 @@ import CTAContact from '../components/CTAContact.astro';
   <!-- Hero -->
   <HeroSection client:load />
 
-  <!-- Client Logos Carousel -->
-  <ClientLogos client:load />
+  <!-- Client Logos Grid -->
+  <ClientLogosGrid />
 
   <!-- Story Section - Problem/Solution/Proof narrative -->
   <StorySection />
@@ -46,6 +47,13 @@ import CTAContact from '../components/CTAContact.astro';
 
   <!-- Contact CTA -->
   <CTAContact />
+
+  <!-- Related Content -->
+  <RelatedContent items={[
+    { title: "הבלוג שלנו", description: "טיפים, מדריכים ותובנות מעולם ה-AI", href: "/blog" },
+    { title: "כלי AI מומלצים", description: "אוסף הכלים שאנחנו משתמשים ומלמדים", href: "/tools" },
+    { title: "הסיפור שלנו", description: "הכירו את הצוות והחזון מאחורי Focus AI", href: "/about" }
+  ]} />
 
   <Footer slot="footer" />
 

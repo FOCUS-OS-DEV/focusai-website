@@ -1,0 +1,30 @@
+---
+---
+<button
+  id="back-to-top"
+  class="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-xl bg-[#12121a]/90 backdrop-blur-sm border border-[#a855f7]/40 text-[#a855f7] opacity-0 invisible transition-all duration-300 hover:border-[#a855f7] hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] cursor-pointer flex items-center justify-center group"
+  aria-label="חזרה למעלה"
+>
+  <svg class="w-5 h-5 transition-transform group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+  </svg>
+</button>
+
+<style>
+  #back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  if (btn) {
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 500);
+    }, { passive: true });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>

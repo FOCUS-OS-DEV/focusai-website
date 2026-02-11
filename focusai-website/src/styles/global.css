@@ -60,8 +60,8 @@
   --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --font-family-body: 'Rubik', system-ui, -apple-system, sans-serif;
 
-  /* Spacing */
-  --space-section: clamp(6rem, 15vw, 12rem);
+  /* Spacing - Tighter sections for seamless flow */
+  --space-section: clamp(2rem, 4vw, 3.5rem);
 
   /* Transitions */
   --transition-fast: 100ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -326,8 +326,8 @@ body::after {
 /* ===== LAYOUT ===== */
 
 .section-padding {
-  padding-top: clamp(2.5rem, 6vw, 6rem);
-  padding-bottom: clamp(2.5rem, 6vw, 6rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 @media (min-width: 768px) {
@@ -852,6 +852,20 @@ body::after {
   animation-play-state: paused;
 }
 
+/* Infinite marquee - 4x content duplication for seamless loop */
+@keyframes clientMarqueeInfinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+.client-marquee-infinite {
+  animation: clientMarqueeInfinite 40s linear infinite;
+}
+
+.client-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
 /* ===== DIVIDERS ===== */
 
 .divider-cyber {
@@ -1165,7 +1179,7 @@ body::after {
 /* Hero container - fits viewport with navbar consideration */
 .hero-section {
   min-height: calc(100svh - 80px); /* Account for navbar */
-  padding-top: 1rem; /* Minimal gap after navbar */
+  padding-top: 1rem;
   padding-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -1204,20 +1218,20 @@ body::after {
 
 /* ===== SPACING UTILITIES ===== */
 
-/* Section spacing - more reasonable gaps */
+/* Section spacing - tight gaps for seamless flow */
 .section-gap {
-  padding-top: clamp(3rem, 8vw, 6rem);
-  padding-bottom: clamp(3rem, 8vw, 6rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
 .section-gap-lg {
-  padding-top: clamp(4rem, 10vw, 8rem);
-  padding-bottom: clamp(4rem, 10vw, 8rem);
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .section-gap-sm {
-  padding-top: clamp(2rem, 5vw, 4rem);
-  padding-bottom: clamp(2rem, 5vw, 4rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 /* ===== IMPROVED CONTRAST COLORS ===== */

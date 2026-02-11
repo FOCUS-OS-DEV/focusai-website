@@ -1,10 +1,17 @@
 ---
+/**
+ * Bot-Camp Page - Light Purple Design
+ * Professional AI & Automation training program
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import VideoTestimonialsCarousel from '../../components/VideoTestimonialsCarousel.astro';
 import SyllabusGate from '../../components/SyllabusGate';
 import TerminalText from '../../components/TerminalText';
-import { founders, siteConfig, getPhoneLink } from '../../data';
+import RelatedContent from '../../components/RelatedContent.astro';
+
+import { founders } from '../../data/team';
 
 // Bot-Camp Syllabus Images
 const syllabusImages = [
@@ -15,191 +22,92 @@ const syllabusImages = [
   'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470088/555_djukfo.jpg'
 ];
 
-// Course data - Updated from official syllabus
+// Course info
 const courseInfo = {
   title: 'Bot-Camp',
   subtitle: 'הכשרת מפתחי סוכני AI ואוטומציות עסקיות',
-  description: 'תוכנית הכשרה מקצועית בשיתוף היחידה ללימודי חוץ באוניברסיטת חיפה. תעודה מקצועית ותיק עבודות מוכן להצגה.',
-  sessions: 12,
-  hours: 72,
-  format: 'Zoom Live',
-  location: 'הרצליה פיתוח + פרונטלי',
-  certification: 'אוניברסיטת חיפה',
-  partner: 'n8n Israel Official Partner',
-  nextCohort: '15.03.2026',
-  nextCohortDay: 'יום ראשון'
+  description: 'תוכנית הכשרה מקצועית בשיתוף היחידה ללימודי חוץ באוניברסיטת חיפה',
 };
 
-// Course Schema for SEO
-const courseSchema = {
-  "@context": "https://schema.org",
-  "@type": "Course",
-  "name": "Bot-Camp - הכשרת מפתחי סוכני AI",
-  "description": courseInfo.description,
-  "provider": {
-    "@type": "Organization",
-    "name": "Focus AI",
-    "url": "https://focusai.co.il"
-  },
-  "educationalCredentialAwarded": "תעודה מקצועית בליווי אקדמי - אוניברסיטת חיפה",
-  "hasCourseInstance": {
-    "@type": "CourseInstance",
-    "courseMode": "blended",
-    "courseWorkload": `PT${courseInfo.hours}H`,
-    "startDate": "2026-03-15",
-    "endDate": "2026-06-07",
-    "location": {
-      "@type": "Place",
-      "name": "הרצליה פיתוח + Zoom"
-    }
-  },
-  "numberOfCredits": courseInfo.sessions,
-  "occupationalCredentialAwarded": "מפתח סוכני AI ואוטומציות",
-  "inLanguage": "he"
-};
+// Hero badges/tags
+const heroBadges = [
+  'תעודה מקצועית',
+  'תיק עבודות',
+  'פרונטלי או Zoom',
+  'ללא ידע בקוד',
+  'יחס חניכה צמוד',
+  'הכנה להשמה'
+];
 
-// FAQ Schema for SEO (defined after faqs array below)
-
-// Actual Syllabus from official PDF - 12 sessions
-const syllabus = [
+// Target audience
+const targetAudience = [
   {
-    session: 1,
-    date: '15.03.2026',
-    title: 'מבוא לאוטומציה ובינה מלאכותית',
-    topics: ['היכרות עם הסביבה המלאכותית, מבוא להנדסה', 'פרומפטים והנדסת הקשר', 'מה סוכן AI ראשון ובכלל מהו'],
-    iconType: 'target'
+    title: 'הסבת מקצוע',
+    icon: 'briefcase',
+    features: ['כיוון קריירה חדש ומבטיח', 'תחום טכנולוגי ללא ידע בקוד', 'מקצוע עם ביקוש גבוה בשוק', 'פוטנציאל השתכרות גבוה']
   },
   {
-    session: 2,
-    date: '22.03.2026',
-    title: 'התקנה והכרות עם מערכת N8N',
-    topics: ['התקנה והיכרות עם המערכת העיקרית והתרחבות שלה מול', 'התחלפות בשוק, נגדיר ונתאר משתמש חדש למערכת ובננה', 'אוטומציה ראשונה כנכסים התחלתיים מתקדמים במערכת'],
-    iconType: 'cpu'
+    title: 'בעלי עסקים ומנהלים',
+    icon: 'chart',
+    features: ['התמקצעות ארגונית לעובדים', 'האצת תהליכי גדילה (Scale)', 'הפיכת תהליכים לאוטומטיים', 'חיסכון בזמן ובמשאבים']
   },
   {
-    session: 3,
-    date: '29.03.2026',
-    title: 'TOOL USE & DEBUGGING',
-    topics: ['נלמד לדבג את זרימת הנתונים באוטומציה, ניתן גישה לסוכני AI', 'לידיעת שגיאה ולשאלות אופטימום בבדיקה חיצונית (וידוא יותר)', 'שיחות מרחיקים ועוד), מרגלל דרכי החמצאויות עם תקיעת ובצר'],
-    iconType: 'wrench'
+    title: 'השלמה לאקדמיה',
+    icon: 'academic',
+    features: ['בוגרי תארים מכלל החוגים', 'לימודי תעודה מקצועיים', 'גישור בין אקדמיה לתעסוקה', 'יתרון תחרותי בקבלה לעבודה']
   },
   {
-    session: 4,
-    date: '05.04.2026',
-    title: 'חיפוש מבוסס בינה מלאכותית',
-    topics: ['נלמד כיצד לבצע חיפוש סמנטי וחכם באמצעויות מנוע AI כמו', 'Perplexity ו-Tavily, נבין את ההבדלים בין חיפוש שיטום', 'לחיפוש מבוסס בינה מלאכותית, נשלב בין AI Agent מתקדם חיפוש'],
-    iconType: 'search'
-  },
-  {
-    session: 5,
-    date: '19.04.2026',
-    title: 'RAG SYSTEM חלק א\'',
-    topics: ['נכיר את ארכיטקטורת RAG והשתלשלה מודלי שפה גדולים עם', 'מידע מבית מותאם-גוריידי או ארגונים והמפרטים קבל תשובות', 'מדוייקות בינות אמונה, את או מקורות הפאסיבית, שיפור חיפושית'],
-    iconType: 'book'
-  },
-  {
-    session: 6,
-    date: '26.04.2026',
-    title: 'RAG SYSTEM חלק ב\' & MCP SERVER',
-    topics: ['נלמד לבנות סוכני AI מבוססי ידע מהמסמכים לנהול שיחה', 'חוזרת ולהשיב על שאלות מהמסמכים ומאגרי מידע ארגוניים', 'בזמן אמת, בהתאגדויות בסיסיות ומתקדמות, נלמד על', 'פרוטוקול MCP נבנים שרת לשימוש אישי ועסקי'],
-    iconType: 'database'
-  },
-  {
-    session: 7,
-    date: '03.05.2026',
-    title: 'SCRAPING & API DOCUMENTATION',
-    topics: ['נלמד כיצד לאסוף מידע מאתרים ופלטפורמות שונות', 'אוטומטיות שסקריפ, נלמד שליפת מידע מתנכון HTML', 'איחוד צעדיות מינימוליות ויקטוריות יונוח'],
-    iconType: 'code'
-  },
-  {
-    session: 8,
-    date: '10.05.2026',
-    title: 'מסדי נתונים מתקדמים ו-CRM',
-    topics: ['נבין את ההבדל בין כידוח, מאן לידיעון מתקדם שנסל חתי', 'לשילוש בכל אחד, משושר למסדי נתונים מאוכנטים ונצה', 'כמו Supabase וגם איך סוכני ה-AI בדאטות מאוכנטות'],
-    iconType: 'database'
-  },
-  {
-    session: 9,
-    date: '17.05.2026',
-    title: 'חשיבה עסקית ואפיון תהליכים',
-    topics: ['שיטות איסוף מידע ארכיון ויבטרי התהליכים בארגון, נלמד', 'לתרגם קיצורות בשר, שאזור ובקשן, ומיצוי עידויים, לדמות', 'ולגדול בעוזרי תבניות הפניות (BPMN ראשי לאפיון דרימ', 'כבתכנית, הפקדיציים וממיקסים בארנון בין נתונים מבוליכות'],
-    iconType: 'clipboard'
-  },
-  {
-    session: 10,
-    date: '24.05.2026',
-    title: 'סוכנים מרובי תהליכים',
-    topics: ['נלמד כיצד לתכנן תהליכים עסקיים מורכבים הכוללים שיתוף', 'פעולה בין כמה סוכני AI, מרכזי בקורנזת Orchestration', 'העסקים ופקידות בגיית Workflow הכולל מספר סוכנים'],
-    iconType: 'users'
-  },
-  {
-    session: 11,
-    date: '31.05.2026',
-    title: 'פרויקט גמר: פיתוח אוטומציה עסקית',
-    topics: ['השלב הראשון ופורק בפיתוח אוטומציה עסקית מקצה', 'לקצה במערכת הפלא של, בינאיט תהליך הייחודך לאפיון', 'אינטגרציה, ניהול נונים, ומיקוס אבק וכי'],
-    iconType: 'rocket'
-  },
-  {
-    session: 12,
-    date: '07.06.2026',
-    title: 'AI AGENT - פיתוח צ\'אטבוט עסקי',
-    topics: ['שכבר השני והשלמנויות על פיתוח צ\'אטבוט עסקי בשיטת', 'AI Agent Swarm, מסכין', 'יציעים לכל עסקים והדגשה העסקיות זכות גם תהאו מגוון'],
-    iconType: 'brain'
+    title: 'סוכנויות שיווק ופרסום',
+    icon: 'megaphone',
+    features: ['הוספת AI לסל המוצרים', 'בידול משמעותי מהמתחרים', 'תהליכים חכמים לקידום וייעול', 'שיפור חווית השירות והמכירה']
   }
 ];
 
-// Bonus content included
-const bonusContent = [
+// Client logos for the grid
+const clientLogos = [
+  { name: 'דרכא', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239326/34_hfdzkq.png' },
+  { name: 'אגודת הסטודנטים', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239331/37_xm34qd.png' },
+  { name: 'דיקנאט הסטודנטים', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239329/36_ddwaud.png' },
+  { name: 'Raveh Ravid', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239338/41_nufstk.png' },
+  { name: 'אוניברסיטת חיפה', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239319/24_fcxmpa.png' },
+  { name: 'New Mark', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239322/28_wg1jv8.png' },
+  { name: 'Beer', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239323/30_ahmcfn.png' },
+  { name: 'רשגדא', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239321/27_gzwe5z.png' },
+  { name: 'iJump', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239334/38_ornkqc.png' },
+  { name: 'Kimama', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239320/26_opmxu4.png' },
+  { name: 'היסוד הבסיסי', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239324/31_brygr5.png' },
+  { name: 'BB Baby', logo: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764239327/35_gopg6v.png' },
+];
+
+// Why now reasons
+const whyNowReasons = [
   {
-    title: 'Telegram API',
-    description: 'בניים בוט טלגרם מאפס מהתחבר אותו ל-n8n, נלמד לזהות סוג הודעה (טקסט או קול), להמתללל הודעות Whisper ולטכנולוגיות מספר, ולהציג תגובה בטקסט או בקול, בבנה סוכן שיחיה רשעות עם כל משתמש בנפרד',
-    iconType: 'telegram'
+    title: 'פער בשוק העבודה',
+    description: 'הביקוש למפתחי אוטומציות וסוכני AI במגמת עלייה מתמדת. ובעלי עסקים רבים מחפשים מומחים שמבינים אותם עם רקע ניסיון.'
   },
   {
-    title: 'WhatsApp Business API',
-    description: 'נכיר את WhatsApp Business, מודל ההתמחור, חלון ה-24 שעות, ולהבדל בין חיבור ישיר ל-API לבין גם להעברה דרך פלטפורמת מתווך, נתנה מבוללת ManyChat, הקמת חנות, בניית Flows אוטומטיות ואינטגרציה עם n8n להצלעת סוכן AI',
-    iconType: 'whatsapp'
+    title: 'חלון הזדמנויות פתוח',
+    description: 'השוק בשלב צמיחה וההכנסה כעת מעניקה יתרון משמעותי. תעודה מקצועית תעניק לכם יתרון יחודים בתחום עם הזדמנויות רבות לצמיחה ויציבות דרך בשוק המתפתח.'
   },
   {
-    title: 'Production ומבוא לאבטחת מידע',
-    description: 'לפרודקשיו: אבטחות מידע ושארט מאוכנטת ב-Webhooks, ניהול שונוי סביבה ושימוש ב-Edge Functions, מדריגל Evaluation לסוכני AI ניטור מערכת התראות על תקלות באוטומטיות',
-    iconType: 'shield'
+    title: 'השקעה שמחזירה את עצמה',
+    description: 'עלות ההשתתפות בהכשרה יכולה לחזור אליכם כבר בפרויקט הראשון. הבוגרים שלנו מדווחים על החזר מלא של ההשקעה תוך 2-3 חודשים עם קבלת התעודה.'
+  },
+  {
+    title: 'עובדים איך שנוח לכם',
+    description: 'ההכשרה מעניקה עצמאות ממקומיות אסטרטגית. ניתן לעבוד מכל מקום ובכל זמן, להתפרנס לצוות בחברות היי-טק ודיגיטל, או לשלב שירותיהם כייעוץ חיצוני לעסקים. מה הבחירה איפה, מתי ואיך לעבוד עוברת לידיים שלכם.'
   }
 ];
 
-// Real instructors from Focus AI + guest instructors
-const instructors = [
-  {
-    ...founders[0], // שחר דדיה
-    role: 'מייסד ומנכ"ל משותף',
-    shortBio: 'עורך דין ויזם, מומחה באפיון והטמעת סוכני AI'
-  },
-  {
-    ...founders[1], // אוניל סחר
-    role: 'מייסד ומנכ"ל משותף',
-    shortBio: 'סמנכ"ל תפעול לשעבר, מומחה בפיתוח עסקי ויישום AI'
-  },
-  {
-    name: 'כפיר קורן',
-    role: 'הכשרות ופיתוח מערכות',
-    shortBio: 'מומחה FixDigital CRM והכשרות טכניות',
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764519896/placeholder-instructor_osvagi.jpg'
-  },
-  {
-    name: 'אסף עמירה',
-    role: 'מייסד ומנכ"ל מערכת',
-    shortBio: 'יזם ומומחה באוטומציות עסקיות',
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764519896/placeholder-instructor2_osvagi.jpg'
-  }
-];
-
-// Course format tracks - Frontal first (right side in RTL), then Zoom
+// Course tracks - Frontal (Herzliya) first, then Zoom (RTL = first item on right)
 const courseTracks = [
   {
     id: 'herzliya',
     title: 'Bot-Camp Herzliya',
-    subtitle: 'מסלול פרונטלי',
+    subtitle: 'בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה',
     highlighted: true,
+    nextDate: '15.03.2026',
+    nextDay: 'מחזור הבא מתחיל בקרוב',
     features: [
       '12 מפגשים פרונטליים (ימי ראשון, 17:00-21:00)',
       'קבוצות קטנות של עד 18 משתתפים',
@@ -219,10 +127,13 @@ const courseTracks = [
     title: 'מסלול Zoom',
     subtitle: 'למידה מרחוק',
     highlighted: false,
+    nextDate: '15.03.2026',
+    nextDay: 'מחזור הבא מתחיל בקרוב',
     features: [
       '12 מפגשים דרך Zoom (יום ראשון, 17:00-21:00)',
       'גישה להקלטות המפגשים',
       'תעודה מקצועית ותיק עבודות',
+      'קבוצת שאלות ותמיכה מרוחק',
       'גישה לקהילת בוגרים מקצועית',
       'אזור לימוד אישי עם מחברת הכשרה וסיכומי AI',
       'מטלות בית אינטראקטיביות עם ליווי מותאם'
@@ -230,108 +141,87 @@ const courseTracks = [
   }
 ];
 
-// What you get - During the program
-const duringProgram = [
+// Past tracks (sold out / completed) - displayed in gray
+const pastTracks = [
+  {
+    id: 'herzliya-dec',
+    title: 'Bot-Camp Herzliya',
+    subtitle: 'מחזור דצמבר 2025',
+    dateText: 'המחזור החל בדצמבר 2025',
+    features: ['12 מפגשים פרונטליים', 'קבוצות קטנות', 'תעודה מקצועית'],
+    buttonText: 'המחזור החל',
+    status: 'started'
+  },
+  {
+    id: 'haifa',
+    title: 'Bot-Camp Haifa',
+    subtitle: 'אוניברסיטת חיפה',
+    dateText: 'המחזור הושלם בספטמבר 2025',
+    features: ['50 שעות אקדמיות', 'ליווי מלא', 'תעודה מקצועית'],
+    buttonText: 'המחזור הסתיים',
+    status: 'completed'
+  },
+  {
+    id: 'tech',
+    title: 'Bot-Camp Tech',
+    subtitle: 'מרכז היזמות של הטכניון',
+    dateText: 'המחזור החל בנובמבר 2025',
+    features: ['10 מפגשים ב-ZOOM', 'שיתוף פעולה עם הטכניון', 'הקלטות מפגשים'],
+    buttonText: 'המחזור החל',
+    status: 'started'
+  }
+];
+
+// What you get - All benefits unified
+const programBenefits = [
+  {
+    title: 'תעודה מקצועית',
+    description: 'הבוגרים זכאים לתעודה מקצועית בליווי אקדמי מטעם היחידה ללימודי החוץ באוניברסיטת חיפה.',
+    icon: 'certificate'
+  },
   {
     title: 'תיק עבודות',
     description: 'תרכיבו תיק עבודות הכולל אוטומציות עסקיות וסוכני בינה מלאכותית להוכחת יכולת מעשית.',
-    iconType: 'folder'
+    icon: 'briefcase'
   },
   {
     title: 'הקלטות מפגשים',
     description: 'תקבלו גישה להקלטות המפגשים לחזרה על החומר ותרגול עצמאי בקצב שלכם.',
-    iconType: 'video'
+    icon: 'video'
   },
   {
     title: 'תגבורים (מסלול פרונטלי)',
-    description: 'זמינות של צוות המנחים חצי שעה לפני ואחרי המפגשים לשאלות ותרגול.',
-    iconType: 'users'
+    description: 'זמינות של צוות המנחים חצי שעה לפני ואחרי המפגשים לשאלות, תרגול וליווי אישי.',
+    icon: 'users'
   },
   {
     title: 'מסלול היברידי',
     description: 'ניתן להצטרף לכיתה או מה-Zoom בכל שלב, למרות שתמיד נעדיף לראות אתכם איתנו בכיתה!',
-    iconType: 'switch'
-  }
-];
-
-// What you get - After completion
-const afterCompletion = [
+    icon: 'hybrid'
+  },
   {
-    title: 'תעודה מקצועית',
-    description: 'הבוגרים זכאים לתעודה מקצועית בליווי אקדמי מטעם היחידה ללימודי החוץ באוניברסיטת חיפה.',
-    iconType: 'academic'
+    title: 'אזור לימוד אישי',
+    description: 'גישה למחברת הכשרה דיגיטלית עם סיכומי AI אוטומטיים, חומרי עזר ומשאבים נוספים ללמידה עצמאית.',
+    icon: 'notebook'
+  },
+  {
+    title: 'מטלות בית אינטראקטיביות',
+    description: 'מטלות שמלוות אתכם בממשק חכם - כמו מורה פרטי שזמין בכל רגע לתת משוב, הכוונה ועזרה.',
+    icon: 'tasks'
+  },
+  {
+    title: 'סוכני AI שיעזרו לכם להצליח',
+    description: 'גישה לסוכני AI ייעודיים שיסייעו לכם בלמידה, בתרגול ובפתרון בעיות לאורך הדרך.',
+    icon: 'bot'
   },
   {
     title: 'קהילת בוגרים',
     description: 'הצטרפות לקהילה סגורה של בוגרי תכנית Bot-Camp מכל הארץ. יצירת שיתופי פעולה וקבוצה לשאלות ותמיכה.',
-    iconType: 'community'
-  },
-  {
-    title: 'גישה לפרויקטים אמיתיים',
-    description: 'הזדמנויות לעבוד על פרויקטים של לקוחות Focus AI. בניית תיק עבודות עם פרויקטים אמיתיים.',
-    iconType: 'briefcase'
-  },
-  {
-    title: 'אירועים וכנסים',
-    description: 'הזמנות לאירועים של Focus AI בתחום. נטוורקינג עם אנשי מקצוע וחשיפה לחידושים.',
-    iconType: 'calendar'
+    icon: 'community'
   }
 ];
 
-// Learning portal features
-const portalFeatures = [
-  'אזור לימוד אישי עם מחברת הכשרה וסיכומי AI',
-  'מטלות בית אינטראקטיביות עם ליווי מותאם',
-  'גישה להקלטות המפגשים',
-  'סוכני AI שיעזרו לכם להצליח',
-  'מרכז מידע לשימוש בכלי AI'
-];
-
-// Target audience - למי מתאימה התוכנית
-const targetAudience = [
-  {
-    title: 'הסבת מקצוע',
-    subtitle: 'כיוון קריירה חדש ומבטיח',
-    iconType: 'compass',
-    features: [
-      'תחום טכנולוגי ללא ידע בקוד',
-      'מקצוע עם ביקוש גבוה בשוק',
-      'פוטנציאל השתכרות גבוה'
-    ]
-  },
-  {
-    title: 'בעלי עסקים ומנהלים',
-    subtitle: 'התמקצעות ארגונית לעובדים',
-    iconType: 'briefcase',
-    features: [
-      'האצת תהליכי גדילה (Scale)',
-      'הפיכת תהליכים לאוטומטיים',
-      'חיסכון בזמן ובמשאבים'
-    ]
-  },
-  {
-    title: 'השלמה לאקדמיה',
-    subtitle: 'בוגרי תארים מכלל החוגים',
-    iconType: 'academic',
-    features: [
-      'לימודי תעודה מקצועיים',
-      'גישור בין אקדמיה לתעסוקה',
-      'יתרון תחרותי בקבלה לעבודה'
-    ]
-  },
-  {
-    title: 'סוכנויות שיווק ופרסום',
-    subtitle: 'הוספת AI לסל המוצרים',
-    iconType: 'megaphone',
-    features: [
-      'בידול משמעותי מהמתחרים',
-      'תהליכים חכמים לקידום וייעול',
-      'שיפור חווית השירות והמכירה'
-    ]
-  }
-];
-
-// Career paths for graduates
+// Career paths
 const careerPaths = [
   'להצטרף לתפקידי פיתוח אוטומציות בחברות היי-טק, סטארט-אפים וארגונים מובילים',
   'להקים עסק עצמאי למתן שירותי אוטומציה וסוכני AI לעסקים',
@@ -341,33 +231,39 @@ const careerPaths = [
   'להמשיך להתמחות בתחומי AI מתקדמים ולהרחיב את הידע'
 ];
 
-// Practical syllabus topics
-const practicalTopics = [
-  'בניית צ\'אט בוטים וסוכני AI שעובדים 24/7',
-  'פיתוח אוטומציות המשלבות בינה מלאכותית',
-  'תהליך עבודה מלא: אפיון, פיתוח והטמעה',
-  'שילוב AI בעבודה עם מייל, CRM, יומן ועוד',
-  'איסוף ועיבוד מידע אוטומטי מאתרי אינטרנט',
-  'אבטחת מידע ופרטיות בעבודה עם AI',
-  'כלי AI המתקדמים ביותר כיום',
-  'אוטומציות ליצירת תמונות ותוכן באמצעות AI',
-  'עבודה בצוותים ופרויקט גמר'
+// Instructors
+const instructors = [
+  {
+    name: 'שחר דדיה, עו"ד',
+    role: 'מייסד ומנכ"ל משותף',
+    bio: 'עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה. מאמין שטכנולוגיה צריכה לשרת את האדם, לא להפך.',
+    image: founders[0]?.image || 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg'
+  },
+  {
+    name: 'אוניל סחר',
+    role: 'מייסד ומנכ"ל משותף',
+    bio: 'יזם עם ניסיון עשיר בניהול תפעול וצמיחה עסקית. סמנכ"ל תפעול לשעבר ברשתות קמעונאיות מובילות, מביא פרספקטיבה עסקית לפתרונות טכנולוגיים. מתמחה בפיתוח עסקי ויישום פתרונות AI עם הבנה עמוקה של צרכי הלקוח. מרצה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.',
+    image: founders[1]?.image || 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770364984/IMG_4898.JPG_uate4o.jpg'
+  },
+  {
+    name: 'כפיר קורן',
+    role: 'מנהלת ופיתוח מערכות',
+    bio: 'כבר למעלה משבע שנים שכפיר מנהל קהילה ומלווה עשרות עסקים בפיתוח טכנולוגי. עם ניסיון רב בשטח בתחום הדיגיטל, הוא מתמחה בניתוח צרכים, תכנון אסטרטגי, והטמעת פתרונות No-Code ו-AI. כמפתח עצמאי בחברות קמעונאיות וחברות ביטוח, כפיר צבר ידע מעמיק בהטמעת פתרונות טכנולוגיים מורכבים בסביבות עסקיות.',
+    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770708833/kfir_qc4dwp.jpg'
+  }
 ];
 
-// Smart classroom features
+// Classroom features
 const classroomFeatures = [
-  'כיתת לימוד מתקדמת עם Wi-Fi איכותי, נקודות חשמל אישיות ומטבחון מאובזר',
-  'מערכת הקלטה וצילום חכמה מבוססת סאונד ותנועה',
-  'שידור חי בזום והקלטת שיעורים באיכות מרבית לחוויית למידה רציפה ואיכותית',
-  'מרחב אינטימי המתאים ל-18 משתתפים בלבד ומעניק חווית למידה אישית, טכנולוגית ומקצועית',
-  'מיקום מרכזי בהרצליה פיתוח המאפשר נטוורקינג איכותי וסביבה פוריה לחיבורים אישיים ועסקיים',
-  'נגישות לתחבורה ציבורית, חניה בכחול לבן ואפשרות לחניה פרטית לכל תקופת ההכשרה בתוספת תשלום'
+  'כיתת לימוד מתקדמת עם Wi-Fi איכותי, נקודות חשמל אישיות ומטבחון מאובזר.',
+  'מערכת הקלטה וצילום חכמה מבוססת סאונד ותנועה.',
+  'שידור חי בזום והקלטת שיעורים באיכות מרבית לחוויית למידה רציפה ואיכותית.',
+  'מרחב אינטימי המתאים ל-18 משתתפים בלבד ומעניק חווית למידה אישית, טכנולוגית ומקצועית.',
+  'מיקום מרכזי בהרצליה פיתוח המאפשר נטוורקינג איכותי וסביבה פוריה לחיבורים אישיים ועסקיים.',
+  'נגישות לתחבורה ציבורית, חניה בכחול לבן ואפשרות לחניה פרטית לכל תקופת ההכשרה בתוספת תשלום.'
 ];
 
-// Classroom image
-const classroomImage = "https://res.cloudinary.com/dfudxxzlj/image/upload/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png";
-
-// FAQ - Real content
+// FAQ
 const faqs = [
   {
     question: 'אני בכלל לא מהתחום הטכני - התוכנית מתאימה לי?',
@@ -375,27 +271,27 @@ const faqs = [
   },
   {
     question: 'מה ההבדל בין המסלול הפרונטלי לבין ה-Zoom?',
-    answer: 'ההבדל העיקרי הוא באינטנסיביות הליווי והחוויה. במסלול הפרונטלי תקבלו ליווי צמוד של צוות מרצים, תגבורים לפני ואחרי כל מפגש, ועזרה ישירה בזמן אמת בכיתה. במסלול Zoom תקבלו את אותו תוכן איכותי עם הקלטות מלאות ונגישות מכל מקום, אבל הליווי יהיה דיגיטלי יותר. אם סגנון הלמידה שלכם מבוסס על אינטראקציה אישית ותמיכה צמודה - המסלול הפרונטלי יתן לכם את המקסימום.'
+    answer: 'ההבדל העיקרי הוא באינטנסיביות הליווי והחוויה. במסלול הפרונטלי תקבלו ליווי צמוד של צוות מרצים, תגבורים לפני ואחרי כל מפגש, ועזרה ישירה בזמן אמת בכיתה. במסלול Zoom תקבלו את אותו תוכן איכותי עם הקלטות מלאות ונגישות מכל מקום, אבל הליווי יהיה דיגיטלי יותר.'
   },
   {
     question: 'איך אני יודע שבאמת יהיה ביקוש למה שאלמד? זה לא עוד באז שיחלוף?',
-    answer: 'זה לא באז - זה שינוי מבני בשוק העבודה. ארגונים בכל הגדלים כבר מטמיעים אוטומציות וסוכני AI בתהליכי העבודה שלהם, והביקוש רק גדל. הנתונים מדברים בעד עצמם: חברות חוסכות עשרות שעות עבודה בחודש עם אוטומציה נכונה, והתשואה מתחילה כבר בשבועות הראשונים. יש פער אמיתי בשוק בין הביקוש למומחים בתחום לבין ההיצע - וזה הזמן להיכנס.'
+    answer: 'זה לא באז - זה שינוי מבני בשוק העבודה. ארגונים בכל הגדלים כבר מטמיעים אוטומציות וסוכני AI בתהליכי העבודה שלהם, והביקוש רק גדל.'
   },
   {
     question: 'כמה זמן ביום/בשבוע אני צריך להשקיע מעבר לשיעורים?',
-    answer: 'מעבר ל-4 שעות השיעור השבועי, מומלץ להקדיש 4-6 שעות נוספות לתרגול ופיתוח הפרויקטים. זו הכשרה מעשית - ככל שתתרגלו יותר, כך תצאו עם תיק עבודות חזק יותר. אפשר לעבוד במקביל להכשרה, רוב התלמידים שלנו עושים את זה. העיקר להיות מחויבים לתרגל ולבצע את המטלות - המומחיות מגיעה מהעשייה.'
+    answer: 'מעבר ל-4 שעות השיעור השבועי, מומלץ להקדיש 4-6 שעות נוספות לתרגול ופיתוח הפרויקטים. זו הכשרה מעשית - ככל שתתרגלו יותר, כך תצאו עם תיק עבודות חזק יותר.'
   },
   {
     question: 'מה קורה אם אני מפספס שיעור? איך מתעדכנים?',
-    answer: 'כל שיעור מוקלט באיכות גבוהה ועולה לפלטפורמה תוך 24 שעות. אפשר לצפות בהקלטה בקצב שלכם ולהשלים את החומר. בנוסף, יש קבוצת שאלות ותשובות פעילה שבה אפשר לקבל הבהרות. אבל חשוב להגיד - הערך של הנוכחות הפיזית או ב-Zoom הוא באינטראקציה החיה עם המרצים ועם התלמידים האחרים. השיעורים המוקלטים הם גיבוי, לא תחליף.'
+    answer: 'כל שיעור מוקלט באיכות גבוהה ועולה לפלטפורמה תוך 24 שעות. אפשר לצפות בהקלטה בקצב שלכם ולהשלים את החומר.'
   },
   {
     question: 'מה עושים עם הפרויקטים בתיק העבודות - זה באמת משהו שאפשר להציג למעסיקים?',
-    answer: 'בהחלט. במהלך ההכשרה תפתחו 3 פרויקטים מתקדמים שמדמים אתגרים אמיתיים של עסקים - אוטומציות לשירות לקוחות, אינטגרציות בין מערכות, סוכני AI חכמים. זה לא תרגילים תיאורטיים אלא פתרונות שאפשר להציג למעסיקים או ללקוחות כהוכחת יכולת. חלק מהבוגרים שלנו אפילו הצליחו למכור גרסאות של הפרויקטים האלה כשירותים אמיתיים.'
+    answer: 'בהחלט. במהלך ההכשרה תפתחו 3 פרויקטים מתקדמים שמדמים אתגרים אמיתיים של עסקים - אוטומציות לשירות לקוחות, אינטגרציות בין מערכות, סוכני AI חכמים.'
   },
   {
     question: 'מה ההבדל בין זה לקורסים אונליין?',
-    answer: 'בקורסים אונליין מקבלים תיאוריה, אצלנו מקבלים מעשה. במסלול הפרונטלי תהנו מליווי אישי צמוד של מרצים שעובדים בתחום כל יום, פתרון בעיות בזמן אמת, וקהילה מקצועית שמלווה אתכם גם אחרי ההכשרה. בנוסף, תקבלו תעודה מוכרת מאוניברסיטת חיפה והזדמנות לעבוד על פרויקטים אמיתיים של לקוחות Focus AI. זו לא רק למידה - זו כניסה לרשת מקצועית והכנה אמיתית לשוק העבודה.'
+    answer: 'בקורסים אונליין מקבלים תיאוריה, אצלנו מקבלים מעשה. במסלול הפרונטלי תהנו מליווי אישי צמוד של מרצים שעובדים בתחום כל יום.'
   },
   {
     question: 'כמה זה עולה לי בסוף? יש עוד הוצאות מעבר למחיר ההכשרה?',
@@ -403,836 +299,378 @@ const faqs = [
   }
 ];
 
-// FAQPage Schema for SEO
-const faqSchema = {
+// Schema for SEO
+const courseSchema = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
-    "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer
-    }
-  }))
+  "@type": "Course",
+  "name": "Bot-Camp - הכשרת מפתחי סוכני AI",
+  "description": courseInfo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": "Focus AI",
+    "url": "https://focusai.co.il"
+  }
 };
-
-// Combined schemas
-const pageSchemas = [courseSchema, faqSchema];
 ---
 
 <BaseLayout
   title={`${courseInfo.title} | Focus AI Academy`}
   description={courseInfo.description}
-  structuredData={pageSchemas}
+  structuredData={[courseSchema]}
 >
   <Header slot="header" currentPath="/academy/bot-camp" />
 
-  <!-- Fixed Fingerprint Background - Center (follows scroll) -->
-  <div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] opacity-[0.04] pointer-events-none z-0 hidden lg:block">
-    <img
-      src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
-      alt=""
-      class="w-full h-full object-contain"
-    />
-  </div>
+  <!-- Breadcrumb Schema (visually hidden - hero design takes priority) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://focusai.co.il/" },
+      { "@type": "ListItem", "position": 2, "name": "אקדמיה", "item": "https://focusai.co.il/academy/bot-camp" },
+      { "@type": "ListItem", "position": 3, "name": "Bot-Camp" }
+    ]
+  })} />
 
-  <!-- Fixed Chavobot Character - Bottom Right (smaller, behind content) -->
-  <div class="fixed right-0 bottom-0 w-48 md:w-56 lg:w-64 pointer-events-none z-0 hidden md:block opacity-80">
-    <img
-      src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770240148/ec35a0f7-13cc-46c8-8db0-f878cb89c6bd_tdxxpb.png"
-      alt="Chavobot - המדריך הווירטואלי שלנו"
-      class="w-full h-auto drop-shadow-[0_0_30px_rgba(168,85,247,0.3)]"
-      style="margin-bottom: -15px; margin-right: -10px;"
-    />
-  </div>
+  <!-- Hero Section - Light Purple Gradient (starts from top, under the floating header) -->
+  <section class="relative pt-24 md:pt-28 pb-6 md:pb-8 overflow-hidden">
+    <!-- Background gradient - soft purple -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#f5eeff] via-[#efe6ff] to-white"></div>
 
-  <!-- Hero Section - Purple Theme (Flagship) -->
-  <section class="hero-section relative justify-center overflow-hidden bg-[#0a0a0f]" data-section>
-    <!-- Animated grid background -->
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
-
-    <!-- Glow orbs -->
-    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"></div>
-    <div class="absolute bottom-1/4 left-1/3 w-80 h-80 bg-violet-600/15 rounded-full blur-[100px]"></div>
-
-    <!-- Content -->
-    <div class="relative z-10 container text-center">
-      <!-- Partner Logos - Prominent Display -->
-      <div class="flex justify-center items-center gap-8 md:gap-14 mb-3" data-animate="fade-up" data-delay="0.1">
-        <!-- University of Haifa Logo (transparent) -->
+    <div class="container relative z-10 px-4">
+      <!-- Partner Logos - Centered & Larger -->
+      <div class="flex justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-8">
+        <!-- University of Haifa Logo -->
         <img
-          src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770476772/%D7%9C%D7%95%D7%92%D7%95_1_e1pxnh.png"
+          src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770736252/dcbee90c-8237-447f-8e27-d0fa244ebca7_gjb2ys.png"
           alt="אוניברסיטת חיפה - היחידה ללימודי חוץ"
-          class="h-20 md:h-28 lg:h-32 w-auto object-contain"
+          class="h-24 md:h-32 lg:h-40 w-auto object-contain"
         />
 
         <!-- Separator -->
-        <div class="h-16 md:h-24 w-px bg-gradient-to-b from-transparent via-[#a855f7]/50 to-transparent"></div>
+        <div class="h-14 md:h-20 lg:h-24 w-[2px] bg-gradient-to-b from-transparent via-[#a855f7]/50 to-transparent"></div>
 
         <!-- N8N Official Partner Logo -->
-        <img
-          src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770477521/9f8b87b7-f3ca-44c4-a81a-b19e62f820f5_dxsqpl.png"
-          alt="N8N Official Partner"
-          class="h-16 md:h-24 lg:h-28 w-auto object-contain"
-        />
+        <div class="flex flex-col items-center">
+          <img
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770733892/39809fe7-d4d5-40a5-98a6-3b63a366d2a6_phdbq0.png"
+            alt="N8N Official Partner"
+            class="h-16 md:h-24 lg:h-28 w-auto object-contain"
+          />
+          <!-- Official Partner Text - tight under n8n letters -->
+          <span class="-mt-3 md:-mt-4 lg:-mt-5 text-[9px] md:text-[11px] font-medium tracking-[0.15em] uppercase text-[#1a1a2e]/50">
+            official partner
+          </span>
+        </div>
       </div>
 
-      <!-- Terminal Style Text with Typing Effect -->
-      <div class="mb-5 text-sm md:text-base text-[#9090a8]" data-animate="fade-up" data-delay="0.15">
-        <TerminalText
-          client:load
-          texts={[
-            "פרטנרים רשמיים של n8n בישראל",
-            "לימודי תעודה בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה"
-          ]}
-          typingSpeed={40}
-          deletingSpeed={25}
-          pauseDuration={2500}
-        />
+      <!-- Terminal Text Animation -->
+      <div class="flex justify-center mb-6">
+        <div class="inline-flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <TerminalText
+            client:load
+            texts={[
+              "מפתחים את העתיד של הארגון שלך",
+              "בונים סוכני AI חכמים",
+              "אוטומציות שחוסכות שעות עבודה",
+              "מובילים טרנספורמציה דיגיטלית",
+              "יוצרים בוטים מותאמים אישית"
+            ]}
+            className="font-mono text-sm text-[#a855f7]"
+            typingSpeed={60}
+            deletingSpeed={30}
+            pauseDuration={2000}
+          />
+        </div>
       </div>
 
       <!-- Title -->
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-3" data-animate="fade-up" data-delay="0.2">
-        <span class="text-white">הכשרת מפתחי</span>
-        <br />
-        <span class="bg-gradient-to-r from-[#a855f7] via-[#c084fc] to-[#e879f9] bg-clip-text text-transparent">אוטומציות וסוכני AI</span>
-      </h1>
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 text-[#1a1a2e]">
+          הכשרת מפתחי
+        </h1>
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-r from-[#a855f7] to-[#d946ef] bg-clip-text text-transparent">
+          אוטומציות וסוכני AI
+        </h2>
+        <p class="text-lg md:text-xl text-[#4a4a6a] mb-8">
+          בליווי אקדמי של היחידה ללימודי חוץ<br/>באוניברסיטת חיפה
+        </p>
 
-      <p class="text-base md:text-lg text-[#c0c0d0] max-w-2xl mx-auto mb-4 leading-relaxed" data-animate="fade-up" data-delay="0.3">
-        {courseInfo.description}
-      </p>
-
-      <!-- Feature Tags - Two Rows -->
-      <div class="space-y-2 mb-5" data-animate="fade-up" data-delay="0.4">
-        <!-- Row 1 - Main benefits -->
-        <div class="flex flex-wrap justify-center gap-2">
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">תעודה מקצועית</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">תיק עבודות</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">פרוייקט גמר</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">פורטל לימוד</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">סוכני AI ללמידה</span>
-          </div>
+        <!-- Badges -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+          {heroBadges.map((badge) => (
+            <span class="px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-[#4a4a6a] border border-[#e0d4f7] shadow-sm">
+              {badge}
+            </span>
+          ))}
         </div>
-        <!-- Row 2 - Additional features -->
-        <div class="flex flex-wrap justify-center gap-2">
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">הקלטות למפגשים</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">מטלות אינטרקטיביות</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">פרונטלי או Zoom</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">ללא ידע בקוד</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 py-1.5 bg-[#12121a]/80 border border-[#a855f7]/20 rounded-full backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="text-xs text-[#e0e0f0]">הכנה להשמה</span>
-          </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+          <a
+            href="#pricing"
+            class="px-8 py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          >
+            להרשמה למחזור הקרוב
+          </a>
+          <SyllabusGate
+            client:load
+            courseName="Bot-Camp"
+            images={syllabusImages}
+            buttonText="לקבלת הסילבוס"
+            className="px-8 py-4 bg-white border-2 border-[#a855f7] text-[#a855f7] font-bold rounded-full text-lg hover:bg-[#f8f4ff] transition-all"
+          />
         </div>
-      </div>
 
-      <!-- CTA Buttons - Rounded -->
-      <div class="flex flex-wrap justify-center gap-4 mb-4" data-animate="fade-up" data-delay="0.5">
-        <a href="#contact" class="inline-flex items-center gap-2 px-8 py-3.5 bg-[#a855f7] text-white font-bold text-base rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:scale-105">
-          <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-          להרשמה למחזור הקרוב
-        </a>
-        <SyllabusGate
-          client:load
-          courseName="Bot-Camp"
-          images={syllabusImages}
-          buttonText="צפייה בסילבוס"
-          variant="secondary"
-        />
+        <!-- Last spots notice -->
+        <p class="text-center text-[#d946ef] font-medium">
+          נותרו מקומות אחרונים למחזור הקרוב
+        </p>
       </div>
-
-      <!-- Urgency note -->
-      <p class="text-[#ff3366] font-mono text-xs animate-pulse" data-animate="fade-up" data-delay="0.6">
-        נותרו מקומות אחרונים למחזור הקרוב
-      </p>
     </div>
   </section>
 
-  <!-- Target Audience Section - למי מתאימה התוכנית -->
-  <section class="py-24 lg:py-32 bg-[#0a0a0f] relative" data-section>
-    <!-- Background -->
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
-
-    <div class="container relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">TARGET_AUDIENCE</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" data-animate="fade-up" data-delay="0.1">
-          <span class="text-[#9090a8]">למי מתאימה</span>
-          <span class="text-white"> התוכנית</span>
+  <!-- Target Audience Section -->
+  <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
+    <div class="container px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e] mb-4">
+          <span class="text-[#a855f7]">למי מתאימה</span> התוכנית
         </h2>
-        <p class="text-lg text-[#c0c0d0] max-w-2xl mx-auto" data-animate="fade-up" data-delay="0.2">
+        <p class="text-lg text-[#4a4a6a]">
           ההכשרה מיועדת לכל מי שרוצה להיכנס לתחום מבוקש, עם או בלי רקע טכנולוגי
         </p>
       </div>
 
-      <!-- Audience Cards Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="fade-up" data-delay="0.3">
-        {targetAudience.map((audience) => (
-          <div class="group relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden" style="clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
-            <!-- Terminal header -->
-            <div class="flex items-center gap-1.5 px-4 py-2.5 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-              <span class="w-2 h-2 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2 h-2 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {targetAudience.map((item) => (
+          <div class="bg-white rounded-2xl p-6 shadow-lg border border-[#e0d4f7] hover:shadow-xl transition-shadow">
+            <!-- Icon -->
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#f8f4ff] to-[#e0d4f7] flex items-center justify-center mb-4 mx-auto">
+              {item.icon === 'briefcase' && (
+                <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              )}
+              {item.icon === 'chart' && (
+                <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              )}
+              {item.icon === 'academic' && (
+                <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                  <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                </svg>
+              )}
+              {item.icon === 'megaphone' && (
+                <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                </svg>
+              )}
             </div>
-
-            <div class="p-6">
-              <!-- Icon -->
-              <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-[#a855f7]/10 border border-[#a855f7]/30 mb-5 group-hover:bg-[#a855f7]/20 transition-colors">
-                {audience.iconType === 'compass' && (
-                  <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+            <h3 class="text-xl font-bold text-[#1a1a2e] text-center mb-4">{item.title}</h3>
+            <ul class="space-y-2">
+              {item.features.map((feature) => (
+                <li class="flex items-start gap-2 text-sm text-[#4a4a6a]">
+                  <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
-                )}
-                {audience.iconType === 'briefcase' && (
-                  <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                )}
-                {audience.iconType === 'academic' && (
-                  <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                  </svg>
-                )}
-                {audience.iconType === 'megaphone' && (
-                  <svg class="w-7 h-7 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                  </svg>
-                )}
-              </div>
-
-              <!-- Title -->
-              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#a855f7] transition-colors">{audience.title}</h3>
-              <p class="text-sm text-[#a855f7] font-mono mb-4">{audience.subtitle}</p>
-
-              <!-- Features -->
-              <ul class="space-y-2">
-                {audience.features.map((feature) => (
-                  <li class="flex items-start gap-2 text-sm text-[#c0c0d0]">
-                    <svg class="w-4 h-4 text-[#a855f7] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
 
-      <!-- Note -->
-      <div class="mt-12 text-center" data-animate="fade-up" data-delay="0.4">
-        <p class="text-[#b0b0c0] text-sm font-mono">
-          נדרשת שליטה בסיסית בסביבת מחשב בלבד | לא נדרש ניסיון בפיתוח או תכנות
-        </p>
+      <p class="text-center text-[#6a6a8a] mt-8 text-sm">
+        נדרשת שליטה בסיסית בסביבת מחשב בלבד | לא נדרש ניסיון בפיתוח או תכנות
+      </p>
+    </div>
+  </section>
+
+  <!-- Client Logos Grid - Asymmetric with fade -->
+  <section class="py-6 bg-gradient-to-b from-[#f8f4ff] to-white overflow-hidden">
+    <div class="container px-4">
+      <!-- Row 1 - Shifted right with fade -->
+      <div class="relative mb-4 md:mb-6">
+        <!-- Fade left -->
+        <div class="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#f8f4ff] to-transparent z-10 pointer-events-none"></div>
+        <!-- Fade right -->
+        <div class="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#f8f4ff] to-transparent z-10 pointer-events-none"></div>
+
+        <div class="flex justify-center gap-4 md:gap-6 -mr-8 md:-mr-16">
+          {clientLogos.slice(0, 6).map((client) => (
+            <div class="bg-white rounded-xl p-3 md:p-4 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+              <img
+                src={client.logo}
+                alt={client.name}
+                class="max-w-full max-h-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Row 2 - Shifted left with fade -->
+      <div class="relative">
+        <!-- Fade left -->
+        <div class="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#f8f4ff] to-transparent z-10 pointer-events-none"></div>
+        <!-- Fade right -->
+        <div class="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#f8f4ff] to-transparent z-10 pointer-events-none"></div>
+
+        <div class="flex justify-center gap-4 md:gap-6 -ml-8 md:-ml-16">
+          {clientLogos.slice(6, 12).map((client) => (
+            <div class="bg-white rounded-xl p-3 md:p-4 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+              <img
+                src={client.logo}
+                alt={client.name}
+                class="max-w-full max-h-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Course Tracks Section - Zoom vs Frontal -->
-  <section id="tracks" class="py-24 lg:py-32 bg-[#0d0d12] relative" data-section>
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
-
-    <div class="container relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">SELECT_TRACK</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">המסלולים </span>
-          <span class="text-[#a855f7]">שלנו</span>
+  <!-- Video Testimonials -->
+  <section class="py-6 md:py-8 bg-white">
+    <div class="container px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          <span class="text-[#6a6a8a]">מה</span> <span class="text-[#a855f7]">מספרים</span> עלינו?
         </h2>
-        <p class="text-lg text-[#c0c0d0] max-w-2xl mx-auto" data-animate="fade-up" data-delay="0.2">
-          בחרו את המסלול שמתאים לכם - למידה מרחוק או פרונטלית
-        </p>
+      </div>
+      <VideoTestimonialsCarousel />
+    </div>
+  </section>
+
+  <!-- Why Now Section -->
+  <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
+    <div class="container px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          למה <span class="text-[#a855f7]">דווקא</span> עכשיו?
+        </h2>
       </div>
 
-      <!-- Track Cards -->
-      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto pt-6" data-animate="fade-up" data-delay="0.3">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {whyNowReasons.map((reason) => (
+          <div class="bg-white rounded-2xl p-6 shadow-lg border border-[#e0d4f7]">
+            <h3 class="text-xl font-bold text-[#a855f7] mb-3">{reason.title}</h3>
+            <p class="text-[#4a4a6a] text-sm leading-relaxed">{reason.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gartner Quote -->
+  <section class="py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef]">
+    <div class="container px-4 text-center">
+      <p class="text-white text-lg md:text-xl font-medium max-w-3xl mx-auto">
+        "הצפי לשנת 2027: 80% מהאינטראקציות עם לקוחות ינוהלו על ידי סוכני AI"
+      </p>
+      <p class="text-white/70 text-sm mt-2">Gartner</p>
+    </div>
+  </section>
+
+  <!-- Course Tracks / Pricing -->
+  <section id="pricing" class="py-6 md:py-8 bg-gradient-to-b from-[#f8f4ff] to-white">
+    <div class="container px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          <span class="text-[#a855f7]">המסלולים</span> שלנו
+        </h2>
+      </div>
+
+      <!-- Main Tracks - Equal Height Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
         {courseTracks.map((track) => (
-          <div class={`group relative bg-[#12121a] border-2 rounded-2xl transition-all duration-300 overflow-hidden ${track.highlighted ? 'border-[#a855f7] shadow-[0_0_40px_rgba(168,85,247,0.2)]' : 'border-[#2a2a3a] hover:border-[#a855f7]/50'}`}>
-
-            {/* Highlight badge for recommended */}
-            {track.highlighted && (
-              <div class="absolute -top-0 right-8 z-20 px-4 py-1.5 bg-[#a855f7] text-white font-mono text-xs font-bold rounded-b-lg">
-                מחירי השקה
-              </div>
-            )}
-            {!track.highlighted && (
-              <div class="absolute -top-0 right-8 z-20 px-4 py-1.5 bg-[#ff3366] text-white font-mono text-xs font-bold rounded-b-lg">
-                מחירי השקה
-              </div>
-            )}
-
-            {/* Terminal header */}
-            <div class="flex items-center justify-between px-5 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-              </div>
-              <span class="font-mono text-xs text-[#707080]">{track.id}.config</span>
+          <div class={`bg-white rounded-2xl overflow-hidden shadow-lg border-2 flex flex-col ${track.highlighted ? 'border-[#a855f7]' : 'border-[#e0d4f7]'}`}>
+            {/* Header */}
+            <div class={`p-4 text-center ${track.highlighted ? 'bg-gradient-to-r from-[#a855f7] to-[#d946ef]' : 'bg-[#f8f4ff]'}`}>
+              {track.highlighted && (
+                <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white text-xs font-medium mb-2">מומלץ</span>
+              )}
+              <h3 class={`text-xl font-bold ${track.highlighted ? 'text-white' : 'text-[#1a1a2e]'}`}>{track.title}</h3>
+              <p class={`text-sm ${track.highlighted ? 'text-white/80' : 'text-[#6a6a8a]'}`}>{track.subtitle}</p>
             </div>
 
-            <div class="p-8">
-              {/* Title */}
-              <div class="mb-6">
-                <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#a855f7] transition-colors">{track.title}</h3>
-                <p class="text-[#a855f7] font-mono text-sm">{track.subtitle}</p>
-              </div>
+            {/* Next date */}
+            <div class="p-4 border-b border-[#e0d4f7]">
+              <p class={`text-center font-bold ${track.highlighted ? 'text-[#a855f7]' : 'text-[#6a6a8a]'}`}>
+                {track.nextDate}
+              </p>
+              <p class="text-center text-sm text-[#6a6a8a]">{track.nextDay}</p>
+            </div>
 
-              {/* Next cohort */}
-              <div class="mb-6 inline-flex items-center gap-3 px-4 py-2 bg-[#a855f7]/10 border border-[#a855f7]/30">
-                <span class="text-[#c0c0d0] font-mono text-sm">פתיחת המחזור הבא:</span>
-                <span class="text-white font-bold">{courseInfo.nextCohort}</span>
-              </div>
-
-              {/* Features list */}
-              <ul class="space-y-3 mb-8">
+            {/* Features - flex-grow to push button to bottom */}
+            <div class="p-6 flex flex-col flex-grow">
+              <ul class="space-y-3 flex-grow">
                 {track.features.map((feature) => (
-                  <li class="flex items-start gap-3 text-[#c0c0d0] text-sm">
-                    <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  <li class="flex items-start gap-2 text-sm text-[#4a4a6a]">
+                    <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                     </svg>
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* CTA Button - Rounded */}
               <a
-                href="#contact"
-                class={`block w-full py-4 text-center font-bold rounded-full transition-all hover:scale-[1.02] ${track.highlighted ? 'bg-[#a855f7] text-white hover:brightness-110 shadow-[0_0_30px_rgba(168,85,247,0.4)]' : 'border-2 border-[#a855f7] text-[#a855f7] hover:bg-[#a855f7]/10'}`}
+                href="#syllabus-form"
+                class={`block w-full mt-6 py-3 text-center font-bold rounded-full transition-all ${
+                  track.highlighted
+                    ? 'bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white hover:shadow-lg'
+                    : 'border-2 border-[#a855f7] text-[#a855f7] hover:bg-[#f8f4ff]'
+                }`}
               >
-                להרשמה למחזור הקרוב
+                לפרטים והרשמה
               </a>
             </div>
           </div>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- What You Get Section -->
-  <section class="py-24 lg:py-32 bg-[#0a0a0f] relative" data-section>
-    <div class="container">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">BENEFITS</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-[#9090a8]">מה תקבלו</span>
-          <span class="text-[#a855f7]"> בהכשרה?</span>
-        </h2>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-12" data-animate="fade-up" data-delay="0.2">
-        <!-- During Program -->
-        <div>
-          <h3 class="text-xl font-bold text-[#a855f7] mb-6 flex items-center gap-3 font-mono">
-            <span class="w-3 h-3 rounded-full bg-[#a855f7]"></span>
-            במהלך התוכנית
-          </h3>
-          <div class="space-y-4">
-            {duringProgram.map((item) => (
-              <div class="group p-5 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/30 transition-colors" style="clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                <div class="flex items-start gap-4">
-                  <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-[#a855f7]/10 border border-[#a855f7]/30 flex-shrink-0">
-                    {item.iconType === 'folder' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
-                      </svg>
-                    )}
-                    {item.iconType === 'video' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                      </svg>
-                    )}
-                    {item.iconType === 'users' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                      </svg>
-                    )}
-                    {item.iconType === 'switch' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                      </svg>
-                    )}
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-white mb-1 group-hover:text-[#a855f7] transition-colors">{item.title}</h4>
-                    <p class="text-sm text-[#c0c0d0]">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- After Completion -->
-        <div>
-          <h3 class="text-xl font-bold text-[#a855f7] mb-6 flex items-center gap-3 font-mono">
-            <span class="w-3 h-3 rounded-full bg-[#a855f7]"></span>
-            בסיום התוכנית
-          </h3>
-          <div class="space-y-4">
-            {afterCompletion.map((item) => (
-              <div class="group p-5 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/30 transition-colors" style="clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                <div class="flex items-start gap-4">
-                  <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-[#a855f7]/10 border border-[#a855f7]/30 flex-shrink-0">
-                    {item.iconType === 'academic' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                      </svg>
-                    )}
-                    {item.iconType === 'community' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                      </svg>
-                    )}
-                    {item.iconType === 'briefcase' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                      </svg>
-                    )}
-                    {item.iconType === 'calendar' && (
-                      <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                    )}
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-white mb-1 group-hover:text-[#a855f7] transition-colors">{item.title}</h4>
-                    <p class="text-sm text-[#c0c0d0]">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <!-- Learning Portal -->
-      <div class="mt-16 relative bg-[#12121a] border border-[#a855f7]/30 overflow-hidden" style="clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);" data-animate="fade-up" data-delay="0.3">
-        <!-- Terminal header -->
-        <div class="flex items-center justify-between px-5 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-          <div class="flex items-center gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-          </div>
-          <span class="font-mono text-xs text-[#707080]">learning_portal.config</span>
-        </div>
-        <div class="p-8">
-          <h3 class="text-xl font-bold text-white mb-6 text-center">פורטל לימוד מתקדם</h3>
-          <div class="flex flex-wrap justify-center gap-3">
-            {portalFeatures.map((feature) => (
-              <div class="flex items-center gap-2 px-4 py-2 bg-[#a855f7]/10 border border-[#a855f7]/30">
-                <svg class="w-4 h-4 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span class="text-sm text-[#d0d0e0]">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Practical Syllabus Section -->
-  <section class="py-24 lg:py-32 bg-[#0d0d12] relative overflow-hidden" data-section>
-    <div class="container">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">PRACTICAL_FOCUS</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <!-- Content -->
-        <div>
-          <h2 class="text-4xl md:text-5xl font-black mb-6" data-animate="fade-up" data-delay="0.1">
-            <span class="text-white">סילבוס במיקוד</span>
-            <br/>
-            <span class="text-[#a855f7]">יישומי ופרקטי</span>
-          </h2>
-          <p class="text-[#c0c0d0] text-lg mb-6" data-animate="fade-up" data-delay="0.2">
-            נבנה בשיתוף האקדמיה ומבוסס על ניסיון בשטח.
-            נעבוד בעיקר בפלטפורמת n8n, המובילה בפיתוח אוטומציות וסוכני בינה מלאכותית בסביבת Low-Code.
-          </p>
-          <p class="text-sm text-[#b0b0c0] mb-8" data-animate="fade-up" data-delay="0.3">
-            לצד כלים ומודלים מתקדמים (לקבלת הסילבוס המלא השאירו פרטים ויועץ לימודים ייצור עמכם קשר בהקדם).
-          </p>
-
-          <div class="space-y-3 mb-8" data-animate="fade-up" data-delay="0.4">
-            {practicalTopics.map((topic) => (
-              <div class="flex items-center gap-3 p-3 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/30 transition-colors">
-                <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
-                <span class="text-[#c0c0d0]">{topic}</span>
-              </div>
-            ))}
-          </div>
-
-          <!-- Syllabus Button -->
-          <SyllabusGate
-            client:load
-            courseName="Bot-Camp"
-            images={syllabusImages}
-            buttonText="צפייה בסילבוס המלא"
-            variant="primary"
-          />
-        </div>
-
-        <!-- Bot Camp Poster Image -->
-        <div class="relative" data-animate="fade-up" data-delay="0.3">
-          <div class="absolute inset-0 bg-[#a855f7]/20 blur-[100px]"></div>
-          <div class="relative bg-[#12121a] border border-[#a855f7]/30 overflow-hidden" style="clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
-            <!-- Terminal header -->
-            <div class="flex items-center justify-between px-5 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-              </div>
-              <span class="font-mono text-xs text-[#707080]">bot_camp.poster</span>
+      <!-- Past Tracks (Sold Out / Completed) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto" dir="rtl">
+        {pastTracks.map((track) => (
+          <div class="bg-[#f5f5f8] rounded-2xl shadow-sm border border-[#e8e8ec]">
+            {/* Header with badge */}
+            <div class="relative p-4 pb-3 pt-8">
+              <span class="absolute top-4 left-1/2 -translate-x-1/2 inline-block px-4 py-1.5 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white text-xs font-bold rounded-full shadow-lg">
+                המקומות אזלו
+              </span>
+              <h4 class="font-bold text-[#6a6a8a] text-lg mt-4 text-center">{track.title}</h4>
+              <p class="text-sm text-[#9a9aaa] text-center">{track.subtitle}</p>
             </div>
 
-            <!-- Poster content with character image -->
-            <div class="relative">
-              <img
-                src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770417795/0616a06c-820e-4c75-89fd-3f92a1159877_ndhfnn.png"
-                alt="חבובוט - הבוט החכם של Focus AI"
-                class="w-full max-w-[300px] mx-auto h-auto chavobot-fade"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#12121a] via-transparent to-transparent"></div>
+            {/* Date */}
+            <div class="py-3 mx-4 bg-[#e8e8ec] rounded-lg mb-4">
+              <p class="text-center text-sm font-medium text-[#7a7a8a]">{track.dateText}</p>
             </div>
 
-            <div class="p-8 pt-0 text-center">
-              <div class="text-4xl md:text-5xl font-black text-white mb-3">BOT CAMP</div>
-              <div class="text-[#a855f7] font-mono mb-4 text-sm">הכשרת מפתחי סוכני AI ואוטומציות עסקיות</div>
-              <div class="text-2xl font-bold text-white mb-4">72 שעות אקדמיות</div>
-              <div class="flex items-center justify-center gap-4 text-sm text-[#b0b0c0] flex-wrap">
-                <span>המחזור הקרוב: {courseInfo.nextCohort}</span>
-                <span class="hidden sm:inline">|</span>
-                <span>Zoom Live / פרונטלי</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Smart Classroom Section -->
-  <section class="py-24 lg:py-32 bg-[#0d0d12] relative" data-section>
-    <!-- Background glow -->
-    <div class="absolute inset-0">
-      <div class="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
-    </div>
-
-    <!-- Grid pattern -->
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 60px 60px;"></div>
-
-    <div class="container relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">LOCATION</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <!-- Image Side -->
-        <div class="relative" data-animate="fade-up" data-delay="0.1">
-          <div class="relative bg-[#12121a] border border-[#2a2a3a] rounded-2xl overflow-hidden">
-            <!-- Terminal header -->
-            <div class="flex items-center justify-between px-6 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-[#ff3366]"></span>
-                <span class="w-2 h-2 rounded-full bg-[#ffff00]"></span>
-                <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
-              </div>
-              <span class="font-mono text-xs text-[#707080]">classroom.view</span>
-            </div>
-            <img
-              src={classroomImage}
-              alt="כיתת הלימוד בהרצליה פיתוח"
-              class="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-
-          <!-- Decorative elements -->
-          <div class="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-[#a855f7]/30"></div>
-          <div class="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-[#a855f7]/30"></div>
-        </div>
-
-        <!-- Text Content Side -->
-        <div>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight" data-animate="fade-up" data-delay="0.2">
-            <span class="text-white">כיתה חכמה</span>
-            <br />
-            <span class="text-[#a855f7]" style="text-shadow: 0 0 30px rgba(168, 85, 247, 0.5);">בלב הרצליה פיתוח</span>
-          </h2>
-
-          <div class="space-y-4 mb-8" data-animate="stagger" data-delay="0.3">
-            {classroomFeatures.slice(0, 4).map((feature) => (
-              <p class="font-mono text-base text-[#c0c0d0]" data-line>
-                <span class="text-[#a855f7]">&gt;</span> {feature}
-              </p>
-            ))}
-          </div>
-
-          <!-- Info panel -->
-          <div class="p-6 bg-[#a855f7]/5 border border-[#a855f7]/30 rounded-xl" data-animate="fade-up" data-delay="0.4">
-            <div class="flex items-start gap-4">
-              <div class="w-8 h-8 flex items-center justify-center border border-[#a855f7]/50 rounded-lg">
-                <svg class="w-5 h-5 text-[#a855f7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <div>
-                <div class="font-mono text-base font-semibold text-[#a855f7] mb-2">LOCATION: HERZLIYA_PITUACH</div>
-                <p class="text-[#d0d0e0] text-sm">
-                  נגישות לתחבורה ציבורית, חניה בכחול לבן ואפשרות לחניה פרטית לכל תקופת ההכשרה.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Note -->
-          <div class="mt-6 p-4 bg-[#ff3366]/5 border border-[#ff3366]/30 rounded-xl" data-animate="fade-up" data-delay="0.5">
-            <p class="text-sm text-[#c0c0d0]">
-              <span class="text-[#ff3366] font-bold font-mono">NOTE:</span> יש להגיע עם מחשב נייד אישי ומטען. ייתכנו תשלומים נוספים לתוכנות במהלך ההכשרה.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Career Paths Section -->
-  <section class="py-24 lg:py-32 bg-[#0a0a0f] relative" data-section>
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
-
-    <div class="container max-w-4xl relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">CAREER_PATHS</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">מסלולי </span>
-          <span class="text-[#a855f7]">קריירה</span>
-          <span class="text-white"> לבוגרי התוכנית</span>
-        </h2>
-        <p class="text-lg text-[#c0c0d0]" data-animate="fade-up" data-delay="0.2">לאחר סיום התוכנית, הבוגרים יכולים:</p>
-      </div>
-
-      <!-- Career paths list -->
-      <div class="space-y-4" data-animate="fade-up" data-delay="0.3">
-        {careerPaths.map((path) => (
-          <div class="p-5 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/30 transition-colors flex items-start gap-4" style="clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-            <span class="w-3 h-3 rounded-full bg-[#a855f7] mt-1.5 flex-shrink-0"></span>
-            <span class="text-[#c0c0d0]">{path}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Two Content Areas Section -->
-  <section class="py-24 lg:py-32 bg-[#0d0d12] relative" data-section>
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
-
-    <div class="container relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">WHAT_YOU_LEARN</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">שני תחומים, </span>
-          <span class="text-[#a855f7]">תוכנית אחת</span>
-        </h2>
-        <p class="text-lg text-[#c0c0d0] max-w-2xl mx-auto" data-animate="fade-up" data-delay="0.2">
-          ההכשרה משלבת בין בניית סוכני AI לאוטומציות עסקיות
-        </p>
-      </div>
-
-      <!-- Cards grid -->
-      <div class="grid md:grid-cols-2 gap-8" data-animate="fade-up" data-delay="0.3">
-        <!-- AI Agents Card -->
-        <div class="group bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden" style="clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
-          <!-- Terminal header -->
-          <div class="flex items-center justify-between px-5 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-            <div class="flex items-center gap-1.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-            </div>
-            <span class="font-mono text-xs text-[#707080]">[AI_AGENTS]</span>
-          </div>
-          <div class="p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-16 h-16 flex items-center justify-center rounded-lg bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7]">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold text-white group-hover:text-[#a855f7] transition-colors">סוכני AI</h3>
-              </div>
-            </div>
-            <p class="text-[#c0c0d0] leading-relaxed">בניית סוכנים חכמים עם Claude, ChatGPT ו-Gemini. אפיון, פרמפטינג מתקדם וחיבור ל-APIs חיצוניים.</p>
-          </div>
-        </div>
-
-        <!-- Automations Card -->
-        <div class="group bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden" style="clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
-          <!-- Terminal header -->
-          <div class="flex items-center justify-between px-5 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-            <div class="flex items-center gap-1.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-            </div>
-            <span class="font-mono text-xs text-[#707080]">[AUTOMATIONS]</span>
-          </div>
-          <div class="p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-16 h-16 flex items-center justify-center rounded-lg bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7]">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold text-white group-hover:text-[#a855f7] transition-colors">אוטומציות עסקיות</h3>
-              </div>
-            </div>
-            <p class="text-[#c0c0d0] leading-relaxed">שליטה מלאה ב-n8n - הפלטפורמה המובילה לפיתוח אוטומציות. בניית תהליכים אוטומטיים, אינטגרציות CRM וניהול דאטה חכם.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Syllabus Section -->
-  <section id="syllabus" class="py-24 lg:py-32 bg-[#0a0a0f] relative" data-section>
-    <div class="container relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">CURRICULUM</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">סילבוס </span>
-          <span class="text-[#a855f7]">ההכשרה</span>
-        </h2>
-        <p class="text-lg text-[#c0c0d0] max-w-2xl mx-auto" data-animate="fade-up" data-delay="0.2">
-          12 מפגשים, 72 שעות אקדמיות
-        </p>
-      </div>
-
-      <!-- Syllabus grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate="fade-up" data-delay="0.3">
-        {syllabus.map((session) => (
-          <div class="group relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden" style="clip-path: polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);">
-            <!-- Session header -->
-            <div class="flex items-center justify-between px-4 py-2.5 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-              <span class="font-mono font-bold text-[#a855f7]">מפגש {session.session}</span>
-              <span class="font-mono text-xs text-[#707080]">{session.date}</span>
-            </div>
-
-            <div class="p-5">
-              <h3 class="text-lg font-bold text-white group-hover:text-[#a855f7] transition-colors mb-3">{session.title}</h3>
-              <ul class="space-y-2">
-                {session.topics.slice(0, 3).map((topic) => (
-                  <li class="flex items-start gap-2 text-sm text-[#c0c0d0]">
-                    <span class="text-[#a855f7] mt-0.5 font-mono">{">"}</span>
-                    <span class="line-clamp-2">{topic}</span>
+            {/* Features */}
+            <div class="px-4 pb-4">
+              <ul class="space-y-2 mb-4">
+                {track.features.map((f) => (
+                  <li class="flex items-center justify-end gap-2 text-sm text-[#8a8a9a]">
+                    <span>{f}</span>
+                    <svg class="w-4 h-4 text-[#b0b0c0] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
                   </li>
                 ))}
               </ul>
+              <button class="w-full py-3 bg-[#e0e0e5] text-[#9a9aaa] text-sm font-medium rounded-full cursor-not-allowed">
+                {track.buttonText}
+              </button>
             </div>
           </div>
         ))}
@@ -1240,57 +678,76 @@ const pageSchemas = [courseSchema, faqSchema];
     </div>
   </section>
 
-  <!-- Bonus Content Section -->
-  <section class="py-24 lg:py-32 bg-[#0a0a0f] relative" data-section>
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
-
-    <div class="container relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">BONUS_CONTENT</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">הכשרות משלימות </span>
-          <span class="text-[#a855f7]">במתנה</span>
+  <!-- What You Get - Unified Grid -->
+  <section class="py-6 md:py-8 bg-white">
+    <div class="container px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          מה <span class="text-[#a855f7]">תקבלו</span> בהכשרה?
         </h2>
-        <p class="text-lg text-[#c0c0d0] max-w-2xl mx-auto" data-animate="fade-up" data-delay="0.2">
-          מודולים נוספים ללמידה עצמאית
-        </p>
       </div>
 
-      <!-- Bonus grid -->
-      <div class="grid md:grid-cols-3 gap-6" data-animate="fade-up" data-delay="0.3">
-        {bonusContent.map((bonus) => (
-          <div class="group bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden" style="clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
-            <!-- Terminal header -->
-            <div class="flex items-center gap-1.5 px-4 py-2.5 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-              <span class="w-2 h-2 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2 h-2 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
-            </div>
-            <div class="p-6">
-              <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4 text-[#a855f7]">
-                {bonus.iconType === 'telegram' && (
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+        {programBenefits.map((item) => (
+          <div class="group bg-gradient-to-br from-[#f8f4ff] to-white rounded-xl p-5 border border-[#e0d4f7] hover:border-[#a855f7]/40 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <!-- Icon -->
+              <div class="w-10 h-10 rounded-lg bg-[#a855f7]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#a855f7]/20 transition-colors">
+                {item.icon === 'certificate' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                  </svg>
                 )}
-                {bonus.iconType === 'whatsapp' && (
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                {item.icon === 'briefcase' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+                  </svg>
                 )}
-                {bonus.iconType === 'shield' && (
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                {item.icon === 'video' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                )}
+                {item.icon === 'users' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
+                )}
+                {item.icon === 'hybrid' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                  </svg>
+                )}
+                {item.icon === 'notebook' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                  </svg>
+                )}
+                {item.icon === 'tasks' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {item.icon === 'bot' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                  </svg>
+                )}
+                {item.icon === 'community' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                  </svg>
+                )}
+                {item.icon === 'projects' && (
+                  <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
                   </svg>
                 )}
               </div>
-              <h3 class="text-lg font-bold text-white group-hover:text-[#a855f7] transition-colors mb-2">{bonus.title}</h3>
-              <p class="text-sm text-[#c0c0d0] line-clamp-4">{bonus.description}</p>
+              <div>
+                <h4 class="font-bold text-[#1a1a2e] mb-1">{item.title}</h4>
+                <p class="text-sm text-[#4a4a6a] leading-relaxed">{item.description}</p>
+              </div>
             </div>
           </div>
         ))}
@@ -1298,83 +755,189 @@ const pageSchemas = [courseSchema, faqSchema];
     </div>
   </section>
 
-  <!-- Instructors Section -->
-  <section id="team" class="py-24 lg:py-32 bg-[#0d0d12] relative" data-section>
-    <div class="container">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">INSTRUCTORS</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">בין המרצים </span>
-          <span class="text-[#a855f7]">שיפגשו אתכם</span>
+  <!-- Career Paths -->
+  <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
+    <div class="container px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          מסלולי <span class="text-[#a855f7]">קריירה</span> לבוגרי התוכנית
         </h2>
-        <p class="text-lg text-[#c0c0d0] max-w-2xl mx-auto" data-animate="fade-up" data-delay="0.2">
-          2-3 מרצים בכל מפגש - יחס שאין באף מקום אחר
-        </p>
+        <p class="text-[#6a6a8a] mt-3">לאחר סיום התוכנית, הבוגרים יכולים:</p>
       </div>
 
-      <!-- Instructors grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" data-animate="fade-up" data-delay="0.3">
+      <div class="max-w-3xl mx-auto">
+        <ul class="space-y-3">
+          {careerPaths.map((path) => (
+            <li class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm border border-[#e0d4f7]">
+              <img
+                src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+                alt=""
+                class="w-8 h-8 object-contain flex-shrink-0 opacity-60"
+              />
+              <span class="text-[#4a4a6a]">{path}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form - Syllabus Request -->
+  <section id="syllabus-form" class="py-6 md:py-8 bg-white">
+    <div class="container px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          לקבלת הסילבוס <span class="text-[#a855f7]">השאירו פרטים</span>
+        </h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <form id="syllabus-form-element" class="bg-[#f8f4ff] rounded-3xl p-8 shadow-lg">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <input
+              type="text"
+              name="name"
+              placeholder="שם מלא"
+              required
+              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="טלפון"
+              required
+              dir="rtl"
+              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="אימייל"
+              dir="rtl"
+              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
+            />
+          </div>
+
+          <div class="flex items-start gap-3 mb-6 text-sm text-[#6a6a8a]">
+            <input
+              type="checkbox"
+              id="privacy-consent"
+              name="consent"
+              required
+              class="mt-1 w-4 h-4 rounded border-[#e0d4f7] text-[#a855f7] focus:ring-[#a855f7]"
+            />
+            <label for="privacy-consent">
+              קראתי ואני מאשר/ת את <a href="/privacy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a> ואת <a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a>, ואני מסכים/ה לקבל מידע שיווקי באמצעות הפרטים שמסרתי. *
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white font-bold text-lg rounded-full hover:shadow-lg hover:shadow-[#a855f7]/30 transition-all"
+          >
+            לפרטים נוספים והרשמה
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-6 md:py-8 bg-[#f8f4ff]">
+    <div class="container px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          הצוות <span class="text-[#a855f7]">שיפגוש</span> אתכם
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {instructors.map((instructor) => (
-          <div class="text-center group">
-            <div class="relative w-32 h-32 mx-auto mb-4">
-              <div class="absolute inset-0 bg-[#a855f7]/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+            <div class="aspect-[4/3] overflow-hidden">
               <img
                 src={instructor.image}
                 alt={instructor.name}
-                class="relative z-10 w-full h-full object-cover border-2 border-[#a855f7]/50 group-hover:border-[#a855f7] transition-colors"
-                style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+                class="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
-            <h3 class="text-lg font-bold text-white mb-1">{instructor.name}</h3>
-            <div class="text-[#a855f7] font-mono text-xs mb-2">{instructor.role}</div>
-            <p class="text-sm text-[#c0c0d0]">{instructor.shortBio}</p>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-[#1a1a2e] mb-1">{instructor.name}</h3>
+              <p class="text-[#a855f7] font-medium text-sm mb-3">{instructor.role}</p>
+              <p class="text-[#6a6a8a] text-sm leading-relaxed">{instructor.bio}</p>
+            </div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Differentiators -->
+  <section class="py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef]">
+    <div class="container px-4 text-center">
+      <h3 class="text-2xl font-bold text-white mb-2">מה מייחד אותנו?</h3>
+      <p class="text-white/80">
+        חיבור מעשי בין התעשייה לאקדמיה, ושיטות עבודה פרקטיות על בסיס פרויקטים אמיתיים
+      </p>
+    </div>
+  </section>
+
+  <!-- Classroom Section -->
+  <section class="py-6 md:py-8 bg-white">
+    <div class="container px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          כיתה <span class="text-[#a855f7]">חכמה</span> בלב הרצליה פיתוח
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="rounded-2xl overflow-hidden mb-8 shadow-lg">
+          <img
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png"
+            alt="כיתת הלימוד בהרצליה פיתוח"
+            class="w-full"
+          />
+        </div>
+
+        <ul class="space-y-3">
+          {classroomFeatures.map((feature) => (
+            <li class="flex items-start gap-3 text-[#4a4a6a]">
+              <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p class="mt-6 text-sm text-[#6a6a8a] text-center">
+          שימו לב כי יש לב עם מחשב נייד אישי ומטען, וכי ייידרשו התשלומים נוספים לתוכנות איתן נעבוד במהלך ההכשרה
+        </p>
       </div>
     </div>
   </section>
 
   <!-- FAQ Section -->
-  <section id="faq" class="py-24 lg:py-32 bg-[#0d0d12] relative" data-section>
-    <div class="container max-w-4xl">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">FAQ</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-      </div>
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-white">שאלות </span>
-          <span class="text-[#a855f7]">נפוצות</span>
+  <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
+    <div class="container px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          שאלות <span class="text-[#a855f7]">נפוצות</span>
         </h2>
       </div>
 
-      <!-- FAQ items -->
-      <div class="space-y-4" data-animate="fade-up" data-delay="0.2">
-        {faqs.map((faq) => (
-          <details class="group bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/30 transition-colors" style="clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
-              <span class="font-bold text-white group-open:text-[#a855f7] transition-colors pr-4">{faq.question}</span>
-              <svg class="w-5 h-5 text-[#a855f7] transform group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="max-w-3xl mx-auto space-y-4">
+        {faqs.map((faq, index) => (
+          <details class="group bg-white rounded-xl shadow-sm border border-[#e0d4f7] overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-5 bg-gradient-to-r from-[#f8f4ff] to-white hover:from-[#f0e6ff]">
+              <span class="font-bold text-[#1a1a2e] pr-4">{faq.question}</span>
+              <svg class="w-5 h-5 text-[#a855f7] transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </summary>
-            <div class="px-6 pb-6 text-[#c0c0d0] border-t border-[#2a2a3a] pt-4 leading-relaxed">
+            <div class="p-5 pt-0 text-[#4a4a6a]">
               {faq.answer}
             </div>
           </details>
@@ -1383,185 +946,167 @@ const pageSchemas = [courseSchema, faqSchema];
     </div>
   </section>
 
-  <!-- CTA / Contact Section -->
-  <section id="contact" class="py-24 lg:py-32 bg-[#0a0a0f] relative overflow-hidden" data-section>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/10 rounded-full blur-[150px]"></div>
-
-    <div class="container max-w-4xl relative z-10">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-12" data-animate="fade-up">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-sm font-semibold text-[#a855f7] uppercase tracking-[0.2em]">ENROLLMENT</span>
+  <!-- Chavobot + Community Section -->
+  <section class="py-6 md:py-8 bg-[#f8f4ff] relative">
+    <div class="container px-4 pt-32 md:pt-40 relative">
+      <!-- Purple banner with Chavobot emerging from top -->
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Chavobot - above the banner, legs hidden -->
+        <div class="absolute -top-28 md:-top-36 left-1/2 -translate-x-1/2 w-56 md:w-72 z-20">
+          <img
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1770240148/ec35a0f7-13cc-46c8-8db0-f878cb89c6bd_tdxxpb.png"
+            alt="Chavobot"
+            class="w-full"
+            style="clip-path: inset(0 0 30% 0);"
+          />
         </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
       </div>
+    </div>
 
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4" data-animate="fade-up" data-delay="0.1">
-          <span class="text-[#9090a8]">לקבלת הסילבוס</span>
-          <span class="text-white"> השאירו פרטים</span>
-        </h2>
-        <p class="text-xl text-[#c0c0d0]" data-animate="fade-up" data-delay="0.2">
-          מחזור {courseInfo.nextCohort} - מקומות מוגבלים!
+    <div class="container px-4 relative z-10">
+      <div class="bg-gradient-to-r from-[#a855f7] to-[#d946ef] rounded-2xl p-8 text-center text-white max-w-4xl mx-auto">
+        <h3 class="text-2xl md:text-3xl font-bold mb-3">
+          מצטרפים <span class="text-white/90">לקהילה שלנו</span> ברשתות
+        </h3>
+        <p class="text-white/80 mb-6">
+          תוכן בלעדי, עדכוני AI ואוטומציות וטיפים פרקטיים - בחרו את הערוץ שנוח לכם.
         </p>
-      </div>
 
-      <!-- Contact form -->
-      <div class="bg-[#12121a] border border-[#a855f7]/30 overflow-hidden" style="clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);" data-animate="fade-up" data-delay="0.3">
-        <!-- Terminal header -->
-        <div class="flex items-center justify-between px-5 py-3 bg-[#0a0a0f] border-b border-[#2a2a3a]">
-          <div class="flex items-center gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-          </div>
-          <span class="font-mono text-xs text-[#707080]">new_inquiry.form</span>
-        </div>
-
-        <div class="p-8">
-          <form action="https://formsubmit.co/info@focusai.co.il" method="POST" class="space-y-6">
-            <!-- Hidden fields for FormSubmit -->
-            <input type="hidden" name="_subject" value="בקשת הרשמה חדשה - Bot-Camp" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://focusai.co.il/academy/bot-camp?submitted=true" />
-            <input type="hidden" name="course" value="Bot-Camp" />
-
-            <div class="grid md:grid-cols-3 gap-6">
-              <div>
-                <label class="block text-sm font-mono text-[#c0c0d0] mb-2">שם מלא *</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors"
-                  placeholder="שם"
-                />
-              </div>
-              <div>
-                <label class="block text-sm font-mono text-[#c0c0d0] mb-2">טלפון *</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors"
-                  placeholder="טלפון"
-                />
-              </div>
-              <div>
-                <label class="block text-sm font-mono text-[#c0c0d0] mb-2">אימייל *</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors"
-                  placeholder="אימייל"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full py-4 bg-[#a855f7] text-white font-mono font-bold text-lg transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:brightness-110"
-              style="clip-path: polygon(0 6px, 6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px));"
-            >
-              <span class="flex items-center justify-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                שליחה
-              </span>
-            </button>
-
-            <!-- Privacy note -->
-            <p class="text-xs text-[#707080] text-center">
-              קראתי ואני מאשר/ת את מדיניות הפרטיות ואת תנאי השימוש, ואני מסכים/ה לקבל מידע שיווקי באמצעות הפרטים שמסרתי. *
-            </p>
-          </form>
-
-          <!-- Alternative contact -->
-          <div class="mt-8 pt-6 border-t border-[#2a2a3a] flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href={getPhoneLink()} class="inline-flex items-center gap-2 text-[#a855f7] font-mono hover:text-[#c084fc] transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-              </svg>
-              {siteConfig.contact.phone}
-            </a>
-            <a href={`https://wa.me/972${siteConfig.contact.phone.replace(/-/g, '').substring(1)}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] font-mono hover:bg-[#25D366]/20 transition-colors">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              וואטסאפ
-            </a>
-          </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="https://wa.me/972539466408" target="_blank" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-5 py-3 rounded-full transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span class="font-medium">WhatsApp</span>
+          </a>
+          <a href="https://instagram.com/focus.ai.il" target="_blank" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-5 py-3 rounded-full transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span class="font-medium">Instagram</span>
+          </a>
+          <a href="https://tiktok.com/@focus.ai.il" target="_blank" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-5 py-3 rounded-full transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+            </svg>
+            <span class="font-medium">TikTok</span>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Contact Form Section -->
+  <section id="contact" class="py-6 md:py-8 bg-white">
+    <div class="container px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
+          מוכנים לקפיצת <span class="text-[#a855f7]">מדרגה</span> לעולם ה-AI?
+        </h2>
+      </div>
+
+      <div class="max-w-xl mx-auto bg-[#f8f4ff] rounded-2xl p-8 border border-[#e0d4f7]">
+        <form
+          action="https://formsubmit.co/ajax/info@focusai.co.il"
+          method="POST"
+          class="space-y-4"
+          id="contactForm"
+        >
+          <input type="hidden" name="_subject" value="פנייה חדשה מדף Bot-Camp">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="שם מלא"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white placeholder:text-[#9a9aaa]"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="טלפון"
+              required
+              dir="rtl"
+              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-right placeholder:text-[#9a9aaa]"
+            />
+          </div>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="אימייל"
+            required
+            dir="rtl"
+            class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-right placeholder:text-[#9a9aaa]"
+          />
+
+          <div class="flex items-start gap-2">
+            <input type="checkbox" id="privacy" name="privacy" required class="mt-1"/>
+            <label for="privacy" class="text-sm text-[#6a6a8a]">
+              קראתי את מדיניות הפרטיות ואני מאשר/ת לשלוח לי מידע באמצעות הפרטים שמסרתי.
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]"
+          >
+            לפרטים נוספים והרשמה
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <RelatedContent items={[
+    { title: "AI Ready", description: "הכשרה מקיפה ל-8 מפגשים בכלי AI מתקדמים", href: "/academy/ai-ready" },
+    { title: "AI First", description: "צעדים ראשונים בעולם ה-AI ב-5 מפגשים מעשיים", href: "/academy/ai-first" },
+    { title: "כלי AI מומלצים", description: "אוסף הכלים שאנחנו משתמשים ומלמדים", href: "/tools" }
+  ]} />
+
   <Footer slot="footer" />
-
-  <!-- GSAP Animations -->
-  <script>
-    import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Fade up animations
-      gsap.utils.toArray('[data-animate="fade-up"]').forEach((element: any) => {
-        gsap.fromTo(element,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-      });
-    });
-  </script>
-
-  <style>
-    .chavobot-fade {
-      mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        black 8%,
-        black 85%,
-        transparent 100%
-      ),
-      linear-gradient(
-        to right,
-        transparent 0%,
-        black 5%,
-        black 95%,
-        transparent 100%
-      );
-      mask-composite: intersect;
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        black 8%,
-        black 85%,
-        transparent 100%
-      ),
-      linear-gradient(
-        to right,
-        transparent 0%,
-        black 5%,
-        black 95%,
-        transparent 100%
-      );
-      -webkit-mask-composite: source-in;
-      filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.3));
-    }
-  </style>
 </BaseLayout>
+
+<style>
+  /* Custom styles for light theme */
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details summary {
+    list-style: none;
+  }
+
+  /* Override global dark styles for this page */
+  :global(body) {
+    background: white;
+  }
+</style>
+
+<script>
+  // Form submission handler
+  const form = document.getElementById('contactForm');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form as HTMLFormElement);
+
+    try {
+      const response = await fetch((form as HTMLFormElement).action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        alert('תודה! נחזור אליך בהקדם');
+        (form as HTMLFormElement).reset();
+      } else {
+        alert('שגיאה בשליחה, אנא נסה שוב');
+      }
+    } catch {
+      alert('שגיאה בשליחה, אנא נסה שוב');
+    }
+  });
+</script>

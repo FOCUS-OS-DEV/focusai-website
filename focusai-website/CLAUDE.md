@@ -1,7 +1,7 @@
 # Focus AI Website - System Prompt
 
 > This file contains all instructions and context for Claude Code.
-> **Last Updated:** 2026-02-06
+> **Last Updated:** 2026-02-10
 
 ---
 
@@ -121,6 +121,62 @@ focusai-website/
 | Chavobot - Laptop | `v1738167278/Bot_pose_11_-_sitting_on_laptop_wjbzwi.png` |
 
 Base URL: `https://res.cloudinary.com/dfudxxzlj/image/upload/`
+
+---
+
+## Media Optimization (CRITICAL)
+
+### Cloudinary URL Transforms
+
+**ALWAYS add optimization transforms when adding new images/videos to the site!**
+
+| Transform | Purpose |
+|-----------|---------|
+| `q_auto` | Auto quality (reduces file size) |
+| `f_auto` | Auto format (WebP for supporting browsers) |
+| `w_XXX` | Resize width (use display size) |
+
+### Image URL Pattern
+
+```
+https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_WIDTH/vXXXXX/filename.jpg
+```
+
+### Recommended Widths by Use Case
+
+| Use Case | Width |
+|----------|-------|
+| Hero/Full-width | `w_1200` |
+| Classroom/Large | `w_1024` |
+| Chavobot/Mascot | `w_800` |
+| Fingerprint BG | `w_700` |
+| Testimonial screenshots | `w_500` |
+| Founder photos | `w_400` |
+| Gallery thumbnails | `w_200` |
+| Logos | `w_200` |
+| Badges/Small icons | `w_120` |
+
+### Video Poster Pattern
+
+For video thumbnails, extract frame from video:
+```
+https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/vXXXXX/video.jpg
+```
+
+### Preconnect (Already in BaseLayout)
+
+```html
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="dns-prefetch" href="https://res.cloudinary.com">
+```
+
+### Checklist for New Media
+
+- [ ] Compress videos before upload (use HandBrake or similar)
+- [ ] Add `q_auto,f_auto` transforms
+- [ ] Set appropriate `w_` for display size
+- [ ] Use `loading="lazy"` on images below fold
+- [ ] Verify image displays correctly after transforms
 
 ---
 
@@ -303,6 +359,14 @@ const syllabusImages = [
 ---
 
 ## Recent Updates
+
+### 2026-02-10
+- Added Media Optimization section to CLAUDE.md
+- Video testimonials updated to compressed versions
+- Image optimization with Cloudinary transforms (q_auto, f_auto, w_XXX)
+- Added preconnect hints for Cloudinary CDN
+- Client logos grid component (ClientLogosGrid.astro)
+- Carousel navigation dots redesigned (minimal elegant style)
 
 ### 2026-02-07
 - Created Syllabus system (SyllabusGate, SyllabusViewer, SyllabusButton)

@@ -1,234 +1,154 @@
 ---
 /**
- * Services Preview Section - Cyberpunk HUD Design
- * Development & Integration services with terminal aesthetic
+ * Services Preview Section - Apple Glass + Retro-Futuristic Design
+ * Modern glassmorphism with terminal accents
  */
 
 const services = [
   {
-    id: "SRV_001",
+    id: "01",
     title: "נציג AI לעסק",
-    subtitle: "DIGITAL_AGENT",
+    subtitle: "Digital Agent",
     description: "בוט חכם שמבין את הלקוחות שלכם, עונה על שאלות, קובע פגישות ומטפל בכל ההודעות - גם בשלוש בלילה.",
     features: ["WhatsApp", "Instagram", "Facebook", "Website"],
     metric: "90%",
-    metricLabel: "TIME_SAVED",
-    neonColor: "magenta"
+    metricLabel: "חיסכון בזמן",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>`,
+    color: "#ec4899"
   },
   {
-    id: "SRV_002",
+    id: "02",
     title: "אוטומציות חכמות",
-    subtitle: "SMART_AUTOMATION",
+    subtitle: "Smart Automation",
     description: "ליד נכנס? מיד נפתח כרטיס ב-CRM, נשלח מייל, מתואם פולואפ ביומן. הכל אוטומטי.",
     features: ["N8N", "Zapier", "API"],
     metric: "50+",
-    metricLabel: "INTEGRATIONS",
-    neonColor: "cyan"
+    metricLabel: "אינטגרציות",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`,
+    color: "#06b6d4"
   },
   {
-    id: "SRV_003",
+    id: "03",
     title: "סדנאות לארגונים",
-    subtitle: "TEAM_TRAINING",
+    subtitle: "Team Training",
     description: "לא עוד מצגות משעממות. סדנאות מעשיות שבהן העובדים יוצאים עם כלים שהם באמת משתמשים בהם.",
     features: ["ChatGPT", "Claude", "Midjourney", "Automation"],
     metric: "500+",
-    metricLabel: "GRADUATES",
-    neonColor: "green"
+    metricLabel: "בוגרים",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`,
+    color: "#a855f7"
   }
 ];
 
 const processSteps = [
-  { num: "01", code: "DISCOVER", title: "מבינים", desc: "פגישת אפיון עמוקה להבנת הצרכים" },
-  { num: "02", code: "BUILD", title: "בונים", desc: "פיתוח הפתרון המותאם לעסק" },
-  { num: "03", code: "CONNECT", title: "מחברים", desc: "אינטגרציה לכל המערכות הקיימות" },
-  { num: "04", code: "SUPPORT", title: "מלווים", desc: "תמיכה עד שעובד מושלם" },
+  { num: "01", title: "מבינים", desc: "פגישת אפיון עמוקה להבנת הצרכים" },
+  { num: "02", title: "בונים", desc: "פיתוח הפתרון המותאם לעסק" },
+  { num: "03", title: "מחברים", desc: "אינטגרציה לכל המערכות הקיימות" },
+  { num: "04", title: "מלווים", desc: "תמיכה עד שעובד מושלם" },
 ];
-
-const getNeonColor = (color: string) => {
-  const colors: Record<string, string> = {
-    green: '#a855f7',
-    cyan: '#c084fc',
-    magenta: '#e879f9',
-  };
-  return colors[color] || colors.green;
-};
 ---
 
-<section id="services" class="py-24 lg:py-32 relative overflow-hidden bg-[#0a0a0f]" data-section>
-  <!-- Background effects -->
-  <div class="absolute inset-0 section-bg">
-    <div class="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#e879f9]/5 rounded-full blur-[200px]"></div>
-    <div class="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#c084fc]/5 rounded-full blur-[200px]"></div>
+<section id="services" class="services-section bg-[#0a0a0f]" data-section>
+  <!-- Background -->
+  <div class="absolute inset-0">
+    <!-- Gradient orbs -->
+    <div class="orb orb-pink"></div>
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-purple"></div>
+
+    <!-- Fingerprint background - left side -->
+    <img
+      src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+      alt=""
+      aria-hidden="true"
+      class="absolute top-1/2 left-0 w-[500px] lg:w-[700px] h-auto -translate-y-1/2 opacity-[0.08] pointer-events-none select-none"
+    />
   </div>
 
-  <!-- Circuit grid -->
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
-
-  <!-- Scan line effect -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <div class="scan-line absolute w-full h-[2px] bg-gradient-to-r from-transparent via-[#a855f7]/50 to-transparent"></div>
-  </div>
-
-  <div class="container relative z-10">
+  <div class="container relative z-10 px-4 md:px-6">
     <!-- Section Header -->
-    <div class="text-center mb-16 lg:mb-24">
+    <div class="text-center mb-10 md:mb-12">
       <!-- Terminal badge -->
-      <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#e879f9]/30 mb-8" data-animate="fade-up">
-        <span class="w-2 h-2 rounded-full bg-[#e879f9] animate-pulse"></span>
-        <span class="font-mono text-sm font-semibold text-[#e879f9] uppercase tracking-[0.15em]">SERVICES_MODULE</span>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 mb-6">
+        <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+        <span class="text-sm font-medium text-white/70">Services</span>
       </div>
 
-      <h2 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6" data-animate="glitch">
-        <span class="text-[#f5f5fa]">בונים. מחברים.</span>
-        <span class="block mt-2 gradient-text-magenta">מלווים.</span>
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+        <span class="text-white/90">בונים. מחברים.</span>
+        <span class="block mt-2 gradient-text">מלווים.</span>
       </h2>
 
-      <p class="text-xl text-[#b0b0c0] max-w-3xl mx-auto font-mono" data-animate="fade-up" data-delay="0.2">
-        <span class="text-[#e879f9]">></span> לא רק מייעצים - בונים את הפתרון ומוודאים שהוא
-        <span class="text-[#f5f5fa]"> עובד מושלם.</span>
+      <p class="text-lg text-white/50 max-w-2xl mx-auto">
+        לא רק מייעצים - בונים את הפתרון ומוודאים שהוא עובד מושלם.
       </p>
     </div>
 
-    <!-- Services Grid - Bento Style -->
+    <!-- Services Grid -->
     <div class="grid lg:grid-cols-3 gap-6 mb-20">
-      {services.map((service, index) => {
-        const neonHex = getNeonColor(service.neonColor);
-        return (
-          <div
-            class="service-card group relative"
-            style={`--neon-color: ${neonHex};`}
-            data-animate="flip"
-            data-delay={`${index * 0.15}`}
-          >
-            {/* Card */}
-            <div
-              class="relative h-full bg-[#12121a] border border-[#2a2a3a] hover:border-[var(--neon-color)] transition-all duration-300 overflow-hidden rounded-2xl"
-            >
-              {/* Glow effect on hover */}
-              <div
-                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                style={`box-shadow: inset 0 0 60px ${neonHex}20;`}
-              ></div>
+      {services.map((service, index) => (
+        <div
+          class="service-card"
+          style={`--card-color: ${service.color}; --delay: ${index * 0.1}s`}
+        >
+          <div class="card-surface">
+            {/* Metric badge */}
+            <div class="metric-badge">
+              <span class="metric-value">{service.metric}</span>
+              <span class="metric-label">{service.metricLabel}</span>
+            </div>
 
-              {/* Terminal header */}
-              <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
-                <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-                </div>
-                <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">{service.id}</span>
-              </div>
+            {/* Header */}
+            <div class="card-header">
+              <div class="icon-wrapper" set:html={service.icon}></div>
+              <span class="card-id">#{service.id}</span>
+            </div>
 
-              {/* Content */}
-              <div class="p-6 lg:p-8">
-                {/* Header with metric */}
-                <div class="flex items-start justify-between mb-6">
-                  <div>
-                    <span class="font-mono text-sm font-medium uppercase tracking-[0.2em] mb-2 block" style={`color: ${neonHex};`}>
-                      {service.subtitle}
-                    </span>
-                    <h3 class="text-2xl font-bold text-[#f5f5fa] group-hover:text-[var(--neon-color)] transition-colors">
-                      {service.title}
-                    </h3>
-                  </div>
-                  <div class="text-left">
-                    <div class="text-3xl font-black font-mono" style={`color: ${neonHex}; text-shadow: 0 0 20px ${neonHex}50;`}>
-                      {service.metric}
-                    </div>
-                    <div class="text-sm font-medium text-[#b0b0c0] font-mono uppercase tracking-wider">{service.metricLabel}</div>
-                  </div>
-                </div>
+            {/* Content */}
+            <div class="card-content">
+              <span class="card-subtitle">{service.subtitle}</span>
+              <h3 class="card-title">{service.title}</h3>
+              <p class="card-description">{service.description}</p>
 
-                {/* Description */}
-                <p class="text-[#d0d0e0] leading-relaxed mb-6 text-sm">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <div class="flex flex-wrap gap-2 mb-6">
-                  {service.features.map((feature) => (
-                    <span
-                      class="px-3 py-1.5 text-sm font-medium font-mono uppercase tracking-wider border rounded-full transition-all duration-300"
-                      style={`border-color: ${neonHex}30; color: ${neonHex};`}
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTA Link */}
-                <a
-                  href="#contact"
-                  class="inline-flex items-center gap-2 font-mono text-[11px] md:text-xs uppercase tracking-wider transition-all duration-300 group/link"
-                  style={`color: ${neonHex};`}
-                >
-                  <span class="w-1.5 h-1.5 rounded-full transition-colors" style={`background-color: ${neonHex};`}></span>
-                  <span>ACCESS_DETAILS</span>
-                </a>
+              {/* Features */}
+              <div class="features-row">
+                {service.features.map((feature) => (
+                  <span class="feature-tag">{feature}</span>
+                ))}
               </div>
             </div>
+
+            {/* CTA */}
+            <a href="#contact" class="card-cta">
+              <span>לפרטים נוספים</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
 
-    <!-- Process Timeline - Terminal Style -->
-    <div class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl">
-      <!-- Glow effects -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>
-
-      <!-- Horizontal lines -->
-      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#a855f7]/30 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#a855f7]/30 to-transparent"></div>
-
-      {/* Terminal header */}
-      <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-        </div>
-        <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">PROCESS_PROTOCOL</span>
-      </div>
-
-      <div class="relative z-10 p-8 lg:p-16">
-        <div class="text-center mb-12">
-          <h3 class="text-3xl lg:text-4xl font-black text-[#f5f5fa] mb-4">
-            <span class="font-mono text-[#a855f7]">$</span> 4 שלבים - ואתם
-            <span class="gradient-text-glow"> באוויר</span>
+    <!-- Process Section -->
+    <div class="process-section">
+      <div class="process-glass">
+        <div class="process-header">
+          <h3 class="process-title">
+            4 שלבים - ואתם <span class="gradient-text">באוויר</span>
           </h3>
-          <p class="text-[#b0b0c0] max-w-xl mx-auto font-mono text-sm">
-            // תהליך מוכח שמביא תוצאות תוך 30 יום
-          </p>
+          <p class="process-subtitle">תהליך מוכח שמביא תוצאות תוך 30 יום</p>
         </div>
 
-        <!-- Steps -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="process-grid">
           {processSteps.map((step, index) => (
-            <div class="process-step relative group" style={`animation-delay: ${index * 0.1}s`}>
-              {/* Connector line */}
-              {index < 3 && (
-                <div class="hidden lg:block absolute top-1/2 left-full w-full h-px">
-                  <div class="w-full h-full bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
-                </div>
-              )}
+            <div class="process-step" style={`--delay: ${index * 0.1}s`}>
+              <div class="step-number">{step.num}</div>
+              <h4 class="step-title">{step.title}</h4>
+              <p class="step-desc">{step.desc}</p>
 
-              <div class="relative text-center p-6 bg-[#0a0a0f] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl">
-                {/* Step number */}
-                <div class="font-mono text-6xl font-black text-[#1c1c2e] group-hover:text-[#a855f7]/10 transition-colors absolute top-2 right-4">
-                  {step.num}
-                </div>
-
-                {/* Code badge */}
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-                  <span class="font-mono text-sm font-medium text-[#a855f7] uppercase tracking-wider">{step.code}</span>
-                </div>
-
-                <h4 class="text-xl font-bold text-[#f5f5fa] mb-2">{step.title}</h4>
-                <p class="text-[#b0b0c0] text-sm font-mono">{step.desc}</p>
-              </div>
+              {/* Connector */}
+              {index < 3 && <div class="step-connector"></div>}
             </div>
           ))}
         </div>
@@ -236,78 +156,395 @@ const getNeonColor = (color: string) => {
     </div>
 
     <!-- CTA Section -->
-    <div class="text-center mt-16">
-      <div class="inline-flex flex-col sm:flex-row gap-4">
-        <a
-          href="#contact"
-          class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)] hover:brightness-110 transition-all duration-300 rounded-full"
-        >
-          <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
-          לשיחת אפיון בחינם
-        </a>
-
-        <a
-          href="https://wa.me/972539466408"
-          class="inline-flex items-center justify-center gap-3 px-10 py-5 border border-[#a855f7]/30 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 rounded-full"
-        >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          WhatsApp
-        </a>
-      </div>
+    <div class="cta-section">
+      <a href="#contact" class="cta-primary">
+        <span>לשיחת אפיון בחינם</span>
+      </a>
+      <a href="https://wa.me/972539466408" target="_blank" class="cta-whatsapp">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>WhatsApp</span>
+      </a>
     </div>
   </div>
 </section>
 
 <style>
+  .services-section {
+    position: relative;
+    padding: 3rem 0 4rem;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .services-section {
+      padding: 4rem 0 5rem;
+    }
+  }
+
+  /* Gradient orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+  }
+
+  .orb-pink {
+    width: 500px;
+    height: 500px;
+    top: 0;
+    left: -100px;
+    background: rgba(236, 72, 153, 0.15);
+  }
+
+  .orb-cyan {
+    width: 400px;
+    height: 400px;
+    bottom: 20%;
+    right: -100px;
+    background: rgba(6, 182, 212, 0.12);
+  }
+
+  .orb-purple {
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(168, 85, 247, 0.08);
+  }
+
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #a855f7, #c084fc, #e879f9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Service Cards */
   .service-card {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.6s ease forwards;
+    animation: cardAppear 0.6s ease-out var(--delay) both;
   }
 
-  .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 40px var(--neon-color, rgba(168, 85, 247, 0.3));
-  }
-
-  .process-step {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
-  }
-
-  @keyframes fadeInUp {
+  @keyframes cardAppear {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  .gradient-text-glow {
-    background: linear-gradient(90deg, #a855f7, #c084fc);
+  .card-surface {
+    position: relative;
+    height: 100%;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card:hover .card-surface {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+  }
+
+  .metric-badge {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    text-align: center;
+  }
+
+  .metric-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--card-color);
+  }
+
+  .metric-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-wrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: var(--card-color);
+  }
+
+  .card-id {
+    font-family: monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .card-content {
+    flex-grow: 1;
+  }
+
+  .card-subtitle {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--card-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+  }
+
+  .features-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-tag {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--card-color);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s;
+  }
+
+  .card-cta:hover {
+    color: white;
+  }
+
+  .card-cta svg {
+    transition: transform 0.3s;
+  }
+
+  .card-cta:hover svg {
+    transform: translateX(-4px);
+  }
+
+  /* Process Section */
+  .process-section {
+    margin-bottom: 4rem;
+  }
+
+  .process-glass {
+    position: relative;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(255,255,255,0.03) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .process-glass {
+      padding: 4rem;
+    }
+  }
+
+  .process-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .process-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .process-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  .process-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .process-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .process-step {
+    position: relative;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    animation: stepAppear 0.5s ease-out var(--delay) both;
+  }
+
+  @keyframes stepAppear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .step-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #a855f7, #c084fc);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+    color: transparent;
+    margin-bottom: 0.5rem;
   }
 
-  .gradient-text-magenta {
-    background: linear-gradient(90deg, #e879f9, #c084fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 20px rgba(232, 121, 249, 0.5));
+  .step-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
   }
 
-  /* Scan line animation */
-  .scan-line {
-    animation: scanMove 4s linear infinite;
+  .step-desc {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
   }
 
-  @keyframes scanMove {
-    0% { top: -2px; }
-    100% { top: 100%; }
+  .step-connector {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .step-connector {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: -1.5rem;
+      width: 1.5rem;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(168,85,247,0.5), transparent);
+    }
+  }
+
+  /* CTA Section */
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .cta-section {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 36px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #a855f7, #9333ea);
+    border-radius: 14px;
+    box-shadow: 0 8px 32px -8px rgba(168, 85, 247, 0.5);
+    transition: all 0.3s;
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px -8px rgba(168, 85, 247, 0.6);
+  }
+
+  .cta-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 36px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #25D366;
+    background: rgba(37, 211, 102, 0.1);
+    border: 1px solid rgba(37, 211, 102, 0.3);
+    border-radius: 14px;
+    transition: all 0.3s;
+  }
+
+  .cta-whatsapp:hover {
+    background: rgba(37, 211, 102, 0.2);
   }
 </style>

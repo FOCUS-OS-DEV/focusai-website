@@ -1,1 +1,0 @@
-import{g as r,S as t}from"./ScrollTrigger.C0eCJjti.js";r.registerPlugin(t);document.addEventListener("DOMContentLoaded",()=>{r.utils.toArray('[data-animate="fade-up"]').forEach(o=>{r.fromTo(o,{opacity:0,y:40},{opacity:1,y:0,duration:.6,ease:"power2.out",scrollTrigger:{trigger:o,start:"top 85%",toggleActions:"play none none reverse"}})})});

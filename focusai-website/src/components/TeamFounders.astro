@@ -15,19 +15,24 @@ const displayFounders = founders.map((f, i) => ({
 const values = companyValues;
 ---
 
-<section id="team" class="py-24 lg:py-32 relative overflow-hidden bg-[#0a0a0f]" data-section>
+<section id="team" class="py-12 md:py-16 relative overflow-hidden bg-[#0a0a0f]" data-section>
   <!-- Background effects -->
   <div class="absolute inset-0 section-bg">
     <div class="absolute top-0 right-0 w-96 h-96 bg-[#c084fc]/5 rounded-full blur-[200px]"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
+    <!-- Fingerprint background - left side -->
+    <img
+      src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+      alt=""
+      aria-hidden="true"
+      class="absolute top-1/2 left-0 w-[500px] lg:w-[700px] h-auto -translate-y-1/2 opacity-[0.08] pointer-events-none select-none"
+    />
   </div>
 
-  <!-- Circuit grid -->
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(192, 132, 252, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(192, 132, 252, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
 
   <div class="container relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16 lg:mb-20">
+    <div class="text-center mb-10 md:mb-12">
       <!-- Terminal badge -->
       <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#c084fc]/30 mb-8" data-animate="fade-up">
         <span class="w-2 h-2 rounded-full bg-[#c084fc] animate-pulse"></span>
@@ -46,7 +51,7 @@ const values = companyValues;
     </div>
 
     <!-- Founders Cards -->
-    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto mb-20">
+    <div class="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto mb-10 md:mb-12">
       {displayFounders.map((founder, index) => (
         <div
           class="founder-card group relative"
@@ -143,7 +148,7 @@ const values = companyValues;
     </div>
 
     <!-- Values Grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16" data-animate="stagger">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-10 md:mb-12" data-animate="stagger">
       {values.map((value, i) => (
         <div
           class="value-card group text-center p-6 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl"

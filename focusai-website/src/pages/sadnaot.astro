@@ -176,9 +176,9 @@ const galleryImages = [
   <Header slot="header" currentPath="/sadnaot" />
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-    <!-- Background Effects -->
-    <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+  <section class="relative min-h-screen flex items-center pt-20 md:pt-24 pb-12 md:pb-16 overflow-hidden bg-[#0a0a0f]">
+    <!-- Background Effects - Hidden on mobile for performance -->
+    <div class="absolute inset-0 z-0 pointer-events-none hidden md:block" aria-hidden="true">
       <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px]"></div>
       <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[100px]"></div>
       <!-- Grid pattern -->
@@ -187,48 +187,50 @@ const galleryImages = [
 
     <div class="container mx-auto px-4 relative z-10 max-w-7xl">
       <div class="flex flex-col items-center text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2.5 bg-[#12121a]/80 border border-[#a855f7]/30 rounded-full backdrop-blur-sm mb-6 md:mb-8">
+          <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-[10px] md:text-xs text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">B2B_TRAINING</span>
+        </div>
+
         <!-- Headline -->
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 font-display">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 md:mb-6 font-display">
           <span class="block text-white mb-2">הפכו את הארגון</span>
           <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">למעצמת AI</span>
         </h1>
 
         <!-- Subheadline -->
-        <p class="text-lg md:text-xl text-[#d0d0e0] max-w-2xl mb-10 leading-relaxed">
+        <p class="text-base md:text-lg lg:text-xl text-[#d0d0e0] max-w-2xl mb-6 md:mb-10 leading-relaxed px-2">
           אנחנו מגשרים על הפער בין אנשים לטכנולוגיה, ומטמיעים בינה מלאכותית בארגון שלכם
           <span class="text-white font-medium">בצורה חכמה, מעשית ואנושית.</span>
         </p>
 
-        <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row gap-4">
+        <!-- CTAs - Rounded buttons like bot-camp -->
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 px-4">
           <a
             href="#contact"
-            class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
-            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            class="inline-flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-4 min-h-[48px] bg-[#a855f7] text-[#0a0a0f] font-bold text-sm md:text-base rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:scale-105"
           >
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
-              לשיחת אפיון ללא עלות
-            </span>
+            <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+            לשיחת אפיון ללא עלות
           </a>
           <a
             href="#process"
-            class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300"
-            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            class="inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-4 min-h-[48px] border-2 border-[#a855f7]/50 text-[#a855f7] font-bold text-sm md:text-base rounded-full hover:bg-[#a855f7]/10 transition-all duration-300"
           >
             איך זה עובד?
           </a>
         </div>
 
         <!-- Client Logos Marquee -->
-        <div class="mt-20 w-full">
-          <p class="text-sm font-mono text-[#b0b0c0] mb-8 uppercase tracking-wider">[TRUSTED_BY] חלק מהלקוחות שסומכים עלינו</p>
+        <div class="mt-12 md:mt-20 w-full">
+          <p class="text-xs md:text-sm font-mono text-[#b0b0c0] mb-6 md:mb-8 uppercase tracking-wider">[TRUSTED_BY] חלק מהלקוחות שסומכים עלינו</p>
 
           <div class="relative overflow-hidden" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
-            <div class="flex gap-6 animate-marquee">
+            <div class="flex gap-4 md:gap-6 animate-marquee">
               {[...clients, ...clients].map((logo) => (
-                <div class="flex-shrink-0 w-24 h-24 bg-white rounded-xl p-3 flex items-center justify-center">
-                  <img src={logo} alt="לקוח" class="max-h-16 max-w-full object-contain" loading="lazy" />
+                <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 bg-white rounded-lg md:rounded-xl p-2 md:p-3 flex items-center justify-center">
+                  <img src={logo} alt="לקוח" class="max-h-10 md:max-h-16 max-w-full object-contain" loading="lazy" />
                 </div>
               ))}
             </div>
@@ -239,14 +241,9 @@ const galleryImages = [
   </section>
 
   <!-- Quick Contact Section -->
-  <section id="contact" class="relative py-20 bg-[#0d0d12]">
+  <section id="contact" class="relative py-12 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
-        <!-- Decorative corners -->
-        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]"></div>
+      <div class="relative p-8 md:p-12 border border-[#a855f7]/30 bg-[#12121a] rounded-2xl">
 
         <header class="text-center mb-10">
           <p class="font-mono text-[#a855f7] text-sm mb-2">[CONTACT_FORM]</p>
@@ -335,23 +332,32 @@ const galleryImages = [
   </section>
 
   <!-- Audience Section -->
-  <section id="audience" class="relative py-20 lg:py-32">
+  <section id="audience" class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4">[TARGET_AUDIENCE]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          למי הסדנאות <span class="text-[#a855f7]">מתאימות?</span>
+      <!-- Section Badge - Right aligned with line -->
+      <div class="flex items-center gap-4 mb-8 md:mb-12">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">TARGET_AUDIENCE</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+      </div>
+
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
+          <span class="text-[#9090a8]">למי הסדנאות</span>
+          <span class="text-[#f5f5fa]"> מתאימות?</span>
         </h2>
-        <p class="text-[#d0d0e0] text-lg">
+        <p class="text-sm md:text-base lg:text-lg text-[#d0d0e0]">
           אנחנו מתאימים את ההכשרה לכל רמה טכנולוגית, מאנשים שמעולם לא נגעו ב-AI ועד צוותי פיתוח מתקדמים.
         </p>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {audiences.map((audience) => (
-          <article class="group relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300 hover:-translate-y-2">
-            <div class="absolute top-4 left-4 font-mono text-[11px] md:text-xs text-[#b0b0c0]">[{audience.code}]</div>
-            <div class="w-12 h-12 bg-[#a855f7]/10 border border-[#a855f7]/30 flex items-center justify-center mb-4 group-hover:bg-[#a855f7]/20 transition-colors">
+          <article class="group relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 overflow-hidden rounded-2xl">
+            <div class="p-4 md:p-6">
+            <div class="w-10 md:w-12 h-10 md:h-12 bg-[#a855f7]/10 border border-[#a855f7]/30 flex items-center justify-center mb-4 rounded-xl group-hover:bg-[#a855f7]/20 transition-colors">
               {audience.icon === 'briefcase' && (
                 <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
@@ -383,8 +389,9 @@ const galleryImages = [
                 </svg>
               )}
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">{audience.title}</h3>
-            <p class="text-[#d0d0e0] leading-relaxed">{audience.description}</p>
+            <h3 class="text-base md:text-lg lg:text-xl font-bold text-white mb-2 group-hover:text-[#a855f7] transition-colors">{audience.title}</h3>
+            <p class="text-xs md:text-sm text-[#d0d0e0] leading-relaxed">{audience.description}</p>
+            </div>
           </article>
         ))}
       </div>
@@ -392,23 +399,32 @@ const galleryImages = [
   </section>
 
   <!-- Topics Section -->
-  <section id="topics" class="relative py-20 lg:py-32 bg-[#0d0d12]">
+  <section id="topics" class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4">[SYLLABUS]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          מה <span class="text-[#a855f7]">נלמד?</span>
+      <!-- Section Badge - Right aligned with line -->
+      <div class="flex items-center gap-4 mb-8 md:mb-12">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">SYLLABUS</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+      </div>
+
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
+          <span class="text-[#9090a8]">מה</span>
+          <span class="text-[#f5f5fa]"> נלמד?</span>
         </h2>
-        <p class="text-[#d0d0e0] text-lg">
+        <p class="text-sm md:text-base lg:text-lg text-[#d0d0e0]">
           הסדנאות מותאמות לצרכים שלכם. הנה כמה מהנושאים שאנחנו מכסים:
         </p>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {topics.map((topic, index) => (
-          <div class="group p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-8 h-8 flex items-center justify-center">
+          <div class="group p-4 md:p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl">
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div class="w-6 md:w-8 h-6 md:h-8 flex items-center justify-center">
                 {topic.icon === 'target' && (
                   <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0l-3-3m3 3l3-3m-8.25 6a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
@@ -450,10 +466,10 @@ const galleryImages = [
                   </svg>
                 )}
               </div>
-              <span class="font-mono text-[11px] md:text-xs text-[#b0b0c0]">[0{index + 1}]</span>
+              <span class="font-mono text-[10px] md:text-xs text-[#b0b0c0]">[0{index + 1}]</span>
             </div>
-            <h3 class="text-lg font-bold text-white mb-2">{topic.title}</h3>
-            <p class="text-sm text-[#d0d0e0]">{topic.description}</p>
+            <h3 class="text-sm md:text-base lg:text-lg font-bold text-white mb-2 group-hover:text-[#a855f7] transition-colors">{topic.title}</h3>
+            <p class="text-xs md:text-sm text-[#d0d0e0]">{topic.description}</p>
           </div>
         ))}
       </div>
@@ -461,25 +477,34 @@ const galleryImages = [
   </section>
 
   <!-- Process Section -->
-  <section id="process" class="relative py-20 lg:py-32">
+  <section id="process" class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4">[PROCESS]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          איך זה <span class="text-[#a855f7]">עובד?</span>
+      <!-- Section Badge - Right aligned with line -->
+      <div class="flex items-center gap-4 mb-8 md:mb-12">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">PROCESS</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+      </div>
+
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6">
+          <span class="text-[#9090a8]">איך זה</span>
+          <span class="text-[#f5f5fa]"> עובד?</span>
         </h2>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
         {processSteps.map((step) => (
-          <div class="relative">
+          <div class="relative text-center md:text-right">
             <!-- Step number -->
-            <div class="w-16 h-16 bg-[#a855f7] text-[#0a0a0f] font-mono font-black text-2xl flex items-center justify-center mb-6" style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));">
+            <div class="w-12 md:w-16 h-12 md:h-16 mx-auto md:mx-0 bg-[#a855f7] text-[#0a0a0f] font-mono font-black text-lg md:text-2xl flex items-center justify-center mb-4 md:mb-6 rounded-xl">
               {step.step}
             </div>
-            <p class="font-mono text-[11px] md:text-xs text-[#b0b0c0] mb-2">[{step.code}]</p>
-            <h3 class="text-xl font-bold text-white mb-3">{step.title}</h3>
-            <p class="text-[#d0d0e0]">{step.description}</p>
+            <p class="font-mono text-[10px] md:text-xs text-[#b0b0c0] mb-1 md:mb-2">[{step.code}]</p>
+            <h3 class="text-sm md:text-lg lg:text-xl font-bold text-white mb-2 md:mb-3">{step.title}</h3>
+            <p class="text-xs md:text-sm text-[#d0d0e0]">{step.description}</p>
           </div>
         ))}
       </div>
@@ -487,37 +512,45 @@ const galleryImages = [
   </section>
 
   <!-- Team Section -->
-  <section id="team" class="relative py-20 lg:py-32 bg-[#0d0d12]">
+  <section id="team" class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4">[TEAM]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          הצוות <span class="text-[#a855f7]">שלנו</span>
+      <!-- Section Badge - Right aligned with line -->
+      <div class="flex items-center gap-4 mb-8 md:mb-12">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">TEAM</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+      </div>
+
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
+          <span class="text-[#9090a8]">הצוות</span>
+          <span class="text-[#f5f5fa]"> שלנו</span>
         </h2>
-        <p class="text-[#d0d0e0] text-lg">
+        <p class="text-sm md:text-base lg:text-lg text-[#d0d0e0]">
           למדו מאנשי מקצוע עם ניסיון אמיתי בהטמעת AI בארגונים
         </p>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto">
         {team.map((member) => (
           <div class="text-center group">
-            <div class="relative w-48 h-48 mx-auto mb-6">
-              <div class="absolute inset-0 bg-[#a855f7]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-4 md:mb-6">
+              <div class="absolute inset-0 bg-[#a855f7]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"></div>
               <img
                 src={member.image}
                 alt={member.name}
-                class="relative w-full h-full object-cover border-2 border-[#2a2a3a] group-hover:border-[#a855f7] transition-colors"
-                style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));"
+                class="relative w-full h-full object-cover border-2 border-[#2a2a3a] group-hover:border-[#a855f7] transition-colors rounded-xl"
               />
             </div>
-            <h3 class="text-xl font-bold text-white mb-1">{member.name}</h3>
-            <p class="font-mono text-[#a855f7] text-sm mb-2">{member.title}</p>
-            <p class="text-[#d0d0e0] text-sm">{member.bio}</p>
+            <h3 class="text-lg md:text-xl font-bold text-white mb-1">{member.name}</h3>
+            <p class="font-mono text-[#a855f7] text-xs md:text-sm mb-2">{member.title}</p>
+            <p class="text-[#d0d0e0] text-xs md:text-sm px-2">{member.bio}</p>
             {/* Credentials */}
-            <div class="flex flex-wrap justify-center gap-2 mt-4">
+            <div class="flex flex-wrap justify-center gap-1.5 md:gap-2 mt-3 md:mt-4">
               {member.credentials.map((cred) => (
-                <span class="px-2 py-1 text-[11px] md:text-xs font-mono text-[#a855f7] border border-[#a855f7]/30 bg-[#a855f7]/5">
+                <span class="px-2 py-1 text-[10px] md:text-xs font-mono text-[#a855f7] border border-[#a855f7]/30 bg-[#a855f7]/5 rounded-full">
                   {cred}
                 </span>
               ))}
@@ -529,25 +562,34 @@ const galleryImages = [
   </section>
 
   <!-- Testimonials Section -->
-  <section id="testimonials" class="relative py-20 lg:py-32">
+  <section id="testimonials" class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4">[TESTIMONIALS]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          מה <span class="text-[#a855f7]">אומרים עלינו</span>
+      <!-- Section Badge - Right aligned with line -->
+      <div class="flex items-center gap-4 mb-8 md:mb-12">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">TESTIMONIALS</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+      </div>
+
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6">
+          <span class="text-[#9090a8]">מה</span>
+          <span class="text-[#f5f5fa]"> אומרים עלינו</span>
         </h2>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {testimonials.map((testimonial) => (
-          <blockquote class="relative p-8 border border-[#2a2a3a] bg-[#12121a]">
-            <div class="absolute top-4 right-4 text-[#a855f7]/20 text-6xl font-serif">"</div>
-            <p class="text-white text-lg mb-6 relative z-10">"{testimonial.quote}"</p>
+          <blockquote class="relative p-5 md:p-8 border border-[#2a2a3a] bg-[#12121a] rounded-xl">
+            <div class="absolute top-4 right-4 text-[#a855f7]/20 text-4xl md:text-6xl font-serif">"</div>
+            <p class="text-white text-sm md:text-base lg:text-lg mb-4 md:mb-6 relative z-10">"{testimonial.quote}"</p>
             <footer>
               <cite class="not-italic">
-                <span class="block text-white font-bold">{testimonial.author}</span>
-                <span class="text-[#a855f7] font-mono text-sm">{testimonial.role}</span>
-                <span class="block text-[#b0b0c0] text-sm">{testimonial.company}</span>
+                <span class="block text-white font-bold text-sm md:text-base">{testimonial.author}</span>
+                <span class="text-[#a855f7] font-mono text-xs md:text-sm">{testimonial.role}</span>
+                <span class="block text-[#b0b0c0] text-xs md:text-sm">{testimonial.company}</span>
               </cite>
             </footer>
           </blockquote>
@@ -557,18 +599,27 @@ const galleryImages = [
   </section>
 
   <!-- Gallery Section -->
-  <section id="gallery" class="relative py-20 lg:py-32 bg-[#0d0d12]">
+  <section id="gallery" class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4">[GALLERY]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          מהסדנאות <span class="text-[#a855f7]">שלנו</span>
+      <!-- Section Badge - Right aligned with line -->
+      <div class="flex items-center gap-4 mb-8 md:mb-12">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">GALLERY</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#a855f7]/50 to-transparent"></div>
+      </div>
+
+      <header class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6">
+          <span class="text-[#9090a8]">מהסדנאות</span>
+          <span class="text-[#f5f5fa]"> שלנו</span>
         </h2>
       </header>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {galleryImages.map((image) => (
-          <div class="aspect-[4/3] overflow-hidden border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-colors">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+        {galleryImages.map((image, index) => (
+          <div class="aspect-[4/3] overflow-hidden border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-colors rounded-lg md:rounded-xl">
             <img
               src={image}
               alt="מהסדנאות שלנו"
@@ -577,24 +628,88 @@ const galleryImages = [
             />
           </div>
         ))}
+        <!-- Chavobot Feature Card -->
+        <div class="aspect-[4/3] overflow-hidden border border-[#a855f7]/30 bg-gradient-to-br from-[#12121a] to-[#1a1a2e] rounded-lg md:rounded-xl flex items-center justify-center p-4">
+          <img
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/w_300,q_auto/v1770566337/ab864303-4e97-4225-b228-047e8f7b393e_de860v.png"
+            alt="Chavobot מצביע על מסך"
+            class="max-h-full max-w-full object-contain"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Community Section -->
+  <section class="py-10 md:py-12 relative overflow-hidden bg-[#0a0a0f]">
+    <div class="container relative z-10 max-w-5xl mx-auto px-4">
+      <div class="relative bg-gradient-to-br from-[#12121a] to-[#1a1a2e] border border-[#a855f7]/30 rounded-2xl overflow-hidden p-6 md:p-10 lg:p-12">
+        <!-- Background glow -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-[#a855f7]/10 rounded-full blur-[100px]"></div>
+
+        <div class="relative flex flex-col md:flex-row items-center gap-6 md:gap-10">
+          <!-- Mascot Image -->
+          <div class="flex-shrink-0">
+            <img
+              src="https://res.cloudinary.com/dfudxxzlj/image/upload/w_200,q_auto/v1770388356/0e214975-5aab-422d-a865-afb04e3179b7_pjtmso.png"
+              alt="Chavobot עם קהילה"
+              class="w-32 md:w-40 lg:w-48 h-auto"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="text-center md:text-right flex-1">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#25D366]/10 border border-[#25D366]/30 rounded-full mb-4">
+              <svg class="w-4 h-4 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span class="text-xs font-semibold text-[#25D366]">קהילת WhatsApp</span>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl lg:text-4xl font-black text-[#f5f5fa] mb-3">
+              הצטרפו לקהילה שלנו
+            </h3>
+
+            <p class="text-sm md:text-base text-[#b0b0c0] mb-6 max-w-lg">
+              קבוצת WhatsApp עם עדכונים, טיפים וכלים חדשים בעולם ה-AI. רשת קשרים עסקית ותמיכה מקצועית.
+            </p>
+
+            <a
+              href="https://chat.whatsapp.com/yourlink"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 px-6 md:px-8 py-3 bg-[#25D366] text-white font-bold rounded-full hover:bg-[#20BA5C] transition-all duration-300 shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)]"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              הצטרפו לקהילה
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Final CTA Section -->
-  <section class="relative py-20 lg:py-32">
+  <section class="relative py-10 md:py-12 lg:py-16 bg-[#0a0a0f]">
     <div class="container mx-auto px-4 max-w-4xl text-center">
-      <p class="font-mono text-[#a855f7] text-sm mb-4">[READY_TO_START]</p>
-      <h2 class="text-3xl md:text-5xl font-black mb-6">
-        מוכנים להפוך את הארגון <span class="text-[#a855f7]">למעצמת AI?</span>
+      <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2.5 bg-[#12121a]/80 border border-[#a855f7]/30 rounded-full backdrop-blur-sm mb-6 md:mb-8">
+        <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
+        <span class="font-mono text-[10px] md:text-xs text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">READY_TO_START</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">
+        <span class="text-[#9090a8]">מוכנים להפוך את הארגון</span>
+        <span class="text-[#f5f5fa]"> למעצמת AI?</span>
       </h2>
-      <p class="text-[#d0d0e0] text-lg mb-10 max-w-2xl mx-auto">
+      <p class="text-sm md:text-base lg:text-lg text-[#d0d0e0] mb-8 md:mb-10 max-w-2xl mx-auto px-2">
         השאירו פרטים ונחזור אליכם תוך 24 שעות עם הצעה מותאמת לצרכים שלכם.
       </p>
       <a
         href="#contact"
-        class="inline-flex items-center gap-3 px-10 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
-        style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+        class="inline-flex items-center justify-center gap-2 md:gap-3 px-8 md:px-10 py-3 md:py-4 min-h-[48px] bg-[#a855f7] text-[#0a0a0f] font-bold text-sm md:text-base rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:scale-105"
       >
         <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
         בואו נדבר
