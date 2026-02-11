@@ -5,7 +5,8 @@
  */
 
 // Brand assets
-const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
+const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
+const chavobotMobile = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_420/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png";
 const fingerprint = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png";
 const n8nBadge = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png";
 
@@ -128,12 +129,16 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
               style="top: -2%; right: 8%; transform: rotate(8deg)"
             />
 
-            <!-- Main image -->
+            <!-- Main image - responsive: 420px mobile, 800px desktop -->
             <img
-              src={chavobot}
+              src={chavobotMobile}
+              srcset={`${chavobotMobile} 420w, ${chavobot} 800w`}
+              sizes="(max-width: 640px) 420px, 800px"
               alt="חבובוט - הנציג החכם של Focus AI"
               fetchpriority="high"
               decoding="async"
+              width="800"
+              height="800"
               class="relative z-10 w-[90vw] max-w-[420px] sm:max-w-[520px] md:max-w-[600px] lg:max-w-[700px] h-auto"
               style="mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)"
             />
