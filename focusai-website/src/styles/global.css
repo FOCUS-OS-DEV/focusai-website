@@ -92,6 +92,7 @@ html {
 @media (min-width: 1024px) {
   html {
     font-size: 112%; /* ~18px on desktop */
+    zoom: 0.85; /* Fit more content in viewport - 100% view looks like 85% browser zoom */
   }
 }
 
