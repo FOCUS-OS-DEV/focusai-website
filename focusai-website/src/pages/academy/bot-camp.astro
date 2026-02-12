@@ -585,94 +585,131 @@ const courseSchema = {
   </section>
 
   <!-- Course Tracks / Pricing -->
-  <section id="pricing" class="py-6 md:py-8 bg-gradient-to-b from-[#f8f4ff] to-white">
-    <div class="container px-4">
-      <div class="text-center mb-12" data-animate="fade-up">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
-          <span class="text-[#a855f7]">המסלולים</span> שלנו
+  <section id="pricing" class="py-10 md:py-14 relative overflow-hidden bg-[#0a0a0f]">
+    <!-- Background effects -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-600/20 to-pink-500/10 blur-[120px]"></div>
+      <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-cyan-500/10 to-blue-600/15 blur-[100px]"></div>
+    </div>
+
+    <div class="container px-4 relative z-10">
+      <div class="text-center mb-10" data-animate="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 mb-6">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+          <span class="text-sm font-medium text-white/70">מסלולים</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">המסלולים</span> שלנו
         </h2>
       </div>
 
-      <!-- Main Tracks - Equal Height Cards -->
+      <!-- Main Tracks - Glass Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10" data-animate="stagger">
         {courseTracks.map((track) => (
-          <div class={`bg-white rounded-2xl overflow-hidden shadow-lg border-2 flex flex-col ${track.highlighted ? 'border-[#a855f7]' : 'border-[#e0d4f7]'}`}>
-            {/* Header - fixed height for alignment */}
-            <div class={`p-4 text-center flex flex-col justify-center min-h-[100px] ${track.highlighted ? 'bg-gradient-to-r from-[#a855f7] to-[#d946ef]' : 'bg-[#f8f4ff]'}`}>
-              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-2 ${track.highlighted ? 'bg-white/20 text-white' : 'bg-[#a855f7]/10 text-[#a855f7]'}`}>
-                {track.highlighted ? 'מומלץ' : 'ללמוד מכל מקום'}
-              </span>
-              <h3 class={`text-xl font-bold ${track.highlighted ? 'text-white' : 'text-[#1a1a2e]'}`}>{track.title}</h3>
-              <p class={`text-sm ${track.highlighted ? 'text-white/80' : 'text-[#6a6a8a]'}`}>{track.subtitle}</p>
+          <div class={`group flex flex-col relative`}
+               style={`--accent: ${track.highlighted ? '#a855f7' : '#06b6d4'}; --accent-secondary: ${track.highlighted ? '#c084fc' : '#0ea5e9'}`}>
+            <div class={`flex flex-col flex-grow rounded-3xl overflow-hidden border transition-all duration-400 ${
+              track.highlighted
+                ? 'bg-gradient-to-br from-[rgba(168,85,247,0.15)_0%] to-[rgba(18,18,26,0.5)_100%] border-[rgba(168,85,247,0.3)] shadow-[0_24px_48px_-12px_rgba(168,85,247,0.25)]'
+                : 'bg-gradient-to-br from-[rgba(6,182,212,0.1)_0%] to-[rgba(18,18,26,0.45)_100%] border-[rgba(6,182,212,0.18)]'
+            }`} style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px)">
+              {/* Header */}
+              <div class="p-6 pb-4">
+                <div class="flex items-start justify-between mb-5">
+                  {/* Icon */}
+                  <div class="relative">
+                    <div class="absolute inset-[-8px] rounded-2xl blur-[20px] opacity-30" style={`background: var(--accent)`}></div>
+                    <div class="relative w-14 h-14 flex items-center justify-center bg-white/5 border border-white/10 rounded-2xl text-white">
+                      {track.highlighted ? (
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      ) : (
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Tag */}
+                  <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm font-medium" style={`color: var(--accent)`}>
+                    {track.highlighted ? 'פרונטלי' : 'מרחוק'}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <p class="text-sm font-medium text-white/40 mb-2 tracking-wide">[{track.highlighted ? 'ההכשרה המקצועית' : 'ללמוד מכל מקום'}]</p>
+                <h3 class="text-3xl font-extrabold mb-2 bg-clip-text text-transparent" style={`background-image: linear-gradient(135deg, var(--accent), white 80%)`}>
+                  {track.title}
+                </h3>
+                <p class="text-sm text-white/50">{track.subtitle}</p>
+              </div>
+
+              {/* Date stats */}
+              <div class="mx-6 flex items-center gap-4 px-4 py-3 bg-black/20 rounded-xl mb-4">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4" style={`color: var(--accent)`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <span class="text-white text-sm font-medium">{track.nextDate}</span>
+                </div>
+                <div class="w-px h-4 bg-white/10"></div>
+                <span class="text-white/50 text-sm">{track.nextDay}</span>
+              </div>
+
+              {/* Features */}
+              <div class="px-6 pb-6 flex flex-col flex-grow">
+                <ul class="space-y-2.5 flex-grow mb-6">
+                  {track.features.map((feature) => (
+                    <li class="flex items-center gap-3 text-[15px] text-white/70">
+                      <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style={`background: var(--accent)`}></span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#syllabus-form"
+                  class={`block w-full py-4 text-center font-bold rounded-xl transition-all ${
+                    track.highlighted
+                      ? 'bg-gradient-to-r from-[#a855f7] to-[#ec4899] text-white shadow-[0_8px_32px_-8px_rgba(168,85,247,0.5)] hover:shadow-[0_12px_40px_-8px_rgba(168,85,247,0.6)] hover:scale-[1.02]'
+                      : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:scale-[1.02]'
+                  }`}
+                >
+                  לפרטים והרשמה
+                </a>
+              </div>
             </div>
 
-            {/* Next date */}
-            <div class="p-4 border-b border-[#e0d4f7]">
-              <p class={`text-center font-bold ${track.highlighted ? 'text-[#a855f7]' : 'text-[#6a6a8a]'}`}>
-                {track.nextDate}
-              </p>
-              <p class="text-center text-sm text-[#6a6a8a]">{track.nextDay}</p>
-            </div>
-
-            {/* Features - flex-grow to push button to bottom */}
-            <div class="p-6 flex flex-col flex-grow">
-              <ul class="space-y-3 flex-grow">
-                {track.features.map((feature) => (
-                  <li class="flex items-start gap-2 text-sm text-[#4a4a6a]">
-                    <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href="#syllabus-form"
-                class={`block w-full mt-6 py-3 text-center font-bold rounded-full transition-all ${
-                  track.highlighted
-                    ? 'bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white hover:shadow-lg'
-                    : 'border-2 border-[#a855f7] text-[#a855f7] hover:bg-[#f8f4ff]'
-                }`}
-              >
-                לפרטים והרשמה
-              </a>
-            </div>
+            {/* Hover glow */}
+            <div class="absolute inset-[-100px] rounded-full opacity-0 group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none -z-10 blur-[80px]" style={`background: var(--accent)`}></div>
           </div>
         ))}
       </div>
 
       <!-- Past Tracks (Sold Out / Completed) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto" dir="rtl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto" dir="rtl">
         {pastTracks.map((track) => (
-          <div class="bg-[#f5f5f8] rounded-2xl shadow-sm border border-[#e8e8ec]">
-            {/* Header with badge */}
-            <div class="relative p-4 pb-3 pt-8">
-              <span class="absolute top-4 left-1/2 -translate-x-1/2 inline-block px-4 py-1.5 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white text-xs font-bold rounded-full shadow-lg">
+          <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+            <div class="p-4 pb-3 pt-5 text-center">
+              <span class="inline-block px-3 py-1 bg-white/5 border border-white/10 text-white/40 text-xs font-medium rounded-full mb-3">
                 המקומות אזלו
               </span>
-              <h4 class="font-bold text-[#6a6a8a] text-lg mt-4 text-center">{track.title}</h4>
-              <p class="text-sm text-[#9a9aaa] text-center">{track.subtitle}</p>
+              <h4 class="font-bold text-white/40 text-lg">{track.title}</h4>
+              <p class="text-sm text-white/25">{track.subtitle}</p>
             </div>
 
-            {/* Date */}
-            <div class="py-3 mx-4 bg-[#e8e8ec] rounded-lg mb-4">
-              <p class="text-center text-sm font-medium text-[#7a7a8a]">{track.dateText}</p>
+            <div class="py-2.5 mx-4 bg-white/[0.03] rounded-lg mb-3">
+              <p class="text-center text-sm font-medium text-white/30">{track.dateText}</p>
             </div>
 
-            {/* Features */}
             <div class="px-4 pb-4">
               <ul class="space-y-2 mb-4">
                 {track.features.map((f) => (
-                  <li class="flex items-center gap-2 text-sm text-[#8a8a9a]">
-                    <svg class="w-4 h-4 text-[#b0b0c0] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
+                  <li class="flex items-center gap-2 text-sm text-white/25">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/15 flex-shrink-0"></span>
                     <span>{f}</span>
                   </li>
                 ))}
               </ul>
-              <button class="w-full py-3 bg-[#e0e0e5] text-[#9a9aaa] text-sm font-medium rounded-full cursor-not-allowed">
+              <button class="w-full py-2.5 bg-white/[0.03] text-white/20 text-sm font-medium rounded-xl cursor-not-allowed border border-white/5">
                 {track.buttonText}
               </button>
             </div>

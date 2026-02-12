@@ -178,7 +178,7 @@ code, pre, .code-block {
   right: 1rem;
 }
 
-/* ===== GLOBAL SCANLINES OVERLAY ===== */
+/* ===== GLOBAL SCANLINES OVERLAY (desktop only) ===== */
 
 body::after {
   content: '';
@@ -194,6 +194,12 @@ body::after {
     rgba(0, 0, 0, 0.5) 2px,
     rgba(0, 0, 0, 0.5) 4px
   );
+}
+
+@media (max-width: 768px) {
+  body::after {
+    display: none;
+  }
 }
 
 /* ===== SCROLLBAR - CYBERPUNK ===== */

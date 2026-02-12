@@ -1,7 +1,7 @@
 ---
 /**
- * Client Logos - Staggered 2-row layout
- * Offset rows with side fade effect
+ * Client Logos - Infinite marquee on mobile, staggered grid on desktop
+ * CSS-only infinite scroll animation for mobile
  */
 import { clients } from "../data/clients";
 
@@ -37,33 +37,37 @@ const row2 = clients.slice(8, 16);
     </p>
   </div>
 
-  <!-- Logos: 2 staggered rows with side fades -->
+  <!-- Logos -->
   <div class="logos-wrapper relative z-10">
-    <!-- Row 1 - shifted right -->
+    <!-- Row 1 -->
     <div class="logos-row row-1">
       <div class="logos-row-inner">
-        {row1.map((client, i) => (
-          <div
-            class="logo-card group"
-            style={`--i: ${i}`}
-            title={client.name}
-          >
+        {row1.map((client) => (
+          <div class="logo-card" title={client.name}>
             <img src={client.logo} alt={client.name} loading="lazy" />
+          </div>
+        ))}
+        {/* Duplicate set for seamless mobile loop */}
+        {row1.map((client) => (
+          <div class="logo-card logo-dup" aria-hidden="true" title={client.name}>
+            <img src={client.logo} alt="" loading="lazy" />
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Row 2 - shifted left -->
+    <!-- Row 2 -->
     <div class="logos-row row-2">
       <div class="logos-row-inner">
-        {row2.map((client, i) => (
-          <div
-            class="logo-card group"
-            style={`--i: ${i + 8}`}
-            title={client.name}
-          >
+        {row2.map((client) => (
+          <div class="logo-card" title={client.name}>
             <img src={client.logo} alt={client.name} loading="lazy" />
+          </div>
+        ))}
+        {/* Duplicate set for seamless mobile loop */}
+        {row2.map((client) => (
+          <div class="logo-card logo-dup" aria-hidden="true" title={client.name}>
+            <img src={client.logo} alt="" loading="lazy" />
           </div>
         ))}
       </div>
@@ -90,7 +94,6 @@ const row2 = clients.slice(8, 16);
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 120px;
     z-index: 2;
     pointer-events: none;
   }
@@ -105,86 +108,56 @@ const row2 = clients.slice(8, 16);
     background: linear-gradient(to left, #0a0a0f 0%, transparent 100%);
   }
 
-  .logos-row-inner {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    padding: 0 20px;
-  }
-
-  /* Offset rows */
-  .row-1 .logos-row-inner {
-    transform: translateX(40px);
-  }
-
-  .row-2 .logos-row-inner {
-    transform: translateX(-40px);
-  }
-
   .logo-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
-    width: 140px;
-    min-width: 140px;
-    aspect-ratio: 3 / 2;
-    opacity: 0;
-    animation: logoAppear 0.4s ease-out calc(var(--i) * 0.03s) forwards;
-    transition: transform 0.3s;
-  }
-
-  .logo-card:hover {
-    transform: translateY(-3px);
-  }
-
-  @keyframes logoAppear {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    flex-shrink: 0;
   }
 
   .logo-card img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    transition: transform 0.3s, opacity 0.3s;
     opacity: 0.85;
   }
 
-  .logo-card:hover img {
-    transform: scale(1.05);
-    opacity: 1;
-  }
+  /* ===== MOBILE & TABLET: Infinite marquee ===== */
+  @media (max-width: 1023px) {
+    .logos-row-inner {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+    }
 
-  /* Responsive sizes */
-  @media (max-width: 639px) {
-    .logos-row::before,
-    .logos-row::after {
-      width: 60px;
+    .row-1 .logos-row-inner {
+      animation: marquee-rtl 25s linear infinite;
+    }
+
+    .row-2 .logos-row-inner {
+      animation: marquee-ltr 28s linear infinite;
     }
 
     .logo-card {
       width: 100px;
       min-width: 100px;
+      aspect-ratio: 3 / 2;
       padding: 8px;
     }
 
-    .logos-row-inner {
-      gap: 8px;
+    .logos-row::before,
+    .logos-row::after {
+      width: 40px;
     }
 
-    .row-1 .logos-row-inner {
-      transform: translateX(25px);
+    @keyframes marquee-rtl {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .row-2 .logos-row-inner {
-      transform: translateX(-25px);
+    @keyframes marquee-ltr {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
     }
   }
 
@@ -194,23 +167,57 @@ const row2 = clients.slice(8, 16);
       min-width: 120px;
     }
 
-    .row-1 .logos-row-inner {
-      transform: translateX(30px);
-    }
-
-    .row-2 .logos-row-inner {
-      transform: translateX(-30px);
+    .logos-row::before,
+    .logos-row::after {
+      width: 60px;
     }
   }
 
+  /* ===== DESKTOP: Centered grid, no animation ===== */
   @media (min-width: 1024px) {
-    .logo-card {
-      width: 150px;
-      min-width: 150px;
+    .logo-dup {
+      display: none;
     }
 
     .logos-row-inner {
+      display: flex;
       gap: 12px;
+      justify-content: center;
+      padding: 0 20px;
+    }
+
+    .row-1 .logos-row-inner {
+      transform: translateX(40px);
+    }
+
+    .row-2 .logos-row-inner {
+      transform: translateX(-40px);
+    }
+
+    .logo-card {
+      width: 150px;
+      min-width: 150px;
+      aspect-ratio: 3 / 2;
+      padding: 12px;
+      transition: transform 0.3s;
+    }
+
+    .logo-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .logo-card:hover img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .logo-card img {
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .logos-row::before,
+    .logos-row::after {
+      width: 120px;
     }
   }
 </style>
