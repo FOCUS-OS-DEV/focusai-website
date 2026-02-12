@@ -101,24 +101,16 @@ const interestOptions = [
       <!-- Form - Takes 3 columns -->
       <div class="lg:col-span-3">
         <div
-          class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl"
+          class="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
           data-animate="terminal"
         >
-          {/* Terminal header */}
-          <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+          {/* Glass header */}
+          <div class="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl">
             <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
             </div>
-            <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">SUBMIT_REQUEST</span>
+            <span class="font-mono text-xs font-medium text-[#b0b0c0]/60 tracking-wider uppercase">השאירו פרטים</span>
           </div>
-
-          {/* Corner accents */}
-          <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]/30"></div>
-          <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]/30"></div>
-          <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]/30"></div>
-          <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]/30"></div>
 
           <form id="contact-form" class="p-8 lg:p-10 space-y-6" action={webhookUrl} method="POST">
             <div class="grid md:grid-cols-2 gap-6">
@@ -230,17 +222,15 @@ const interestOptions = [
       <div class="lg:col-span-2 space-y-6">
         <!-- Contact Methods -->
         <div
-          class="bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl"
+          class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
           data-animate="slide-left" data-delay="0.2"
         >
-          {/* Terminal header */}
-          <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+          {/* Glass header */}
+          <div class="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl">
             <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
             </div>
-            <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">CONTACT_METHODS</span>
+            <span class="font-mono text-xs font-medium text-[#b0b0c0]/60 tracking-wider uppercase">דרכי התקשרות</span>
           </div>
 
           <div class="p-6 space-y-4">
@@ -281,20 +271,18 @@ const interestOptions = [
 
         <!-- Chavobot Card -->
         <div
-          class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl"
+          class="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
           data-animate="neon-pulse" data-delay="0.3"
         >
           {/* Glow effect */}
           <div class="absolute inset-0 bg-gradient-to-br from-[#a855f7]/5 via-transparent to-[#c084fc]/5"></div>
 
-          {/* Terminal header */}
-          <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 relative z-10 rounded-t-2xl">
+          {/* Glass header */}
+          <div class="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm relative z-10 rounded-t-2xl">
             <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
             </div>
-            <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">AI_ASSISTANT</span>
+            <span class="font-mono text-xs font-medium text-[#b0b0c0]/60 tracking-wider uppercase">חבובוט</span>
           </div>
 
           <div class="relative z-10 p-8 text-center">

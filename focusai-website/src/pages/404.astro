@@ -14,13 +14,11 @@ import Footer from '../components/Footer.astro';
     </div>
 
     <div class="relative z-10 text-center px-4">
-      <!-- Terminal window -->
-      <div class="inline-block bg-[#12121a] border border-[#2a2a3a] rounded-2xl overflow-hidden max-w-lg w-full">
-        <!-- Terminal header -->
-        <div class="flex items-center gap-2 px-4 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50">
-          <span class="w-3 h-3 rounded-full bg-[#ff3366]"></span>
-          <span class="w-3 h-3 rounded-full bg-[#ffff00]"></span>
-          <span class="w-3 h-3 rounded-full bg-[#a855f7]"></span>
+      <!-- Glass window -->
+      <div class="inline-block bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl overflow-hidden max-w-lg w-full shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <!-- Glass header -->
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
           <span class="font-mono text-xs text-[#a855f7]/40 mr-auto">system.error</span>
         </div>
 
@@ -41,8 +39,8 @@ import Footer from '../components/Footer.astro';
           <!-- Terminal prompt -->
           <div class="font-mono text-xs text-[#8080a0] mb-6 text-right" dir="ltr">
             <span class="text-[#a855f7]">focusai</span>
-            <span class="text-[#ff3366]">@</span>
-            <span class="text-[#ffff00]">web</span>
+            <span class="text-[#c084fc]">@</span>
+            <span class="text-[#a855f7]">web</span>
             <span> ~ $ </span>
             <span class="text-white">cd /home</span>
             <span class="animate-pulse">_</span>

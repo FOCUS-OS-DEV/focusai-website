@@ -74,10 +74,8 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
           gap: 12,
         }}
       >
-        <div style={{ display: 'flex', gap: 6 }}>
-          <span style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#ff3366' }}></span>
-          <span style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#ffff00' }}></span>
-          <span style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#a855f7' }}></span>
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#a855f7' }}></span>
         </div>
         <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 14 }}>
           עמוד {currentIndex + 1} / {images.length}

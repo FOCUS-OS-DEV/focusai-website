@@ -62,19 +62,17 @@ const values = companyValues;
         >
           {/* Card */}
           <div
-            class="relative bg-[#12121a] border border-[#2a2a3a] hover:border-[#c084fc]/50 transition-all duration-500 overflow-hidden rounded-2xl"
+            class="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-[#c084fc]/30 transition-all duration-500 overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
           >
             {/* Glow effect on hover */}
             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" style="box-shadow: inset 0 0 60px rgba(192, 132, 252, 0.1);"></div>
 
-            {/* Terminal header */}
-            <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 rounded-t-2xl">
+            {/* Glass header */}
+            <div class="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl">
               <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#c084fc] animate-pulse"></span>
               </div>
-              <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">{founder.displayId}</span>
+              <span class="font-mono text-xs font-medium text-[#b0b0c0]/60 tracking-wider">{founder.displayId}</span>
             </div>
 
             {/* Content */}
@@ -172,19 +170,17 @@ const values = companyValues;
     <!-- Vision Statement -->
     <div class="max-w-4xl mx-auto" data-animate="scale-up">
       <div
-        class="relative bg-[#12121a] border border-[#2a2a3a] overflow-hidden rounded-2xl"
+        class="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
       >
         {/* Background glow */}
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#a855f7]/10 rounded-full blur-[100px]"></div>
 
-        {/* Terminal header */}
-        <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50 relative z-10 rounded-t-2xl">
+        {/* Glass header */}
+        <div class="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm relative z-10 rounded-t-2xl">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
           </div>
-          <span class="font-mono text-sm font-medium text-[#b0b0c0] tracking-wider">MISSION_STATEMENT</span>
+          <span class="font-mono text-xs font-medium text-[#b0b0c0]/60 tracking-wider uppercase">החזון שלנו</span>
         </div>
 
         {/* Quote marks */}

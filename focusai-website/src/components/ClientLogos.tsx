@@ -16,15 +16,10 @@ export const ClientLogos = () => {
       {/* Terminal-style Header */}
       <div className="container relative z-10 mb-8 md:mb-12 px-4">
         <div className="text-center">
-          {/* Terminal badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#12121a] border border-[#a855f7]/30 mb-6">
-            <div className="flex gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#ff3366] shadow-[0_0_6px_#ff3366]" />
-              <span className="w-2 h-2 rounded-full bg-[#ffff00] shadow-[0_0_6px_#ffff00]" />
-              <span className="w-2 h-2 rounded-full bg-[#a855f7] shadow-[0_0_6px_#a855f7]" />
-            </div>
-            <span className="font-mono text-xs text-[#a855f7] tracking-[0.2em] uppercase">TRUSTED_BY</span>
+          {/* Glass badge */}
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse" />
+            <span className="text-xs text-[#a855f7] tracking-wider uppercase">סומכים עלינו</span>
           </div>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">

@@ -337,8 +337,7 @@ const serviceSchema = {
           <div class="flex flex-col sm:flex-row gap-4">
             <a
               href="#contact"
-              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center"
-              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center rounded-xl"
             >
               <span class="flex items-center justify-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
@@ -347,8 +346,7 @@ const serviceSchema = {
             </a>
             <a
               href="#benefits"
-              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center"
-              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center rounded-xl"
             >
               איך זה עובד?
             </a>
@@ -357,7 +355,7 @@ const serviceSchema = {
 
         <!-- Visual Element - Chat Demo -->
         <div class="relative hidden lg:block">
-          <div class="relative p-6 border border-[#2a2a3a] bg-[#12121a]/80 backdrop-blur-sm" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+          <div class="relative p-6 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl">
             <!-- Chat Header -->
             <div class="flex items-center gap-3 pb-4 border-b border-[#2a2a3a] mb-4">
               <div class="w-10 h-10 rounded-full bg-[#a855f7] flex items-center justify-center">
@@ -428,9 +426,6 @@ const serviceSchema = {
             </div>
           </div>
 
-          <!-- Decorative elements -->
-          <div class="absolute -top-4 -right-4 w-20 h-20 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 100% 0, 100% 100%);"></div>
-          <div class="absolute -bottom-4 -left-4 w-20 h-20 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 0 100%, 100% 100%);"></div>
         </div>
       </div>
 
@@ -464,8 +459,7 @@ const serviceSchema = {
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate="stagger">
         {benefits.map((benefit) => (
           <div
-            class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
-            style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));"
+            class="relative p-6 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 rounded-xl"
           >
             <div class="flex items-start gap-4">
               <div class="w-12 h-12 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 flex-shrink-0">
@@ -525,10 +519,9 @@ const serviceSchema = {
       <div class="grid md:grid-cols-3 gap-8" data-animate="stagger">
         {valueProps.map((prop) => (
           <div
-            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
-            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+            class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 rounded-2xl"
           >
-            <div class="w-16 h-16 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4">
+            <div class="w-16 h-16 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4 rounded-xl">
               {prop.iconType === 'chat' && (
                 <svg class="w-8 h-8 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
@@ -572,7 +565,7 @@ const serviceSchema = {
 
       <div class="flex flex-wrap justify-center gap-6" data-animate="stagger">
         {platforms.map(platform => (
-          <div class="w-32 h-32 flex flex-col items-center justify-center p-4 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
+          <div class="w-32 h-32 flex flex-col items-center justify-center p-4 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl">
             <div class="w-10 h-10 flex items-center justify-center mb-2">
               {platform.iconType === 'whatsapp' && (
                 <svg class="w-8 h-8 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
@@ -629,11 +622,10 @@ const serviceSchema = {
       <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
         {processSteps.map((step) => (
           <div
-            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
-            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+            class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 rounded-2xl"
           >
             <!-- Step number -->
-            <div class="absolute top-6 left-6 w-12 h-12 flex items-center justify-center bg-[#a855f7] text-[#0a0a0f] font-black text-xl" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
+            <div class="absolute top-6 left-6 w-12 h-12 flex items-center justify-center bg-[#a855f7] text-[#0a0a0f] font-black text-xl rounded-xl">
               {step.step.toString().padStart(2, '0')}
             </div>
 
@@ -664,8 +656,7 @@ const serviceSchema = {
       <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
         {testimonials.map((testimonial) => (
           <div
-            class="relative p-8 border border-[#2a2a3a] bg-[#12121a]"
-            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+            class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl"
           >
             <!-- Quote icon -->
             <div class="text-[#a855f7]/30 text-6xl font-serif absolute top-4 right-4">"</div>
@@ -704,7 +695,7 @@ const serviceSchema = {
 
       <div class="space-y-4" data-animate="stagger">
         {faq.map((item) => (
-          <details class="group border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
+          <details class="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-xl">
             <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-[#a855f7]/5 transition-colors">
               <span class="text-white font-medium">{item.q}</span>
               <svg class="w-5 h-5 text-[#a855f7] transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -723,12 +714,7 @@ const serviceSchema = {
   <!-- CTA Section -->
   <section id="contact" class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" data-animate="fade-up" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
-        <!-- Decorative corners -->
-        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]"></div>
+      <div class="relative p-8 md:p-12 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl" data-animate="fade-up">
 
         <header class="text-center mb-10">
           <p class="font-mono text-[#a855f7] text-sm mb-2">[GET_STARTED]</p>
@@ -788,8 +774,7 @@ const serviceSchema = {
 
           <button
             type="submit"
-            class="w-full px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)]"
-            style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+            class="w-full px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] rounded-xl"
           >
             <span class="flex items-center justify-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>

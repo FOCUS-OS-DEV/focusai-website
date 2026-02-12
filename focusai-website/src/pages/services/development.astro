@@ -225,8 +225,7 @@ const serviceSchema = {
           <div class="flex flex-col sm:flex-row gap-4">
             <a
               href="#contact"
-              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center"
-              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center rounded-xl"
             >
               <span class="flex items-center justify-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
@@ -235,8 +234,7 @@ const serviceSchema = {
             </a>
             <a
               href="#capabilities"
-              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center"
-              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center rounded-xl"
             >
               היכולות שלנו
             </a>
@@ -245,7 +243,7 @@ const serviceSchema = {
 
         <!-- Visual Element - Integration Diagram -->
         <div class="relative hidden lg:block">
-          <div class="relative p-8 border border-[#2a2a3a] bg-[#12121a]/80 backdrop-blur-sm" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+          <div class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl">
             <!-- Integration Flow Visualization -->
             <div class="relative h-80">
               <!-- Center Hub -->
@@ -302,8 +300,7 @@ const serviceSchema = {
       <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
         {integrations.map((item) => (
           <div
-            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
-            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+            class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 rounded-2xl"
           >
             <!-- Header -->
             <div class="flex items-start gap-4 mb-6">
@@ -381,7 +378,7 @@ const serviceSchema = {
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" data-animate="stagger">
         {techStack.map((category) => (
-          <div class="p-4 border border-[#2a2a3a] bg-[#12121a]" style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));">
+          <div class="p-4 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-xl">
             <p class="text-xs font-mono text-[#a855f7] mb-3">{category.category}</p>
             <div class="space-y-1">
               {category.tools.map(tool => (
@@ -411,7 +408,7 @@ const serviceSchema = {
         <div class="grid md:grid-cols-5 gap-6">
           {processSteps.map((step) => (
             <div class="relative text-center">
-              <div class="inline-flex items-center justify-center w-16 h-16 bg-[#12121a] border-2 border-[#a855f7] mb-4 relative z-10" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">
+              <div class="inline-flex items-center justify-center w-16 h-16 bg-white/[0.03] backdrop-blur-xl border-2 border-[#a855f7] mb-4 relative z-10 rounded-xl">
                 <span class="text-[#a855f7] font-bold text-lg">{step.step}</span>
               </div>
               <p class="font-mono text-[#a855f7] text-xs mb-1">[{step.code}]</p>
@@ -437,8 +434,7 @@ const serviceSchema = {
       <div class="grid md:grid-cols-3 gap-8" data-animate="stagger">
         {useCases.map((useCase) => (
           <div
-            class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
-            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+            class="relative p-6 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 rounded-2xl"
           >
             <div class="w-12 h-12 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4">
               {useCase.iconType === 'bank' && (
@@ -482,12 +478,7 @@ const serviceSchema = {
   <!-- CTA Section -->
   <section id="contact" class="relative py-20 bg-[#0d0d12]">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" data-animate="fade-up" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
-        <!-- Decorative corners -->
-        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]"></div>
+      <div class="relative p-8 md:p-12 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl" data-animate="fade-up">
 
         <header class="text-center mb-10">
           <p class="font-mono text-[#a855f7] text-sm mb-2">[BUILD_TOGETHER]</p>

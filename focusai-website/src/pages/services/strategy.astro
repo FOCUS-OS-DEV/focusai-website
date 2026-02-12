@@ -198,8 +198,7 @@ const serviceSchema = {
           <div class="flex flex-col sm:flex-row gap-4">
             <a
               href="#contact"
-              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center"
-              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+              class="group relative px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center rounded-xl"
             >
               <span class="flex items-center justify-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
@@ -208,8 +207,7 @@ const serviceSchema = {
             </a>
             <a
               href="#process"
-              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center"
-              style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));"
+              class="px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center rounded-xl"
             >
               איך זה עובד?
             </a>
@@ -218,7 +216,7 @@ const serviceSchema = {
 
         <!-- Visual Element -->
         <div class="relative hidden lg:block">
-          <div class="relative p-8 border border-[#2a2a3a] bg-[#12121a]/80 backdrop-blur-sm" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
+          <div class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl">
             <!-- Terminal Style Display -->
             <div class="font-mono text-sm">
               <div class="flex items-center gap-2 mb-4 pb-4 border-b border-[#2a2a3a]">
@@ -242,9 +240,6 @@ const serviceSchema = {
             </div>
           </div>
 
-          <!-- Decorative elements -->
-          <div class="absolute -top-4 -right-4 w-24 h-24 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 100% 0, 100% 100%);"></div>
-          <div class="absolute -bottom-4 -left-4 w-24 h-24 border border-[#a855f7]/30" style="clip-path: polygon(0 0, 0 100%, 100% 100%);"></div>
         </div>
       </div>
     </div>
@@ -266,8 +261,7 @@ const serviceSchema = {
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="stagger">
         {benefits.map((benefit, index) => (
           <div
-            class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/50 transition-all duration-300 group"
-            style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));"
+            class="relative p-6 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/50 transition-all duration-300 group rounded-xl"
           >
             <div class="text-4xl font-black text-[#a855f7] mb-2" style="text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);">
               {benefit.stat}
@@ -299,7 +293,7 @@ const serviceSchema = {
         <div class="flex gap-4 min-w-max px-4">
           {processSteps.map((step, index) => (
             <div class="relative flex flex-col items-center">
-              <div class="w-32 p-4 border border-[#2a2a3a] bg-[#12121a] text-center" style="clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));">
+              <div class="w-32 p-4 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl text-center rounded-xl">
                 <div class="text-xs font-mono text-[#a855f7] mb-1">שבוע {step.week}</div>
                 <div class="font-bold text-white text-sm">{step.title}</div>
                 <div class="text-xs text-[#b0b0c0] mt-1">{step.desc}</div>
@@ -316,8 +310,7 @@ const serviceSchema = {
       <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
         {discoveryPhases.map((phase) => (
           <div
-            class="relative p-8 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300"
-            style="clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));"
+            class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 rounded-2xl"
           >
             <!-- Corner decorations -->
             <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#a855f7]"></div>
@@ -386,7 +379,7 @@ const serviceSchema = {
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate="stagger">
         {deliverables.map((item) => (
-          <div class="relative p-6 border border-[#2a2a3a] bg-[#12121a] hover:border-[#a855f7]/30 transition-all duration-300 group" style="clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));">
+          <div class="relative p-6 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 transition-all duration-300 group rounded-xl">
             <div class="w-10 h-10 flex items-center justify-center border border-[#a855f7]/30 bg-[#a855f7]/5 mb-4">
               {item.iconType === 'document' && (
                 <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
@@ -430,12 +423,7 @@ const serviceSchema = {
   <!-- CTA Section -->
   <section id="contact" class="relative py-20">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="relative p-8 md:p-12 border border-[#2a2a3a] bg-[#12121a]" data-animate="fade-up" style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
-        <!-- Decorative corners -->
-        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#a855f7]"></div>
-        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a855f7]"></div>
+      <div class="relative p-8 md:p-12 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl" data-animate="fade-up">
 
         <header class="text-center mb-10">
           <p class="font-mono text-[#a855f7] text-sm mb-2">[START_NOW]</p>

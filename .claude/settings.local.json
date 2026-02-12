@@ -23,7 +23,13 @@
       "WebFetch(domain:res.cloudinary.com)",
       "WebFetch(domain:profit-fs.com)",
       "WebFetch(domain:apple.com)",
-      "Bash(claude mcp list:*)"
+      "Bash(claude mcp list:*)",
+      "Bash(find:*)",
+      "Read(//c/sites/maderfuker/**)",
+      "Bash(ls:*)",
+      "Bash(sort:*)",
+      "Bash(du:*)",
+      "Bash(node:*)"
     ]
   }
 }
