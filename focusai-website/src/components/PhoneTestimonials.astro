@@ -1,0 +1,320 @@
+---
+/**
+ * PhoneTestimonials - iPhone mockup with scrollable WhatsApp screenshots
+ * Auto-scrolling + nav arrows + mouse wheel support
+ */
+
+interface Props {
+  theme?: 'dark' | 'light';
+}
+
+const { theme = 'dark' } = Astro.props;
+
+const screenshots = [
+  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.33_uxlvn0.jpg",
+  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.14_t4lh0q.jpg",
+  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.55.36_qc8mqk.jpg",
+  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.54.38_zgosjo.jpg",
+  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.54.38_1_z35b4a.jpg",
+  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.53.28_jjdzdw.jpg",
+];
+
+const isDark = theme === 'dark';
+const id = `phone-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class="phone-wrapper">
+  <!-- Nav arrow up -->
+  <button class="phone-nav phone-nav-up" data-phone-nav="up" data-phone-id={id}
+    aria-label="גלול למעלה">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+  </button>
+
+  <div class="phone-row">
+    <!-- iPhone frame -->
+    <div class:list={["phone-frame", { "phone-dark": isDark, "phone-light": !isDark }]} data-phone-frame={id}>
+      <!-- Dynamic Island -->
+      <div class="phone-island"></div>
+
+      <!-- Screen -->
+      <div class="phone-screen">
+        <div class="phone-scroll" data-phone-scroll={id}>
+          {screenshots.map((src, i) => (
+            <img
+              src={src}
+              alt={`פידבק מסטודנט ${i + 1}`}
+              loading="lazy"
+              decoding="async"
+              class="phone-img"
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Home indicator -->
+      <div class="phone-home"></div>
+    </div>
+  </div>
+
+  <!-- Nav arrow down -->
+  <button class="phone-nav phone-nav-down" data-phone-nav="down" data-phone-id={id}
+    aria-label="גלול למטה">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+</div>
+
+<script is:inline>
+  (function initPhones() {
+    function setup() {
+      document.querySelectorAll('.phone-wrapper').forEach(function(wrapper) {
+        if (wrapper.dataset.init) return;
+        wrapper.dataset.init = '1';
+
+        var scrollEl = wrapper.querySelector('.phone-scroll');
+        var frame = wrapper.querySelector('.phone-frame');
+        var btnUp = wrapper.querySelector('.phone-nav-up');
+        var btnDown = wrapper.querySelector('.phone-nav-down');
+        if (!scrollEl) return;
+
+        var isPaused = false;
+        var autoStarted = false;
+
+        function startAutoScroll() {
+          if (autoStarted) return;
+          autoStarted = true;
+          setInterval(function() {
+            if (isPaused) return;
+            var max = scrollEl.scrollHeight - scrollEl.clientHeight;
+            if (scrollEl.scrollTop >= max - 1) {
+              scrollEl.scrollTo({ top: 0, behavior: 'smooth' });
+              isPaused = true;
+              setTimeout(function() { isPaused = false; }, 2000);
+            } else {
+              scrollEl.scrollTop += 0.5;
+            }
+          }, 16);
+        }
+
+        // Hover pause + wheel
+        if (frame) {
+          frame.addEventListener('mouseenter', function() { isPaused = true; });
+          frame.addEventListener('mouseleave', function() { isPaused = false; });
+          frame.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            scrollEl.scrollTop += e.deltaY;
+          }, { passive: false });
+        }
+
+        // Nav arrows
+        btnUp && btnUp.addEventListener('click', function(e) {
+          e.preventDefault();
+          isPaused = true;
+          scrollEl.scrollBy({ top: -250, behavior: 'smooth' });
+          setTimeout(function() { isPaused = false; }, 1500);
+        });
+        btnDown && btnDown.addEventListener('click', function(e) {
+          e.preventDefault();
+          isPaused = true;
+          scrollEl.scrollBy({ top: 250, behavior: 'smooth' });
+          setTimeout(function() { isPaused = false; }, 1500);
+        });
+
+        // Start when visible
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              startAutoScroll();
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        obs.observe(scrollEl);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup);
+    } else {
+      setup();
+    }
+  })();
+</script>
+
+<style>
+  .phone-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .phone-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Nav arrows */
+  .phone-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+
+  .phone-nav:hover {
+    background: rgba(168, 85, 247, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  /* iPhone frame */
+  .phone-frame {
+    position: relative;
+    width: 340px;
+    height: 700px;
+    border-radius: 48px;
+    padding: 14px;
+    cursor: grab;
+  }
+
+  .phone-frame:active {
+    cursor: grabbing;
+  }
+
+  .phone-dark {
+    background: #1a1a2e;
+    box-shadow:
+      inset 0 0 0 2px rgba(255, 255, 255, 0.08),
+      0 25px 70px rgba(0, 0, 0, 0.5),
+      0 0 50px rgba(168, 85, 247, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .phone-light {
+    background: #1c1c1e;
+    box-shadow:
+      inset 0 0 0 2px rgba(255, 255, 255, 0.06),
+      0 25px 70px rgba(0, 0, 0, 0.25),
+      0 0 40px rgba(168, 85, 247, 0.12),
+      0 0 0 1px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Dynamic Island */
+  .phone-island {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 10;
+  }
+
+  /* Screen */
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+  }
+
+  /* Scrollable area - hidden scrollbar */
+  .phone-scroll {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .phone-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .phone-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Home bar */
+  .phone-home {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    z-index: 10;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .phone-frame {
+      width: 280px;
+      height: 580px;
+      border-radius: 42px;
+      padding: 12px;
+    }
+
+    .phone-island {
+      top: 14px;
+      width: 86px;
+      height: 26px;
+    }
+
+    .phone-screen {
+      border-radius: 32px;
+    }
+
+    .phone-home {
+      bottom: 16px;
+      width: 110px;
+    }
+
+    .phone-nav {
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .phone-frame {
+      width: 260px;
+      height: 540px;
+      border-radius: 38px;
+      padding: 10px;
+    }
+
+    .phone-island {
+      top: 12px;
+      width: 76px;
+      height: 24px;
+    }
+
+    .phone-screen {
+      border-radius: 28px;
+    }
+  }
+</style>

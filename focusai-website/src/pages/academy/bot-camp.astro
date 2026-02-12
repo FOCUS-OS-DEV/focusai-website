@@ -10,6 +10,8 @@ import VideoTestimonialsCarousel from '../../components/VideoTestimonialsCarouse
 import SyllabusGate from '../../components/SyllabusGate';
 import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
+import TechLogosMarquee from '../../components/TechLogosMarquee.astro';
+import StudentTestimonials from '../../components/StudentTestimonials.astro';
 
 import { founders } from '../../data/team';
 
@@ -63,7 +65,7 @@ const targetAudience = [
   {
     title: 'סוכנויות שיווק ופרסום',
     icon: 'megaphone',
-    features: ['הוספת AI לסל המוצרים', 'בידול משמעותי מהמתחרים', 'תהליכים חכמים לקידום וייעול', 'שיפור חווית השירות והמכירה']
+    features: ['הוספת אוטומציות וסוכני AI לסל המוצרים', 'בידול משמעותי מהמתחרים', 'תהליכים חכמים לקידום וייעול', 'שיפור חווית השירות והמכירה']
   }
 ];
 
@@ -428,6 +430,9 @@ const courseSchema = {
     </div>
   </section>
 
+  <!-- Tech Tools Logos -->
+  <TechLogosMarquee />
+
   <!-- Target Audience Section -->
   <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
     <div class="container px-4">
@@ -469,13 +474,13 @@ const courseSchema = {
               )}
             </div>
             <h3 class="text-xl font-bold text-[#1a1a2e] text-center mb-4">{item.title}</h3>
-            <ul class="space-y-2 flex flex-col items-center md:items-start">
+            <ul class="space-y-2 w-full">
               {item.features.map((feature) => (
-                <li class="flex items-center gap-2 text-sm text-[#4a4a6a]">
-                  <span>{feature}</span>
+                <li class="flex items-center justify-center gap-2 text-sm text-[#4a4a6a]" dir="rtl">
                   <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
@@ -492,6 +497,9 @@ const courseSchema = {
   <!-- Client Logos Grid - Asymmetric with fade -->
   <section class="py-6 bg-gradient-to-b from-[#f8f4ff] to-white overflow-hidden">
     <div class="container px-4">
+      <h3 class="text-center text-2xl md:text-3xl font-bold text-[#a855f7] tracking-wide mb-10">
+        סומכים עלינו
+      </h3>
       <!-- Row 1 - Shifted right with fade -->
       <div class="relative mb-4 md:mb-6">
         <!-- Fade left -->
@@ -501,7 +509,7 @@ const courseSchema = {
 
         <div class="flex justify-center gap-4 md:gap-6 -mr-8 md:-mr-16">
           {clientLogos.slice(0, 6).map((client) => (
-            <div class="bg-white rounded-xl p-3 md:p-4 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+            <div class="bg-white rounded-xl p-3 md:p-4 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow w-[116px] h-[116px] md:w-[154px] md:h-[154px] flex-shrink-0">
               <img
                 src={client.logo}
                 alt={client.name}
@@ -522,7 +530,7 @@ const courseSchema = {
 
         <div class="flex justify-center gap-4 md:gap-6 -ml-8 md:-ml-16">
           {clientLogos.slice(6, 12).map((client) => (
-            <div class="bg-white rounded-xl p-3 md:p-4 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+            <div class="bg-white rounded-xl p-3 md:p-4 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow w-[116px] h-[116px] md:w-[154px] md:h-[154px] flex-shrink-0">
               <img
                 src={client.logo}
                 alt={client.name}
@@ -535,6 +543,9 @@ const courseSchema = {
       </div>
     </div>
   </section>
+
+  <!-- Student WhatsApp Testimonials -->
+  <StudentTestimonials />
 
   <!-- Video Testimonials -->
   <section class="py-6 md:py-8 bg-white">

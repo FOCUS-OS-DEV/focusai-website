@@ -4,15 +4,7 @@
  * Real feedback displayed as modern glass cards + video testimonials carousel
  */
 import VideoTestimonialsCarousel from './VideoTestimonialsCarousel.astro';
-
-const screenshots = [
-  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.33_uxlvn0.jpg",
-  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.14_t4lh0q.jpg",
-  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.55.36_qc8mqk.jpg",
-  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.54.38_zgosjo.jpg",
-  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.54.38_1_z35b4a.jpg",
-  "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.53.28_jjdzdw.jpg",
-];
+import PhoneTestimonials from './PhoneTestimonials.astro';
 
 const stats = [
   { value: "98%", label: "שביעות רצון" },
@@ -46,7 +38,7 @@ const stats = [
       </div>
 
       <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-        פידבק <span class="testimonials-gradient-text">אמיתי</span>
+        מספרים <span class="testimonials-gradient-text">עלינו</span>
       </h2>
       <p class="text-lg text-white/50 max-w-xl mx-auto">
         לא מילים שלנו. הודעות אמיתיות מלקוחות ובוגרים.
@@ -78,28 +70,13 @@ const stats = [
       <VideoTestimonialsCarousel />
     </div>
 
-    <!-- Screenshots Grid -->
+    <!-- WhatsApp Screenshots in Phone Mockup -->
     <div class="mb-10 md:mb-12">
-      <div class="flex items-center gap-4 mb-8">
-        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
-        <span class="text-sm font-medium text-white/40 uppercase tracking-wider">הודעות מלקוחות</span>
-        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
-      </div>
+      <h3 class="text-xl md:text-2xl font-bold text-white text-center mb-8">
+        ככה זה נראה בקבוצה של <span class="testimonials-gradient-text">המחזור הנוכחי</span>
+      </h3>
 
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-        {screenshots.map((src, index) => (
-          <div class="testimonials-screenshot-card" style={`--delay: ${index * 0.08}s`}>
-            <div class="testimonials-glass-surface overflow-hidden">
-              <img
-                src={src}
-                alt={`פידבק מלקוח ${index + 1}`}
-                class="w-full h-auto transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <PhoneTestimonials theme="dark" />
     </div>
 
     <!-- Bottom CTA -->
@@ -177,37 +154,6 @@ const stats = [
     from {
       opacity: 0;
       transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Glass surface */
-  .testimonials-glass-surface {
-    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s;
-  }
-
-  /* Screenshot cards */
-  .testimonials-screenshot-card {
-    animation: cardAppear 0.5s ease-out var(--delay) both;
-  }
-
-  .testimonials-screenshot-card:hover .testimonials-glass-surface {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 32px -8px rgba(168, 85, 247, 0.2);
-  }
-
-  @keyframes cardAppear {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
     }
     to {
       opacity: 1;

@@ -1,0 +1,86 @@
+---
+/**
+ * TechLogosMarquee - Tech tools logos grid
+ * Static two-row staggered layout, per-logo sizing for visual balance
+ * For light-background pages (Bot-Camp, Academy)
+ */
+
+const CLD = "https://res.cloudinary.com/dfudxxzlj/image/upload";
+
+const T = "e_trim:20/c_fit,h_200/q_auto,f_auto";
+const TSVG = "e_trim:20/c_fit,h_200/q_auto,f_png";
+
+// h = display height in px — tuned per logo so they all look the same visual size
+const row1 = [
+  { name: "Claude AI", h: 36, src: `${CLD}/${T}/v1770932830/Claude_AI_logo.svg_ytgq64.png` },
+  { name: "Pinecone", h: 36, src: `${CLD}/${TSVG}/v1770932829/Pinecone-Full-Logo-Black_yqj3ly.svg` },
+  { name: "Apify", h: 36, src: `${CLD}/${T}/v1770932830/Apify_Logo.svg_qz8okh.png` },
+  { name: "N8N", h: 36, src: `${CLD}/${T}/v1770733892/39809fe7-d4d5-40a5-98a6-3b63a366d2a6_phdbq0.png` },
+  { name: "LlamaIndex", h: 36, src: `${CLD}/${T}/v1770932829/LlamaIndex-e1716781781228_j6dqq9.png` },
+];
+
+const row2 = [
+  { name: "Google Cloud", h: 52, src: `${CLD}/${T}/v1770932830/google_cloud_logo_icon_170066_fwf7x8.webp` },
+  { name: "Perplexity", h: 36, src: `${CLD}/${T}/v1770932829/Perplexity-Logo_a7gs7g.png` },
+  { name: "OpenAI", h: 36, src: `${CLD}/${T}/v1770932829/4178d5a0a14d32e3d5672090d840ac58_obowc5.jpg` },
+  { name: "Supabase", h: 36, src: `${CLD}/${T}/v1770932830/%D7%94%D7%95%D7%A8%D7%93%D7%94_2_jza1on.png` },
+  { name: "Cloudinary", h: 56, src: `${CLD}/${T}/v1770932830/%D7%94%D7%95%D7%A8%D7%93%D7%94_1_tgtrb7.png` },
+];
+---
+
+<section class="py-8 md:py-12 bg-gradient-to-b from-[#f8f4ff] to-white">
+  <div class="container px-4">
+    <h3 class="text-center text-2xl md:text-3xl font-bold text-[#a855f7] tracking-wide mb-12">
+      חלק מהכלים והמערכות שנלמד בהכשרה
+    </h3>
+
+    <!-- Row 1 -->
+    <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 mb-8" data-animate="fade-up">
+      {row1.map((logo) => (
+        <div class="logo-box" title={logo.name}>
+          <img src={logo.src} alt={logo.name} loading="lazy" style={`height: ${logo.h}px;`} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Row 2 -->
+    <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8" data-animate="fade-up" data-delay="0.1">
+      {row2.map((logo) => (
+        <div class="logo-box" title={logo.name}>
+          <img src={logo.src} alt={logo.name} loading="lazy" style={`height: ${logo.h}px;`} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 52px;
+  }
+
+  .logo-box img {
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .logo-box:hover img {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  @media (max-width: 768px) {
+    .logo-box { height: 40px; }
+    .logo-box img {
+      max-width: 120px;
+    }
+  }
+</style>
