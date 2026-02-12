@@ -1,6 +1,14 @@
 /* Fonts loaded via <link> tags in BaseLayout.astro - no @import needed */
 @import "tailwindcss";
 
+/* ===== FOIC PREVENTION =====
+   GSAP sets opacity:0 via fromTo(). If GSAP loads late or fails,
+   elements stay invisible. This ensures content is visible by default.
+   GSAP will override this inline when it initializes. */
+[data-animate] {
+  opacity: 1;
+}
+
 /* ========================================
    FOCUS AI - CYBERPUNK / GLITCH DESIGN SYSTEM
    ======================================== */
