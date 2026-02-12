@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | בלוג - חדשות, מדריכים וטיפים בעולם ה-AI';
@@ -49,6 +50,20 @@ function formatDate(date: Date): string {
     <div class="container mx-auto px-4 relative z-10 max-w-7xl">
       <header class="text-center mb-12">
         <p class="font-mono text-[#a855f7] text-sm mb-4 uppercase tracking-wider">[BLOG]</p>
+
+        <TerminalTypewriter
+          id="tw-blog"
+          texts={[
+            "fetching latest_articles...",
+            "מדריכים מעשיים מהשטח",
+            "reading_time.reduce() // we keep it short",
+            "טיפים שאפשר ליישם מיד",
+            "cat blog/*.md | grep 'practical tips'",
+            "כותבים על AI בלי באזוורדס מיותרים",
+            "new Post('something actually useful')",
+          ]}
+        />
+
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6">
           <span class="text-white">הבלוג של </span>
           <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">Focus AI</span>

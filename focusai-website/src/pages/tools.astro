@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import TerminalTypewriter from '../components/TerminalTypewriter.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | מרכז כלי הבינה המלאכותית';
@@ -711,6 +712,20 @@ const categories = [...new Set(toolsData.map(tool => tool.category))];
           style="filter: drop-shadow(0 4px 30px rgba(168, 85, 247, 0.4));"
         />
       </div>
+
+      <!-- Terminal Text -->
+      <TerminalTypewriter
+        id="tw-tools"
+        texts={[
+          "scanning ai_tools_database...",
+          "כל הכלים שאנחנו מלמדים ומשתמשים",
+          "pip install everything-ai",
+          "סננו, חפשו וקפצו ישירות לעבודה",
+          "tool_count.length > your_expectations",
+          "האוסף שיחסוך לכם שעות של חיפושים",
+          "brew install productivity --unlimited",
+        ]}
+      />
 
       <!-- Title -->
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6">

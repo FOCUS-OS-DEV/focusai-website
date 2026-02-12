@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | אפיון ואסטרטגיית AI לארגונים';
@@ -171,6 +172,19 @@ const serviceSchema = {
         <!-- Content -->
         <div>
           <p class="font-mono text-[#a855f7] text-sm mb-4 uppercase tracking-wider">[SERVICE_01] STRATEGY & DISCOVERY</p>
+
+          <TerminalTypewriter
+            id="tw-strategy"
+            texts={[
+              "mapping organization_dna...",
+              "מאפיינים את המסע הדיגיטלי שלכם",
+              "calculating ROI... it's gonna be good",
+              "בונים תכנית פעולה ריאלית",
+              "scanning industry for best practices",
+              "לפני שמתחילים לבנות, צריך להבין",
+              "strategy.plan > random_experiments",
+            ]}
+          />
 
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
             <span class="block text-white">אפיון</span>

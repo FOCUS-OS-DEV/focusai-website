@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { instructors } from '../data';
+import TerminalTypewriter from '../components/TerminalTypewriter.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | סדנאות AI לארגונים';
@@ -192,6 +193,20 @@ const galleryImages = [
           <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
           <span class="font-mono text-[10px] md:text-xs text-[#a855f7] uppercase tracking-[0.15em] md:tracking-[0.2em]">B2B_TRAINING</span>
         </div>
+
+        <!-- Terminal Text -->
+        <TerminalTypewriter
+          id="tw-sadnaot"
+          texts={[
+            "scanning organization for AI gaps",
+            "סדנאות שמשנות ארגונים מבפנים",
+            "upgrading workforce.dll... please wait",
+            "מטמיעים AI בצורה חכמה ואנושית",
+            "warning: productivity levels about to spike",
+            "הפכו את הצוות שלכם למובילי AI",
+            "deploying knowledge --target=entire_org",
+          ]}
+        />
 
         <!-- Headline -->
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 md:mb-6 font-display">

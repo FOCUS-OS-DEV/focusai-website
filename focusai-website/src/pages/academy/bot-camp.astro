@@ -8,7 +8,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import VideoTestimonialsCarousel from '../../components/VideoTestimonialsCarousel.astro';
 import SyllabusGate from '../../components/SyllabusGate';
-import TerminalText from '../../components/TerminalText';
+import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 
 import { founders } from '../../data/team';
@@ -368,25 +368,19 @@ const courseSchema = {
       </div>
 
       <!-- Terminal Text Animation -->
-      <div class="flex justify-center mb-6">
-        <div class="inline-flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <TerminalText
-            client:load
-            texts={[
-              "מפתחים את העתיד של הארגון שלך",
-              "בונים סוכני AI חכמים",
-              "אוטומציות שחוסכות שעות עבודה",
-              "מובילים טרנספורמציה דיגיטלית",
-              "יוצרים בוטים מותאמים אישית"
-            ]}
-            className="font-mono text-sm text-[#a855f7]"
-            typingSpeed={60}
-            deletingSpeed={30}
-            pauseDuration={2000}
-          />
-        </div>
-      </div>
+      <TerminalTypewriter
+        id="tw-botcamp"
+        texts={[
+          "loading bot_camp_protocol v3.0",
+          "בונים סוכני AI חכמים",
+          "compiling dreams into automation",
+          "אוטומציות שחוסכות שעות עבודה",
+          "teaching robots to be polite... almost done",
+          "מפתחים את העתיד של הארגון שלך",
+          "npm install --save career-upgrade",
+          "יוצרים בוטים שעובדים בשבילך 24/7",
+        ]}
+      />
 
       <!-- Title -->
       <div class="text-center max-w-4xl mx-auto">

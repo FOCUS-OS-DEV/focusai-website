@@ -44,7 +44,7 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
 
   <!-- Terminal prompt - typewriter effect -->
   <div class="hero-animate hero-delay-2 absolute top-20 md:top-24 right-4 md:right-8 lg:right-12 z-30">
-    <span class="font-mono text-[#a855f7] text-xs md:text-sm">
+    <span class="font-mono text-[#a855f7] text-sm md:text-base lg:text-lg">
       <span class="text-[#9090a8]">&gt;</span>{" "}
       <span id="typewriter-text"></span>
       <span class="hero-blink">_</span>
@@ -244,10 +244,13 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   // Typewriter effect - pure vanilla JS (~30 lines vs 308KB React+Framer)
   const messages = [
     "initializing focus protocol",
-    "Your AI Partner",
+    "loading future_of_work.exe",
+    "מחשב כמה עובדים AI יחליף... רק צוחק",
     "מחברים אנשים וטכנולוגיה",
-    "Building the Future",
-    "AI Solutions for Business",
+    "scanning for humans who still use Excel",
+    "deploying ai_agents --mode=beast",
+    "building the future, one prompt at a time",
+    "sudo make me a sandwich... with AI",
   ];
 
   const el = document.getElementById('typewriter-text');

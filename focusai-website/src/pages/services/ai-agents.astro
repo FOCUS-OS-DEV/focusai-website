@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | נציג AI לעסק - זמין 24/7';
@@ -258,6 +259,19 @@ const serviceSchema = {
             <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
             <span class="font-mono text-[#a855f7] text-sm">חדש! מהפכת ה-AI בשירות הלקוחות והמכירות</span>
           </div>
+
+          <TerminalTypewriter
+            id="tw-agents"
+            texts={[
+              "deploying ai_agent --mode=247",
+              "הנציג שלך עובד גם כשאתה ישן",
+              "connecting: whatsapp + instagram + web",
+              "סוכן AI שמוכר, מתאם ועונה במקומך",
+              "sleep(0); // agents don't need sleep",
+              "מענה אנושי? ברור. רק שזה AI",
+              "processing 1000 conversations simultaneously",
+            ]}
+          />
 
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
             <span class="block text-white">נציג AI</span>

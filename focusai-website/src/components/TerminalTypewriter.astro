@@ -1,0 +1,70 @@
+---
+/**
+ * TerminalTypewriter - Pure Astro + vanilla JS typewriter
+ * No React needed. Lightweight alternative to TerminalText.tsx
+ */
+interface Props {
+  texts: string[];
+  id?: string;
+}
+
+const { texts, id = 'terminal-typewriter' } = Astro.props;
+---
+
+<div class="flex justify-center mb-6">
+  <div class="inline-flex items-center gap-2">
+    <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+    <span class="font-mono text-base md:text-lg text-[#a855f7]">
+      <span class="text-[#9090a8]">&gt;</span>{" "}
+      <span id={id} dir="auto"></span>
+      <span class="tw-blink">_</span>
+    </span>
+  </div>
+</div>
+
+<style>
+  .tw-blink {
+    animation: twBlink 1s step-end infinite;
+    color: #a855f7;
+  }
+
+  @keyframes twBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>
+
+<script define:vars={{ texts, id }}>
+  const el = document.getElementById(id);
+  if (el) {
+    let msgIdx = 0;
+    let charIdx = 0;
+    let deleting = false;
+
+    function tick() {
+      const msg = texts[msgIdx];
+
+      if (!deleting) {
+        if (charIdx < msg.length) {
+          charIdx++;
+          el.textContent = msg.slice(0, charIdx);
+          setTimeout(tick, 55);
+        } else {
+          setTimeout(() => { deleting = true; tick(); }, 2200);
+        }
+      } else {
+        if (charIdx > 0) {
+          charIdx--;
+          el.textContent = msg.slice(0, charIdx);
+          setTimeout(tick, 25);
+        } else {
+          deleting = false;
+          msgIdx = (msgIdx + 1) % texts.length;
+          setTimeout(tick, 300);
+        }
+      }
+    }
+
+    tick();
+  }
+</script>

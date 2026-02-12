@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CTAContact from '../components/CTAContact.astro';
 import { founders, siteConfig } from '../data';
+import TerminalTypewriter from '../components/TerminalTypewriter.astro';
 
 const pageTitle = 'אודות | Focus AI - הסיפור שלנו';
 const pageDescription = 'הכירו את הצוות מאחורי Focus AI - שני מנהלים בכירים שהחליטו לגשר על הפער בין אנשים לטכנולוגיה';
@@ -84,6 +85,19 @@ const milestones = [
         <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
         <span class="font-mono text-xs text-[#a855f7] uppercase tracking-[0.2em]">OUR_STORY</span>
       </div>
+
+      <TerminalTypewriter
+        id="tw-about"
+        texts={[
+          "loading origin_story.md",
+          "שני מנהלים, חזון אחד, הרבה קפה",
+          "git log --oneline | head -1 // where it all began",
+          "מגשרים על הפער בין אנשים לטכנולוגיה",
+          "founders.passion === Infinity // true",
+          "מאוניברסיטת חיפה והטכניון לעולם",
+          "console.log('hello, future')",
+        ]}
+      />
 
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6">
         <span class="text-[#f5f5fa]">הסיפור של</span>

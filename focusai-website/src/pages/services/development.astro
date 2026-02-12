@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 
 // Page metadata
 const pageTitle = 'Focus AI | פיתוח ואינטגרציה של פתרונות AI';
@@ -192,6 +193,19 @@ const serviceSchema = {
         <!-- Content -->
         <div>
           <p class="font-mono text-[#a855f7] text-sm mb-4 uppercase tracking-wider">[SERVICE_02] DEVELOPMENT & INTEGRATION</p>
+
+          <TerminalTypewriter
+            id="tw-dev"
+            texts={[
+              "connecting systems... all of them",
+              "בונים את הגשרים בין המערכות שלכם",
+              "n8n workflow deployed successfully",
+              "אוטומציות שחוסכות שעות ביום",
+              "SELECT * FROM boring_tasks WHERE automate=true",
+              "דשבורדים שנותנים תמונה מלאה",
+              "integration.complete(); // that was easy",
+            ]}
+          />
 
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
             <span class="block text-white">פיתוח</span>
