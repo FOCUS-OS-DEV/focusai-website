@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -R dist/* /home/focusaico/public_html/staging.focusai.co.il/
+    - /bin/cp -R dist/* /home/focusaico/public_html/
