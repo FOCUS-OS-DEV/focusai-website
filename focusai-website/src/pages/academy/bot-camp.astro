@@ -384,20 +384,20 @@ const courseSchema = {
 
       <!-- Title -->
       <div class="text-center max-w-4xl mx-auto">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 text-[#1a1a2e]">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 text-[#1a1a2e]">
           הכשרת מפתחי
         </h1>
-        <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-r from-[#a855f7] to-[#d946ef] bg-clip-text text-transparent">
+        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-[#a855f7] to-[#d946ef] bg-clip-text text-transparent">
           אוטומציות וסוכני AI
         </h2>
         <p class="text-lg md:text-xl text-[#4a4a6a] mb-8">
           בליווי אקדמי של היחידה ללימודי חוץ<br/>באוניברסיטת חיפה
         </p>
 
-        <!-- Badges -->
-        <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <!-- Badges - grid on mobile, flex-wrap on desktop -->
+        <div class="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2 sm:gap-3 mb-10 px-2 sm:px-0">
           {heroBadges.map((badge) => (
-            <span class="px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-[#4a4a6a] border border-[#e0d4f7] shadow-sm">
+            <span class="px-3 sm:px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-[#4a4a6a] border border-[#e0d4f7] shadow-sm text-center">
               {badge}
             </span>
           ))}
@@ -469,13 +469,13 @@ const courseSchema = {
               )}
             </div>
             <h3 class="text-xl font-bold text-[#1a1a2e] text-center mb-4">{item.title}</h3>
-            <ul class="space-y-2">
+            <ul class="space-y-2 flex flex-col items-center md:items-start">
               {item.features.map((feature) => (
-                <li class="flex items-start gap-2 text-sm text-[#4a4a6a]">
-                  <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <li class="flex items-center gap-2 text-sm text-[#4a4a6a]">
+                  <span>{feature}</span>
+                  <svg class="w-5 h-5 text-[#a855f7] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
-                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
