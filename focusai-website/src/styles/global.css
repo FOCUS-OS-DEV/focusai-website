@@ -139,6 +139,22 @@ body::before {
   z-index: 0;
 }
 
+/* Mobile: bigger, more visible continuous fingerprint */
+@media (max-width: 1023px) {
+  body::before {
+    width: 100vw;
+    height: 100vw;
+    max-width: none;
+    max-height: none;
+    opacity: 0.08;
+  }
+
+  /* Hide per-section fingerprints on mobile - they conflict with the global fixed one */
+  img[src*="grkja9"][aria-hidden="true"] {
+    display: none !important;
+  }
+}
+
 /* ===== RTL SUPPORT ===== */
 [dir="rtl"] {
   text-align: right;
