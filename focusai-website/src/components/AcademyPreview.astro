@@ -108,7 +108,7 @@ const courses = [
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6 mb-8 lg:items-center" data-animate="stagger">
       {courses.map((course, index) => (
         <div
-          class={`glass-card group ${course.featured ? 'featured' : ''}`}
+          class={`glass-card group ${course.featured ? 'featured' : ''} ${course.name === 'AI First' ? 'hidden lg:block' : ''}`}
           style={`--accent: ${course.color}; --accent-secondary: ${course.colorSecondary}; --delay: ${index * 0.1}s`}
         >
           {/* Featured badge - pulses and scales on card hover */}
