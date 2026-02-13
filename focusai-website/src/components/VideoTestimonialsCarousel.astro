@@ -58,7 +58,7 @@ const videoTestimonials = [
           <div class="aspect-wrapper">
             <div class="skeleton-shimmer"></div>
             <img class="poster-img" alt={testimonial.name} loading="lazy" />
-            <video playsinline muted preload="none"></video>
+            <video playsinline muted preload="none"><track kind="captions" default /></video>
             <div class="play-overlay">
               <div class="play-btn">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -105,7 +105,7 @@ const videoTestimonials = [
 
   <div class="lightbox-content">
     <div class="lightbox-video-container">
-      <video id="lightboxVideo" controls playsinline></video>
+      <video id="lightboxVideo" controls playsinline><track kind="captions" default /></video>
     </div>
     <div class="lightbox-info">
       <p id="lightboxName" class="lightbox-name"></p>
@@ -176,19 +176,27 @@ const videoTestimonials = [
     opacity: 1;
   }
 
-  /* Skeleton shimmer */
+  /* Skeleton shimmer (GPU-composited via transform) */
   .carousel-slide .skeleton-shimmer {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: linear-gradient(110deg, #1a1a24 30%, #252530 50%, #1a1a24 70%);
-    background-size: 200% 100%;
+    background: #1a1a24;
+    overflow: hidden;
+  }
+
+  .carousel-slide .skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(37, 37, 48, 0.6) 50%, transparent 70%);
     animation: shimmer 1.5s ease-in-out infinite;
+    will-change: transform;
   }
 
   @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 
   .carousel-slide.media-ready .skeleton-shimmer {
@@ -386,7 +394,7 @@ const videoTestimonials = [
     height: 28px;
     border-radius: 50%;
     border: none;
-    background-image: url('https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png');
+    background-image: url('https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_50/v1765571815/FOCUS_LOGO-06_2_grkja9.png');
     background-size: cover;
     background-position: center;
     cursor: pointer;
@@ -794,6 +802,7 @@ const videoTestimonials = [
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
       dot.setAttribute('data-dot', String(i));
+      dot.setAttribute('aria-label', 'עבור לעדות ' + (i + 1));
       dot.onclick = () => goToSlide(i);
       dotsContainer.appendChild(dot);
     }

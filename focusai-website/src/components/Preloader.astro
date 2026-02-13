@@ -16,11 +16,13 @@
     <div class="preloader-logo-wrap">
       <div class="preloader-glow"></div>
       <img
-        src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+        src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
         alt="Focus AI"
         class="preloader-logo"
         width="120"
         height="120"
+        fetchpriority="high"
+        loading="eager"
       />
       <!-- Scan line -->
       <div class="preloader-scanline"></div>
@@ -107,7 +109,7 @@
   function updateProgress() {
     loaded++;
     var pct = Math.round((loaded / total) * 100);
-    if (progressBar) progressBar.style.width = pct + '%';
+    if (progressBar) progressBar.style.transform = 'scaleX(' + (pct / 100) + ')';
     if (loaded >= total) finishLoading();
   }
 
@@ -126,7 +128,7 @@
     allDone = true;
     clearInterval(msgInterval);
     if (statusText) statusText.textContent = 'YOUR_AI_PARTNER_';
-    if (progressBar) progressBar.style.width = '100%';
+    if (progressBar) progressBar.style.transform = 'scaleX(1)';
 
     var elapsed = Date.now() - startTime;
     var remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
@@ -250,12 +252,15 @@
   }
 
   .preloader-progress-bar {
-    width: 0%;
+    width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #a855f7, #c084fc);
     box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
     border-radius: 1px;
-    transition: width 0.3s ease-out;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
   }
 
   .preloader-status {

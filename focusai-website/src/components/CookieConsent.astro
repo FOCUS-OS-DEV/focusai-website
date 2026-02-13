@@ -131,15 +131,8 @@
   // Cookie Consent Script
   const CONSENT_KEY = 'focus_ai_cookie_consent';
 
-  interface CookieConsent {
-    essential: boolean;
-    analytics: boolean;
-    marketing: boolean;
-    timestamp: number;
-  }
-
   // Check if consent already given
-  function getConsent(): CookieConsent | null {
+  function getConsent() {
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent) {
       return JSON.parse(consent);
@@ -148,14 +141,14 @@
   }
 
   // Save consent
-  function saveConsent(consent: CookieConsent) {
+  function saveConsent(consent) {
     localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
     applyConsent(consent);
     hideBanner();
   }
 
   // Apply consent settings
-  function applyConsent(consent: CookieConsent) {
+  function applyConsent(consent) {
     // Enable/disable analytics based on consent
     if (consent.analytics) {
       // Load Google Analytics or other analytics here
@@ -254,8 +247,8 @@
 
       // Set toggle states based on current consent
       const currentConsent = getConsent();
-      const analyticsToggle = document.getElementById('analytics-toggle') as HTMLInputElement;
-      const marketingToggle = document.getElementById('marketing-toggle') as HTMLInputElement;
+      const analyticsToggle = document.getElementById('analytics-toggle');
+      const marketingToggle = document.getElementById('marketing-toggle');
 
       if (analyticsToggle) {
         analyticsToggle.checked = currentConsent?.analytics ?? false;
@@ -270,8 +263,8 @@
 
     // Save preferences button
     document.getElementById('save-preferences')?.addEventListener('click', () => {
-      const analyticsToggle = document.getElementById('analytics-toggle') as HTMLInputElement;
-      const marketingToggle = document.getElementById('marketing-toggle') as HTMLInputElement;
+      const analyticsToggle = document.getElementById('analytics-toggle');
+      const marketingToggle = document.getElementById('marketing-toggle');
 
       saveConsent({
         essential: true,
