@@ -88,16 +88,9 @@ const processSteps = [
           style={`--card-color: ${service.color}; --delay: ${index * 0.1}s`}
         >
           <div class="card-surface">
-            {/* Metric badge */}
-            <div class="metric-badge">
-              <span class="metric-value">{service.metric}</span>
-              <span class="metric-label">{service.metricLabel}</span>
-            </div>
-
             {/* Header */}
             <div class="card-header">
               <div class="icon-wrapper" set:html={service.icon}></div>
-              <span class="card-id">#{service.id}</span>
             </div>
 
             {/* Content */}
@@ -224,31 +217,9 @@ const processSteps = [
     box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
   }
 
-  .metric-badge {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    text-align: center;
-  }
-
-  .metric-value {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--card-color);
-  }
-
-  .metric-label {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
   .card-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 1.5rem;
   }
 
@@ -264,11 +235,6 @@ const processSteps = [
     color: var(--card-color);
   }
 
-  .card-id {
-    font-family: monospace;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.3);
-  }
 
   .card-content {
     flex-grow: 1;
