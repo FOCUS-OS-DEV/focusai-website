@@ -51,7 +51,7 @@ export const founders: TeamMember[] = [
 סמנכ"ל תפעול לשעבר ברשתות קמעונאיות מובילות, מביא פרספקטיבה עסקית לפתרונות טכנולוגיים.
 מתמחה בפיתוח עסקי ויישום פתרונות AI עם הבנה עמוקה של צרכי הלקוח.
 מרצה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.`,
-    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1770364984/IMG_4898.JPG_uate4o.jpg",
+    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1770364910/IMG_4945.JPG_s0kdkg.jpg",
     credentials: ["אוניברסיטת חיפה", "טכניון", "ניהול תפעול"],
     status: "ONLINE",
     social: {

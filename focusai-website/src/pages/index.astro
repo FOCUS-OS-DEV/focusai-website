@@ -49,6 +49,56 @@ import RelatedContent from '../components/RelatedContent.astro';
 
   <Footer slot="footer" />
 
+  <!-- Webinar Popup -->
+  <div id="webinar-popup" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-500" style="background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);">
+    <div class="relative w-full max-w-md bg-[#12121a] border border-[#a855f7]/40 rounded-2xl shadow-[0_0_60px_rgba(168,85,247,0.3)] overflow-hidden transform scale-90 transition-transform duration-500" id="webinar-popup-card">
+      <!-- Close button -->
+      <button id="webinar-popup-close" class="absolute top-3 left-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors" aria-label="סגירה">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Purple gradient top -->
+      <div class="h-1 bg-gradient-to-r from-[#a855f7] via-[#c084fc] to-[#e879f9]"></div>
+
+      <div class="p-6 text-center">
+        <!-- Chavobot gift image -->
+        <img
+          src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1770947684/f25e86b9-3f3c-400f-abf1-cb242a673cd4_p8fmzp.png"
+          alt="חבובוט מחזיק במתנה"
+          class="w-40 h-40 mx-auto mb-4 object-contain drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+        />
+
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#a855f7]/10 border border-[#a855f7]/30 rounded-full mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="text-xs font-semibold text-[#a855f7]">וובינר במתנה</span>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-xl font-black text-white mb-2">
+          וובינר סוכני AI
+        </h3>
+        <p class="text-sm text-[#b0b0c0] mb-6 leading-relaxed">
+          גלו איך סוכני AI משנים את כללי המשחק.<br/>
+          וובינר מעשי - בחינם, במתנה מאיתנו.
+        </p>
+
+        <!-- CTA Button -->
+        <a
+          href="https://focusai.co.il/%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8-%D7%91%D7%9E%D7%AA%D7%A0%D7%94-%D7%A1%D7%95%D7%9B%D7%A0%D7%99-%D7%91%D7%99%D7%A0%D7%94-%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA/"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-[#a855f7] text-[#0a0a0f] font-bold rounded-full hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:scale-105 transition-all duration-300"
+        >
+          <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+          שמרו לי מקום
+        </a>
+
+        <p class="text-[10px] text-white/30 mt-4">ללא התחייבות. ניתן לבטל בכל עת.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Header hide/show on scroll (no GSAP needed) -->
   <script slot="scripts">
     let lastScroll = 0;
@@ -69,5 +119,45 @@ import RelatedContent from '../components/RelatedContent.astro';
         lastScroll = currentScroll;
       }, { passive: true });
     }
+
+    // Webinar popup - show after 7 seconds, once per session
+    (function() {
+      var POPUP_KEY = 'webinar_popup_shown';
+      if (sessionStorage.getItem(POPUP_KEY)) return;
+
+      setTimeout(function() {
+        var popup = document.getElementById('webinar-popup');
+        var card = document.getElementById('webinar-popup-card');
+        if (!popup) return;
+
+        popup.style.opacity = '1';
+        popup.style.pointerEvents = 'auto';
+        if (card) card.style.transform = 'scale(1)';
+
+        sessionStorage.setItem(POPUP_KEY, '1');
+      }, 7000);
+
+      // Close popup
+      document.addEventListener('click', function(e) {
+        var target = e.target as HTMLElement;
+        var popup = document.getElementById('webinar-popup');
+        var card = document.getElementById('webinar-popup-card');
+        if (!popup) return;
+
+        var closeBtn = document.getElementById('webinar-popup-close');
+        if (closeBtn && (closeBtn === target || closeBtn.contains(target))) {
+          popup.style.opacity = '0';
+          popup.style.pointerEvents = 'none';
+          if (card) card.style.transform = 'scale(0.9)';
+        }
+
+        // Close on backdrop click
+        if (target === popup) {
+          popup.style.opacity = '0';
+          popup.style.pointerEvents = 'none';
+          if (card) card.style.transform = 'scale(0.9)';
+        }
+      });
+    })();
   </script>
 </BaseLayout>
