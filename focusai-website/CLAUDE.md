@@ -1,14 +1,16 @@
 # Focus AI Website - System Prompt
 
 > This file contains all instructions and context for Claude Code.
-> **Last Updated:** 2026-02-10
+> **Last Updated:** 2026-02-13
 
 ---
 
 ## Quick Links
 
-- [Full Design System](./docs/DESIGN_SYSTEM.md) - Complete design documentation
+- [Design System](./docs/DESIGN_SYSTEM.md) - Full design documentation (partially outdated - refer to this file for latest)
 - [Business Model](../memory/focusai-business-model.md) - Company intel & user journeys
+- [Assets Library](../memory/focusai-assets.md) - All Cloudinary asset references
+- [Deployment Flow](../memory/deployment-workflow.md) - cPanel deployment process
 
 ---
 
@@ -19,46 +21,81 @@
 | Attribute | Value |
 |-----------|-------|
 | Domain | focusai.co.il |
-| Theme | **Cyberpunk Terminal** (dark, purple neon) |
-| Language | Hebrew (RTL) |
-| Framework | Astro 5.x + React |
+| Theme | **Apple Glassmorphism + Cyberpunk** (dark, purple neon, glass cards) |
+| Slogan | **Your AI Partner** |
+| Language | Hebrew (RTL native) |
+| Framework | Astro 5.x (SSG only!) + React 19.x (islands) |
 | Styling | Tailwind CSS 4.x |
+| User Pref | **תענה בעברית** (respond in Hebrew) |
 
 ---
 
-## Current Design Theme
+## Current Design Theme (Updated 2026-02-11)
 
-### Cyberpunk Terminal Aesthetic
+### Apple Glassmorphism + Cyberpunk
 
 ```
 Background:    #0a0a0f (deep void)
-Cards:         #12121a (dark gray)
+Cards:         bg-white/[0.03] backdrop-blur-xl (glassmorphism)
+Card Border:   border-white/[0.08]
+Card Radius:   rounded-2xl (NO clip-path chamfered corners!)
 Primary:       #a855f7 (purple)
 Accent:        #c084fc (light purple)
-Text:          #f5f5fa (bright white)
+Text Primary:  #f5f5fa (bright white)
+Text Secondary:#9090a8 (muted)
+Text Tertiary: #b0b0c0 (labels)
 ```
 
-**Visual Elements:**
-- Terminal headers with traffic light dots (red, yellow, purple)
-- Clip-path chamfered corners on cards
-- Scan line overlay effect
-- Purple glow effects on hover
-- Grid pattern backgrounds
-- Fingerprint watermark (body::before)
+### CRITICAL Design Rules
+
+- **NO traffic light dots** (red/yellow/purple trio) - REMOVED! Use single purple pulse dot instead
+- **NO clip-path chamfered corners** - use `rounded-2xl` / `rounded-xl`
+- **NO badges above hero title** - user rejected this pattern
+- Glass headers use: single purple pulse dot + subtle mono label
+- Desktop zoom: `zoom: 0.85` on html for 1024px+
+- Body fingerprint watermark: fixed, z-index 0, pointer-events none
 
 ---
 
 ## Tech Stack
 
 ```
-Framework:      Astro 5.x (SSG only!)
+Framework:      Astro 5.x (SSG only - NO SSR!)
 Styling:        Tailwind CSS 4.x
-Interactivity:  React 19.x (islands)
-Animations:     GSAP + ScrollTrigger + Framer Motion
-Smooth Scroll:  Lenis
+Interactivity:  React 19.x (islands - minimal usage)
+Animations:     GSAP + ScrollTrigger (deferred loading)
+Smooth Scroll:  Lenis (deferred with requestIdleCallback)
 Icons:          Lucide + MDI (astro-icon)
-Images:         Cloudinary + Sharp
+Images:         Cloudinary CDN + Sharp
+Analytics:      GTM (GTM-M33PM5WV) + Microsoft Clarity (vddsj5y6bj)
+Forms:          FormSubmit.co (AJAX) → Email
 ```
+
+---
+
+## Business Model (CRITICAL)
+
+Focus AI is **NOT just a training company**. Full-service AI consultancy:
+- **70%** Academy (courses)
+- **30%** B2B Services (consulting, integration)
+
+### Two User Journeys
+1. **B2B Path**: Organizations wanting AI transformation → `/ai-agents`
+2. **Academy Path**: Individuals wanting AI training → `/academy`
+
+### Core Services
+1. Strategic Consulting
+2. AI Agents & Bots
+3. Automations (N8N, Make, Zapier)
+4. Dashboards & Analytics
+5. Academy (Bot-Camp, AI Ready, AI First)
+
+### Differentiators
+- Learn from practitioners (not theorists)
+- Academic backing (University of Haifa, Technion)
+- 2-3 instructors per session
+- 30-day proven ROI
+- Active alumni community
 
 ---
 
@@ -68,220 +105,327 @@ Images:         Cloudinary + Sharp
 focusai-website/
 ├── src/
 │   ├── components/
-│   │   ├── ui/           # Aceternity UI (React)
-│   │   ├── Header.astro
+│   │   ├── ui/                          # Aceternity UI (React islands)
+│   │   ├── Header.astro                 # Glassmorphism floating nav
 │   │   ├── Footer.astro
-│   │   ├── HeroSection.tsx      # React - Hero + Chavobot
-│   │   ├── ClientLogos.tsx      # React - Logo carousel
-│   │   ├── StorySection.astro   # Problem/Solution/Proof
-│   │   ├── AcademyPreview.astro # Course cards
-│   │   ├── ServicesPreview.astro
-│   │   ├── Testimonials.astro
-│   │   ├── TeamFounders.astro
-│   │   ├── CTAContact.astro
-│   │   └── ...
+│   │   ├── HeroSection.astro            # Hero (Pure Astro+CSS, NO React!)
+│   │   ├── Preloader.astro              # Site preloader with progress bar
+│   │   ├── AcademyPreview.astro         # Course cards (homepage)
+│   │   ├── AcademyIntro.astro           # Academy intro section
+│   │   ├── ServicesPreview.astro         # Services grid
+│   │   ├── StorySection.astro           # Problem/Solution/Proof
+│   │   ├── Testimonials.astro           # Text testimonials
+│   │   ├── VideoTestimonialsCarousel.astro # Video testimonial carousel
+│   │   ├── PhoneTestimonials.astro      # Phone screenshot testimonials
+│   │   ├── StudentTestimonials.astro    # Student feedback
+│   │   ├── TeamFounders.astro           # Founders section
+│   │   ├── CTAContact.astro             # Contact form CTA
+│   │   ├── ClientLogos.tsx              # Logo carousel (React island)
+│   │   ├── ClientLogosGrid.astro        # Logo grid (static)
+│   │   ├── TechLogosMarquee.astro       # Tech logos scroll
+│   │   ├── TerminalTypewriter.astro     # Reusable typewriter effect
+│   │   ├── TerminalText.tsx             # Terminal text (React, legacy)
+│   │   ├── WhatsAppFloat.astro          # Floating WhatsApp button
+│   │   ├── WhatsAppCommunity.astro      # WhatsApp community CTA
+│   │   ├── BackToTop.astro              # Back to top button
+│   │   ├── CookieConsent.astro          # GDPR cookie consent
+│   │   ├── Analytics.astro              # GTM + Clarity (head)
+│   │   ├── AnalyticsBody.astro          # GTM noscript (body)
+│   │   ├── Breadcrumbs.astro            # SEO breadcrumbs
+│   │   ├── RelatedContent.astro         # Related articles
+│   │   ├── SyllabusGate.tsx             # Form gate (React)
+│   │   ├── SyllabusViewer.tsx           # Gallery viewer (React)
+│   │   └── SyllabusButton.tsx           # Direct syllabus access (React)
+│   ├── content/
+│   │   └── blog/                        # Blog articles (Markdown)
 │   ├── data/
-│   │   ├── config.ts     # Site constants
-│   │   └── team.ts       # Founders data
+│   │   ├── config.ts                    # Site constants (contact, social, analytics)
+│   │   ├── clients.ts                   # Client logos data
+│   │   ├── team.ts                      # Founders data
+│   │   └── index.ts
 │   ├── layouts/
-│   │   └── BaseLayout.astro
-│   ├── pages/            # Routes
+│   │   └── BaseLayout.astro             # Base HTML layout + SEO + Schema.org
+│   ├── pages/                           # Routes (see Page Routes below)
 │   └── styles/
-│       └── global.css    # Design system
+│       └── global.css                   # Global styles + Tailwind imports
 ├── docs/
-│   └── DESIGN_SYSTEM.md  # Full documentation
-└── public/
+│   └── DESIGN_SYSTEM.md                 # Design documentation (v1.0, 2026-02-06)
+├── public/
+│   ├── .htaccess                        # Apache security headers
+│   ├── robots.txt
+│   └── favicon files
+└── CLAUDE.md                            # This file
 ```
 
 ---
 
 ## Page Routes
 
-| Route | Status | Component |
-|-------|--------|-----------|
-| `/` | Done | Homepage |
-| `/about` | Done | About page |
-| `/services/*` | Done | Service pages |
-| `/academy/*` | Done | Course pages |
-| `/sadnaot` | Done | Workshops |
-| `/tools` | Done | AI Tools |
-| `/blog` | Done | Blog index |
-| `/privacy` | Done | Privacy policy |
-| `/terms` | Done | Terms of service |
+| Route | Status | Description |
+|-------|--------|-------------|
+| `/` | Live | Homepage - hero, services, academy preview, testimonials |
+| `/about` | Live | About page - founders, mission, partners |
+| `/academy` | Live | Bot-Camp course page (main academy landing) |
+| `/academy/ai-ready` | Live | AI Ready course page |
+| `/academy/_drafts/ai-first` | Draft | AI First course (NOT routed) |
+| `/academy/thank-you` | Live | Form submission thank-you |
+| `/ai-agents` | Live | AI Agents service page |
+| `/ai-workshop` | Live | AI Workshops page (redirects to external link) |
+| `/services/strategy` | Live | Strategic consulting |
+| `/services/ai-agents` | Live | AI agents service detail |
+| `/services/development` | Live | Development services |
+| `/tools` | Live | AI Tools directory |
+| `/blog` | **Dev only** | Blog index (NOT deployed to production yet!) |
+| `/blog/[slug]` | **Dev only** | Blog article pages |
+| `/privacy` | Live | Privacy policy |
+| `/terms` | Live | Terms of service |
+
+### Important Route Notes
+
+- **`/blog` is NOT live on production** - removed from navigation. Available on localhost only.
+- **`/ai-workshop`** redirects to external registration link
+- **AI First card** is hidden on mobile in homepage (`hidden lg:block`)
+- **Navigation** does NOT include blog link (leads to 404 on production)
 
 ---
 
-## Brand Assets (Cloudinary)
+## Navigation Structure
 
-| Asset | URL |
-|-------|-----|
-| Logo | `v1765265415/2_fxdcio.png` |
-| Fingerprint | `v1765571815/FOCUS_LOGO-06_2_grkja9.png` |
-| Chavobot - Standing | `v1738167285/Bot_pose_1_-_stand_1_uzaxed.png` |
-| Chavobot - Laptop | `v1738167278/Bot_pose_11_-_sitting_on_laptop_wjbzwi.png` |
+```
+Header navLinks:
+├── בית (/)
+├── אקדמיה (#academy) ← dropdown
+│   ├── AI Ready (/academy/ai-ready)
+│   └── Bot-Camp (/academy)
+├── סוכני AI (/ai-agents)
+├── סדנאות (/ai-workshop)
+├── כלי AI (/tools) ← dropdown
+└── אודות (/about)
+```
 
-Base URL: `https://res.cloudinary.com/dfudxxzlj/image/upload/`
+---
+
+## Hero Section Architecture
+
+The hero (`HeroSection.astro`) is **pure Astro + CSS** - no React, no Framer Motion (~308KB saved).
+
+### Key Elements
+- **Floating particles**: CSS-only, `text-white/40` with purple glow `text-shadow`, font-size 13-16px
+- **Typewriter effect**: Vanilla JS, 16 messages, random start index
+- **Typewriter timing**: type=50ms, delete=30ms, **pause=3500ms**, gap=200ms
+- **"Your AI Partner"**: Displayed as subtitle under "Focus AI" (`font-mono text-[#9090a8]/70`)
+- **CTA buttons**: "אקדמיה" → `/academy`, "פיתוח מערכות" → `/ai-agents`
+- **Chavobot mascot**: Responsive with srcset (420w mobile, 800w desktop)
+- **Scroll fade**: DISABLED - hero stays fully visible when scrolling
+- **Fingerprint**: Decorative background image behind text, opacity 0.15
+
+---
+
+## Blog System (Dev Only)
+
+### Architecture
+- Content collection using Astro's `getCollection('blog')`
+- Schema: `content.config.ts` defines title, description, pubDate, heroImage, author, category, tags, difficulty
+- Categories: `news` | `guide` | `tutorial`
+- Template: `pages/blog/[...slug].astro` with CTA form at bottom
+
+### Existing Articles
+| Slug | Title | Category |
+|------|-------|----------|
+| `n8n-funding-ai-automation` | n8n גייסה 180 מיליון דולר | news |
+| `what-is-ai-agent` | מה זה סוכן AI | guide |
+| `prompt-engineering-guide` | מדריך פרומפט אנג'ינירינג | guide |
+| `automation-examples` | דוגמאות אוטומציה | guide |
+| `top-10-ai-tools-2025` | 10 כלי AI מובילים | guide |
+
+### Content Agent
+Custom agent at `.claude/agents/content-from-url.md` for creating blog articles from source URLs.
+
+### Article Template Pattern
+- Hebrew content, 800-1500 words
+- Include Bot-Camp banner CTA (HTML block with inline styles)
+- End with CTA to Focus AI services
+- Tags for filtering
+- Hero images via Cloudinary
+
+---
+
+## Component Patterns
+
+### Glass Card (Current Standard)
+
+```html
+<div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+  <!-- Glass header (optional) -->
+  <div class="px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl">
+    <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+    <span class="font-mono text-xs text-[#b0b0c0]/60">Label</span>
+  </div>
+  <div class="p-6">Content</div>
+</div>
+```
+
+### Badge/Tag (Current Standard)
+
+```html
+<div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-4 py-2">
+  <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+  <span class="text-xs text-[#a855f7] uppercase tracking-[0.15em]">TEXT</span>
+</div>
+```
+
+### Section Title
+
+```html
+<h2 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-white">
+  כותרת <span class="text-[#a855f7]">מודגשת</span>
+</h2>
+```
+
+### TerminalTypewriter Usage
+
+```astro
+<TerminalTypewriter
+  id="unique-id"
+  texts={["message 1", "message 2", "..."]}
+/>
+```
+Timing: type 55ms, delete 25ms, pause 3500ms, gap 300ms.
 
 ---
 
 ## Media Optimization (CRITICAL)
 
-### Cloudinary URL Transforms
-
-**ALWAYS add optimization transforms when adding new images/videos to the site!**
-
-| Transform | Purpose |
-|-----------|---------|
-| `q_auto` | Auto quality (reduces file size) |
-| `f_auto` | Auto format (WebP for supporting browsers) |
-| `w_XXX` | Resize width (use display size) |
-
-### Image URL Pattern
+### Cloudinary URL Pattern
 
 ```
 https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_WIDTH/vXXXXX/filename.jpg
 ```
 
-### Recommended Widths by Use Case
+**ALWAYS add `q_auto,f_auto` transforms!**
+
+### Recommended Widths
 
 | Use Case | Width |
 |----------|-------|
 | Hero/Full-width | `w_1200` |
-| Classroom/Large | `w_1024` |
-| Chavobot/Mascot | `w_800` |
-| Fingerprint BG | `w_700` |
-| Testimonial screenshots | `w_500` |
+| Large images | `w_900` |
+| Chavobot/Mascot | `w_800` (desktop), `w_420` (mobile via srcset) |
+| Classroom/Academy | `w_700` |
+| Testimonial screenshots | `w_300` |
 | Founder photos | `w_400` |
-| Gallery thumbnails | `w_200` |
 | Logos | `w_200` |
-| Badges/Small icons | `w_120` |
+| Badges/Small | `w_120` |
+| Decorative fingerprints | `w_400` |
 
 ### Video Poster Pattern
 
-For video thumbnails, extract frame from video:
 ```
 https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/vXXXXX/video.jpg
 ```
 
-### Preconnect (Already in BaseLayout)
+### Preconnect (in BaseLayout)
 
 ```html
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 <link rel="dns-prefetch" href="https://res.cloudinary.com">
 ```
 
-### Checklist for New Media
-
-- [ ] Compress videos before upload (use HandBrake or similar)
-- [ ] Add `q_auto,f_auto` transforms
-- [ ] Set appropriate `w_` for display size
-- [ ] Use `loading="lazy"` on images below fold
-- [ ] Verify image displays correctly after transforms
-
 ---
 
-## Component Patterns
+## Responsive Design
 
-### Terminal Card
+| Device | Prefix | Notes |
+|--------|--------|-------|
+| Mobile | (default) | 1 column, touch targets 44px+, `clamp()` typography |
+| Tablet | `md:` | 2 columns |
+| Desktop | `lg:` | 3-4 columns, `zoom: 0.85` on html |
 
-```astro
-<div class="bg-[#12121a] border border-[#2a2a3a]"
-     style="clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));">
-  <!-- Terminal header -->
-  <div class="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a] bg-[#0a0a0f]/50">
-    <div class="flex items-center gap-2">
-      <span class="w-2.5 h-2.5 rounded-full bg-[#ff3366]"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-[#ffff00]"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-[#a855f7]"></span>
-    </div>
-    <span class="font-mono text-xs text-[#b0b0c0]">ID_HERE</span>
-  </div>
-  <div class="p-6">Content</div>
-</div>
-```
-
-### Badge/Tag
-
-```astro
-<div class="inline-flex items-center gap-3 px-4 py-2 bg-[#12121a] border border-[#a855f7]/30">
-  <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
-  <span class="font-mono text-sm text-[#a855f7] uppercase tracking-[0.15em]">TEXT</span>
-</div>
-```
-
----
-
-## Responsive Rules
-
-| Device | Prefix | Columns |
-|--------|--------|---------|
-| Mobile | (default) | 1 |
-| Tablet | `md:` | 2 |
-| Desktop | `lg:` | 3-4 |
-
-**Critical:**
-- Mobile-first approach
-- No hidden elements without alternatives
-- Touch targets min 44x44px
-- Typography: use `clamp()` for fluid sizing
+### Mobile-Specific Rules
+- AI First card hidden on mobile homepage (`hidden lg:block`)
+- Phone testimonial images: `w_300` (not `w_500`)
+- Hero chavobot: `max-w-[420px]` on mobile
+- All headings use `clamp()` for fluid sizing
+- Video lightbox: special iOS handling for autoplay
 
 ---
 
 ## Animation System
 
-**GSAP Triggers:**
+### GSAP (Deferred)
 ```javascript
 data-animate="fade-up"
 data-animate="fade-right"
 data-animate="fade-left"
 ```
+Loaded via `requestIdleCallback` to avoid blocking.
 
-**CSS Classes:**
-- `.animate-pulse` - pulsing glow
-- `.animate-float` - floating motion
-- `.animate-blink` - cursor blink
+### CSS Animations
+- `.animate-pulse` - pulsing glow (purple dot)
+- Hero particles: `@keyframes heroFloat` (CSS-only)
+- Hero entrance: `@keyframes heroFadeUp` with staggered delays
+- Typewriter cursor: `@keyframes heroBlink`
 
----
-
-## Deployment Rules
-
-### STATIC ONLY - Non-negotiable!
-
-```
-npm run build  →  dist/  →  cPanel  →  Live
-```
-
-**Rules:**
-1. No Node.js on server
-2. No SSR - SSG only
-3. No API routes - use n8n webhooks
-4. All libraries must compile to static
-
-**Before adding any library:**
-- [ ] Works with Astro static build?
-- [ ] No runtime Node.js required?
-- [ ] Output is HTML/CSS/JS only?
+### Performance Notes
+- Prefer `transform` and `opacity` for animations (GPU composited)
+- Avoid animating `width`, `box-shadow`, `background-position` (non-composited)
+- Shimmer effects should use `translateX` not `background-position`
 
 ---
 
-## Commands
+## Deployment
 
-```bash
-npm run dev      # Development
-npm run build    # Production build
-npm run preview  # Preview build
+### PRIMARY: cPanel (Apache)
+
 ```
+1. npm run build          ← MANDATORY! cPanel doesn't build!
+2. git add src/ dist/     ← ALWAYS include dist/!
+3. git commit + push
+4. User pulls from Git in cPanel
+5. Site live at focusai.co.il
+```
+
+**CRITICAL:**
+- `dist/` MUST be included in every commit
+- cPanel runs Apache with `.htaccess` for security headers
+- No Node.js on server - static files only
+- Vercel also auto-deploys but is NOT the primary target
+
+### Security Headers (public/.htaccess)
+- HSTS (1 year)
+- X-Frame-Options: SAMEORIGIN
+- COOP: same-origin-allow-popups
+- X-Content-Type-Options: nosniff
+- Referrer-Policy: strict-origin-when-cross-origin
+- Permissions-Policy: camera/mic/geo disabled
+
+### Pre-Deployment Checklist
+- [ ] `npm run build` passes
+- [ ] No console errors in dev
+- [ ] dist/ included in commit
+- [ ] No sensitive files (.env, credentials)
+
+---
+
+## Brand Assets (Cloudinary)
+
+| Asset | Public ID |
+|-------|-----------|
+| Logo (light bg) | `v1765265415/2_fxdcio.png` |
+| Logo (dark bg) | `v1765265416/5_mckdsj.png` |
+| Fingerprint | `v1765571815/FOCUS_LOGO-06_2_grkja9.png` |
+| Chavobot (new) | `v1771022344/36c7efb5-d099-4cb1-94fe-1bd896f53cef_ivfe4n.png` |
+
+Base URL: `https://res.cloudinary.com/dfudxxzlj/image/upload/`
 
 ---
 
 ## Founders (Real People)
 
-| Name | Role | Image |
-|------|------|-------|
-| **Shahar Dadia** | CEO & AI Strategy | v1764519896/WhatsApp... |
-| **Unil Sahar** | COO & Business Dev | v1770364984/IMG_4898... |
-
-Both are instructors at University of Haifa & Technion.
+| Name | Role | Background |
+|------|------|------------|
+| **Shahar Dadia** | CEO & AI Strategy | University of Haifa + Technion instructor |
+| **Unil Sahar** | COO & Business Dev | University of Haifa + Technion instructor |
 
 ---
 
@@ -296,103 +440,114 @@ Both are instructors at University of Haifa & Technion.
 | Facebook | focusai.co.il |
 | TikTok | @focus.ai.il |
 
----
-
-## Key Differentiators
-
-1. Learn from practitioners (not theorists)
-2. Academic backing (U of Haifa, Technion)
-3. 2-3 instructors per session
-4. Active alumni community
-5. End-to-end service
-6. 30-day proven ROI
+Centralized in `src/data/config.ts`.
 
 ---
 
 ## Syllabus System (Lead Capture)
 
-### Components
-
 | Component | Purpose |
 |-----------|---------|
-| `SyllabusGate.tsx` | Form gate - requires form submission before viewing |
-| `SyllabusViewer.tsx` | Gallery modal with keyboard nav & thumbnails |
-| `SyllabusButton.tsx` | Direct access button (no form gate) |
+| `SyllabusGate.tsx` | Form gate - requires submission before viewing |
+| `SyllabusViewer.tsx` | Gallery modal with keyboard nav |
+| `SyllabusButton.tsx` | Direct access (no gate) |
 
-### Flow (SyllabusGate)
-
-1. User clicks "לקבלת הסילבוס"
-2. Modal opens with form (name, phone, email)
-3. Form submits to FormSubmit.co → info@focusai.co.il
-4. Syllabus viewer opens immediately
-
-### Hidden Syllabus Pages
-
-Each course has a hidden syllabus page accessible only via direct link:
-
-| Course | Syllabus Page |
-|--------|---------------|
-| Bot-Camp | `/academy/bot-camp/syllabus` |
-| AI-Ready | `/academy/ai-ready/syllabus` (TODO) |
-| AI-First | `/academy/ai-first/syllabus` (TODO) |
-
-### Syllabus Images (Cloudinary)
-
-```javascript
-// Bot-Camp
-const syllabusImages = [
-  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470074/111_kyis5b.jpg',
-  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470080/222_enxevc.jpg',
-  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470082/333_odscrk.jpg',
-  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470083/444_icwizs.jpg',
-  'https://res.cloudinary.com/dfudxxzlj/image/upload/v1770470088/555_djukfo.jpg'
-];
-```
+Flow: Click → Form (name, phone, email) → FormSubmit.co → Syllabus viewer opens.
 
 ---
 
 ## Forms & Webhooks
 
-**Current:** FormSubmit.co (AJAX) → Email
+**Current:** FormSubmit.co (AJAX) → Email (office@focusai.co.il)
 **Future:** N8N webhooks (when ready)
 
+Forms exist on:
+- Homepage CTA
+- Bot-Camp page (mid-page + bottom)
+- AI Agents page
+- Blog article pages (bottom CTA)
+- Academy thank-you page
+
+All forms include privacy/terms checkbox.
+
 ---
 
-## Recent Updates
+## Self-Update Rule (CRITICAL)
+
+**CLAUDE.md must stay current.** After making significant changes to the project, update this file:
+
+- New pages/routes → update Page Routes table
+- Design changes → update Design Theme section
+- New components → update Project Structure
+- Architecture decisions → add to relevant section
+- Navigation changes → update Navigation Structure
+- New blog articles → update Blog System table
+- Config/deployment changes → update relevant section
+- Add entry to Recent Changes Log with date
+
+This ensures every new session starts with accurate context.
+
+---
+
+## Commands
+
+```bash
+npm run dev      # Development server (localhost:4321)
+npm run build    # Production build → dist/
+npm run preview  # Preview production build
+```
+
+---
+
+## Recent Changes Log
+
+### 2026-02-13
+- Removed duplicate "Your AI Partner" from mono comment line
+- Increased typewriter display time: 2000ms → 3500ms (hero + blog)
+- Added "Your AI Partner" as subtitle under "Focus AI" in hero
+- Randomized typewriter start index
+- Added new typewriter messages (total 16)
+- Removed "חדשות AI" from navigation (blog not live yet)
+- Hero CTA: "אקדמיה" → `/academy`, "פיתוח מערכות" → `/ai-agents`
+- AI First card hidden on mobile homepage
+- Added "המסלולים שלנו" section title on Bot-Camp page
+- Hero scroll fade completely removed (stays fully visible)
+- Hero particles: whiter (text-white/40), larger (13-16px), purple glow
+- Blog: new article (n8n funding), article template with CTA form
+
+### 2026-02-11
+- Design theme updated to Apple Glassmorphism (from old cyberpunk terminal)
+- Removed traffic light dots globally
+- Removed clip-path chamfered corners globally
+- Glass card pattern established (bg-white/[0.03] + backdrop-blur)
 
 ### 2026-02-10
-- Added Media Optimization section to CLAUDE.md
-- Video testimonials updated to compressed versions
-- Image optimization with Cloudinary transforms (q_auto, f_auto, w_XXX)
-- Added preconnect hints for Cloudinary CDN
-- Client logos grid component (ClientLogosGrid.astro)
-- Carousel navigation dots redesigned (minimal elegant style)
+- Media optimization: Cloudinary transforms, image right-sizing
+- Video testimonials compressed
+- Client logos grid redesigned
+- PageSpeed optimizations (LCP, accessibility)
 
 ### 2026-02-07
-- Created Syllabus system (SyllabusGate, SyllabusViewer, SyllabusButton)
-- Added Chavobot character to Bot-Camp hero
-- Added fingerprint background to Bot-Camp hero
-- Bot-Camp page redesigned with cyberpunk theme
-- Added "למי מתאימה התוכנית" section
+- Syllabus system created
+- Chavobot in Bot-Camp hero
+- Bot-Camp page cyberpunk redesign
 
 ### 2026-02-06
-- Created comprehensive DESIGN_SYSTEM.md
-- Updated CLAUDE.md to current state
-- Header dropdown menus with descriptions
-
-### 2026-02-05
-- Aceternity UI integration
-- Framer Motion animations
-- Footer updates
+- Created DESIGN_SYSTEM.md
+- Header dropdown menus
 
 ---
 
-## TODO (Next)
+## TODO
 
-- [ ] Create hidden syllabus pages for AI-Ready and AI-First
-- [ ] Replace FormSubmit.co with N8N webhooks when ready
-- [ ] Add syllabus images for other courses
+- [ ] Deploy blog to production (add back to nav)
+- [ ] Create more blog articles (AI news, guides)
+- [ ] Generate hero images for blog articles (Cloudinary)
+- [ ] Create AI-Ready and AI-First syllabus pages
+- [ ] Replace FormSubmit.co with N8N webhooks
+- [ ] PageSpeed: remaining optimizations from plan (video captions, carousel dot a11y)
 
 ---
 
 > **For complete design system details, see [docs/DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)**
+> Note: DESIGN_SYSTEM.md was last updated 2026-02-06 and may reference old patterns. This CLAUDE.md is the source of truth for current design decisions.

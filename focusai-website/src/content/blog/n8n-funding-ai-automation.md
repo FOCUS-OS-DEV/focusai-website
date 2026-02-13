@@ -1,7 +1,7 @@
 ---
 title: "n8n גייסה 180 מיליון דולר - ומה זה אומר על עתיד האוטומציה בישראל"
 description: "פלטפורמת האוטומציה n8n סוגרת סבב גיוס ענק בשווי 2.5 מיליארד דולר. מה המשמעות לעסקים ישראלים ואיך להיערך למהפכת ה-AI Automation."
-pubDate: 2026-02-13
+pubDate: 2025-10-10
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771019382/blog/n8n-automation-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "automation", "ai-agents", "tools"]
@@ -65,13 +65,13 @@ tags: ["news", "automation", "ai-agents", "tools"]
 
 ![אוטומציה חכמה לעסקים ישראלים](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771020191/blog/n8n-automation-israeli-business.png)
 
-<a href="/academy" style="display:block; position:relative; margin:3rem 0; border-radius:16px; overflow:hidden; text-decoration:none; border:1px solid rgba(168,85,247,0.3);">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" style="width:100%; display:block; filter:brightness(0.45);" />
-  <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1.5rem;">
-    <span style="background:rgba(168,85,247,0.9); color:#0a0a0f; padding:5px 14px; border-radius:20px; font-size:0.7rem; font-weight:800; letter-spacing:0.08em; margin-bottom:0.75rem;">BOT-CAMP</span>
-    <span style="color:white; font-size:1.4rem; font-weight:900; line-height:1.3; margin-bottom:0.5rem;">רוצים לבנות את זה בעצמכם?</span>
-    <span style="color:rgba(255,255,255,0.75); font-size:0.85rem; margin-bottom:1rem;">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
-    <span style="background:#a855f7; color:#0a0a0f; padding:10px 28px; border-radius:25px; font-weight:700; font-size:0.85rem;">לפרטים נוספים</span>
+<a href="/academy" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" />
+  <div class="blog-cta-overlay">
+    <span class="blog-cta-badge">BOT-CAMP</span>
+    <span class="blog-cta-title">רוצים לבנות את זה בעצמכם?</span>
+    <span class="blog-cta-subtitle">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
+    <span class="blog-cta-btn">לפרטים נוספים</span>
   </div>
 </a>
 
@@ -85,7 +85,7 @@ tags: ["news", "automation", "ai-agents", "tools"]
 
 **3. הכירו את הכלים.** תנסו גרסאות חינמיות של n8n, Make או Zapier. תבינו את הלוגיקה. ברגע שאתם מבינים איך אוטומציה עובדת, אתם מתחילים לראות הזדמנויות בכל מקום.
 
-**4. חשבו על סוכני AI, לא רק אוטומציות.** האוטומציה של 2026 היא לא רק "אם קרה X, עשה Y". היא כוללת סוכני AI שמסוגלים לקבל החלטות, לנתח מידע, ולפעול בהתאם להקשר. תחשבו איפה בעסק שלכם יש צורך בשכבה חכמה כזו.
+**4. חשבו על סוכני AI, לא רק אוטומציות.** אוטומציה מודרנית היא לא רק "אם קרה X, עשה Y". היא כוללת סוכני AI שמסוגלים לקבל החלטות, לנתח מידע, ולפעול בהתאם להקשר. תחשבו איפה בעסק שלכם יש צורך בשכבה חכמה כזו.
 
 **5. היעזרו במומחים.** הכלים נגישים, אבל בניית אוטומציות ברמה ארגונית דורשת ניסיון. טעויות באוטומציה יכולות לעלות ביוקר - לידים שנופלים, מיילים שנשלחים פעמיים, נתונים שהולכים לאיבוד.
 
