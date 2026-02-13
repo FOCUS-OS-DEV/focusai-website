@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ClientLogosGrid from '../components/ClientLogosGrid.astro';
 import { instructors } from '../data';
 import TerminalTypewriter from '../components/TerminalTypewriter.astro';
 
@@ -730,6 +731,8 @@ const galleryImages = [
       </a>
     </div>
   </section>
+
+  <ClientLogosGrid />
 
   <Footer slot="footer" />
 </BaseLayout>

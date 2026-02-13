@@ -12,6 +12,7 @@ import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import TechLogosMarquee from '../../components/TechLogosMarquee.astro';
 import StudentTestimonials from '../../components/StudentTestimonials.astro';
+import ClientLogosGrid from '../../components/ClientLogosGrid.astro';
 
 import { founders } from '../../data/team';
 
@@ -1182,6 +1183,8 @@ const courseSchema = {
       </div>
     </div>
   </section>
+
+  <ClientLogosGrid />
 
   <RelatedContent items={[
     { title: "AI Ready", description: "הכשרה מקיפה ל-8 מפגשים בכלי AI מתקדמים", href: "/academy/ai-ready" },

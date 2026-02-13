@@ -1,12 +1,9 @@
 ---
 /**
- * Client Logos - Static grid on all screen sizes
- * Two rows of logos, centered
+ * Client Logos - Infinite scrolling carousel
+ * Uses CSS-only animation with 3 identical copies for seamless loop
  */
 import { clients } from "../data/clients";
-
-const row1 = clients.slice(0, 8);
-const row2 = clients.slice(8, 16);
 ---
 
 <section class="relative py-10 md:py-14 bg-[#0a0a0f] overflow-hidden" data-section>
@@ -37,73 +34,127 @@ const row2 = clients.slice(8, 16);
     </p>
   </div>
 
-  <!-- Logos - Static Grid -->
-  <div class="logos-grid relative z-10 max-w-5xl mx-auto px-4">
-    <!-- Row 1 -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-3 md:mb-4">
-      {row1.map((client) => (
-        <div class="logo-card" title={client.name}>
-          <img src={client.logo} alt={client.name} loading="lazy" />
+  <!-- Logos - Infinite Carousel -->
+  <div class="logos-carousel-section relative z-10">
+    <div class="logos-carousel-wrapper">
+      <div class="logos-carousel-track">
+        <!-- Copy 1 -->
+        <div class="logos-set">
+          {clients.map((client) => (
+            <div class="logo-slide" title={client.name}>
+              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-
-    <!-- Row 2 -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4">
-      {row2.map((client) => (
-        <div class="logo-card" title={client.name}>
-          <img src={client.logo} alt={client.name} loading="lazy" />
+        <!-- Copy 2 (identical) -->
+        <div class="logos-set">
+          {clients.map((client) => (
+            <div class="logo-slide" title={client.name}>
+              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+            </div>
+          ))}
         </div>
-      ))}
+        <!-- Copy 3 (identical) -->
+        <div class="logos-set">
+          {clients.map((client) => (
+            <div class="logo-slide" title={client.name}>
+              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .logo-card {
+  .logos-carousel-section {
+    width: 100%;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  .logos-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logos-carousel-track {
+    display: flex;
+    width: fit-content;
+    animation: logosScrollLeft 30s linear infinite;
+  }
+
+  .logos-carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logos-set {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  .logo-slide {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    width: 90px;
+    width: 100px;
     aspect-ratio: 3 / 2;
-    padding: 8px;
+    padding: 10px;
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    transition: transform 0.3s, background 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    transition: transform 0.3s, background 0.3s, border-color 0.3s;
   }
 
-  .logo-card img {
+  .logo-slide img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    opacity: 0.85;
-    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0.8;
+    transition: opacity 0.3s;
   }
 
-  .logo-card:hover {
-    transform: translateY(-3px);
+  .logo-slide:hover {
+    transform: translateY(-3px) scale(1.05);
     background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(168, 85, 247, 0.3);
   }
 
-  .logo-card:hover img {
-    transform: scale(1.05);
+  .logo-slide:hover img {
     opacity: 1;
   }
 
+  @keyframes logosScrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
+
   @media (min-width: 640px) {
-    .logo-card {
-      width: 110px;
-      padding: 10px;
+    .logo-slide {
+      width: 120px;
+      padding: 12px;
+    }
+    .logos-set {
+      gap: 20px;
     }
   }
 
   @media (min-width: 1024px) {
-    .logo-card {
-      width: 130px;
-      padding: 12px;
-      border-radius: 12px;
+    .logo-slide {
+      width: 140px;
+      padding: 14px;
+      border-radius: 14px;
+    }
+    .logos-set {
+      gap: 24px;
     }
   }
 </style>
