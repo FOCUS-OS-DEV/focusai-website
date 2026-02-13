@@ -1,8 +1,15 @@
 ---
 /**
- * Client Logos - Simple white band with logos, blur edges
+ * Client Logos - Dual-direction marquee with rounded square cards
+ * Desktop: Two rows scrolling in opposite directions
+ * Mobile: Two rows marquee (slower, smaller)
  */
 import { clients } from "../data/clients";
+
+// Split clients into two rows
+const half = Math.ceil(clients.length / 2);
+const row1 = clients.slice(0, half);
+const row2 = clients.slice(half);
 ---
 
 <section class="relative py-10 md:py-14 bg-[#0a0a0f]" data-section>
@@ -16,55 +23,125 @@ import { clients } from "../data/clients";
     </p>
   </div>
 
-  <!-- White band with logos -->
-  <div class="client-band">
-    <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-10 px-6 py-8 md:py-10 max-w-6xl mx-auto">
-      {clients.map((client) => (
-        <div class="client-logo" title={client.name}>
-          <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
-        </div>
-      ))}
+  <!-- Marquee container -->
+  <div class="logos-wrapper">
+    <!-- Row 1 - scrolls right -->
+    <div class="marquee-row" style="--direction: normal; --duration: 35s;">
+      <div class="marquee-track">
+        {[...row1, ...row1, ...row1].map((client) => (
+          <div class="logo-card" title={client.name}>
+            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Row 2 - scrolls left -->
+    <div class="marquee-row" style="--direction: reverse; --duration: 40s;">
+      <div class="marquee-track">
+        {[...row2, ...row2, ...row2].map((client) => (
+          <div class="logo-card" title={client.name}>
+            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .client-band {
-    background: white;
-    position: relative;
-    box-shadow:
-      0 -40px 60px -10px rgba(255, 255, 255, 0.15),
-      0 40px 60px -10px rgba(255, 255, 255, 0.15);
+  .logos-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   }
 
-  .client-logo {
+  .marquee-row {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: marqueeScroll var(--duration) linear infinite;
+    animation-direction: var(--direction);
+  }
+
+  .marquee-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
+
+  .logo-card {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    flex-shrink: 0;
+    width: 140px;
+    height: 90px;
+    background: white;
+    border-radius: 16px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .client-logo img {
+  .logo-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 24px rgba(168, 85, 247, 0.15);
+  }
+
+  .logo-card img {
     width: auto;
-    max-width: 120px;
+    max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
   }
 
-  .client-logo:hover img {
+  .logo-card:hover img {
     opacity: 1;
-    transform: scale(1.08);
   }
 
-  @media (max-width: 768px) {
-    .client-logo {
-      height: 36px;
+  /* Desktop */
+  @media (min-width: 768px) {
+    .logos-wrapper {
+      gap: 16px;
     }
-    .client-logo img {
-      max-width: 80px;
+
+    .logo-card {
+      width: 170px;
+      height: 100px;
+      border-radius: 20px;
+      padding: 16px 20px;
+    }
+
+    .marquee-track {
+      gap: 16px;
+    }
+  }
+
+  /* Mobile - smaller cards, faster readability */
+  @media (max-width: 767px) {
+    .logo-card {
+      width: 110px;
+      height: 70px;
+      border-radius: 12px;
+      padding: 8px 12px;
+    }
+
+    .marquee-track {
+      gap: 10px;
     }
   }
 </style>
