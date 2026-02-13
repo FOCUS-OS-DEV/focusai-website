@@ -914,10 +914,7 @@ const videoTestimonials = [
     const data = getVideoData(lightboxIndex);
     if (!data || !video) return;
 
-    // Stop current playback and clear handlers
     video.pause();
-    video.oncanplay = null;
-    video.onerror = null;
 
     // Set poster for immediate visual feedback
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
@@ -929,18 +926,10 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Set new source directly (no empty reset - causes iOS error state)
-    const videoUrl = mobileVideoUrl(data.video);
-    video.src = isMobileVideo ? videoUrl + '#t=0.001' : videoUrl;
-    video.load();
-
-    // Desktop only: autoplay after ready (mobile users tap native play button)
-    if (!isMobileVideo) {
-      video.oncanplay = () => {
-        video.oncanplay = null;
-        video.play().catch(() => {});
-      };
-    }
+    // Use original video URL (no w_720 transform - can fail on mobile)
+    video.src = data.video;
+    // Play within user gesture chain (works on iOS Safari)
+    video.play().catch(function() {});
   }
 
   function lightboxNav(dir: number) {
@@ -954,7 +943,7 @@ const videoTestimonials = [
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
     if (!lightbox || !video) return;
     video.pause();
-    video.src = '';
+    video.removeAttribute('src');
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
     lightboxOpen = false;
@@ -985,7 +974,15 @@ const videoTestimonials = [
     lightboxNav(1);
   });
 
-  // Touch support for lightbox (swipe between videos)
+  // Prevent lightbox swipe from interfering with native video controls on mobile
+  const lightboxVideoEl = document.getElementById('lightboxVideo');
+  if (lightboxVideoEl) {
+    lightboxVideoEl.addEventListener('touchstart', function(e) { e.stopPropagation(); }, { passive: true });
+    lightboxVideoEl.addEventListener('touchmove', function(e) { e.stopPropagation(); }, { passive: true });
+    lightboxVideoEl.addEventListener('touchend', function(e) { e.stopPropagation(); }, { passive: true });
+  }
+
+  // Touch support for lightbox (swipe between videos - only on backdrop, not on video)
   let lightboxTouchStartX = 0;
   lightbox?.addEventListener('touchstart', (e) => {
     lightboxTouchStartX = e.changedTouches[0].screenX;
