@@ -69,7 +69,7 @@ const processSteps = [
 
   <div class="container relative z-10 px-4 md:px-6">
     <!-- Section Header -->
-    <div class="text-center mb-10 md:mb-12">
+    <div class="text-center mb-10 md:mb-12" data-animate="fade-up">
       <h2 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
         <span class="text-white/90">בונים. מחברים.</span>
         <span class="block mt-2 gradient-text">מלווים.</span>
@@ -81,7 +81,7 @@ const processSteps = [
     </div>
 
     <!-- Services Grid -->
-    <div class="grid lg:grid-cols-3 gap-6 mb-20">
+    <div class="grid lg:grid-cols-3 gap-6 mb-20" data-animate="stagger">
       {services.map((service, index) => (
         <div
           class="service-card"
@@ -182,20 +182,6 @@ const processSteps = [
   }
 
   /* Service Cards */
-  .service-card {
-    animation: cardAppear 0.6s ease-out var(--delay) both;
-  }
-
-  @keyframes cardAppear {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 
   .card-surface {
     position: relative;

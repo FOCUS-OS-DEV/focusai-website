@@ -76,8 +76,8 @@
   var progressBar = document.getElementById('preloaderBar');
   var statusText = document.getElementById('preloaderStatus');
 
-  var MIN_DISPLAY_MS = 1200;
-  var MAX_DISPLAY_MS = 4000;
+  var MIN_DISPLAY_MS = 2200;
+  var MAX_DISPLAY_MS = 6000;
   var startTime = Date.now();
 
   // Critical above-the-fold images
@@ -85,6 +85,13 @@
     'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png',
     'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png',
     'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png'
+  ];
+
+  // Phone mockup screenshots (preload first 3 for crisp display)
+  var phoneScreenshots = [
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.33_uxlvn0.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.14_t4lh0q.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1769108295/WhatsApp_Image_2026-01-22_at_19.55.36_qc8mqk.jpg'
   ];
 
   // Video posters (desktop only)
@@ -98,20 +105,20 @@
   ];
 
   var isMobile = window.innerWidth < 768;
-  var allUrls = isMobile ? criticalImages : criticalImages.concat(videoPosters);
+  var allUrls = criticalImages.concat(phoneScreenshots).concat(isMobile ? [] : videoPosters);
   var total = allUrls.length;
   var loaded = 0;
   var allDone = false;
 
   // Terminal-style status messages
-  var messages = ['LOADING_ASSETS_', 'ESTABLISHING_CONNECTION_', 'NEURAL_SYNC_', 'RENDERING_INTERFACE_', 'ALMOST_READY_'];
+  var messages = ['LOADING_ASSETS_', 'ESTABLISHING_CONNECTION_', 'NEURAL_SYNC_', 'CACHING_MEDIA_', 'RENDERING_INTERFACE_', 'OPTIMIZING_EXPERIENCE_', 'ALMOST_READY_'];
   var msgIndex = 0;
   var msgInterval = setInterval(function() {
     if (statusText && msgIndex < messages.length) {
       statusText.textContent = messages[msgIndex];
       msgIndex++;
     }
-  }, 400);
+  }, 500);
 
   function updateProgress() {
     loaded++;
