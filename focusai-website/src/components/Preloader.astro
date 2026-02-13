@@ -69,13 +69,13 @@
   var progressBar = document.getElementById('preloaderBar');
   var statusText = document.getElementById('preloaderStatus');
 
-  var MIN_DISPLAY_MS = 2200;
+  var MIN_DISPLAY_MS = 1600;
   var MAX_DISPLAY_MS = 6000;
   var startTime = Date.now();
 
   // Critical above-the-fold images
   var criticalImages = [
-    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png',
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_650/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png',
     'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png',
     'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png'
   ];
@@ -216,12 +216,14 @@
 
   .preloader-scanline {
     position: absolute;
+    top: 0;
     left: -30px;
     right: -30px;
     height: 2px;
     background: linear-gradient(90deg, transparent, #a855f7, #c084fc, #a855f7, transparent);
     box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
     animation: preloaderScan 2s ease-in-out infinite;
+    will-change: transform;
   }
 
   /* Desktop: bigger logo */
@@ -292,12 +294,11 @@
     color: rgba(168, 85, 247, 0.7);
   }
 
-  /* Exit animation */
+  /* Exit animation - only composited properties */
   .preloader.preloader-exit .preloader-content {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: scale(1.15);
-    filter: blur(10px);
   }
 
   .preloader.preloader-exit .preloader-bg {
@@ -324,10 +325,10 @@
   }
 
   @keyframes preloaderScan {
-    0% { top: 0; opacity: 0; }
+    0% { transform: translateY(0); opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+    100% { transform: translateY(120px); opacity: 0; }
   }
 
   @keyframes preloaderBlink {
