@@ -6,9 +6,11 @@
 
 interface Props {
   currentPath?: string;
+  theme?: 'dark' | 'light';
 }
 
-const { currentPath = '/' } = Astro.props;
+const { currentPath = '/', theme = 'dark' } = Astro.props;
+const isLight = theme === 'light';
 
 const logo = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265415/2_fxdcio.png";
 
@@ -41,7 +43,7 @@ const toolsLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 p-3 md:p-4 pointer-events-none" id="main-header">
+<header class={`fixed top-0 left-0 right-0 z-50 p-3 md:p-4 pointer-events-none ${isLight ? 'header-theme-light' : ''}`} id="main-header">
   <!-- Floating Glassmorphism Container -->
   <div class="header-glass max-w-6xl mx-auto pointer-events-auto">
     <div class="relative px-4 sm:px-6 lg:px-8">
@@ -70,7 +72,9 @@ const toolsLinks = [
                     (link.dropdownType === 'services' && currentPath.startsWith('/services')) ||
                     (link.dropdownType === 'tools' && currentPath === '/tools')
                       ? 'text-[#a855f7] bg-[#a855f7]/10'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      : isLight
+                        ? 'text-[#2a2a3a]/80 hover:text-[#2a2a3a] hover:bg-black/5 header-nav-light'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span>{link.label}</span>
@@ -116,7 +120,9 @@ const toolsLinks = [
                 class={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                   currentPath === link.href
                     ? 'text-[#a855f7] bg-[#a855f7]/10'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                    : isLight
+                      ? 'text-[#2a2a3a]/80 hover:text-[#2a2a3a] hover:bg-black/5 header-nav-light'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
                 }`}
                 aria-current={currentPath === link.href ? 'page' : undefined}
               >
@@ -339,8 +345,9 @@ const toolsLinks = [
     link.addEventListener('click', closeMenu);
   });
 
-  // Header scroll effect
+  // Header scroll effect + light/dark theme transition
   const header = document.getElementById('main-header');
+  const isLightPage = header?.classList.contains('header-theme-light');
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
@@ -349,6 +356,31 @@ const toolsLinks = [
       header?.classList.add('header-scrolled');
     } else {
       header?.classList.remove('header-scrolled');
+    }
+
+    // On light pages, switch to dark header when scrolling past light sections
+    if (isLightPage) {
+      // Find the first dark section to know when to switch
+      const darkSections = document.querySelectorAll('[data-section]');
+      let inDarkArea = false;
+      darkSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 80 && rect.bottom > 80) {
+          const bg = window.getComputedStyle(section).backgroundColor;
+          // Check if section has dark background (rgb values < 30)
+          const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+          if (match) {
+            const brightness = (parseInt(match[1]) + parseInt(match[2]) + parseInt(match[3])) / 3;
+            if (brightness < 30) inDarkArea = true;
+          }
+        }
+      });
+
+      if (inDarkArea) {
+        header?.classList.add('header-switched-dark');
+      } else {
+        header?.classList.remove('header-switched-dark');
+      }
     }
   }, { passive: true });
 </script>
@@ -464,6 +496,64 @@ const toolsLinks = [
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+  /* ===== Light Theme ===== */
+  .header-theme-light .header-glass {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(168, 85, 247, 0.08) inset;
+  }
+
+  .header-theme-light.header-scrolled .header-glass {
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(168, 85, 247, 0.12) inset;
+    border-color: rgba(168, 85, 247, 0.2);
+  }
+
+  /* Light theme logo - no purple glow, natural colors */
+  .header-theme-light:not(.header-switched-dark) .header-glass img[alt="Focus AI"] {
+    filter: none !important;
+  }
+
+  /* Light theme nav links - override the gradient hover for light backgrounds */
+  .header-nav-light::before {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(236, 72, 153, 0.04)) !important;
+  }
+
+  /* Light theme dropdown chevron */
+  .header-theme-light:not(.header-switched-dark) .nav-link-glass svg {
+    color: #6b6b8a;
+  }
+
+  /* When scrolled into dark area on a light page, revert to dark header */
+  .header-theme-light.header-switched-dark .header-glass {
+    background: rgba(15, 15, 20, 0.9);
+    border-color: rgba(168, 85, 247, 0.25);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(168, 85, 247, 0.15) inset;
+  }
+
+  .header-theme-light.header-switched-dark .nav-link-glass.header-nav-light {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .header-theme-light.header-switched-dark .nav-link-glass.header-nav-light:hover {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .header-theme-light.header-switched-dark .header-glass img[alt="Focus AI"] {
+    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4)) !important;
+  }
+
+  .header-theme-light.header-switched-dark .nav-link-glass svg {
+    color: rgba(255, 255, 255, 0.6);
   }
 
   /* Responsive adjustments */

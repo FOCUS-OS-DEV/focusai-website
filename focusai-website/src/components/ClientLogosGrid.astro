@@ -1,7 +1,7 @@
 ---
 /**
  * Client Logos - Infinite scrolling carousel
- * Uses CSS-only animation with 3 identical copies for seamless loop
+ * CSS-only: 2 identical copies + translateX(-50%) for seamless loop
  */
 import { clients } from "../data/clients";
 ---
@@ -35,126 +35,103 @@ import { clients } from "../data/clients";
   </div>
 
   <!-- Logos - Infinite Carousel -->
-  <div class="logos-carousel-section relative z-10">
-    <div class="logos-carousel-wrapper">
-      <div class="logos-carousel-track">
-        <!-- Copy 1 -->
-        <div class="logos-set">
-          {clients.map((client) => (
-            <div class="logo-slide" title={client.name}>
-              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
-            </div>
-          ))}
+  <div class="logos-carousel relative z-10">
+    <div class="logos-carousel__track">
+      {/* Set 1 - original */}
+      {clients.map((client) => (
+        <div class="logos-carousel__item" title={client.name}>
+          <img src={client.logo} alt={client.name} decoding="async" />
         </div>
-        <!-- Copy 2 (identical) -->
-        <div class="logos-set">
-          {clients.map((client) => (
-            <div class="logo-slide" title={client.name}>
-              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
-            </div>
-          ))}
+      ))}
+      {/* Set 2 - identical duplicate for seamless loop */}
+      {clients.map((client) => (
+        <div class="logos-carousel__item" aria-hidden="true" title={client.name}>
+          <img src={client.logo} alt="" decoding="async" />
         </div>
-        <!-- Copy 3 (identical) -->
-        <div class="logos-set">
-          {clients.map((client) => (
-            <div class="logo-slide" title={client.name}>
-              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
-            </div>
-          ))}
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 
-<style>
-  .logos-carousel-section {
+<style is:global>
+  .logos-carousel {
     width: 100%;
+    overflow: hidden;
     padding: 10px 0;
-    overflow: hidden;
-    position: relative;
-    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   }
 
-  .logos-carousel-wrapper {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .logos-carousel-track {
+  .logos-carousel__track {
     display: flex;
-    width: fit-content;
-    animation: logosScrollLeft 30s linear infinite;
+    animation: logos-scroll 35s linear infinite;
+    will-change: transform;
   }
 
-  .logos-carousel-track:hover {
+  .logos-carousel__track:hover {
     animation-play-state: paused;
   }
 
-  .logos-set {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0 8px;
-    flex-shrink: 0;
-  }
-
-  .logo-slide {
-    flex-shrink: 0;
+  .logos-carousel__item {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    aspect-ratio: 3 / 2;
+    width: 110px;
+    height: 70px;
     padding: 10px;
+    margin-right: 16px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     transition: transform 0.3s, background 0.3s, border-color 0.3s;
   }
 
-  .logo-slide img {
+  .logos-carousel__item img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    opacity: 0.8;
-    transition: opacity 0.3s;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+    transition: opacity 0.3s, filter 0.3s;
   }
 
-  .logo-slide:hover {
+  .logos-carousel__item:hover {
     transform: translateY(-3px) scale(1.05);
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(168, 85, 247, 0.3);
   }
 
-  .logo-slide:hover img {
-    opacity: 1;
+  .logos-carousel__item:hover img {
+    opacity: 0.9;
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(168, 85, 247, 0.5));
   }
 
-  @keyframes logosScrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-33.333%); }
+  @keyframes logos-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   @media (min-width: 640px) {
-    .logo-slide {
-      width: 120px;
+    .logos-carousel__item {
+      width: 130px;
+      height: 80px;
       padding: 12px;
-    }
-    .logos-set {
-      gap: 20px;
+      margin-right: 20px;
     }
   }
 
   @media (min-width: 1024px) {
-    .logo-slide {
-      width: 140px;
+    .logos-carousel__item {
+      width: 150px;
+      height: 90px;
       padding: 14px;
+      margin-right: 24px;
       border-radius: 14px;
-    }
-    .logos-set {
-      gap: 24px;
     }
   }
 </style>
