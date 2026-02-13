@@ -67,7 +67,7 @@
   var progressBar = document.getElementById('preloaderBar');
   var statusText = document.getElementById('preloaderStatus');
 
-  var MIN_DISPLAY_MS = 1500;
+  var MIN_DISPLAY_MS = 2000;
   var MAX_DISPLAY_MS = 5000;
   var startTime = Date.now();
 
@@ -125,7 +125,7 @@
     if (allDone) return;
     allDone = true;
     clearInterval(msgInterval);
-    if (statusText) statusText.textContent = 'READY_';
+    if (statusText) statusText.textContent = 'YOUR_AI_PARTNER_';
     if (progressBar) progressBar.style.width = '100%';
 
     var elapsed = Date.now() - startTime;
@@ -215,6 +215,32 @@
     animation: preloaderScan 2s ease-in-out infinite;
   }
 
+  /* Desktop: bigger logo */
+  @media (min-width: 768px) {
+    .preloader-logo-wrap {
+      width: 200px;
+      height: 200px;
+    }
+    .preloader-logo {
+      width: 200px;
+      height: 200px;
+      filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.6));
+    }
+    .preloader-glow {
+      inset: -60px;
+    }
+    .preloader-scanline {
+      left: -50px;
+      right: -50px;
+    }
+    .preloader-progress-track {
+      width: 280px;
+    }
+    .preloader-text {
+      font-size: 13px;
+    }
+  }
+
   .preloader-progress-track {
     width: 200px;
     height: 2px;
@@ -289,7 +315,7 @@
     0% { top: 0; opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { top: 120px; opacity: 0; }
+    100% { top: 100%; opacity: 0; }
   }
 
   @keyframes preloaderBlink {

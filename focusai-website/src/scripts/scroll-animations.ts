@@ -26,21 +26,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
+// Trigger point: 100% = bottom edge of viewport (instant on enter)
+const TRIGGER_START = 'top 100%';
+
 // Animation configurations
 const animations = {
   // Basic fade up
   'fade-up': (el: Element, delay: number = 0) => {
     gsap.fromTo(el,
-      { opacity: 0, y: 60 },
+      { opacity: 0, y: isMobile ? 20 : 30 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: isMobile ? 0.35 : 0.5,
         delay,
-        ease: 'power3.out',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -50,16 +53,16 @@ const animations = {
   // Fade from top
   'fade-down': (el: Element, delay: number = 0) => {
     gsap.fromTo(el,
-      { opacity: 0, y: -60 },
+      { opacity: 0, y: isMobile ? -20 : -30 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: isMobile ? 0.35 : 0.5,
         delay,
-        ease: 'power3.out',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -69,16 +72,16 @@ const animations = {
   // Slide from right (RTL aware)
   'slide-right': (el: Element, delay: number = 0) => {
     gsap.fromTo(el,
-      { opacity: 0, x: -100 },
+      { opacity: 0, x: isMobile ? -30 : -50 },
       {
         opacity: 1,
         x: 0,
-        duration: 1,
+        duration: isMobile ? 0.35 : 0.6,
         delay,
-        ease: 'power3.out',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -88,16 +91,16 @@ const animations = {
   // Slide from left (RTL aware)
   'slide-left': (el: Element, delay: number = 0) => {
     gsap.fromTo(el,
-      { opacity: 0, x: 100 },
+      { opacity: 0, x: isMobile ? 30 : 50 },
       {
         opacity: 1,
         x: 0,
-        duration: 1,
+        duration: isMobile ? 0.35 : 0.6,
         delay,
-        ease: 'power3.out',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -109,19 +112,19 @@ const animations = {
     gsap.fromTo(el,
       {
         opacity: 0,
-        scale: 0.9,
-        ...(isMobile ? {} : { filter: 'blur(10px)' })
+        scale: 0.92,
+        ...(isMobile ? {} : { filter: 'blur(6px)' })
       },
       {
         opacity: 1,
         scale: 1,
         ...(isMobile ? {} : { filter: 'blur(0px)' }),
-        duration: isMobile ? 0.4 : 0.8,
+        duration: isMobile ? 0.3 : 0.5,
         delay,
-        ease: 'back.out(1.7)',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -133,7 +136,7 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 95%',
+        start: TRIGGER_START,
         toggleActions: 'play none none none'
       }
     });
@@ -146,31 +149,15 @@ const animations = {
       {
         opacity: 1,
         clipPath: 'inset(0 0% 0 0)',
-        duration: 0.6,
+        duration: 0.4,
         delay,
         ease: 'power2.inOut'
       }
     )
-    .to(el, {
-      x: -5,
-      duration: 0.05,
-      ease: 'power1.inOut'
-    })
-    .to(el, {
-      x: 5,
-      duration: 0.05,
-      ease: 'power1.inOut'
-    })
-    .to(el, {
-      x: -3,
-      duration: 0.05,
-      ease: 'power1.inOut'
-    })
-    .to(el, {
-      x: 0,
-      duration: 0.05,
-      ease: 'power1.inOut'
-    });
+    .to(el, { x: -3, duration: 0.04, ease: 'power1.inOut' })
+    .to(el, { x: 3, duration: 0.04, ease: 'power1.inOut' })
+    .to(el, { x: -2, duration: 0.04, ease: 'power1.inOut' })
+    .to(el, { x: 0, duration: 0.04, ease: 'power1.inOut' });
   },
 
   // Typewriter effect
@@ -184,7 +171,7 @@ const animations = {
 
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 95%',
+      start: TRIGGER_START,
       onEnter: () => {
         const interval = setInterval(() => {
           if (currentIndex < chars.length) {
@@ -193,7 +180,7 @@ const animations = {
           } else {
             clearInterval(interval);
           }
-        }, 30);
+        }, 25);
       }
     });
   },
@@ -225,26 +212,26 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 95%',
+        start: TRIGGER_START,
         toggleActions: 'play none none none'
       }
     });
 
     tl.fromTo(el,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay, ease: 'power2.out' }
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.4, delay, ease: 'power2.out' }
     )
     .fromTo(scanline,
       { opacity: 1, top: 0 },
       {
         top: '100%',
-        duration: 0.6,
+        duration: 0.4,
         ease: 'power1.inOut',
         onComplete: () => {
-          gsap.to(scanline, { opacity: 0, duration: 0.2 });
+          gsap.to(scanline, { opacity: 0, duration: 0.15 });
         }
       },
-      '-=0.4'
+      '-=0.3'
     );
   },
 
@@ -255,20 +242,20 @@ const animations = {
     gsap.fromTo(children,
       {
         opacity: 0,
-        y: isMobile ? 20 : 40,
-        scale: 0.95
+        y: isMobile ? 15 : 25,
+        scale: 0.97
       },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: isMobile ? 0.3 : 0.6,
+        duration: isMobile ? 0.25 : 0.4,
         delay,
-        stagger: isMobile ? 0.05 : 0.1,
-        ease: 'power3.out',
+        stagger: isMobile ? 0.04 : 0.07,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -283,13 +270,13 @@ const animations = {
 
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 95%',
+      start: TRIGGER_START,
       onEnter: () => {
         gsap.fromTo({ value: 0 },
           { value: 0 },
           {
             value: target,
-            duration: 2,
+            duration: 1.5,
             delay,
             ease: 'power2.out',
             onUpdate: function() {
@@ -306,19 +293,19 @@ const animations = {
     gsap.fromTo(el,
       {
         opacity: 0,
-        ...(isMobile ? {} : { filter: 'blur(20px)' }),
-        scale: 1.05
+        ...(isMobile ? {} : { filter: 'blur(12px)' }),
+        scale: 1.03
       },
       {
         opacity: 1,
         ...(isMobile ? {} : { filter: 'blur(0px)' }),
         scale: 1,
-        duration: isMobile ? 0.4 : 1,
+        duration: isMobile ? 0.3 : 0.6,
         delay,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -342,20 +329,20 @@ const animations = {
     gsap.fromTo(el.children,
       {
         opacity: 0,
-        y: 50,
-        rotateX: -90
+        y: 30,
+        rotateX: -60
       },
       {
         opacity: 1,
         y: 0,
         rotateX: 0,
-        duration: 0.5,
+        duration: 0.35,
         delay,
-        stagger: 0.02,
-        ease: 'back.out(1.7)',
+        stagger: 0.015,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -369,16 +356,16 @@ const animations = {
     if (lines.length === 0) {
       // If no lines marked, treat content as single block
       gsap.fromTo(el,
-        { opacity: 0, x: -20 },
+        { opacity: 0, x: -15 },
         {
           opacity: 1,
           x: 0,
-          duration: 0.6,
+          duration: 0.4,
           delay,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 95%',
+            start: TRIGGER_START,
             toggleActions: 'play none none none'
           }
         }
@@ -389,20 +376,18 @@ const animations = {
     gsap.fromTo(lines,
       {
         opacity: 0,
-        x: -30,
-        filter: 'blur(4px)'
+        x: -20
       },
       {
         opacity: 1,
         x: 0,
-        filter: 'blur(0px)',
-        duration: 0.4,
+        duration: 0.3,
         delay,
-        stagger: 0.08,
+        stagger: 0.06,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
@@ -414,32 +399,28 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 95%',
+        start: TRIGGER_START,
         toggleActions: 'play none none none'
       }
     });
 
     tl.fromTo(el,
-      {
-        opacity: 0,
-        filter: 'brightness(0.5) blur(4px)'
-      },
+      { opacity: 0 },
       {
         opacity: 1,
-        filter: 'brightness(1) blur(0px)',
-        duration: 0.6,
+        duration: 0.4,
         delay,
         ease: 'power2.out'
       }
     )
     .to(el, {
       filter: 'brightness(1.5) drop-shadow(0 0 20px rgba(168, 85, 247, 0.8))',
-      duration: 0.3,
+      duration: 0.2,
       ease: 'power2.inOut'
     })
     .to(el, {
       filter: 'brightness(1) drop-shadow(0 0 10px rgba(168, 85, 247, 0.4))',
-      duration: 0.3,
+      duration: 0.2,
       ease: 'power2.inOut'
     });
   },
@@ -469,25 +450,25 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 95%',
+        start: TRIGGER_START,
         toggleActions: 'play none none none'
       }
     });
 
     tl.fromTo(el,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, delay, ease: 'power2.out' }
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.35, delay, ease: 'power2.out' }
     )
     .fromTo(overlay,
       { opacity: 1, backgroundPosition: '0% 0%' },
       {
         opacity: 0,
         backgroundPosition: '0% 100%',
-        duration: 0.8,
+        duration: 0.5,
         ease: 'power1.inOut',
         onComplete: () => overlay.remove()
       },
-      '-=0.3'
+      '-=0.2'
     );
   },
 
@@ -496,18 +477,18 @@ const animations = {
     gsap.fromTo(el,
       {
         opacity: 0,
-        rotateY: -90,
+        rotateY: -60,
         transformPerspective: 1000
       },
       {
         opacity: 1,
         rotateY: 0,
-        duration: 0.8,
+        duration: 0.5,
         delay,
-        ease: 'power3.out',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 95%',
+          start: TRIGGER_START,
           toggleActions: 'play none none none'
         }
       }
