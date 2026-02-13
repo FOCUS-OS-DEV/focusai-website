@@ -236,10 +236,11 @@ const pageUrl = `https://focusai.co.il/blog/${post.id}`;
             </div>
 
             <h3 class="text-2xl font-black text-white mb-2">
-              רוצים ללמוד לבנות אוטומציות וסוכני AI?
+              קראתם על זה. עכשיו תבנו את זה.
             </h3>
             <p class="text-[#d0d0e0]/70 mb-8">
-              ב-Bot-Camp של Focus AI תלמדו לבנות מערכות אוטומציה מקצועיות עם n8n, Make וכלי AI מתקדמים - ותצאו עם פרויקט עובד.
+              12 מפגשים פרונטליים בהרצליה פיתוח. קבוצה קטנה של 18 משתתפים. 3 מנחים שמלווים אתכם צעד אחר צעד.<br/>
+              תבנו אוטומציות אמיתיות עם <bdi>n8n</bdi>, תפתחו סוכני AI, ותצאו עם תיק עבודות ותעודה מקצועית.
             </p>
 
             <form id="article-contact-form" class="space-y-5">
@@ -291,7 +292,7 @@ const pageUrl = `https://focusai.co.il/blog/${post.id}`;
                   name="message"
                   rows="3"
                   class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-sm focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 transition-all duration-300 resize-none rounded-xl"
-                  placeholder="על מה אתם מחפשים? גודל הארגון? תחום פעילות?"
+                  placeholder="מה הרקע שלכם? ניסיון קודם באוטומציה?"
                 ></textarea>
               </div>
 
@@ -309,7 +310,7 @@ const pageUrl = `https://focusai.co.il/blog/${post.id}`;
                 class="w-full py-3.5 bg-[#a855f7] text-[#0a0a0f] font-bold text-sm hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:brightness-110 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 rounded-full"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-[#0a0a0f] animate-pulse"></span>
-                השאירו פרטים לקבלת מידע
+                רוצה לשמוע פרטים
               </button>
             </form>
 
@@ -326,12 +327,12 @@ const pageUrl = `https://focusai.co.il/blog/${post.id}`;
 
             <!-- Bot-Camp link -->
             <div class="mt-6 pt-6 border-t border-white/[0.06] text-center">
-              <p class="text-sm text-[#b0b0c0] mb-3">רוצים לראות את הסילבוס המלא?</p>
+              <p class="text-sm text-[#b0b0c0] mb-3">רוצים לראות את התכנית המלאה?</p>
               <a
                 href="/academy"
                 class="inline-flex items-center gap-2 text-[#a855f7] font-bold text-sm hover:gap-3 transition-all"
               >
-                לפרטים נוספים על <bdi>Bot-Camp</bdi>
+                לסילבוס, לוח זמנים ופרטים נוספים
                 <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -566,8 +567,8 @@ const pageUrl = `https://focusai.co.il/blog/${post.id}`;
   });
 </script>
 
-<style>
-  /* Article prose styling */
+<style is:global>
+  /* Article prose styling - must be global to target Markdown-rendered HTML from <Content /> */
   .article-prose {
     color: #d0d0e0;
     font-size: 1.125rem;

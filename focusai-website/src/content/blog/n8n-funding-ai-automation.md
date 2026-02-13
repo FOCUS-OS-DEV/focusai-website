@@ -65,6 +65,16 @@ tags: ["news", "automation", "ai-agents", "tools"]
 
 ![אוטומציה חכמה לעסקים ישראלים](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771020191/blog/n8n-automation-israeli-business.png)
 
+<a href="/academy" style="display:block; position:relative; margin:3rem 0; border-radius:16px; overflow:hidden; text-decoration:none; border:1px solid rgba(168,85,247,0.3);">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" style="width:100%; display:block; filter:brightness(0.45);" />
+  <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1.5rem;">
+    <span style="background:rgba(168,85,247,0.9); color:#0a0a0f; padding:5px 14px; border-radius:20px; font-size:0.7rem; font-weight:800; letter-spacing:0.08em; margin-bottom:0.75rem;">BOT-CAMP</span>
+    <span style="color:white; font-size:1.4rem; font-weight:900; line-height:1.3; margin-bottom:0.5rem;">רוצים לבנות את זה בעצמכם?</span>
+    <span style="color:rgba(255,255,255,0.75); font-size:0.85rem; margin-bottom:1rem;">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
+    <span style="background:#a855f7; color:#0a0a0f; padding:10px 28px; border-radius:25px; font-weight:700; font-size:0.85rem;">לפרטים נוספים</span>
+  </div>
+</a>
+
 ## חמישה צעדים שאפשר לעשות כבר היום
 
 לא צריך לחכות שהשוק יגיע ל-88 מיליארד דולר כדי להתחיל. הנה חמישה דברים שאתם יכולים לעשות עכשיו:
