@@ -4,7 +4,7 @@
  */
 import { siteConfig, getMailtoLink, getPhoneLink } from '../data';
 
-const webhookUrl = import.meta.env.PUBLIC_CONTACT_WEBHOOK || "#";
+const webhookUrl = "https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c";
 const chavobot = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/v1770324982/freepik__base-prompt-sitting-at-a-modern-laptop-computer-ty__91188_u0haiq.png";
 
 const contactMethods = [
@@ -310,7 +310,8 @@ const interestOptions = [
     e.preventDefault();
 
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    const data: Record<string, string> = { source: 'homepage-contact' };
+    formData.forEach((value, key) => { data[key] = value.toString(); });
     const submitBtn = form.querySelector('.submit-btn') as HTMLButtonElement;
     const originalHTML = submitBtn.innerHTML;
 

@@ -764,3 +764,39 @@ const galleryImages = [
     font-family: 'Rubik', sans-serif;
   }
 </style>
+
+<script>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    params.append('source', 'sadnaot-contact');
+    formData.forEach((value, key) => { params.append(key, value.toString()); });
+
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalHTML = btn?.innerHTML || '';
+    if (btn) {
+      btn.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span> שולח...';
+      btn.disabled = true;
+    }
+
+    try {
+      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+      if (btn) {
+        btn.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#0a0a0f]"></span> נשלח בהצלחה!';
+      }
+    } catch {
+      if (btn) {
+        btn.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> שגיאה, נסו שוב';
+      }
+    }
+
+    setTimeout(() => {
+      form.reset();
+      if (btn) { btn.innerHTML = originalHTML; btn.disabled = false; }
+    }, 3000);
+  });
+</script>

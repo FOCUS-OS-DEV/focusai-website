@@ -224,9 +224,7 @@ const courses = [
               השאירו פרטים ונחזור אליכם תוך 24 שעות לשיחת ייעוץ בחינם
             </p>
 
-            <form class="space-y-4" action="https://formsubmit.co/info@focusai.co.il" method="POST">
-              <input type="hidden" name="_subject" value="בקשת ייעוץ - Academy" />
-              <input type="hidden" name="_captcha" value="false" />
+            <form id="academy-consult-form" class="space-y-4">
 
               <div class="flex flex-col sm:flex-row gap-3">
                 <input
@@ -753,3 +751,26 @@ const courses = [
     }
   }
 </style>
+
+<script>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+
+  const academyForm = document.getElementById('academy-consult-form') as HTMLFormElement;
+  academyForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(academyForm);
+    const params = new URLSearchParams();
+    params.append('source', 'homepage-academy-consult');
+    formData.forEach((value, key) => { params.append(key, value.toString()); });
+
+    const btn = academyForm.querySelector('.submit-btn') as HTMLButtonElement;
+    if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
+
+    try {
+      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+    } catch {}
+
+    if (btn) { btn.textContent = 'נשלח בהצלחה!'; btn.disabled = true; }
+    setTimeout(() => { academyForm.reset(); if (btn) { btn.disabled = false; btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg> חזרו אליי'; } }, 3000);
+  });
+</script>
