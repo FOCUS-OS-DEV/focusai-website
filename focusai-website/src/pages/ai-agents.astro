@@ -233,7 +233,7 @@ const serviceSchema = {
   ]} />
 
   <!-- Hero Section -->
-  <section class="relative min-h-[85vh] md:min-h-[90vh] flex items-center pt-20 md:pt-24 pb-12 md:pb-16 overflow-hidden">
+  <section class="relative min-h-screen flex items-center justify-center pt-24 md:pt-28 pb-14 md:pb-20 overflow-hidden">
     <!-- Background Effects -->
     <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
       <div class="absolute top-1/4 right-1/3 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[150px]"></div>
@@ -243,10 +243,7 @@ const serviceSchema = {
       <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10 max-w-7xl">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <!-- Content -->
-        <div>
+    <div class="container mx-auto px-4 relative z-10 max-w-5xl text-center">
           <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#a855f7]/10 border border-[#a855f7]/30 rounded-full mb-6">
             <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
             <span class="font-mono text-[#a855f7] text-sm">חדש! מהפכת ה-AI בשירות הלקוחות והמכירות</span>
@@ -265,27 +262,27 @@ const serviceSchema = {
             ]}
           />
 
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 leading-tight">
+          <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 md:mb-8 leading-tight">
             <span class="block text-white">נציג AI</span>
             <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">לעסק</span>
           </h1>
 
-          <p class="text-xl sm:text-2xl md:text-3xl text-white font-bold mb-3 md:mb-4">
+          <p class="text-2xl sm:text-3xl md:text-4xl text-white font-bold mb-4 md:mb-5">
             זמין 24/7
           </p>
 
-          <p class="text-base sm:text-lg md:text-xl text-[#d0d0e0] mb-3 md:mb-4 leading-relaxed">
+          <p class="text-lg sm:text-xl md:text-2xl text-[#d0d0e0] mb-3 md:mb-4 leading-relaxed">
             עונה במקומך, מתאם שיחה, מוכר.
           </p>
 
-          <p class="text-base sm:text-lg text-[#d0d0e0] mb-6 md:mb-8">
+          <p class="text-lg sm:text-xl text-[#d0d0e0] mb-8 md:mb-10">
             לקוח שולח הודעה, הנציג מטפל בכל היתר.
           </p>
 
           <!-- Platform badges -->
-          <div class="mb-8">
+          <div class="mb-10">
             <p class="text-sm font-mono text-[#b0b0c0] mb-3">מתחבר ל:</p>
-            <div class="flex flex-wrap gap-2 sm:gap-3">
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
               {platforms.map(platform => (
                 <div class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#12121a] border border-[#2a2a3a] rounded-lg">
                   <div class="w-5 h-5 flex items-center justify-center">
@@ -326,100 +323,23 @@ const serviceSchema = {
             </div>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-4">
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="#contact"
-              class="group relative px-6 sm:px-8 py-4 bg-[#a855f7] text-[#0a0a0f] font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,255,136,0.5)] text-center rounded-xl"
+              class="group relative px-8 py-4 bg-gradient-to-r from-[#a855f7] to-[#ec4899] text-white font-bold text-lg transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] hover:-translate-y-0.5 text-center rounded-full"
             >
               <span class="flex items-center justify-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
                 לשיחת אפיון בחינם
               </span>
             </a>
             <a
               href="#benefits"
-              class="px-6 sm:px-8 py-4 border-2 border-[#a855f7]/50 text-[#a855f7] font-mono uppercase tracking-wider hover:bg-[#a855f7]/10 transition-all duration-300 text-center rounded-xl"
+              class="px-8 py-4 bg-white/[0.05] border border-white/[0.1] text-white font-medium text-lg rounded-full hover:bg-white/[0.1] hover:border-[#a855f7]/30 transition-all duration-300 text-center"
             >
               איך זה עובד?
             </a>
           </div>
-        </div>
-
-        <!-- Visual Element - Chat Demo -->
-        <div class="relative hidden lg:block">
-          <div class="relative p-6 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl">
-            <!-- Chat Header -->
-            <div class="flex items-center gap-3 pb-4 border-b border-[#2a2a3a] mb-4">
-              <div class="w-10 h-10 rounded-full bg-[#a855f7] flex items-center justify-center">
-                <svg class="w-5 h-5 text-[#0a0a0f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
-              </div>
-              <div>
-                <p class="text-white font-medium">נציג AI - העסק שלך</p>
-                <p class="text-[#a855f7] text-xs flex items-center gap-1">
-                  <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
-                  מחובר לוואטסאפ
-                </p>
-              </div>
-            </div>
-
-            <!-- Chat Messages -->
-            <div class="space-y-4 mb-4">
-              <div class="flex justify-start">
-                <div class="max-w-[80%] p-3 bg-[#1a1a24] border border-[#2a2a3a] text-[#d0d0e0] text-sm rounded-lg">
-                  היי! איך אני יכול לעזור לך היום? 😊
-                </div>
-              </div>
-              <div class="flex justify-end">
-                <div class="max-w-[80%] p-3 bg-[#a855f7]/10 border border-[#a855f7]/30 text-white text-sm rounded-lg">
-                  היי, מתעניין בשירות שלכם
-                </div>
-              </div>
-              <div class="flex justify-start">
-                <div class="max-w-[80%] p-3 bg-[#1a1a24] border border-[#2a2a3a] text-[#d0d0e0] text-sm rounded-lg">
-                  מעולה! אשמח לספר לך על השירותים שלנו. מה הכי מעניין אותך - מחירון, זמינות, או דוגמאות לעבודות קודמות?
-                </div>
-              </div>
-              <div class="flex justify-end">
-                <div class="max-w-[80%] p-3 bg-[#a855f7]/10 border border-[#a855f7]/30 text-white text-sm rounded-lg">
-                  אשמח לראות מחירים
-                </div>
-              </div>
-              <div class="flex justify-start">
-                <div class="max-w-[80%] p-3 bg-[#1a1a24] border border-[#2a2a3a] text-[#d0d0e0] text-sm rounded-lg">
-                  בטח! שולח לך עכשיו את המחירון המלא 📄<br/><br/>
-                  אגב, מה השם שלך? ככה אוכל לשמור את הפרטים שלך למעקב
-                </div>
-              </div>
-              <div class="flex justify-start">
-                <div class="flex items-center gap-2 text-[#b0b0c0] text-sm">
-                  <span class="inline-flex gap-1">
-                    <span class="w-2 h-2 bg-[#a855f7] rounded-full animate-bounce" style="animation-delay: 0ms;"></span>
-                    <span class="w-2 h-2 bg-[#a855f7] rounded-full animate-bounce" style="animation-delay: 150ms;"></span>
-                    <span class="w-2 h-2 bg-[#a855f7] rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
-                  </span>
-                  <span>אוסף פרטים ושולח ל-CRM...</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Input -->
-            <div class="flex items-center gap-2 p-3 bg-[#0a0a0f] border border-[#2a2a3a]">
-              <input
-                type="text"
-                placeholder="הקלידו הודעה..."
-                class="flex-1 bg-transparent text-white text-sm focus:outline-none"
-                disabled
-              />
-              <button class="p-2 text-[#a855f7]" disabled>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-        </div>
-      </div>
 
     </div>
   </section>

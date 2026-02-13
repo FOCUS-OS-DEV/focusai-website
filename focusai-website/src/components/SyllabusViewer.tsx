@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 interface SyllabusViewerProps {
@@ -10,6 +10,15 @@ interface SyllabusViewerProps {
 
 function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps, 'isOpen'>) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const touchStartX = useRef(0);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -25,6 +34,23 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
     };
   }, [images.length, onClose]);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe left → next (RTL: forward)
+        setCurrentIndex((prev) => Math.min(prev + 1, images.length - 1));
+      } else {
+        // Swipe right → prev (RTL: backward)
+        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+      }
+    }
+  };
+
   return (
     <div
       id="syllabus-modal"
@@ -34,26 +60,28 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
         zIndex: 999999,
         backgroundColor: '#000',
       }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Close button - floating */}
       <button
         onClick={onClose}
         style={{
           position: 'absolute',
-          top: 20,
-          left: 20,
+          top: isMobile ? 12 : 20,
+          left: isMobile ? 12 : 20,
           zIndex: 100,
-          padding: '12px 24px',
+          padding: isMobile ? '8px 16px' : '12px 24px',
           backgroundColor: '#ff3366',
           color: '#fff',
           border: 'none',
           borderRadius: 50,
           cursor: 'pointer',
           fontWeight: 'bold',
-          fontSize: 16,
+          fontSize: isMobile ? 13 : 16,
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 6,
         }}
       >
         ✕ סגור
@@ -63,33 +91,33 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
       <div
         style={{
           position: 'absolute',
-          top: 20,
-          right: 20,
+          top: isMobile ? 12 : 20,
+          right: isMobile ? 12 : 20,
           zIndex: 100,
-          padding: '12px 20px',
+          padding: isMobile ? '8px 14px' : '12px 20px',
           backgroundColor: 'rgba(0,0,0,0.8)',
           borderRadius: 50,
           display: 'flex',
           alignItems: 'center',
-          gap: 12,
+          gap: isMobile ? 8 : 12,
         }}
       >
         <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#a855f7' }}></span>
         </div>
-        <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 14 }}>
+        <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: isMobile ? 12 : 14 }}>
           עמוד {currentIndex + 1} / {images.length}
         </span>
       </div>
 
-      {/* Main image - centered */}
+      {/* Main image - centered, much larger on mobile */}
       <div
         style={{
           position: 'absolute',
-          top: 80,
-          left: 100,
-          right: 100,
-          bottom: 120,
+          top: isMobile ? 52 : 80,
+          left: isMobile ? 4 : 100,
+          right: isMobile ? 4 : 100,
+          bottom: isMobile ? 70 : 120,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -102,7 +130,7 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
             maxWidth: '100%',
             maxHeight: '100%',
             objectFit: 'contain',
-            borderRadius: 16,
+            borderRadius: isMobile ? 8 : 16,
             boxShadow: '0 0 80px rgba(168,85,247,0.4)',
           }}
         />
@@ -114,19 +142,22 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
           onClick={() => setCurrentIndex(currentIndex - 1)}
           style={{
             position: 'absolute',
-            right: 20,
+            right: isMobile ? 6 : 20,
             top: '50%',
             transform: 'translateY(-50%)',
-            width: 70,
-            height: 70,
+            width: isMobile ? 36 : 70,
+            height: isMobile ? 36 : 70,
             borderRadius: '50%',
             border: 'none',
-            backgroundColor: '#a855f7',
+            backgroundColor: isMobile ? 'rgba(168,85,247,0.7)' : '#a855f7',
             color: '#fff',
             cursor: 'pointer',
-            fontSize: 28,
+            fontSize: isMobile ? 16 : 28,
             zIndex: 100,
-            boxShadow: '0 0 40px rgba(168,85,247,0.6)',
+            boxShadow: isMobile ? 'none' : '0 0 40px rgba(168,85,247,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           ❯
@@ -139,19 +170,22 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
           onClick={() => setCurrentIndex(currentIndex + 1)}
           style={{
             position: 'absolute',
-            left: 20,
+            left: isMobile ? 6 : 20,
             top: '50%',
             transform: 'translateY(-50%)',
-            width: 70,
-            height: 70,
+            width: isMobile ? 36 : 70,
+            height: isMobile ? 36 : 70,
             borderRadius: '50%',
             border: 'none',
-            backgroundColor: '#a855f7',
+            backgroundColor: isMobile ? 'rgba(168,85,247,0.7)' : '#a855f7',
             color: '#fff',
             cursor: 'pointer',
-            fontSize: 28,
+            fontSize: isMobile ? 16 : 28,
             zIndex: 100,
-            boxShadow: '0 0 40px rgba(168,85,247,0.6)',
+            boxShadow: isMobile ? 'none' : '0 0 40px rgba(168,85,247,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           ❮
@@ -162,13 +196,13 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
       <div
         style={{
           position: 'absolute',
-          bottom: 20,
+          bottom: isMobile ? 8 : 20,
           left: 0,
           right: 0,
           display: 'flex',
           justifyContent: 'center',
-          gap: 10,
-          padding: '0 20px',
+          gap: isMobile ? 4 : 10,
+          padding: isMobile ? '0 8px' : '0 20px',
         }}
       >
         {images.map((img, idx) => (
@@ -176,11 +210,13 @@ function SyllabusModal({ onClose, courseName, images }: Omit<SyllabusViewerProps
             key={idx}
             onClick={() => setCurrentIndex(idx)}
             style={{
-              width: 50,
-              height: 65,
+              width: isMobile ? 32 : 50,
+              height: isMobile ? 42 : 65,
               padding: 0,
-              border: idx === currentIndex ? '3px solid #a855f7' : '2px solid #555',
-              borderRadius: 8,
+              border: idx === currentIndex
+                ? (isMobile ? '2px solid #a855f7' : '3px solid #a855f7')
+                : (isMobile ? '1px solid #555' : '2px solid #555'),
+              borderRadius: isMobile ? 4 : 8,
               overflow: 'hidden',
               cursor: 'pointer',
               opacity: idx === currentIndex ? 1 : 0.6,
