@@ -5,12 +5,6 @@
  */
 import VideoTestimonialsCarousel from './VideoTestimonialsCarousel.astro';
 import PhoneTestimonials from './PhoneTestimonials.astro';
-
-const stats = [
-  { value: "98%", label: "שביעות רצון" },
-  { value: "4.9", label: "דירוג ממוצע" },
-  { value: "500+", label: "בוגרים" },
-];
 ---
 
 <section id="testimonials" class="py-12 md:py-16 relative overflow-hidden bg-[#0a0a0f]" data-section>
@@ -45,28 +39,8 @@ const stats = [
       </p>
     </div>
 
-    <!-- Stats - Glass Cards -->
-    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-10 md:mb-12">
-      {stats.map((stat, i) => (
-        <div class="testimonials-stat-card" style={`--delay: ${i * 0.1}s`}>
-          <div class="text-3xl md:text-4xl font-black testimonials-gradient-text mb-1">
-            {stat.value}
-          </div>
-          <div class="text-sm text-white/50">
-            {stat.label}
-          </div>
-        </div>
-      ))}
-    </div>
-
     <!-- Video Testimonials Carousel -->
-    <div class="mb-10 md:mb-12">
-      <div class="flex items-center gap-4 mb-4">
-        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
-        <span class="text-sm font-medium text-white/40 uppercase tracking-wider">עדויות וידאו</span>
-        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
-      </div>
-
+    <div class="mb-8 md:mb-10">
       <VideoTestimonialsCarousel />
     </div>
 
@@ -82,9 +56,9 @@ const stats = [
     <!-- Bottom CTA -->
     <div class="text-center">
       <div class="testimonials-cta-glass">
-        <div class="relative z-10 p-8 md:p-10">
-          <p class="text-lg text-white/70 mb-6">
-            רוצים להצטרף לרשימת הלקוחות המרוצים?
+        <div class="relative z-10 p-10 md:p-14 lg:p-16">
+          <p class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8">
+            רוצים להצטרף למשפחת הלקוחות המרוצים?
           </p>
 
           <a
@@ -94,22 +68,8 @@ const stats = [
             <span class="testimonials-btn-bg"></span>
             <span class="testimonials-btn-text">
               בואו נדבר
-              <svg class="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
             </span>
           </a>
-
-          <div class="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-white/50">
-            <span class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-              ללא התחייבות
-            </span>
-            <span class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-              תגובה תוך 24 שעות
-            </span>
-          </div>
         </div>
       </div>
     </div>
@@ -131,34 +91,6 @@ const stats = [
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
-
-  /* Stat cards */
-  .testimonials-stat-card {
-    text-align: center;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border-radius: 16px;
-    animation: statAppear 0.5s ease-out var(--delay) both;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .testimonials-stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 32px -8px rgba(168, 85, 247, 0.2);
-  }
-
-  @keyframes statAppear {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   /* CTA Glass */
@@ -184,11 +116,19 @@ const stats = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 32px;
+    padding: 20px 48px;
     border-radius: 100px;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     overflow: hidden;
     transition: transform 0.3s;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-cta-btn {
+      padding: 24px 64px;
+      font-size: 1.5rem;
+    }
   }
 
   .testimonials-cta-btn:hover {

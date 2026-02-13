@@ -181,29 +181,25 @@ const row2 = clients.slice(8, 16);
 
     .logos-row-inner {
       display: flex;
-      gap: 12px;
+      gap: 8px;
       justify-content: center;
-      padding: 0 20px;
-    }
-
-    .row-1 .logos-row-inner {
-      transform: translateX(40px);
-    }
-
-    .row-2 .logos-row-inner {
-      transform: translateX(-40px);
+      padding: 0 40px;
     }
 
     .logo-card {
-      width: 150px;
-      min-width: 150px;
+      width: 130px;
+      min-width: 130px;
       aspect-ratio: 3 / 2;
       padding: 12px;
-      transition: transform 0.3s;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      transition: transform 0.3s, background 0.3s;
     }
 
     .logo-card:hover {
       transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .logo-card:hover img {
@@ -217,7 +213,7 @@ const row2 = clients.slice(8, 16);
 
     .logos-row::before,
     .logos-row::after {
-      width: 120px;
+      width: 80px;
     }
   }
 </style>
