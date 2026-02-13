@@ -1,0 +1,182 @@
+---
+import '../styles/workshop.css';
+---
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0612" />
+  <meta name="description" content="Focus AI - סדנאות בינה מלאכותית מעשיות לארגונים וחברות. שפרו את הפרודוקטיביות והחדשנות בארגון שלכם עם הכשרה מותאמת אישית." />
+  <title>Focus AI | סדנאות AI לארגונים</title>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://focusai.co.il/ai-workshop/" />
+  <meta property="og:title" content="Focus AI | סדנאות AI לארגונים" />
+  <meta property="og:description" content="סדנאות בינה מלאכותית מעשיות לארגונים. הפכו את הארגון שלכם למעצמת AI." />
+  <meta property="og:image" content="https://i.ibb.co/nNX99Wys/FOCUSAI-LOGO-04.png" />
+  <meta property="og:locale" content="he_IL" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Focus AI | סדנאות AI לארגונים" />
+  <meta name="twitter:description" content="סדנאות בינה מלאכותית מעשיות לארגונים. הפכו את הארגון שלכם למעצמת AI." />
+  <meta name="twitter:image" content="https://i.ibb.co/nNX99Wys/FOCUSAI-LOGO-04.png" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" href="/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+
+  <meta name="generator" content={Astro.generator} />
+</head>
+<body class="bg-brand-dark text-white antialiased selection:bg-brand-purple selection:text-white min-h-screen relative overflow-x-hidden font-sans">
+
+  <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-dark/50 backdrop-blur-md py-4" role="banner">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <div class="flex items-center justify-between">
+        <a href="#hero" class="flex items-center gap-2 z-50 relative group" aria-label="Focus AI - חזרה לעמוד הבית">
+          <img src="https://i.ibb.co/nNX99Wys/FOCUSAI-LOGO-04.png" alt="Focus AI" class="h-8 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" width="120" height="40" />
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1.5 border border-white/10 backdrop-blur-sm" role="navigation" aria-label="תפריט ראשי">
+          <a href="#hero" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="hero">בית</a>
+          <a href="#audience" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="audience">למי זה מתאים</a>
+          <a href="#topics" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="topics">הסילבוס</a>
+          <a href="#process" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="process">תהליך העבודה</a>
+          <a href="#about" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="about">מי אנחנו</a>
+          <a href="#team" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="team">הצוות</a>
+          <a href="#testimonials" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="testimonials">המלצות</a>
+          <a href="#gallery" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="gallery">גלריה</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <a href="#contact" class="hidden md:inline-block bg-gradient-to-r from-brand-purple to-brand-pink text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-purple-900/40 hover:shadow-purple-700/60 hover:-translate-y-0.5 transition-all duration-300">הזמינו סדנה</a>
+          <button id="mobile-menu-btn" class="md:hidden z-50 relative p-2 text-white hover:bg-white/10 rounded-lg transition-colors" aria-label="פתח תפריט ניווט" aria-expanded="false" aria-controls="mobile-menu">
+            <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            <svg id="icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="fixed inset-0 h-[100dvh] bg-brand-dark z-40 md:hidden flex flex-col pt-24 pb-8 px-6 transition-transform duration-300 translate-x-full pointer-events-none overflow-y-auto" role="dialog" aria-modal="true" aria-label="תפריט ניווט">
+      <nav class="flex flex-col items-center gap-6 w-full" role="navigation">
+        <a href="#hero" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="hero">בית</a>
+        <a href="#audience" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="audience">למי זה מתאים</a>
+        <a href="#topics" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="topics">הסילבוס</a>
+        <a href="#process" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="process">תהליך העבודה</a>
+        <a href="#about" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="about">מי אנחנו</a>
+        <a href="#team" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="team">הצוות</a>
+        <a href="#testimonials" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="testimonials">המלצות</a>
+        <a href="#gallery" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="gallery">גלריה</a>
+        <a href="#contact" class="mobile-link mt-6 w-full text-center bg-gradient-to-r from-brand-purple to-brand-pink text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg shadow-purple-900/20">שריינו שיחת אפיון</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="main-content">
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="hero" class="relative min-h-[100dvh] flex items-center pt-32 pb-12 lg:pt-28">
+      <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div class="absolute top-[-10%] right-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-purple/20 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow will-change-transform"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-pink/20 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow will-change-transform" style="animation-delay: 1.5s;"></div>
+        <div class="absolute inset-0 bg-noise opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 md:mb-6 relative animate-float">
+            <div class="absolute inset-0 bg-brand-purple/30 blur-2xl rounded-full transform scale-90" aria-hidden="true"></div>
+            <img src="https://i.ibb.co/ZRCkJBX4/FOCUS-LOGO-01-3.png" alt="" class="relative w-80 h-80 md:w-[28rem] md:h-[28rem] object-contain drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]" width="448" height="448" aria-hidden="true">
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight mb-6 leading-tight">
+            <span class="block text-white mb-2">הפכו את הארגון</span>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-purple via-brand-pink to-white">למעצמת AI</span>
+          </h1>
+
+          <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mb-8 md:mb-10 leading-relaxed px-4">
+            אנחנו מגשרים על הפער בין אנשים לטכנולוגיה, ומטמיעים בינה מלאכותית בארגון שלכם
+            <span class="text-white font-medium">בצורה חכמה, מעשית ואנושית.</span>
+          </p>
+
+          <div class="flex flex-col w-full sm:w-auto sm:flex-row gap-4 px-4 sm:px-0">
+            <a href="#contact" class="group relative overflow-hidden inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-white bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_10px_25px_rgba(168,85,247,0.4)] hover:shadow-[0_20px_40px_rgba(168,85,247,0.5)] border border-transparent">
+              <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]" aria-hidden="true"></span>
+              <span class="relative">לשיחת אפיון ללא עלות</span>
+            </a>
+            <a href="#process" class="group inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-brand-purple bg-transparent border-2 border-brand-purple text-white hover:bg-brand-purple/10">איך זה עובד?</a>
+          </div>
+
+          <!-- Client Logos Marquee -->
+          <div class="mt-16 md:mt-20 w-full max-w-[100vw] overflow-hidden">
+            <p class="text-2xl md:text-4xl text-gray-200 mb-10 md:mb-12 font-bold">חלק מהלקוחות שסומכים עלינו</p>
+            <div class="w-full relative marquee-mask mb-6 md:mb-8" dir="ltr">
+              <div class="flex w-fit animate-scroll-left-fast md:animate-scroll-left hover:[animation-play-state:paused]">
+                <div class="flex items-center gap-4 md:gap-6 px-2 shrink-0">
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                </div>
+                <div class="flex items-center gap-4 md:gap-6 px-2 shrink-0">
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEHOLDER: Remaining sections will be appended -->
+
+  </main>
+
+</body>
+</html>
