@@ -1,182 +1,1070 @@
 ---
-import '../styles/workshop.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ClientLogosGrid from '../components/ClientLogosGrid.astro';
+import { founders } from '../data/team';
+
+const workshopBios: Record<string, string> = {
+  unil: "יזם, מנהל רשתות וסמנכ\u05F4ל תפעול ושיווק לשעבר ברשתות קמעונאיות. מומחה בפיתוח עסקי, יישום פתרונות AI ובניית אוטומציות מורכבות שמייעלות תהליכים. מרצה בטכניון ובאוניברסיטת חיפה, מפתח תוכניות לימוד בתחום האוטומציה ו-AI באקדמיה, ויוצר בתחומי הספרות והשירה.",
+  shahar: "עורך דין ויזם עם רקע עשיר בשיווק דיגיטלי. מתמחה באפיון והטמעה של סוכני AI חכמים לעסקים ובהנגשת טכנולוגיה לצוותים לא טכנולוגיים. מרצה בטכניון ובאוניברסיטת חיפה בתחומי פיתוח AI ומפתח תוכניות לימוד בתחום סוכני הבינה המלאכותית והאוטומציה.",
+};
+
+const webhookUrl = "https://focus2025.app.n8n.cloud/webhook/06374873-ea8a-4d27-bfa2-453ab2bf03d8";
+
+const videoTestimonials = [
+  { name: "מטר", role: "בוגרת הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/%D7%9E%D7%98%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pvninr.mp4" },
+  { name: "חגית", role: "מנהלת המרכז לפיתוח קריירה אוניברסיטת חיפה", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1767274571/IMG_0753_iah7ft.mp4" },
+  { name: "שניר", role: "בוגר הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483262/%D7%A9%D7%A0%D7%99%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_mxbzrj.mp4" },
+  { name: "בני", role: "בוגר הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1767274566/IMG_3467_pg6tos.mp4" },
+  { name: "ארטיום", role: "בוגר הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/%D7%90%D7%A8%D7%98%D7%99%D7%95%D7%9D_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pzkt2y.mp4" },
+];
+
+const writtenTestimonials = [
+  { name: "להב דור", role: "בוגר הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177221/4_qhzbdk.jpg", quote: "תודה רבה לכל החבר'ה המדהימים על שבוע מעניין ומאתגר. תודה מיוחדת לאוניל, שחר וכפיר על הובלה דינמית, הקניית כלים וערכים לעתיד ושיתוף הידע. אני המלצתי כבר לכמה חברים על הקורס ולא רק לגבי החומר הנלמד אלא גם לאופי העברת החומר והתמיכה בסטודנטים לאורך הקורס." },
+  { name: "בני מוזס", role: "בוגר הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177222/5_iudgl3.jpg", quote: "הדבר שהכי עוזר לי בלמידה בקורס הוא התמיכה האישית מהמרצים, ההסברים הברורים והיכולת להתנסות במערכת תוך כדי הלמידה. אשתדל ככל יכולתי להניע תהליכים בארגון לטובת הטמעת האוטומציות." },
+  { name: "חגית הלמר הרמן", role: "מנהלת המרכז לפיתוח קריירה, אוניברסיטת חיפה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177220/3_d351xk.jpg", quote: "החוויה שלנו בעבודה עם צוות Focus הייתה מדהימה. ההכשרה הועברה בצורה מקצועית וברורה, והסטודנטים קיבלו מענה מיידי ומקיף לכל הצרכים שלהם. התגובות של כלל המשתתפים היו מעל המצופה, החל מסטודנטים צעירים ועד לעובדי האוניברסיטה שלקחו חלק בהכשרה." },
+  { name: "סאוסן פרעוני", role: "בוגרת הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177222/6_mngwf3.jpg", quote: "הייתה חוויה נעימה מאוד, נהניתי מהשילוב בין התיאוריה לפרקטיקה ומהאווירה החיובית של הקבוצה. אני מתכננת לשלב את מה שלמדתי בפרויקטים באוניברסיטה ובעבודה היומיומית שלי." },
+  { name: "אריס חנא", role: "בוגרת הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177221/2_ytkcuf.jpg", quote: "תודה רבה לכם ולכל הקבוצה! באמת אתם מסבירים מהלב, בסבלנות ובצורה שממש נותנת ביטחון ללמוד. מרגישה שאתם לא רק מלמדים אלא גם מלווים ותומכים, וזה עושה את כל ההבדל." },
+  { name: "רימא חלאילה", role: "בוגרת הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177220/1_d3qx5v.jpg", quote: "השיעור הראשון היום היה ממש מעניין! פיתחתי סוכן קטן שייעץ בנושא כושר ותזונה וחייבת לכתוב לכם שזה באמת היה מגניב עבורי. חייבת להוסיף שפשוט הייתה זמינות טוטאלית של המרצים ולא היה מקרה שמישהו שנתקל בקושי נשאר מאחור." },
+];
+
+const whatsappScreenshots = [
+  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.49_gslu8r.jpg",
+  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.49_2_s6qi2d.jpg",
+  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.49_1_i6dk6x.jpg",
+  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.48_vjykkf.jpg",
+  "v1764235508/WhatsApp_Image_2025-11-27_at_11.21.40_b817hm.jpg",
+  "v1764609935/WhatsApp_Image_2025-12-01_at_18.34.02_y37mtc.jpg",
+  "v1768494114/WhatsApp_Image_2026-01-15_at_18.21.37_s66ddm.jpg",
+  "v1768493691/WhatsApp_Image_2026-01-15_at_17.48.02_tftosm.jpg",
+  "v1768493691/WhatsApp_Image_2026-01-15_at_17.45.34_scfem2.jpg",
+  "v1768493691/WhatsApp_Image_2026-01-15_at_17.46.50_ex406e.jpg",
+  "v1768493691/WhatsApp_Image_2026-01-15_at_17.46.04_emr8y2.jpg",
+  "v1768493691/WhatsApp_Image_2026-01-15_at_17.49.34_c7nii5.jpg",
+];
+
+const galleryImages = [
+  "v1764513070/WhatsApp_Image_2025-11-30_at_16.29.03_n0casb.jpg",
+  "v1764513071/WhatsApp_Image_2025-11-30_at_16.29.04_1_qfl4j2.jpg",
+  "v1764513069/WhatsApp_Image_2025-11-30_at_16.29.03_1_ttrimh.jpg",
+  "v1764513600/Generated_Image_November_28_2025_-_10_13PM_s4lv23.jpg",
+  "v1764513069/WhatsApp_Image_2025-11-30_at_16.29.04_f6lckc.jpg",
+  "v1764513656/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%9C%D7%98_%D7%97%D7%95%D7%A6%D7%95%D7%AA_%D7%91%D7%95%D7%98_%D7%A7%D7%90%D7%9E%D7%A4_9-16_idbaxk.jpg",
+  "v1764513069/WhatsApp_Image_2025-11-30_at_16.29.04_2_r2dtuu.jpg",
+  "v1764513630/IMG_0363_1_hul8x7.jpg",
+  "v1764514114/WhatsApp_Image_2025-11-30_at_16.48.20_da8cf5.jpg",
+  "v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg",
+  "v1764519897/WhatsApp_Image_2025-11-30_at_18.24.31_apalzp.jpg",
+  "v1764675923/IMG_8298_vhl1gz.jpg",
+  "v1764675925/IMG_9174_zl2imh.jpg",
+  "v1764675925/IMG_8910_oqlk56.jpg",
+  "v1764675922/IMG_0497_orbhra.jpg",
+];
+
+const audienceCards = [
+  { icon: "briefcase", title: "מנהלים ו-C-Level", desc: "שרוצים להוביל טרנספורמציה דיגיטלית ולקבל החלטות אסטרטגיות מבוססות חדשנות." },
+  { icon: "megaphone", title: "צוותי שיווק ותוכן", desc: "שמעוניינים לייצר יותר תוכן, ברמה גבוהה יותר ובפחות זמן בעזרת כלי AI." },
+  { icon: "code", title: "אנשי טכנולוגיה", desc: "הרוצים להעמיק את הידע שלהם בכלים החדשים ביותר ולייעל תהליכי פיתוח." },
+  { icon: "rocket", title: "סטארטאפים", desc: "שרוצים לשלב AI במוצר או בתהליכי העבודה כדי לרוץ מהר יותר מהמתחרים." },
+  { icon: "building", title: "ארגוני Enterprise", desc: "המחפשים דרכים לייעל את שגרות העבודה, לשפר שירות לקוחות, לחסוך בעלויות תפעול ולהגדיל מכירות." },
+  { icon: "users", title: "משאבי אנוש", desc: "לייעול תהליכי גיוס, כתיבת תיאורי משרה ושיפור חווית העובד בארגון." },
+];
+
+const syllabusTopics = [
+  { title: "מבוא לבינה מלאכותית והנדסת פרומפטים", desc: "מבוא מקיף לעולם ה AI, היכרות עם מודלי שפה גדולים ויכולות הכלים המובילים. למידה מעמיקה של עקרונות חשיבה ובניית בקשות מדויקות לקבלת תוצאות איכותיות.", tags: ["ChatGPT", "Claude", "Prompt Engineering"], highlighted: false },
+  { title: "מחקר חכם ובניית סוכני AI", desc: "בניית סוכנים חכמים המיועדים לכל מטרה אישית או מקצועית. ביצוע מחקר ואיסוף מידע לבניית בסיס ידע איכותי. כל משתתף יבנה סוכן AI פעיל!", tags: ["GPTs Builder", "Perplexity", "AI Agents"], highlighted: false },
+  { title: "סיכום פגישות, עיבוד מסמכים ויצירת מצגות", desc: "למידה מעמיקה של כלים לניתוח מסמכים, תמלול וסיכום פגישות, עיבוד תוכן מורכב ובניית תובנות.", tags: ["GenSpark", "NotebookLM", "Google AI Studio"], highlighted: false },
+  { title: "יצירת תמונות וסרטונים בכלים חדשניים", desc: "כלי AI מתקדמים לשליטה גבוהה ויצירה מהירה ואיכותית של תוכן ויזואלי.", tags: ["Kling AI", "Nano Banana Pro", "תמיכה בעברית"], highlighted: false },
+  { title: "בניית אפליקציות פנים ארגוניות", desc: "בניית אפליקציות פנימיות לצרכים תפעוליים, ניהוליים ושיווקיים עם בסיס נתונים בזמן אמת.", tags: ["Lovable", "Base44", "No Code Apps"], highlighted: false },
+  { title: "אפיון עסקי, איסוף מידע ויצירת דשבורדים", desc: "שיטות לאיסוף מידע איכותי ומיפוי תהליכים בארגון. יצירת דשבורדים חכמים.", tags: ["BPMN", "RACI", "Dashboards"], highlighted: false },
+  { title: "דפי נחיתה, מיילים מעוצבים ואוטומציה", desc: "יסודות הפיתוח לבניית דפי נחיתה ומיילים שיווקיים מעוצבים. AI לכתיבת קופי.", tags: ["n8n", "Landing Pages", "Automation"], highlighted: false },
+  { title: "יישום מעשי ופרויקט אישי", desc: "התכלית של כל סדנה! יישום כל היכולות שנרכשו בפרויקט אמיתי מהארגון. ליווי צמוד ומשוב מקצועי.", tags: ["פרויקט אמיתי", "ליווי צמוד"], highlighted: true },
+];
+
+const toolBadges = ["ChatGPT", "Claude", "Gemini", "Perplexity", "GenSpark", "NotebookLM", "Google AI Studio", "n8n", "Lovable", "Base44", "Kling AI", "Nano Banana Pro"];
+
+const processSteps = [
+  { num: "01", title: "אפיון מעמיק", desc: "שיחת עומק להבנת ה-DNA הארגוני" },
+  { num: "02", title: "תפירת החליפה", desc: "בניית סילבוס, מצגת וחומרי לימוד מותאמים אישית" },
+  { num: "03", title: "הכשרה מעשית", desc: "סדנת Hands-on חווייתית" },
+  { num: "04", title: "הטמעה וליווי", desc: "חומרי עזר, הקלטות ותמיכה" },
+];
+
+const stats = [
+  { value: "2,000+", label: "משתתפים" },
+  { value: "50+", label: "ארגונים" },
+  { value: "98%", label: "שביעות רצון" },
+  { value: "100+", label: "סדנאות" },
+];
 ---
 
-<!DOCTYPE html>
-<html lang="he" dir="rtl" class="scroll-smooth">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0a0612" />
-  <meta name="description" content="Focus AI - סדנאות בינה מלאכותית מעשיות לארגונים וחברות. שפרו את הפרודוקטיביות והחדשנות בארגון שלכם עם הכשרה מותאמת אישית." />
-  <title>Focus AI | סדנאות AI לארגונים</title>
+<BaseLayout title="Focus AI | סדנאות AI לארגונים" description="סדנאות בינה מלאכותית מעשיות לארגונים. הפכו את הארגון שלכם למעצמת AI עם הכשרה מותאמת אישית.">
+  <Header slot="header" currentPath="/ai-workshop" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://focusai.co.il/ai-workshop/" />
-  <meta property="og:title" content="Focus AI | סדנאות AI לארגונים" />
-  <meta property="og:description" content="סדנאות בינה מלאכותית מעשיות לארגונים. הפכו את הארגון שלכם למעצמת AI." />
-  <meta property="og:image" content="https://i.ibb.co/nNX99Wys/FOCUSAI-LOGO-04.png" />
-  <meta property="og:locale" content="he_IL" />
+  <!-- ============================================ -->
+  <!-- SECTION 1: HERO                              -->
+  <!-- ============================================ -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]" data-section>
+    <!-- Background effects -->
+    <div class="absolute inset-0">
+      <div class="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[#a855f7]/10 rounded-full blur-[200px]"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#ec4899]/8 rounded-full blur-[150px]"></div>
+    </div>
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(168,85,247,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.5) 1px, transparent 1px); background-size: 60px 60px;"></div>
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Focus AI | סדנאות AI לארגונים" />
-  <meta name="twitter:description" content="סדנאות בינה מלאכותית מעשיות לארגונים. הפכו את הארגון שלכם למעצמת AI." />
-  <meta name="twitter:image" content="https://i.ibb.co/nNX99Wys/FOCUSAI-LOGO-04.png" />
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-32 pb-20">
+      <!-- Fingerprint logo -->
+      <div class="mb-8" data-animate="fade-up">
+        <img
+          src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+          alt="Focus AI"
+          class="w-28 md:w-36 mx-auto opacity-40"
+          style="filter: drop-shadow(0 0 40px rgba(168,85,247,0.3));"
+        />
+      </div>
 
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="icon" href="/favicon.png" />
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-8" data-animate="fade-up">
+        <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+        <span class="text-xs text-[#a855f7] uppercase tracking-wider font-medium">סדנאות AI לארגונים</span>
+      </div>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+      <!-- Heading -->
+      <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-tight" data-animate="fade-up">
+        הפכו את הארגון
+        <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#ec4899]">למעצמת AI</span>
+      </h1>
 
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-[#b0b0c0] max-w-2xl mx-auto mb-10 leading-relaxed" data-animate="fade-up">
+        אנחנו מגשרים על הפער בין אנשים לטכנולוגיה, ומטמיעים בינה מלאכותית בארגון שלכם בצורה חכמה, מעשית ואנושית.
+      </p>
 
-  <meta name="generator" content={Astro.generator} />
-</head>
-<body class="bg-brand-dark text-white antialiased selection:bg-brand-purple selection:text-white min-h-screen relative overflow-x-hidden font-sans">
-
-  <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
-
-  <!-- ========== NAVIGATION ========== -->
-  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-dark/50 backdrop-blur-md py-4" role="banner">
-    <div class="container mx-auto px-4 max-w-7xl">
-      <div class="flex items-center justify-between">
-        <a href="#hero" class="flex items-center gap-2 z-50 relative group" aria-label="Focus AI - חזרה לעמוד הבית">
-          <img src="https://i.ibb.co/nNX99Wys/FOCUSAI-LOGO-04.png" alt="Focus AI" class="h-8 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" width="120" height="40" />
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-animate="fade-up">
+        <a href="#contact" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#a855f7] to-[#ec4899] text-white font-bold text-lg rounded-full shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-300 hover:-translate-y-0.5">
+          <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+          לשיחת אפיון ללא עלות
         </a>
+        <a href="#process" class="inline-flex items-center gap-2 px-8 py-4 bg-white/[0.05] border border-white/[0.1] text-white font-medium text-lg rounded-full hover:bg-white/[0.1] hover:border-[#a855f7]/30 transition-all duration-300">
+          איך זה עובד?
+          <svg class="w-4 h-4 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </a>
+      </div>
+    </div>
 
-        <nav class="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1.5 border border-white/10 backdrop-blur-sm" role="navigation" aria-label="תפריט ראשי">
-          <a href="#hero" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="hero">בית</a>
-          <a href="#audience" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="audience">למי זה מתאים</a>
-          <a href="#topics" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="topics">הסילבוס</a>
-          <a href="#process" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="process">תהליך העבודה</a>
-          <a href="#about" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="about">מי אנחנו</a>
-          <a href="#team" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="team">הצוות</a>
-          <a href="#testimonials" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="testimonials">המלצות</a>
-          <a href="#gallery" class="nav-link px-5 py-2 text-sm font-medium text-gray-200 rounded-full border border-transparent hover:bg-white/10 hover:text-white transition-all duration-300" data-section="gallery">גלריה</a>
-        </nav>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+      <span class="text-xs text-[#b0b0c0] font-mono">SCROLL</span>
+      <div class="w-px h-8 bg-gradient-to-b from-[#a855f7] to-transparent"></div>
+    </div>
+  </section>
 
-        <div class="flex items-center gap-4">
-          <a href="#contact" class="hidden md:inline-block bg-gradient-to-r from-brand-purple to-brand-pink text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-purple-900/40 hover:shadow-purple-700/60 hover:-translate-y-0.5 transition-all duration-300">הזמינו סדנה</a>
-          <button id="mobile-menu-btn" class="md:hidden z-50 relative p-2 text-white hover:bg-white/10 rounded-lg transition-colors" aria-label="פתח תפריט ניווט" aria-expanded="false" aria-controls="mobile-menu">
-            <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            <svg id="icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-          </button>
+  <!-- ============================================ -->
+  <!-- SECTION 2: CLIENT LOGOS                      -->
+  <!-- ============================================ -->
+  <ClientLogosGrid />
+
+  <!-- ============================================ -->
+  <!-- SECTION 3: QUICK CONTACT FORM                -->
+  <!-- ============================================ -->
+  <section id="quick-contact" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
+      <!-- Section header -->
+      <div class="text-center mb-10" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">התחלה מהירה</span>
         </div>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="fixed inset-0 h-[100dvh] bg-brand-dark z-40 md:hidden flex flex-col pt-24 pb-8 px-6 transition-transform duration-300 translate-x-full pointer-events-none overflow-y-auto" role="dialog" aria-modal="true" aria-label="תפריט ניווט">
-      <nav class="flex flex-col items-center gap-6 w-full" role="navigation">
-        <a href="#hero" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="hero">בית</a>
-        <a href="#audience" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="audience">למי זה מתאים</a>
-        <a href="#topics" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="topics">הסילבוס</a>
-        <a href="#process" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="process">תהליך העבודה</a>
-        <a href="#about" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="about">מי אנחנו</a>
-        <a href="#team" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="team">הצוות</a>
-        <a href="#testimonials" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="testimonials">המלצות</a>
-        <a href="#gallery" class="mobile-nav-link text-2xl font-bold text-white hover:text-brand-purple transition-colors duration-300 w-full text-center py-3 border-b border-white/10" data-section="gallery">גלריה</a>
-        <a href="#contact" class="mobile-link mt-6 w-full text-center bg-gradient-to-r from-brand-purple to-brand-pink text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg shadow-purple-900/20">שריינו שיחת אפיון</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ========== MAIN CONTENT ========== -->
-  <main id="main-content">
-
-    <!-- ========== HERO SECTION ========== -->
-    <section id="hero" class="relative min-h-[100dvh] flex items-center pt-32 pb-12 lg:pt-28">
-      <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div class="absolute top-[-10%] right-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-purple/20 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow will-change-transform"></div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-pink/20 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow will-change-transform" style="animation-delay: 1.5s;"></div>
-        <div class="absolute inset-0 bg-noise opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">רוצים להתחיל?</h2>
+        <p class="text-[#b0b0c0] text-lg max-w-xl mx-auto">
+          השאירו פרטים ונחזור אליכם תוך 24 שעות לשיחת אפיון ללא התחייבות.
+        </p>
       </div>
 
-      <div class="container mx-auto px-4 relative z-10 max-w-7xl">
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 md:mb-6 relative animate-float">
-            <div class="absolute inset-0 bg-brand-purple/30 blur-2xl rounded-full transform scale-90" aria-hidden="true"></div>
-            <img src="https://i.ibb.co/ZRCkJBX4/FOCUS-LOGO-01-3.png" alt="" class="relative w-80 h-80 md:w-[28rem] md:h-[28rem] object-contain drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]" width="448" height="448" aria-hidden="true">
+      <!-- Form card -->
+      <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6 md:p-8" data-animate="fade-up">
+        <!-- Glass header -->
+        <div class="flex items-center gap-2 mb-6 pb-4 border-b border-white/[0.06]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60">QUICK_CONTACT</span>
+        </div>
+
+        <form id="hero-form" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
+              <input type="text" name="name" required placeholder="השם שלך"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
+              <input type="email" name="email" required placeholder="email@company.com" dir="ltr"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
           </div>
-
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tight mb-6 leading-tight">
-            <span class="block text-white mb-2">הפכו את הארגון</span>
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-purple via-brand-pink to-white">למעצמת AI</span>
-          </h1>
-
-          <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mb-8 md:mb-10 leading-relaxed px-4">
-            אנחנו מגשרים על הפער בין אנשים לטכנולוגיה, ומטמיעים בינה מלאכותית בארגון שלכם
-            <span class="text-white font-medium">בצורה חכמה, מעשית ואנושית.</span>
-          </p>
-
-          <div class="flex flex-col w-full sm:w-auto sm:flex-row gap-4 px-4 sm:px-0">
-            <a href="#contact" class="group relative overflow-hidden inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-white bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-[0_10px_25px_rgba(168,85,247,0.4)] hover:shadow-[0_20px_40px_rgba(168,85,247,0.5)] border border-transparent">
-              <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 transition-all duration-700 ease-out group-hover:left-[200%]" aria-hidden="true"></span>
-              <span class="relative">לשיחת אפיון ללא עלות</span>
-            </a>
-            <a href="#process" class="group inline-flex items-center justify-center px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-brand-purple bg-transparent border-2 border-brand-purple text-white hover:bg-brand-purple/10">איך זה עובד?</a>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
+              <input type="tel" name="phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
+              <input type="text" name="company" placeholder="שם החברה"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
           </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
+              <select name="employees"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
+                <option value="" class="bg-[#12121a]">בחרו טווח</option>
+                <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
+                <option value="11-50" class="bg-[#12121a]">11-50 עובדים</option>
+                <option value="51-200" class="bg-[#12121a]">51-200 עובדים</option>
+                <option value="201-500" class="bg-[#12121a]">201-500 עובדים</option>
+                <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
+              <input type="text" name="role" placeholder="התפקיד שלך"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
+            <textarea name="message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
+              class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
+          </div>
+          <div class="flex items-start gap-2">
+            <input type="checkbox" name="terms" required id="hero-terms"
+              class="mt-1 w-4 h-4 rounded border-white/20 bg-white/[0.05] text-[#a855f7] focus:ring-[#a855f7]/30" />
+            <label for="hero-terms" class="text-xs text-[#b0b0c0]">
+              אני מאשר/ת קבלת מידע מ-Focus AI. ניתן להסיר את ההסכמה בכל עת. <a href="/privacy" class="text-[#a855f7] hover:underline">מדיניות פרטיות</a>
+            </label>
+          </div>
+          <button type="submit"
+            class="w-full py-4 bg-gradient-to-r from-[#a855f7] to-[#ec4899] text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)] transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+            שלחו לי פרטים
+          </button>
+          <div id="hero-form-status" class="text-center text-sm hidden"></div>
+        </form>
+      </div>
+    </div>
+  </section>
 
-          <!-- Client Logos Marquee -->
-          <div class="mt-16 md:mt-20 w-full max-w-[100vw] overflow-hidden">
-            <p class="text-2xl md:text-4xl text-gray-200 mb-10 md:mb-12 font-bold">חלק מהלקוחות שסומכים עלינו</p>
-            <div class="w-full relative marquee-mask mb-6 md:mb-8" dir="ltr">
-              <div class="flex w-fit animate-scroll-left-fast md:animate-scroll-left hover:[animation-play-state:paused]">
-                <div class="flex items-center gap-4 md:gap-6 px-2 shrink-0">
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                </div>
-                <div class="flex items-center gap-4 md:gap-6 px-2 shrink-0">
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/32-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/34-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/37-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/36-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/33-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/29-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/28-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/27-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/25-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/635434-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/123546321-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/22456-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/38-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/35-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/31-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/30-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/26-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
-                  <div class="bg-white rounded-2xl p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-20 h-20 md:w-32 md:h-32"><img src="https://focusai.co.il/wp-content/uploads/2025/11/unnamed-file-1-150x150.png" alt="לקוח" class="max-h-16 md:max-h-24 max-w-full object-contain" loading="lazy"></div>
+  <!-- ============================================ -->
+  <!-- SECTION 4: AUDIENCE                          -->
+  <!-- ============================================ -->
+  <section id="audience" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168,85,247,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.5) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">קהל יעד</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          למי הסדנאות <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">מתאימות?</span>
+        </h2>
+      </div>
+
+      <!-- Cards grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {audienceCards.map((card, i) => (
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:border-[#a855f7]/30 transition-all duration-300 group" data-animate="fade-up" data-delay={`${i * 0.08}`}>
+            <!-- Icon -->
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#a855f7]/20 to-[#ec4899]/10 flex items-center justify-center mb-4 group-hover:from-[#a855f7]/30 group-hover:to-[#ec4899]/20 transition-all">
+              {card.icon === "briefcase" && (
+                <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+              )}
+              {card.icon === "megaphone" && (
+                <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>
+              )}
+              {card.icon === "code" && (
+                <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+              )}
+              {card.icon === "rocket" && (
+                <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" /></svg>
+              )}
+              {card.icon === "building" && (
+                <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              )}
+              {card.icon === "users" && (
+                <svg class="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+              )}
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">{card.title}</h3>
+            <p class="text-[#b0b0c0] text-sm leading-relaxed">{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 5: SYLLABUS                          -->
+  <!-- ============================================ -->
+  <section id="topics" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">סילבוס</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          מה תלמדו <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">בסדנה?</span>
+        </h2>
+      </div>
+
+      <!-- Tool badges -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6" data-animate="fade-up">
+        {toolBadges.map((tool) => (
+          <span class="px-4 py-2 bg-white/[0.05] border border-white/[0.1] rounded-full text-sm text-white/80 font-medium hover:border-[#a855f7]/40 hover:text-[#a855f7] transition-all cursor-default">
+            {tool}
+          </span>
+        ))}
+      </div>
+      <p class="text-center text-[#a855f7] text-sm mb-12 font-medium" data-animate="fade-up">וכל הכלים המתקדמים ביותר בעולם!</p>
+
+      <!-- Topics grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {syllabusTopics.map((topic, i) => (
+          <div
+            class={`bg-white/[0.03] backdrop-blur-xl border rounded-2xl p-6 transition-all duration-300 group hover:border-[#a855f7]/30 ${topic.highlighted ? 'border-[#a855f7]/40 shadow-[0_0_30px_rgba(168,85,247,0.15)] bg-gradient-to-br from-[#a855f7]/[0.06] to-transparent' : 'border-white/[0.08]'}`}
+            data-animate="fade-up"
+            data-delay={`${i * 0.06}`}
+          >
+            <div class="flex items-start gap-4">
+              <div class={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold font-mono ${topic.highlighted ? 'bg-gradient-to-br from-[#a855f7] to-[#ec4899] text-white' : 'bg-[#a855f7]/10 text-[#a855f7]'}`}>
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-bold text-white mb-2">{topic.title}</h3>
+                <p class="text-[#b0b0c0] text-sm leading-relaxed mb-3">{topic.desc}</p>
+                <div class="flex flex-wrap gap-2">
+                  {topic.tags.map((tag) => (
+                    <span class="px-3 py-1 bg-[#a855f7]/10 text-[#a855f7] text-xs rounded-full font-medium">{tag}</span>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
+        ))}
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="text-center mt-12" data-animate="fade-up">
+        <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#a855f7] to-[#ec4899] text-white font-bold text-lg rounded-full shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-300 hover:-translate-y-0.5">
+          <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+          בואו נדבר על הסדנה שלכם
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 6: VIDEO TESTIMONIALS                -->
+  <!-- ============================================ -->
+  <section id="video-testimonials" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">עדויות</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          מה אומרים <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">עלינו?</span>
+        </h2>
+      </div>
+
+      <!-- Video grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {videoTestimonials.map((vid, i) => (
+          <div class="relative group cursor-pointer rounded-2xl overflow-hidden bg-white/[0.03] border border-white/[0.08] hover:border-[#a855f7]/30 transition-all duration-300" data-animate="fade-up" data-delay={`${i * 0.08}`}>
+            <div class="aspect-[9/16] relative">
+              <video
+                src={`${vid.src}#t=0.1`}
+                preload="metadata"
+                muted
+                playsinline
+                class="w-full h-full object-cover"
+              ></video>
+              <!-- Play button overlay -->
+              <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-all duration-300 video-play-trigger"
+                data-video-src={vid.src}>
+                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:bg-[#a855f7]/40 transition-all duration-300">
+                  <svg class="w-6 h-6 text-white mr-[-2px]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                </div>
+              </div>
+              <!-- Name label -->
+              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-3 pt-8">
+                <p class="text-white text-sm font-bold">{vid.name}</p>
+                <p class="text-white/60 text-xs">{vid.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-sm video-modal-overlay">
+    <div class="relative w-full max-w-lg mx-4">
+      <button id="video-modal-close" class="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors z-10" aria-label="סגור">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+      <div class="rounded-2xl overflow-hidden bg-black aspect-[9/16]">
+        <video id="modal-video" controls playsinline class="w-full h-full object-contain"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SECTION 7: PROCESS                           -->
+  <!-- ============================================ -->
+  <section id="process" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">תהליך</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          איך זה <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">עובד?</span>
+        </h2>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Vertical line -->
+        <div class="absolute right-6 md:right-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#a855f7]/50 via-[#a855f7]/20 to-transparent"></div>
+
+        <div class="space-y-8">
+          {processSteps.map((step, i) => (
+            <div class="relative flex items-start gap-6 md:gap-8" data-animate="fade-right" data-delay={`${i * 0.1}`}>
+              <!-- Number circle -->
+              <div class="relative z-10 flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#a855f7] to-[#ec4899] flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                <span class="text-white font-bold font-mono text-sm md:text-lg">{step.num}</span>
+              </div>
+              <!-- Content -->
+              <div class="flex-1 bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 md:p-6 hover:border-[#a855f7]/20 transition-all">
+                <h3 class="text-xl font-bold text-white mb-1">{step.title}</h3>
+                <p class="text-[#b0b0c0] text-sm">{step.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </section>
 
-    <!-- PLACEHOLDER: Remaining sections will be appended -->
+      <!-- Format cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-14" data-animate="fade-up">
+        <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 text-center hover:border-[#a855f7]/30 transition-all">
+          <div class="text-3xl mb-3">&#127970;</div>
+          <h4 class="text-white font-bold mb-1">אצלכם במשרד</h4>
+          <p class="text-[#b0b0c0] text-sm">סדנה פרונטלית בסביבה שלכם</p>
+        </div>
+        <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 text-center hover:border-[#a855f7]/30 transition-all">
+          <div class="text-3xl mb-3">&#128187;</div>
+          <h4 class="text-white font-bold mb-1">ZOOM</h4>
+          <p class="text-[#b0b0c0] text-sm">סדנה אונליין אינטראקטיבית</p>
+        </div>
+        <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 text-center hover:border-[#a855f7]/30 transition-all">
+          <div class="text-3xl mb-3">&#128260;</div>
+          <h4 class="text-white font-bold mb-1">היברידי</h4>
+          <p class="text-[#b0b0c0] text-sm">שילוב פרונטלי + אונליין</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </main>
+  <!-- ============================================ -->
+  <!-- SECTION 8: ABOUT                             -->
+  <!-- ============================================ -->
+  <section id="about" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(168,85,247,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.5) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">אודות</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          הסיפור <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">שלנו</span>
+        </h2>
+      </div>
 
-</body>
-</html>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+        <!-- Text content (3 cols) -->
+        <div class="lg:col-span-3 space-y-6" data-animate="fade-right">
+          <p class="text-[#d0d0e0] text-lg leading-relaxed">
+            <span class="text-white font-bold">Focus AI</span> נולדה מתוך הבנה עמוקה שהפער בין טכנולוגיה לאנשים הולך וגדל.
+            בעולם שבו כלי AI חדשים צצים כל יום, ארגונים זקוקים למישהו שיגשר על הפער הזה -
+            שיתרגם טכנולוגיה מורכבת לכלים פרקטיים שכל אחד יכול להשתמש בהם.
+          </p>
+          <p class="text-[#d0d0e0] text-lg leading-relaxed">
+            אנחנו לא מלמדים תיאוריה - אנחנו מביאים ניסיון אמיתי מהשטח.
+            כל סדנה מותאמת לארגון, לתעשייה ולאנשים. כי מה שעובד לחברת הייטק לא בהכרח עובד לארגון ממשלתי.
+          </p>
+
+          <!-- Blockquote -->
+          <blockquote class="border-r-4 border-[#a855f7] pr-6 my-8">
+            <p class="text-white text-xl font-medium italic leading-relaxed">
+              "אנחנו מאמינים שטכנולוגיה צריכה לשרת את האדם, לא להפך.
+              המטרה שלנו היא לתת לכל אדם בארגון את הכוח לעבוד חכם יותר."
+            </p>
+          </blockquote>
+
+          <p class="text-[#d0d0e0] leading-relaxed">
+            שותפויות אקדמיות עם <span class="text-[#a855f7] font-semibold">אוניברסיטת חיפה</span> ו<span class="text-[#a855f7] font-semibold">הטכניון</span> מבטיחות שהתוכן שלנו תמיד בחזית הטכנולוגיה, עם בסיס אקדמי איתן.
+          </p>
+        </div>
+
+        <!-- Side cards (2 cols) -->
+        <div class="lg:col-span-2 space-y-4" data-animate="fade-left">
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:border-[#a855f7]/20 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-[#a855f7]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+              </div>
+              <h4 class="text-white font-bold">מצוינות אקדמית</h4>
+            </div>
+            <p class="text-[#b0b0c0] text-sm leading-relaxed">שותפות עם אוניברסיטת חיפה והטכניון. תוכניות לימוד מבוססות מחקר ומעודכנות.</p>
+          </div>
+
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:border-[#a855f7]/20 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-[#a855f7]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+              </div>
+              <h4 class="text-white font-bold">DNA עסקי-ניהולי</h4>
+            </div>
+            <p class="text-[#b0b0c0] text-sm leading-relaxed">המייסדים מגיעים מעולם הניהול והעסקים. כל פתרון מותאם לשפה העסקית של הארגון.</p>
+          </div>
+
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:border-[#a855f7]/20 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-[#a855f7]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              </div>
+              <h4 class="text-white font-bold">מעטפת שלמה</h4>
+            </div>
+            <p class="text-[#b0b0c0] text-sm leading-relaxed">לא רק סדנה - אלא ליווי מלא: אפיון, הכשרה, הטמעה ותמיכה שוטפת אחרי.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 9: STATS + TEAM                      -->
+  <!-- ============================================ -->
+  <section id="team" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20" data-animate="fade-up">
+        {stats.map((stat) => (
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 text-center hover:border-[#a855f7]/20 transition-all">
+            <div class="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#ec4899] mb-2">{stat.value}</div>
+            <div class="text-[#b0b0c0] text-sm font-medium">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Team section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">הצוות</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          מי <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">מלמד?</span>
+        </h2>
+        <p class="text-[#b0b0c0] text-lg max-w-xl mx-auto">
+          2-3 מרצים בכל סדנה. מומחים שמתרגלים מה שהם מלמדים - כל יום.
+        </p>
+      </div>
+
+      <!-- Founders grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {founders.map((founder, i) => (
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl overflow-hidden hover:border-[#a855f7]/20 transition-all duration-300 group" data-animate="fade-up" data-delay={`${i * 0.1}`}>
+            <!-- Photo -->
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={founder.image}
+                alt={founder.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <!-- Content -->
+            <div class="p-6">
+              <!-- Status -->
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_6px_rgba(74,222,128,0.5)]"></span>
+                <span class="font-mono text-xs text-green-400/80">ONLINE</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-1">{founder.name}</h3>
+              <p class="text-[#a855f7] text-sm font-medium mb-3">{founder.role}</p>
+              <p class="text-[#b0b0c0] text-sm leading-relaxed">{workshopBios[founder.id]}</p>
+              <!-- Credentials -->
+              <div class="flex flex-wrap gap-2 mt-4">
+                {founder.credentials.map((cred) => (
+                  <span class="px-3 py-1 bg-[#a855f7]/10 text-[#a855f7] text-xs rounded-full">{cred}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 10: WRITTEN TESTIMONIALS             -->
+  <!-- ============================================ -->
+  <section class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">המלצות</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          הלקוחות <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">מספרים</span>
+        </h2>
+      </div>
+
+      <!-- Testimonials grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {writtenTestimonials.map((t, i) => (
+          <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:border-[#a855f7]/20 transition-all duration-300" data-animate="fade-up" data-delay={`${i * 0.08}`}>
+            <!-- Stars -->
+            <div class="flex items-center gap-1 mb-4">
+              {[1,2,3,4,5].map(() => (
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+              ))}
+            </div>
+            <!-- Quote -->
+            <p class="text-[#d0d0e0] text-sm leading-relaxed mb-5 min-h-[60px]">"{t.quote}"</p>
+            <!-- Author -->
+            <div class="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+              <img src={t.photo} alt={t.name} class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="text-white text-sm font-bold">{t.name}</p>
+                <p class="text-[#b0b0c0] text-xs">{t.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 11: WHATSAPP SCREENSHOTS             -->
+  <!-- ============================================ -->
+  <section id="testimonials" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">WhatsApp</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          מה אומרים <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">הלקוחות?</span>
+        </h2>
+      </div>
+
+      <!-- Masonry grid -->
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+        {whatsappScreenshots.map((img, i) => (
+          <div class="break-inside-avoid rounded-2xl overflow-hidden border border-white/[0.08] hover:border-[#a855f7]/20 transition-all duration-300" data-animate="fade-up" data-delay={`${(i % 6) * 0.06}`}>
+            <img
+              src={`https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/${img}`}
+              alt="חוות דעת לקוח"
+              class="w-full h-auto"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 12: GALLERY                          -->
+  <!-- ============================================ -->
+  <section id="gallery" class="relative py-20 md:py-28 bg-[#0a0a0f] overflow-hidden" data-section>
+    <div class="relative z-10">
+      <!-- Section header -->
+      <div class="text-center mb-14 px-4" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">גלריה</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          רגעים <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">מהשטח</span>
+        </h2>
+      </div>
+
+      <!-- Gallery carousel -->
+      <div class="gallery-carousel">
+        <div class="gallery-slide">
+          {[0, 1, 2].map(() => (
+            <div class="gallery-set">
+              {galleryImages.map((img) => (
+                <div class="gallery-item">
+                  <img
+                    src={`https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/${img}`}
+                    alt="רגע מסדנה"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 13: CONTACT FORM #2                  -->
+  <!-- ============================================ -->
+  <section id="contact" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
+    <div class="absolute inset-0">
+      <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#a855f7]/8 rounded-full blur-[200px]"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-[#ec4899]/5 rounded-full blur-[150px]"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
+      <!-- Section header -->
+      <div class="text-center mb-10" data-animate="fade-up">
+        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
+          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+          <span class="text-xs text-[#a855f7] uppercase tracking-wider">צור קשר</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          מוכנים לגשר <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">על הפער?</span>
+        </h2>
+        <p class="text-[#b0b0c0] text-lg max-w-xl mx-auto">
+          השאירו פרטים ונחזור אליכם תוך 24 שעות לשיחת אפיון ללא התחייבות.
+        </p>
+      </div>
+
+      <!-- Form card -->
+      <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6 md:p-8" data-animate="fade-up">
+        <!-- Glass header -->
+        <div class="flex items-center gap-2 mb-6 pb-4 border-b border-white/[0.06]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60">CONTACT_FORM</span>
+        </div>
+
+        <form id="contact-form" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
+              <input type="text" name="name" required placeholder="השם שלך"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
+              <input type="email" name="email" required placeholder="email@company.com" dir="ltr"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
+              <input type="tel" name="phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
+              <input type="text" name="company" placeholder="שם החברה"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
+              <select name="employees"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
+                <option value="" class="bg-[#12121a]">בחרו טווח</option>
+                <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
+                <option value="11-50" class="bg-[#12121a]">11-50 עובדים</option>
+                <option value="51-200" class="bg-[#12121a]">51-200 עובדים</option>
+                <option value="201-500" class="bg-[#12121a]">201-500 עובדים</option>
+                <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
+              <input type="text" name="role" placeholder="התפקיד שלך"
+                class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
+            <textarea name="message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
+              class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
+          </div>
+          <div class="flex items-start gap-2">
+            <input type="checkbox" name="terms" required id="contact-terms"
+              class="mt-1 w-4 h-4 rounded border-white/20 bg-white/[0.05] text-[#a855f7] focus:ring-[#a855f7]/30" />
+            <label for="contact-terms" class="text-xs text-[#b0b0c0]">
+              אני מאשר/ת קבלת מידע מ-Focus AI. ניתן להסיר את ההסכמה בכל עת. <a href="/privacy" class="text-[#a855f7] hover:underline">מדיניות פרטיות</a>
+            </label>
+          </div>
+          <button type="submit"
+            class="w-full py-4 bg-gradient-to-r from-[#a855f7] to-[#ec4899] text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)] transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+            שלחו לי פרטים
+          </button>
+          <div id="contact-form-status" class="text-center text-sm hidden"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS                                      -->
+  <!-- ============================================ -->
+  <Fragment slot="scripts">
+    <script is:inline>
+      // ========================
+      // Video Modal
+      // ========================
+      function openVideoModal(src) {
+        var modal = document.getElementById('video-modal');
+        var video = document.getElementById('modal-video');
+        if (!modal || !video) return;
+        video.src = src;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        video.play();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeVideoModal(e) {
+        if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
+        var modal = document.getElementById('video-modal');
+        var video = document.getElementById('modal-video');
+        if (!modal || !video) return;
+        video.pause();
+        video.src = '';
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeVideoModal();
+      });
+
+      // Video play triggers
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.video-play-trigger').forEach(function(el) {
+          el.addEventListener('click', function() {
+            openVideoModal(this.dataset.videoSrc);
+          });
+        });
+
+        // Modal overlay click
+        var modalOverlay = document.querySelector('.video-modal-overlay');
+        if (modalOverlay) {
+          modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeVideoModal();
+          });
+        }
+
+        // Modal close button
+        var closeBtn = document.getElementById('video-modal-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function() {
+            closeVideoModal();
+          });
+        }
+      });
+
+      // ========================
+      // Form Submission
+      // ========================
+      var WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/06374873-ea8a-4d27-bfa2-453ab2bf03d8';
+
+      function handleFormSubmit(form, statusId) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          var btn = form.querySelector('button[type="submit"]');
+          var statusEl = document.getElementById(statusId);
+          var originalText = btn.innerHTML;
+
+          // Loading state
+          btn.disabled = true;
+          btn.innerHTML = '<svg class="animate-spin w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>';
+
+          var formData = new FormData(form);
+          var data = {};
+          formData.forEach(function(value, key) {
+            if (key !== 'terms') data[key] = value;
+          });
+          data.source = 'ai-workshop';
+          data.timestamp = new Date().toISOString();
+
+          fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          })
+          .then(function(response) {
+            if (!response.ok) throw new Error('Network response was not ok');
+            // Success
+            statusEl.classList.remove('hidden', 'text-red-400');
+            statusEl.classList.add('text-green-400');
+            statusEl.textContent = 'הפרטים נשלחו בהצלחה! נחזור אליכם בהקדם.';
+            form.reset();
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+
+            setTimeout(function() {
+              statusEl.classList.add('hidden');
+            }, 5000);
+          })
+          .catch(function(error) {
+            console.error('Form error:', error);
+            statusEl.classList.remove('hidden', 'text-green-400');
+            statusEl.classList.add('text-red-400');
+            statusEl.textContent = 'שגיאה בשליחה. נסו שוב או פנו אלינו בוואטסאפ.';
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          });
+        });
+      }
+
+      // Init forms
+      document.addEventListener('DOMContentLoaded', function() {
+        var heroForm = document.getElementById('hero-form');
+        var contactForm = document.getElementById('contact-form');
+        if (heroForm) handleFormSubmit(heroForm, 'hero-form-status');
+        if (contactForm) handleFormSubmit(contactForm, 'contact-form-status');
+      });
+    </script>
+  </Fragment>
+</BaseLayout>
+
+<style>
+  /* ======================== */
+  /* Gallery Carousel         */
+  /* ======================== */
+  .gallery-carousel {
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  }
+
+  .gallery-slide {
+    display: flex;
+    width: max-content;
+    animation: galleryScrollLeft 60s linear infinite;
+  }
+
+  .gallery-slide:hover {
+    animation-play-state: paused;
+  }
+
+  .gallery-set {
+    display: flex;
+    gap: 12px;
+    padding-left: 12px;
+  }
+
+  .gallery-item {
+    flex-shrink: 0;
+    width: 260px;
+    height: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.03);
+    border-color: rgba(168, 85, 247, 0.3);
+  }
+
+  @keyframes galleryScrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-item {
+      width: 200px;
+      height: 150px;
+    }
+
+    .gallery-set {
+      gap: 8px;
+      padding-left: 8px;
+    }
+  }
+
+  /* ======================== */
+  /* Video Modal Animation    */
+  /* ======================== */
+  #video-modal {
+    animation: modalFadeIn 0.3s ease;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ======================== */
+  /* Select dropdown styling  */
+  /* ======================== */
+  .workshop-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 16px center;
+    background-size: 12px;
+    padding-left: 40px;
+  }
+
+  .workshop-select option {
+    background: #12121a;
+    color: #f5f5fa;
+    padding: 8px;
+  }
+</style>
