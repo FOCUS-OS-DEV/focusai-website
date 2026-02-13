@@ -1,7 +1,7 @@
 ---
 /**
- * Client Logos - Infinite marquee on mobile, staggered grid on desktop
- * CSS-only infinite scroll animation for mobile
+ * Client Logos - Static grid on all screen sizes
+ * Two rows of logos, centered
  */
 import { clients } from "../data/clients";
 
@@ -37,82 +37,41 @@ const row2 = clients.slice(8, 16);
     </p>
   </div>
 
-  <!-- Logos -->
-  <div class="logos-wrapper relative z-10">
+  <!-- Logos - Static Grid -->
+  <div class="logos-grid relative z-10 max-w-5xl mx-auto px-4">
     <!-- Row 1 -->
-    <div class="logos-row row-1">
-      <div class="logos-row-inner">
-        {row1.map((client) => (
-          <div class="logo-card" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" />
-          </div>
-        ))}
-        {/* Duplicate set for seamless mobile loop */}
-        {row1.map((client) => (
-          <div class="logo-card logo-dup" aria-hidden="true" title={client.name}>
-            <img src={client.logo} alt="" loading="lazy" />
-          </div>
-        ))}
-      </div>
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-3 md:mb-4">
+      {row1.map((client) => (
+        <div class="logo-card" title={client.name}>
+          <img src={client.logo} alt={client.name} loading="lazy" />
+        </div>
+      ))}
     </div>
 
     <!-- Row 2 -->
-    <div class="logos-row row-2">
-      <div class="logos-row-inner">
-        {row2.map((client) => (
-          <div class="logo-card" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" />
-          </div>
-        ))}
-        {/* Duplicate set for seamless mobile loop */}
-        {row2.map((client) => (
-          <div class="logo-card logo-dup" aria-hidden="true" title={client.name}>
-            <img src={client.logo} alt="" loading="lazy" />
-          </div>
-        ))}
-      </div>
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+      {row2.map((client) => (
+        <div class="logo-card" title={client.name}>
+          <img src={client.logo} alt={client.name} loading="lazy" />
+        </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .logos-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .logos-row {
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Side fade overlays */
-  .logos-row::before,
-  .logos-row::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .logos-row::before {
-    left: 0;
-    background: linear-gradient(to right, #0a0a0f 0%, transparent 100%);
-  }
-
-  .logos-row::after {
-    right: 0;
-    background: linear-gradient(to left, #0a0a0f 0%, transparent 100%);
-  }
-
   .logo-card {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    width: 90px;
+    aspect-ratio: 3 / 2;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    transition: transform 0.3s, background 0.3s;
   }
 
   .logo-card img {
@@ -120,100 +79,31 @@ const row2 = clients.slice(8, 16);
     max-height: 100%;
     object-fit: contain;
     opacity: 0.85;
+    transition: transform 0.3s, opacity 0.3s;
   }
 
-  /* ===== MOBILE & TABLET: Infinite marquee ===== */
-  @media (max-width: 1023px) {
-    .logos-row-inner {
-      display: flex;
-      gap: 8px;
-      width: max-content;
-    }
+  .logo-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
+  }
 
-    .row-1 .logos-row-inner {
-      animation: marquee-rtl 25s linear infinite;
-    }
+  .logo-card:hover img {
+    transform: scale(1.05);
+    opacity: 1;
+  }
 
-    .row-2 .logos-row-inner {
-      animation: marquee-ltr 28s linear infinite;
-    }
-
+  @media (min-width: 640px) {
     .logo-card {
-      width: 100px;
-      min-width: 100px;
-      aspect-ratio: 3 / 2;
-      padding: 8px;
-    }
-
-    .logos-row::before,
-    .logos-row::after {
-      width: 40px;
-    }
-
-    @keyframes marquee-rtl {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @keyframes marquee-ltr {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
+      width: 110px;
+      padding: 10px;
     }
   }
 
-  @media (min-width: 640px) and (max-width: 1023px) {
-    .logo-card {
-      width: 120px;
-      min-width: 120px;
-    }
-
-    .logos-row::before,
-    .logos-row::after {
-      width: 60px;
-    }
-  }
-
-  /* ===== DESKTOP: Centered grid, no animation ===== */
   @media (min-width: 1024px) {
-    .logo-dup {
-      display: none;
-    }
-
-    .logos-row-inner {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      padding: 0 40px;
-    }
-
     .logo-card {
       width: 130px;
-      min-width: 130px;
-      aspect-ratio: 3 / 2;
       padding: 12px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 12px;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .logo-card:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .logo-card:hover img {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-
-    .logo-card img {
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .logos-row::before,
-    .logos-row::after {
-      width: 80px;
     }
   }
 </style>
