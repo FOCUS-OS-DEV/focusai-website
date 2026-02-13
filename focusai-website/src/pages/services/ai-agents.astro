@@ -640,45 +640,6 @@ const serviceSchema = {
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section class="relative py-20 bg-[#0d0d12]">
-    <div class="container mx-auto px-4 max-w-7xl">
-      <header class="text-center mb-16" data-animate="fade-up">
-        <p class="font-mono text-[#a855f7] text-sm mb-2">[TESTIMONIALS]</p>
-        <h2 class="text-3xl md:text-4xl font-black mb-4">
-          לקוחות <span class="text-[#a855f7]">מספרים</span>
-        </h2>
-        <p class="text-[#d0d0e0]">
-          הנה מה שיש לחלק מהלקוחות שלנו להגיד על נציגי ה-AI הפועלים אצלהם.
-        </p>
-      </header>
-
-      <div class="grid md:grid-cols-2 gap-8" data-animate="stagger">
-        {testimonials.map((testimonial) => (
-          <div
-            class="relative p-8 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-2xl"
-          >
-            <!-- Quote icon -->
-            <div class="text-[#a855f7]/30 text-6xl font-serif absolute top-4 right-4">"</div>
-
-            <blockquote class="text-[#d0d0e0] mb-6 relative z-10">
-              "{testimonial.quote}"
-            </blockquote>
-
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-white rounded-lg p-1 flex items-center justify-center">
-                <img src={testimonial.logo} alt={testimonial.company} class="max-h-10 max-w-full object-contain" loading="lazy" />
-              </div>
-              <div>
-                <p class="text-white font-medium">{testimonial.author}</p>
-                <p class="text-[#a855f7] text-sm">{testimonial.company}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- FAQ Section -->
   <section class="relative py-20">
