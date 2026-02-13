@@ -428,6 +428,8 @@ const videoTestimonials = [
     align-items: center;
     justify-content: center;
     padding: 20px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: auto;
   }
 
   .video-lightbox.active {
@@ -892,6 +894,34 @@ const videoTestimonials = [
     };
   }
 
+  function lockScroll() {
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    // Stop Lenis smooth scroll if active
+    (window as any).lenis?.stop();
+    // Hide header and floating UI to avoid z-index overlap
+    const header = document.querySelector('header') as HTMLElement;
+    if (header) header.style.display = 'none';
+    const waFloat = document.getElementById('whatsapp-float');
+    if (waFloat) waFloat.style.display = 'none';
+    const btt = document.getElementById('back-to-top');
+    if (btt) btt.style.display = 'none';
+  }
+
+  function unlockScroll() {
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    // Resume Lenis smooth scroll
+    (window as any).lenis?.start();
+    // Restore header and floating UI
+    const header = document.querySelector('header') as HTMLElement;
+    if (header) header.style.display = '';
+    const waFloat = document.getElementById('whatsapp-float');
+    if (waFloat) waFloat.style.display = '';
+    const btt = document.getElementById('back-to-top');
+    if (btt) btt.style.display = '';
+  }
+
   function openLightbox(idx: number) {
     const lightbox = document.getElementById('videoLightbox');
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
@@ -901,12 +931,30 @@ const videoTestimonials = [
     lightboxOpen = true;
 
     lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    // Hide header and floating UI to avoid z-index overlap
-    document.querySelector('header')?.setAttribute('style', 'display:none!important');
-    document.getElementById('whatsapp-float')?.setAttribute('style', 'display:none!important');
-    document.getElementById('back-to-top')?.setAttribute('style', 'display:none!important');
-    updateLightboxContent();
+    lockScroll();
+
+    // Set video content
+    const data = getVideoData(lightboxIndex);
+    if (!data) return;
+
+    const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
+    const posterUrl = slide?.getAttribute('data-poster');
+    if (posterUrl) video.poster = posterUrl;
+
+    const nameEl = document.getElementById('lightboxName');
+    const roleEl = document.getElementById('lightboxRole');
+    if (nameEl) nameEl.textContent = data.name;
+    if (roleEl) roleEl.textContent = data.role;
+
+    // Set src and play DIRECTLY in user gesture chain (critical for iOS)
+    video.src = data.video;
+    video.play().catch(function() {
+      // iOS may block autoplay - add canplay fallback so tap-to-play works
+      video.addEventListener('canplay', function onCanplay() {
+        video.removeEventListener('canplay', onCanplay);
+        // Don't auto-retry play here - let user tap native controls
+      }, { once: true });
+    });
   }
 
   function updateLightboxContent() {
@@ -929,9 +977,8 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Use original video URL (no w_720 transform - can fail on mobile)
+    // Set src and attempt play (swipe navigation - NOT user gesture, may fail on iOS)
     video.src = data.video;
-    // Play within user gesture chain (works on iOS Safari)
     video.play().catch(function() {});
   }
 
@@ -948,11 +995,7 @@ const videoTestimonials = [
     video.pause();
     video.removeAttribute('src');
     lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-    // Restore header and floating UI
-    document.querySelector('header')?.removeAttribute('style');
-    document.getElementById('whatsapp-float')?.removeAttribute('style');
-    document.getElementById('back-to-top')?.removeAttribute('style');
+    unlockScroll();
     lightboxOpen = false;
   }
 
@@ -981,25 +1024,29 @@ const videoTestimonials = [
     lightboxNav(1);
   });
 
-  // Prevent lightbox swipe from interfering with native video controls on mobile
-  const lightboxVideoEl = document.getElementById('lightboxVideo');
-  if (lightboxVideoEl) {
-    lightboxVideoEl.addEventListener('touchstart', function(e) { e.stopPropagation(); }, { passive: true });
-    lightboxVideoEl.addEventListener('touchmove', function(e) { e.stopPropagation(); }, { passive: true });
-    lightboxVideoEl.addEventListener('touchend', function(e) { e.stopPropagation(); }, { passive: true });
-  }
-
-  // Touch support for lightbox (swipe between videos - only on backdrop, not on video)
+  // Touch support for lightbox (swipe between videos)
+  // NOTE: Do NOT stopPropagation on video touch events - it breaks native iOS video controls
   let lightboxTouchStartX = 0;
+  let lightboxTouchStartY = 0;
+  const lightboxContent = lightbox?.querySelector('.lightbox-content');
+
+  // Only add swipe to the lightbox backdrop (not the video/content area)
   lightbox?.addEventListener('touchstart', (e) => {
+    // Skip if touch started on or inside the video/content area
+    if (lightboxContent && lightboxContent.contains(e.target as Node)) return;
     lightboxTouchStartX = e.changedTouches[0].screenX;
+    lightboxTouchStartY = e.changedTouches[0].screenY;
   }, { passive: true });
 
   lightbox?.addEventListener('touchend', (e) => {
+    if (lightboxContent && lightboxContent.contains(e.target as Node)) return;
     const touchEndX = e.changedTouches[0].screenX;
-    const diff = lightboxTouchStartX - touchEndX;
-    if (Math.abs(diff) > 50 && lightboxOpen) {
-      lightboxNav(diff > 0 ? 1 : -1);
+    const touchEndY = e.changedTouches[0].screenY;
+    const diffX = lightboxTouchStartX - touchEndX;
+    const diffY = Math.abs(lightboxTouchStartY - touchEndY);
+    // Only swipe if horizontal movement is dominant
+    if (Math.abs(diffX) > 50 && diffX > diffY && lightboxOpen) {
+      lightboxNav(diffX > 0 ? 1 : -1);
     }
   }, { passive: true });
 
