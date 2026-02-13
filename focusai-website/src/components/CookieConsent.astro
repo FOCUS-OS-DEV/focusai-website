@@ -176,6 +176,12 @@
     if (banner) {
       banner.classList.remove('translate-y-full');
     }
+    // Move WhatsApp float up so it doesn't overlap
+    const waFloat = document.getElementById('whatsapp-float');
+    if (waFloat) {
+      waFloat.style.transition = 'bottom 0.5s ease';
+      waFloat.style.bottom = '5.5rem';
+    }
   }
 
   // Hide banner
@@ -183,6 +189,11 @@
     const banner = document.getElementById('cookie-banner');
     if (banner) {
       banner.classList.add('translate-y-full');
+    }
+    // Move WhatsApp float back down
+    const waFloat = document.getElementById('whatsapp-float');
+    if (waFloat) {
+      waFloat.style.bottom = '';
     }
   }
 
