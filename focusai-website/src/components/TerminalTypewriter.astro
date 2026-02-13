@@ -50,7 +50,7 @@ const { texts, id = 'terminal-typewriter' } = Astro.props;
           el.textContent = msg.slice(0, charIdx);
           setTimeout(tick, 55);
         } else {
-          setTimeout(() => { deleting = true; tick(); }, 2200);
+          setTimeout(() => { deleting = true; tick(); }, 3500);
         }
       } else {
         if (charIdx > 0) {
