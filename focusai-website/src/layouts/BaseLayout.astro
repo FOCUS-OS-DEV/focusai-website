@@ -190,6 +190,47 @@ const websiteSchema = {
     initSmoothScrollAndAnimations();
   </script>
 
+  <!-- Global form validation -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Israeli phone regex: starts with 0, 9-10 digits, allows dashes
+      var phoneRegex = /^0[2-9]\d?-?\d{3}-?\d{4}$/;
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      document.querySelectorAll('form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          var phoneInput = form.querySelector('input[name="phone"], input[inputmode="tel"], input[type="tel"]');
+          var emailInput = form.querySelector('input[name="email"], input[type="email"], input[inputmode="email"]');
+
+          if (phoneInput && phoneInput.value) {
+            var cleanPhone = phoneInput.value.replace(/[\s\-()]/g, '');
+            if (!phoneRegex.test(cleanPhone) && cleanPhone.length < 9) {
+              e.preventDefault();
+              phoneInput.style.borderColor = '#ef4444';
+              phoneInput.setCustomValidity('נא להזין מספר טלפון ישראלי תקין');
+              phoneInput.reportValidity();
+              return;
+            }
+            phoneInput.style.borderColor = '';
+            phoneInput.setCustomValidity('');
+          }
+
+          if (emailInput && emailInput.value && !emailRegex.test(emailInput.value)) {
+            e.preventDefault();
+            emailInput.style.borderColor = '#ef4444';
+            emailInput.setCustomValidity('נא להזין כתובת אימייל תקינה');
+            emailInput.reportValidity();
+            return;
+          }
+          if (emailInput) {
+            emailInput.style.borderColor = '';
+            emailInput.setCustomValidity('');
+          }
+        });
+      });
+    });
+  </script>
+
   <!-- Scripts slot for page-specific scripts -->
   <slot name="scripts" />
 </body>

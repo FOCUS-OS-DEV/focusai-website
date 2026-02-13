@@ -591,6 +591,62 @@ const courseSchema = {
     </div>
   </section>
 
+  <!-- Mid-page Contact Form -->
+  <section class="py-8 md:py-12 bg-[#f8f4ff]">
+    <div class="container px-4">
+      <div class="max-w-lg mx-auto bg-white rounded-2xl p-8 border border-[#e0d4f7] shadow-lg" data-animate="fade-up">
+        <h3 class="text-2xl md:text-3xl font-black text-center text-[#1a1a2e] mb-6">
+          רוצים לשמוע <span class="text-[#a855f7]">עוד?</span>
+        </h3>
+
+        <form class="space-y-4" id="midPageForm">
+          <input
+            type="text"
+            name="name"
+            placeholder="שם מלא"
+            required
+            dir="rtl"
+            class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-right placeholder:text-[#9a9aaa]"
+          />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="text"
+              inputmode="tel"
+              name="phone"
+              placeholder="טלפון"
+              required
+              dir="rtl"
+              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-right placeholder:text-[#9a9aaa]"
+            />
+            <input
+              type="text"
+              inputmode="email"
+              name="email"
+              placeholder="אימייל"
+              required
+              dir="rtl"
+              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-right placeholder:text-[#9a9aaa]"
+            />
+          </div>
+
+          <div class="flex items-start gap-2">
+            <input type="checkbox" id="mid-privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
+            <label for="mid-privacy" class="text-sm text-[#6a6a8a]">
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומאשר/ת קבלת דיוור שיווקי. ניתן לבטל בכל עת.
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]"
+          >
+            השאירו פרטים ונחזור אליכם
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Why Now Section -->
   <section class="py-6 md:py-8 bg-gradient-to-b from-white to-[#f8f4ff]">
     <div class="container px-4">
@@ -917,8 +973,8 @@ const courseSchema = {
               required
               class="mt-1 w-4 h-4 rounded border-[#e0d4f7] text-[#a855f7] focus:ring-[#a855f7]"
             />
-            <label for="privacy-consent">
-              קראתי ואני מאשר/ת את <a href="/privacy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a> ואת <a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a>, ואני מסכים/ה לקבל מידע שיווקי באמצעות הפרטים שמסרתי. *
+            <label for="privacy-consent" class="text-sm text-[#6a6a8a]">
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומאשר/ת קבלת דיוור שיווקי. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -1131,9 +1187,9 @@ const courseSchema = {
           />
 
           <div class="flex items-start gap-2">
-            <input type="checkbox" id="privacy" name="privacy" required class="mt-1"/>
+            <input type="checkbox" id="privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
             <label for="privacy" class="text-sm text-[#6a6a8a]">
-              קראתי את מדיניות הפרטיות ואני מאשר/ת לשלוח לי מידע באמצעות הפרטים שמסרתי.
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומאשר/ת קבלת דיוור שיווקי. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -1205,6 +1261,13 @@ const courseSchema = {
   syllabusForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     handleFormSubmit(syllabusForm, 'bot-camp-syllabus');
+  });
+
+  // Mid-page form
+  const midPageForm = document.getElementById('midPageForm') as HTMLFormElement;
+  midPageForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleFormSubmit(midPageForm, 'bot-camp-mid-page');
   });
 
   // Contact form

@@ -191,19 +191,28 @@ function formatDate(date: Date): string {
           הירשמו לניוזלטר וקבלו עדכונים על מאמרים חדשים, טיפים וחדשות מעולם ה-AI
         </p>
 
-        <form class="flex flex-col sm:flex-row gap-4">
-          <input
-            type="email"
-            placeholder="האימייל שלך"
-            required
-            class="flex-1 px-4 py-3 bg-white/[0.05] border border-white/[0.08] text-white focus:border-[#a855f7] focus:outline-none transition-colors text-center sm:text-right rounded-xl"
-          />
-          <button
-            type="submit"
-            class="px-6 py-3 bg-[#a855f7] text-[#0a0a0f] font-bold transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] rounded-full"
-          >
-            הרשמה
-          </button>
+        <form class="space-y-4">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <input
+              type="email"
+              name="email"
+              placeholder="האימייל שלך"
+              required
+              class="flex-1 px-4 py-3 bg-white/[0.05] border border-white/[0.08] text-white focus:border-[#a855f7] focus:outline-none transition-colors text-center sm:text-right rounded-xl"
+            />
+            <button
+              type="submit"
+              class="px-6 py-3 bg-[#a855f7] text-[#0a0a0f] font-bold transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] rounded-full"
+            >
+              הרשמה
+            </button>
+          </div>
+          <div class="flex items-start gap-2 text-right justify-center">
+            <input type="checkbox" id="blog-privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
+            <label for="blog-privacy" class="text-xs text-white/50">
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומאשר/ת קבלת דיוור שיווקי. ניתן לבטל בכל עת.
+            </label>
+          </div>
         </form>
       </div>
     </div>
