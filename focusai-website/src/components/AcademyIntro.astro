@@ -16,7 +16,7 @@ const formatFeatures = [
 ];
 ---
 
-<section class="py-12 md:py-16 relative overflow-hidden" style="background: linear-gradient(to bottom, #0a0a0f 0%, #f0ecff 8%, #f8f4ff 15%, white 50%, #f8f4ff 85%, #0a0a0f 100%);">
+<section class="py-12 md:py-16 relative overflow-hidden bg-[#0a0a0f]">
   <!-- Background -->
   <div class="absolute inset-0">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#a855f7]/8 rounded-full blur-[150px]"></div>
@@ -25,7 +25,7 @@ const formatFeatures = [
   <div class="container relative z-10">
     <!-- Section Badge - Centered -->
     <div class="flex justify-center mb-12" data-animate="fade-up">
-      <div class="inline-flex items-center gap-3 px-4 py-2 bg-white border border-[#a855f7]/20 rounded-full shadow-sm">
+      <div class="inline-flex items-center gap-3 px-4 py-2 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full">
         <span class="font-mono text-sm text-[#a855f7]">[FOCUS_AI_ACADEMY]</span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
       </div>
@@ -38,20 +38,20 @@ const formatFeatures = [
       <div class="order-2 lg:order-1 text-center lg:text-start">
         <!-- Headline -->
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight" data-animate="fade-up" data-delay="0.1">
-          <span class="text-[#1a1a2e]">לומדים בינה מלאכותית</span>
+          <span class="text-white">לומדים בינה מלאכותית</span>
           <span class="block mt-2 bg-gradient-to-r from-[#a855f7] via-[#c084fc] to-[#e879f9] bg-clip-text text-transparent">בצורה אנושית</span>
         </h2>
 
         <!-- Description -->
-        <p class="text-xl text-[#4a4a6a] mb-8 leading-relaxed" data-animate="fade-up" data-delay="0.2">
+        <p class="text-xl text-[#b0b0c0] mb-8 leading-relaxed" data-animate="fade-up" data-delay="0.2">
           לא קורסים מוקלטים שאף אחד לא מסיים. אצלנו לומדים
-          <span class="text-[#1a1a2e] font-semibold">פנים מול פנים</span> - בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.
+          <span class="text-white font-semibold">פנים מול פנים</span> - בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.
         </p>
 
         <!-- Format Features -->
         <div class="grid grid-cols-2 gap-4 mb-10" data-animate="fade-up" data-delay="0.3">
           {formatFeatures.map((feature) => (
-            <div class="flex items-center gap-3 p-4 bg-white/80 border border-[#e0d8f0] rounded-xl hover:border-[#a855f7]/40 shadow-sm transition-colors">
+            <div class="flex items-center gap-3 p-4 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-xl hover:border-[#a855f7]/30 transition-colors">
               <div class="w-10 h-10 rounded-lg bg-[#a855f7]/10 flex items-center justify-center">
                 {feature.icon === "users" && (
                   <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@ const formatFeatures = [
                   </svg>
                 )}
               </div>
-              <span class="text-sm text-[#3a3a5a] font-medium">{feature.text}</span>
+              <span class="text-sm text-[#b0b0c0] font-medium">{feature.text}</span>
             </div>
           ))}
         </div>
@@ -88,7 +88,7 @@ const formatFeatures = [
         <div class="relative">
           <!-- Top row - smaller images -->
           <div class="flex gap-3 mb-3 justify-center flex-wrap">
-            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1764513699/IMG_9082_ej3sr0.heic"
                 alt="תלמידים לומדים AI"
@@ -96,7 +96,7 @@ const formatFeatures = [
                 loading="lazy"
               />
             </div>
-            <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300">
+            <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1764675923/IMG_8298_vhl1gz.heic"
                 alt="מפגש לימודי"
@@ -104,7 +104,7 @@ const formatFeatures = [
                 loading="lazy"
               />
             </div>
-            <div class="w-20 h-20 md:w-28 md:h-28 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[4deg] hover:rotate-0 transition-transform duration-300 hidden sm:block">
+            <div class="w-20 h-20 md:w-28 md:h-28 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[4deg] hover:rotate-0 transition-transform duration-300 hidden sm:block">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1770468490/WhatsApp_Image_2026-02-07_at_14.47.47_cham41.jpg"
                 alt="הרצאה"
@@ -112,7 +112,7 @@ const formatFeatures = [
                 loading="lazy"
               />
             </div>
-            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300 hidden md:block">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300 hidden md:block">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764239338/41_nufstk.png"
                 alt="הדרכת AI"
@@ -123,7 +123,7 @@ const formatFeatures = [
           </div>
 
           <!-- Main classroom image -->
-          <div class="relative rounded-3xl overflow-hidden border border-[#e0d8f0] shadow-2xl">
+          <div class="relative rounded-3xl overflow-hidden border border-white/[0.08] shadow-2xl">
             <img
               src={classroomImage}
               alt="כיתת הלימוד של Focus AI Academy - לימוד בינה מלאכותית בצורה אנושית"
@@ -143,7 +143,7 @@ const formatFeatures = [
 
           <!-- Bottom row - smaller images -->
           <div class="flex gap-3 mt-3 justify-center flex-wrap">
-            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300 hidden md:block">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300 hidden md:block">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764239319/24_fcxmpa.png"
                 alt="למידה מעשית"
@@ -151,7 +151,7 @@ const formatFeatures = [
                 loading="lazy"
               />
             </div>
-            <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[3deg] hover:rotate-0 transition-transform duration-300">
+            <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[3deg] hover:rotate-0 transition-transform duration-300">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765177221/2_ytkcuf.jpg"
                 alt="סדנת AI"
@@ -159,7 +159,7 @@ const formatFeatures = [
                 loading="lazy"
               />
             </div>
-            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1764513069/WhatsApp_Image_2025-11-30_at_16.29.04_f6lckc.jpg"
                 alt="קהילת הלומדים"
@@ -167,7 +167,7 @@ const formatFeatures = [
                 loading="lazy"
               />
             </div>
-            <div class="w-20 h-20 md:w-28 md:h-28 rounded-2xl overflow-hidden border border-[#e0d8f0] shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300 hidden sm:block">
+            <div class="w-20 h-20 md:w-28 md:h-28 rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300 hidden sm:block">
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765177220/1_d3qx5v.jpg"
                 alt="תלמידים בכיתה"
