@@ -52,6 +52,22 @@ const moreVideos = videoTestimonials.slice(1);
 <BaseLayout title="תודה! | Focus AI" description="הפרטים נקלטו בהצלחה">
   <Header slot="header" />
 
+  <!-- Meta Pixel Code - PageView + Lead -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '801192442681278');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=801192442681278&ev=PageView&noscript=1" /></noscript>
+
   <!-- Hero Message -->
   <section class="pt-32 pb-8 bg-[#0a0a0f] text-center">
     <div class="container px-4">
