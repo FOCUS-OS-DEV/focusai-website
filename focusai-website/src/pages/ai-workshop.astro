@@ -23,24 +23,6 @@ const writtenTestimonials = [
 ];
 
 
-const galleryImages = [
-  "v1764513070/WhatsApp_Image_2025-11-30_at_16.29.03_n0casb.jpg",
-  "v1764513071/WhatsApp_Image_2025-11-30_at_16.29.04_1_qfl4j2.jpg",
-  "v1764513069/WhatsApp_Image_2025-11-30_at_16.29.03_1_ttrimh.jpg",
-  "v1764513600/Generated_Image_November_28_2025_-_10_13PM_s4lv23.jpg",
-  "v1764513069/WhatsApp_Image_2025-11-30_at_16.29.04_f6lckc.jpg",
-  "v1764513656/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%9C%D7%98_%D7%97%D7%95%D7%A6%D7%95%D7%AA_%D7%91%D7%95%D7%98_%D7%A7%D7%90%D7%9E%D7%A4_9-16_idbaxk.jpg",
-  "v1764513069/WhatsApp_Image_2025-11-30_at_16.29.04_2_r2dtuu.jpg",
-  "v1764513630/IMG_0363_1_hul8x7.jpg",
-  "v1764514114/WhatsApp_Image_2025-11-30_at_16.48.20_da8cf5.jpg",
-  "v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg",
-  "v1764519897/WhatsApp_Image_2025-11-30_at_18.24.31_apalzp.jpg",
-  "v1764675923/IMG_8298_vhl1gz.jpg",
-  "v1764675925/IMG_9174_zl2imh.jpg",
-  "v1764675925/IMG_8910_oqlk56.jpg",
-  "v1764675922/IMG_0497_orbhra.jpg",
-];
-
 const audienceCards = [
   { icon: "briefcase", title: "מנהלים ו-C-Level", desc: "שרוצים להוביל טרנספורמציה דיגיטלית ולקבל החלטות אסטרטגיות מבוססות חדשנות." },
   { icon: "megaphone", title: "צוותי שיווק ותוכן", desc: "שמעוניינים לייצר יותר תוכן, ברמה גבוהה יותר ובפחות זמן בעזרת כלי AI." },
@@ -620,45 +602,6 @@ const stats = [
   </section>
 
   <!-- ============================================ -->
-  <!-- SECTION 12: GALLERY                          -->
-  <!-- ============================================ -->
-  <section id="gallery" class="relative py-20 md:py-28 bg-[#0a0a0f] overflow-hidden" data-section>
-    <div class="relative z-10">
-      <!-- Section header -->
-      <div class="text-center mb-14 px-4" data-animate="fade-up">
-        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
-          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
-          <span class="text-xs text-[#a855f7] uppercase tracking-wider">גלריה</span>
-        </div>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-          רגעים <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">מהשטח</span>
-        </h2>
-      </div>
-
-      <!-- Gallery carousel -->
-      <div class="gallery-carousel">
-        <div class="gallery-slide">
-          {[0, 1, 2].map(() => (
-            <div class="gallery-set">
-              {galleryImages.map((img) => (
-                <div class="gallery-item">
-                  <img
-                    src={`https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/${img}`}
-                    alt="רגע מסדנה"
-                    class="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
   <!-- SECTION 13: CONTACT FORM #2                  -->
   <!-- ============================================ -->
   <section id="contact" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
@@ -830,64 +773,6 @@ const stats = [
 </BaseLayout>
 
 <style>
-  /* ======================== */
-  /* Gallery Carousel         */
-  /* ======================== */
-  .gallery-carousel {
-    overflow: hidden;
-    width: 100%;
-    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-  }
-
-  .gallery-slide {
-    display: flex;
-    width: max-content;
-    animation: galleryScrollLeft 60s linear infinite;
-  }
-
-  .gallery-slide:hover {
-    animation-play-state: paused;
-  }
-
-  .gallery-set {
-    display: flex;
-    gap: 12px;
-    padding-left: 12px;
-  }
-
-  .gallery-item {
-    flex-shrink: 0;
-    width: 260px;
-    height: 200px;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-  }
-
-  .gallery-item:hover {
-    transform: scale(1.03);
-    border-color: rgba(168, 85, 247, 0.3);
-  }
-
-  @keyframes galleryScrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-33.333%); }
-  }
-
-  @media (max-width: 768px) {
-    .gallery-item {
-      width: 200px;
-      height: 150px;
-    }
-
-    .gallery-set {
-      gap: 8px;
-      padding-left: 8px;
-    }
-  }
-
   /* ======================== */
   /* Select dropdown styling  */
   /* ======================== */
