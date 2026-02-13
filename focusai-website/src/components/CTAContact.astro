@@ -84,18 +84,6 @@ const interestOptions = [
       </p>
     </div>
 
-    <!-- Quick Stats -->
-    <div class="flex flex-wrap justify-center gap-4 lg:gap-6 mb-12" data-animate="stagger">
-      {quickStats.map((stat) => (
-        <div
-          class="flex items-center gap-3 px-5 py-3 bg-[#12121a] border border-[#2a2a3a] hover:border-[#a855f7]/50 transition-all duration-300 rounded-xl"
-        >
-          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-          <span class="font-mono text-sm font-medium text-[#a855f7] uppercase tracking-wider">[{stat.code}]</span>
-          <span class="text-sm text-[#d0d0e0]">{stat.text}</span>
-        </div>
-      ))}
-    </div>
 
     <div class="grid lg:grid-cols-5 gap-8 lg:gap-12 max-w-6xl mx-auto">
       <!-- Form - Takes 3 columns -->
