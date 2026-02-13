@@ -12,7 +12,6 @@ import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import TechLogosMarquee from '../../components/TechLogosMarquee.astro';
 import StudentTestimonials from '../../components/StudentTestimonials.astro';
-import AcademyIntro from '../../components/AcademyIntro.astro';
 
 import { founders } from '../../data/team';
 
@@ -510,31 +509,34 @@ const courseSchema = {
     </div>
   </section>
 
-  <!-- Client Logos - Infinite Carousel -->
-  <section class="py-6 bg-gradient-to-b from-[#f8f4ff] to-white overflow-hidden">
+  <!-- Client Logos - Static Grid -->
+  <section class="py-8 md:py-12 bg-gradient-to-b from-[#f8f4ff] to-white">
     <div class="container px-4">
-      <h3 class="text-center text-3xl md:text-4xl lg:text-5xl font-bold text-[#a855f7] tracking-wide mb-10">
+      <h3 class="text-center text-2xl md:text-3xl font-bold text-[#a855f7] tracking-wide mb-10 md:mb-12">
         סומכים עלינו
       </h3>
-    </div>
 
-    <!-- Infinite marquee -->
-    <div class="client-marquee-wrapper">
-      <!-- Fade edges -->
-      <div class="client-fade-left"></div>
-      <div class="client-fade-right"></div>
-
-      <div class="client-marquee-track">
-        {/* First set */}
+      <!-- Mobile: 2-col grid -->
+      <div class="grid grid-cols-3 gap-4 max-w-sm mx-auto md:hidden">
         {clientLogos.map((client) => (
-          <div class="client-logo-card">
+          <div class="client-logo-static" title={client.name}>
             <img src={client.logo} alt={client.name} loading="lazy" />
           </div>
         ))}
-        {/* Duplicate for seamless loop */}
-        {clientLogos.map((client) => (
-          <div class="client-logo-card" aria-hidden="true">
-            <img src={client.logo} alt="" loading="lazy" />
+      </div>
+
+      <!-- Desktop: two rows -->
+      <div class="hidden md:flex flex-wrap justify-center items-center gap-x-10 gap-y-6 mb-6" data-animate="fade-up">
+        {clientLogos.slice(0, 6).map((client) => (
+          <div class="client-logo-static" title={client.name}>
+            <img src={client.logo} alt={client.name} loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <div class="hidden md:flex flex-wrap justify-center items-center gap-x-10 gap-y-6" data-animate="fade-up" data-delay="0.1">
+        {clientLogos.slice(6).map((client) => (
+          <div class="client-logo-static" title={client.name}>
+            <img src={client.logo} alt={client.name} loading="lazy" />
           </div>
         ))}
       </div>
@@ -542,88 +544,36 @@ const courseSchema = {
   </section>
 
   <style>
-    .client-marquee-wrapper {
-      position: relative;
-      overflow: hidden;
-      padding: 0.5rem 0;
-    }
-
-    .client-fade-left,
-    .client-fade-right {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 60px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .client-fade-left {
-      left: 0;
-      background: linear-gradient(to right, #f8f4ff 0%, transparent 100%);
-    }
-
-    .client-fade-right {
-      right: 0;
-      background: linear-gradient(to left, white 0%, transparent 100%);
-    }
-
-    .client-marquee-track {
-      display: flex;
-      gap: 16px;
-      width: max-content;
-      animation: client-scroll 30s linear infinite;
-    }
-
-    .client-marquee-track:hover {
-      animation-play-state: paused;
-    }
-
-    .client-logo-card {
+    .client-logo-static {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 100px;
-      height: 100px;
-      padding: 12px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      transition: box-shadow 0.3s, transform 0.3s;
+      height: 60px;
     }
 
-    .client-logo-card:hover {
-      box-shadow: 0 4px 16px rgba(168, 85, 247, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .client-logo-card img {
+    .client-logo-static img {
       max-width: 100%;
       max-height: 100%;
+      height: 50px;
+      width: auto;
       object-fit: contain;
+      opacity: 0.75;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    @keyframes client-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .client-logo-static:hover img {
+      opacity: 1;
+      transform: scale(1.08);
     }
 
-    @media (min-width: 768px) {
-      .client-logo-card {
-        width: 130px;
-        height: 130px;
-        padding: 16px;
-        border-radius: 16px;
+    @media (max-width: 768px) {
+      .client-logo-static {
+        height: 48px;
       }
-
-      .client-marquee-track {
-        gap: 20px;
-      }
-
-      .client-fade-left,
-      .client-fade-right {
-        width: 100px;
+      .client-logo-static img {
+        height: 40px;
+        max-width: 90px;
       }
     }
   </style>
@@ -1026,7 +976,6 @@ const courseSchema = {
     </div>
   </section>
 
-  <AcademyIntro />
 
   <!-- Classroom Section -->
   <section class="py-6 md:py-8 bg-white">
