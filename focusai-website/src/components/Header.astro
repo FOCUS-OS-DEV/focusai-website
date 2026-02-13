@@ -151,7 +151,11 @@ const toolsLinks = [
         <!-- Mobile Menu Button -->
         <button
           type="button"
-          class="lg:hidden relative p-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
+          class={`lg:hidden relative p-2.5 rounded-full transition-all duration-300 ${
+            isLight
+              ? 'text-[#2a2a3a]/80 hover:text-[#2a2a3a] hover:bg-black/5 mobile-burger-light'
+              : 'text-white/80 hover:text-white hover:bg-white/10'
+          }`}
           aria-label="פתח תפריט"
           aria-expanded="false"
           aria-controls="mobile-menu"
@@ -169,7 +173,7 @@ const toolsLinks = [
   <!-- Mobile Menu - Glassmorphism Full Screen -->
   <div
     id="mobile-menu"
-    class="lg:hidden fixed inset-0 top-0 bg-[#0a0a0f]/95 backdrop-blur-2xl transform -translate-x-full transition-transform duration-500 ease-out z-40 pointer-events-auto"
+    class="lg:hidden fixed inset-0 top-0 bg-[#0a0a0f]/95 backdrop-blur-2xl transform -translate-x-full transition-transform duration-500 ease-out z-[60] pointer-events-auto"
     aria-hidden="true"
   >
     {/* Ambient glow */}
@@ -177,7 +181,7 @@ const toolsLinks = [
     <div class="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-[#ec4899]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
     {/* Close button */}
-    <div class="absolute top-4 left-4 right-4 flex justify-end">
+    <div class="absolute top-4 left-4 right-4 flex justify-end z-20">
       <button
         type="button"
         class="p-3 text-white/80 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all duration-300"
@@ -567,6 +571,15 @@ const toolsLinks = [
 
   .header-theme-light.header-switched-dark .nav-link-glass svg {
     color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Light theme mobile hamburger - switch to white when in dark area */
+  .header-theme-light.header-switched-dark .mobile-burger-light {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  .header-theme-light.header-switched-dark .mobile-burger-light:hover {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.1) !important;
   }
 
   /* Responsive adjustments */
