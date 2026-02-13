@@ -85,9 +85,11 @@
       <div class="p-4 rounded-xl bg-white/5 border border-white/10">
         <div class="flex items-center justify-between mb-2">
           <h4 class="font-semibold text-white">עוגיות אנליטיקס</h4>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="analytics-toggle" class="sr-only peer" />
-            <div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#a855f7]"></div>
+          <label class="cookie-toggle">
+            <input type="checkbox" id="analytics-toggle" />
+            <span class="cookie-toggle-track">
+              <span class="cookie-toggle-thumb"></span>
+            </span>
           </label>
         </div>
         <p class="text-sm text-white/60">
@@ -99,9 +101,11 @@
       <div class="p-4 rounded-xl bg-white/5 border border-white/10">
         <div class="flex items-center justify-between mb-2">
           <h4 class="font-semibold text-white">עוגיות שיווקיות</h4>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="marketing-toggle" class="sr-only peer" />
-            <div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#a855f7]"></div>
+          <label class="cookie-toggle">
+            <input type="checkbox" id="marketing-toggle" />
+            <span class="cookie-toggle-track">
+              <span class="cookie-toggle-thumb"></span>
+            </span>
           </label>
         </div>
         <p class="text-sm text-white/60">
@@ -126,6 +130,45 @@
     </div>
   </div>
 </div>
+
+<style>
+  .cookie-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .cookie-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .cookie-toggle-track {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: background 0.3s;
+  }
+  .cookie-toggle input:checked + .cookie-toggle-track {
+    background: #a855f7;
+  }
+  .cookie-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  .cookie-toggle input:checked + .cookie-toggle-track .cookie-toggle-thumb {
+    transform: translateX(-20px);
+  }
+</style>
 
 <script>
   // Cookie Consent Script

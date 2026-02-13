@@ -692,9 +692,18 @@ body::after {
 
 /* ===== CHECKBOX ===== */
 input[type="checkbox"]:not(.sr-only) {
-  min-width: 20px;
-  min-height: 20px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   cursor: pointer;
+  accent-color: #a855f7;
+  border-radius: 6px;
+}
+
+input[type="checkbox"]:not(.sr-only) + label {
+  font-size: 0.875rem !important;
+  line-height: 1.4;
 }
 
 /* ===== BADGES ===== */
