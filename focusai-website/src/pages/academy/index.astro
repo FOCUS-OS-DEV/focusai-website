@@ -12,7 +12,6 @@ import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import TechLogosMarquee from '../../components/TechLogosMarquee.astro';
 import StudentTestimonials from '../../components/StudentTestimonials.astro';
-import ClientLogosGrid from '../../components/ClientLogosGrid.astro';
 import AcademyIntro from '../../components/AcademyIntro.astro';
 
 import { founders } from '../../data/team';
@@ -1187,12 +1186,10 @@ const courseSchema = {
     </div>
   </section>
 
-  <ClientLogosGrid />
-
   <RelatedContent items={[
     { title: "AI Ready", description: "הכשרה מקיפה ל-8 מפגשים בכלי AI מתקדמים", href: "/academy/ai-ready" },
-    { title: "AI First", description: "צעדים ראשונים בעולם ה-AI ב-5 מפגשים מעשיים", href: "/academy/ai-first" },
-    { title: "כלי AI מומלצים", description: "אוסף הכלים שאנחנו משתמשים ומלמדים", href: "/tools" }
+    { title: "כלי AI מומלצים", description: "אוסף הכלים שאנחנו משתמשים ומלמדים", href: "/tools" },
+    { title: "סוכני AI", description: "נציגי AI חכמים לשירות לקוחות ומכירות", href: "/services/ai-agents" }
   ]} />
 
   <Footer slot="footer" />

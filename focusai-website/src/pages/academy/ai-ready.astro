@@ -12,7 +12,6 @@ import RelatedContent from '../../components/RelatedContent.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import ClientLogosGrid from '../../components/ClientLogosGrid.astro';
-import AcademyIntro from '../../components/AcademyIntro.astro';
 
 const courseInfo = {
   title: "AI READY",
@@ -258,8 +257,6 @@ const courseSchema = {
     </div>
 
   </section>
-
-  <AcademyIntro />
 
   <!-- ==================== 2. Storytelling Section ==================== -->
   <section class="py-10 md:py-12 lg:py-16 relative overflow-hidden bg-[#0a0a0f]">
@@ -667,8 +664,8 @@ const courseSchema = {
 
   <RelatedContent items={[
     { title: "Bot-Camp", description: "תוכנית הכשרה מקצועית לבניית סוכני AI ואוטומציות", href: "/academy" },
-    { title: "AI First", description: "צעדים ראשונים בעולם ה-AI ב-5 מפגשים", href: "/academy/ai-first" },
-    { title: "כלי AI מומלצים", description: "אוסף הכלים שאנחנו משתמשים ומלמדים", href: "/tools" }
+    { title: "כלי AI מומלצים", description: "אוסף הכלים שאנחנו משתמשים ומלמדים", href: "/tools" },
+    { title: "סוכני AI", description: "נציגי AI חכמים לשירות לקוחות ומכירות", href: "/services/ai-agents" }
   ]} />
 
   <Footer slot="footer" />

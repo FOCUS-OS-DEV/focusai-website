@@ -18,7 +18,7 @@ const logoDark = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_aut
 const navLinks = [
   { href: '/', label: 'בית', code: 'HOME' },
   { href: '#academy', label: 'אקדמיה', code: 'ACADEMY', hasDropdown: true, dropdownType: 'academy' },
-  { href: '#services', label: 'שירותים', code: 'SERVICES', hasDropdown: true, dropdownType: 'services' },
+  { href: '/services/ai-agents', label: 'סוכני AI', code: 'AGENTS' },
   { href: '/sadnaot', label: 'סדנאות', code: 'WORKSHOPS' },
   { href: '/tools', label: 'כלי AI', code: 'TOOLS', hasDropdown: true, dropdownType: 'tools' },
   // DRAFT: { href: '/blog', label: 'בלוג', code: 'BLOG' },
@@ -28,13 +28,6 @@ const navLinks = [
 const academyLinks = [
   { href: '/academy/ai-ready', label: 'AI Ready', code: 'AI_RDY', description: 'יסודות AI לאנשי מקצוע' },
   { href: '/academy', label: 'Bot-Camp', code: 'BOT_CMP', description: 'מפתחי אוטומציות וסוכני AI' },
-  { href: '/academy/ai-first', label: 'AI First', code: 'AI_FST', description: 'מובילי טרנספורמציה בארגונים' },
-];
-
-const servicesLinks = [
-  { href: '/services/strategy', label: 'אפיון ואסטרטגיה', code: 'STRAT', description: 'גיבוש אסטרטגיית AI לארגון' },
-  { href: '/services/development', label: 'פיתוח ואינטגרציה', code: 'DEV', description: 'פתרונות AI מותאמים אישית' },
-  { href: '/services/ai-agents', label: 'סוכני AI', code: 'AGENTS', description: 'בוטים ונציגים חכמים לעסקים' },
 ];
 
 const toolsLinks = [
@@ -79,7 +72,6 @@ const toolsLinks = [
                   href={link.href}
                   class={`nav-link-glass flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                     (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
-                    (link.dropdownType === 'services' && currentPath.startsWith('/services')) ||
                     (link.dropdownType === 'tools' && currentPath === '/tools')
                       ? 'text-[#a855f7] bg-[#a855f7]/10'
                       : isLight
@@ -97,7 +89,7 @@ const toolsLinks = [
                   <div class="dropdown-glass">
                     {/* Menu Items */}
                     <div class="p-3">
-                      {(link.dropdownType === 'academy' ? academyLinks : link.dropdownType === 'services' ? servicesLinks : toolsLinks).map((sublink) => (
+                      {(link.dropdownType === 'academy' ? academyLinks : toolsLinks).map((sublink) => (
                         <a
                           href={sublink.href}
                           {...(sublink.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
@@ -217,7 +209,6 @@ const toolsLinks = [
               <div
                 class={`flex items-center justify-between px-5 py-4 rounded-2xl transition-all duration-300 ${
                   (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
-                  (link.dropdownType === 'services' && currentPath.startsWith('/services')) ||
                   (link.dropdownType === 'tools' && currentPath === '/tools')
                     ? 'text-[#a855f7] bg-[#a855f7]/10'
                     : 'text-white/90 hover:bg-white/5'
@@ -228,7 +219,7 @@ const toolsLinks = [
               </div>
               {/* Sub-links */}
               <div class="mt-1 mr-4 space-y-1">
-                {(link.dropdownType === 'academy' ? academyLinks : link.dropdownType === 'services' ? servicesLinks : toolsLinks).map((sublink) => (
+                {(link.dropdownType === 'academy' ? academyLinks : toolsLinks).map((sublink) => (
                   <a
                     href={sublink.href}
                     {...(sublink.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
