@@ -6,8 +6,8 @@ import { getCollection } from 'astro:content';
 import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 
 // Page metadata
-const pageTitle = 'Focus AI | בלוג - חדשות, מדריכים וטיפים בעולם ה-AI';
-const pageDescription = 'הבלוג של Focus AI - מאמרים, מדריכים וטיפים מעשיים על בינה מלאכותית, אוטומציות, סוכני AI ועוד.';
+const pageTitle = 'Focus AI | חדשות AI - עדכונים, מדריכים וטיפים בעולם ה-AI';
+const pageDescription = 'חדשות AI של Focus AI - מאמרים, מדריכים וטיפים מעשיים על בינה מלאכותית, אוטומציות, סוכני AI ועוד.';
 
 // Get all blog posts sorted by date
 const posts = (await getCollection('blog')).sort(
@@ -49,7 +49,7 @@ function formatDate(date: Date): string {
 
     <div class="container mx-auto px-4 relative z-10 max-w-7xl">
       <header class="text-center mb-12">
-        <p class="font-mono text-[#a855f7] text-sm mb-4 uppercase tracking-wider">[BLOG]</p>
+        <p class="font-mono text-[#a855f7] text-sm mb-4 uppercase tracking-wider">[AI_NEWS]</p>
 
         <TerminalTypewriter
           id="tw-blog"
@@ -65,11 +65,11 @@ function formatDate(date: Date): string {
         />
 
         <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black mb-6">
-          <span class="text-white">הבלוג של </span>
-          <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">Focus AI</span>
+          <span class="text-white">חדשות </span>
+          <span class="text-[#a855f7]" style="text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);">AI</span>
         </h1>
         <p class="text-lg md:text-xl text-[#d0d0e0] max-w-2xl mx-auto">
-          מאמרים, מדריכים וטיפים מעשיים על בינה מלאכותית, אוטומציות וסוכני AI
+          חדשות, מדריכים וטיפים מעשיים על בינה מלאכותית, אוטומציות וסוכני AI
         </p>
       </header>
 
@@ -96,6 +96,7 @@ function formatDate(date: Date): string {
             <article
               class="post-card group relative border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-[#a855f7]/30 hover:bg-white/[0.06] transition-all duration-300 overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               data-tags={post.data.tags?.join(',') || ''}
+              data-category={post.data.category || 'news'}
             >
               <!-- Hero Image -->
               {post.data.heroImage && (
@@ -107,6 +108,17 @@ function formatDate(date: Date): string {
                     loading="lazy"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-[#12121a] to-transparent"></div>
+                  {/* Category badge */}
+                  <div class="absolute top-3 left-3">
+                    <span class={`px-3 py-1 text-xs font-bold rounded-full ${
+                      (post.data.category || 'news') === 'guide' ? 'bg-emerald-500/90 text-white' :
+                      (post.data.category || 'news') === 'tutorial' ? 'bg-blue-500/90 text-white' :
+                      'bg-[#a855f7]/90 text-white'
+                    }`}>
+                      {(post.data.category || 'news') === 'guide' ? 'מדריך' :
+                       (post.data.category || 'news') === 'tutorial' ? 'הדרכה' : 'חדשות'}
+                    </span>
+                  </div>
                 </div>
               )}
 
@@ -235,15 +247,20 @@ function formatDate(date: Date): string {
       categoryBtns.forEach(b => b.setAttribute('data-active', 'false'));
       btn.setAttribute('data-active', 'true');
 
-      const category = btn.getAttribute('data-category');
+      const filter = btn.getAttribute('data-category');
 
-      // Filter posts
+      // Filter posts by tags OR category
       postCards.forEach(card => {
         const tags = card.getAttribute('data-tags')?.toLowerCase() || '';
+        const category = card.getAttribute('data-category')?.toLowerCase() || '';
 
-        if (category === 'all') {
+        if (filter === 'all') {
           card.style.display = 'block';
-        } else if (tags.includes(category.replace('-', ''))) {
+        } else if (filter === 'guides' && (category === 'guide' || category === 'tutorial' || tags.includes('guides'))) {
+          card.style.display = 'block';
+        } else if (filter === 'news' && (category === 'news' || tags.includes('news'))) {
+          card.style.display = 'block';
+        } else if (tags.includes(filter) || tags.includes(filter.replace('-', ''))) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
