@@ -1,0 +1,312 @@
+---
+/**
+ * Preloader Component - Focus AI Premium Loader
+ * Pure HTML/CSS shell renders instantly before any JS.
+ * JS preloads critical assets + exit animation.
+ * Shows only on first page load per session (sessionStorage).
+ */
+---
+
+<!-- Preloader overlay -->
+<div id="preloader" class="preloader" aria-live="polite" aria-label="טוען...">
+  <div class="preloader-bg"></div>
+
+  <div class="preloader-content">
+    <!-- Fingerprint logo with glow -->
+    <div class="preloader-logo-wrap">
+      <div class="preloader-glow"></div>
+      <img
+        src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png"
+        alt="Focus AI"
+        class="preloader-logo"
+        width="120"
+        height="120"
+      />
+      <!-- Scan line -->
+      <div class="preloader-scanline"></div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="preloader-progress-track">
+      <div class="preloader-progress-bar" id="preloaderBar"></div>
+    </div>
+
+    <!-- Status text -->
+    <div class="preloader-status">
+      <span class="preloader-dot"></span>
+      <span class="preloader-text" id="preloaderStatus">INITIALIZING_</span>
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <style>
+    #preloader { display: none !important; }
+    html.preloader-active { overflow: auto !important; }
+    html.preloader-active body { overflow: auto !important; }
+    html.preloader-active main,
+    html.preloader-active [slot="header"],
+    html.preloader-active [slot="footer"] { opacity: 1 !important; }
+  </style>
+</noscript>
+
+<script is:inline>
+(function() {
+  var preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  // Skip preloader on return visits within same session
+  if (sessionStorage.getItem('focusai_loaded')) {
+    preloader.style.display = 'none';
+    document.body.classList.remove('preloader-active');
+    document.documentElement.classList.remove('preloader-active');
+    window.dispatchEvent(new CustomEvent('preloaderDone'));
+    return;
+  }
+
+  var progressBar = document.getElementById('preloaderBar');
+  var statusText = document.getElementById('preloaderStatus');
+
+  var MIN_DISPLAY_MS = 1500;
+  var MAX_DISPLAY_MS = 5000;
+  var startTime = Date.now();
+
+  // Critical above-the-fold images
+  var criticalImages = [
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1770379453/6962a37d-21ba-4e69-9946-59e37d731ed3_qjwm7h.png',
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png',
+    'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1770414664/f4b939e2-bcbe-4c98-adff-db93933b12e3_bhhw3i.png'
+  ];
+
+  // Video posters (desktop only)
+  var videoPosters = [
+    'https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/v1770711777/%D7%A4%D7%95%D7%A7%D7%95%D7%A1_%D7%96%D7%95%D7%94%D7%A8_%D7%99%D7%A2%D7%A7%D7%91_s4jds5_1_xhrejb.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/v1770711629/IMG_0753_iah7ft_1_roxnqc.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/v1770711703/%D7%9E%D7%98%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_jg7esj_qtan3r.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/v1770711663/IMG_3467_pg6tos_1_pkb8qv.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/v1770711683/%D7%A9%D7%A0%D7%99%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_mxbzrj_1_cwq90t.jpg',
+    'https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_auto,f_jpg/v1770711686/%D7%90%D7%A8%D7%98%D7%99%D7%95%D7%9D_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pzkt2y_1_zaaisz.jpg'
+  ];
+
+  var isMobile = window.innerWidth < 768;
+  var allUrls = isMobile ? criticalImages : criticalImages.concat(videoPosters);
+  var total = allUrls.length;
+  var loaded = 0;
+  var allDone = false;
+
+  // Terminal-style status messages
+  var messages = ['LOADING_ASSETS_', 'ESTABLISHING_CONNECTION_', 'NEURAL_SYNC_', 'RENDERING_INTERFACE_', 'ALMOST_READY_'];
+  var msgIndex = 0;
+  var msgInterval = setInterval(function() {
+    if (statusText && msgIndex < messages.length) {
+      statusText.textContent = messages[msgIndex];
+      msgIndex++;
+    }
+  }, 400);
+
+  function updateProgress() {
+    loaded++;
+    var pct = Math.round((loaded / total) * 100);
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (loaded >= total) finishLoading();
+  }
+
+  function preloadImage(url) {
+    var img = new Image();
+    img.onload = updateProgress;
+    img.onerror = updateProgress;
+    img.src = url;
+  }
+
+  // Start preloading
+  allUrls.forEach(preloadImage);
+
+  function finishLoading() {
+    if (allDone) return;
+    allDone = true;
+    clearInterval(msgInterval);
+    if (statusText) statusText.textContent = 'READY_';
+    if (progressBar) progressBar.style.width = '100%';
+
+    var elapsed = Date.now() - startTime;
+    var remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
+    setTimeout(exitPreloader, remaining);
+  }
+
+  function exitPreloader() {
+    preloader.classList.add('preloader-exit');
+
+    setTimeout(function() {
+      preloader.classList.add('preloader-done');
+      document.body.classList.remove('preloader-active');
+      document.documentElement.classList.remove('preloader-active');
+      sessionStorage.setItem('focusai_loaded', '1');
+      window.dispatchEvent(new CustomEvent('preloaderDone'));
+    }, 700);
+  }
+
+  // Safety timeout
+  setTimeout(function() {
+    if (!allDone) finishLoading();
+  }, MAX_DISPLAY_MS);
+})();
+</script>
+
+<style>
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+  }
+
+  .preloader-bg {
+    position: absolute;
+    inset: 0;
+    background: #0a0a0f;
+    background-image:
+      linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .preloader-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .preloader-logo-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .preloader-glow {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: preloaderPulse 2s ease-in-out infinite;
+  }
+
+  .preloader-logo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.6));
+    animation: preloaderFloat 3s ease-in-out infinite;
+  }
+
+  .preloader-scanline {
+    position: absolute;
+    left: -30px;
+    right: -30px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #a855f7, #c084fc, #a855f7, transparent);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+    animation: preloaderScan 2s ease-in-out infinite;
+  }
+
+  .preloader-progress-track {
+    width: 200px;
+    height: 2px;
+    background: rgba(168, 85, 247, 0.12);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .preloader-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+    border-radius: 1px;
+    transition: width 0.3s ease-out;
+  }
+
+  .preloader-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .preloader-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a855f7;
+    animation: preloaderBlink 1s ease-in-out infinite;
+  }
+
+  .preloader-text {
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(168, 85, 247, 0.7);
+  }
+
+  /* Exit animation */
+  .preloader.preloader-exit .preloader-content {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: scale(1.15);
+    filter: blur(10px);
+  }
+
+  .preloader.preloader-exit .preloader-bg {
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+  }
+
+  .preloader.preloader-exit {
+    pointer-events: none;
+  }
+
+  .preloader.preloader-done {
+    display: none;
+  }
+
+  @keyframes preloaderPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+
+  @keyframes preloaderFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes preloaderScan {
+    0% { top: 0; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 120px; opacity: 0; }
+  }
+
+  @keyframes preloaderBlink {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preloader-logo,
+    .preloader-glow,
+    .preloader-scanline,
+    .preloader-dot {
+      animation: none !important;
+    }
+    .preloader.preloader-exit .preloader-bg,
+    .preloader.preloader-exit .preloader-content {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

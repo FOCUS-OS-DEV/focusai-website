@@ -9,6 +9,28 @@
   opacity: 1;
 }
 
+/* ===== PRELOADER ACTIVE STATE ===== */
+html.preloader-active {
+  overflow: hidden !important;
+}
+
+html.preloader-active body {
+  overflow: hidden !important;
+}
+
+html.preloader-active main,
+html.preloader-active [slot="header"],
+html.preloader-active [slot="footer"] {
+  opacity: 0;
+}
+
+html:not(.preloader-active) main,
+html:not(.preloader-active) [slot="header"],
+html:not(.preloader-active) [slot="footer"] {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
 /* ========================================
    FOCUS AI - CYBERPUNK / GLITCH DESIGN SYSTEM
    ======================================== */

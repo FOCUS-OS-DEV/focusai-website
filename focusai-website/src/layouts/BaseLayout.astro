@@ -5,6 +5,7 @@ import Analytics from '../components/Analytics.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
 import BackToTop from '../components/BackToTop.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import Preloader from '../components/Preloader.astro';
 import { siteConfig } from '../data/config';
 
 interface Props {
@@ -67,7 +68,7 @@ const websiteSchema = {
 ---
 
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="lenis lenis-smooth">
+<html lang="he" dir="rtl" class="lenis lenis-smooth preloader-active">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -127,7 +128,10 @@ const websiteSchema = {
   <!-- Analytics (GTM, Clarity) - Respects Cookie Consent -->
   <Analytics />
 </head>
-<body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased">
+<body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active">
+  <!-- Preloader (first child - renders before everything) -->
+  <Preloader />
+
   <!-- GTM noscript fallback -->
   <AnalyticsBody />
 
@@ -187,11 +191,20 @@ const websiteSchema = {
       initScrollAnimations();
     }
 
-    // Use requestIdleCallback on mobile for faster first paint
-    if (isMobile && 'requestIdleCallback' in window) {
-      requestIdleCallback(() => initSmoothScrollAndAnimations(), { timeout: 200 });
+    function startInit() {
+      if (isMobile && 'requestIdleCallback' in window) {
+        requestIdleCallback(() => initSmoothScrollAndAnimations(), { timeout: 200 });
+      } else {
+        initSmoothScrollAndAnimations();
+      }
+    }
+
+    // Wait for preloader to finish before initializing Lenis/GSAP
+    const preloaderEl = document.getElementById('preloader');
+    if (preloaderEl && !preloaderEl.classList.contains('preloader-done')) {
+      window.addEventListener('preloaderDone', startInit, { once: true });
     } else {
-      initSmoothScrollAndAnimations();
+      startInit();
     }
   </script>
 
