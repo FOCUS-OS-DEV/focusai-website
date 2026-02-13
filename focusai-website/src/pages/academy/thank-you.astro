@@ -189,8 +189,17 @@ const moreVideos = videoTestimonials.slice(1);
 </BaseLayout>
 
 <script>
-  // Auto-play featured video
+  const isMobileVideo = window.innerWidth < 768;
+  function mobileVideoUrl(url: string): string {
+    if (!isMobileVideo) return url;
+    return url.replace('/upload/q_auto/', '/upload/w_720,q_auto/');
+  }
+
+  // Auto-play featured video (with mobile 720p)
   const featured = document.getElementById('featured-video') as HTMLVideoElement;
+  if (featured && isMobileVideo) {
+    featured.src = mobileVideoUrl(featured.src);
+  }
   if (featured) {
     featured.play().catch(() => {});
   }
@@ -208,7 +217,7 @@ const moreVideos = videoTestimonials.slice(1);
       const name = card.getAttribute('data-name') || '';
       const role = card.getAttribute('data-role') || '';
 
-      if (lightboxVideo) lightboxVideo.src = video;
+      if (lightboxVideo) lightboxVideo.src = mobileVideoUrl(video);
       if (lightboxName) lightboxName.textContent = name;
       if (lightboxRole) lightboxRole.textContent = role;
 

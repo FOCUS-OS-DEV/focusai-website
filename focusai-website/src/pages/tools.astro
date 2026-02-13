@@ -688,6 +688,7 @@ const categories = [...new Set(toolsData.map(tool => tool.category))];
     <!-- Video Background -->
     <div class="absolute inset-0 z-0">
       <video
+        id="tools-bg-video"
         class="absolute w-full h-full object-cover"
         autoplay
         muted
@@ -1018,6 +1019,18 @@ const categories = [...new Set(toolsData.map(tool => tool.category))];
 </BaseLayout>
 
 <script>
+  // Mobile 720p video optimization
+  if (window.innerWidth < 768) {
+    const bgVideo = document.getElementById('tools-bg-video') as HTMLVideoElement;
+    if (bgVideo) {
+      const source = bgVideo.querySelector('source');
+      if (source) {
+        source.src = source.src.replace('/upload/q_auto/', '/upload/w_720,q_auto/');
+        bgVideo.load();
+      }
+    }
+  }
+
   // Search and Filter functionality
   document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput') as HTMLInputElement;

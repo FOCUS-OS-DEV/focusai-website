@@ -756,6 +756,12 @@ const videoTestimonials = [
     nearbyIndices.forEach((idx) => loadVideoSrc(idx));
   }
 
+  const isMobileVideo = window.innerWidth < 768;
+  function mobileVideoUrl(url: string): string {
+    if (!isMobileVideo) return url;
+    return url.replace('/upload/q_auto/', '/upload/w_720,q_auto/');
+  }
+
   function loadVideoSrc(idx: number) {
     if (videosLoaded[idx]) return;
     const slide = document.querySelector(`.carousel-slide[data-index="${idx}"]`) as HTMLElement;
@@ -764,7 +770,7 @@ const videoTestimonials = [
     if (!videoUrl) return;
     const video = slide.querySelector('video') as HTMLVideoElement;
     if (!video || (video.src && video.src !== '')) return;
-    video.src = videoUrl + '#t=0.1';
+    video.src = mobileVideoUrl(videoUrl) + '#t=0.1';
     video.preload = 'metadata';
     video.onloadeddata = () => {
       video.classList.add('video-loaded');
@@ -888,7 +894,7 @@ const videoTestimonials = [
     if (!data || !video) return;
 
     video.pause();
-    video.src = data.video;
+    video.src = mobileVideoUrl(data.video);
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
     setTimeout(() => video.play(), 100);
