@@ -175,11 +175,16 @@ body::before {
 
 /* Form inputs that should remain LTR */
 input[type="email"],
-input[type="tel"],
 input[type="url"],
 input[type="number"] {
   direction: ltr;
   text-align: left;
+}
+
+/* Phone inputs - RTL aligned but accepts LTR numbers */
+input[type="tel"] {
+  direction: rtl;
+  text-align: right;
 }
 
 /* Code blocks should stay LTR */
