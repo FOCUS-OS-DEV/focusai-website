@@ -284,10 +284,6 @@ const courses = [
     }
   }
 
-  .glass-card.featured {
-    transform: scale(1.02);
-  }
-
   /* Non-featured cards - smaller from top and bottom */
   @media (min-width: 1024px) {
     .glass-card:not(.featured) {
@@ -617,23 +613,25 @@ const courses = [
   /* Glass input */
   .glass-input {
     flex: 1;
+    min-height: 48px;
     padding: 14px 18px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     color: white;
     font-size: 15px;
-    transition: background 0.3s, border-color 0.3s;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
   }
 
   .glass-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.45);
   }
 
   .glass-input:focus {
     outline: none;
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25);
   }
 
   /* Submit button */

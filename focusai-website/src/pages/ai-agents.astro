@@ -657,7 +657,7 @@ const serviceSchema = {
       <div class="space-y-4" data-animate="stagger">
         {faq.map((item) => (
           <details class="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl rounded-xl">
-            <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-[#a855f7]/5 transition-colors">
+            <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-[#a855f7]/5 focus-visible:ring-2 focus-visible:ring-[#a855f7]/50 focus-visible:outline-none rounded-xl transition-colors">
               <span class="text-white font-medium">{item.q}</span>
               <svg class="w-5 h-5 text-[#a855f7] transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -696,7 +696,7 @@ const serviceSchema = {
                 id="name"
                 name="name"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
               />
             </div>
             <div>
@@ -706,7 +706,7 @@ const serviceSchema = {
                 id="phone"
                 name="phone"
                 required
-                class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+                class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -718,7 +718,7 @@ const serviceSchema = {
               id="email"
               name="email"
               required
-              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono"
+              class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
             />
           </div>
 
@@ -728,7 +728,7 @@ const serviceSchema = {
               id="message"
               name="message"
               rows="4"
-              class="w-full px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] text-white focus:border-[#a855f7] focus:outline-none transition-colors font-mono resize-none"
+              class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors resize-none"
               placeholder="באילו ערוצים אתם פועלים היום? מה האתגר הכי גדול בתקשורת עם לקוחות?"
             ></textarea>
           </div>
