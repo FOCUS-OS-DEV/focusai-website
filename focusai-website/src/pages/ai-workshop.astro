@@ -2,7 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ClientLogosGrid from '../components/ClientLogosGrid.astro';
+import VideoTestimonialsCarousel from '../components/VideoTestimonialsCarousel.astro';
+import PhoneTestimonials from '../components/PhoneTestimonials.astro';
 import { founders } from '../data/team';
 
 const workshopBios: Record<string, string> = {
@@ -11,14 +12,6 @@ const workshopBios: Record<string, string> = {
 };
 
 const webhookUrl = "https://focus2025.app.n8n.cloud/webhook/06374873-ea8a-4d27-bfa2-453ab2bf03d8";
-
-const videoTestimonials = [
-  { name: "מטר", role: "בוגרת הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/%D7%9E%D7%98%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pvninr.mp4" },
-  { name: "חגית", role: "מנהלת המרכז לפיתוח קריירה אוניברסיטת חיפה", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1767274571/IMG_0753_iah7ft.mp4" },
-  { name: "שניר", role: "בוגר הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483262/%D7%A9%D7%A0%D7%99%D7%A8_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_mxbzrj.mp4" },
-  { name: "בני", role: "בוגר הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1767274566/IMG_3467_pg6tos.mp4" },
-  { name: "ארטיום", role: "בוגר הכשרת Focus AI", src: "https://res.cloudinary.com/dfudxxzlj/video/upload/v1768483285/%D7%90%D7%A8%D7%98%D7%99%D7%95%D7%9D_%D7%A4%D7%95%D7%A7%D7%95%D7%A1_AI_pzkt2y.mp4" },
-];
 
 const writtenTestimonials = [
   { name: "להב דור", role: "בוגר הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177221/4_qhzbdk.jpg", quote: "תודה רבה לכל החבר'ה המדהימים על שבוע מעניין ומאתגר. תודה מיוחדת לאוניל, שחר וכפיר על הובלה דינמית, הקניית כלים וערכים לעתיד ושיתוף הידע. אני המלצתי כבר לכמה חברים על הקורס ולא רק לגבי החומר הנלמד אלא גם לאופי העברת החומר והתמיכה בסטודנטים לאורך הקורס." },
@@ -29,20 +22,6 @@ const writtenTestimonials = [
   { name: "רימא חלאילה", role: "בוגרת הכשרה", photo: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_100/v1765177220/1_d3qx5v.jpg", quote: "השיעור הראשון היום היה ממש מעניין! פיתחתי סוכן קטן שייעץ בנושא כושר ותזונה וחייבת לכתוב לכם שזה באמת היה מגניב עבורי. חייבת להוסיף שפשוט הייתה זמינות טוטאלית של המרצים ולא היה מקרה שמישהו שנתקל בקושי נשאר מאחור." },
 ];
 
-const whatsappScreenshots = [
-  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.49_gslu8r.jpg",
-  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.49_2_s6qi2d.jpg",
-  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.49_1_i6dk6x.jpg",
-  "v1764235507/WhatsApp_Image_2025-11-27_at_11.03.48_vjykkf.jpg",
-  "v1764235508/WhatsApp_Image_2025-11-27_at_11.21.40_b817hm.jpg",
-  "v1764609935/WhatsApp_Image_2025-12-01_at_18.34.02_y37mtc.jpg",
-  "v1768494114/WhatsApp_Image_2026-01-15_at_18.21.37_s66ddm.jpg",
-  "v1768493691/WhatsApp_Image_2026-01-15_at_17.48.02_tftosm.jpg",
-  "v1768493691/WhatsApp_Image_2026-01-15_at_17.45.34_scfem2.jpg",
-  "v1768493691/WhatsApp_Image_2026-01-15_at_17.46.50_ex406e.jpg",
-  "v1768493691/WhatsApp_Image_2026-01-15_at_17.46.04_emr8y2.jpg",
-  "v1768493691/WhatsApp_Image_2026-01-15_at_17.49.34_c7nii5.jpg",
-];
 
 const galleryImages = [
   "v1764513070/WhatsApp_Image_2025-11-30_at_16.29.03_n0casb.jpg",
@@ -85,10 +64,10 @@ const syllabusTopics = [
 const toolBadges = ["ChatGPT", "Claude", "Gemini", "Perplexity", "GenSpark", "NotebookLM", "Google AI Studio", "n8n", "Lovable", "Base44", "Kling AI", "Nano Banana Pro"];
 
 const processSteps = [
-  { num: "01", title: "אפיון מעמיק", desc: "שיחת עומק להבנת ה-DNA הארגוני" },
-  { num: "02", title: "תפירת החליפה", desc: "בניית סילבוס, מצגת וחומרי לימוד מותאמים אישית" },
-  { num: "03", title: "הכשרה מעשית", desc: "סדנת Hands-on חווייתית" },
-  { num: "04", title: "הטמעה וליווי", desc: "חומרי עזר, הקלטות ותמיכה" },
+  { num: "01", title: "אפיון מעמיק", desc: "שיחת עומק להבנת ה-DNA הארגוני, האתגרים הטכנולוגיים והיעדים העסקיים שלכם." },
+  { num: "02", title: "תפירת החליפה", desc: "בניית סילבוס, מצגת וחומרי לימוד מותאמים אישית הכוללים דוגמאות וסימולציות מעולם התוכן הספציפי שלכם." },
+  { num: "03", title: "הכשרה מעשית", desc: "סדנת Hands-on חווייתית (בזום או אצלכם במשרד) שבה העובדים מתרגלים בזמן אמת." },
+  { num: "04", title: "הטמעה וליווי", desc: "אנחנו נשארים בתמונה עם חומרי עזר, הקלטות ותמיכה כדי להבטיח שימוש שוטף." },
 ];
 
 const stats = [
@@ -125,12 +104,6 @@ const stats = [
         />
       </div>
 
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-8" data-animate="fade-up">
-        <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
-        <span class="text-xs text-[#a855f7] uppercase tracking-wider font-medium">סדנאות AI לארגונים</span>
-      </div>
-
       <!-- Heading -->
       <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-tight" data-animate="fade-up">
         הפכו את הארגון
@@ -162,11 +135,6 @@ const stats = [
       <div class="w-px h-8 bg-gradient-to-b from-[#a855f7] to-transparent"></div>
     </div>
   </section>
-
-  <!-- ============================================ -->
-  <!-- SECTION 2: CLIENT LOGOS                      -->
-  <!-- ============================================ -->
-  <ClientLogosGrid />
 
   <!-- ============================================ -->
   <!-- SECTION 3: QUICK CONTACT FORM                -->
@@ -328,13 +296,22 @@ const stats = [
         </h2>
       </div>
 
-      <!-- Tool badges -->
-      <div class="flex flex-wrap items-center justify-center gap-3 mb-6" data-animate="fade-up">
-        {toolBadges.map((tool) => (
-          <span class="px-4 py-2 bg-white/[0.05] border border-white/[0.1] rounded-full text-sm text-white/80 font-medium hover:border-[#a855f7]/40 hover:text-[#a855f7] transition-all cursor-default">
-            {tool}
-          </span>
-        ))}
+      <!-- Tool badges - woven rows -->
+      <div class="flex flex-col items-center gap-3 mb-6" data-animate="fade-up">
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          {toolBadges.slice(0, 6).map((tool) => (
+            <span class="px-4 py-2 bg-white/[0.05] border border-white/[0.1] rounded-full text-sm text-white/80 font-medium hover:border-[#a855f7]/40 hover:text-[#a855f7] transition-all cursor-default">
+              {tool}
+            </span>
+          ))}
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-3 pr-8">
+          {toolBadges.slice(6).map((tool) => (
+            <span class="px-4 py-2 bg-white/[0.05] border border-white/[0.1] rounded-full text-sm text-white/80 font-medium hover:border-[#a855f7]/40 hover:text-[#a855f7] transition-all cursor-default">
+              {tool}
+            </span>
+          ))}
+        </div>
       </div>
       <p class="text-center text-[#a855f7] text-sm mb-12 font-medium" data-animate="fade-up">וכל הכלים המתקדמים ביותר בעולם!</p>
 
@@ -375,101 +352,47 @@ const stats = [
   </section>
 
   <!-- ============================================ -->
-  <!-- SECTION 6: VIDEO TESTIMONIALS                -->
+  <!-- SECTION 6: VIDEO TESTIMONIALS CAROUSEL       -->
   <!-- ============================================ -->
-  <section id="video-testimonials" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Section header -->
-      <div class="text-center mb-14" data-animate="fade-up">
-        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
-          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
-          <span class="text-xs text-[#a855f7] uppercase tracking-wider">עדויות</span>
-        </div>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-          מה אומרים <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">עלינו?</span>
-        </h2>
-      </div>
-
-      <!-- Video grid -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {videoTestimonials.map((vid, i) => (
-          <div class="relative group cursor-pointer rounded-2xl overflow-hidden bg-white/[0.03] border border-white/[0.08] hover:border-[#a855f7]/30 transition-all duration-300" data-animate="fade-up" data-delay={`${i * 0.08}`}>
-            <div class="aspect-[9/16] relative">
-              <video
-                src={`${vid.src}#t=0.1`}
-                preload="metadata"
-                muted
-                playsinline
-                class="w-full h-full object-cover"
-              ></video>
-              <!-- Play button overlay -->
-              <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-all duration-300 video-play-trigger"
-                data-video-src={vid.src}>
-                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:bg-[#a855f7]/40 transition-all duration-300">
-                  <svg class="w-6 h-6 text-white mr-[-2px]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                </div>
-              </div>
-              <!-- Name label -->
-              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-3 pt-8">
-                <p class="text-white text-sm font-bold">{vid.name}</p>
-                <p class="text-white/60 text-xs">{vid.role}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Modal -->
-  <div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-sm video-modal-overlay">
-    <div class="relative w-full max-w-lg mx-4">
-      <button id="video-modal-close" class="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors z-10" aria-label="סגור">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-      </button>
-      <div class="rounded-2xl overflow-hidden bg-black aspect-[9/16]">
-        <video id="modal-video" controls playsinline class="w-full h-full object-contain"></video>
-      </div>
-    </div>
-  </div>
+  <VideoTestimonialsCarousel />
 
   <!-- ============================================ -->
   <!-- SECTION 7: PROCESS                           -->
   <!-- ============================================ -->
   <section id="process" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
     <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-[#a855f7]/5 rounded-full blur-[200px]"></div>
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center mb-14" data-animate="fade-up">
-        <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-6">
-          <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
-          <span class="text-xs text-[#a855f7] uppercase tracking-wider">תהליך</span>
-        </div>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
           איך זה <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">עובד?</span>
         </h2>
+        <p class="text-[#b0b0c0] text-lg max-w-xl mx-auto">
+          תהליך אנושי ומותאם אישית, כי כל ארגון הוא עולם ומלואו.
+        </p>
       </div>
 
-      <!-- Timeline -->
-      <div class="relative">
-        <!-- Vertical line -->
-        <div class="absolute right-6 md:right-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#a855f7]/50 via-[#a855f7]/20 to-transparent"></div>
+      <!-- Zigzag Timeline -->
+      <div class="process-timeline relative">
+        <!-- Center vertical line -->
+        <div class="process-line absolute top-0 bottom-0 w-px bg-gradient-to-b from-[#a855f7]/60 via-[#a855f7]/30 to-[#a855f7]/10"></div>
 
-        <div class="space-y-8">
-          {processSteps.map((step, i) => (
-            <div class="relative flex items-start gap-6 md:gap-8" data-animate="fade-right" data-delay={`${i * 0.1}`}>
-              <!-- Number circle -->
-              <div class="relative z-10 flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#a855f7] to-[#ec4899] flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-                <span class="text-white font-bold font-mono text-sm md:text-lg">{step.num}</span>
+        {processSteps.map((step, i) => {
+          const isEven = i % 2 === 0;
+          return (
+            <div class={`process-step relative flex items-center gap-4 md:gap-6 ${isEven ? 'process-step-right' : 'process-step-left'}`} data-animate="fade-up" data-delay={`${i * 0.1}`}>
+              {/* Circle */}
+              <div class="process-circle relative z-10 flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0a0a0f] border-2 border-[#a855f7] flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.25)]">
+                <span class="text-white font-bold font-mono text-sm md:text-base">{step.num}</span>
               </div>
-              <!-- Content -->
-              <div class="flex-1 bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 md:p-6 hover:border-[#a855f7]/20 transition-all">
-                <h3 class="text-xl font-bold text-white mb-1">{step.title}</h3>
-                <p class="text-[#b0b0c0] text-sm">{step.desc}</p>
+              {/* Card */}
+              <div class={`process-card flex-1 bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 md:p-6 hover:border-[#a855f7]/30 transition-all ${isEven ? 'border-l-2 border-l-[#a855f7]/60' : 'border-r-2 border-r-[#a855f7]/60'}`}>
+                <h3 class="text-lg md:text-xl font-bold text-white mb-2">{step.title}</h3>
+                <p class="text-[#b0b0c0] text-sm leading-relaxed">{step.desc}</p>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
       <!-- Format cards -->
@@ -682,7 +605,7 @@ const stats = [
   </section>
 
   <!-- ============================================ -->
-  <!-- SECTION 11: WHATSAPP SCREENSHOTS             -->
+  <!-- SECTION 11: WHATSAPP PHONE MOCKUP            -->
   <!-- ============================================ -->
   <section id="testimonials" class="relative py-20 md:py-28 bg-[#0a0a0f]" data-section>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -697,20 +620,7 @@ const stats = [
         </h2>
       </div>
 
-      <!-- Masonry grid -->
-      <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-        {whatsappScreenshots.map((img, i) => (
-          <div class="break-inside-avoid rounded-2xl overflow-hidden border border-white/[0.08] hover:border-[#a855f7]/20 transition-all duration-300" data-animate="fade-up" data-delay={`${(i % 6) * 0.06}`}>
-            <img
-              src={`https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500/${img}`}
-              alt="חוות דעת לקוח"
-              class="w-full h-auto"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ))}
-      </div>
+      <PhoneTestimonials theme="dark" />
     </div>
   </section>
 
@@ -859,62 +769,6 @@ const stats = [
   <Fragment slot="scripts">
     <script is:inline>
       // ========================
-      // Video Modal
-      // ========================
-      function openVideoModal(src) {
-        var modal = document.getElementById('video-modal');
-        var video = document.getElementById('modal-video');
-        if (!modal || !video) return;
-        video.src = src;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        video.play();
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeVideoModal(e) {
-        if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
-        var modal = document.getElementById('video-modal');
-        var video = document.getElementById('modal-video');
-        if (!modal || !video) return;
-        video.pause();
-        video.src = '';
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.style.overflow = '';
-      }
-
-      // Close on Escape
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeVideoModal();
-      });
-
-      // Video play triggers
-      document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.video-play-trigger').forEach(function(el) {
-          el.addEventListener('click', function() {
-            openVideoModal(this.dataset.videoSrc);
-          });
-        });
-
-        // Modal overlay click
-        var modalOverlay = document.querySelector('.video-modal-overlay');
-        if (modalOverlay) {
-          modalOverlay.addEventListener('click', function(e) {
-            if (e.target === this) closeVideoModal();
-          });
-        }
-
-        // Modal close button
-        var closeBtn = document.getElementById('video-modal-close');
-        if (closeBtn) {
-          closeBtn.addEventListener('click', function() {
-            closeVideoModal();
-          });
-        }
-      });
-
-      // ========================
       // Form Submission
       // ========================
       var WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/06374873-ea8a-4d27-bfa2-453ab2bf03d8';
@@ -1040,18 +894,6 @@ const stats = [
   }
 
   /* ======================== */
-  /* Video Modal Animation    */
-  /* ======================== */
-  #video-modal {
-    animation: modalFadeIn 0.3s ease;
-  }
-
-  @keyframes modalFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* ======================== */
   /* Select dropdown styling  */
   /* ======================== */
   .workshop-select {
@@ -1066,5 +908,49 @@ const stats = [
     background: #12121a;
     color: #f5f5fa;
     padding: 8px;
+  }
+
+  /* ======================== */
+  /* Process Timeline (Zigzag)*/
+  /* ======================== */
+  .process-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Hide center line on mobile */
+  .process-line {
+    display: none;
+  }
+
+  /* Desktop zigzag layout */
+  @media (min-width: 768px) {
+    .process-timeline {
+      gap: 2.5rem;
+    }
+
+    .process-line {
+      display: block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .process-step {
+      width: calc(50% + 28px);
+    }
+
+    /* Right side: card on right, circle at center line */
+    .process-step-right {
+      margin-left: auto;
+      margin-right: 0;
+      flex-direction: row-reverse;
+    }
+
+    /* Left side: card on left, circle at center line */
+    .process-step-left {
+      margin-right: auto;
+      margin-left: 0;
+    }
   }
 </style>
