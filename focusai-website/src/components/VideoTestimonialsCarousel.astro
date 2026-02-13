@@ -98,7 +98,7 @@ const videoTestimonials = [
 
   <div class="lightbox-content">
     <div class="lightbox-video-container">
-      <video id="lightboxVideo" controls playsinline><track kind="captions" default /></video>
+      <video id="lightboxVideo" controls playsinline webkit-playsinline preload="auto"><track kind="captions" default /></video>
       <!-- Close Button - Top Right of video box -->
       <button class="lightbox-close-btn" aria-label="סגור">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -566,8 +566,8 @@ const videoTestimonials = [
   @media (max-width: 640px) {
     .video-lightbox {
       padding: 0;
-      align-items: stretch;
-      justify-content: stretch;
+      align-items: center;
+      justify-content: center;
     }
 
     .lightbox-close-btn {
@@ -590,10 +590,10 @@ const videoTestimonials = [
     }
 
     .lightbox-content {
-      max-width: 100%;
-      max-height: 100%;
-      width: 100%;
-      height: 100%;
+      max-width: 100vw;
+      max-height: 100vh;
+      width: 100vw;
+      height: 100vh;
       justify-content: center;
     }
 
@@ -601,13 +601,15 @@ const videoTestimonials = [
       border-radius: 0;
       border: none;
       box-shadow: none;
-      max-height: 100dvh;
+      max-height: 100vh;
       height: 100%;
       width: 100%;
       aspect-ratio: auto;
     }
 
     .lightbox-video-container video {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       background: #000;
     }
@@ -912,35 +914,33 @@ const videoTestimonials = [
     const data = getVideoData(lightboxIndex);
     if (!data || !video) return;
 
+    // Fully reset video element
     video.pause();
+    video.oncanplay = null;
+    video.removeAttribute('src');
+    video.load();
 
-    // Set poster so user sees thumbnail immediately while video loads
+    // Set poster for immediate visual feedback
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
     const posterUrl = slide?.getAttribute('data-poster');
-    if (posterUrl) video.poster = posterUrl;
+    if (posterUrl) {
+      video.poster = posterUrl;
+    }
 
-    video.src = mobileVideoUrl(data.video);
-    video.load();
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Attempt autoplay - on mobile, muted autoplay works then we unmute
-    video.oncanplay = () => {
-      video.oncanplay = null;
-      video.play().catch(() => {
-        // Unmuted autoplay blocked (mobile) - try muted then unmute
-        video.muted = true;
-        video.play().then(() => {
-          // Playing muted - unmute now
-          video.muted = false;
-        }).catch(() => {
-          // Even muted failed - user can tap native play button
-          video.muted = false;
-        });
-      });
-    };
-    // Also try immediately for already-buffered content
-    video.play().catch(() => {});
+    // Set new source and load
+    video.src = mobileVideoUrl(data.video);
+    video.load();
+
+    // Desktop only: autoplay after ready (mobile users tap native play button)
+    if (!isMobileVideo) {
+      video.oncanplay = () => {
+        video.oncanplay = null;
+        video.play().catch(() => {});
+      };
+    }
   }
 
   function lightboxNav(dir: number) {
