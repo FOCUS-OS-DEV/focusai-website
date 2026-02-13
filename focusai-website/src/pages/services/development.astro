@@ -490,10 +490,7 @@ const serviceSchema = {
           </p>
         </header>
 
-        <form class="space-y-6" data-animate="scale-up" action="https://formsubmit.co/ajax/info@focusai.co.il" method="POST" id="dev-form">
-          <input type="hidden" name="_subject" value="פנייה חדשה - פיתוח ואינטגרציה" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
+        <form class="space-y-6" data-animate="scale-up" id="dev-form">
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -600,26 +597,25 @@ const serviceSchema = {
 </BaseLayout>
 
 <script>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+
   const form = document.getElementById('dev-form') as HTMLFormElement;
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const statusEl = document.getElementById('dev-form-status');
-      if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (response.ok) {
-          form.style.display = 'none';
-          if (statusEl) statusEl.classList.remove('hidden');
-        }
-      } catch {
-        if (btn) { btn.disabled = false; btn.textContent = 'שלחו פרטים'; }
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    params.append('source', 'development-contact');
+    formData.forEach((value, key) => {
+      if (key !== 'consent' && key !== 'privacy') {
+        params.append(key, value.toString());
       }
     });
-  }
+
+    try {
+      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+    } catch {}
+
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+    window.location.href = '/academy/thank-you';
+  });
 </script>

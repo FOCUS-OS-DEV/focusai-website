@@ -295,74 +295,26 @@ const interestOptions = [
 </section>
 
 <script>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
   const form = document.getElementById('contact-form') as HTMLFormElement;
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const formData = new FormData(form);
-    const data: Record<string, string> = { source: 'homepage-contact' };
-    formData.forEach((value, key) => { data[key] = value.toString(); });
-    const submitBtn = form.querySelector('.submit-btn') as HTMLButtonElement;
-    const originalHTML = submitBtn.innerHTML;
-
-    // Loading state
-    submitBtn.innerHTML = `
-      <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      <span>PROCESSING...</span>
-    `;
-    submitBtn.disabled = true;
-    submitBtn.classList.add('opacity-80');
+    const params = new URLSearchParams();
+    params.append('source', 'homepage-contact');
+    formData.forEach((value, key) => {
+      if (key !== 'consent' && key !== 'privacy') {
+        params.append(key, value.toString());
+      }
+    });
 
     try {
-      const webhookUrl = form.action;
-      if (webhookUrl && webhookUrl !== '#') {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-      }
+      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+    } catch {}
 
-      // Success state
-      submitBtn.innerHTML = `
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-        <span>SUCCESS_TRANSMITTED</span>
-      `;
-      submitBtn.style.boxShadow = '0 0 30px rgba(168, 85, 247, 0.7)';
-
-      setTimeout(() => {
-        form.reset();
-        submitBtn.innerHTML = originalHTML;
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('opacity-80');
-        submitBtn.style.boxShadow = '0 0 30px rgba(168, 85, 247, 0.5)';
-      }, 3000);
-
-    } catch (error) {
-      // Error state
-      submitBtn.innerHTML = `
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        <span>ERROR_RETRY</span>
-      `;
-      submitBtn.style.background = '#ff3366';
-      submitBtn.style.boxShadow = '0 0 30px rgba(255, 51, 102, 0.5)';
-
-      setTimeout(() => {
-        submitBtn.innerHTML = originalHTML;
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('opacity-80');
-        submitBtn.style.background = '#a855f7';
-        submitBtn.style.boxShadow = '0 0 30px rgba(168, 85, 247, 0.5)';
-      }, 3000);
-    }
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+    window.location.href = '/academy/thank-you';
   });
 </script>
 

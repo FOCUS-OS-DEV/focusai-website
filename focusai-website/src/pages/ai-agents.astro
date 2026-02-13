@@ -687,7 +687,7 @@ const serviceSchema = {
           </p>
         </header>
 
-        <form class="space-y-6" data-animate="scale-up">
+        <form id="agents-form" class="space-y-6" data-animate="scale-up">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
@@ -762,6 +762,30 @@ const serviceSchema = {
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<script>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+
+  const agentsForm = document.getElementById('agents-form') as HTMLFormElement;
+  agentsForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(agentsForm);
+    const params = new URLSearchParams();
+    params.append('source', 'ai-agents-contact');
+    formData.forEach((value, key) => {
+      if (key !== 'consent' && key !== 'privacy') {
+        params.append(key, value.toString());
+      }
+    });
+
+    try {
+      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+    } catch {}
+
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+    window.location.href = '/academy/thank-you';
+  });
+</script>
 
 <style>
   @keyframes bounce {
