@@ -13,6 +13,7 @@ const { currentPath = '/', theme = 'dark' } = Astro.props;
 const isLight = theme === 'light';
 
 const logo = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265415/2_fxdcio.png";
+const logoDark = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265416/5_mckdsj.png";
 
 const navLinks = [
   { href: '/', label: 'בית', code: 'HOME' },
@@ -52,12 +53,21 @@ const toolsLinks = [
         <!-- Logo with glow effect -->
         <a href="/" class="flex items-center gap-3 group relative z-10">
           <div class="absolute inset-0 bg-[#a855f7]/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          {/* Light logo (for dark backgrounds) */}
           <img
             src={logo}
             alt="Focus AI"
-            class="h-7 lg:h-9 w-auto transition-all group-hover:brightness-125 relative z-10"
+            class={`h-7 lg:h-9 w-auto transition-all group-hover:brightness-125 relative z-10 ${isLight ? 'header-logo-light' : ''}`}
             style="filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));"
           />
+          {/* Dark logo (for light backgrounds) */}
+          {isLight && (
+            <img
+              src={logoDark}
+              alt="Focus AI"
+              class="h-7 lg:h-9 w-auto transition-all group-hover:brightness-110 relative z-10 header-logo-dark"
+            />
+          )}
         </a>
 
         <!-- Desktop Navigation -->
@@ -515,9 +525,25 @@ const toolsLinks = [
     border-color: rgba(168, 85, 247, 0.2);
   }
 
-  /* Light theme logo - no purple glow, natural colors */
-  .header-theme-light:not(.header-switched-dark) .header-glass img[alt="Focus AI"] {
-    filter: none !important;
+  /* Light theme logo swap - show dark logo, hide light logo */
+  .header-theme-light:not(.header-switched-dark) .header-logo-light {
+    display: none !important;
+  }
+  .header-theme-light:not(.header-switched-dark) .header-logo-dark {
+    display: block !important;
+  }
+
+  /* Default: show light logo, hide dark logo */
+  .header-logo-dark {
+    display: none !important;
+  }
+
+  /* When switched to dark area, revert logos */
+  .header-theme-light.header-switched-dark .header-logo-light {
+    display: block !important;
+  }
+  .header-theme-light.header-switched-dark .header-logo-dark {
+    display: none !important;
   }
 
   /* Light theme nav links - override the gradient hover for light backgrounds */
@@ -546,10 +572,6 @@ const toolsLinks = [
   .header-theme-light.header-switched-dark .nav-link-glass.header-nav-light:hover {
     color: white !important;
     background: rgba(255, 255, 255, 0.1) !important;
-  }
-
-  .header-theme-light.header-switched-dark .header-glass img[alt="Focus AI"] {
-    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4)) !important;
   }
 
   .header-theme-light.header-switched-dark .nav-link-glass svg {
