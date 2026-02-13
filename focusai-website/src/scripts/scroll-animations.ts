@@ -26,8 +26,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-// Trigger point: 100% = bottom edge of viewport (instant on enter)
-const TRIGGER_START = 'top 100%';
+// Trigger point: 120% = 20% BELOW viewport (animation starts well before visible)
+const TRIGGER_START = 'top 120%';
 
 // Animation configurations
 const animations = {
@@ -242,16 +242,14 @@ const animations = {
     gsap.fromTo(children,
       {
         opacity: 0,
-        y: isMobile ? 15 : 25,
-        scale: 0.97
+        y: isMobile ? 10 : 15
       },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
-        duration: isMobile ? 0.25 : 0.4,
+        duration: isMobile ? 0.2 : 0.3,
         delay,
-        stagger: isMobile ? 0.04 : 0.07,
+        stagger: isMobile ? 0.03 : 0.05,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
