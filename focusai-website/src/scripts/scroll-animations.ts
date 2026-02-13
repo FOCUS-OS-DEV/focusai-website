@@ -24,6 +24,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 // Animation configurations
 const animations = {
   // Basic fade up
@@ -38,7 +40,7 @@ const animations = {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -57,7 +59,7 @@ const animations = {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -76,7 +78,7 @@ const animations = {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -95,7 +97,7 @@ const animations = {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -107,19 +109,19 @@ const animations = {
     gsap.fromTo(el,
       {
         opacity: 0,
-        scale: 0.8,
-        filter: 'blur(10px)'
+        scale: 0.9,
+        ...(isMobile ? {} : { filter: 'blur(10px)' })
       },
       {
         opacity: 1,
         scale: 1,
-        filter: 'blur(0px)',
-        duration: 0.8,
+        ...(isMobile ? {} : { filter: 'blur(0px)' }),
+        duration: isMobile ? 0.4 : 0.8,
         delay,
         ease: 'back.out(1.7)',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -131,7 +133,7 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
+        start: 'top 95%',
         toggleActions: 'play none none none'
       }
     });
@@ -182,7 +184,7 @@ const animations = {
 
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 85%',
+      start: 'top 95%',
       onEnter: () => {
         const interval = setInterval(() => {
           if (currentIndex < chars.length) {
@@ -223,7 +225,7 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
+        start: 'top 95%',
         toggleActions: 'play none none none'
       }
     });
@@ -253,20 +255,20 @@ const animations = {
     gsap.fromTo(children,
       {
         opacity: 0,
-        y: 40,
+        y: isMobile ? 20 : 40,
         scale: 0.95
       },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.6,
+        duration: isMobile ? 0.3 : 0.6,
         delay,
-        stagger: 0.1,
+        stagger: isMobile ? 0.05 : 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -281,7 +283,7 @@ const animations = {
 
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 85%',
+      start: 'top 95%',
       onEnter: () => {
         gsap.fromTo({ value: 0 },
           { value: 0 },
@@ -304,19 +306,19 @@ const animations = {
     gsap.fromTo(el,
       {
         opacity: 0,
-        filter: 'blur(20px)',
-        scale: 1.1
+        ...(isMobile ? {} : { filter: 'blur(20px)' }),
+        scale: 1.05
       },
       {
         opacity: 1,
-        filter: 'blur(0px)',
+        ...(isMobile ? {} : { filter: 'blur(0px)' }),
         scale: 1,
-        duration: 1,
+        duration: isMobile ? 0.4 : 1,
         delay,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -353,7 +355,7 @@ const animations = {
         ease: 'back.out(1.7)',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -376,7 +378,7 @@ const animations = {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%',
+            start: 'top 95%',
             toggleActions: 'play none none none'
           }
         }
@@ -400,7 +402,7 @@ const animations = {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -412,7 +414,7 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
+        start: 'top 95%',
         toggleActions: 'play none none none'
       }
     });
@@ -467,7 +469,7 @@ const animations = {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
+        start: 'top 95%',
         toggleActions: 'play none none none'
       }
     });
@@ -505,7 +507,7 @@ const animations = {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 95%',
           toggleActions: 'play none none none'
         }
       }
@@ -533,9 +535,12 @@ export function initScrollAnimations() {
 
 // Section transition effects
 function initSectionTransitions() {
+  // Skip parallax on mobile for better performance
+  if (isMobile) return;
+
   const sections = document.querySelectorAll('section[data-section]');
 
-  sections.forEach((section, index) => {
+  sections.forEach((section) => {
     // Add parallax effect to section backgrounds
     const bg = section.querySelector('.section-bg');
     if (bg) {
@@ -550,7 +555,6 @@ function initSectionTransitions() {
         }
       });
     }
-    // Removed fade between sections - was causing visibility issues
   });
 }
 

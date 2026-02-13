@@ -148,6 +148,8 @@ const websiteSchema = {
 
   <!-- Lenis Smooth Scroll + GSAP Scroll Animations (deferred for performance) -->
   <script>
+    const isMobile = window.innerWidth < 768;
+
     async function initSmoothScrollAndAnimations() {
       const [{ default: Lenis }, { gsap }, { ScrollTrigger }, { initScrollAnimations }] = await Promise.all([
         import('lenis'),
@@ -158,9 +160,9 @@ const websiteSchema = {
 
       gsap.registerPlugin(ScrollTrigger);
 
-      // Initialize Lenis smooth scrolling
+      // Initialize Lenis smooth scrolling - faster on mobile
       const lenis = new Lenis({
-        duration: 1.2,
+        duration: isMobile ? 0.6 : 1.0,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
@@ -185,9 +187,12 @@ const websiteSchema = {
       initScrollAnimations();
     }
 
-    // Dynamic imports provide code-splitting (separate chunks loaded in parallel)
-    // No need for requestIdleCallback - dynamic imports are already non-blocking
-    initSmoothScrollAndAnimations();
+    // Use requestIdleCallback on mobile for faster first paint
+    if (isMobile && 'requestIdleCallback' in window) {
+      requestIdleCallback(() => initSmoothScrollAndAnimations(), { timeout: 200 });
+    } else {
+      initSmoothScrollAndAnimations();
+    }
   </script>
 
   <!-- Global form validation -->

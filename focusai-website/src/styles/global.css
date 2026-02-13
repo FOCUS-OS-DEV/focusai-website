@@ -1325,6 +1325,19 @@ input[type="button"] {
     animation: none;
     box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
   }
+
+  /* Reduce heavy blur effects on mobile for GPU performance */
+  .blur-\[150px\],
+  .blur-\[120px\],
+  .blur-\[100px\] {
+    filter: blur(40px) !important;
+  }
+
+  /* Reduce backdrop-blur on mobile */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
 }
 
 /* Tablet and up */
