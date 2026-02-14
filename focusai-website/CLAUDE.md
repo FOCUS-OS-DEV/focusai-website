@@ -68,7 +68,7 @@ Smooth Scroll:  Lenis (deferred with requestIdleCallback)
 Icons:          Lucide + MDI (astro-icon)
 Images:         Cloudinary CDN + Sharp
 Analytics:      GTM (GTM-M33PM5WV) + Microsoft Clarity (vddsj5y6bj)
-Forms:          FormSubmit.co (AJAX) → Email
+Forms:          N8N Webhooks (AJAX) → CRM
 ```
 
 ---
@@ -175,17 +175,16 @@ focusai-website/
 | `/services/ai-agents` | Live | AI agents service detail |
 | `/services/development` | Live | Development services |
 | `/tools` | Live | AI Tools directory |
-| `/blog` | **Dev only** | Blog index (NOT deployed to production yet!) |
-| `/blog/[slug]` | **Dev only** | Blog article pages |
+| `/blog` | **Live** | Blog index - AI news articles |
+| `/blog/[slug]` | **Live** | Blog article pages |
 | `/privacy` | Live | Privacy policy |
 | `/terms` | Live | Terms of service |
 
 ### Important Route Notes
 
-- **`/blog` is NOT live on production** - removed from navigation. Available on localhost only.
+- **`/blog` is LIVE on production** - accessible via "חדשות AI" in navigation
 - **`/ai-workshop`** redirects to external registration link
 - **AI First card** is hidden on mobile in homepage (`hidden lg:block`)
-- **Navigation** does NOT include blog link (leads to 404 on production)
 
 ---
 
@@ -199,6 +198,7 @@ Header navLinks:
 │   └── Bot-Camp (/academy)
 ├── סוכני AI (/ai-agents)
 ├── סדנאות (/ai-workshop)
+├── חדשות AI (/blog)
 ├── כלי AI (/tools) ← dropdown
 └── אודות (/about)
 ```
@@ -221,32 +221,44 @@ The hero (`HeroSection.astro`) is **pure Astro + CSS** - no React, no Framer Mot
 
 ---
 
-## Blog System (Dev Only)
+## Blog System (LIVE)
 
 ### Architecture
 - Content collection using Astro's `getCollection('blog')`
-- Schema: `content.config.ts` defines title, description, pubDate, heroImage, author, category, tags, difficulty
+- Schema: `content.config.ts` defines title, description, pubDate, heroImage, author, category, tags, ctaType, difficulty
 - Categories: `news` | `guide` | `tutorial`
-- Template: `pages/blog/[...slug].astro` with CTA form at bottom
+- Template: `pages/blog/[...slug].astro` with glassmorphism CTA banners
+- Blog index: `pages/blog/index.astro` - fully clickable cards, newsletter form with webhook
+- Terminology: "כתבות" (NOT "מאמרים" or "בלוג")
 
 ### Existing Articles
-| Slug | Title | Category |
-|------|-------|----------|
-| `n8n-funding-ai-automation` | n8n גייסה 180 מיליון דולר | news |
-| `what-is-ai-agent` | מה זה סוכן AI | guide |
-| `prompt-engineering-guide` | מדריך פרומפט אנג'ינירינג | guide |
-| `automation-examples` | דוגמאות אוטומציה | guide |
-| `top-10-ai-tools-2025` | 10 כלי AI מובילים | guide |
+| Slug | Title | CTA |
+|------|-------|-----|
+| `openai-100b-funding` | 100 מיליארד דולר ל-OpenAI | Bot-Camp |
+| `claude-opus-4-6` | Claude Opus 4.6 - חשיבה אדפטיבית | Bot-Camp |
+| `ai-agents-revolution-2026` | מהפכת סוכני ה-AI 2026 | Bot-Camp |
+| `n8n-funding-ai-automation` | n8n גייסה 180 מיליון דולר | Bot-Camp |
+| `what-is-ai-agent` | מה זה סוכן AI | Bot-Camp |
+| `openai-frontier-enterprise-ai` | OpenAI Frontier לארגונים | Consulting |
+| `prompt-engineering-guide` | מדריך פרומפט אנג'ינירינג | AI Ready |
+| `automation-examples` | דוגמאות אוטומציה | Bot-Camp |
+| `top-10-ai-tools-2025` | 10 כלי AI מובילים | AI Ready |
+
+### CTA Banner System
+- Glassmorphism HTML banners (NOT image CTAs)
+- Per-article CTA type via `ctaType` frontmatter: `botcamp` / `ai-ready` / `agents` / `consulting`
+- NO arrows in buttons
+- CSS in `[...slug].astro`: `.blog-cta-banner`, `.cta-badge`, `.cta-title`, `.cta-desc`, `.cta-tags`, `.cta-button`
 
 ### Content Agent
 Custom agent at `.claude/agents/content-from-url.md` for creating blog articles from source URLs.
 
 ### Article Template Pattern
 - Hebrew content, 800-1500 words
-- Include Bot-Camp banner CTA (HTML block with inline styles)
+- Include CTA banner (glassmorphism HTML block)
 - End with CTA to Focus AI services
 - Tags for filtering
-- Hero images via Cloudinary
+- Hero images via Cloudinary (generated with Gemini API)
 
 ---
 
@@ -458,17 +470,18 @@ Flow: Click → Form (name, phone, email) → FormSubmit.co → Syllabus viewer 
 
 ## Forms & Webhooks
 
-**Current:** FormSubmit.co (AJAX) → Email (office@focusai.co.il)
-**Future:** N8N webhooks (when ready)
+**Current:** N8N Webhooks (AJAX)
+**Webhook URL:** `https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c`
 
 Forms exist on:
-- Homepage CTA
+- Homepage CTA (`source: homepage-academy-consult`)
 - Bot-Camp page (mid-page + bottom)
-- AI Agents page
+- AI Agents page (`source: ai-agents-contact`)
+- AI Workshop page
+- Blog newsletter (`source: blog-newsletter`)
 - Blog article pages (bottom CTA)
-- Academy thank-you page
 
-All forms include privacy/terms checkbox.
+All forms include privacy/terms checkbox. All use the SAME webhook URL.
 
 ---
 
@@ -501,13 +514,25 @@ npm run preview  # Preview production build
 
 ## Recent Changes Log
 
+### 2026-02-14
+- Blog deployed to production! 9 articles live
+- Added "חדשות AI" link back to navigation
+- Replaced image CTAs with glassmorphism HTML CTA banners in all articles
+- Made blog cards fully clickable (not just title)
+- Changed "מאמרים" → "כתבות" terminology
+- Connected newsletter form to N8N webhook
+- All forms migrated from FormSubmit.co to N8N webhooks
+- Added `overflow-x: clip` on html to prevent mobile horizontal scroll
+- Fixed `.cpanel.yml` - removed blog deletion from deploy, fixed copy path
+- New article: OpenAI 100 מיליארד דולר
+- PageSpeed scores: Performance 88-94, Accessibility 97-100, SEO 100
+
 ### 2026-02-13
 - Removed duplicate "Your AI Partner" from mono comment line
 - Increased typewriter display time: 2000ms → 3500ms (hero + blog)
 - Added "Your AI Partner" as subtitle under "Focus AI" in hero
 - Randomized typewriter start index
 - Added new typewriter messages (total 16)
-- Removed "חדשות AI" from navigation (blog not live yet)
 - Hero CTA: "אקדמיה" → `/academy`, "פיתוח מערכות" → `/ai-agents`
 - AI First card hidden on mobile homepage
 - Added "המסלולים שלנו" section title on Bot-Camp page
@@ -540,12 +565,12 @@ npm run preview  # Preview production build
 
 ## TODO
 
-- [ ] Deploy blog to production (add back to nav)
+- [x] Deploy blog to production (add back to nav) ✅ 2026-02-14
+- [x] Replace FormSubmit.co with N8N webhooks ✅ 2026-02-14
 - [ ] Create more blog articles (AI news, guides)
-- [ ] Generate hero images for blog articles (Cloudinary)
 - [ ] Create AI-Ready and AI-First syllabus pages
-- [ ] Replace FormSubmit.co with N8N webhooks
-- [ ] PageSpeed: remaining optimizations from plan (video captions, carousel dot a11y)
+- [ ] Deploy /services pages to production (currently deleted by .cpanel.yml)
+- [ ] PageSpeed: remaining optimizations (video captions, carousel dot a11y)
 
 ---
 

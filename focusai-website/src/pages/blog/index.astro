@@ -193,7 +193,7 @@ function formatDate(date: Date): string {
           הירשמו לניוזלטר וקבלו עדכונים על כתבות חדשות, טיפים וחדשות מעולם ה-AI
         </p>
 
-        <form class="space-y-4">
+        <form id="newsletter-form" class="space-y-4">
           <div class="flex flex-col sm:flex-row gap-4">
             <input
               type="email"
@@ -215,6 +215,8 @@ function formatDate(date: Date): string {
               קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומאשר/ת קבלת דיוור שיווקי. ניתן לבטל בכל עת.
             </label>
           </div>
+          <p id="newsletter-success" class="hidden text-[#22c55e] text-sm font-medium mt-2">נרשמת בהצלחה! תודה רבה.</p>
+          <p id="newsletter-error" class="hidden text-[#ef4444] text-sm font-medium mt-2">משהו השתבש, נסו שוב.</p>
         </form>
       </div>
     </div>
@@ -257,6 +259,44 @@ function formatDate(date: Date): string {
         }
       });
     });
+  });
+
+  // Newsletter form webhook
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+  const newsletterForm = document.getElementById('newsletter-form') as HTMLFormElement;
+  const successMsg = document.getElementById('newsletter-success');
+  const errorMsg = document.getElementById('newsletter-error');
+
+  newsletterForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(newsletterForm);
+    const params = new URLSearchParams();
+    params.append('source', 'blog-newsletter');
+    params.append('email', formData.get('email')?.toString() || '');
+
+    try {
+      const btn = newsletterForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true;
+      btn.textContent = 'שולח...';
+
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+        mode: 'no-cors'
+      });
+
+      successMsg?.classList.remove('hidden');
+      errorMsg?.classList.add('hidden');
+      newsletterForm.reset();
+      btn.textContent = 'נרשמת!';
+    } catch {
+      errorMsg?.classList.remove('hidden');
+      successMsg?.classList.add('hidden');
+      const btn = newsletterForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = false;
+      btn.textContent = 'הרשמה';
+    }
   });
 </script>
 
