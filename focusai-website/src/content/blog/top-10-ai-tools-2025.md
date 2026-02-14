@@ -5,6 +5,7 @@ pubDate: 2025-01-10
 heroImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=60"
 author: "צוות Focus AI"
 tags: ["tools", "guides", "automation"]
+ctaType: "ai-ready"
 ---
 
 ## הכלים שמשנים את כללי המשחק

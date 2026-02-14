@@ -5,6 +5,7 @@ pubDate: 2025-01-15
 heroImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60"
 author: "צוות Focus AI"
 tags: ["ai-agents", "automation", "guides"]
+ctaType: "agents"
 ---
 
 ## מה זה בעצם סוכן AI?

@@ -5,6 +5,7 @@ pubDate: 2026-02-07
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
+ctaType: "consulting"
 ---
 
 ## הצ'אטבוט הפך לעובד - ועכשיו צריך מערכת HR עבורו
@@ -51,15 +52,12 @@ OpenAI חשפה (6 בפברואר 2026) את Frontier - פלטפורמה חדש�
 
 לא חייבים Frontier כדי להתחיל. פלטפורמות כמו n8n, Make ו-Zapier כבר מאפשרות לבנות סוכני AI עם רמה בסיסית של בקרה. אבל המגמה ברורה: ניהול סוכנים הולך להפוך לדיסציפלינה בפני עצמה.
 
-<a href="/academy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" />
-  <div class="blog-cta-overlay">
-    <span class="blog-cta-badge">BOT-CAMP</span>
-    <span class="blog-cta-title">רוצים לבנות את זה בעצמכם?</span>
-    <span class="blog-cta-subtitle">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
-    <span class="blog-cta-btn">לפרטים נוספים</span>
-  </div>
-</a>
+<div class="blog-cta-card blog-cta-card--amber">
+  <div class="blog-cta-card-badge">STRATEGY</div>
+  <div class="blog-cta-card-title">רוצים אסטרטגיית AI לארגון?</div>
+  <div class="blog-cta-card-desc">ייעוץ אסטרטגי להטמעת AI בארגון | תכנית מותאמת | ROI מוכח תוך 30 יום | ניסיון עם חברות מובילות</div>
+  <a href="/services/strategy" class="blog-cta-card-btn">לייעוץ אסטרטגי ←</a>
+</div>
 
 ## המלחמה על שכבת הניהול
 

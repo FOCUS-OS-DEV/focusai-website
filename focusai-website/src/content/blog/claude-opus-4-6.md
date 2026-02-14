@@ -5,6 +5,7 @@ pubDate: 2026-02-13
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
+ctaType: "agents"
 ---
 
 ## המודל שלא רק חכם יותר - אלא יודע *איך* לחשוב
@@ -48,15 +49,12 @@ Claude Opus 4.6 מציג ארבע רמות מאמץ: low, medium, high, max. ה�
 
 בשילוב עם פלטפורמות אוטומציה כמו n8n ו-Make, האפשרויות מתרחבות משמעותית. במקום תהליך ליניארי שבו כל שלב מחכה לקודם, אפשר לבנות מערכות מקבילות שמטפלות בתהליכים עסקיים שלמים.
 
-<a href="/academy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" />
-  <div class="blog-cta-overlay">
-    <span class="blog-cta-badge">BOT-CAMP</span>
-    <span class="blog-cta-title">רוצים לבנות את זה בעצמכם?</span>
-    <span class="blog-cta-subtitle">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
-    <span class="blog-cta-btn">לפרטים נוספים</span>
-  </div>
-</a>
+<div class="blog-cta-card blog-cta-card--green">
+  <div class="blog-cta-card-badge">AI AGENTS</div>
+  <div class="blog-cta-card-title">צריכים סוכן AI שעובד בשבילכם?</div>
+  <div class="blog-cta-card-desc">פיתוח סוכני AI מותאמים לעסק שלכם | בוטים חכמים, אוטומציות ודשבורדים | ROI מוכח תוך 30 יום</div>
+  <a href="/ai-agents" class="blog-cta-card-btn">לשירותי AI לעסקים ←</a>
+</div>
 
 ## Cowork - סביבת עבודה אוטונומית
 

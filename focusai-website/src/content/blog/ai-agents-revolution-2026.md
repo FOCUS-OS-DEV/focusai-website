@@ -5,6 +5,7 @@ pubDate: 2026-02-10
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "automation"]
+ctaType: "agents"
 ---
 
 ## הפער שצריך להדאיג את כולם
@@ -71,15 +72,12 @@ Deloitte פרסמה את דוח "State of AI in the Enterprise 2026" - סקר ש
 
 מנהל הזמנות מספקים, עוקב אחרי מלאי, מתאם לוגיסטיקה, ומזהה צווארי בקבוק. רלוונטי במיוחד לעסקים עם מלאי פיזי או שרשרת אספקה מורכבת.
 
-<a href="/academy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" />
-  <div class="blog-cta-overlay">
-    <span class="blog-cta-badge">BOT-CAMP</span>
-    <span class="blog-cta-title">רוצים לבנות את זה בעצמכם?</span>
-    <span class="blog-cta-subtitle">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
-    <span class="blog-cta-btn">לפרטים נוספים</span>
-  </div>
-</a>
+<div class="blog-cta-card blog-cta-card--green">
+  <div class="blog-cta-card-badge">AI AGENTS</div>
+  <div class="blog-cta-card-title">רוצים סוכני AI שעובדים בשביל העסק שלכם?</div>
+  <div class="blog-cta-card-desc">אנחנו בונים סוכני AI, בוטים ומערכות אוטומציה מותאמים אישית לעסקים | הגדלת יעילות וחיסכון בעלויות</div>
+  <a href="/ai-agents" class="blog-cta-card-btn">לשירותי AI לעסקים ←</a>
+</div>
 
 ## הפער שהופך להזדמנות
 

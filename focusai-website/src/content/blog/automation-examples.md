@@ -5,6 +5,7 @@ pubDate: 2025-01-01
 heroImage: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&auto=format&fit=crop&q=60"
 author: "צוות Focus AI"
 tags: ["automation", "guides", "tools"]
+ctaType: "botcamp"
 ---
 
 ## למה אוטומציות?

@@ -13,6 +13,7 @@ const blog = defineCollection({
     category: z.enum(['news', 'guide', 'tutorial']).default('news'),
     tags: z.array(z.string()).optional(),
     difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
+    ctaType: z.enum(['botcamp', 'ai-ready', 'agents', 'consulting']).default('botcamp'),
   }),
 });
 

@@ -5,6 +5,7 @@ pubDate: 2025-01-05
 heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=60"
 author: "צוות Focus AI"
 tags: ["guides", "tools", "ai-agents"]
+ctaType: "ai-ready"
 ---
 
 ## למה Prompt Engineering זה קריטי?

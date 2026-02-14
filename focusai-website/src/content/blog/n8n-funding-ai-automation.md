@@ -5,6 +5,7 @@ pubDate: 2025-10-10
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771019382/blog/n8n-automation-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "automation", "ai-agents", "tools"]
+ctaType: "botcamp"
 ---
 
 ## 180 מיליון דולר על אוטומציה - והשוק רק מתחיל
@@ -65,15 +66,12 @@ tags: ["news", "automation", "ai-agents", "tools"]
 
 ![אוטומציה חכמה לעסקים ישראלים](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771020191/blog/n8n-automation-israeli-business.png)
 
-<a href="/academy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771021962/blog/botcamp-banner-cta.png" alt="Bot-Camp - הכשרה מקצועית לאוטומציה וסוכני AI" />
-  <div class="blog-cta-overlay">
-    <span class="blog-cta-badge">BOT-CAMP</span>
-    <span class="blog-cta-title">רוצים לבנות את זה בעצמכם?</span>
-    <span class="blog-cta-subtitle">12 מפגשים פרונטליים | n8n + סוכני AI | תיק עבודות ותעודה</span>
-    <span class="blog-cta-btn">לפרטים נוספים</span>
-  </div>
-</a>
+<div class="blog-cta-card">
+  <div class="blog-cta-card-badge">BOT-CAMP</div>
+  <div class="blog-cta-card-title">רוצים לבנות אוטומציות n8n בעצמכם?</div>
+  <div class="blog-cta-card-desc">12 מפגשים פרונטליים בהרצליה פיתוח | בניית אוטומציות עם n8n + סוכני AI | תיק עבודות ותעודה מקצועית</div>
+  <a href="/academy" class="blog-cta-card-btn">לפרטים על ההכשרה ←</a>
+</div>
 
 ## חמישה צעדים שאפשר לעשות כבר היום
 
