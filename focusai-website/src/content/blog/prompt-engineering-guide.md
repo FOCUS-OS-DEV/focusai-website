@@ -127,8 +127,22 @@ AI לא יכול לדעת מידע עדכני, לקרוא קבצים שלא שי
 ```
 
 <a href="/academy/ai-ready" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029387/blog/prompt-guide-cta.jpg" alt="קורס AI Ready - למדו Prompt Engineering ועוד" />
+  <span class="cta-badge">AI Ready</span>
+  <div class="cta-title">רוצים לקחת את ה-Prompt Engineering שלכם לשלב הבא?</div>
+  <div class="cta-desc">הכשרת AI Ready מלמדת את הצוות שלכם טכניקות מתקדמות שחוסכות שעות עבודה כל יום. תרגול מעשי, לא תיאוריה.</div>
+  <div class="cta-tags"><span class="cta-tag">Prompt Engineering</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span><span class="cta-tag">Gemini</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
+
+---
+
+## רגע, אפילו לא צריך לזכור את כל זה
+
+הכנו לכם סוכני AI שכותבים פרומפטים מקצועיים בשבילכם. פשוט ספרו להם מה אתם צריכים והם ייצרו פרומפט מושלם:
+
+**<a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" target="_blank">Prompt Master V3 ב-ChatGPT</a>** | **<a href="https://gemini.google.com/gem/c9c0363a0699?usp=sharing" target="_blank">Prompt Master V3 ב-Gemini</a>**
+
+חינם, בלי הרשמה, אפשר להתחיל עכשיו.
 
 ---
 

@@ -121,7 +121,11 @@ CRM/Google Analytics → Zapier → סיכום שבועי למייל
 אחרי שאוטומציה עובדת, חפשו דרכים לשפר אותה. אולי אפשר להוסיף התאמה אישית? לחבר למערכת נוספת?
 
 <a href="/academy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029409/blog/automation-examples-cta.jpg" alt="Bot-Camp - הכשרה מקצועית באוטומציה ו-AI" />
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים ללמוד לבנות אוטומציות בעצמכם?</div>
+  <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תלמדו לחבר כלים, לבנות תהליכים אוטומטיים ולחסוך לעסק שלכם שעות של עבודה ידנית כל יום.</div>
+  <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">Make</span><span class="cta-tag">Zapier</span><span class="cta-tag">Automation</span><span class="cta-tag">API</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ---

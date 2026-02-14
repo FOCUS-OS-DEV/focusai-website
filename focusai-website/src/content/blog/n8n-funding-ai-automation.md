@@ -65,7 +65,11 @@ ctaType: "botcamp"
 ב-Focus AI אנחנו עובדים עם כל שלושת הכלים, ובוחרים את הפתרון המתאים לפי גודל הארגון, רמת המורכבות, ודרישות האבטחה. אין תשובה אחת נכונה - יש תשובה נכונה לכל מקרה.
 
 <a href="/academy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029348/blog/n8n-funding-cta.jpg" alt="Bot-Camp - הכשרה מקצועית באוטומציה ו-AI" />
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים ללמוד לבנות אוטומציות עם n8n?</div>
+  <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תבנו אוטומציות אמיתיות מאפס, תחברו מערכות, ותגלו איך לחסוך שעות עבודה כל שבוע.</div>
+  <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## חמישה צעדים שאפשר לעשות כבר היום

@@ -66,8 +66,12 @@ ctaType: "agents"
 4. **הטמעה** - חיבור לוואטסאפ, אתר ומערכות נוספות
 5. **ליווי** - אופטימיזציה ושיפור מתמיד
 
-<a href="/ai-agents" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029399/blog/what-is-agent-cta.jpg" alt="שירותי סוכני AI לעסקים - Focus AI" />
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים לבנות סוכני AI בעצמכם?</div>
+  <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תלמדו לבנות סוכני AI ואוטומציות מאפס, תתרגלו על פרויקטים אמיתיים, ותצאו עם כלים שמייצרים ערך מהיום הראשון.</div>
+  <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ---

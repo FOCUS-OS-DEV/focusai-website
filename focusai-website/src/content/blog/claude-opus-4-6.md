@@ -51,8 +51,12 @@ Claude Opus 4.6 מציג ארבע רמות מאמץ: low, medium, high, max. ה�
 
 בשילוב עם פלטפורמות אוטומציה כמו n8n ו-Make, האפשרויות מתרחבות משמעותית. במקום תהליך ליניארי שבו כל שלב מחכה לקודם, אפשר לבנות מערכות מקבילות שמטפלות בתהליכים עסקיים שלמים.
 
-<a href="/ai-agents" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029300/blog/claude-opus-cta.jpg" alt="שירותי סוכני AI לעסקים - Focus AI" />
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים לעבוד עם המודלים האלה בעצמכם?</div>
+  <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תלמדו לחבר מודלים כמו Claude ו-GPT לתהליכים עסקיים אמיתיים, לבנות סוכני AI ולהפוך רעיונות לאוטומציות שעובדות.</div>
+  <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## Cowork - סביבת עבודה אוטונומית

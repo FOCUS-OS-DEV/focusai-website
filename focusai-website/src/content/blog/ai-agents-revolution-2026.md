@@ -74,8 +74,12 @@ Deloitte פרסמה את דוח "State of AI in the Enterprise 2026" - סקר ש
 
 מנהל הזמנות מספקים, עוקב אחרי מלאי, מתאם לוגיסטיקה, ומזהה צווארי בקבוק. רלוונטי במיוחד לעסקים עם מלאי פיזי או שרשרת אספקה מורכבת.
 
-<a href="/ai-agents" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029321/blog/agents-revolution-cta.jpg" alt="סוכני AI לעסקים - Focus AI" />
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים להיות בצד של ה-21% המוכנים?</div>
+  <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. 12 מפגשים פרונטליים בהרצליה פיתוח, קבוצה קטנה ואינטימית, ופרויקטים אמיתיים שתיקחו איתכם הביתה.</div>
+  <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## הפער שהופך להזדמנות

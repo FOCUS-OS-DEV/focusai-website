@@ -55,7 +55,11 @@ OpenAI חשפה (6 בפברואר 2026) את Frontier - פלטפורמה חדש�
 לא חייבים Frontier כדי להתחיל. פלטפורמות כמו n8n, Make ו-Zapier כבר מאפשרות לבנות סוכני AI עם רמה בסיסית של בקרה. אבל המגמה ברורה: ניהול סוכנים הולך להפוך לדיסציפלינה בפני עצמה.
 
 <a href="/services/strategy" class="blog-cta-banner">
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029337/blog/openai-frontier-cta.jpg" alt="ייעוץ אסטרטגי AI לארגונים - Focus AI" />
+  <span class="cta-badge">ייעוץ אסטרטגי</span>
+  <div class="cta-title">רוצים להטמיע סוכני AI בארגון שלכם?</div>
+  <div class="cta-desc">לא חייבים לחכות ל-Frontier. בואו נבנה יחד תוכנית הטמעה מותאמת לארגון שלכם, עם תוצאות מדידות כבר בחודש הראשון.</div>
+  <div class="cta-tags"><span class="cta-tag">Strategy</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ROI</span></div>
+  <span class="cta-button">לתיאום שיחת ייעוץ</span>
 </a>
 
 ## המלחמה על שכבת הניהול
