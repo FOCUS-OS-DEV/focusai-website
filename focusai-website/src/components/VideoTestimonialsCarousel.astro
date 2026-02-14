@@ -104,15 +104,8 @@ const videoTestimonials = [
   </button>
 
   <div class="lightbox-content">
-    <div class="lightbox-video-container">
-      <video id="lightboxVideo" controls playsinline webkit-playsinline preload="auto"><track kind="captions" default /></video>
-      <!-- iOS play overlay - shown when autoplay fails -->
-      <button id="lightboxPlayOverlay" class="lightbox-play-overlay" aria-label="הפעל סרטון">
-        <div class="lightbox-play-icon">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="white"/></svg>
-        </div>
-        <span class="lightbox-play-text">לחצו להפעלה</span>
-      </button>
+    <div class="lightbox-video-container" id="lightboxVideoContainer">
+      <!-- Video element created dynamically on each open for iOS compatibility -->
     </div>
     <div class="lightbox-info">
       <p id="lightboxName" class="lightbox-name"></p>
@@ -439,56 +432,6 @@ const videoTestimonials = [
 
   .video-lightbox.active {
     display: flex;
-  }
-
-  /* iOS Play Overlay */
-  .lightbox-play-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    background: rgba(0, 0, 0, 0.4);
-    border: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-
-  .lightbox-play-overlay.visible {
-    display: flex;
-  }
-
-  .lightbox-play-icon {
-    width: 80px;
-    height: 80px;
-    background: rgba(168, 85, 247, 0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
-    transition: transform 0.2s ease;
-  }
-
-  .lightbox-play-overlay:active .lightbox-play-icon {
-    transform: scale(0.95);
-  }
-
-  .lightbox-play-icon svg {
-    width: 36px;
-    height: 36px;
-    margin-right: -4px;
-  }
-
-  .lightbox-play-text {
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   }
 
   /* Close Button - Fixed position, always on top */
@@ -972,169 +915,108 @@ const videoTestimonials = [
     };
   }
 
-  // Detect iOS for play overlay behavior
+  // Detect iOS
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-  // Move lightbox to body root so it's not trapped inside any stacking context
-  const lightboxEl = document.getElementById('videoLightbox');
-  if (lightboxEl && lightboxEl.parentElement !== document.body) {
-    document.body.appendChild(lightboxEl);
-  }
+  // NO reparenting! Lightbox stays where it is in the DOM.
+  // The z-index:999999 + opaque background covers everything.
 
   function lockScroll() {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
-    // Stop Lenis smooth scroll if active
     (window as any).lenis?.stop();
-    // Hide ALL page content - prevents anything showing behind lightbox on iOS
-    const mainEl = document.querySelector('main') as HTMLElement;
-    if (mainEl) mainEl.style.display = 'none';
-    const header = document.querySelector('header') as HTMLElement;
-    if (header) header.style.display = 'none';
-    const footer = document.querySelector('footer') as HTMLElement;
-    if (footer) footer.style.display = 'none';
-    const waFloat = document.getElementById('whatsapp-float');
-    if (waFloat) waFloat.style.display = 'none';
-    const btt = document.getElementById('back-to-top');
-    if (btt) btt.style.display = 'none';
+    // Do NOT use display:none on page elements - it breaks iOS video rendering.
+    // The lightbox's z-index + opaque bg already covers everything.
   }
 
   function unlockScroll() {
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
-    // Resume Lenis smooth scroll
     (window as any).lenis?.start();
-    // Restore ALL page content
-    const mainEl = document.querySelector('main') as HTMLElement;
-    if (mainEl) mainEl.style.display = '';
-    const header = document.querySelector('header') as HTMLElement;
-    if (header) header.style.display = '';
-    const footer = document.querySelector('footer') as HTMLElement;
-    if (footer) footer.style.display = '';
-    const waFloat = document.getElementById('whatsapp-float');
-    if (waFloat) waFloat.style.display = '';
-    const btt = document.getElementById('back-to-top');
-    if (btt) btt.style.display = '';
   }
 
-  const playOverlay = document.getElementById('lightboxPlayOverlay');
+  // Create a FRESH video element each time.
+  // iOS Safari breaks video playback when elements are reparented in the DOM
+  // or when parent elements use display:none. Fresh element = clean slate.
+  function createFreshVideo(container: HTMLElement, posterUrl: string, videoUrl: string) {
+    // Remove any existing video
+    const old = container.querySelector('video');
+    if (old) { old.pause(); old.removeAttribute('src'); old.remove(); }
 
-  function showPlayOverlay() {
-    playOverlay?.classList.add('visible');
-    // Remove native controls so they don't intercept touches on iOS
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (video) {
-      video.controls = false;
-      video.style.pointerEvents = 'none';
-    }
-  }
+    const video = document.createElement('video');
+    video.controls = true;
+    video.playsInline = true;
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('playsinline', '');
+    video.preload = 'auto';
+    if (posterUrl) video.poster = posterUrl;
 
-  function hidePlayOverlay() {
-    playOverlay?.classList.remove('visible');
-    // Restore native controls
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (video) {
-      video.controls = true;
-      video.style.pointerEvents = '';
-    }
+    const track = document.createElement('track');
+    track.kind = 'captions';
+    track.default = true;
+    video.appendChild(track);
+
+    // Insert into visible container FIRST (crucial for iOS)
+    container.appendChild(video);
+
+    // Set src AFTER element is in the visible DOM (crucial for iOS)
+    requestAnimationFrame(function() {
+      video.src = videoUrl;
+      // On non-iOS, try autoplay
+      if (!isIOS) {
+        video.play().catch(function() {
+          // Autoplay failed - user can use native play button
+        });
+      }
+      // On iOS: native controls show play button, user taps to play
+    });
+
+    return video;
   }
 
   function openLightbox(idx: number) {
     const lightbox = document.getElementById('videoLightbox');
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (!lightbox || !video) return;
+    const container = document.getElementById('lightboxVideoContainer');
+    if (!lightbox || !container) return;
 
     lightboxIndex = idx;
     lightboxOpen = true;
-    hidePlayOverlay();
 
+    // Make lightbox visible FIRST - video must be in visible DOM on iOS
     lightbox.classList.add('active');
     lockScroll();
 
-    // Set video content
     const data = getVideoData(lightboxIndex);
     if (!data) return;
 
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
-    const posterUrl = slide?.getAttribute('data-poster');
-    if (posterUrl) video.poster = posterUrl;
+    const posterUrl = slide?.getAttribute('data-poster') || '';
 
     const nameEl = document.getElementById('lightboxName');
     const roleEl = document.getElementById('lightboxRole');
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    if (isIOS) {
-      // On iOS: don't fight autoplay policies. Just set src with native controls.
-      // iOS will show its own play button - user taps once to play. Reliable.
-      video.src = data.video;
-      video.controls = true;
-      // No play overlay, no programmatic play - let iOS handle it natively
-    } else {
-      video.src = data.video;
-      video.load();
-      video.play().then(function() {
-        hidePlayOverlay();
-      }).catch(function() {
-        showPlayOverlay();
-      });
-    }
+    // Create fresh video in the already-visible container
+    createFreshVideo(container, posterUrl, data.video);
   }
 
-  // Auto-hide play overlay when video actually starts playing
-  const lbVideo = document.getElementById('lightboxVideo') as HTMLVideoElement;
-  lbVideo?.addEventListener('playing', function() {
-    hidePlayOverlay();
-  });
-
-  // Play overlay click handler - for non-iOS browsers where autoplay failed
-  playOverlay?.addEventListener('click', function(e) {
-    e.stopPropagation();
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (!video) return;
-
-    // Restore controls and remove overlay
-    video.controls = true;
-    video.style.pointerEvents = '';
-    playOverlay?.classList.remove('visible');
-
-    video.play().catch(function() {});
-  });
-
   function updateLightboxContent() {
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    const container = document.getElementById('lightboxVideoContainer');
     const nameEl = document.getElementById('lightboxName');
     const roleEl = document.getElementById('lightboxRole');
 
     const data = getVideoData(lightboxIndex);
-    if (!data || !video) return;
+    if (!data || !container) return;
 
-    video.pause();
-    hidePlayOverlay();
-
-    // Set poster for immediate visual feedback
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
-    const posterUrl = slide?.getAttribute('data-poster');
-    if (posterUrl) {
-      video.poster = posterUrl;
-    }
+    const posterUrl = slide?.getAttribute('data-poster') || '';
 
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    if (isIOS) {
-      // On iOS: native controls, no programmatic play
-      video.src = data.video;
-      video.controls = true;
-    } else {
-      video.src = data.video;
-      video.load();
-      video.play().then(function() {
-        hidePlayOverlay();
-      }).catch(function() {
-        showPlayOverlay();
-      });
-    }
+    // Create fresh video for the new content
+    createFreshVideo(container, posterUrl, data.video);
   }
 
   function lightboxNav(dir: number) {
@@ -1145,12 +1027,11 @@ const videoTestimonials = [
 
   function closeLightbox() {
     const lightbox = document.getElementById('videoLightbox');
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (!lightbox || !video) return;
-    video.pause();
-    video.removeAttribute('src');
-    video.removeAttribute('data-pending-src');
-    hidePlayOverlay();
+    const container = document.getElementById('lightboxVideoContainer');
+    if (!lightbox) return;
+    // Destroy the video element completely
+    const video = container?.querySelector('video');
+    if (video) { video.pause(); video.removeAttribute('src'); video.remove(); }
     lightbox.classList.remove('active');
     unlockScroll();
     lightboxOpen = false;
