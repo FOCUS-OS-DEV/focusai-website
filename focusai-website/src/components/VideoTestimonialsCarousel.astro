@@ -971,14 +971,27 @@ const videoTestimonials = [
     };
   }
 
+  // Detect iOS for play overlay behavior
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  // Move lightbox to body root so it's not trapped inside any stacking context
+  const lightboxEl = document.getElementById('videoLightbox');
+  if (lightboxEl && lightboxEl.parentElement !== document.body) {
+    document.body.appendChild(lightboxEl);
+  }
+
   function lockScroll() {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
     // Stop Lenis smooth scroll if active
     (window as any).lenis?.stop();
-    // Hide header and floating UI to avoid z-index overlap
+    // Hide ALL page content - prevents anything showing behind lightbox on iOS
+    const mainEl = document.querySelector('main') as HTMLElement;
+    if (mainEl) mainEl.style.display = 'none';
     const header = document.querySelector('header') as HTMLElement;
     if (header) header.style.display = 'none';
+    const footer = document.querySelector('footer') as HTMLElement;
+    if (footer) footer.style.display = 'none';
     const waFloat = document.getElementById('whatsapp-float');
     if (waFloat) waFloat.style.display = 'none';
     const btt = document.getElementById('back-to-top');
@@ -990,9 +1003,13 @@ const videoTestimonials = [
     document.documentElement.style.overflow = '';
     // Resume Lenis smooth scroll
     (window as any).lenis?.start();
-    // Restore header and floating UI
+    // Restore ALL page content
+    const mainEl = document.querySelector('main') as HTMLElement;
+    if (mainEl) mainEl.style.display = '';
     const header = document.querySelector('header') as HTMLElement;
     if (header) header.style.display = '';
+    const footer = document.querySelector('footer') as HTMLElement;
+    if (footer) footer.style.display = '';
     const waFloat = document.getElementById('whatsapp-float');
     if (waFloat) waFloat.style.display = '';
     const btt = document.getElementById('back-to-top');
@@ -1034,15 +1051,26 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Set src and play DIRECTLY in user gesture chain (critical for iOS)
+    // Set src and play
     video.src = data.video;
-    video.play().then(function() {
-      hidePlayOverlay();
-    }).catch(function() {
-      // iOS blocks autoplay - show visible play button
+
+    if (isIOS) {
+      // On iOS, autoplay will always fail - show play overlay immediately
       showPlayOverlay();
-    });
+    } else {
+      video.play().then(function() {
+        hidePlayOverlay();
+      }).catch(function() {
+        showPlayOverlay();
+      });
+    }
   }
+
+  // Auto-hide play overlay when video actually starts playing
+  const lbVideo = document.getElementById('lightboxVideo') as HTMLVideoElement;
+  lbVideo?.addEventListener('playing', function() {
+    hidePlayOverlay();
+  });
 
   // Play overlay click handler - direct user gesture so iOS allows playback
   playOverlay?.addEventListener('click', function(e) {
@@ -1083,11 +1111,16 @@ const videoTestimonials = [
 
     // Set src and attempt play (swipe navigation - NOT user gesture, may fail on iOS)
     video.src = data.video;
-    video.play().then(function() {
-      hidePlayOverlay();
-    }).catch(function() {
+
+    if (isIOS) {
       showPlayOverlay();
-    });
+    } else {
+      video.play().then(function() {
+        hidePlayOverlay();
+      }).catch(function() {
+        showPlayOverlay();
+      });
+    }
   }
 
   function lightboxNav(dir: number) {
