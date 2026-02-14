@@ -455,6 +455,7 @@ const videoTestimonials = [
     border: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   .lightbox-play-overlay.visible {
@@ -1020,10 +1021,22 @@ const videoTestimonials = [
 
   function showPlayOverlay() {
     playOverlay?.classList.add('visible');
+    // Remove native controls so they don't intercept touches on iOS
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    if (video) {
+      video.controls = false;
+      video.style.pointerEvents = 'none';
+    }
   }
 
   function hidePlayOverlay() {
     playOverlay?.classList.remove('visible');
+    // Restore native controls
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    if (video) {
+      video.controls = true;
+      video.style.pointerEvents = '';
+    }
   }
 
   function openLightbox(idx: number) {
@@ -1051,8 +1064,9 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Set src and play
+    // Set src and start loading
     video.src = data.video;
+    video.load();
 
     if (isIOS) {
       // On iOS, autoplay will always fail - show play overlay immediately
@@ -1074,19 +1088,42 @@ const videoTestimonials = [
 
   // Play overlay click handler - direct user gesture so iOS allows playback
   playOverlay?.addEventListener('click', function(e) {
+    e.preventDefault();
     e.stopPropagation();
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
     if (video) {
-      video.play().then(function() {
-        hidePlayOverlay();
-      }).catch(function() {
-        // Fallback: even tap failed, try load + play
-        video.load();
-        video.play().catch(function() {});
-        hidePlayOverlay();
-      });
+      // Restore controls and pointer-events BEFORE playing
+      video.controls = true;
+      video.style.pointerEvents = '';
+      playOverlay?.classList.remove('visible');
+
+      // Direct play call in user gesture context - iOS should allow this
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          // If play still fails, video is likely not loaded yet
+          // User can tap the native video play button now (controls are restored)
+        });
+      }
     }
   });
+
+  // Also listen for touchend as fallback for iOS click issues
+  playOverlay?.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    if (video) {
+      video.controls = true;
+      video.style.pointerEvents = '';
+      playOverlay?.classList.remove('visible');
+
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {});
+      }
+    }
+  }, { passive: false });
 
   function updateLightboxContent() {
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
@@ -1109,8 +1146,9 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Set src and attempt play (swipe navigation - NOT user gesture, may fail on iOS)
+    // Set src and start loading
     video.src = data.video;
+    video.load();
 
     if (isIOS) {
       showPlayOverlay();
