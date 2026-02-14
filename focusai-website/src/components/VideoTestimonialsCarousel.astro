@@ -587,7 +587,30 @@ const videoTestimonials = [
     }
 
     .lightbox-nav {
-      display: none;
+      width: 40px;
+      height: 40px;
+      border-width: 1px;
+      background: rgba(0, 0, 0, 0.6);
+      top: auto;
+      bottom: calc(env(safe-area-inset-bottom, 8px) + 16px);
+      transform: none;
+    }
+
+    .lightbox-nav:hover {
+      transform: none;
+    }
+
+    .lightbox-nav-right {
+      right: 24px;
+    }
+
+    .lightbox-nav-left {
+      left: 24px;
+    }
+
+    .lightbox-nav svg {
+      width: 20px;
+      height: 20px;
     }
 
     .lightbox-content {
@@ -1025,21 +1048,16 @@ const videoTestimonials = [
   });
 
   // Touch support for lightbox (swipe between videos)
-  // NOTE: Do NOT stopPropagation on video touch events - it breaks native iOS video controls
   let lightboxTouchStartX = 0;
   let lightboxTouchStartY = 0;
-  const lightboxContent = lightbox?.querySelector('.lightbox-content');
 
-  // Only add swipe to the lightbox backdrop (not the video/content area)
+  // Swipe on the entire lightbox area (backdrop + content)
   lightbox?.addEventListener('touchstart', (e) => {
-    // Skip if touch started on or inside the video/content area
-    if (lightboxContent && lightboxContent.contains(e.target as Node)) return;
     lightboxTouchStartX = e.changedTouches[0].screenX;
     lightboxTouchStartY = e.changedTouches[0].screenY;
   }, { passive: true });
 
   lightbox?.addEventListener('touchend', (e) => {
-    if (lightboxContent && lightboxContent.contains(e.target as Node)) return;
     const touchEndX = e.changedTouches[0].screenX;
     const touchEndY = e.changedTouches[0].screenY;
     const diffX = lightboxTouchStartX - touchEndX;
