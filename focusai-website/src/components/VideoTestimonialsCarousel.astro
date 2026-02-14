@@ -106,6 +106,13 @@ const videoTestimonials = [
   <div class="lightbox-content">
     <div class="lightbox-video-container">
       <video id="lightboxVideo" controls playsinline webkit-playsinline preload="auto"><track kind="captions" default /></video>
+      <!-- iOS play overlay - shown when autoplay fails -->
+      <button id="lightboxPlayOverlay" class="lightbox-play-overlay" aria-label="הפעל סרטון">
+        <div class="lightbox-play-icon">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="white"/></svg>
+        </div>
+        <span class="lightbox-play-text">לחצו להפעלה</span>
+      </button>
     </div>
     <div class="lightbox-info">
       <p id="lightboxName" class="lightbox-name"></p>
@@ -423,17 +430,64 @@ const videoTestimonials = [
     position: fixed;
     inset: 0;
     z-index: 999999;
-    background: rgba(5, 5, 10, 0.97);
-    backdrop-filter: blur(30px);
+    background: rgba(5, 5, 10, 1);
     align-items: center;
     justify-content: center;
     padding: 20px;
     overscroll-behavior: contain;
-    -webkit-overflow-scrolling: auto;
   }
 
   .video-lightbox.active {
     display: flex;
+  }
+
+  /* iOS Play Overlay */
+  .lightbox-play-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lightbox-play-overlay.visible {
+    display: flex;
+  }
+
+  .lightbox-play-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(168, 85, 247, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+    transition: transform 0.2s ease;
+  }
+
+  .lightbox-play-overlay:active .lightbox-play-icon {
+    transform: scale(0.95);
+  }
+
+  .lightbox-play-icon svg {
+    width: 36px;
+    height: 36px;
+    margin-right: -4px;
+  }
+
+  .lightbox-play-text {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   }
 
   /* Close Button - Fixed position, always on top */
@@ -945,6 +999,16 @@ const videoTestimonials = [
     if (btt) btt.style.display = '';
   }
 
+  const playOverlay = document.getElementById('lightboxPlayOverlay');
+
+  function showPlayOverlay() {
+    playOverlay?.classList.add('visible');
+  }
+
+  function hidePlayOverlay() {
+    playOverlay?.classList.remove('visible');
+  }
+
   function openLightbox(idx: number) {
     const lightbox = document.getElementById('videoLightbox');
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
@@ -952,6 +1016,7 @@ const videoTestimonials = [
 
     lightboxIndex = idx;
     lightboxOpen = true;
+    hidePlayOverlay();
 
     lightbox.classList.add('active');
     lockScroll();
@@ -971,14 +1036,29 @@ const videoTestimonials = [
 
     // Set src and play DIRECTLY in user gesture chain (critical for iOS)
     video.src = data.video;
-    video.play().catch(function() {
-      // iOS may block autoplay - add canplay fallback so tap-to-play works
-      video.addEventListener('canplay', function onCanplay() {
-        video.removeEventListener('canplay', onCanplay);
-        // Don't auto-retry play here - let user tap native controls
-      }, { once: true });
+    video.play().then(function() {
+      hidePlayOverlay();
+    }).catch(function() {
+      // iOS blocks autoplay - show visible play button
+      showPlayOverlay();
     });
   }
+
+  // Play overlay click handler - direct user gesture so iOS allows playback
+  playOverlay?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    if (video) {
+      video.play().then(function() {
+        hidePlayOverlay();
+      }).catch(function() {
+        // Fallback: even tap failed, try load + play
+        video.load();
+        video.play().catch(function() {});
+        hidePlayOverlay();
+      });
+    }
+  });
 
   function updateLightboxContent() {
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
@@ -989,6 +1069,7 @@ const videoTestimonials = [
     if (!data || !video) return;
 
     video.pause();
+    hidePlayOverlay();
 
     // Set poster for immediate visual feedback
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
@@ -1002,7 +1083,11 @@ const videoTestimonials = [
 
     // Set src and attempt play (swipe navigation - NOT user gesture, may fail on iOS)
     video.src = data.video;
-    video.play().catch(function() {});
+    video.play().then(function() {
+      hidePlayOverlay();
+    }).catch(function() {
+      showPlayOverlay();
+    });
   }
 
   function lightboxNav(dir: number) {
@@ -1017,6 +1102,7 @@ const videoTestimonials = [
     if (!lightbox || !video) return;
     video.pause();
     video.removeAttribute('src');
+    hidePlayOverlay();
     lightbox.classList.remove('active');
     unlockScroll();
     lightboxOpen = false;
