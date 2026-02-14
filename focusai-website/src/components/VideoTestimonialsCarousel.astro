@@ -1065,10 +1065,11 @@ const videoTestimonials = [
     if (roleEl) roleEl.textContent = data.role;
 
     if (isIOS) {
-      // On iOS, store video URL but let the user gesture (play overlay tap) handle
-      // src + load + play all in one gesture for maximum compatibility
-      video.setAttribute('data-pending-src', data.video);
-      showPlayOverlay();
+      // On iOS: don't fight autoplay policies. Just set src with native controls.
+      // iOS will show its own play button - user taps once to play. Reliable.
+      video.src = data.video;
+      video.controls = true;
+      // No play overlay, no programmatic play - let iOS handle it natively
     } else {
       video.src = data.video;
       video.load();
@@ -1086,7 +1087,7 @@ const videoTestimonials = [
     hidePlayOverlay();
   });
 
-  // Play overlay click handler - direct user gesture so iOS allows playback
+  // Play overlay click handler - for non-iOS browsers where autoplay failed
   playOverlay?.addEventListener('click', function(e) {
     e.stopPropagation();
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
@@ -1097,37 +1098,7 @@ const videoTestimonials = [
     video.style.pointerEvents = '';
     playOverlay?.classList.remove('visible');
 
-    // On iOS: set src + load in the SAME user gesture context as play()
-    const pendingSrc = video.getAttribute('data-pending-src');
-    if (pendingSrc) {
-      video.src = pendingSrc;
-      video.removeAttribute('data-pending-src');
-    }
-    video.load();
-
-    // Direct play() in user gesture context "activates" the media element on iOS.
-    // Even if this rejects (not enough data buffered), iOS remembers the activation
-    // and allows future play() calls to succeed without a gesture.
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(function() {
-        // Play failed - likely video data hasn't loaded yet.
-        // Retry when enough data is available (element is already "activated").
-        function retryPlay() {
-          video.removeEventListener('canplay', retryPlay);
-          video.removeEventListener('loadeddata', retryPlay);
-          video.play().catch(function() {});
-        }
-        if (video.readyState >= 3) {
-          // Data is available, retry immediately
-          video.play().catch(function() {});
-        } else {
-          // Wait for data, then play
-          video.addEventListener('canplay', retryPlay);
-          video.addEventListener('loadeddata', retryPlay);
-        }
-      });
-    }
+    video.play().catch(function() {});
   });
 
   function updateLightboxContent() {
@@ -1152,9 +1123,9 @@ const videoTestimonials = [
     if (roleEl) roleEl.textContent = data.role;
 
     if (isIOS) {
-      // Store pending src for play overlay tap
-      video.setAttribute('data-pending-src', data.video);
-      showPlayOverlay();
+      // On iOS: native controls, no programmatic play
+      video.src = data.video;
+      video.controls = true;
     } else {
       video.src = data.video;
       video.load();
