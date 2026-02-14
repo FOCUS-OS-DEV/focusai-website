@@ -104,8 +104,8 @@ const videoTestimonials = [
   </button>
 
   <div class="lightbox-content">
-    <div class="lightbox-video-container" id="lightboxVideoContainer">
-      <!-- Video element created dynamically on each open for iOS compatibility -->
+    <div class="lightbox-video-container">
+      <video id="lightboxVideo" controls playsinline webkit-playsinline preload="auto"><track kind="captions" default /></video>
     </div>
     <div class="lightbox-info">
       <p id="lightboxName" class="lightbox-name"></p>
@@ -915,108 +915,86 @@ const videoTestimonials = [
     };
   }
 
-  // Detect iOS
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-  // NO reparenting! Lightbox stays where it is in the DOM.
-  // The z-index:999999 + opaque background covers everything.
-
   function lockScroll() {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
     (window as any).lenis?.stop();
-    // Do NOT use display:none on page elements - it breaks iOS video rendering.
-    // The lightbox's z-index + opaque bg already covers everything.
+    // Hide header and floating UI to avoid z-index overlap
+    const header = document.querySelector('header') as HTMLElement;
+    if (header) header.style.display = 'none';
+    const waFloat = document.getElementById('whatsapp-float');
+    if (waFloat) waFloat.style.display = 'none';
+    const btt = document.getElementById('back-to-top');
+    if (btt) btt.style.display = 'none';
   }
 
   function unlockScroll() {
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
     (window as any).lenis?.start();
-  }
-
-  // Create a FRESH video element each time.
-  // iOS Safari breaks video playback when elements are reparented in the DOM
-  // or when parent elements use display:none. Fresh element = clean slate.
-  function createFreshVideo(container: HTMLElement, posterUrl: string, videoUrl: string) {
-    // Remove any existing video
-    const old = container.querySelector('video');
-    if (old) { old.pause(); old.removeAttribute('src'); old.remove(); }
-
-    const video = document.createElement('video');
-    video.controls = true;
-    video.playsInline = true;
-    video.setAttribute('webkit-playsinline', '');
-    video.setAttribute('playsinline', '');
-    video.preload = 'auto';
-    if (posterUrl) video.poster = posterUrl;
-
-    const track = document.createElement('track');
-    track.kind = 'captions';
-    track.default = true;
-    video.appendChild(track);
-
-    // Insert into visible container FIRST (crucial for iOS)
-    container.appendChild(video);
-
-    // Set src AFTER element is in the visible DOM (crucial for iOS)
-    requestAnimationFrame(function() {
-      video.src = videoUrl;
-      // On non-iOS, try autoplay
-      if (!isIOS) {
-        video.play().catch(function() {
-          // Autoplay failed - user can use native play button
-        });
-      }
-      // On iOS: native controls show play button, user taps to play
-    });
-
-    return video;
+    // Restore header and floating UI
+    const header = document.querySelector('header') as HTMLElement;
+    if (header) header.style.display = '';
+    const waFloat = document.getElementById('whatsapp-float');
+    if (waFloat) waFloat.style.display = '';
+    const btt = document.getElementById('back-to-top');
+    if (btt) btt.style.display = '';
   }
 
   function openLightbox(idx: number) {
     const lightbox = document.getElementById('videoLightbox');
-    const container = document.getElementById('lightboxVideoContainer');
-    if (!lightbox || !container) return;
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    if (!lightbox || !video) return;
 
     lightboxIndex = idx;
     lightboxOpen = true;
 
-    // Make lightbox visible FIRST - video must be in visible DOM on iOS
     lightbox.classList.add('active');
     lockScroll();
 
+    // Set video content
     const data = getVideoData(lightboxIndex);
     if (!data) return;
 
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
-    const posterUrl = slide?.getAttribute('data-poster') || '';
+    const posterUrl = slide?.getAttribute('data-poster');
+    if (posterUrl) video.poster = posterUrl;
 
     const nameEl = document.getElementById('lightboxName');
     const roleEl = document.getElementById('lightboxRole');
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Create fresh video in the already-visible container
-    createFreshVideo(container, posterUrl, data.video);
+    // Set src and play DIRECTLY in user gesture chain (critical for iOS)
+    video.src = data.video;
+    video.play().catch(function() {
+      // iOS may block autoplay - user can tap native controls
+    });
   }
 
   function updateLightboxContent() {
-    const container = document.getElementById('lightboxVideoContainer');
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
     const nameEl = document.getElementById('lightboxName');
     const roleEl = document.getElementById('lightboxRole');
 
     const data = getVideoData(lightboxIndex);
-    if (!data || !container) return;
+    if (!data || !video) return;
 
+    video.pause();
+
+    // Set poster for immediate visual feedback
     const slide = document.querySelector('.carousel-slide[data-index="' + lightboxIndex + '"]') as HTMLElement;
-    const posterUrl = slide?.getAttribute('data-poster') || '';
+    const posterUrl = slide?.getAttribute('data-poster');
+    if (posterUrl) {
+      video.poster = posterUrl;
+    }
 
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Create fresh video for the new content
-    createFreshVideo(container, posterUrl, data.video);
+    // Set src and attempt play (swipe navigation - NOT user gesture, may fail on iOS)
+    video.src = data.video;
+    video.play().catch(function() {});
   }
 
   function lightboxNav(dir: number) {
@@ -1027,11 +1005,10 @@ const videoTestimonials = [
 
   function closeLightbox() {
     const lightbox = document.getElementById('videoLightbox');
-    const container = document.getElementById('lightboxVideoContainer');
-    if (!lightbox) return;
-    // Destroy the video element completely
-    const video = container?.querySelector('video');
-    if (video) { video.pause(); video.removeAttribute('src'); video.remove(); }
+    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
+    if (!lightbox || !video) return;
+    video.pause();
+    video.removeAttribute('src');
     lightbox.classList.remove('active');
     unlockScroll();
     lightboxOpen = false;
