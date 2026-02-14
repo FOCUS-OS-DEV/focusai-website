@@ -1064,14 +1064,14 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Set src and start loading
-    video.src = data.video;
-    video.load();
-
     if (isIOS) {
-      // On iOS, autoplay will always fail - show play overlay immediately
+      // On iOS, store video URL but let the user gesture (play overlay tap) handle
+      // src + load + play all in one gesture for maximum compatibility
+      video.setAttribute('data-pending-src', data.video);
       showPlayOverlay();
     } else {
+      video.src = data.video;
+      video.load();
       video.play().then(function() {
         hidePlayOverlay();
       }).catch(function() {
@@ -1088,42 +1088,47 @@ const videoTestimonials = [
 
   // Play overlay click handler - direct user gesture so iOS allows playback
   playOverlay?.addEventListener('click', function(e) {
-    e.preventDefault();
     e.stopPropagation();
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (video) {
-      // Restore controls and pointer-events BEFORE playing
-      video.controls = true;
-      video.style.pointerEvents = '';
-      playOverlay?.classList.remove('visible');
+    if (!video) return;
 
-      // Direct play call in user gesture context - iOS should allow this
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(function() {
-          // If play still fails, video is likely not loaded yet
-          // User can tap the native video play button now (controls are restored)
-        });
-      }
+    // Restore controls and remove overlay
+    video.controls = true;
+    video.style.pointerEvents = '';
+    playOverlay?.classList.remove('visible');
+
+    // On iOS: set src + load in the SAME user gesture context as play()
+    const pendingSrc = video.getAttribute('data-pending-src');
+    if (pendingSrc) {
+      video.src = pendingSrc;
+      video.removeAttribute('data-pending-src');
+    }
+    video.load();
+
+    // Direct play() in user gesture context "activates" the media element on iOS.
+    // Even if this rejects (not enough data buffered), iOS remembers the activation
+    // and allows future play() calls to succeed without a gesture.
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function() {
+        // Play failed - likely video data hasn't loaded yet.
+        // Retry when enough data is available (element is already "activated").
+        function retryPlay() {
+          video.removeEventListener('canplay', retryPlay);
+          video.removeEventListener('loadeddata', retryPlay);
+          video.play().catch(function() {});
+        }
+        if (video.readyState >= 3) {
+          // Data is available, retry immediately
+          video.play().catch(function() {});
+        } else {
+          // Wait for data, then play
+          video.addEventListener('canplay', retryPlay);
+          video.addEventListener('loadeddata', retryPlay);
+        }
+      });
     }
   });
-
-  // Also listen for touchend as fallback for iOS click issues
-  playOverlay?.addEventListener('touchend', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    if (video) {
-      video.controls = true;
-      video.style.pointerEvents = '';
-      playOverlay?.classList.remove('visible');
-
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(function() {});
-      }
-    }
-  }, { passive: false });
 
   function updateLightboxContent() {
     const video = document.getElementById('lightboxVideo') as HTMLVideoElement;
@@ -1146,13 +1151,13 @@ const videoTestimonials = [
     if (nameEl) nameEl.textContent = data.name;
     if (roleEl) roleEl.textContent = data.role;
 
-    // Set src and start loading
-    video.src = data.video;
-    video.load();
-
     if (isIOS) {
+      // Store pending src for play overlay tap
+      video.setAttribute('data-pending-src', data.video);
       showPlayOverlay();
     } else {
+      video.src = data.video;
+      video.load();
       video.play().then(function() {
         hidePlayOverlay();
       }).catch(function() {
@@ -1173,6 +1178,7 @@ const videoTestimonials = [
     if (!lightbox || !video) return;
     video.pause();
     video.removeAttribute('src');
+    video.removeAttribute('data-pending-src');
     hidePlayOverlay();
     lightbox.classList.remove('active');
     unlockScroll();
