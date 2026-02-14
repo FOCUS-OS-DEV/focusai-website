@@ -2,7 +2,7 @@
 title: "מדריך Prompt Engineering - איך לגרום ל-AI לעשות בדיוק מה שאתם רוצים"
 description: "הטכניקות והסודות של כתיבת פרומפטים אפקטיביים. למדו איך לקבל תוצאות מדויקות מ-ChatGPT, Claude וכלי AI אחרים."
 pubDate: 2025-01-05
-heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=60"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028289/blog/prompt-engineering-hero.png"
 author: "צוות Focus AI"
 tags: ["guides", "tools", "ai-agents"]
 ctaType: "ai-ready"

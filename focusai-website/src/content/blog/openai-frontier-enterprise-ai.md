@@ -2,7 +2,7 @@
 title: "OpenAI Frontier - הפלטפורמה שהופכת סוכני AI מניסוי לתשתית ארגונית"
 description: "OpenAI חשפה את Frontier, פלטפורמה לניהול סוכני AI בארגונים. הרשאות, בקרה, ביצועים - הכל במקום אחד. מה זה אומר לשוק הישראלי."
 pubDate: 2026-02-07
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028281/blog/openai-frontier-enterprise-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
 ctaType: "consulting"

@@ -2,7 +2,7 @@
 title: "Claude Opus 4.6 - המודל שמבין מתי לחשוב הרבה ומתי לרוץ מהר"
 description: "Anthropic שיחררה את Claude Opus 4.6 עם חלון הקשר של מיליון טוקנים, צוותי סוכנים אוטונומיים ויכולת חשיבה אדפטיבית. מה זה אומר לעסקים ישראליים."
 pubDate: 2026-02-13
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028274/blog/claude-opus-4-6-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
 ctaType: "agents"

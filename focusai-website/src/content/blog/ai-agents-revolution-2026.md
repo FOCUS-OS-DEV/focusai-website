@@ -2,7 +2,7 @@
 title: "75% מהחברות מתכננות סוכני AI - ורק 21% מוכנות לזה"
 description: "סקר Deloitte חושף פער ענק: רוב הארגונים רוצים סוכני AI אוטונומיים, אבל כמעט אף אחד לא בנה מערכת שליטה. מה זה אומר לעסקים ישראליים."
 pubDate: 2026-02-10
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028277/blog/ai-agents-revolution-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "automation"]
 ctaType: "agents"

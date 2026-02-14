@@ -2,7 +2,7 @@
 title: "5 אוטומציות שכל עסק קטן יכול להטמיע היום"
 description: "דוגמאות מעשיות לאוטומציות פשוטות שחוסכות שעות עבודה. ללא צורך בידע טכני, עם כלים חינמיים או זולים."
 pubDate: 2025-01-01
-heroImage: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&auto=format&fit=crop&q=60"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028296/blog/automation-examples-hero.png"
 author: "צוות Focus AI"
 tags: ["automation", "guides", "tools"]
 ctaType: "botcamp"

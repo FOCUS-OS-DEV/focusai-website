@@ -2,7 +2,7 @@
 title: "10 כלי AI שכל עסק חייב להכיר בשנת 2025"
 description: "סקירה מקיפה של הכלים הכי חמים בעולם ה-AI - מיצירת תוכן ועד אוטומציות עסקיות. גלו איך להפוך את העסק שלכם ליעיל יותר."
 pubDate: 2025-01-10
-heroImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=60"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028284/blog/top-10-ai-tools-hero.png"
 author: "צוות Focus AI"
 tags: ["tools", "guides", "automation"]
 ctaType: "ai-ready"

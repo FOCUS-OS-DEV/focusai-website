@@ -2,7 +2,7 @@
 title: "מה זה סוכן AI ולמה הוא קריטי לעסק שלך בשנת 2025"
 description: "סוכני AI הם לא רק צ'אטבוטים - הם נציגים חכמים שיכולים לנהל שיחות, לתאם פגישות ולסגור עסקאות. למד איך הם יכולים לשנות את העסק שלך."
 pubDate: 2025-01-15
-heroImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028293/blog/what-is-ai-agent-hero.png"
 author: "צוות Focus AI"
 tags: ["ai-agents", "automation", "guides"]
 ctaType: "agents"
