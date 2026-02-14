@@ -844,120 +844,169 @@ const ctaConfig = {
     }
   }
 
-  /* Blog CTA Card - compact, no image */
+  /* Blog CTA Card - glassmorphism premium */
   .blog-cta-card {
+    --cta-accent: #a855f7;
+    --cta-accent-rgb: 168, 85, 247;
     display: block;
     position: relative;
-    margin: 2rem 0;
-    padding: 1.25rem 1.5rem;
-    border-radius: 16px;
-    border: 1px solid rgba(168, 85, 247, 0.25);
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0.02) 100%);
-    backdrop-filter: blur(10px);
-    text-decoration: none;
+    margin: 2.5rem 0;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(var(--cta-accent-rgb), 0.15);
+    background: rgba(15, 15, 25, 0.85);
+    backdrop-filter: blur(20px);
     text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition: border-color 0.4s, box-shadow 0.4s;
+  }
+
+  .blog-cta-card:hover {
+    border-color: rgba(var(--cta-accent-rgb), 0.35);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(var(--cta-accent-rgb), 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Grid pattern overlay */
+  .blog-cta-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(var(--cta-accent-rgb), 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--cta-accent-rgb), 0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orb */
+  .blog-cta-card::after {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(var(--cta-accent-rgb), 0.12) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   @media (min-width: 768px) {
     .blog-cta-card {
-      margin: 2.5rem 0;
-      padding: 1.75rem 2rem;
+      margin: 3rem 0;
+      padding: 2.5rem 2.5rem;
     }
   }
 
   .blog-cta-card--blue {
-    border-color: rgba(59, 130, 246, 0.25);
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.02) 100%);
+    --cta-accent: #3b82f6;
+    --cta-accent-rgb: 59, 130, 246;
   }
 
   .blog-cta-card--green {
-    border-color: rgba(16, 185, 129, 0.25);
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 100%);
+    --cta-accent: #10b981;
+    --cta-accent-rgb: 16, 185, 129;
   }
 
   .blog-cta-card--amber {
-    border-color: rgba(245, 158, 11, 0.25);
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
+    --cta-accent: #f59e0b;
+    --cta-accent-rgb: 245, 158, 11;
   }
 
   .blog-cta-card-badge {
-    display: inline-block;
-    padding: 3px 10px;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
     border-radius: 20px;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     font-weight: 800;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-    background: rgba(168, 85, 247, 0.9);
-    color: #0a0a0f;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+    background: rgba(var(--cta-accent-rgb), 0.15);
+    color: var(--cta-accent);
+    border: 1px solid rgba(var(--cta-accent-rgb), 0.25);
+    font-family: 'JetBrains Mono', monospace;
   }
 
-  .blog-cta-card--blue .blog-cta-card-badge {
-    background: rgba(59, 130, 246, 0.9);
-  }
-
-  .blog-cta-card--green .blog-cta-card-badge {
-    background: rgba(16, 185, 129, 0.9);
-  }
-
-  .blog-cta-card--amber .blog-cta-card-badge {
-    background: rgba(245, 158, 11, 0.9);
+  .blog-cta-card-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cta-accent);
+    animation: preloaderBlink 1.5s ease-in-out infinite;
+    box-shadow: 0 0 6px var(--cta-accent);
   }
 
   .blog-cta-card-title {
+    position: relative;
+    z-index: 1;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 900;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
   }
 
   @media (min-width: 768px) {
     .blog-cta-card-title {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
     }
   }
 
   .blog-cta-card-desc {
-    color: rgba(208, 208, 224, 0.7);
-    font-size: 0.8rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    color: rgba(208, 208, 224, 0.65);
+    font-size: 0.82rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (min-width: 768px) {
     .blog-cta-card-desc {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
   }
 
   .blog-cta-card-btn {
-    display: inline-block;
-    background: #a855f7;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--cta-accent), color-mix(in srgb, var(--cta-accent), white 20%));
     color: #0a0a0f;
-    padding: 8px 24px;
+    padding: 10px 28px;
     border-radius: 25px;
-    font-weight: 700;
-    font-size: 0.8rem;
+    font-weight: 800;
+    font-size: 0.85rem;
     text-decoration: none;
     border: none;
     transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(var(--cta-accent-rgb), 0.3);
   }
 
   .blog-cta-card-btn:hover {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 6px 25px rgba(var(--cta-accent-rgb), 0.5);
+    transform: translateY(-1px);
     border-bottom: none;
-  }
-
-  .blog-cta-card--blue .blog-cta-card-btn {
-    background: rgba(59, 130, 246, 0.9);
-  }
-
-  .blog-cta-card--green .blog-cta-card-btn {
-    background: rgba(16, 185, 129, 0.9);
-  }
-
-  .blog-cta-card--amber .blog-cta-card-btn {
-    background: rgba(245, 158, 11, 0.9);
   }
 
   .line-clamp-2 {
