@@ -2,7 +2,7 @@
 title: "OpenAI Frontier - הפלטפורמה שהופכת סוכני AI מניסוי לתשתית ארגונית"
 description: "OpenAI חשפה את Frontier, פלטפורמה לניהול סוכני AI בארגונים. הרשאות, בקרה, ביצועים - הכל במקום אחד. מה זה אומר לשוק הישראלי."
 pubDate: 2026-02-07
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028281/blog/openai-frontier-enterprise-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029325/blog/openai-frontier-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
 ctaType: "consulting"
@@ -28,6 +28,8 @@ OpenAI חשפה (6 בפברואר 2026) את Frontier - פלטפורמה חדש�
 
 **5. חיבור למערכות קיימות.** אינטגרציה עם ה-stack הטכנולוגי של הארגון - ERP, CRM, מערכות HR, מיילים, צ'אטים.
 
+![פלטפורמת OpenAI Frontier - ניהול סוכני AI בארגון](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029328/blog/openai-frontier-mid.jpg)
+
 ## למה OpenAI עוברת מ"מודלים" ל"ניהול"
 
 ההימור האסטרטגי של OpenAI ברור: יצירת switching costs. ברגע שארגון בנה את כל תשתית הסוכנים שלו על Frontier - עם הרשאות, תהליכים, מדידות ואינטגרציות - המעבר למתחרה הופך להרבה יותר מורכב ויקר.
@@ -52,12 +54,9 @@ OpenAI חשפה (6 בפברואר 2026) את Frontier - פלטפורמה חדש�
 
 לא חייבים Frontier כדי להתחיל. פלטפורמות כמו n8n, Make ו-Zapier כבר מאפשרות לבנות סוכני AI עם רמה בסיסית של בקרה. אבל המגמה ברורה: ניהול סוכנים הולך להפוך לדיסציפלינה בפני עצמה.
 
-<div class="blog-cta-card blog-cta-card--amber">
-  <div class="blog-cta-card-badge">STRATEGY</div>
-  <div class="blog-cta-card-title">רוצים אסטרטגיית AI לארגון?</div>
-  <div class="blog-cta-card-desc">ייעוץ אסטרטגי להטמעת AI בארגון | תכנית מותאמת | ROI מוכח תוך 30 יום | ניסיון עם חברות מובילות</div>
-  <a href="/services/strategy" class="blog-cta-card-btn">לייעוץ אסטרטגי ←</a>
-</div>
+<a href="/services/strategy" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029337/blog/openai-frontier-cta.jpg" alt="ייעוץ אסטרטגי AI לארגונים - Focus AI" />
+</a>
 
 ## המלחמה על שכבת הניהול
 

@@ -2,7 +2,7 @@
 title: "5 אוטומציות שכל עסק קטן יכול להטמיע היום"
 description: "דוגמאות מעשיות לאוטומציות פשוטות שחוסכות שעות עבודה. ללא צורך בידע טכני, עם כלים חינמיים או זולים."
 pubDate: 2025-01-01
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028296/blog/automation-examples-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029403/blog/automation-examples-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["automation", "guides", "tools"]
 ctaType: "botcamp"
@@ -42,6 +42,8 @@ Facebook Lead Ads → Zapier/Make → Google Sheets
 **כלים:** Zapier (יש חינמי), Make, n8n
 
 **זמן הגדרה:** 30 דקות
+
+![5 אוטומציות חיוניות לעסקים קטנים](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029406/blog/automation-examples-mid.jpg)
 
 ## 3. תזכורות לפולו-אפ
 
@@ -117,6 +119,10 @@ CRM/Google Analytics → Zapier → סיכום שבועי למייל
 
 ### 4. שפרו בהדרגה
 אחרי שאוטומציה עובדת, חפשו דרכים לשפר אותה. אולי אפשר להוסיף התאמה אישית? לחבר למערכת נוספת?
+
+<a href="/academy" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029409/blog/automation-examples-cta.jpg" alt="Bot-Camp - הכשרה מקצועית באוטומציה ו-AI" />
+</a>
 
 ---
 

@@ -2,7 +2,7 @@
 title: "מה זה סוכן AI ולמה הוא קריטי לעסק שלך בשנת 2025"
 description: "סוכני AI הם לא רק צ'אטבוטים - הם נציגים חכמים שיכולים לנהל שיחות, לתאם פגישות ולסגור עסקאות. למד איך הם יכולים לשנות את העסק שלך."
 pubDate: 2025-01-15
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028293/blog/what-is-ai-agent-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029391/blog/what-is-agent-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["ai-agents", "automation", "guides"]
 ctaType: "agents"
@@ -44,6 +44,8 @@ ctaType: "agents"
 
 כל זה קורה אוטומטית, 24/7, בלי התערבות אנושית.
 
+![סוכן AI לעסקים - זמינות 24/7, חיסכון בעלויות, שירות עקבי](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029395/blog/what-is-agent-mid.jpg)
+
 ## מה ההבדל בין סוכן AI לצ'אטבוט רגיל?
 
 | תכונה | צ'אטבוט רגיל | סוכן AI |
@@ -63,6 +65,10 @@ ctaType: "agents"
 3. **בדיקות** - וידוא שהסוכן עונה נכון בכל מצב
 4. **הטמעה** - חיבור לוואטסאפ, אתר ומערכות נוספות
 5. **ליווי** - אופטימיזציה ושיפור מתמיד
+
+<a href="/ai-agents" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029399/blog/what-is-agent-cta.jpg" alt="שירותי סוכני AI לעסקים - Focus AI" />
+</a>
 
 ---
 

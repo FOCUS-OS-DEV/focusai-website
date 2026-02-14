@@ -2,7 +2,7 @@
 title: "Claude Opus 4.6 - המודל שמבין מתי לחשוב הרבה ומתי לרוץ מהר"
 description: "Anthropic שיחררה את Claude Opus 4.6 עם חלון הקשר של מיליון טוקנים, צוותי סוכנים אוטונומיים ויכולת חשיבה אדפטיבית. מה זה אומר לעסקים ישראליים."
 pubDate: 2026-02-13
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028274/blog/claude-opus-4-6-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029289/blog/claude-opus-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
 ctaType: "agents"
@@ -29,6 +29,8 @@ Anthropic שחררה (8 בפברואר 2026) את Claude Opus 4.6, והפעם ז
 
 חלון הקשר של מיליון טוקנים זה לא סתם מספר מרשים. זה אומר שאפשר לתת למודל מסמך של 3,000 עמודים ולבקש ממנו לחפש, לנתח ולחבר מידע מכל המסמך - בלי לפספס פרטים. בבדיקת MRCR v2, שבודקת דיוק באחזור מידע מתוך הקשר ארוך מאוד, Opus 4.6 הגיע ל-76% דיוק - פי ארבעה מהדגם הקודם.
 
+![חשיבה אדפטיבית ב-Claude Opus 4.6 - ארבע רמות מאמץ](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029293/blog/claude-opus-mid.jpg)
+
 ## חשיבה אדפטיבית - למה זה משנה בפועל
 
 עד עכשיו, מודלי AI גדולים עבדו בגישה של "הכל או כלום". כל שאילתה קיבלה את אותה רמת עיבוד, בלי קשר למורכבות. זה בזבוז - גם של זמן וגם של כסף.
@@ -49,12 +51,9 @@ Claude Opus 4.6 מציג ארבע רמות מאמץ: low, medium, high, max. ה�
 
 בשילוב עם פלטפורמות אוטומציה כמו n8n ו-Make, האפשרויות מתרחבות משמעותית. במקום תהליך ליניארי שבו כל שלב מחכה לקודם, אפשר לבנות מערכות מקבילות שמטפלות בתהליכים עסקיים שלמים.
 
-<div class="blog-cta-card blog-cta-card--green">
-  <div class="blog-cta-card-badge">AI AGENTS</div>
-  <div class="blog-cta-card-title">צריכים סוכן AI שעובד בשבילכם?</div>
-  <div class="blog-cta-card-desc">פיתוח סוכני AI מותאמים לעסק שלכם | בוטים חכמים, אוטומציות ודשבורדים | ROI מוכח תוך 30 יום</div>
-  <a href="/ai-agents" class="blog-cta-card-btn">לשירותי AI לעסקים ←</a>
-</div>
+<a href="/ai-agents" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029300/blog/claude-opus-cta.jpg" alt="שירותי סוכני AI לעסקים - Focus AI" />
+</a>
 
 ## Cowork - סביבת עבודה אוטונומית
 

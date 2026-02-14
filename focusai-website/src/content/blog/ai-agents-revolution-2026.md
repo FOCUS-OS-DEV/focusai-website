@@ -2,7 +2,7 @@
 title: "75% מהחברות מתכננות סוכני AI - ורק 21% מוכנות לזה"
 description: "סקר Deloitte חושף פער ענק: רוב הארגונים רוצים סוכני AI אוטונומיים, אבל כמעט אף אחד לא בנה מערכת שליטה. מה זה אומר לעסקים ישראליים."
 pubDate: 2026-02-10
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028277/blog/ai-agents-revolution-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029314/blog/agents-revolution-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "automation"]
 ctaType: "agents"
@@ -33,6 +33,8 @@ Deloitte פרסמה את דוח "State of AI in the Enterprise 2026" - סקר ש
 **הגל כבר כאן, לא בדרך.** 60% מהעובדים בארגונים שנסקרו כבר משתמשים בכלי AI מאושרים - עלייה של 50% תוך שנה בלבד. זה לא הבטחה לעתיד. זה קורה עכשיו.
 
 **ההשפעה מתעצמת.** 25% מהמנהלים מדווחים שה-AI משנה את החברה שלהם ברמה טרנספורמטיבית - כפול מהשנה הקודמת. ו-30% כבר מתכננים מחדש תהליכים מרכזיים סביב AI.
+
+![סקר Deloitte 2026 - הפער בין תכנון להטמעת סוכני AI](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029318/blog/agents-revolution-mid.jpg)
 
 **אבל 37% עדיין "רק משחקים".** יותר משליש מהארגונים עדיין משתמשים ב-AI ברמה שטחית, בלי שינוי תהליכי אמיתי. אלה הם הארגונים שהולכים לגלות שהם מאחור כשהמתחרים שלהם יעברו לסוכנים אוטונומיים.
 
@@ -72,12 +74,9 @@ Deloitte פרסמה את דוח "State of AI in the Enterprise 2026" - סקר ש
 
 מנהל הזמנות מספקים, עוקב אחרי מלאי, מתאם לוגיסטיקה, ומזהה צווארי בקבוק. רלוונטי במיוחד לעסקים עם מלאי פיזי או שרשרת אספקה מורכבת.
 
-<div class="blog-cta-card blog-cta-card--green">
-  <div class="blog-cta-card-badge">AI AGENTS</div>
-  <div class="blog-cta-card-title">רוצים סוכני AI שעובדים בשביל העסק שלכם?</div>
-  <div class="blog-cta-card-desc">אנחנו בונים סוכני AI, בוטים ומערכות אוטומציה מותאמים אישית לעסקים | הגדלת יעילות וחיסכון בעלויות</div>
-  <a href="/ai-agents" class="blog-cta-card-btn">לשירותי AI לעסקים ←</a>
-</div>
+<a href="/ai-agents" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029321/blog/agents-revolution-cta.jpg" alt="סוכני AI לעסקים - Focus AI" />
+</a>
 
 ## הפער שהופך להזדמנות
 

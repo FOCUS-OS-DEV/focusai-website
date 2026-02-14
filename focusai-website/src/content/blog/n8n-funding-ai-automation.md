@@ -2,7 +2,7 @@
 title: "n8n גייסה 180 מיליון דולר - ומה זה אומר על עתיד האוטומציה בישראל"
 description: "פלטפורמת האוטומציה n8n סוגרת סבב גיוס ענק בשווי 2.5 מיליארד דולר. מה המשמעות לעסקים ישראלים ואיך להיערך למהפכת ה-AI Automation."
 pubDate: 2025-10-10
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771019382/blog/n8n-automation-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029341/blog/n8n-funding-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["news", "automation", "ai-agents", "tools"]
 ctaType: "botcamp"
@@ -22,7 +22,7 @@ ctaType: "botcamp"
 
 בין שאר המשקיעים בסבב: Sequoia Capital, Meritech, Redpoint ו-Highland Europe. סך כל הגיוסים של n8n עד היום עומד על כ-240 מיליון דולר.
 
-![תזמור סוכני AI - רשת אוטומציה מתקדמת](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771020183/blog/n8n-ai-agent-orchestration.png)
+![n8n - תזמור סוכני AI ואוטומציה](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029345/blog/n8n-funding-mid.jpg)
 
 ## הצמיחה שמדברת בעד עצמה
 
@@ -64,14 +64,9 @@ ctaType: "botcamp"
 
 ב-Focus AI אנחנו עובדים עם כל שלושת הכלים, ובוחרים את הפתרון המתאים לפי גודל הארגון, רמת המורכבות, ודרישות האבטחה. אין תשובה אחת נכונה - יש תשובה נכונה לכל מקרה.
 
-![אוטומציה חכמה לעסקים ישראלים](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771020191/blog/n8n-automation-israeli-business.png)
-
-<div class="blog-cta-card">
-  <div class="blog-cta-card-badge">BOT-CAMP</div>
-  <div class="blog-cta-card-title">רוצים לבנות אוטומציות n8n בעצמכם?</div>
-  <div class="blog-cta-card-desc">12 מפגשים פרונטליים בהרצליה פיתוח | בניית אוטומציות עם n8n + סוכני AI | תיק עבודות ותעודה מקצועית</div>
-  <a href="/academy" class="blog-cta-card-btn">לפרטים על ההכשרה ←</a>
-</div>
+<a href="/academy" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029348/blog/n8n-funding-cta.jpg" alt="Bot-Camp - הכשרה מקצועית באוטומציה ו-AI" />
+</a>
 
 ## חמישה צעדים שאפשר לעשות כבר היום
 

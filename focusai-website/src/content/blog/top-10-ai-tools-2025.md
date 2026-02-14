@@ -2,7 +2,7 @@
 title: "10 כלי AI שכל עסק חייב להכיר בשנת 2025"
 description: "סקירה מקיפה של הכלים הכי חמים בעולם ה-AI - מיצירת תוכן ועד אוטומציות עסקיות. גלו איך להפוך את העסק שלכם ליעיל יותר."
 pubDate: 2025-01-10
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028284/blog/top-10-ai-tools-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029352/blog/ai-tools-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["tools", "guides", "automation"]
 ctaType: "ai-ready"
@@ -41,6 +41,8 @@ ctaType: "ai-ready"
 **למה זה חשוב:** עריכת וידאו כמו עריכת טקסט. מחיקת "אממ", תיקון טעויות, ויצירת כתוביות אוטומטית.
 
 **טיפ:** השתמשו ב-Overdub ליצירת קריינות מקצועית מטקסט.
+
+![כלי AI מובילים לעסקים - השוואה מקיפה](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029356/blog/ai-tools-mid.jpg)
 
 ## 6. Copy.ai / Jasper - כתיבת תוכן שיווקי
 
@@ -81,6 +83,10 @@ ctaType: "ai-ready"
 2. **מה התקציב?** - יש כלים חינמיים ויש בתשלום
 3. **מה רמת המורכבות?** - חלק מהכלים דורשים למידה
 4. **האם יש אינטגרציה?** - חשוב שהכלי יתחבר למערכות שלכם
+
+<a href="/academy/ai-ready" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029360/blog/ai-tools-cta.jpg" alt="קורס AI Ready - למדו להשתמש בכלי AI מתקדמים" />
+</a>
 
 ---
 

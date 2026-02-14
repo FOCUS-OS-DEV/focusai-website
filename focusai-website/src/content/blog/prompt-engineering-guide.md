@@ -2,7 +2,7 @@
 title: "מדריך Prompt Engineering - איך לגרום ל-AI לעשות בדיוק מה שאתם רוצים"
 description: "הטכניקות והסודות של כתיבת פרומפטים אפקטיביים. למדו איך לקבל תוצאות מדויקות מ-ChatGPT, Claude וכלי AI אחרים."
 pubDate: 2025-01-05
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771028289/blog/prompt-engineering-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029364/blog/prompt-guide-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["guides", "tools", "ai-agents"]
 ctaType: "ai-ready"
@@ -79,6 +79,8 @@ ctaType: "ai-ready"
 >
 > "עכשיו תתאים את זה לקהל ישראלי"
 
+![מדריך Prompt Engineering - טכניקות מתקדמות](https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1771029384/blog/prompt-guide-mid.jpg)
+
 ## טעויות נפוצות להימנע
 
 ### 1. פרומפטים ארוכים מדי
@@ -123,6 +125,10 @@ AI לא יכול לדעת מידע עדכני, לקרוא קבצים שלא שי
 
 מה הפתרון שאתה ממליץ? תסביר למה.
 ```
+
+<a href="/academy/ai-ready" class="blog-cta-banner">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029387/blog/prompt-guide-cta.jpg" alt="קורס AI Ready - למדו Prompt Engineering ועוד" />
+</a>
 
 ---
 
