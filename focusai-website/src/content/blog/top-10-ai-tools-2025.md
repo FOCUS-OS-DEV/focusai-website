@@ -87,7 +87,7 @@ ctaType: "ai-ready"
 <a href="/academy/ai-ready" class="blog-cta-banner">
   <span class="cta-badge">AI Ready</span>
   <div class="cta-title">רוצים לדעת להשתמש בכלים האלה באמת?</div>
-  <div class="cta-desc">הכשרת AI Ready מלמדת את הצוות שלכם לעבוד עם כלי AI ביום-יום. לא תיאוריה - תרגול מעשי שמשנה את שגרת העבודה.</div>
+  <div class="cta-desc">בתוכנית AI Ready תלמדו לעבוד עם כלי AI ביום-יום. לא תיאוריה - תרגול מעשי שמשנה את שגרת העבודה.</div>
   <div class="cta-tags"><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span><span class="cta-tag">Gemini</span><span class="cta-tag">Prompt Engineering</span></div>
   <span class="cta-button">לפרטים והרשמה</span>
 </a>
