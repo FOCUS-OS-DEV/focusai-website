@@ -1,7 +1,6 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -R focusai-website/dist/* /home/focusaico/public_html/
+    - /bin/cp -Rf focusai-website/dist/. /home/focusaico/public_html/
     # Draft pages - remove from live until ready
     - /bin/rm -rf /home/focusaico/public_html/services/
-    - /bin/rm -rf /home/focusaico/public_html/blog/
