@@ -103,7 +103,8 @@ html:not(.preloader-active) [slot="footer"] {
 html {
   font-size: 100%; /* 16px base on mobile */
   scroll-behavior: smooth;
-  overflow-x: clip; /* Prevent horizontal scroll on all pages */
+  overflow-x: hidden; /* Fallback for older Safari (<16) */
+  overflow-x: clip; /* Modern browsers - prevents scroll anchoring issues */
 }
 
 @media (min-width: 768px) {

@@ -508,6 +508,18 @@ export function initScrollAnimations() {
     }
   });
 
+  // Safety net: if any animated element is still invisible after 4s, force it visible.
+  // This prevents "disappearing sections" if ScrollTrigger fails (e.g., Safari + Lenis conflict).
+  setTimeout(() => {
+    animatedElements.forEach((el) => {
+      const computed = window.getComputedStyle(el);
+      if (computed.opacity === '0') {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      }
+    });
+  }, 4000);
+
   // Initialize section transitions
   initSectionTransitions();
 }
