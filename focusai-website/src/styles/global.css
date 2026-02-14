@@ -103,6 +103,7 @@ html:not(.preloader-active) [slot="footer"] {
 html {
   font-size: 100%; /* 16px base on mobile */
   scroll-behavior: smooth;
+  overflow-x: clip; /* Prevent horizontal scroll on all pages */
 }
 
 @media (min-width: 768px) {
