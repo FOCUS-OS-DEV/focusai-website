@@ -243,6 +243,7 @@ The hero (`HeroSection.astro`) is **pure Astro + CSS** - no React, no Framer Mot
 | `prompt-engineering-guide` | מדריך פרומפט אנג'ינירינג | AI Ready |
 | `automation-examples` | דוגמאות אוטומציה | Bot-Camp |
 | `top-10-ai-tools-2025` | 10 כלי AI מובילים | AI Ready |
+| `google-ai-transformation-2026` | גוגל כבר לא מנוע חיפוש - חברת תשתיות AI | Consulting |
 
 ### CTA Banner System
 - Glassmorphism HTML banners (NOT image CTAs)
@@ -513,6 +514,12 @@ npm run preview  # Preview production build
 ---
 
 ## Recent Changes Log
+
+### 2026-02-15
+- Removed VideoTestimonialsCarousel component entirely (1,101 lines deleted) - iOS Safari issues
+- Fixed form text color on Bot-Camp page (white on white → dark text)
+- Fixed fingerprint background visibility on mobile homepage
+- New article: Google AI Transformation 2026 (10 articles total)
 
 ### 2026-02-14
 - Blog deployed to production! 9 articles live
