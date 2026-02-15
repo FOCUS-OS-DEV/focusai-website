@@ -94,7 +94,7 @@ const values = companyValues;
                   {/* Status indicator */}
                   <div class="absolute -bottom-1 -right-1 flex items-center gap-1.5 px-2.5 py-1 bg-[#0a0a0f] border border-[#a855f7]/50 rounded-md">
                     <span class="w-2 h-2 rounded-full bg-[#a855f7] animate-pulse"></span>
-                    <span class="font-mono text-[10px] md:text-[11px] text-[#a855f7] font-medium">{founder.status || "ONLINE"}</span>
+                    <span class="font-mono text-xs text-[#a855f7] font-medium">{founder.status || "ONLINE"}</span>
                   </div>
                 </div>
 
@@ -152,7 +152,7 @@ const values = companyValues;
           {/* Code badge */}
           <div class="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4 rounded-full">
             <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span>
-            <span class="font-mono text-[10px] md:text-[11px] text-[#a855f7] uppercase font-medium">{value.code}</span>
+            <span class="font-mono text-xs text-[#a855f7] uppercase font-medium">{value.code}</span>
           </div>
 
           <h4 class="font-bold text-lg text-[#f5f5fa] mb-2 group-hover:text-[#a855f7] transition-colors">{value.title}</h4>

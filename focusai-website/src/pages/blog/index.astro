@@ -132,7 +132,7 @@ function formatDate(date: Date): string {
                 {post.data.tags && post.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-3">
                     {post.data.tags.slice(0, 3).map((tag) => (
-                      <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-[#a855f7]/10 text-[#a855f7] text-[10px] sm:text-xs rounded-full">
+                      <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-[#a855f7]/10 text-[#a855f7] text-xs rounded-full">
                         #{tag}
                       </span>
                     ))}
@@ -150,7 +150,7 @@ function formatDate(date: Date): string {
                 </p>
 
                 <!-- Meta -->
-                <div class="flex items-center justify-between text-[10px] sm:text-xs font-mono text-[#b0b0c0]">
+                <div class="flex items-center justify-between text-xs font-mono text-[#b0b0c0]">
                   <time datetime={post.data.pubDate.toISOString()}>
                     {formatDate(post.data.pubDate)}
                   </time>
