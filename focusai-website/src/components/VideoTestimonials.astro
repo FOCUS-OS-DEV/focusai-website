@@ -114,6 +114,15 @@ const testimonials = [
       <button class="vtc-arr vtc-arr-l" aria-label="הבא">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       </button>
+
+      <!-- Fingerprint pagination -->
+      <div class="vtc-dots">
+        {testimonials.map((_, i) => (
+          <button class={`vtc-dot${i === 0 ? ' vtc-dot-active' : ''}`} data-dot={i} aria-label={`סרטון ${i + 1}`}>
+            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_40/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="" aria-hidden="true" draggable="false" />
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 
@@ -151,6 +160,7 @@ const testimonials = [
   vtc.dataset.init = '1';
 
   var cards = vtc.querySelectorAll('.vtc-card');
+  var dots = vtc.querySelectorAll('.vtc-dot');
   var total = cards.length;
   var current = 0;
   var lightbox = document.querySelector('.vtc-lb');
@@ -185,6 +195,10 @@ const testimonials = [
       card.style.pointerEvents = abs <= 1 ? 'auto' : 'none';
       card.classList.toggle('vtc-center', abs === 0);
     });
+    // Update fingerprint dots
+    dots.forEach(function(dot, i) {
+      dot.classList.toggle('vtc-dot-active', i === current);
+    });
   }
 
   function goTo(idx) {
@@ -195,6 +209,11 @@ const testimonials = [
   // Arrow navigation
   vtc.querySelector('.vtc-arr-l').addEventListener('click', function() { goTo(current + 1); });
   vtc.querySelector('.vtc-arr-r').addEventListener('click', function() { goTo(current - 1); });
+
+  // Dot clicks → navigate
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() { goTo(i); });
+  });
 
   // Card clicks: center → lightbox, side → navigate
   cards.forEach(function(card, i) {
@@ -416,6 +435,49 @@ const testimonials = [
 
   .vtc-arr-r { right: 0.75rem; }
   .vtc-arr-l { left: 0.75rem; }
+
+  /* === Fingerprint Dots === */
+  .vtc-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0 1rem;
+  }
+
+  .vtc-dot {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    opacity: 0.2;
+    filter: grayscale(1) brightness(0.5);
+    transition: opacity 0.4s ease, filter 0.4s ease, transform 0.3s ease;
+  }
+
+  .vtc-dot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .vtc-dot-active {
+    opacity: 1;
+    filter: grayscale(0) brightness(1) drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+    transform: scale(1.15);
+  }
+
+  .vtc-dot:hover:not(.vtc-dot-active) {
+    opacity: 0.45;
+    filter: grayscale(0.5) brightness(0.7);
+  }
 
   /* === Lightbox === */
   .vtc-lb {
