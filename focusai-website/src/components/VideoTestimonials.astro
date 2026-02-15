@@ -1,8 +1,9 @@
 ---
 /**
- * Video Testimonials Carousel
- * CSS Scroll-Snap carousel with inline video playback
- * Pure Astro + vanilla JS (no React island, no lightbox)
+ * Video Testimonials - 3D Transform Carousel + Lightbox
+ * Center card large, sides smaller, infinite loop, arrow nav
+ * Click center → opens lightbox with native video controls
+ * iOS safe: poster images in carousel, direct video src in lightbox HTML
  */
 
 interface Props {
@@ -57,7 +58,7 @@ const testimonials = [
 ];
 ---
 
-<section class="py-12 md:py-16 relative overflow-hidden bg-[#0a0a0f]" aria-label="עדויות וידאו מבוגרים" data-section>
+<section class="py-12 md:py-20 relative overflow-hidden bg-[#0a0a0f]" aria-label="עדויות וידאו מבוגרים" data-section>
   <!-- Background glow -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>
 
@@ -71,330 +72,295 @@ const testimonials = [
     </div>
 
     <!-- Title -->
-    <div class="text-center mb-10" data-animate="fade-up" data-delay="0.1">
-      <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-        {title}
-      </h2>
+    <div class="text-center mb-10" data-animate="fade-up">
+      <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">{title}</h2>
       <p class="text-lg text-white/50 max-w-xl mx-auto">{subtitle}</p>
     </div>
 
-    <!-- Carousel -->
-    <div class="vt-carousel" role="region" aria-label="קרוסלת עדויות וידאו" tabindex="0">
-      {testimonials.map((t, i) => (
-        <div class="vt-card" data-vt-index={i}>
-          <div class="vt-card-inner">
-            <!-- Video container -->
-            <div class="vt-video-wrap">
-              <video
-                preload="none"
-                poster={t.poster}
-                playsinline
-                controls
-                class="vt-video"
-                data-src-desktop={t.video}
-                data-src-mobile={t.video.replace('/upload/q_auto/', '/upload/w_720,q_auto/')}
-                aria-label={`${t.name} - ${t.role} - עדות וידאו`}
-              ><track kind="captions" default /></video>
-
-              <!-- Play button overlay (hides once playing) -->
-              <button class="vt-play-btn" aria-label={`נגן סרטון של ${t.name}`}>
-                <svg class="w-7 h-7 ms-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <!-- 3D Carousel -->
+    <div class="vtc" aria-label="קרוסלת עדויות וידאו" tabindex="0">
+      <div class="vtc-track">
+        {testimonials.map((t, i) => (
+          <div class="vtc-card" data-vtc={i}>
+            <div class="vtc-inner">
+              <img
+                src={t.poster}
+                alt={`${t.name} - ${t.role}`}
+                class="vtc-poster"
+                loading="lazy"
+                draggable="false"
+              />
+              <!-- Play overlay -->
+              <div class="vtc-play">
+                <svg class="w-8 h-8 ms-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
-              </button>
-
-              <!-- Bottom gradient -->
-              <div class="vt-gradient"></div>
-
-              <!-- Name/role -->
-              <div class="vt-info">
-                <p class="vt-name">{t.name}</p>
-                <p class="vt-role">{t.role}</p>
               </div>
-
-              <!-- Playing indicator -->
-              <div class="vt-playing-dot"></div>
+              <!-- Gradient + info -->
+              <div class="vtc-grad"></div>
+              <div class="vtc-info">
+                <p class="vtc-name">{t.name}</p>
+                <p class="vtc-role">{t.role}</p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
 
-    <!-- Navigation arrows -->
-    <div class="vt-nav">
-      <button class="vt-nav-btn" data-vt-dir="prev" aria-label="העדות הקודמת">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
+      <!-- Arrows -->
+      <button class="vtc-arr vtc-arr-r" aria-label="הקודם">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </button>
-      <button class="vt-nav-btn" data-vt-dir="next" aria-label="העדות הבאה">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
+      <button class="vtc-arr vtc-arr-l" aria-label="הבא">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       </button>
     </div>
+  </div>
 
-    <!-- Dots -->
-    <div class="vt-dots" role="tablist" aria-label="ניווט עדויות">
-      {testimonials.map((_, i) => (
-        <button
-          class="vt-dot"
-          role="tab"
-          aria-selected={i === 0 ? "true" : "false"}
-          aria-label={`עדות ${i + 1}`}
-          data-dot-index={i}
-        />
-      ))}
-    </div>
+  <!-- Lightbox (all videos pre-rendered with direct src for iOS) -->
+  <div class="vtc-lb">
+    <div class="vtc-lb-bg"></div>
+    <button class="vtc-lb-x" aria-label="סגור">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    {testimonials.map((t, i) => (
+      <div class="vtc-lb-item" data-lb={i}>
+        <video
+          src={t.video}
+          poster={t.poster}
+          controls
+          playsinline
+          webkit-playsinline
+          preload="none"
+          controlslist="nodownload"
+          disablepictureinpicture
+          class="vtc-lb-vid"
+          oncontextmenu="return false;"
+        ></video>
+        <p class="vtc-lb-name">{t.name}</p>
+        <p class="vtc-lb-role">{t.role}</p>
+      </div>
+    ))}
   </div>
 </section>
 
 <script is:inline>
 (function() {
-  var carousel = document.querySelector('.vt-carousel');
-  if (!carousel || carousel.dataset.vtInit) return;
-  carousel.dataset.vtInit = '1';
+  var vtc = document.querySelector('.vtc');
+  if (!vtc || vtc.dataset.init) return;
+  vtc.dataset.init = '1';
 
-  var cards = carousel.querySelectorAll('.vt-card');
-  var dots = document.querySelectorAll('.vt-dot');
-  var isMobile = window.innerWidth < 768;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var scrollBehavior = reduced ? 'auto' : 'smooth';
+  var cards = vtc.querySelectorAll('.vtc-card');
+  var total = cards.length;
+  var current = 0;
+  var lightbox = document.querySelector('.vtc-lb');
+  var lbItems = lightbox.querySelectorAll('.vtc-lb-item');
+  var activeLb = null;
 
-  // Lazy-load: set video src on first interaction with card
-  function loadVideo(video) {
-    if (video.getAttribute('src')) return; // already loaded
-    var src = isMobile
-      ? video.getAttribute('data-src-mobile')
-      : video.getAttribute('data-src-desktop');
-    if (src) {
-      video.src = src;
-      video.load();
-    }
+  // Position all cards based on offset from current center
+  function layout() {
+    cards.forEach(function(card, i) {
+      var offset = i - current;
+      // Wrap for infinite loop
+      if (offset > total / 2) offset -= total;
+      if (offset < -total / 2) offset += total;
+
+      var abs = Math.abs(offset);
+      var sign = offset > 0 ? -1 : 1; // Flip for RTL (next=left, prev=right)
+      var scale, tx, opa, z;
+
+      if (abs === 0) {
+        scale = 1; tx = 0; opa = 1; z = 5;
+      } else if (abs === 1) {
+        scale = 0.78; tx = sign * 105; opa = 0.6; z = 4;
+      } else if (abs === 2) {
+        scale = 0.6; tx = sign * 190; opa = 0.3; z = 3;
+      } else {
+        scale = 0.5; tx = sign * 220; opa = 0; z = 0;
+      }
+
+      card.style.transform = 'translateX(' + tx + '%) scale(' + scale + ')';
+      card.style.opacity = opa;
+      card.style.zIndex = z;
+      card.style.pointerEvents = abs <= 1 ? 'auto' : 'none';
+      card.classList.toggle('vtc-center', abs === 0);
+    });
   }
 
-  // Pause all other videos
-  function pauseOthers(currentVideo) {
-    cards.forEach(function(c) {
-      var v = c.querySelector('.vt-video');
-      var btn = c.querySelector('.vt-play-btn');
-      var inner = c.querySelector('.vt-card-inner');
-      if (v && v !== currentVideo && !v.paused) {
-        v.pause();
-        if (inner) inner.classList.remove('vt-active');
-        if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
-      }
-    });
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    layout();
   }
 
-  cards.forEach(function(card) {
-    var video = card.querySelector('.vt-video');
-    var playBtn = card.querySelector('.vt-play-btn');
-    var inner = card.querySelector('.vt-card-inner');
-    if (!video || !playBtn) return;
+  // Arrow navigation
+  vtc.querySelector('.vtc-arr-l').addEventListener('click', function() { goTo(current + 1); });
+  vtc.querySelector('.vtc-arr-r').addEventListener('click', function() { goTo(current - 1); });
 
-    // Click play button → load src + play
-    playBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      loadVideo(video);
-      pauseOthers(video);
-      // Call play() synchronously to preserve iOS user gesture context
-      var playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(function() {
-          // Video not ready yet - wait for canplay then retry
-          video.addEventListener('canplay', function onReady() {
-            video.removeEventListener('canplay', onReady);
-            video.play().catch(function() {});
-          });
-        });
+  // Card clicks: center → lightbox, side → navigate
+  cards.forEach(function(card, i) {
+    card.addEventListener('click', function() {
+      if (i === current) {
+        openLightbox(i);
+      } else {
+        goTo(i);
       }
-    });
-
-    // When video starts playing (from custom btn OR native controls)
-    video.addEventListener('play', function() {
-      pauseOthers(video);
-      if (inner) inner.classList.add('vt-active');
-      playBtn.style.opacity = '0';
-      playBtn.style.pointerEvents = 'none';
-    });
-
-    // When video pauses or ends
-    video.addEventListener('pause', function() {
-      if (inner) inner.classList.remove('vt-active');
-      playBtn.style.opacity = '1';
-      playBtn.style.pointerEvents = 'auto';
-    });
-
-    video.addEventListener('ended', function() {
-      if (inner) inner.classList.remove('vt-active');
-      playBtn.style.opacity = '1';
-      playBtn.style.pointerEvents = 'auto';
-    });
-
-    // Also load src when native controls play button is clicked
-    video.addEventListener('click', function() {
-      loadVideo(video);
     });
   });
 
-  // Keyboard navigation
-  carousel.addEventListener('keydown', function(e) {
-    var cardW = cards[0] ? cards[0].offsetWidth + 16 : 236;
-    if (e.key === 'ArrowLeft') {
-      carousel.scrollBy({ left: -cardW, behavior: scrollBehavior });
-    } else if (e.key === 'ArrowRight') {
-      carousel.scrollBy({ left: cardW, behavior: scrollBehavior });
+  // Touch swipe
+  var startX = 0;
+  var startY = 0;
+  var swiping = false;
+  vtc.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    swiping = true;
+  }, { passive: true });
+  vtc.addEventListener('touchend', function(e) {
+    if (!swiping) return;
+    swiping = false;
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    // Only swipe if horizontal movement > vertical
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      goTo(current + (dx > 0 ? -1 : 1));
     }
   });
 
-  // Arrow buttons
-  document.querySelectorAll('[data-vt-dir]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var cardW = cards[0] ? cards[0].offsetWidth + 16 : 236;
-      var dir = btn.getAttribute('data-vt-dir');
-      var delta = dir === 'prev' ? cardW : -cardW;
-      carousel.scrollBy({ left: delta, behavior: scrollBehavior });
-    });
+  // Keyboard
+  vtc.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowRight') { goTo(current - 1); e.preventDefault(); }
   });
 
-  // Dot pagination with IntersectionObserver
-  if (dots.length && 'IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var idx = entry.target.getAttribute('data-vt-index');
-          dots.forEach(function(d) {
-            d.setAttribute('aria-selected',
-              d.getAttribute('data-dot-index') === idx ? 'true' : 'false');
-          });
-        }
-      });
-    }, { root: carousel, threshold: 0.5 });
-
-    cards.forEach(function(card) { observer.observe(card); });
+  // === Lightbox ===
+  function openLightbox(idx) {
+    activeLb = lbItems[idx];
+    if (!activeLb) return;
+    activeLb.classList.add('active');
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
-  // Dot click
-  dots.forEach(function(dot) {
-    dot.addEventListener('click', function() {
-      var idx = parseInt(dot.getAttribute('data-dot-index'));
-      if (cards[idx]) {
-        cards[idx].scrollIntoView({ behavior: scrollBehavior, block: 'nearest', inline: 'start' });
-      }
-    });
+  function closeLightbox() {
+    if (activeLb) {
+      var vid = activeLb.querySelector('video');
+      if (vid) vid.pause();
+      activeLb.classList.remove('active');
+      activeLb = null;
+    }
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  lightbox.querySelector('.vtc-lb-x').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.vtc-lb-bg').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
   });
+
+  // Init
+  layout();
 })();
 </script>
 
 <style>
-  .vt-carousel {
+  /* === 3D Carousel === */
+  .vtc {
+    position: relative;
+    overflow: hidden;
+    padding: 0.5rem 0;
+  }
+
+  .vtc-track {
+    position: relative;
     display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: 0.5rem 1rem 1rem;
+    align-items: center;
+    justify-content: center;
+    height: 410px;
   }
 
-  .vt-carousel::-webkit-scrollbar {
-    display: none;
-  }
-
-  .vt-card {
-    scroll-snap-align: start;
-    flex: 0 0 auto;
+  .vtc-card {
+    position: absolute;
     width: 220px;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s ease;
+    will-change: transform, opacity;
   }
 
-  .vt-card-inner {
+  .vtc-inner {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    border-radius: 1rem;
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
-    overflow: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transition: border-color 0.3s, box-shadow 0.3s;
   }
 
-  .vt-card-inner.vt-active {
-    border-color: rgba(168, 85, 247, 0.4);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.2), 0 8px 32px rgba(0, 0, 0, 0.3);
+  .vtc-center .vtc-inner {
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
-  .vt-video-wrap {
-    position: relative;
-    aspect-ratio: 9 / 16;
-    overflow: hidden;
-    background: #0d0d15;
-  }
-
-  .vt-video {
+  .vtc-poster {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
   }
 
-  /* Hide native controls by default, show when playing */
-  .vt-video::-webkit-media-controls {
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .vt-active .vt-video::-webkit-media-controls {
-    opacity: 1;
-  }
-
-  .vt-play-btn {
+  /* Play button - only visible on center card */
+  .vtc-play {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: rgba(168, 85, 247, 0.8);
+    background: rgba(168, 85, 247, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.25);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
     z-index: 10;
-    min-height: 56px;
-    min-width: 56px;
-    padding: 0;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
   }
 
-  .vt-play-btn:hover {
-    background: rgba(168, 85, 247, 1);
+  .vtc-center .vtc-play {
+    opacity: 1;
+  }
+
+  .vtc-center:hover .vtc-play {
     transform: translate(-50%, -50%) scale(1.1);
     box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
   }
 
-  .vt-gradient {
+  .vtc-grad {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 40%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
     pointer-events: none;
     z-index: 4;
   }
 
-  .vt-info {
+  .vtc-info {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -404,7 +370,7 @@ const testimonials = [
     pointer-events: none;
   }
 
-  .vt-name {
+  .vtc-name {
     font-size: 0.9375rem;
     font-weight: 700;
     color: #f5f5fa;
@@ -412,7 +378,7 @@ const testimonials = [
     margin-bottom: 0.125rem;
   }
 
-  .vt-role {
+  .vtc-role {
     font-size: 0.6875rem;
     color: rgba(245, 245, 250, 0.7);
     font-family: 'JetBrains Mono', monospace;
@@ -420,141 +386,169 @@ const testimonials = [
     line-height: 1.3;
   }
 
-  .vt-playing-dot {
+  /* Arrows */
+  .vtc-arr {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #a855f7;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .vt-active .vt-playing-dot {
-    opacity: 1;
-    animation: vtPulse 2s infinite;
-  }
-
-  @keyframes vtPulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(168, 85, 247, 0.5); }
-    50% { opacity: 0.5; box-shadow: 0 0 8px rgba(168, 85, 247, 0.8); }
-  }
-
-  /* Navigation */
-  .vt-nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .vt-nav-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
     width: 44px;
     height: 44px;
     border-radius: 50%;
     background: rgba(168, 85, 247, 0.15);
     border: 1px solid rgba(168, 85, 247, 0.3);
     color: #a855f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all 0.3s;
+    z-index: 10;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s;
     padding: 0;
   }
 
-  .vt-nav-btn:hover {
+  .vtc-arr:hover {
     background: rgba(168, 85, 247, 0.3);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
   }
 
-  /* Dots */
-  .vt-dots {
+  .vtc-arr-r { right: 0.75rem; }
+  .vtc-arr-l { left: 0.75rem; }
+
+  /* === Lightbox === */
+  .vtc-lb {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
   }
 
-  .vt-dot {
-    width: 8px;
-    height: 8px;
+  .vtc-lb.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .vtc-lb-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .vtc-lb-x {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all 0.3s;
+    z-index: 10;
     padding: 0;
-    min-height: 8px;
-    min-width: 8px;
+    transition: all 0.3s;
   }
 
-  .vt-dot[aria-selected="true"] {
-    background: #a855f7;
-    box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
-    transform: scale(1.25);
+  .vtc-lb-x:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
   }
 
-  /* Mobile */
+  .vtc-lb-item {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    max-width: 360px;
+    width: 90vw;
+    display: none;
+  }
+
+  .vtc-lb-item.active {
+    display: block;
+  }
+
+  .vtc-lb-vid {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 1rem;
+    background: #0d0d15;
+    object-fit: cover;
+  }
+
+  .vtc-lb-name {
+    margin-top: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .vtc-lb-role {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 0.25rem;
+  }
+
+  /* === Responsive === */
   @media (max-width: 768px) {
-    .vt-card {
-      width: 55vw;
+    .vtc-track {
+      height: calc(60vw * 16 / 9);
     }
 
-    .vt-play-btn {
-      width: 48px;
-      height: 48px;
-      min-height: 48px;
-      min-width: 48px;
+    .vtc-card {
+      width: 60vw;
+      max-width: 240px;
     }
 
-    .vt-nav {
-      display: none;
+    .vtc-play {
+      width: 52px;
+      height: 52px;
     }
+
+    .vtc-arr {
+      width: 36px;
+      height: 36px;
+    }
+
+    .vtc-arr-r { right: 0.25rem; }
+    .vtc-arr-l { left: 0.25rem; }
   }
 
-  /* Tablet */
   @media (min-width: 769px) and (max-width: 1023px) {
-    .vt-card {
+    .vtc-card {
       width: 200px;
     }
-  }
 
-  /* Large desktop: center cards, hide nav/dots */
-  @media (min-width: 1280px) {
-    .vt-carousel {
-      justify-content: center;
-      overflow-x: visible;
-      scroll-snap-type: none;
-    }
-
-    .vt-nav,
-    .vt-dots {
-      display: none;
+    .vtc-track {
+      height: 380px;
     }
   }
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .vt-carousel {
-      scroll-behavior: auto;
-    }
-
-    .vt-play-btn,
-    .vt-nav-btn,
-    .vt-dot,
-    .vt-card-inner {
+    .vtc-card {
       transition: none;
     }
 
-    .vt-playing-dot {
-      animation: none;
-      opacity: 1;
+    .vtc-inner {
+      transition: none;
+    }
+
+    .vtc-lb {
+      transition: none;
     }
   }
 </style>
