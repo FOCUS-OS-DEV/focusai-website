@@ -100,15 +100,11 @@ const links = [
     <div class="bg-orb bg-orb-1"></div>
     <div class="bg-orb bg-orb-2"></div>
     <div class="bg-orb bg-orb-3"></div>
-    <div class="bg-grid"></div>
     <div class="bg-noise"></div>
   </div>
 
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress" id="scrollProgress"></div>
-
-  <!-- Cursor Trail (desktop only) -->
-  <div class="cursor-trail" id="cursorTrail"></div>
 
   <!-- Floating Data Particles -->
   <div class="lt-particles" aria-hidden="true">
@@ -263,6 +259,20 @@ const links = [
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
+    background: linear-gradient(
+      180deg,
+      #050007 0%,
+      #0a0412 15%,
+      #0d0618 40%,
+      #0a0412 65%,
+      #080210 85%,
+      #050007 100%
+    );
+  }
+
+  /* Make VideoTestimonials section transparent so linktree bg shows through */
+  .linktree-page section[data-vtc-theme] {
+    background: transparent !important;
   }
 
   /* ============================================
@@ -361,16 +371,6 @@ const links = [
     25% { transform: translate(-45%, -55%) scale(1.05); }
     50% { transform: translate(-55%, -45%) scale(0.95); }
     75% { transform: translate(-48%, -52%) scale(1.02); }
-  }
-
-  .linktree-page .bg-grid {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
   }
 
   .linktree-page .bg-noise {
@@ -1035,18 +1035,6 @@ const links = [
   /* ============================================
      SCROLL EFFECTS
      ============================================ */
-  .linktree-page .cursor-trail {
-    position: fixed;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(184, 108, 255, 0.4) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-    display: none;
-  }
-
   .linktree-page .scroll-progress {
     position: fixed;
     top: 0; left: 0;
@@ -1094,16 +1082,6 @@ const links = [
   // ============================================
 
   document.addEventListener('DOMContentLoaded', function() {
-    // --- Cursor Trail (desktop only) ---
-    var cursorTrail = document.getElementById('cursorTrail');
-    if (cursorTrail && window.innerWidth > 768) {
-      cursorTrail.style.display = 'block';
-      document.addEventListener('mousemove', function(e) {
-        cursorTrail.style.left = e.clientX + 'px';
-        cursorTrail.style.top = e.clientY + 'px';
-      });
-    }
-
     // --- Scroll Progress Bar ---
     var scrollProgress = document.getElementById('scrollProgress');
     if (scrollProgress) {
