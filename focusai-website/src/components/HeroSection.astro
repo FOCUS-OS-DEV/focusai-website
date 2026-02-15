@@ -172,10 +172,11 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
     to   { opacity: 1; transform: scale(1); }
   }
 
-  /* Fingerprint fade-in */
+  /* Fingerprint fade-in - override global mobile hide rule */
   .hero-fingerprint {
     opacity: 0;
     animation: heroFadeIn 2s ease-out 1s forwards;
+    display: block !important;
   }
 
   @keyframes heroFadeIn {
