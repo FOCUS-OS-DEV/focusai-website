@@ -176,7 +176,7 @@ const links = [
     <a href="/" class="homepage-link">
       <div class="homepage-link-glow"></div>
       <div class="homepage-link-inner">
-        <img src={logoUrl} alt="Focus AI" class="homepage-logo" width="40" height="40" />
+        <img src={logoUrl} alt="Focus AI" class="homepage-logo" width="56" height="56" />
         <div class="homepage-link-text">
           <span class="homepage-link-title">האתר הראשי של Focus AI</span>
           <span class="homepage-link-sub">focusai.co.il</span>
@@ -233,13 +233,19 @@ const links = [
   </div>
 </div>
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" slot="scripts" />
+<!-- Font Awesome - load in head for immediate icon rendering -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin slot="head" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" slot="head" />
 
 <style is:global>
   /* ============================================
      LINKTREE PAGE STYLES
      ============================================ */
+  /* Hide global body fingerprint watermark on this page (we have our own) */
+  body:has(.linktree-page)::before {
+    display: none !important;
+  }
+
   .linktree-page {
     --lt-primary-purple: #b86cff;
     --lt-primary-pink: #ff4fd8;
@@ -279,37 +285,27 @@ const links = [
     position: fixed;
     width: 100vw; height: 100vh;
     top: 0; left: 0;
-    background-size: 60% auto;
+    background-size: 55% auto;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    opacity: 0.07;
-    filter: blur(1px);
-    animation: lt-fingerprintFloat 15s ease-in-out infinite;
+    opacity: 0.06;
+    filter: blur(2px);
     z-index: 1;
   }
 
   @media (min-width: 1024px) {
     .linktree-page .fingerprint-bg {
-      opacity: 0.1;
-      background-size: 50% auto;
-      top: 25vh;
-      background-position: center top;
+      opacity: 0.08;
+      background-size: 45% auto;
     }
   }
 
   @media (max-width: 767px) {
     .linktree-page .fingerprint-bg {
-      opacity: 0.08;
-      background-size: 90% auto;
+      opacity: 0.06;
+      background-size: 80% auto;
     }
-  }
-
-  @keyframes lt-fingerprintFloat {
-    0%, 100% { opacity: 0.06; transform: scale(1) rotate(0deg); }
-    25% { opacity: 0.1; transform: scale(1.02) rotate(1deg); }
-    50% { opacity: 0.08; transform: scale(1.04) rotate(0deg); }
-    75% { opacity: 0.1; transform: scale(1.02) rotate(-1deg); }
   }
 
   .linktree-page .fingerprint-glow {
@@ -614,10 +610,10 @@ const links = [
     position: relative;
     display: block;
     width: 100%;
-    max-width: 500px;
-    margin-bottom: 10px;
+    max-width: 550px;
+    margin-bottom: 15px;
     text-decoration: none;
-    border-radius: var(--lt-radius);
+    border-radius: 24px;
     padding: 3px;
     background: linear-gradient(135deg, var(--lt-primary-purple), var(--lt-primary-pink), #7c3aed, var(--lt-primary-purple));
     background-size: 300% 300%;
@@ -655,10 +651,11 @@ const links = [
   .linktree-page .homepage-link-inner {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 16px 22px;
+    justify-content: center;
+    gap: 16px;
+    padding: 22px 28px;
     background: linear-gradient(135deg, rgba(5, 0, 7, 0.95), rgba(27, 1, 37, 0.9));
-    border-radius: calc(var(--lt-radius) - 3px);
+    border-radius: 21px;
     transition: background 0.3s ease;
   }
 
@@ -667,10 +664,10 @@ const links = [
   }
 
   .linktree-page .homepage-logo {
-    width: 44px; height: 44px;
-    border-radius: 12px;
+    width: 56px; height: 56px;
+    border-radius: 14px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(184, 108, 255, 0.5));
+    filter: drop-shadow(0 0 12px rgba(184, 108, 255, 0.5));
     flex-shrink: 0;
   }
 
@@ -678,11 +675,12 @@ const links = [
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    gap: 3px;
   }
 
   .linktree-page .homepage-link-title {
-    font-size: 16px;
+    font-size: 19px;
     font-weight: 700;
     color: var(--lt-text-light);
     transition: all 0.3s ease;
@@ -696,16 +694,15 @@ const links = [
   }
 
   .linktree-page .homepage-link-sub {
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'Courier New', monospace;
     color: var(--lt-text-muted);
     opacity: 0.7;
     direction: ltr;
-    text-align: right;
   }
 
   .linktree-page .homepage-link-icon {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--lt-primary-purple);
     transition: transform 0.3s ease;
     flex-shrink: 0;
@@ -1082,8 +1079,9 @@ const links = [
     .linktree-page .link-subtitle { font-size: 12px; }
     .linktree-page .social-icon { width: 40px; height: 40px; }
     .linktree-page .social-icons { gap: 12px; }
-    .linktree-page .homepage-link-title { font-size: 14px; }
-    .linktree-page .homepage-logo { width: 38px; height: 38px; }
+    .linktree-page .homepage-link-title { font-size: 16px; }
+    .linktree-page .homepage-logo { width: 46px; height: 46px; }
+    .linktree-page .homepage-link-inner { padding: 18px 20px; gap: 14px; }
   }
 
   @media (max-width: 380px) {

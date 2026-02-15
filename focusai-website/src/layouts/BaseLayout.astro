@@ -129,6 +129,9 @@ const websiteSchema = {
 
   <!-- Analytics (GTM, Clarity) - Respects Cookie Consent -->
   <Analytics />
+
+  <!-- Page-specific head content -->
+  <slot name="head" />
 </head>
 <body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active">
   <!-- Skip to content (a11y) -->
