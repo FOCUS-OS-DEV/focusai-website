@@ -14,13 +14,15 @@ interface Props {
 }
 
 const {
-  title = "שומעים את זה ישירות מהבוגרים",
-  subtitle = "בוגרי ההכשרות שלנו מספרים מהשטח",
+  title = "מספרים עלינו",
+  subtitle = "בואו תשמעו מה יש לבוגרי ההכשרות שלנו לספר על החוויה שלהם",
   badge = "VIDEO_TESTIMONIALS",
   theme = "dark",
 } = Astro.props;
 
 const isLight = theme === 'light';
+// When using default title, highlight "מספרים" with gradient
+const useDefaultHighlight = !('title' in Astro.props);
 
 const testimonials = [
   {
@@ -68,16 +70,22 @@ const testimonials = [
 
   <div class="container relative z-10 px-4 md:px-6">
     <!-- Badge -->
-    <div class="flex justify-center mb-6" data-animate="fade-up">
-      <div class={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${isLight ? 'bg-[#f0e6ff] border border-[#d4b8ff]' : 'bg-white/[0.03] backdrop-blur-sm border border-white/[0.08]'}`}>
-        <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
-        <span class="font-mono text-xs text-[#a855f7] uppercase tracking-[0.15em]">{badge}</span>
+    {badge && (
+      <div class="flex justify-center mb-6" data-animate="fade-up">
+        <div class={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${isLight ? 'bg-[#f0e6ff] border border-[#d4b8ff]' : 'bg-white/[0.03] backdrop-blur-sm border border-white/[0.08]'}`}>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs text-[#a855f7] uppercase tracking-[0.15em]">{badge}</span>
+        </div>
       </div>
-    </div>
+    )}
 
     <!-- Title -->
     <div class="text-center mb-10" data-animate="fade-up">
-      <h2 class={`text-2xl sm:text-3xl md:text-5xl font-bold mb-4 tracking-tight ${isLight ? 'text-[#1a1a2e]' : 'text-white'}`}>{title}</h2>
+      <h2 class={`text-2xl sm:text-3xl md:text-5xl font-bold mb-4 tracking-tight ${isLight ? 'text-[#1a1a2e]' : 'text-white'}`}>
+        {useDefaultHighlight ? (
+          <><span class="vtc-title-highlight">מספרים</span> עלינו</>
+        ) : title}
+      </h2>
       <p class={`text-lg max-w-xl mx-auto ${isLight ? 'text-[#6a6a8a]' : 'text-white/50'}`}>{subtitle}</p>
     </div>
 
@@ -288,6 +296,14 @@ const testimonials = [
 </script>
 
 <style>
+  /* === Title highlight gradient === */
+  .vtc-title-highlight {
+    background: linear-gradient(135deg, #a855f7, #c084fc, #e879f9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* === 3D Carousel === */
   .vtc {
     position: relative;
