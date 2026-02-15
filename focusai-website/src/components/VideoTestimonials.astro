@@ -88,15 +88,15 @@ const testimonials = [
               <video
                 preload="none"
                 poster={t.poster}
-                muted
                 playsinline
+                controls
                 class="vt-video"
                 data-src-desktop={t.video}
                 data-src-mobile={t.video.replace('/upload/q_auto/', '/upload/w_720,q_auto/')}
                 aria-label={`${t.name} - ${t.role} - עדות וידאו`}
-              />
+              ><track kind="captions" default /></video>
 
-              <!-- Play button -->
+              <!-- Play button overlay (hides once playing) -->
               <button class="vt-play-btn" aria-label={`נגן סרטון של ${t.name}`}>
                 <svg class="w-7 h-7 ms-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8 5v14l11-7z"/>
@@ -157,47 +157,34 @@ const testimonials = [
 
   var cards = carousel.querySelectorAll('.vt-card');
   var dots = document.querySelectorAll('.vt-dot');
+  var isMobile = window.innerWidth < 768;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var scrollBehavior = reduced ? 'auto' : 'smooth';
 
-  function getSrc(el) {
-    return window.innerWidth < 768
-      ? el.getAttribute('data-src-mobile')
-      : el.getAttribute('data-src-desktop');
+  // Lazy-load: set video src on first interaction with card
+  function loadVideo(video) {
+    if (video.getAttribute('src')) return; // already loaded
+    var src = isMobile
+      ? video.getAttribute('data-src-mobile')
+      : video.getAttribute('data-src-desktop');
+    if (src) {
+      video.src = src;
+      video.load();
+    }
   }
 
-  function pauseAll() {
+  // Pause all other videos
+  function pauseOthers(currentVideo) {
     cards.forEach(function(c) {
       var v = c.querySelector('.vt-video');
       var btn = c.querySelector('.vt-play-btn');
       var inner = c.querySelector('.vt-card-inner');
-      if (v && !v.paused) {
+      if (v && v !== currentVideo && !v.paused) {
         v.pause();
         if (inner) inner.classList.remove('vt-active');
         if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
       }
     });
-  }
-
-  function doPlay(video, playBtn, inner) {
-    pauseAll();
-    video.muted = true;
-    var p = video.play();
-    if (p && p.then) {
-      p.then(function() {
-        try { video.muted = false; } catch(e) {}
-        if (inner) inner.classList.add('vt-active');
-        playBtn.style.opacity = '0';
-        playBtn.style.pointerEvents = 'none';
-      }).catch(function() {
-        video.muted = true;
-        video.play().then(function() {
-          if (inner) inner.classList.add('vt-active');
-          playBtn.style.opacity = '0';
-          playBtn.style.pointerEvents = 'none';
-        }).catch(function() {});
-      });
-    }
   }
 
   cards.forEach(function(card) {
@@ -206,36 +193,42 @@ const testimonials = [
     var inner = card.querySelector('.vt-card-inner');
     if (!video || !playBtn) return;
 
-    function toggle() {
-      // First click: load src, wait for canplay, then play
-      if (!video.getAttribute('src')) {
-        var src = getSrc(video);
-        if (!src) return;
-        video.src = src;
-        video.load();
-        video.addEventListener('canplay', function onReady() {
-          video.removeEventListener('canplay', onReady);
-          doPlay(video, playBtn, inner);
-        });
-        return;
-      }
+    // Click play button → load src + play
+    playBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      loadVideo(video);
+      pauseOthers(video);
+      // Small delay to ensure src is set before play
+      setTimeout(function() {
+        video.play().catch(function() {});
+      }, 100);
+    });
 
-      if (video.paused) {
-        doPlay(video, playBtn, inner);
-      } else {
-        video.pause();
-        if (inner) inner.classList.remove('vt-active');
-        playBtn.style.opacity = '1';
-        playBtn.style.pointerEvents = 'auto';
-      }
-    }
+    // When video starts playing (from custom btn OR native controls)
+    video.addEventListener('play', function() {
+      pauseOthers(video);
+      if (inner) inner.classList.add('vt-active');
+      playBtn.style.opacity = '0';
+      playBtn.style.pointerEvents = 'none';
+    });
 
-    playBtn.addEventListener('click', function(e) { e.stopPropagation(); toggle(); });
-    video.addEventListener('click', toggle);
+    // When video pauses or ends
+    video.addEventListener('pause', function() {
+      if (inner) inner.classList.remove('vt-active');
+      playBtn.style.opacity = '1';
+      playBtn.style.pointerEvents = 'auto';
+    });
+
     video.addEventListener('ended', function() {
       if (inner) inner.classList.remove('vt-active');
       playBtn.style.opacity = '1';
       playBtn.style.pointerEvents = 'auto';
+    });
+
+    // Also load src when native controls play button is clicked
+    video.addEventListener('click', function() {
+      loadVideo(video);
     });
   });
 
@@ -340,6 +333,17 @@ const testimonials = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
+  }
+
+  /* Hide native controls by default, show when playing */
+  .vt-video::-webkit-media-controls {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .vt-active .vt-video::-webkit-media-controls {
+    opacity: 1;
   }
 
   .vt-play-btn {
