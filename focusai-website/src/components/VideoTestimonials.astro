@@ -10,13 +10,17 @@ interface Props {
   title?: string;
   subtitle?: string;
   badge?: string;
+  theme?: 'dark' | 'light';
 }
 
 const {
   title = "שומעים את זה ישירות מהבוגרים",
   subtitle = "בוגרי ההכשרות שלנו מספרים מהשטח",
   badge = "VIDEO_TESTIMONIALS",
+  theme = "dark",
 } = Astro.props;
+
+const isLight = theme === 'light';
 
 const testimonials = [
   {
@@ -58,14 +62,14 @@ const testimonials = [
 ];
 ---
 
-<section class="py-12 md:py-20 relative overflow-hidden bg-[#0a0a0f]" aria-label="עדויות וידאו מבוגרים" data-section>
+<section class={`py-12 md:py-20 relative overflow-hidden ${isLight ? 'bg-transparent' : 'bg-[#0a0a0f]'}`} aria-label="עדויות וידאו מבוגרים" data-section data-vtc-theme={theme}>
   <!-- Background glow -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>
+  {!isLight && <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>}
 
   <div class="container relative z-10 px-4 md:px-6">
     <!-- Badge -->
     <div class="flex justify-center mb-6" data-animate="fade-up">
-      <div class="inline-flex items-center gap-3 px-4 py-2 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full">
+      <div class={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${isLight ? 'bg-[#f0e6ff] border border-[#d4b8ff]' : 'bg-white/[0.03] backdrop-blur-sm border border-white/[0.08]'}`}>
         <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
         <span class="font-mono text-xs text-[#a855f7] uppercase tracking-[0.15em]">{badge}</span>
       </div>
@@ -73,8 +77,8 @@ const testimonials = [
 
     <!-- Title -->
     <div class="text-center mb-10" data-animate="fade-up">
-      <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">{title}</h2>
-      <p class="text-lg text-white/50 max-w-xl mx-auto">{subtitle}</p>
+      <h2 class={`text-2xl sm:text-3xl md:text-5xl font-bold mb-4 tracking-tight ${isLight ? 'text-[#1a1a2e]' : 'text-white'}`}>{title}</h2>
+      <p class={`text-lg max-w-xl mx-auto ${isLight ? 'text-[#6a6a8a]' : 'text-white/50'}`}>{subtitle}</p>
     </div>
 
     <!-- 3D Carousel -->
@@ -597,6 +601,39 @@ const testimonials = [
     .vtc-track {
       height: 380px;
     }
+  }
+
+  /* === Light theme overrides === */
+  [data-vtc-theme="light"] .vtc-inner {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  [data-vtc-theme="light"] .vtc-center .vtc-inner {
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.12), 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  [data-vtc-theme="light"] .vtc-arr {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+  }
+
+  [data-vtc-theme="light"] .vtc-arr:hover {
+    background: rgba(168, 85, 247, 0.2);
+  }
+
+  [data-vtc-theme="light"] .vtc-dot {
+    filter: grayscale(1) brightness(0.3);
+  }
+
+  [data-vtc-theme="light"] .vtc-dot-active {
+    filter: grayscale(0) brightness(0.8) drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+  }
+
+  [data-vtc-theme="light"] .vtc-dot:hover:not(.vtc-dot-active) {
+    filter: grayscale(0.5) brightness(0.5);
   }
 
   /* Reduced motion */
