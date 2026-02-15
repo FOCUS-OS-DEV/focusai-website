@@ -27,7 +27,9 @@ export default defineConfig({
 
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/links'),
+    }),
     icon({
       include: {
         lucide: ['*'],  // All Lucide icons
