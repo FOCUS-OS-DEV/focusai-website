@@ -83,10 +83,15 @@ html:not(.preloader-active) [slot="footer"] {
   --glow-magenta: 0 0 10px #c084fc, 0 0 20px rgba(192, 132, 252, 0.5);
   --glow-cyan: 0 0 10px #06b6d4, 0 0 20px rgba(6, 182, 212, 0.5);
 
-  /* Typography */
-  --font-family-display: 'Orbitron', 'Share Tech Mono', monospace;
-  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-  --font-family-body: 'Rubik', system-ui, -apple-system, sans-serif;
+  /* Typography - Rubik only */
+  --font-family-display: 'Rubik', system-ui, sans-serif;
+  --font-family-mono: 'Rubik', system-ui, sans-serif;
+  --font-family-body: 'Rubik', system-ui, sans-serif;
+
+  /* Override Tailwind font-family utilities to use Rubik everywhere */
+  --font-sans: 'Rubik', system-ui, sans-serif;
+  --font-mono: 'Rubik', system-ui, sans-serif;
+  --font-serif: 'Rubik', system-ui, sans-serif;
 
   /* Spacing - Tighter sections for seamless flow */
   --space-section: clamp(2rem, 4vw, 3.5rem);
@@ -101,7 +106,7 @@ html:not(.preloader-active) [slot="footer"] {
 /* ===== BASE STYLES ===== */
 
 html {
-  font-size: 100%; /* 16px base on mobile */
+  font-size: 106%; /* ~17px base on mobile - bumped for readability */
   scroll-behavior: smooth;
   overflow-x: hidden; /* Fallback for older Safari (<16) */
   overflow-x: clip; /* Modern browsers - prevents scroll anchoring issues */
@@ -109,13 +114,13 @@ html {
 
 @media (min-width: 768px) {
   html {
-    font-size: 106%; /* ~17px on tablet */
+    font-size: 112%; /* ~18px on tablet */
   }
 }
 
 @media (min-width: 1024px) {
   html {
-    font-size: 112%; /* ~18px on desktop */
+    font-size: 118%; /* ~19px on desktop */
     zoom: 0.85; /* Fit more content in viewport - 100% view looks like 85% browser zoom */
   }
 }
@@ -291,7 +296,7 @@ body::after {
 
 /* ===== TYPOGRAPHY ===== */
 
-/* Display headings - Orbitron */
+/* Display headings - Rubik */
 .heading-display {
   font-family: var(--font-family-display);
   font-weight: 900;
