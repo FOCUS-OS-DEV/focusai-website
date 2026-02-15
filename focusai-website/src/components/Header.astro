@@ -350,6 +350,62 @@ const toolsLinks = [
     link.addEventListener('click', closeMenu);
   });
 
+  // Focus trap in mobile menu
+  function handleFocusTrap(e: KeyboardEvent) {
+    if (e.key !== 'Tab' || !isMenuOpen || !mobileMenu) return;
+    const focusable = mobileMenu.querySelectorAll<HTMLElement>('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  document.addEventListener('keydown', handleFocusTrap);
+
+  // Desktop dropdown keyboard accessibility
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const trigger = dropdown.querySelector('a');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    if (!trigger || !menu) return;
+
+    trigger.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const isOpen = menu.classList.contains('dropdown-open');
+        document.querySelectorAll('.dropdown-menu.dropdown-open').forEach(m => m.classList.remove('dropdown-open'));
+        if (!isOpen) {
+          menu.classList.add('dropdown-open');
+          const firstLink = menu.querySelector<HTMLElement>('a');
+          firstLink?.focus();
+        }
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        menu.classList.add('dropdown-open');
+        const firstLink = menu.querySelector<HTMLElement>('a');
+        firstLink?.focus();
+      }
+    });
+
+    menu.querySelectorAll('a').forEach((link, i, links) => {
+      link.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); (links[i + 1] || links[0])?.focus(); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); (links[i - 1] || links[links.length - 1])?.focus(); }
+        if (e.key === 'Escape') { e.preventDefault(); menu.classList.remove('dropdown-open'); trigger.focus(); }
+      });
+    });
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element)?.closest('.nav-dropdown')) {
+      document.querySelectorAll('.dropdown-menu.dropdown-open').forEach(m => m.classList.remove('dropdown-open'));
+    }
+  });
+
   // Header scroll effect + light/dark theme transition
   const header = document.getElementById('main-header');
   const isLightPage = header?.classList.contains('header-theme-light');
@@ -430,8 +486,11 @@ const toolsLinks = [
     transform: translateY(-10px) scale(0.98);
   }
 
-  .nav-dropdown:hover .dropdown-menu {
+  .nav-dropdown:hover .dropdown-menu,
+  .dropdown-menu.dropdown-open {
     transform: translateY(0) scale(1);
+    opacity: 1;
+    visibility: visible;
   }
 
   /* CTA button styling */

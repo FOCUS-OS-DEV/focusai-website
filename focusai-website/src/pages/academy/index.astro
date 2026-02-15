@@ -594,25 +594,26 @@ const courseSchema = {
             placeholder="שם מלא"
             required
             dir="rtl"
+            aria-label="שם מלא"
             class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
           />
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
-              type="text"
-              inputmode="tel"
+              type="tel"
               name="phone"
               placeholder="טלפון"
               required
               dir="rtl"
+              aria-label="טלפון"
               class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
             />
             <input
-              type="text"
-              inputmode="email"
+              type="email"
               name="email"
               placeholder="אימייל"
               required
               dir="rtl"
+              aria-label="אימייל"
               class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
             />
           </div>
@@ -942,20 +943,20 @@ const courseSchema = {
               class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
             />
             <input
-              type="text"
-              inputmode="tel"
+              type="tel"
               name="phone"
               placeholder="טלפון"
               required
               dir="rtl"
+              aria-label="טלפון"
               class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
             />
             <input
-              type="text"
-              inputmode="email"
+              type="email"
               name="email"
               placeholder="אימייל"
               dir="rtl"
+              aria-label="אימייל"
               class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
             />
           </div>
@@ -1161,23 +1162,23 @@ const courseSchema = {
               class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
             />
             <input
-              type="text"
-              inputmode="tel"
+              type="tel"
               name="phone"
               placeholder="טלפון"
               required
               dir="rtl"
+              aria-label="טלפון"
               class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
             />
           </div>
 
           <input
-            type="text"
-            inputmode="email"
+            type="email"
             name="email"
             placeholder="אימייל"
             required
             dir="rtl"
+            aria-label="אימייל"
             class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
           />
 
@@ -1228,6 +1229,12 @@ const courseSchema = {
   const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
 
   async function handleFormSubmit(form: HTMLFormElement, source: string) {
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalHTML = submitBtn?.innerHTML || '';
+
+    // Loading state
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'שולח...'; }
+
     const formData = new FormData(form);
     const params = new URLSearchParams();
     params.append('source', source);
@@ -1237,18 +1244,18 @@ const courseSchema = {
       }
     });
 
-    // Send as form-urlencoded (simple request, no CORS preflight)
     try {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
         body: params,
       });
+      // Fire Meta Pixel Lead event
+      if (typeof fbq === 'function') fbq('track', 'Lead');
+      window.location.href = '/academy/thank-you';
     } catch {
-      // Even if fetch fails, still redirect
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalHTML; }
+      alert('שגיאה בשליחת הטופס. אנא נסו שנית.');
     }
-    // Fire Meta Pixel Lead event
-    if (typeof fbq === 'function') fbq('track', 'Lead');
-    window.location.href = '/academy/thank-you';
   }
 
   // Syllabus form

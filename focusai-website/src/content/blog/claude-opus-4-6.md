@@ -5,7 +5,7 @@ pubDate: 2026-02-13
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029289/blog/claude-opus-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools"]
-ctaType: "agents"
+ctaType: "botcamp"
 ---
 
 ## המודל שלא רק חכם יותר - אלא יודע *איך* לחשוב

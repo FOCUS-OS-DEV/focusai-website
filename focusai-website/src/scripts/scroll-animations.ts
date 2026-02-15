@@ -24,6 +24,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
 // Trigger point: 120% = 20% BELOW viewport (animation starts well before visible)
@@ -499,6 +501,15 @@ export function initScrollAnimations() {
   // Find all elements with data-animate attribute
   const animatedElements = document.querySelectorAll('[data-animate]');
 
+  // Respect prefers-reduced-motion: show all elements immediately, skip animations
+  if (prefersReducedMotion) {
+    animatedElements.forEach(el => {
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'none';
+    });
+    return;
+  }
+
   animatedElements.forEach((el) => {
     const animationType = el.getAttribute('data-animate') as keyof typeof animations;
     const delay = parseFloat(el.getAttribute('data-delay') || '0');
@@ -522,6 +533,10 @@ export function initScrollAnimations() {
 
   // Initialize section transitions
   initSectionTransitions();
+
+  // Refresh ScrollTrigger after init and after lazy images load
+  ScrollTrigger.refresh();
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 }
 
 // Section transition effects

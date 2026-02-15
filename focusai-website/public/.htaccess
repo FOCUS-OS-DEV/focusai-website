@@ -17,4 +17,7 @@
 
   # Permissions Policy
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # Content Security Policy
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.clarity.ms https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://res.cloudinary.com data:; connect-src 'self' https://*.n8n.cloud https://www.google-analytics.com https://www.clarity.ms https://region1.google-analytics.com; frame-src 'none';"
 </IfModule>

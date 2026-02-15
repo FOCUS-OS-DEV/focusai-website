@@ -113,7 +113,7 @@ const interestOptions = [
                     id="name"
                     name="name"
                     required
-                    class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-sm focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+                    class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
                     placeholder="הכנס שם_"
                   />
                 </div>
@@ -130,7 +130,7 @@ const interestOptions = [
                     id="phone"
                     name="phone"
                     required
-                    class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-sm focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+                    class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
                     placeholder="050-000-0000_"
                   />
                 </div>
@@ -147,7 +147,7 @@ const interestOptions = [
                   type="email"
                   id="email"
                   name="email"
-                  class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-sm focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+                  class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
                   placeholder="email@example.com_"
                 />
               </div>
@@ -162,7 +162,7 @@ const interestOptions = [
                 <select
                   id="interest"
                   name="interest"
-                  class="w-full pl-10 pr-10 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-sm focus:outline-none focus:border-[#a855f7] focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 appearance-none cursor-pointer rounded-xl"
+                  class="w-full pl-10 pr-10 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 appearance-none cursor-pointer rounded-xl"
                 >
                   {interestOptions.map((opt) => (
                     <option value={opt.value}>[{opt.code}] {opt.label}</option>
@@ -185,7 +185,7 @@ const interestOptions = [
                   id="message"
                   name="message"
                   rows="4"
-                  class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-sm focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 resize-none rounded-xl"
+                  class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 resize-none rounded-xl"
                   placeholder="// ספרו לנו על מה שאתם מחפשים..."
                 ></textarea>
               </div>
@@ -282,7 +282,10 @@ const interestOptions = [
               alt="חבובוט - הבוט החכם של Focus AI"
               class="w-40 lg:w-48 h-auto mx-auto mb-4 hover:scale-105 transition-transform duration-500"
               style="filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.3));"
+              width="500"
+              height="500"
               loading="lazy"
+              decoding="async"
             />
             <p class="text-sm text-[#b0b0c0] font-mono">
               <span class="text-[#a855f7]">//</span> יש לכם שאלה? חבובוט כאן לעזור!
@@ -300,6 +303,14 @@ const interestOptions = [
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const btnText = submitBtn?.querySelector('span:last-child');
+    const originalText = btnText?.textContent || '';
+
+    // Loading state
+    if (submitBtn) submitBtn.disabled = true;
+    if (btnText) btnText.textContent = 'שולח...';
+
     const formData = new FormData(form);
     const params = new URLSearchParams();
     params.append('source', 'homepage-contact');
@@ -311,10 +322,13 @@ const interestOptions = [
 
     try {
       await fetch(WEBHOOK_URL, { method: 'POST', body: params });
-    } catch {}
-
-    if (typeof fbq === 'function') fbq('track', 'Lead');
-    window.location.href = '/academy/thank-you';
+      if (typeof fbq === 'function') fbq('track', 'Lead');
+      window.location.href = '/academy/thank-you';
+    } catch {
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnText) btnText.textContent = originalText;
+      alert('שגיאה בשליחת הטופס. אנא נסו שנית.');
+    }
   });
 </script>
 
