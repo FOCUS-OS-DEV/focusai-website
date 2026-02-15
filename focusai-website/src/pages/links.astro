@@ -5,36 +5,40 @@ import { siteConfig } from '../data/config';
 
 const cldBase = siteConfig.assets.cloudinaryBase;
 
-// Client logos for brands carousel
-const clientLogos = [
-  { name: 'דרכא', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239326/34_hfdzkq.png` },
-  { name: 'אגודת הסטודנטים', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239331/37_xm34qd.png` },
-  { name: 'דיקנאט הסטודנטים', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239329/36_ddwaud.png` },
-  { name: 'Raveh Ravid', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239338/41_nufstk.png` },
-  { name: 'אוניברסיטת חיפה', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239319/24_fcxmpa.png` },
-  { name: 'New Mark', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239322/28_wg1jv8.png` },
-  { name: 'Beer', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239323/30_ahmcfn.png` },
-  { name: 'רשגדא', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239321/27_gzwe5z.png` },
-  { name: 'iJump', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239334/38_ornkqc.png` },
-  { name: 'Kimama', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239320/26_opmxu4.png` },
-  { name: 'היסוד הבסיסי', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239324/31_brygr5.png` },
-  { name: 'BB Baby', logo: `${cldBase}/q_auto,f_auto,w_400/v1764239327/35_gopg6v.png` },
-];
-
+// Hero assets (from HeroSection)
+const chavobot = `${cldBase}/q_auto,f_auto,w_650/v1771022344/36c7efb5-d099-4cb1-94fe-1bd896f53cef_ivfe4n.png`;
+const chavobotMobile = `${cldBase}/q_auto,f_auto,w_420/v1771022344/36c7efb5-d099-4cb1-94fe-1bd896f53cef_ivfe4n.png`;
 const logoUrl = `${cldBase}/q_auto,f_auto,w_200/v1765265415/2_fxdcio.png`;
 const fingerprintUrl = `${cldBase}/q_auto,f_auto,w_700/v1765571815/FOCUS_LOGO-06_2_grkja9.png`;
-const shaharImg = `${cldBase}/q_auto,f_auto,w_500/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg`;
-const unilImg = `${cldBase}/q_auto,f_auto,w_500/v1770364984/IMG_4898.JPG_uate4o.jpg`;
 
-// Links data
+// Floating particles (deterministic)
+const particles = Array.from({ length: 10 }, (_, i) => ({
+  char: ['0', '1', '>', '<', '/', '*', '#', '@'][i % 8],
+  x: (i * 37 + 13) % 100,
+  y: (i * 29 + 7) % 100,
+  duration: (i % 5) + 6,
+  delay: (i * 1.2) % 5,
+  size: (i % 4) + 12,
+}));
+
+// Links data - all nav menu items
 const links = [
   {
-    title: 'אקדמיית Focus AI',
-    subtitle: 'הכשרות AI מקצועיות - Bot-Camp',
+    title: 'Bot-Camp',
+    subtitle: 'הכשרת AI מקצועית - מפתחי אוטומציות וסוכני AI',
     href: '/academy',
     icon: 'fa-solid fa-graduation-cap',
-    badge: 'חדש',
+    badge: 'מוביל',
     badgeClass: '',
+    cardClass: 'featured',
+  },
+  {
+    title: 'AI Ready',
+    subtitle: 'יסודות AI לאנשי מקצוע - הכשרה ארגונית',
+    href: '/academy/ai-ready',
+    icon: 'fa-solid fa-users-gear',
+    badge: 'פופולרי',
+    badgeClass: 'popular',
     cardClass: 'featured',
   },
   {
@@ -43,16 +47,7 @@ const links = [
     href: '/ai-workshop',
     icon: 'fa-solid fa-chalkboard-user',
     badge: 'חינם',
-    badgeClass: '',
-    cardClass: 'featured',
-  },
-  {
-    title: 'הכשרת AI Ready',
-    subtitle: 'הכשרת עובדים ארגונית',
-    href: '/academy/ai-ready',
-    icon: 'fa-solid fa-users-gear',
-    badge: 'פופולרי',
-    badgeClass: 'popular',
+    badgeClass: 'free',
     cardClass: 'featured',
   },
   {
@@ -65,18 +60,17 @@ const links = [
     cardClass: '',
   },
   {
-    title: 'קהילת WhatsApp',
-    subtitle: 'הצטרפו לקהילה שלנו - טיפים וחדשות AI',
-    href: siteConfig.social.whatsappCommunity,
-    icon: 'fa-brands fa-whatsapp',
+    title: 'חדשות AI',
+    subtitle: 'מאמרים, מדריכים וטיפים על בינה מלאכותית',
+    href: '/blog',
+    icon: 'fa-solid fa-newspaper',
     badge: '',
     badgeClass: '',
-    cardClass: '',
-    external: true,
+    cardClass: 'news',
   },
   {
-    title: 'ארגז כלי AI',
-    subtitle: 'הכלים הטובים ביותר שאנחנו ממליצים',
+    title: 'מרכז הכלים',
+    subtitle: 'כלי AI מומלצים ומדריכים',
     href: '/tools',
     icon: 'fa-solid fa-wand-magic-sparkles',
     badge: '',
@@ -84,13 +78,14 @@ const links = [
     cardClass: 'ai-tools',
   },
   {
-    title: 'הבלוג שלנו',
-    subtitle: 'מאמרים, מדריכים וטיפים על AI',
-    href: '/blog',
-    icon: 'fa-solid fa-newspaper',
+    title: 'קהילת WhatsApp',
+    subtitle: 'הצטרפו לקהילה שלנו - טיפים וחדשות AI',
+    href: siteConfig.social.whatsappCommunity,
+    icon: 'fa-brands fa-whatsapp',
     badge: '',
     badgeClass: '',
-    cardClass: 'prompt-master',
+    cardClass: 'whatsapp',
+    external: true,
   },
 ];
 ---
@@ -105,7 +100,6 @@ const links = [
     <div class="bg-orb bg-orb-1"></div>
     <div class="bg-orb bg-orb-2"></div>
     <div class="bg-orb bg-orb-3"></div>
-    <div class="bg-orb bg-orb-4"></div>
     <div class="bg-grid"></div>
     <div class="bg-noise"></div>
   </div>
@@ -116,59 +110,48 @@ const links = [
   <!-- Cursor Trail (desktop only) -->
   <div class="cursor-trail" id="cursorTrail"></div>
 
-  <div class="lt-container">
-    <!-- Header with Epic Logo -->
-    <header class="lt-header">
-      <a href="/" class="logo-wrapper" title="לדף הבית">
-        <!-- Pulse Rings -->
-        <div class="pulse-ring-outer"></div>
-        <div class="pulse-ring-outer"></div>
-        <div class="pulse-ring-outer"></div>
+  <!-- Floating Data Particles -->
+  <div class="lt-particles" aria-hidden="true">
+    {particles.map((p) => (
+      <span
+        class="lt-particle"
+        style={`left:${p.x}%;top:${p.y}%;font-size:${p.size}px;animation-duration:${p.duration}s;animation-delay:${p.delay}s`}
+      >
+        {p.char}
+      </span>
+    ))}
+  </div>
 
-        <!-- Gradient Spinner -->
-        <div class="gradient-spinner"></div>
+  <!-- HERO SECTION (from homepage, without CTA buttons) -->
+  <section class="lt-hero">
+    <div class="lt-hero-content">
+      <!-- Chavobot Image -->
+      <div class="lt-hero-image">
+        <img
+          src={chavobotMobile}
+          srcset={`${chavobotMobile} 420w, ${chavobot} 800w`}
+          sizes="(max-width: 640px) 420px, 650px"
+          alt="חבובוט - הנציג החכם של Focus AI"
+          fetchpriority="high"
+          decoding="async"
+          width="650"
+          height="650"
+          class="lt-chavobot"
+        />
+      </div>
 
-        <!-- Energy Field -->
-        <div class="energy-field"></div>
-
-        <!-- Orbit Dots -->
-        <div class="orbit-dots">
-          <div class="orbit-dot"></div>
-          <div class="orbit-dot"></div>
-          <div class="orbit-dot"></div>
-          <div class="orbit-dot"></div>
-        </div>
-
-        <!-- Data Streams -->
-        <div class="data-stream"></div>
-        <div class="data-stream"></div>
-        <div class="data-stream"></div>
-        <div class="data-stream"></div>
-        <div class="data-stream"></div>
-        <div class="data-stream"></div>
-
-        <!-- Inner Ring -->
-        <div class="inner-ring"></div>
-
-        <!-- Scan Effect -->
-        <div class="scan-effect"></div>
-
-        <!-- Logo Container -->
-        <div class="logo-inner">
-          <div class="grid-overlay"></div>
-          <div class="shine-sweep"></div>
-          <img src={logoUrl} alt="Focus AI" class="logo-img" width="150" height="150" />
-        </div>
-
-        <!-- Corner Accents -->
-        <div class="corner-accent"></div>
-        <div class="corner-accent"></div>
-        <div class="corner-accent"></div>
-        <div class="corner-accent"></div>
-
-        <!-- Status Badge -->
-        <div class="status-badge">AI PARTNER</div>
-      </a>
+      <!-- Text Content -->
+      <div class="lt-hero-text">
+        <h1 class="lt-hero-title">
+          <span class="lt-title-focus">Focus</span>
+          <span class="lt-title-ai">AI</span>
+        </h1>
+        <p class="lt-hero-partner">Your AI Partner</p>
+        <h2 class="lt-hero-subtitle">
+          <span class="lt-sub-white">מחברים אנשים </span>
+          <span class="lt-sub-gradient">וטכנולוגיה</span>
+        </h2>
+      </div>
 
       <!-- Social Icons -->
       <div class="social-icons">
@@ -185,23 +168,21 @@ const links = [
           <i class="fa-brands fa-instagram"></i>
         </a>
       </div>
-    </header>
-
-    <!-- About Card -->
-    <div class="about-card">
-      <p class="description">
-        אנחנו <strong>Focus AI</strong> - מלווים חברות, ארגונים ואנשי מקצוע בתהליכי טרנספורמציה דיגיטלית באמצעות הטמעת פתרונות AI ואוטומציה. מגשרים על הפער בין אנשים לטכנולוגיה.
-      </p>
-      <p class="description">
-        הכשרות מקצועיות, סדנאות, ייעוץ אסטרטגי, פיתוח סוכני AI ופתרונות אוטומציה מותאמים אישית.
-      </p>
     </div>
+  </section>
 
-    <!-- Homepage Link -->
+  <div class="lt-container">
+    <!-- Premium Homepage Link -->
     <a href="/" class="homepage-link">
-      <i class="fa-solid fa-house"></i>
-      <span>לאתר הראשי של Focus AI</span>
-      <i class="fa-solid fa-arrow-left link-arrow"></i>
+      <div class="homepage-link-glow"></div>
+      <div class="homepage-link-inner">
+        <img src={logoUrl} alt="Focus AI" class="homepage-logo" width="40" height="40" />
+        <div class="homepage-link-text">
+          <span class="homepage-link-title">האתר הראשי של Focus AI</span>
+          <span class="homepage-link-sub">focusai.co.il</span>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square homepage-link-icon"></i>
+      </div>
     </a>
 
     <!-- Section Divider -->
@@ -243,43 +224,7 @@ const links = [
   <!-- VideoTestimonials (full width) -->
   <VideoTestimonials theme="dark" />
 
-  <div class="lt-container">
-    <!-- Brands Carousel -->
-    <div class="brands-section">
-      <div class="brands-title">עובדים עם הטובים ביותר</div>
-      <div class="carousel-wrapper">
-        <div class="carousel-track" id="brandsTrack">
-          {/* 3 sets for seamless infinite loop */}
-          {[0, 1, 2].map(() => (
-            <div class="logos-set">
-              {clientLogos.map((client) => (
-                <img src={client.logo} alt={client.name} loading="lazy" width="180" height="180" />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <!-- Founders Section -->
-    <div class="founders-section">
-      <div class="founders-names">
-        <div class="founder-name">
-          <img src={shaharImg} alt="שחר דדיה" class="founder-avatar" loading="lazy" width="80" height="80" />
-          <h4>שחר דדיה</h4>
-          <span>CEO & AI Strategy</span>
-        </div>
-        <div class="founder-name">
-          <img src={unilImg} alt="אוניל סחר" class="founder-avatar" loading="lazy" width="80" height="80" />
-          <h4>אוניל סחר</h4>
-          <span>COO & Business Dev</span>
-        </div>
-      </div>
-      <p class="founders-text">
-        מרצים באוניברסיטת חיפה והטכניון. מלווים חברות מובילות בישראל בתהליכי טרנספורמציה דיגיטלית.
-      </p>
-    </div>
-
+  <div class="lt-container" style="padding-top: 0;">
     <!-- Footer -->
     <footer class="lt-footer">
       <div class="footer-text">&copy; {new Date().getFullYear()} Focus AI - כל הזכויות שמורות</div>
@@ -323,10 +268,8 @@ const links = [
      ============================================ */
   .linktree-page .bg-effects {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
@@ -334,10 +277,8 @@ const links = [
 
   .linktree-page .fingerprint-bg {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
+    width: 100vw; height: 100vh;
+    top: 0; left: 0;
     background-size: 60% auto;
     background-repeat: no-repeat;
     background-position: center center;
@@ -354,11 +295,6 @@ const links = [
       background-size: 50% auto;
       top: 25vh;
       background-position: center top;
-    }
-    .linktree-page .about-card {
-      background: rgba(27, 1, 37, 0.3) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
     }
   }
 
@@ -378,10 +314,8 @@ const links = [
 
   .linktree-page .fingerprint-glow {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
+    width: 100vw; height: 100vh;
+    top: 0; left: 0;
     background: radial-gradient(ellipse at center, rgba(184, 108, 255, 0.15) 0%, transparent 60%);
     z-index: 0;
     animation: lt-glowBreath 8s ease-in-out infinite;
@@ -415,20 +349,12 @@ const links = [
 
   .linktree-page .bg-orb-3 {
     width: 300px; height: 300px;
-    background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+    background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     animation-delay: -14s;
     opacity: 0.2;
     animation-name: lt-float3;
-  }
-
-  .linktree-page .bg-orb-4 {
-    width: 250px; height: 250px;
-    background: radial-gradient(circle, #d946ef 0%, transparent 70%);
-    top: 30%; right: 20%;
-    animation-delay: -10s;
-    opacity: 0.25;
   }
 
   @keyframes lt-float {
@@ -468,310 +394,138 @@ const links = [
       opacity: 0.25;
       filter: blur(100px);
     }
-    .linktree-page .bg-orb-3, .linktree-page .bg-orb-4 {
-      display: none;
-    }
+    .linktree-page .bg-orb-3 { display: none; }
   }
 
   /* ============================================
-     CONTAINER
+     FLOATING PARTICLES
      ============================================ */
-  .lt-container {
-    position: relative;
+  .lt-particles {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
     z-index: 1;
-    width: 100%;
-    max-width: 100%;
+  }
+
+  .lt-particle {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    color: rgba(168, 85, 247, 0.35);
+    text-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+    animation: lt-particleFloat linear infinite;
+  }
+
+  @keyframes lt-particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    50% { transform: translateY(-40px); }
+  }
+
+  /* ============================================
+     HERO SECTION
+     ============================================ */
+  .lt-hero {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 30px 20px 0;
+  }
+
+  .lt-hero-content {
+    max-width: 600px;
     margin: 0 auto;
-    padding: 30px 20px 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
+  }
+
+  /* Chavobot */
+  .lt-hero-image {
+    position: relative;
+    margin-bottom: -20px;
+    animation: lt-heroImageIn 1s ease-out 0.2s both;
+  }
+
+  .lt-chavobot {
+    width: 90vw;
+    max-width: 380px;
+    height: auto;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
+    filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.2));
+  }
+
+  @keyframes lt-heroImageIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Title */
+  .lt-hero-text {
+    animation: lt-heroTextIn 0.8s ease-out 0.4s both;
+  }
+
+  .lt-hero-title {
+    font-size: clamp(3rem, 12vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 4px;
+  }
+
+  .lt-title-focus {
+    color: #f5f5fa;
+  }
+
+  .lt-title-ai {
+    background: linear-gradient(90deg, #a855f7, #c084fc, #e879f9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-right: 0.15em;
+  }
+
+  .lt-hero-partner {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    color: rgba(144, 144, 168, 0.7);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+
+  .lt-hero-subtitle {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+
+  .lt-sub-white { color: #f5f5fa; }
+
+  .lt-sub-gradient {
+    background: linear-gradient(90deg, #a855f7, #c084fc, #e879f9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @keyframes lt-heroTextIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (min-width: 1024px) {
-    .lt-container {
-      padding: 50px 60px 80px;
-      max-width: 1400px;
-    }
-    .lt-header { width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .linktree-page .about-card { max-width: 800px; }
-    .linktree-page .links-section {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      max-width: 1000px;
-      width: 100%;
-    }
-    .linktree-page .social-icons { max-width: 600px; }
-    .linktree-page .brands-section { max-width: 1200px; }
-    .linktree-page .section-divider { max-width: 600px; }
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .lt-container { max-width: 700px; padding: 40px 30px 60px; }
-    .linktree-page .links-section { max-width: 600px; width: 100%; }
-  }
-
-  @media (max-width: 767px) {
-    .lt-container { max-width: 100%; padding: 20px 15px 40px; }
-    .linktree-page .links-section { width: 100%; }
-  }
-
-  /* ============================================
-     EPIC LOGO ANIMATION
-     ============================================ */
-  .lt-header {
-    text-align: center;
-    margin-bottom: 30px;
-    width: 100%;
-    padding-top: 20px;
-  }
-
-  .linktree-page .logo-wrapper {
-    position: relative;
-    width: 200px; height: 200px;
-    margin: 20px auto 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  @media (max-width: 767px) {
-    .lt-header { padding-top: 10px; }
-    .linktree-page .logo-wrapper { width: 160px; height: 160px; margin: 10px auto 20px; }
-    .linktree-page .logo-inner { width: 120px !important; height: 120px !important; }
-    .linktree-page .pulse-ring-outer { inset: -25px !important; }
-    .linktree-page .gradient-spinner { inset: -15px !important; }
-    .linktree-page .orbit-dots { inset: -18px !important; }
-    .linktree-page .corner-accent { display: none; }
-  }
-
-  .linktree-page .pulse-ring-outer {
-    position: absolute;
-    inset: -40px;
-    border-radius: 50%;
-    border: 1px solid rgba(184, 108, 255, 0.3);
-    animation: lt-pulseExpand 4s ease-out infinite;
-  }
-  .linktree-page .pulse-ring-outer:nth-child(2) { animation-delay: 1.3s; }
-  .linktree-page .pulse-ring-outer:nth-child(3) { animation-delay: 2.6s; }
-
-  @keyframes lt-pulseExpand {
-    0% { transform: scale(0.8); opacity: 0.8; }
-    100% { transform: scale(1.8); opacity: 0; }
-  }
-
-  .linktree-page .gradient-spinner {
-    position: absolute;
-    inset: -20px;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0%, var(--lt-primary-purple) 10%, var(--lt-primary-pink) 20%, transparent 30%, transparent 70%, var(--lt-primary-pink) 80%, var(--lt-primary-purple) 90%, transparent 100%);
-    animation: lt-spinGlow 4s linear infinite;
-    filter: blur(3px);
-  }
-
-  @keyframes lt-spinGlow { to { transform: rotate(360deg); } }
-
-  .linktree-page .energy-field {
-    position: absolute;
-    inset: -15px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(184, 108, 255, 0.2) 0%, transparent 70%);
-    animation: lt-energyPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes lt-energyPulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-  }
-
-  .linktree-page .inner-ring {
-    position: absolute;
-    inset: -5px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    background: linear-gradient(#050007, #050007) padding-box,
-                linear-gradient(135deg, var(--lt-primary-purple), var(--lt-primary-pink), var(--lt-primary-purple)) border-box;
-    animation: lt-ringPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes lt-ringPulse {
-    0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.4); }
-  }
-
-  .linktree-page .scan-effect {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .linktree-page .scan-effect::before {
-    content: '';
-    position: absolute;
-    top: -100%;
-    left: 0; right: 0;
-    height: 50%;
-    background: linear-gradient(to bottom, transparent, rgba(184, 108, 255, 0.3), transparent);
-    animation: lt-scanMove 3s ease-in-out infinite;
-  }
-
-  @keyframes lt-scanMove {
-    0%, 100% { top: -50%; }
-    50% { top: 100%; }
-  }
-
-  .linktree-page .orbit-dots {
-    position: absolute;
-    inset: -25px;
-    animation: lt-orbitSpin 10s linear infinite;
-  }
-
-  .linktree-page .orbit-dot {
-    position: absolute;
-    width: 6px; height: 6px;
-    background: var(--lt-primary-purple);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--lt-primary-purple), 0 0 20px var(--lt-primary-pink);
-  }
-  .linktree-page .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-  .linktree-page .orbit-dot:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); }
-  .linktree-page .orbit-dot:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
-  .linktree-page .orbit-dot:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
-
-  @keyframes lt-orbitSpin { to { transform: rotate(360deg); } }
-
-  .linktree-page .data-stream {
-    position: absolute;
-    width: 2px; height: 30px;
-    background: linear-gradient(to bottom, var(--lt-primary-purple), transparent);
-    animation: lt-streamFlow 2s ease-in-out infinite;
-  }
-  .linktree-page .data-stream:nth-child(1) { top: -35px; left: 30%; }
-  .linktree-page .data-stream:nth-child(2) { top: -35px; left: 50%; animation-delay: 0.3s; }
-  .linktree-page .data-stream:nth-child(3) { top: -35px; left: 70%; animation-delay: 0.6s; }
-  .linktree-page .data-stream:nth-child(4) { bottom: -35px; left: 30%; transform: rotate(180deg); animation-delay: 0.9s; }
-  .linktree-page .data-stream:nth-child(5) { bottom: -35px; left: 50%; transform: rotate(180deg); animation-delay: 1.2s; }
-  .linktree-page .data-stream:nth-child(6) { bottom: -35px; left: 70%; transform: rotate(180deg); animation-delay: 1.5s; }
-
-  @keyframes lt-streamFlow {
-    0%, 100% { opacity: 0; height: 20px; }
-    50% { opacity: 1; height: 35px; }
-  }
-
-  .linktree-page .logo-inner {
-    position: relative;
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(20, 5, 30, 0.98), #050007);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 40px rgba(184, 108, 255, 0.3), inset 0 0 30px rgba(184, 108, 255, 0.1), 0 0 80px rgba(255, 79, 216, 0.2);
-    overflow: hidden;
-    z-index: 10;
-    animation: lt-logoAppear 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  @keyframes lt-logoAppear {
-    from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
-    to { opacity: 1; transform: scale(1) rotate(0deg); }
-  }
-
-  .linktree-page .logo-wrapper:hover .logo-inner {
-    transform: scale(1.05);
-    box-shadow: 0 0 60px rgba(184, 108, 255, 0.5), inset 0 0 40px rgba(184, 108, 255, 0.2), 0 0 100px rgba(255, 79, 216, 0.3);
-  }
-
-  .linktree-page .grid-overlay {
-    position: absolute; inset: 0; border-radius: 50%;
-    background:
-      linear-gradient(0deg, transparent 48%, rgba(184, 108, 255, 0.05) 50%, transparent 52%),
-      linear-gradient(90deg, transparent 48%, rgba(184, 108, 255, 0.05) 50%, transparent 52%);
-    background-size: 15px 15px;
-    pointer-events: none;
-  }
-
-  .linktree-page .shine-sweep {
-    position: absolute; inset: 0; border-radius: 50%;
-    background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
-    animation: lt-shineSweep 4s ease-in-out infinite;
-  }
-
-  @keyframes lt-shineSweep {
-    0%, 100% { transform: translateX(-100%) rotate(0deg); }
-    50% { transform: translateX(100%) rotate(0deg); }
-  }
-
-  .linktree-page .logo-img {
-    width: 97%; height: 97%;
-    object-fit: contain;
-    position: relative; z-index: 2;
-    filter: drop-shadow(0 0 15px rgba(184, 108, 255, 0.6));
-    animation: lt-logoFloat 4s ease-in-out infinite;
-  }
-
-  @keyframes lt-logoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-
-  .linktree-page .corner-accent {
-    position: absolute;
-    width: 25px; height: 25px;
-    border: 2px solid var(--lt-primary-purple);
-    opacity: 0.6;
-    animation: lt-cornerPulse 2s ease-in-out infinite;
-  }
-  .linktree-page .corner-accent:nth-child(1) { top: -30px; left: -30px; border-right: none; border-bottom: none; }
-  .linktree-page .corner-accent:nth-child(2) { top: -30px; right: -30px; border-left: none; border-bottom: none; animation-delay: 0.5s; }
-  .linktree-page .corner-accent:nth-child(3) { bottom: -30px; left: -30px; border-right: none; border-top: none; animation-delay: 1s; }
-  .linktree-page .corner-accent:nth-child(4) { bottom: -30px; right: -30px; border-left: none; border-top: none; animation-delay: 1.5s; }
-
-  @keyframes lt-cornerPulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.8; }
-  }
-
-  .linktree-page .status-badge {
-    position: absolute;
-    bottom: -40px; left: 50%;
-    transform: translateX(-50%);
-    display: flex; align-items: center; gap: 8px;
-    padding: 6px 14px;
-    background: rgba(184, 108, 255, 0.1);
-    border: 1px solid rgba(184, 108, 255, 0.3);
-    border-radius: 20px;
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--lt-primary-purple);
-    text-transform: uppercase;
-  }
-
-  .linktree-page .status-badge::before {
-    content: '';
-    width: 8px; height: 8px;
-    background: #00ff88;
-    border-radius: 50%;
-    animation: lt-statusGlow 1.5s ease-in-out infinite;
-    box-shadow: 0 0 10px #00ff88;
-  }
-
-  @keyframes lt-statusGlow {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+    .lt-hero { padding-top: 50px; }
+    .lt-chavobot { max-width: 500px; }
+    .lt-hero-image { margin-bottom: -30px; }
   }
 
   @media (max-width: 480px) {
-    .linktree-page .logo-wrapper { width: 160px; height: 160px; }
-    .linktree-page .logo-inner { width: 120px; height: 120px; }
-    .linktree-page .corner-accent, .linktree-page .status-badge, .linktree-page .data-stream { display: none; }
+    .lt-hero { padding-top: 15px; }
+    .lt-chavobot { max-width: 320px; }
+    .lt-hero-image { margin-bottom: -10px; }
   }
 
   /* ============================================
@@ -781,8 +535,8 @@ const links = [
     display: flex;
     gap: 16px;
     justify-content: center;
-    margin: 25px 0 35px;
-    animation: lt-fadeIn 0.8s ease-out 0.3s both;
+    margin: 20px 0 10px;
+    animation: lt-fadeIn 0.8s ease-out 0.6s both;
   }
 
   @keyframes lt-fadeIn {
@@ -812,100 +566,153 @@ const links = [
   }
 
   /* ============================================
-     ABOUT CARD
+     CONTAINER
      ============================================ */
-  .linktree-page .about-card {
+  .lt-container {
     position: relative;
-    background: rgba(27, 1, 37, 0.4);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--lt-glass-border);
-    border-radius: var(--lt-radius);
-    padding: 28px 24px;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: lt-revealUp 0.8s ease-out 0.4s forwards;
-    margin-top: 60px;
+    z-index: 2;
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .lt-container {
+      padding: 30px 60px 80px;
+      max-width: 1400px;
+    }
+    .linktree-page .links-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .linktree-page .social-icons { max-width: 600px; }
+    .linktree-page .section-divider { max-width: 600px; }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .lt-container { max-width: 700px; padding: 20px 30px 60px; }
+    .linktree-page .links-section { max-width: 600px; width: 100%; }
   }
 
   @media (max-width: 767px) {
-    .linktree-page .about-card {
-      background: rgba(27, 1, 37, 0.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      margin-top: 45px;
-    }
-  }
-
-  @keyframes lt-revealUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .linktree-page .about-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--lt-primary-purple), transparent);
-  }
-
-  .linktree-page .about-card::after {
-    content: '';
-    position: absolute;
-    top: -100%; left: -100%;
-    width: 300%; height: 300%;
-    background: radial-gradient(circle at 30% 30%, rgba(184, 108, 255, 0.06), transparent 40%);
-    pointer-events: none;
-  }
-
-  .linktree-page .description {
-    font-size: 16px;
-    color: var(--lt-text-muted);
-    line-height: 1.85;
-    position: relative;
-    z-index: 1;
-  }
-
-  .linktree-page .description + .description {
-    margin-top: 16px;
+    .lt-container { max-width: 100%; padding: 15px 15px 40px; }
+    .linktree-page .links-section { width: 100%; }
   }
 
   /* ============================================
-     HOMEPAGE LINK
+     PREMIUM HOMEPAGE LINK
      ============================================ */
   .linktree-page .homepage-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
-    padding: 12px 24px;
-    background: var(--lt-primary-gradient);
-    border-radius: var(--lt-radius);
-    color: white;
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 10px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px var(--lt-glow);
+    border-radius: var(--lt-radius);
+    padding: 3px;
+    background: linear-gradient(135deg, var(--lt-primary-purple), var(--lt-primary-pink), #7c3aed, var(--lt-primary-purple));
+    background-size: 300% 300%;
+    animation: lt-revealUp 0.8s ease-out 0.7s both, lt-gradientShift 6s ease-in-out infinite;
     opacity: 0;
-    animation: lt-revealUp 0.8s ease-out 0.5s forwards;
     transform: translateY(30px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .linktree-page .homepage-link:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(184, 108, 255, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(184, 108, 255, 0.4), 0 0 60px rgba(184, 108, 255, 0.15);
   }
 
-  .linktree-page .homepage-link .link-arrow {
-    margin-right: auto;
+  @keyframes lt-gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .linktree-page .homepage-link-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--lt-radius);
+    background: linear-gradient(135deg, var(--lt-primary-purple), var(--lt-primary-pink));
+    filter: blur(15px);
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .linktree-page .homepage-link:hover .homepage-link-glow {
+    opacity: 0.7;
+  }
+
+  .linktree-page .homepage-link-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, rgba(5, 0, 7, 0.95), rgba(27, 1, 37, 0.9));
+    border-radius: calc(var(--lt-radius) - 3px);
+    transition: background 0.3s ease;
+  }
+
+  .linktree-page .homepage-link:hover .homepage-link-inner {
+    background: linear-gradient(135deg, rgba(27, 1, 37, 0.95), rgba(40, 5, 55, 0.9));
+  }
+
+  .linktree-page .homepage-logo {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(184, 108, 255, 0.5));
+    flex-shrink: 0;
+  }
+
+  .linktree-page .homepage-link-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .linktree-page .homepage-link-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--lt-text-light);
+    transition: all 0.3s ease;
+  }
+
+  .linktree-page .homepage-link:hover .homepage-link-title {
+    background: var(--lt-primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .linktree-page .homepage-link-sub {
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    color: var(--lt-text-muted);
+    opacity: 0.7;
+    direction: ltr;
+    text-align: right;
+  }
+
+  .linktree-page .homepage-link-icon {
+    font-size: 16px;
+    color: var(--lt-primary-purple);
     transition: transform 0.3s ease;
+    flex-shrink: 0;
   }
 
-  .linktree-page .homepage-link:hover .link-arrow {
-    transform: translateX(-5px);
+  .linktree-page .homepage-link:hover .homepage-link-icon {
+    transform: translate(-3px, -3px);
   }
 
   /* ============================================
@@ -916,7 +723,7 @@ const links = [
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin: 20px auto 10px;
+    margin: 15px auto 10px;
     opacity: 0.6;
     max-width: 400px;
     width: 100%;
@@ -1067,7 +874,7 @@ const links = [
     border-color: transparent;
   }
 
-  /* AI Tools */
+  /* AI Tools - gold theme */
   .linktree-page .link-card.ai-tools {
     background: linear-gradient(135deg, rgba(255, 200, 55, 0.12), rgba(255, 140, 50, 0.08));
     border-color: rgba(255, 180, 50, 0.4);
@@ -1082,19 +889,34 @@ const links = [
     border-color: rgba(255, 180, 50, 0.3);
   }
 
-  /* Blog / Green theme */
-  .linktree-page .link-card.prompt-master {
+  /* News - green theme */
+  .linktree-page .link-card.news {
     background: linear-gradient(135deg, rgba(16, 163, 127, 0.15), rgba(0, 200, 150, 0.1));
     border-color: rgba(16, 163, 127, 0.4);
   }
-  .linktree-page .link-card.prompt-master:hover {
+  .linktree-page .link-card.news:hover {
     background: linear-gradient(135deg, rgba(16, 163, 127, 0.25), rgba(0, 200, 150, 0.18));
     border-color: rgba(16, 163, 127, 0.6);
     box-shadow: 0 12px 35px rgba(16, 163, 127, 0.25);
   }
-  .linktree-page .link-card.prompt-master .link-icon {
+  .linktree-page .link-card.news .link-icon {
     background: linear-gradient(135deg, rgba(16, 163, 127, 0.25), rgba(0, 200, 150, 0.18));
     border-color: rgba(16, 163, 127, 0.35);
+  }
+
+  /* WhatsApp - green theme */
+  .linktree-page .link-card.whatsapp {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(18, 140, 60, 0.1));
+    border-color: rgba(37, 211, 102, 0.35);
+  }
+  .linktree-page .link-card.whatsapp:hover {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(18, 140, 60, 0.16));
+    border-color: rgba(37, 211, 102, 0.5);
+    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.2);
+  }
+  .linktree-page .link-card.whatsapp .link-icon {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(18, 140, 60, 0.15));
+    border-color: rgba(37, 211, 102, 0.3);
   }
 
   /* Featured Badge */
@@ -1126,6 +948,11 @@ const links = [
   .linktree-page .featured-badge.popular {
     background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  }
+
+  .linktree-page .featured-badge.free {
+    background: linear-gradient(135deg, #10a37f 0%, #00c896 100%);
+    box-shadow: 0 4px 15px rgba(16, 163, 127, 0.4);
   }
 
   /* Binary Overlay */
@@ -1187,164 +1014,6 @@ const links = [
   }
 
   /* ============================================
-     BRANDS CAROUSEL
-     ============================================ */
-  .linktree-page .brands-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    padding: 30px 0;
-    margin-top: 30px;
-    overflow: hidden;
-    position: relative;
-    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  }
-
-  .linktree-page .brands-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    text-align: center;
-    font-size: 38px;
-    font-weight: 600;
-    color: var(--lt-text-muted);
-    margin: 0 auto 25px;
-    padding: 0 20px;
-    opacity: 0.9;
-    position: relative;
-    z-index: 3;
-    max-width: 600px;
-  }
-
-  .linktree-page .brands-title::before,
-  .linktree-page .brands-title::after {
-    content: '';
-    flex: 1;
-    max-width: 120px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--lt-stroke-purple), transparent);
-  }
-
-  .linktree-page .carousel-wrapper {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .linktree-page .carousel-track {
-    display: flex;
-    width: fit-content;
-    animation: lt-logosScrollRight 35s linear infinite;
-    transform: translateX(-33.333%);
-  }
-
-  .linktree-page .carousel-track:hover {
-    animation-play-state: paused;
-  }
-
-  .linktree-page .logos-set {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 10px;
-    flex-shrink: 0;
-  }
-
-  .linktree-page .logos-set img {
-    flex-shrink: 0;
-    width: 180px; height: 180px;
-    object-fit: contain;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  .linktree-page .logos-set img:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 12px 48px rgba(184, 108, 255, 0.2);
-    border-color: rgba(184, 108, 255, 0.3);
-  }
-
-  @keyframes lt-logosScrollRight {
-    0% { transform: translateX(-33.333%); }
-    100% { transform: translateX(0); }
-  }
-
-  @media (max-width: 480px) {
-    .linktree-page .logos-set img { width: 120px; height: 120px; padding: 15px; border-radius: 16px; }
-    .linktree-page .logos-set { gap: 15px; }
-    .linktree-page .brands-title { font-size: 24px; padding: 0 15px; }
-  }
-
-  @media (min-width: 768px) {
-    .linktree-page .logos-set img { width: 195px; height: 195px; }
-    .linktree-page .logos-set { gap: 30px; }
-  }
-
-  /* ============================================
-     FOUNDERS SECTION
-     ============================================ */
-  .linktree-page .founders-section {
-    margin: 40px 0 30px;
-    text-align: center;
-    opacity: 0;
-    animation: lt-revealUp 0.8s ease-out 0.6s forwards;
-    transform: translateY(30px);
-  }
-
-  .linktree-page .founders-names {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 15px;
-  }
-
-  .linktree-page .founder-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .linktree-page .founder-avatar {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--lt-stroke-purple);
-    box-shadow: 0 4px 20px var(--lt-glow);
-  }
-
-  .linktree-page .founder-name h4 {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 2px;
-    color: var(--lt-text-light);
-  }
-
-  .linktree-page .founder-name span {
-    font-size: 12px;
-    color: var(--lt-text-muted);
-  }
-
-  .linktree-page .founders-text {
-    font-size: 14px;
-    color: var(--lt-text-muted);
-    max-width: 400px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-
-  @media (max-width: 480px) {
-    .linktree-page .founders-names { gap: 25px; }
-    .linktree-page .founder-name h4 { font-size: 15px; }
-  }
-
-  /* ============================================
      FOOTER
      ============================================ */
   .lt-footer {
@@ -1396,19 +1065,28 @@ const links = [
     box-shadow: 0 0 10px var(--lt-primary-purple);
   }
 
+  /* ============================================
+     REVEAL ANIMATION
+     ============================================ */
+  @keyframes lt-revealUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   /* Responsive */
   @media (max-width: 480px) {
-    .lt-container { padding: 20px 16px 40px; }
+    .lt-container { padding: 15px 16px 40px; }
     .linktree-page .link-card { padding: 14px 16px; }
     .linktree-page .link-icon { width: 40px; height: 40px; min-width: 40px; font-size: 18px; }
     .linktree-page .link-title { font-size: 15px; }
     .linktree-page .link-subtitle { font-size: 12px; }
     .linktree-page .social-icon { width: 40px; height: 40px; }
     .linktree-page .social-icons { gap: 12px; }
+    .linktree-page .homepage-link-title { font-size: 14px; }
+    .linktree-page .homepage-logo { width: 38px; height: 38px; }
   }
 
   @media (max-width: 380px) {
-    .linktree-page .description { font-size: 16px; }
     .linktree-page .link-card { padding: 12px 14px; gap: 12px; }
     .linktree-page .link-icon { width: 36px; height: 36px; min-width: 36px; }
     .linktree-page .link-title { font-size: 14px; }
@@ -1423,23 +1101,17 @@ const links = [
 
   document.addEventListener('DOMContentLoaded', function() {
     // --- Cursor Trail (desktop only) ---
-    const cursorTrail = document.getElementById('cursorTrail');
+    var cursorTrail = document.getElementById('cursorTrail');
     if (cursorTrail && window.innerWidth > 768) {
       cursorTrail.style.display = 'block';
       document.addEventListener('mousemove', function(e) {
         cursorTrail.style.left = e.clientX + 'px';
         cursorTrail.style.top = e.clientY + 'px';
       });
-      document.addEventListener('mousedown', function() {
-        cursorTrail.classList.add('clicking');
-      });
-      document.addEventListener('mouseup', function() {
-        cursorTrail.classList.remove('clicking');
-      });
     }
 
     // --- Scroll Progress Bar ---
-    const scrollProgress = document.getElementById('scrollProgress');
+    var scrollProgress = document.getElementById('scrollProgress');
     if (scrollProgress) {
       window.addEventListener('scroll', function() {
         var scrollTop = window.scrollY;
