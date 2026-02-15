@@ -249,6 +249,27 @@ const id = "tw-aiready";
     });
   }
 
+  function doPlay(video, playBtn, inner) {
+    pauseAll();
+    video.muted = true;
+    var p = video.play();
+    if (p && p.then) {
+      p.then(function() {
+        try { video.muted = false; } catch(e) {}
+        if (inner) inner.classList.add('vt-active');
+        playBtn.style.opacity = '0';
+        playBtn.style.pointerEvents = 'none';
+      }).catch(function() {
+        video.muted = true;
+        video.play().then(function() {
+          if (inner) inner.classList.add('vt-active');
+          playBtn.style.opacity = '0';
+          playBtn.style.pointerEvents = 'none';
+        }).catch(function() {});
+      });
+    }
+  }
+
   cards.forEach(function(card) {
     var video = card.querySelector('.vt-video');
     var playBtn = card.querySelector('.vt-play-btn');
@@ -256,22 +277,21 @@ const id = "tw-aiready";
     if (!video || !playBtn) return;
 
     function toggle() {
-      if (!video.src || video.src === window.location.href) {
-        video.src = getSrc(video);
+      // First click: load src, wait for canplay, then play
+      if (!video.getAttribute('src')) {
+        var src = getSrc(video);
+        if (!src) return;
+        video.src = src;
         video.load();
+        video.addEventListener('canplay', function onReady() {
+          video.removeEventListener('canplay', onReady);
+          doPlay(video, playBtn, inner);
+        });
+        return;
       }
 
       if (video.paused) {
-        pauseAll();
-        video.play().then(function() {
-          video.muted = false;
-          if (inner) inner.classList.add('vt-active');
-          playBtn.style.opacity = '0';
-          playBtn.style.pointerEvents = 'none';
-        }).catch(function() {
-          video.muted = true;
-          video.play().catch(function() {});
-        });
+        doPlay(video, playBtn, inner);
       } else {
         video.pause();
         if (inner) inner.classList.remove('vt-active');
