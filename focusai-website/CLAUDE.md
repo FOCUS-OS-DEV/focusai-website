@@ -1,7 +1,7 @@
 # Focus AI Website - System Prompt
 
 > This file contains all instructions and context for Claude Code.
-> **Last Updated:** 2026-02-13
+> **Last Updated:** 2026-02-15
 
 ---
 
@@ -359,7 +359,56 @@ https://res.cloudinary.com/dfudxxzlj/video/upload/so_0.1,w_400,h_710,c_fill,q_au
 - Phone testimonial images: `w_300` (not `w_500`)
 - Hero chavobot: `max-w-[420px]` on mobile
 - All headings use `clamp()` for fluid sizing
-- Video lightbox: special iOS handling for autoplay
+
+---
+
+## iOS Video Playback (CRITICAL - Read Before Touching Video Code)
+
+### The Problem (Discovered 2026-02-15)
+
+iOS Safari **blocks video playback** when ANY of these patterns are used:
+
+1. **`video.play()` inside `setTimeout`** - breaks the "user gesture chain". iOS requires `play()` to be called **synchronously** within a user tap/click handler. Even `setTimeout(fn, 0)` breaks it.
+2. **Setting `video.src` via JavaScript + calling `play()`** - dynamically loading video src and then calling play() programmatically fails on iOS even in a click handler, because the video isn't ready.
+3. **Lazy loading video src via JS (`data-src` → `video.src`)** - this pattern worked on desktop but consistently failed on iOS Safari across all pages.
+
+### What DOES Work on iOS
+
+- **Direct `src` attribute in HTML** (`<video src="...">`) - always works
+- **`preload="metadata"` or `preload="none"`** with direct src - both work
+- **Native browser controls** (`controls` attribute) - user taps the native play button, iOS handles it
+- **`playsinline` + `webkit-playsinline`** - required for inline playback (without these, iOS opens fullscreen player)
+
+### The Solution: Poster Images + Lightbox Pattern
+
+The current `VideoTestimonials.astro` uses this architecture:
+
+```
+CAROUSEL (no video elements at all):
+├── Poster images (<img>) for each testimonial
+├── Transform-based 3D positioning (center large, sides small)
+├── Click center card → opens lightbox
+└── Click side card → navigates to center
+
+LIGHTBOX (pre-rendered video elements in HTML):
+├── ALL videos pre-rendered with direct src in HTML (not added via JS!)
+├── preload="none" (no bandwidth until user interacts)
+├── Native controls (user taps play themselves)
+├── display:none → display:block toggle (class-based, not hidden attr)
+└── NO JavaScript play() calls anywhere
+```
+
+### Rules for Future Video Work
+
+1. **NEVER use `video.play()` in JavaScript** - always let the user tap native controls
+2. **NEVER lazy-load video src via JS** (`data-src` pattern) - always put `src` directly in HTML
+3. **NEVER use `setTimeout` before `play()`** - this breaks iOS user gesture chain
+4. **ALWAYS include `playsinline webkit-playsinline`** on video elements
+5. **ALWAYS include `controls`** on video elements the user should play
+6. **ALWAYS include `controlslist="nodownload"`** to prevent download button
+7. **Use `preload="none"`** for off-screen videos to save bandwidth
+8. **Pre-render all video elements in HTML** - even if hidden, the src must be in the HTML source
+9. **Use class toggling** (not `hidden` attribute) for show/hide - `hidden` has `display:none !important` which can't be overridden with CSS
 
 ---
 
@@ -516,7 +565,13 @@ npm run preview  # Preview production build
 ## Recent Changes Log
 
 ### 2026-02-15
-- Removed VideoTestimonialsCarousel component entirely (1,101 lines deleted) - iOS Safari issues
+- **Rebuilt VideoTestimonials.astro from scratch** - 3D transform carousel with lightbox
+  - Poster images in carousel (no `<video>` elements) → iOS safe
+  - Pre-rendered videos in lightbox HTML with direct `src` and native controls
+  - Infinite loop, arrow navigation, RTL-aware, no-download protection
+  - Deployed on: homepage, Bot-Camp, AI Ready, AI Workshop
+- Documented iOS Video Playback rules in CLAUDE.md (critical for future video work)
+- Updated Zohar Yaakov's video URL to latest version
 - Fixed form text color on Bot-Camp page (white on white → dark text)
 - Fixed fingerprint background visibility on mobile homepage
 - New article: Google AI Transformation 2026 (10 articles total)
