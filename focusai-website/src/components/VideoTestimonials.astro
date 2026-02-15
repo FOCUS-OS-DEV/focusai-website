@@ -199,10 +199,17 @@ const testimonials = [
       e.stopPropagation();
       loadVideo(video);
       pauseOthers(video);
-      // Small delay to ensure src is set before play
-      setTimeout(function() {
-        video.play().catch(function() {});
-      }, 100);
+      // Call play() synchronously to preserve iOS user gesture context
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          // Video not ready yet - wait for canplay then retry
+          video.addEventListener('canplay', function onReady() {
+            video.removeEventListener('canplay', onReady);
+            video.play().catch(function() {});
+          });
+        });
+      }
     });
 
     // When video starts playing (from custom btn OR native controls)
