@@ -7,7 +7,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CTAContact from '../../components/CTAContact.astro';
-import VideoTestimonialsCarousel from '../../components/VideoTestimonialsCarousel.astro';
 import TerminalTypewriter from '../../components/TerminalTypewriter.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -364,32 +363,6 @@ const courseSchema = {
           </svg>
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- Video Testimonials Section -->
-  <section id="testimonials" class="py-10 md:py-12 lg:py-16 relative overflow-hidden bg-[#0a0a0f]">
-    <div class="absolute inset-0 opacity-[0.02] hidden md:block" style="background-image: linear-gradient(rgba(192, 132, 252, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(192, 132, 252, 0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
-
-    <div class="container relative z-10 max-w-6xl mx-auto px-4">
-      <!-- Section Badge - Right aligned with line -->
-      <div class="flex items-center gap-4 mb-8 md:mb-12">
-        <div class="flex items-center gap-2">
-          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#c084fc] animate-pulse"></span>
-          <span class="font-mono text-xs md:text-sm font-semibold text-[#c084fc] uppercase tracking-[0.15em] md:tracking-[0.2em]">TESTIMONIALS</span>
-        </div>
-        <div class="h-px flex-1 bg-gradient-to-r from-[#c084fc]/50 to-transparent"></div>
-      </div>
-
-      <div class="text-center mb-6 md:mb-8" data-animate="fade-up">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-3 md:mb-4">
-          <span class="text-[#9090a8]">הם כבר</span>
-          <span class="text-[#f5f5fa]"> AI FIRST</span>
-        </h2>
-        <p class="text-sm md:text-base text-[#b0b0c0] font-mono">בוגרי ההכשרה משתפים את החוויה שלהם</p>
-      </div>
-
-      <VideoTestimonialsCarousel />
     </div>
   </section>
 
