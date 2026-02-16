@@ -28,7 +28,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/links') && !page.includes('/webinar'),
+      filter: (page) => !page.includes('/links') && !page.includes('GPTS'),
     }),
     icon({
       include: {
