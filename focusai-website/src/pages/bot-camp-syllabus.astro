@@ -1,10 +1,10 @@
 ---
 /**
  * Bot-Camp Syllabus Page - Full Document Viewer
- * Direct link: /academy/syllabus
+ * Direct link: /bot-camp-syllabus
  */
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
 
 const syllabusImages = [
   'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1770470074/111_kyis5b.jpg',
@@ -25,18 +25,12 @@ const totalPages = syllabusImages.length;
   <Header slot="header" currentPath="/academy" theme="light" />
 
   <div class="syllabus-viewer" id="syllabusViewer">
-    <!-- Background -->
-    <div class="sv-bg"></div>
-
     <!-- Top Bar -->
     <div class="sv-topbar">
       <div class="sv-topbar-inner">
-        <!-- Back Button -->
+        <!-- Back Button - Glassmorphic, no arrow -->
         <a href="/academy" class="sv-back">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Bot-Camp</span>
+          Bot-Camp
         </a>
 
         <!-- Page Counter -->
@@ -49,23 +43,20 @@ const totalPages = syllabusImages.length;
         <!-- CTA -->
         <a href="/academy#pricing" class="sv-cta">
           להרשמה
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
         </a>
       </div>
     </div>
 
     <!-- Main Viewer Area -->
-    <div class="sv-main">
-      <!-- Navigation Arrow - Previous -->
+    <div class="sv-main" id="svMain">
+      <!-- Navigation Arrow - Previous (RTL: right side) -->
       <button class="sv-nav sv-nav-prev" id="prevBtn" aria-label="עמוד קודם" disabled>
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 18l6-6-6-6" />
         </svg>
       </button>
 
-      <!-- Document Display -->
+      <!-- Document Display - edge-to-edge -->
       <div class="sv-document" id="svDocument">
         <div class="sv-pages-track" id="pagesTrack">
           {syllabusImages.map((img, idx) => (
@@ -82,7 +73,7 @@ const totalPages = syllabusImages.length;
         </div>
       </div>
 
-      <!-- Navigation Arrow - Next -->
+      <!-- Navigation Arrow - Next (RTL: left side) -->
       <button class="sv-nav sv-nav-next" id="nextBtn" aria-label="עמוד הבא">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M15 18l-6-6 6-6" />
@@ -113,46 +104,44 @@ const totalPages = syllabusImages.length;
 <style is:global>
   /* ============================================
      SYLLABUS DOCUMENT VIEWER
+     Full-height layout that works WITH the header
      ============================================ */
 
-  /* Override body zoom for this page */
-  body:has(.syllabus-viewer) {
-    overflow: hidden;
-  }
+  /* Hide footer and watermark on this page */
   body:has(.syllabus-viewer) footer,
   body:has(.syllabus-viewer) .fingerprint-watermark {
     display: none !important;
   }
 
+  /* Make the viewer fill remaining viewport below header */
   .syllabus-viewer {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
     display: flex;
     flex-direction: column;
-    font-family: 'Rubik', sans-serif;
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
+    overflow: hidden;
+    background: linear-gradient(180deg, #f0e8ff 0%, #e8ddf7 30%, #f5f0ff 100%);
   }
 
-  .sv-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #f0e8ff 0%, #e8ddf7 30%, #f5f0ff 100%);
-    z-index: 0;
+  @media (min-width: 768px) {
+    .syllabus-viewer {
+      height: calc(100vh - 76px);
+      height: calc(100dvh - 76px);
+    }
   }
 
   /* ---- Top Bar ---- */
   .sv-topbar {
-    position: relative;
-    z-index: 10;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.85);
+    flex-shrink: 0;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(168, 85, 247, 0.12);
-    margin-top: 72px; /* space for floating header */
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.08);
   }
 
   @media (min-width: 768px) {
-    .sv-topbar { padding: 14px 24px; margin-top: 76px; }
+    .sv-topbar { padding: 12px 24px; }
   }
 
   .sv-topbar-inner {
@@ -164,27 +153,31 @@ const totalPages = syllabusImages.length;
     gap: 12px;
   }
 
+  /* Back button - Glassmorphic */
   .sv-back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    background: white;
-    border: 1.5px solid rgba(168, 85, 247, 0.25);
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(168, 85, 247, 0.15);
     border-radius: 50px;
-    color: #a855f7;
-    font-weight: 600;
+    color: #7c3aed;
+    font-weight: 700;
     font-size: 14px;
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(168, 85, 247, 0.08);
   }
 
   .sv-back:hover {
-    background: #f5eeff;
-    border-color: #a855f7;
-    transform: translateX(3px);
-    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.15);
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(168, 85, 247, 0.35);
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
+    transform: translateY(-1px);
   }
 
   .sv-counter {
@@ -194,7 +187,9 @@ const totalPages = syllabusImages.length;
     font-family: 'Courier New', monospace;
     font-size: 15px;
     color: #6b6b8a;
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 6px 14px;
     border-radius: 50px;
     border: 1px solid rgba(168, 85, 247, 0.1);
@@ -228,36 +223,32 @@ const totalPages = syllabusImages.length;
   }
 
   .sv-cta:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-1px);
     box-shadow: 0 6px 28px rgba(168, 85, 247, 0.4);
   }
 
   /* ---- Main Viewer Area ---- */
   .sv-main {
-    position: relative;
-    z-index: 5;
     flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 8px;
-    overflow: hidden;
+    align-items: stretch;
     min-height: 0;
+    position: relative;
+    overflow: hidden;
   }
 
-  @media (min-width: 768px) {
-    .sv-main { gap: 16px; padding: 20px 20px; }
-  }
-
-  /* Navigation Arrows */
+  /* Navigation Arrows - floating over the image */
   .sv-nav {
-    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 44px;
     height: 44px;
     border-radius: 50%;
     border: none;
-    background: white;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #a855f7;
     cursor: pointer;
     display: flex;
@@ -265,46 +256,41 @@ const totalPages = syllabusImages.length;
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    z-index: 10;
+    z-index: 20;
   }
+
+  .sv-nav-prev { right: 12px; }
+  .sv-nav-next { left: 12px; }
 
   @media (min-width: 768px) {
     .sv-nav { width: 56px; height: 56px; }
+    .sv-nav-prev { right: 20px; }
+    .sv-nav-next { left: 20px; }
   }
 
   .sv-nav:hover:not(:disabled) {
-    background: #a855f7;
+    background: rgba(168, 85, 247, 0.9);
     color: white;
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
     box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3);
   }
 
   .sv-nav:active:not(:disabled) {
-    transform: scale(0.95);
+    transform: translateY(-50%) scale(0.95);
   }
 
   .sv-nav:disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: default;
     box-shadow: none;
   }
 
-  /* Document Container */
+  /* Document Container - edge-to-edge, no box/border */
   .sv-document {
-    flex: 1;
-    max-width: 900px;
+    width: 100%;
     height: 100%;
     overflow: hidden;
-    border-radius: 16px;
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(168, 85, 247, 0.08);
-    background: white;
     position: relative;
-  }
-
-  @media (min-width: 768px) {
-    .sv-document { border-radius: 20px; }
   }
 
   .sv-pages-track {
@@ -321,27 +307,25 @@ const totalPages = syllabusImages.length;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: auto;
-    padding: 8px;
+    overflow: hidden;
   }
 
   .sv-page-img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    border-radius: 8px;
     user-select: none;
     -webkit-user-drag: none;
   }
 
   /* ---- Bottom Bar - Page Selector ---- */
   .sv-bottombar {
-    position: relative;
-    z-index: 10;
+    flex-shrink: 0;
     padding: 10px 16px 14px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(168, 85, 247, 0.08);
   }
 
   @media (min-width: 768px) {
@@ -444,7 +428,7 @@ const totalPages = syllabusImages.length;
   /* ---- Page transition animation ---- */
   .sv-page {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.95);
     transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -453,16 +437,18 @@ const totalPages = syllabusImages.length;
     transform: scale(1);
   }
 
-  /* ---- Mobile touch hint ---- */
+  /* ---- Mobile adjustments ---- */
   @media (max-width: 767px) {
-    .sv-nav-prev, .sv-nav-next {
+    .sv-nav {
       width: 36px;
       height: 36px;
     }
-    .sv-nav-prev svg, .sv-nav-next svg {
+    .sv-nav svg {
       width: 20px;
       height: 20px;
     }
+    .sv-nav-prev { right: 8px; }
+    .sv-nav-next { left: 8px; }
   }
 </style>
 
@@ -487,7 +473,7 @@ const totalPages = syllabusImages.length;
     }
 
     function updateView() {
-      // Move track
+      // Move track (RTL: positive translateX)
       track.style.transform = 'translateX(' + (currentPage * 100) + '%)';
 
       // Update counter with animation
@@ -543,21 +529,21 @@ const totalPages = syllabusImages.length;
       if (num >= 1 && num <= totalPages) goToPage(num - 1);
     });
 
-    // Touch swipe
-    var doc = document.getElementById('svDocument');
-    doc.addEventListener('touchstart', function(e) {
+    // Touch swipe on main area
+    var main = document.getElementById('svMain');
+    main.addEventListener('touchstart', function(e) {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
       isSwiping = false;
     }, { passive: true });
 
-    doc.addEventListener('touchmove', function(e) {
+    main.addEventListener('touchmove', function(e) {
       var diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
       var diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
       if (diffX > diffY && diffX > 20) isSwiping = true;
     }, { passive: true });
 
-    doc.addEventListener('touchend', function(e) {
+    main.addEventListener('touchend', function(e) {
       if (!isSwiping) return;
       var diff = touchStartX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 50) {
