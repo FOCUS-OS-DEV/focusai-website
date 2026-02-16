@@ -22,7 +22,7 @@ const totalPages = syllabusImages.length;
   title="סילבוס Bot-Camp | Focus AI Academy"
   description="סילבוס מפורט של תוכנית Bot-Camp - הכשרת מפתחי סוכני AI ואוטומציות עסקיות בשיתוף אוניברסיטת חיפה"
 >
-  <Header slot="header" currentPath="/academy" theme="light" />
+  <Header slot="header" currentPath="/academy" />
 
   <div class="syllabus-viewer" id="syllabusViewer">
     <!-- Top Bar -->
@@ -103,8 +103,7 @@ const totalPages = syllabusImages.length;
 
 <style is:global>
   /* ============================================
-     SYLLABUS DOCUMENT VIEWER
-     Full-height layout that works WITH the header
+     SYLLABUS DOCUMENT VIEWER - Dark Theme
      ============================================ */
 
   /* Hide footer and watermark on this page */
@@ -113,14 +112,14 @@ const totalPages = syllabusImages.length;
     display: none !important;
   }
 
-  /* Make the viewer fill remaining viewport below header */
+  /* Fill remaining viewport below header */
   .syllabus-viewer {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 72px);
     height: calc(100dvh - 72px);
     overflow: hidden;
-    background: linear-gradient(180deg, #f0e8ff 0%, #e8ddf7 30%, #f5f0ff 100%);
+    background: #0a0a0f;
   }
 
   @media (min-width: 768px) {
@@ -130,18 +129,18 @@ const totalPages = syllabusImages.length;
     }
   }
 
-  /* ---- Top Bar ---- */
+  /* ---- Top Bar - minimal dark ---- */
   .sv-topbar {
     flex-shrink: 0;
-    padding: 10px 16px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(168, 85, 247, 0.08);
+    padding: 8px 16px;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.12);
   }
 
   @media (min-width: 768px) {
-    .sv-topbar { padding: 12px 24px; }
+    .sv-topbar { padding: 10px 24px; }
   }
 
   .sv-topbar-inner {
@@ -153,31 +152,28 @@ const totalPages = syllabusImages.length;
     gap: 12px;
   }
 
-  /* Back button - Glassmorphic */
+  /* Back button - Dark glassmorphic */
   .sv-back {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 20px;
-    background: rgba(255, 255, 255, 0.5);
+    padding: 7px 18px;
+    background: rgba(168, 85, 247, 0.1);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.25);
     border-radius: 50px;
-    color: #7c3aed;
+    color: #c084fc;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
-    box-shadow: 0 2px 12px rgba(168, 85, 247, 0.08);
   }
 
   .sv-back:hover {
-    background: rgba(255, 255, 255, 0.75);
-    border-color: rgba(168, 85, 247, 0.35);
-    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
-    transform: translateY(-1px);
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
   }
 
   .sv-counter {
@@ -185,46 +181,41 @@ const totalPages = syllabusImages.length;
     align-items: baseline;
     gap: 4px;
     font-family: 'Courier New', monospace;
-    font-size: 15px;
-    color: #6b6b8a;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 6px 14px;
+    font-size: 14px;
+    color: #8080a0;
+    padding: 6px 12px;
     border-radius: 50px;
-    border: 1px solid rgba(168, 85, 247, 0.1);
   }
 
   .sv-counter-current {
     font-weight: 700;
-    font-size: 18px;
-    color: #a855f7;
-    min-width: 16px;
+    font-size: 17px;
+    color: #c084fc;
+    min-width: 14px;
     text-align: center;
     transition: all 0.3s ease;
   }
 
-  .sv-counter-sep { color: #c0b0d8; }
+  .sv-counter-sep { color: #4a4a6a; }
 
   .sv-cta {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 20px;
-    background: linear-gradient(135deg, #a855f7, #d946ef);
+    padding: 7px 18px;
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
     color: white;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     border-radius: 50px;
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
   }
 
   .sv-cta:hover {
-    transform: scale(1.05) translateY(-1px);
-    box-shadow: 0 6px 28px rgba(168, 85, 247, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
   }
 
   /* ---- Main Viewer Area ---- */
@@ -237,25 +228,24 @@ const totalPages = syllabusImages.length;
     overflow: hidden;
   }
 
-  /* Navigation Arrows - floating over the image */
+  /* Navigation Arrows - dark floating */
   .sv-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    background: rgba(10, 10, 15, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: #a855f7;
+    color: #c084fc;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     z-index: 20;
   }
 
@@ -263,16 +253,17 @@ const totalPages = syllabusImages.length;
   .sv-nav-next { left: 12px; }
 
   @media (min-width: 768px) {
-    .sv-nav { width: 56px; height: 56px; }
-    .sv-nav-prev { right: 20px; }
-    .sv-nav-next { left: 20px; }
+    .sv-nav { width: 48px; height: 48px; }
+    .sv-nav-prev { right: 16px; }
+    .sv-nav-next { left: 16px; }
   }
 
   .sv-nav:hover:not(:disabled) {
-    background: rgba(168, 85, 247, 0.9);
+    background: rgba(168, 85, 247, 0.8);
+    border-color: #a855f7;
     color: white;
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.4);
   }
 
   .sv-nav:active:not(:disabled) {
@@ -280,12 +271,11 @@ const totalPages = syllabusImages.length;
   }
 
   .sv-nav:disabled {
-    opacity: 0.25;
+    opacity: 0.15;
     cursor: default;
-    box-shadow: none;
   }
 
-  /* Document Container - edge-to-edge, no box/border */
+  /* Document Container - fills everything */
   .sv-document {
     width: 100%;
     height: 100%;
@@ -318,18 +308,18 @@ const totalPages = syllabusImages.length;
     -webkit-user-drag: none;
   }
 
-  /* ---- Bottom Bar - Page Selector ---- */
+  /* ---- Bottom Bar - Page Selector (dark) ---- */
   .sv-bottombar {
     flex-shrink: 0;
-    padding: 10px 16px 14px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(168, 85, 247, 0.08);
+    padding: 8px 16px 10px;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(168, 85, 247, 0.12);
   }
 
   @media (min-width: 768px) {
-    .sv-bottombar { padding: 12px 24px 16px; }
+    .sv-bottombar { padding: 10px 24px 12px; }
   }
 
   .sv-pages-selector {
@@ -339,16 +329,16 @@ const totalPages = syllabusImages.length;
   }
 
   @media (min-width: 768px) {
-    .sv-pages-selector { gap: 12px; }
+    .sv-pages-selector { gap: 10px; }
   }
 
   .sv-page-btn {
     position: relative;
-    width: 44px;
-    height: 56px;
-    border-radius: 10px;
-    border: 2px solid transparent;
-    background: rgba(168, 85, 247, 0.06);
+    width: 40px;
+    height: 52px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(168, 85, 247, 0.15);
+    background: rgba(168, 85, 247, 0.05);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -360,7 +350,7 @@ const totalPages = syllabusImages.length;
   }
 
   @media (min-width: 768px) {
-    .sv-page-btn { width: 56px; height: 72px; border-radius: 12px; }
+    .sv-page-btn { width: 48px; height: 62px; border-radius: 10px; }
   }
 
   .sv-page-btn-num {
@@ -368,13 +358,13 @@ const totalPages = syllabusImages.length;
     z-index: 2;
     font-family: 'Courier New', monospace;
     font-weight: 700;
-    font-size: 16px;
-    color: #8b7aa8;
+    font-size: 15px;
+    color: #6b6b8a;
     transition: all 0.3s ease;
   }
 
   @media (min-width: 768px) {
-    .sv-page-btn-num { font-size: 18px; }
+    .sv-page-btn-num { font-size: 16px; }
   }
 
   .sv-page-btn-thumb {
@@ -391,44 +381,43 @@ const totalPages = syllabusImages.length;
   }
 
   .sv-page-btn:hover {
-    border-color: rgba(168, 85, 247, 0.3);
-    background: rgba(168, 85, 247, 0.1);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    background: rgba(168, 85, 247, 0.12);
+    transform: translateY(-2px);
   }
 
   .sv-page-btn:hover .sv-page-btn-thumb {
-    opacity: 0.2;
+    opacity: 0.15;
   }
 
   .sv-page-btn:hover .sv-page-btn-num {
-    color: #a855f7;
+    color: #c084fc;
   }
 
   .sv-page-btn.active {
     border-color: #a855f7;
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(217, 70, 239, 0.1));
-    transform: translateY(-4px) scale(1.1);
-    box-shadow: 0 8px 28px rgba(168, 85, 247, 0.25);
+    background: rgba(168, 85, 247, 0.15);
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
   }
 
   .sv-page-btn.active .sv-page-btn-num {
-    color: #a855f7;
-    font-size: 18px;
+    color: #c084fc;
+    font-size: 17px;
   }
 
   @media (min-width: 768px) {
-    .sv-page-btn.active .sv-page-btn-num { font-size: 22px; }
+    .sv-page-btn.active .sv-page-btn-num { font-size: 20px; }
   }
 
   .sv-page-btn.active .sv-page-btn-thumb {
-    opacity: 0.15;
+    opacity: 0.1;
   }
 
   /* ---- Page transition animation ---- */
   .sv-page {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.96);
     transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -440,15 +429,15 @@ const totalPages = syllabusImages.length;
   /* ---- Mobile adjustments ---- */
   @media (max-width: 767px) {
     .sv-nav {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
     }
     .sv-nav svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
-    .sv-nav-prev { right: 8px; }
-    .sv-nav-next { left: 8px; }
+    .sv-nav-prev { right: 6px; }
+    .sv-nav-next { left: 6px; }
   }
 </style>
 
