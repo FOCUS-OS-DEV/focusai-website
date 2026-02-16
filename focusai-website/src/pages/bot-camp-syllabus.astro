@@ -1,6 +1,6 @@
 ---
 /**
- * Bot-Camp Syllabus Page - Full Document Viewer
+ * Bot-Camp Syllabus Page - Light Theme Document Viewer
  * Direct link: /bot-camp-syllabus
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -22,25 +22,22 @@ const totalPages = syllabusImages.length;
   title="סילבוס Bot-Camp | Focus AI Academy"
   description="סילבוס מפורט של תוכנית Bot-Camp - הכשרת מפתחי סוכני AI ואוטומציות עסקיות בשיתוף אוניברסיטת חיפה"
 >
-  <Header slot="header" currentPath="/academy" />
+  <Header slot="header" theme="light" currentPath="/academy" />
 
   <div class="syllabus-viewer" id="syllabusViewer">
     <!-- Top Bar -->
     <div class="sv-topbar">
       <div class="sv-topbar-inner">
-        <!-- Back Button - Glassmorphic, no arrow -->
         <a href="/academy" class="sv-back">
-          Bot-Camp
+          ← Bot-Camp
         </a>
 
-        <!-- Page Counter -->
         <div class="sv-counter">
           <span class="sv-counter-current" id="counterCurrent">1</span>
           <span class="sv-counter-sep">/</span>
-          <span class="sv-counter-total">{totalPages}</span>
+          <span>{totalPages}</span>
         </div>
 
-        <!-- CTA -->
         <a href="/academy#pricing" class="sv-cta">
           להרשמה
         </a>
@@ -49,24 +46,18 @@ const totalPages = syllabusImages.length;
 
     <!-- Main Viewer Area -->
     <div class="sv-main" id="svMain">
-      <!-- Background effects for empty space -->
-      <div class="sv-bg-effects">
-        <div class="sv-bg-glow"></div>
-        <div class="sv-bg-grid"></div>
-      </div>
-
       <!-- Navigation Arrow - Previous (RTL: right side) -->
       <button class="sv-nav sv-nav-prev" id="prevBtn" aria-label="עמוד קודם" disabled>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 18l6-6-6-6" />
         </svg>
       </button>
 
-      <!-- Document Display - edge-to-edge -->
+      <!-- Document Display -->
       <div class="sv-document" id="svDocument">
         <div class="sv-pages-track" id="pagesTrack">
           {syllabusImages.map((img, idx) => (
-            <div class="sv-page" data-page={idx}>
+            <div class={`sv-page ${idx === 0 ? 'visible' : ''}`} data-page={idx}>
               <img
                 src={img}
                 alt={`סילבוס Bot-Camp - עמוד ${idx + 1}`}
@@ -81,7 +72,7 @@ const totalPages = syllabusImages.length;
 
       <!-- Navigation Arrow - Next (RTL: left side) -->
       <button class="sv-nav sv-nav-next" id="nextBtn" aria-label="עמוד הבא">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
@@ -97,9 +88,6 @@ const totalPages = syllabusImages.length;
             aria-label={`עמוד ${idx + 1}`}
           >
             <span class="sv-page-btn-num">{idx + 1}</span>
-            <div class="sv-page-btn-thumb">
-              <img src={img.replace('w_1200', 'w_100')} alt="" draggable="false" />
-            </div>
           </button>
         ))}
       </div>
@@ -109,46 +97,57 @@ const totalPages = syllabusImages.length;
 
 <style is:global>
   /* ============================================
-     SYLLABUS DOCUMENT VIEWER - Dark Theme
+     SYLLABUS VIEWER - Light Theme
      ============================================ */
 
-  /* Hide footer and watermark on this page */
+  /* Reset zoom on this page to fix viewport calculations */
+  html:has(.syllabus-viewer) {
+    zoom: 1 !important;
+    font-size: 100% !important;
+  }
+
+  /* Hide footer/watermark/back-to-top on viewer page */
   body:has(.syllabus-viewer) footer,
-  body:has(.syllabus-viewer) .fingerprint-watermark {
+  body:has(.syllabus-viewer) .fingerprint-watermark,
+  body:has(.syllabus-viewer) .back-to-top,
+  body:has(.syllabus-viewer) .whatsapp-float {
     display: none !important;
   }
 
-  /* Fill remaining viewport below fixed header */
+  /* Light background for the page */
+  body:has(.syllabus-viewer) {
+    background: #f0e8ff !important;
+  }
+
+  /* Viewer fills viewport below header */
   .syllabus-viewer {
     display: flex;
     flex-direction: column;
-    margin-top: 80px; /* Clear fixed header: p-3(12) + h-14(56) + p-3(12) */
-    height: calc(100vh - 80px);
-    height: calc(100dvh - 80px);
+    padding-top: 80px; /* Clear fixed header mobile */
+    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
-    background: #0a0a0f;
+    background: linear-gradient(135deg, #f5eeff 0%, #efe6ff 50%, #e8deff 100%);
   }
 
   @media (min-width: 1024px) {
     .syllabus-viewer {
-      margin-top: 96px; /* Clear fixed header: p-4(16) + h-16(64) + p-4(16) */
-      height: calc(100vh - 96px);
-      height: calc(100dvh - 96px);
+      padding-top: 88px; /* Clear fixed header desktop (no zoom so smaller) */
     }
   }
 
-  /* ---- Top Bar - minimal dark ---- */
+  /* ---- Top Bar ---- */
   .sv-topbar {
     flex-shrink: 0;
-    padding: 8px 16px;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(168, 85, 247, 0.12);
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.15);
   }
 
   @media (min-width: 768px) {
-    .sv-topbar { padding: 10px 24px; }
+    .sv-topbar { padding: 12px 32px; }
   }
 
   .sv-topbar-inner {
@@ -160,130 +159,102 @@ const totalPages = syllabusImages.length;
     gap: 12px;
   }
 
-  /* Back button - Dark glassmorphic */
+  /* Back button */
   .sv-back {
     display: inline-flex;
     align-items: center;
-    padding: 7px 18px;
-    background: rgba(168, 85, 247, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(168, 85, 247, 0.25);
+    gap: 6px;
+    padding: 8px 20px;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.2);
     border-radius: 50px;
-    color: #c084fc;
+    color: #7c3aed;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
   }
 
   .sv-back:hover {
-    background: rgba(168, 85, 247, 0.2);
-    border-color: rgba(168, 85, 247, 0.5);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #6d28d9;
   }
 
+  /* Counter */
   .sv-counter {
     display: flex;
     align-items: baseline;
     gap: 4px;
     font-family: 'Courier New', monospace;
-    font-size: 14px;
-    color: #8080a0;
-    padding: 6px 12px;
-    border-radius: 50px;
+    font-size: 15px;
+    color: #9090a8;
+    font-weight: 600;
   }
 
   .sv-counter-current {
-    font-weight: 700;
-    font-size: 17px;
-    color: #c084fc;
+    font-size: 18px;
+    color: #7c3aed;
     min-width: 14px;
     text-align: center;
     transition: all 0.3s ease;
   }
 
-  .sv-counter-sep { color: #4a4a6a; }
+  .sv-counter-sep { color: #c0b0d8; }
 
+  /* CTA button */
   .sv-cta {
     display: inline-flex;
     align-items: center;
-    padding: 7px 18px;
+    padding: 8px 22px;
     background: linear-gradient(135deg, #a855f7, #7c3aed);
     color: white;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     border-radius: 50px;
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
   }
 
   .sv-cta:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
   }
 
   /* ---- Main Viewer Area ---- */
   .sv-main {
     flex: 1;
-    display: flex;
-    align-items: stretch;
-    min-height: 0;
     position: relative;
     overflow: hidden;
+    min-height: 0; /* Critical for flex child to not overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Background effects - fill empty space around portrait document */
-  .sv-bg-effects {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .sv-bg-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 80%;
-    background: radial-gradient(ellipse, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0.03) 40%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .sv-bg-grid {
-    position: absolute;
-    inset: 0;
-    opacity: 0.025;
-    background-image:
-      linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* Navigation Arrows - dark floating */
+  /* Navigation Arrows */
   .sv-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: #c084fc;
+    color: #7c3aed;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 20;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .sv-nav-prev { right: 12px; }
@@ -291,16 +262,16 @@ const totalPages = syllabusImages.length;
 
   @media (min-width: 768px) {
     .sv-nav { width: 48px; height: 48px; }
-    .sv-nav-prev { right: 16px; }
-    .sv-nav-next { left: 16px; }
+    .sv-nav-prev { right: 24px; }
+    .sv-nav-next { left: 24px; }
   }
 
   .sv-nav:hover:not(:disabled) {
-    background: rgba(168, 85, 247, 0.8);
+    background: #a855f7;
     border-color: #a855f7;
     color: white;
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 0 24px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
   }
 
   .sv-nav:active:not(:disabled) {
@@ -308,11 +279,11 @@ const totalPages = syllabusImages.length;
   }
 
   .sv-nav:disabled {
-    opacity: 0.15;
+    opacity: 0.25;
     cursor: default;
   }
 
-  /* Document Container - fills everything */
+  /* Document Container */
   .sv-document {
     width: 100%;
     height: 100%;
@@ -334,30 +305,43 @@ const totalPages = syllabusImages.length;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    padding: 12px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
-  .sv-page-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    user-select: none;
-    -webkit-user-drag: none;
-    filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.15)) drop-shadow(0 8px 30px rgba(0, 0, 0, 0.5));
-  }
-
-  /* ---- Bottom Bar - Page Selector (dark) ---- */
-  .sv-bottombar {
-    flex-shrink: 0;
-    padding: 8px 16px 10px;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(168, 85, 247, 0.12);
+  .sv-page.visible {
+    opacity: 1;
   }
 
   @media (min-width: 768px) {
-    .sv-bottombar { padding: 10px 24px 12px; }
+    .sv-page { padding: 16px 80px; }
+  }
+
+  .sv-page-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* ---- Bottom Bar ---- */
+  .sv-bottombar {
+    flex-shrink: 0;
+    padding: 10px 16px 12px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(168, 85, 247, 0.15);
+  }
+
+  @media (min-width: 768px) {
+    .sv-bottombar { padding: 12px 32px 14px; }
   }
 
   .sv-pages-selector {
@@ -371,109 +355,57 @@ const totalPages = syllabusImages.length;
   }
 
   .sv-page-btn {
-    position: relative;
     width: 40px;
-    height: 52px;
-    border-radius: 8px;
-    border: 1.5px solid rgba(168, 85, 247, 0.15);
+    height: 40px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(168, 85, 247, 0.2);
     background: rgba(168, 85, 247, 0.05);
     cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     padding: 0;
   }
 
   @media (min-width: 768px) {
-    .sv-page-btn { width: 48px; height: 62px; border-radius: 10px; }
+    .sv-page-btn { width: 44px; height: 44px; }
   }
 
   .sv-page-btn-num {
-    position: relative;
-    z-index: 2;
     font-family: 'Courier New', monospace;
     font-weight: 700;
     font-size: 15px;
-    color: #6b6b8a;
+    color: #9090a8;
     transition: all 0.3s ease;
   }
 
-  @media (min-width: 768px) {
-    .sv-page-btn-num { font-size: 16px; }
-  }
-
-  .sv-page-btn-thumb {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .sv-page-btn-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   .sv-page-btn:hover {
-    border-color: rgba(168, 85, 247, 0.4);
-    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.5);
+    background: rgba(168, 85, 247, 0.1);
     transform: translateY(-2px);
   }
 
-  .sv-page-btn:hover .sv-page-btn-thumb {
-    opacity: 0.15;
-  }
-
   .sv-page-btn:hover .sv-page-btn-num {
-    color: #c084fc;
+    color: #7c3aed;
   }
 
   .sv-page-btn.active {
     border-color: #a855f7;
     background: rgba(168, 85, 247, 0.15);
-    transform: translateY(-3px) scale(1.08);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
   }
 
   .sv-page-btn.active .sv-page-btn-num {
-    color: #c084fc;
+    color: #7c3aed;
     font-size: 17px;
   }
 
-  @media (min-width: 768px) {
-    .sv-page-btn.active .sv-page-btn-num { font-size: 20px; }
-  }
-
-  .sv-page-btn.active .sv-page-btn-thumb {
-    opacity: 0.1;
-  }
-
-  /* ---- Page transition animation ---- */
-  .sv-page {
-    opacity: 0;
-    transform: scale(0.96);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .sv-page.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* ---- Mobile adjustments ---- */
+  /* ---- Mobile ---- */
   @media (max-width: 767px) {
-    .sv-nav {
-      width: 34px;
-      height: 34px;
-    }
-    .sv-nav svg {
-      width: 18px;
-      height: 18px;
-    }
+    .sv-nav { width: 36px; height: 36px; }
+    .sv-nav svg { width: 18px; height: 18px; }
     .sv-nav-prev { right: 6px; }
     .sv-nav-next { left: 6px; }
   }
@@ -500,39 +432,28 @@ const totalPages = syllabusImages.length;
     }
 
     function updateView() {
-      // Move track (RTL: positive translateX)
       track.style.transform = 'translateX(' + (currentPage * 100) + '%)';
 
-      // Update counter with animation
       counter.style.transform = 'scale(1.3)';
       counter.style.color = '#a855f7';
       counter.textContent = currentPage + 1;
       setTimeout(function() {
         counter.style.transform = 'scale(1)';
+        counter.style.color = '#7c3aed';
       }, 200);
 
-      // Update page visibility
       pages.forEach(function(page, idx) {
-        if (idx === currentPage) {
-          page.classList.add('visible');
-        } else {
-          page.classList.remove('visible');
-        }
+        page.classList.toggle('visible', idx === currentPage);
       });
 
-      // Update nav buttons
       prevBtn.disabled = currentPage === 0;
       nextBtn.disabled = currentPage === totalPages - 1;
 
-      // Update page buttons
       pageBtns.forEach(function(btn) {
         var pageIdx = parseInt(btn.getAttribute('data-page'));
         btn.classList.toggle('active', pageIdx === currentPage);
       });
     }
-
-    // Initialize first page
-    pages[0].classList.add('visible');
 
     // Nav buttons
     prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
@@ -547,16 +468,15 @@ const totalPages = syllabusImages.length;
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight') goToPage(currentPage - 1); // RTL
-      if (e.key === 'ArrowLeft') goToPage(currentPage + 1);  // RTL
+      if (e.key === 'ArrowRight') goToPage(currentPage - 1);
+      if (e.key === 'ArrowLeft') goToPage(currentPage + 1);
       if (e.key === 'Home') goToPage(0);
       if (e.key === 'End') goToPage(totalPages - 1);
-      // Number keys 1-6
       var num = parseInt(e.key);
       if (num >= 1 && num <= totalPages) goToPage(num - 1);
     });
 
-    // Touch swipe on main area
+    // Touch swipe
     var main = document.getElementById('svMain');
     main.addEventListener('touchstart', function(e) {
       touchStartX = e.changedTouches[0].screenX;
@@ -574,11 +494,8 @@ const totalPages = syllabusImages.length;
       if (!isSwiping) return;
       var diff = touchStartX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          goToPage(currentPage + 1); // Swipe left → next (RTL forward)
-        } else {
-          goToPage(currentPage - 1); // Swipe right → prev (RTL backward)
-        }
+        if (diff > 0) goToPage(currentPage + 1);
+        else goToPage(currentPage - 1);
       }
     }, { passive: true });
   });
