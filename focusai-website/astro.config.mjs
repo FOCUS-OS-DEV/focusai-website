@@ -28,7 +28,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/links'),
+      filter: (page) => !page.includes('/links') && !page.includes('/webinar'),
     }),
     icon({
       include: {
