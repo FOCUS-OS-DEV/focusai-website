@@ -49,6 +49,12 @@ const totalPages = syllabusImages.length;
 
     <!-- Main Viewer Area -->
     <div class="sv-main" id="svMain">
+      <!-- Background effects for empty space -->
+      <div class="sv-bg-effects">
+        <div class="sv-bg-glow"></div>
+        <div class="sv-bg-grid"></div>
+      </div>
+
       <!-- Navigation Arrow - Previous (RTL: right side) -->
       <button class="sv-nav sv-nav-prev" id="prevBtn" aria-label="עמוד קודם" disabled>
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -112,20 +118,22 @@ const totalPages = syllabusImages.length;
     display: none !important;
   }
 
-  /* Fill remaining viewport below header */
+  /* Fill remaining viewport below fixed header */
   .syllabus-viewer {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 72px);
-    height: calc(100dvh - 72px);
+    margin-top: 80px; /* Clear fixed header: p-3(12) + h-14(56) + p-3(12) */
+    height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
     overflow: hidden;
     background: #0a0a0f;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .syllabus-viewer {
-      height: calc(100vh - 76px);
-      height: calc(100dvh - 76px);
+      margin-top: 96px; /* Clear fixed header: p-4(16) + h-16(64) + p-4(16) */
+      height: calc(100vh - 96px);
+      height: calc(100dvh - 96px);
     }
   }
 
@@ -228,6 +236,35 @@ const totalPages = syllabusImages.length;
     overflow: hidden;
   }
 
+  /* Background effects - fill empty space around portrait document */
+  .sv-bg-effects {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .sv-bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(ellipse, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0.03) 40%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .sv-bg-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image:
+      linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
   /* Navigation Arrows - dark floating */
   .sv-nav {
     position: absolute;
@@ -306,6 +343,7 @@ const totalPages = syllabusImages.length;
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;
+    filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.15)) drop-shadow(0 8px 30px rgba(0, 0, 0, 0.5));
   }
 
   /* ---- Bottom Bar - Page Selector (dark) ---- */
