@@ -236,7 +236,14 @@ ONLINE
     });
   </script> <!-- Scripts slot for page-specific scripts -->  </body></html>  <script>
   (function() {
-    // === SIZE: Use actual pixels to bypass zoom: 0.85 issues ===
+    // === CRITICAL: Reset zoom to 1 on this page ===
+    // global.css sets zoom: 0.85 on html for desktop, which makes
+    // ALL viewport measurements (CSS vh/dvh AND JS window.innerHeight)
+    // return values ~17.6% larger than the actual screen.
+    // Resetting to 1 gives us accurate measurements.
+    document.documentElement.style.zoom = '1';
+
+    // === SIZE: Calculate viewer height from actual viewport ===
     function sizeViewer() {
       var viewer = document.getElementById('syllabusViewer');
       var header = document.getElementById('main-header');
