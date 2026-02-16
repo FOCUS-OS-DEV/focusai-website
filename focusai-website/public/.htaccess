@@ -1,3 +1,10 @@
+# Redirects - /blog to /ai-news
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^blog/?$ /ai-news/ [R=301,L]
+  RewriteRule ^blog/(.+)$ /ai-news/$1 [R=301,L]
+</IfModule>
+
 # Security Headers
 <IfModule mod_headers.c>
   # HSTS - Force HTTPS (1 year)

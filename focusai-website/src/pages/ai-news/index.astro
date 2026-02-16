@@ -35,7 +35,7 @@ function formatDate(date: Date): string {
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
-  <Header slot="header" currentPath="/blog" />
+  <Header slot="header" currentPath="/ai-news" />
 
   <!-- Hero Section -->
   <section class="relative pt-20 sm:pt-24 pb-10 sm:pb-16 overflow-hidden">
@@ -58,7 +58,7 @@ function formatDate(date: Date): string {
             "מדריכים מעשיים מהשטח",
             "reading_time.reduce() // we keep it short",
             "טיפים שאפשר ליישם מיד",
-            "cat blog/*.md | grep 'practical tips'",
+            "cat ai-news/*.md | grep 'practical tips'",
             "כותבים על AI בלי באזוורדס מיותרים",
             "new Post('something actually useful')",
           ]}
@@ -99,7 +99,7 @@ function formatDate(date: Date): string {
               data-category={post.data.category || 'news'}
             >
               <!-- Full card link overlay -->
-              <a href={`/blog/${post.id}`} class="absolute inset-0 z-10" aria-label={post.data.title}></a>
+              <a href={`/ai-news/${post.id}`} class="absolute inset-0 z-10" aria-label={post.data.title}></a>
 
               <!-- Hero Image -->
               {post.data.heroImage && (

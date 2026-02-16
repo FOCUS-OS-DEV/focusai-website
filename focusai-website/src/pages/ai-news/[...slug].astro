@@ -67,7 +67,7 @@ const categoryColor = (post.data.category || 'news') === 'guide' ? 'bg-emerald-5
                        (post.data.category || 'news') === 'tutorial' ? 'bg-blue-500' : 'bg-[#a855f7]';
 
 // Page URL for sharing
-const pageUrl = `https://focusai.co.il/blog/${post.id}`;
+const pageUrl = `https://focusai.co.il/ai-news/${post.id}`;
 
 // CTA config based on article ctaType
 const ctaType = post.data.ctaType || 'botcamp';
@@ -116,7 +116,7 @@ const ctaConfig = {
 ---
 
 <BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description}>
-  <Header slot="header" currentPath="/blog" />
+  <Header slot="header" currentPath="/ai-news" />
 
   <!-- Hero Image - Full Width -->
   {post.data.heroImage && (
@@ -149,7 +149,7 @@ const ctaConfig = {
       <nav class="mb-4 sm:mb-6 font-mono text-xs sm:text-sm flex flex-wrap items-center gap-1" dir="rtl">
         <a href="/" class="text-[#b0b0c0] hover:text-[#a855f7] transition-colors shrink-0">בית</a>
         <span class="text-[#b0b0c0]/50">/</span>
-        <a href="/blog" class="text-[#b0b0c0] hover:text-[#a855f7] transition-colors shrink-0"><bdi>חדשות AI</bdi></a>
+        <a href="/ai-news" class="text-[#b0b0c0] hover:text-[#a855f7] transition-colors shrink-0"><bdi>חדשות AI</bdi></a>
         <span class="text-[#b0b0c0]/50 hidden sm:inline">/</span>
         <span class="text-[#a855f7] truncate hidden sm:inline max-w-[200px] md:max-w-none"><bdi>{post.data.title.length > 40 ? post.data.title.slice(0, 40) + '...' : post.data.title}</bdi></span>
       </nav>
@@ -387,7 +387,7 @@ const ctaConfig = {
           <!-- Back to Blog -->
           <div class="mt-10">
             <a
-              href="/blog"
+              href="/ai-news"
               class="inline-flex items-center gap-2 text-[#a855f7] font-mono text-sm hover:gap-3 transition-all"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -452,7 +452,7 @@ const ctaConfig = {
               <p class="text-white font-bold mb-4">{relatedPosts.length >= 2 ? 'כתבות קשורות' : 'כתבות אחרונות'}</p>
               <div class="space-y-4">
                 {sidebarPosts.map(sp => (
-                  <a href={`/blog/${sp.id}`} class="group block">
+                  <a href={`/ai-news/${sp.id}`} class="group block">
                     <div class="flex gap-3">
                       {sp.data.heroImage && (
                         <img
@@ -548,7 +548,7 @@ const ctaConfig = {
               )}
               <div class="p-3 sm:p-5">
                 <h3 class="text-sm sm:text-base font-bold text-white mb-1 sm:mb-2 group-hover:text-[#a855f7] transition-colors line-clamp-2">
-                  <a href={`/blog/${relatedPost.id}`}>
+                  <a href={`/ai-news/${relatedPost.id}`}>
                     {relatedPost.data.title}
                   </a>
                 </h3>
