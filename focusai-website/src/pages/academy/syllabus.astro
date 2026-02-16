@@ -1,0 +1,159 @@
+---
+/**
+ * Bot-Camp Syllabus Page - Standalone gallery view
+ * Direct link: /academy/syllabus
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const syllabusImages = [
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1770470074/111_kyis5b.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1770470080/222_enxevc.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1770470082/333_odscrk.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1770470083/444_icwizs.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1770470076/222_2_trdefs.jpg',
+  'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1770470088/555_djukfo.jpg'
+];
+---
+
+<BaseLayout
+  title="סילבוס Bot-Camp | Focus AI Academy"
+  description="סילבוס מפורט של תוכנית Bot-Camp - הכשרת מפתחי סוכני AI ואוטומציות עסקיות בשיתוף אוניברסיטת חיפה"
+>
+  <Header slot="header" currentPath="/academy" theme="light" />
+
+  <!-- Hero Section -->
+  <section class="relative pt-28 md:pt-32 pb-8 md:pb-12 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#f5eeff] via-[#efe6ff] to-white"></div>
+
+    <div class="container relative z-10 px-4 max-w-4xl mx-auto">
+      <Breadcrumbs items={[
+        { label: 'בית', href: '/' },
+        { label: 'Bot-Camp', href: '/academy' },
+        { label: 'סילבוס' }
+      ]} />
+
+      <!-- Back Button -->
+      <a href="/academy" class="inline-flex items-center gap-2 text-[#a855f7] hover:text-[#9333ea] font-medium transition-colors mb-6 group">
+        <svg class="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+        חזרה לדף Bot-Camp
+      </a>
+
+      <!-- Title -->
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-[#1a1a2e] mb-3">
+        סילבוס <span class="text-[#a855f7]">Bot-Camp</span>
+      </h1>
+      <p class="text-base md:text-lg text-[#4a4a6a] mb-6">
+        הכשרת מפתחי סוכני AI ואוטומציות עסקיות | 72 שעות אקדמיות | בליווי אקדמי של אוניברסיטת חיפה
+      </p>
+
+      <!-- Thumbnail Strip -->
+      <div class="flex gap-2 md:gap-3 overflow-x-auto pb-4 scrollbar-hide" id="thumb-strip">
+        {syllabusImages.map((img, idx) => (
+          <button
+            class="syllabus-thumb flex-shrink-0 w-14 h-[72px] md:w-20 md:h-[104px] rounded-lg md:rounded-xl overflow-hidden border-2 border-transparent hover:border-[#a855f7] transition-all cursor-pointer opacity-70 hover:opacity-100"
+            data-index={idx}
+          >
+            <img src={img.replace('w_900', 'w_120')} alt={`עמוד ${idx + 1}`} class="w-full h-full object-cover" loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Syllabus Gallery -->
+  <section class="py-6 md:py-10 bg-white">
+    <div class="container px-4 max-w-4xl mx-auto space-y-6 md:space-y-8">
+      {syllabusImages.map((img, idx) => (
+        <div class="syllabus-page-img rounded-2xl overflow-hidden shadow-lg border border-[#e0d4f7]/50" id={`page-${idx}`}>
+          <img
+            src={img}
+            alt={`סילבוס Bot-Camp - עמוד ${idx + 1}`}
+            class="w-full h-auto"
+            loading={idx < 2 ? 'eager' : 'lazy'}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-10 md:py-16 bg-gradient-to-b from-white to-[#f5eeff]">
+    <div class="container px-4 max-w-2xl mx-auto text-center">
+      <h2 class="text-2xl md:text-3xl font-black text-[#1a1a2e] mb-4">
+        מוכנים <span class="text-[#a855f7]">להתחיל?</span>
+      </h2>
+      <p class="text-[#4a4a6a] mb-8">
+        הצטרפו למחזור הקרוב של Bot-Camp והתחילו לבנות סוכני AI ואוטומציות עסקיות
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="/academy#pricing"
+          class="px-8 py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef] text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+        >
+          להרשמה למחזור הקרוב
+        </a>
+        <a
+          href="/academy"
+          class="px-8 py-4 border-2 border-[#a855f7] text-[#a855f7] font-bold rounded-full text-lg hover:bg-[#f8f4ff] transition-all"
+        >
+          חזרה לדף הקורס
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .syllabus-thumb.active {
+    border-color: #a855f7;
+    opacity: 1;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.3);
+    transform: scale(1.08);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    var thumbs = document.querySelectorAll('.syllabus-thumb');
+    var pages = document.querySelectorAll('.syllabus-page-img');
+
+    // Click thumbnail → scroll to image
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-index'));
+        var target = document.getElementById('page-' + idx);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+
+    // Highlight active thumbnail on scroll
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var idx = entry.target.id.replace('page-', '');
+          thumbs.forEach(function(t) { t.classList.remove('active'); });
+          var activeThumb = document.querySelector('.syllabus-thumb[data-index="' + idx + '"]');
+          if (activeThumb) activeThumb.classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    pages.forEach(function(page) { observer.observe(page); });
+  });
+</script>

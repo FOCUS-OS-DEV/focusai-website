@@ -1,0 +1,211 @@
+---
+/**
+ * AI Ready Syllabus Page - Dark Cyberpunk Theme
+ * Direct link: /academy/ai-ready/syllabus
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+
+const syllabus = [
+  {
+    session: 1,
+    title: "יסודות הפרומפט",
+    description: "הכרות עם כלי AI מובילים, עקרונות כתיבת פרומפטים אפקטיביים, טכניקות מתקדמות להפקת תוצאות מדויקות ואיכותיות.",
+    tools: ["ChatGPT", "Claude", "Gemini"]
+  },
+  {
+    session: 2,
+    title: "יצירת תוכן ויזואלי",
+    description: "יצירת תמונות, עריכה ושיפור תמונות באמצעות AI. לימוד סגנונות, פרומפטים ויזואליים ועבודה עם כלי עיצוב חכמים.",
+    tools: ["Midjourney", "DALL-E", "Canva AI"]
+  },
+  {
+    session: 3,
+    title: "כתיבה שיווקית ותוכן",
+    description: "יצירת תוכן שיווקי, בלוגים, פוסטים ומיילים. בניית קול מותגי עקבי ואסטרטגיות תוכן מבוססות AI.",
+    tools: ["Copy.ai", "Jasper", "ChatGPT"]
+  },
+  {
+    session: 4,
+    title: "מצגות ודוקומנטציה",
+    description: "בניית מצגות מקצועיות ודוקומנטציה אוטומטית. יצירת חומרים עסקיים ברמה גבוהה תוך דקות.",
+    tools: ["Gamma", "Beautiful.ai", "Notion AI"]
+  },
+  {
+    session: 5,
+    title: "ניתוח נתונים ודשבורדים",
+    description: "עיבוד נתונים, יצירת גרפים ודשבורדים. הפיכת מידע גולמי לתובנות ויזואליות מועילות.",
+    tools: ["Code Interpreter", "Julius AI", "Tableau"]
+  },
+  {
+    session: 6,
+    title: "אוטומציות וזרימות עבודה",
+    description: "בניית אוטומציות ושילוב כלי AI בתהליכי עבודה. חיבור בין מערכות וייעול תהליכים חוזרים.",
+    tools: ["N8N", "Zapier"]
+  },
+  {
+    session: 7,
+    title: "סוכני AI ובוטים",
+    description: "בניית צ'אטבוטים וסוכני AI לשירות לקוחות, מכירות ותמיכה. תכנון, אפיון והטמעה מעשית.",
+    tools: ["Voiceflow", "Botpress", "GPT Builder"]
+  },
+  {
+    session: 8,
+    title: "פרויקט גמר",
+    description: "יישום מעשי של כל הנלמד בפרויקט אישי. הצגה, משוב וקבלת תעודת סיום.",
+    tools: ["All Tools Integration"]
+  }
+];
+
+const courseSchema = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "AI Ready - הכשרה יישומית לכלי AI",
+  "description": "8 מפגשים מעשיים ללימוד כלי AI מתקדמים",
+  "provider": {
+    "@type": "Organization",
+    "name": "Focus AI",
+    "url": "https://focusai.co.il"
+  }
+};
+---
+
+<BaseLayout
+  title="סילבוס AI Ready | Focus AI Academy"
+  description="סילבוס מפורט של תוכנית AI Ready - 8 מפגשים מעשיים ללימוד כלי AI מתקדמים"
+  structuredData={[courseSchema]}
+>
+  <Header slot="header" currentPath="/academy" />
+
+  <!-- Hero Section -->
+  <section class="relative pt-28 md:pt-32 pb-8 md:pb-12 overflow-hidden bg-[#0a0a0f]">
+    <div class="absolute inset-0 opacity-[0.02] hidden md:block" style="background-image: linear-gradient(rgba(192, 132, 252, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(192, 132, 252, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <div class="container relative z-10 px-4 max-w-5xl mx-auto">
+      <Breadcrumbs items={[
+        { label: 'בית', href: '/' },
+        { label: 'AI Ready', href: '/academy/ai-ready' },
+        { label: 'סילבוס' }
+      ]} />
+
+      <!-- Back Button -->
+      <a href="/academy/ai-ready" class="inline-flex items-center gap-2 text-[#c084fc] hover:text-[#a855f7] font-medium transition-colors mb-6 group">
+        <svg class="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+        חזרה לדף AI Ready
+      </a>
+
+      <!-- Title -->
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black mb-3">
+        <span class="text-[#9090a8]">סילבוס</span>
+        <span class="text-[#f5f5fa]"> AI Ready</span>
+      </h1>
+      <p class="text-base md:text-lg text-[#b0b0c0] mb-2">
+        הכשרה יישומית לכלי AI מתקדמים | 8 מפגשים | 24 שעות אקדמיות
+      </p>
+      <p class="text-sm text-[#b0b0c0]/70 font-mono">
+        8 מפגשים. 8 יכולות חדשות. אינסוף אפשרויות.
+      </p>
+    </div>
+  </section>
+
+  <!-- Syllabus Grid -->
+  <section class="py-10 md:py-16 bg-[#0a0a0f] relative overflow-hidden">
+    <div class="absolute inset-0 hidden md:block">
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#c084fc]/5 rounded-full blur-[200px]"></div>
+    </div>
+
+    <div class="container relative z-10 max-w-5xl mx-auto px-4">
+      <!-- Section Badge -->
+      <div class="flex items-center gap-4 mb-10 md:mb-14">
+        <div class="flex items-center gap-2">
+          <span class="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#c084fc] animate-pulse"></span>
+          <span class="font-mono text-xs md:text-sm font-semibold text-[#c084fc] uppercase tracking-[0.15em] md:tracking-[0.2em]">SYLLABUS</span>
+        </div>
+        <div class="h-px flex-1 bg-gradient-to-r from-[#c084fc]/50 to-transparent"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        {syllabus.map((item) => (
+          <div class="group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-[#c084fc]/50 rounded-2xl transition-all duration-300 overflow-hidden p-5 md:p-6">
+            <!-- Session number badge -->
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-white/[0.05] border border-white/[0.08] rounded-xl flex items-center justify-center">
+                <span class="font-mono text-lg md:text-xl font-bold text-[#c084fc]">{item.session}</span>
+              </div>
+              <h3 class="text-base md:text-lg font-bold text-[#f5f5fa] group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
+            </div>
+
+            <p class="text-xs md:text-sm text-[#b0b0c0] mb-4 leading-relaxed">{item.description}</p>
+
+            <div class="flex flex-wrap gap-2">
+              {item.tools.map((tool) => (
+                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/[0.06] text-xs font-mono text-[#d0d0e0] rounded-full">{tool}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary Stats -->
+  <section class="py-8 md:py-12 bg-[#0a0a0f] border-t border-white/[0.06]">
+    <div class="container max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div class="text-center p-4">
+          <div class="text-2xl md:text-3xl font-black text-[#c084fc] mb-1">8</div>
+          <div class="text-xs md:text-sm text-[#b0b0c0]">מפגשים</div>
+        </div>
+        <div class="text-center p-4">
+          <div class="text-2xl md:text-3xl font-black text-[#c084fc] mb-1">24</div>
+          <div class="text-xs md:text-sm text-[#b0b0c0]">שעות אקדמיות</div>
+        </div>
+        <div class="text-center p-4">
+          <div class="text-2xl md:text-3xl font-black text-[#c084fc] mb-1">20+</div>
+          <div class="text-xs md:text-sm text-[#b0b0c0]">כלי AI</div>
+        </div>
+        <div class="text-center p-4">
+          <div class="text-2xl md:text-3xl font-black text-[#c084fc] mb-1">100%</div>
+          <div class="text-xs md:text-sm text-[#b0b0c0]">מעשי</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-10 md:py-16 bg-[#0a0a0f] relative overflow-hidden">
+    <div class="absolute inset-0 hidden md:block">
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#c084fc]/5 rounded-full blur-[150px]"></div>
+    </div>
+
+    <div class="container relative z-10 px-4 max-w-2xl mx-auto text-center">
+      <h2 class="text-2xl md:text-3xl font-black mb-4">
+        <span class="text-[#9090a8]">מוכנים</span>
+        <span class="text-[#f5f5fa]"> להתחיל?</span>
+      </h2>
+      <p class="text-[#b0b0c0] mb-8">
+        הצטרפו למחזור הקרוב של AI Ready ותתחילו ליישם כלי AI בעבודה היומיומית
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="/academy/ai-ready#contact"
+          class="px-8 py-4 bg-gradient-to-r from-[#a855f7] to-[#7c3aed] text-white font-bold rounded-full text-lg shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)] transition-all hover:scale-105"
+        >
+          להרשמה למחזור הקרוב
+        </a>
+        <a
+          href="/academy/ai-ready"
+          class="px-8 py-4 border-2 border-[#c084fc]/50 text-[#c084fc] font-bold rounded-full text-lg hover:bg-white/[0.05] transition-all"
+        >
+          חזרה לדף הקורס
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
