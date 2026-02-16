@@ -98,15 +98,10 @@ const totalPages = syllabusImages.length;
 <style is:global>
   /* ============================================
      SYLLABUS VIEWER - Light Theme
+     Uses JS for height to bypass zoom: 0.85 issues
      ============================================ */
 
-  /* Reset zoom on this page to fix viewport calculations */
-  html:has(.syllabus-viewer) {
-    zoom: 1 !important;
-    font-size: 100% !important;
-  }
-
-  /* Hide footer/watermark/back-to-top on viewer page */
+  /* Hide footer/watermark on viewer page */
   body:has(.syllabus-viewer) footer,
   body:has(.syllabus-viewer) .fingerprint-watermark,
   body:has(.syllabus-viewer) .back-to-top,
@@ -114,33 +109,25 @@ const totalPages = syllabusImages.length;
     display: none !important;
   }
 
-  /* Light background for the page */
   body:has(.syllabus-viewer) {
     background: #f0e8ff !important;
+    overflow: hidden !important;
   }
 
-  /* Viewer fills viewport below header */
+  /* Viewer: height set by JS via --viewer-h custom property */
   .syllabus-viewer {
     display: flex;
     flex-direction: column;
-    padding-top: 80px; /* Clear fixed header mobile */
-    height: 100vh;
-    height: 100dvh;
     overflow: hidden;
     background: linear-gradient(135deg, #f5eeff 0%, #efe6ff 50%, #e8deff 100%);
-  }
-
-  @media (min-width: 1024px) {
-    .syllabus-viewer {
-      padding-top: 88px; /* Clear fixed header desktop (no zoom so smaller) */
-    }
+    /* JS sets: margin-top, height */
   }
 
   /* ---- Top Bar ---- */
   .sv-topbar {
     flex-shrink: 0;
     padding: 10px 16px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(168, 85, 247, 0.15);
@@ -159,7 +146,6 @@ const totalPages = syllabusImages.length;
     gap: 12px;
   }
 
-  /* Back button */
   .sv-back {
     display: inline-flex;
     align-items: center;
@@ -179,10 +165,8 @@ const totalPages = syllabusImages.length;
   .sv-back:hover {
     background: rgba(168, 85, 247, 0.15);
     border-color: rgba(168, 85, 247, 0.4);
-    color: #6d28d9;
   }
 
-  /* Counter */
   .sv-counter {
     display: flex;
     align-items: baseline;
@@ -203,7 +187,6 @@ const totalPages = syllabusImages.length;
 
   .sv-counter-sep { color: #c0b0d8; }
 
-  /* CTA button */
   .sv-cta {
     display: inline-flex;
     align-items: center;
@@ -229,13 +212,10 @@ const totalPages = syllabusImages.length;
     flex: 1;
     position: relative;
     overflow: hidden;
-    min-height: 0; /* Critical for flex child to not overflow */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 0;
   }
 
-  /* Navigation Arrows */
+  /* Nav arrows */
   .sv-nav {
     position: absolute;
     top: 50%;
@@ -244,7 +224,7 @@ const totalPages = syllabusImages.length;
     height: 44px;
     border-radius: 50%;
     border: 1px solid rgba(168, 85, 247, 0.25);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: #7c3aed;
@@ -283,12 +263,11 @@ const totalPages = syllabusImages.length;
     cursor: default;
   }
 
-  /* Document Container */
+  /* Document area - absolute positioned to get real pixel height from parent */
   .sv-document {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     overflow: hidden;
-    position: relative;
   }
 
   .sv-pages-track {
@@ -305,7 +284,7 @@ const totalPages = syllabusImages.length;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 12px 50px;
     opacity: 0;
     transition: opacity 0.4s ease;
   }
@@ -325,7 +304,7 @@ const totalPages = syllabusImages.length;
     height: auto;
     object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
     user-select: none;
     -webkit-user-drag: none;
   }
@@ -334,7 +313,7 @@ const totalPages = syllabusImages.length;
   .sv-bottombar {
     flex-shrink: 0;
     padding: 10px 16px 12px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid rgba(168, 85, 247, 0.15);
@@ -408,95 +387,108 @@ const totalPages = syllabusImages.length;
     .sv-nav svg { width: 18px; height: 18px; }
     .sv-nav-prev { right: 6px; }
     .sv-nav-next { left: 6px; }
+    .sv-page { padding: 8px 44px; }
   }
 </style>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', function() {
-    var currentPage = 0;
-    var totalPages = 6;
-    var track = document.getElementById('pagesTrack');
-    var prevBtn = document.getElementById('prevBtn');
-    var nextBtn = document.getElementById('nextBtn');
-    var counter = document.getElementById('counterCurrent');
-    var pageBtns = document.querySelectorAll('.sv-page-btn');
-    var pages = document.querySelectorAll('.sv-page');
-    var touchStartX = 0;
-    var touchStartY = 0;
-    var isSwiping = false;
-
-    function goToPage(idx) {
-      if (idx < 0 || idx >= totalPages || idx === currentPage) return;
-      currentPage = idx;
-      updateView();
+  (function() {
+    // === SIZE: Use actual pixels to bypass zoom: 0.85 issues ===
+    function sizeViewer() {
+      var viewer = document.getElementById('syllabusViewer');
+      var header = document.getElementById('main-header');
+      if (!viewer || !header) return;
+      var headerBottom = header.getBoundingClientRect().bottom;
+      viewer.style.marginTop = headerBottom + 'px';
+      viewer.style.height = (window.innerHeight - headerBottom) + 'px';
     }
 
-    function updateView() {
-      track.style.transform = 'translateX(' + (currentPage * 100) + '%)';
+    // Size on load + resize
+    sizeViewer();
+    window.addEventListener('resize', sizeViewer);
+    document.addEventListener('DOMContentLoaded', sizeViewer);
 
-      counter.style.transform = 'scale(1.3)';
-      counter.style.color = '#a855f7';
-      counter.textContent = currentPage + 1;
-      setTimeout(function() {
-        counter.style.transform = 'scale(1)';
-        counter.style.color = '#7c3aed';
-      }, 200);
+    // === PAGE NAVIGATION ===
+    document.addEventListener('DOMContentLoaded', function() {
+      var currentPage = 0;
+      var totalPages = 6;
+      var track = document.getElementById('pagesTrack');
+      var prevBtn = document.getElementById('prevBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var counter = document.getElementById('counterCurrent');
+      var pageBtns = document.querySelectorAll('.sv-page-btn');
+      var pages = document.querySelectorAll('.sv-page');
+      var touchStartX = 0;
+      var touchStartY = 0;
+      var isSwiping = false;
 
-      pages.forEach(function(page, idx) {
-        page.classList.toggle('visible', idx === currentPage);
-      });
+      function goToPage(idx) {
+        if (idx < 0 || idx >= totalPages || idx === currentPage) return;
+        currentPage = idx;
+        updateView();
+      }
 
-      prevBtn.disabled = currentPage === 0;
-      nextBtn.disabled = currentPage === totalPages - 1;
+      function updateView() {
+        track.style.transform = 'translateX(' + (currentPage * 100) + '%)';
+
+        counter.style.transform = 'scale(1.3)';
+        counter.textContent = currentPage + 1;
+        setTimeout(function() {
+          counter.style.transform = 'scale(1)';
+        }, 200);
+
+        pages.forEach(function(page, i) {
+          page.classList.toggle('visible', i === currentPage);
+        });
+
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === totalPages - 1;
+
+        pageBtns.forEach(function(btn) {
+          var idx = parseInt(btn.getAttribute('data-page'));
+          btn.classList.toggle('active', idx === currentPage);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
+      nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
 
       pageBtns.forEach(function(btn) {
-        var pageIdx = parseInt(btn.getAttribute('data-page'));
-        btn.classList.toggle('active', pageIdx === currentPage);
+        btn.addEventListener('click', function() {
+          goToPage(parseInt(this.getAttribute('data-page')));
+        });
       });
-    }
 
-    // Nav buttons
-    prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
-    nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
-
-    // Page selector buttons
-    pageBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        goToPage(parseInt(this.getAttribute('data-page')));
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') goToPage(currentPage - 1);
+        if (e.key === 'ArrowLeft') goToPage(currentPage + 1);
+        if (e.key === 'Home') goToPage(0);
+        if (e.key === 'End') goToPage(totalPages - 1);
+        var num = parseInt(e.key);
+        if (num >= 1 && num <= totalPages) goToPage(num - 1);
       });
+
+      var main = document.getElementById('svMain');
+      main.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isSwiping = false;
+      }, { passive: true });
+
+      main.addEventListener('touchmove', function(e) {
+        var diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
+        var diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
+        if (diffX > diffY && diffX > 20) isSwiping = true;
+      }, { passive: true });
+
+      main.addEventListener('touchend', function(e) {
+        if (!isSwiping) return;
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goToPage(currentPage + 1);
+          else goToPage(currentPage - 1);
+        }
+      }, { passive: true });
     });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight') goToPage(currentPage - 1);
-      if (e.key === 'ArrowLeft') goToPage(currentPage + 1);
-      if (e.key === 'Home') goToPage(0);
-      if (e.key === 'End') goToPage(totalPages - 1);
-      var num = parseInt(e.key);
-      if (num >= 1 && num <= totalPages) goToPage(num - 1);
-    });
-
-    // Touch swipe
-    var main = document.getElementById('svMain');
-    main.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-      isSwiping = false;
-    }, { passive: true });
-
-    main.addEventListener('touchmove', function(e) {
-      var diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
-      var diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
-      if (diffX > diffY && diffX > 20) isSwiping = true;
-    }, { passive: true });
-
-    main.addEventListener('touchend', function(e) {
-      if (!isSwiping) return;
-      var diff = touchStartX - e.changedTouches[0].screenX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) goToPage(currentPage + 1);
-        else goToPage(currentPage - 1);
-      }
-    }, { passive: true });
-  });
+  })();
 </script>

@@ -52,7 +52,7 @@
     })();
   })();</script><!-- Page-specific head content --><link rel="stylesheet" href="/_astro/about.Cye2ZLXG.css">
 <link rel="stylesheet" href="/_astro/about.BsRMIQLW.css">
-<link rel="stylesheet" href="/_astro/bot-camp-syllabus.Cx--6wtl.css"></head> <body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active"> <!-- Skip to content (a11y) --> <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[9999] focus:bg-[#a855f7] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold">דלג לתוכן</a> <!-- Preloader (first child - renders before everything) --> <!-- Preloader overlay --><div id="preloader" class="preloader" aria-live="polite" aria-label="טוען..." data-astro-cid-whrugjgn> <div class="preloader-bg" data-astro-cid-whrugjgn></div> <div class="preloader-content" data-astro-cid-whrugjgn> <!-- Fingerprint logo with glow --> <div class="preloader-logo-wrap" data-astro-cid-whrugjgn> <div class="preloader-glow" data-astro-cid-whrugjgn></div> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="preloader-logo" width="120" height="120" fetchpriority="high" loading="eager" data-astro-cid-whrugjgn> <!-- Scan line --> <div class="preloader-scanline" data-astro-cid-whrugjgn></div> </div> <!-- Progress bar --> <div class="preloader-progress-track" data-astro-cid-whrugjgn> <div class="preloader-progress-bar" id="preloaderBar" data-astro-cid-whrugjgn></div> </div> <!-- Status text --> <div class="preloader-status" data-astro-cid-whrugjgn> <span class="preloader-dot" data-astro-cid-whrugjgn></span> <span class="preloader-text" id="preloaderStatus" data-astro-cid-whrugjgn>INITIALIZING_</span> </div> </div> </div> <noscript> <style>
+<link rel="stylesheet" href="/_astro/bot-camp-syllabus.DVQSbhSw.css"></head> <body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active"> <!-- Skip to content (a11y) --> <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[9999] focus:bg-[#a855f7] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold">דלג לתוכן</a> <!-- Preloader (first child - renders before everything) --> <!-- Preloader overlay --><div id="preloader" class="preloader" aria-live="polite" aria-label="טוען..." data-astro-cid-whrugjgn> <div class="preloader-bg" data-astro-cid-whrugjgn></div> <div class="preloader-content" data-astro-cid-whrugjgn> <!-- Fingerprint logo with glow --> <div class="preloader-logo-wrap" data-astro-cid-whrugjgn> <div class="preloader-glow" data-astro-cid-whrugjgn></div> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="preloader-logo" width="120" height="120" fetchpriority="high" loading="eager" data-astro-cid-whrugjgn> <!-- Scan line --> <div class="preloader-scanline" data-astro-cid-whrugjgn></div> </div> <!-- Progress bar --> <div class="preloader-progress-track" data-astro-cid-whrugjgn> <div class="preloader-progress-bar" id="preloaderBar" data-astro-cid-whrugjgn></div> </div> <!-- Status text --> <div class="preloader-status" data-astro-cid-whrugjgn> <span class="preloader-dot" data-astro-cid-whrugjgn></span> <span class="preloader-text" id="preloaderStatus" data-astro-cid-whrugjgn>INITIALIZING_</span> </div> </div> </div> <noscript> <style>
     #preloader { display: none !important; }
     html.preloader-active { overflow: auto !important; }
     html.preloader-active body { overflow: auto !important; }
@@ -235,91 +235,103 @@ ONLINE
       });
     });
   </script> <!-- Scripts slot for page-specific scripts -->  </body></html>  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var currentPage = 0;
-    var totalPages = 6;
-    var track = document.getElementById('pagesTrack');
-    var prevBtn = document.getElementById('prevBtn');
-    var nextBtn = document.getElementById('nextBtn');
-    var counter = document.getElementById('counterCurrent');
-    var pageBtns = document.querySelectorAll('.sv-page-btn');
-    var pages = document.querySelectorAll('.sv-page');
-    var touchStartX = 0;
-    var touchStartY = 0;
-    var isSwiping = false;
-
-    function goToPage(idx) {
-      if (idx < 0 || idx >= totalPages || idx === currentPage) return;
-      currentPage = idx;
-      updateView();
+  (function() {
+    // === SIZE: Use actual pixels to bypass zoom: 0.85 issues ===
+    function sizeViewer() {
+      var viewer = document.getElementById('syllabusViewer');
+      var header = document.getElementById('main-header');
+      if (!viewer || !header) return;
+      var headerBottom = header.getBoundingClientRect().bottom;
+      viewer.style.marginTop = headerBottom + 'px';
+      viewer.style.height = (window.innerHeight - headerBottom) + 'px';
     }
 
-    function updateView() {
-      track.style.transform = 'translateX(' + (currentPage * 100) + '%)';
+    // Size on load + resize
+    sizeViewer();
+    window.addEventListener('resize', sizeViewer);
+    document.addEventListener('DOMContentLoaded', sizeViewer);
 
-      counter.style.transform = 'scale(1.3)';
-      counter.style.color = '#a855f7';
-      counter.textContent = currentPage + 1;
-      setTimeout(function() {
-        counter.style.transform = 'scale(1)';
-        counter.style.color = '#7c3aed';
-      }, 200);
+    // === PAGE NAVIGATION ===
+    document.addEventListener('DOMContentLoaded', function() {
+      var currentPage = 0;
+      var totalPages = 6;
+      var track = document.getElementById('pagesTrack');
+      var prevBtn = document.getElementById('prevBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var counter = document.getElementById('counterCurrent');
+      var pageBtns = document.querySelectorAll('.sv-page-btn');
+      var pages = document.querySelectorAll('.sv-page');
+      var touchStartX = 0;
+      var touchStartY = 0;
+      var isSwiping = false;
 
-      pages.forEach(function(page, idx) {
-        page.classList.toggle('visible', idx === currentPage);
-      });
+      function goToPage(idx) {
+        if (idx < 0 || idx >= totalPages || idx === currentPage) return;
+        currentPage = idx;
+        updateView();
+      }
 
-      prevBtn.disabled = currentPage === 0;
-      nextBtn.disabled = currentPage === totalPages - 1;
+      function updateView() {
+        track.style.transform = 'translateX(' + (currentPage * 100) + '%)';
+
+        counter.style.transform = 'scale(1.3)';
+        counter.textContent = currentPage + 1;
+        setTimeout(function() {
+          counter.style.transform = 'scale(1)';
+        }, 200);
+
+        pages.forEach(function(page, i) {
+          page.classList.toggle('visible', i === currentPage);
+        });
+
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === totalPages - 1;
+
+        pageBtns.forEach(function(btn) {
+          var idx = parseInt(btn.getAttribute('data-page'));
+          btn.classList.toggle('active', idx === currentPage);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
+      nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
 
       pageBtns.forEach(function(btn) {
-        var pageIdx = parseInt(btn.getAttribute('data-page'));
-        btn.classList.toggle('active', pageIdx === currentPage);
+        btn.addEventListener('click', function() {
+          goToPage(parseInt(this.getAttribute('data-page')));
+        });
       });
-    }
 
-    // Nav buttons
-    prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
-    nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
-
-    // Page selector buttons
-    pageBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        goToPage(parseInt(this.getAttribute('data-page')));
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') goToPage(currentPage - 1);
+        if (e.key === 'ArrowLeft') goToPage(currentPage + 1);
+        if (e.key === 'Home') goToPage(0);
+        if (e.key === 'End') goToPage(totalPages - 1);
+        var num = parseInt(e.key);
+        if (num >= 1 && num <= totalPages) goToPage(num - 1);
       });
+
+      var main = document.getElementById('svMain');
+      main.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isSwiping = false;
+      }, { passive: true });
+
+      main.addEventListener('touchmove', function(e) {
+        var diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
+        var diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
+        if (diffX > diffY && diffX > 20) isSwiping = true;
+      }, { passive: true });
+
+      main.addEventListener('touchend', function(e) {
+        if (!isSwiping) return;
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goToPage(currentPage + 1);
+          else goToPage(currentPage - 1);
+        }
+      }, { passive: true });
     });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight') goToPage(currentPage - 1);
-      if (e.key === 'ArrowLeft') goToPage(currentPage + 1);
-      if (e.key === 'Home') goToPage(0);
-      if (e.key === 'End') goToPage(totalPages - 1);
-      var num = parseInt(e.key);
-      if (num >= 1 && num <= totalPages) goToPage(num - 1);
-    });
-
-    // Touch swipe
-    var main = document.getElementById('svMain');
-    main.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-      isSwiping = false;
-    }, { passive: true });
-
-    main.addEventListener('touchmove', function(e) {
-      var diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
-      var diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
-      if (diffX > diffY && diffX > 20) isSwiping = true;
-    }, { passive: true });
-
-    main.addEventListener('touchend', function(e) {
-      if (!isSwiping) return;
-      var diff = touchStartX - e.changedTouches[0].screenX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) goToPage(currentPage + 1);
-        else goToPage(currentPage - 1);
-      }
-    }, { passive: true });
-  });
+  })();
 </script>
