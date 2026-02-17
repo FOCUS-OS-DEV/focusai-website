@@ -145,22 +145,31 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
 </section>
 
 <style>
-  /* Entrance animations */
+  /* Entrance animations - paused until preloader finishes */
   .hero-animate {
     opacity: 0;
     transform: translateY(40px);
     animation: heroFadeUp 0.8s ease-out forwards;
+    animation-play-state: paused;
   }
 
   .hero-scale {
-    transform: translateY(0) scale(0.95);
+    opacity: 0;
+    transform: scale(0.95);
     animation: heroScaleUp 1.2s ease-out forwards;
+    animation-play-state: paused;
   }
 
-  .hero-delay-1 { animation-delay: 0.3s; }
-  .hero-delay-2 { animation-delay: 0.5s; }
-  .hero-delay-3 { animation-delay: 0.7s; }
-  .hero-delay-4 { animation-delay: 0.9s; }
+  /* When preloader is done, play animations */
+  html:not(.preloader-active) .hero-animate,
+  html:not(.preloader-active) .hero-scale {
+    animation-play-state: running;
+  }
+
+  .hero-delay-1 { animation-delay: 0.1s; }
+  .hero-delay-2 { animation-delay: 0.25s; }
+  .hero-delay-3 { animation-delay: 0.4s; }
+  .hero-delay-4 { animation-delay: 0.55s; }
 
   @keyframes heroFadeUp {
     from { opacity: 0; transform: translateY(40px); }

@@ -1,12 +1,19 @@
 /* Fonts loaded via <link> tags in BaseLayout.astro - no @import needed */
 @import "tailwindcss";
 
-/* ===== FOIC PREVENTION =====
-   GSAP sets opacity:0 via fromTo(). If GSAP loads late or fails,
-   elements stay invisible. This ensures content is visible by default.
-   GSAP will override this inline when it initializes. */
+/* ===== SCROLL ANIMATION INITIAL STATE =====
+   Elements start hidden. GSAP animates them on scroll.
+   Safety net in scroll-animations.ts forces visible after 4s if GSAP fails.
+   prefers-reduced-motion users see everything immediately. */
 [data-animate] {
-  opacity: 1;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* ===== PRELOADER ACTIVE STATE ===== */
