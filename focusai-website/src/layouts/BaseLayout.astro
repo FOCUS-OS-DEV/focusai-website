@@ -200,7 +200,11 @@ const websiteSchema = {
     }
 
     function startInit() {
-      initSmoothScrollAndAnimations();
+      if (isMobile && 'requestIdleCallback' in window) {
+        requestIdleCallback(() => initSmoothScrollAndAnimations(), { timeout: 200 });
+      } else {
+        initSmoothScrollAndAnimations();
+      }
     }
 
     // Wait for preloader to finish before initializing Lenis/GSAP
