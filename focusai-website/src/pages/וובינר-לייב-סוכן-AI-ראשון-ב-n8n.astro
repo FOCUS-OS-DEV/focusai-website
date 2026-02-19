@@ -828,6 +828,15 @@
             color: var(--text-muted);
         }
 
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
         .form-group {
             margin-bottom: 16px;
         }
@@ -1877,12 +1886,21 @@
                 </div>
 
                 <form id="leadForm">
-                    <div class="form-group">
-                        <label for="fullName" class="required">
-                            <i class="fas fa-user"></i>
-                            שם
-                        </label>
-                        <input type="text" id="fullName" name="fullName" placeholder="השם שלך" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="required">
+                                <i class="fas fa-user"></i>
+                                שם פרטי
+                            </label>
+                            <input type="text" id="firstName" name="firstName" placeholder="שם פרטי" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם פרטי - אותיות בלבד, 2-30 תווים">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="required">
+                                <i class="fas fa-user"></i>
+                                שם משפחה
+                            </label>
+                            <input type="text" id="lastName" name="lastName" placeholder="שם משפחה" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם משפחה - אותיות בלבד, 2-30 תווים">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -1890,7 +1908,7 @@
                             <i class="fas fa-phone"></i>
                             טלפון
                         </label>
-                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required>
+                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required pattern="0[2-9][\d\-\s]{7,10}" title="מספר טלפון ישראלי תקין, לדוגמה: 0521234567">
                     </div>
 
                     <div class="form-group">
@@ -2063,13 +2081,14 @@
         var patterns = {
             phone: /^0[2-9]\d{7,8}$/,
             email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            name: /^[\u0590-\u05FFa-zA-Z\s]{2,50}$/
+            name: /^[\u0590-\u05FFa-zA-Z\s]{2,30}$/
         };
 
         // Validation function
         function validateField(field, pattern) {
-            var value = field.value.replace(/[-\s]/g, '');
-            if (!pattern.test(field.id === 'phone' ? value : field.value)) {
+            var value = field.value.trim().replace(/[-\s]/g, '');
+            var testValue = (field.id === 'phone') ? value : field.value.trim();
+            if (!pattern.test(testValue)) {
                 field.style.borderColor = '#ef4444';
                 field.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.2)';
                 return false;
@@ -2080,7 +2099,10 @@
         }
 
         // Real-time validation
-        document.getElementById('fullName').addEventListener('blur', function() {
+        document.getElementById('firstName').addEventListener('blur', function() {
+            validateField(this, patterns.name);
+        });
+        document.getElementById('lastName').addEventListener('blur', function() {
             validateField(this, patterns.name);
         });
         document.getElementById('email').addEventListener('blur', function() {
@@ -2098,17 +2120,19 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            var fullName = document.getElementById('fullName');
+            var firstName = document.getElementById('firstName');
+            var lastName = document.getElementById('lastName');
             var phone = document.getElementById('phone');
             var email = document.getElementById('email');
             var privacyConsent = document.getElementById('privacyConsent');
 
             // Validate all fields
-            var isNameValid = validateField(fullName, patterns.name);
+            var isFirstNameValid = validateField(firstName, patterns.name);
+            var isLastNameValid = validateField(lastName, patterns.name);
             var isPhoneValid = validateField(phone, patterns.phone);
             var isEmailValid = validateField(email, patterns.email);
 
-            if (!isNameValid || !isPhoneValid || !isEmailValid) {
+            if (!isFirstNameValid || !isLastNameValid || !isPhoneValid || !isEmailValid) {
                 alert('נא למלא את כל השדות בצורה תקינה');
                 return;
             }
@@ -2128,17 +2152,16 @@
             submitBtn.disabled = true;
 
             var formData = {
-                fullName: fullName.value.trim(),
-                phone: phone.value.trim(),
+                firstName: firstName.value.trim(),
+                lastName: lastName.value.trim(),
                 email: email.value.trim(),
-                privacyConsent: privacyConsent.checked,
-                marketingConsent: marketingConsent.checked,
-                timestamp: new Date().toISOString(),
-                source: 'live webinar n8n march 2026'
+                phone: phone.value.trim().replace(/[-\s]/g, ''),
+                consent: 'on',
+                formType: 'quick'
             };
 
             try {
-                var response = await fetch('https://focus2025.app.n8n.cloud/webhook/free-webinar-onboard', {
+                var response = await fetch('https://focus2025.app.n8n.cloud/webhook/n8n-ai-agent-webinar', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
