@@ -1308,18 +1308,60 @@
             background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
         }
 
+        .story-hook .hook-image-wrap {
+            position: relative;
+            margin: 0 auto 28px;
+            max-width: 340px;
+        }
+
         .story-hook .hook-image {
-            margin: 0 -20px 22px;
             padding: 3px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 14px;
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.25);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .story-hook .hook-image:hover {
+            transform: rotate(0deg) scale(1.02);
         }
 
         .story-hook .hook-image img {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 10px;
             display: block;
+        }
+
+        .hook-label {
+            position: absolute;
+            bottom: -18px;
+            left: -10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transform: rotate(3deg);
+        }
+
+        .hook-label-arrow {
+            font-size: 1.6rem;
+            color: var(--accent);
+            transform: scaleX(-1);
+            animation: hookArrowBounce 1.5s ease-in-out infinite;
+        }
+
+        .hook-label-text {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--accent);
+            text-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes hookArrowBounce {
+            0%, 100% { transform: scaleX(-1) translateX(0); }
+            50% { transform: scaleX(-1) translateX(-5px); }
         }
 
         .story-hook .hook-question {
@@ -1472,8 +1514,8 @@
                 padding: 32px 40px;
             }
 
-            .story-hook .hook-image {
-                margin: 0 -40px 26px;
+            .story-hook .hook-image-wrap {
+                max-width: 420px;
             }
 
             .story-hook .hook-question {
@@ -1555,8 +1597,12 @@
                 padding: 40px 50px;
             }
 
-            .story-hook .hook-image {
-                margin: 0 -50px 28px;
+            .story-hook .hook-image-wrap {
+                max-width: 460px;
+            }
+
+            .hook-label-text {
+                font-size: 1.3rem;
             }
 
             .story-hook .hook-question {
@@ -1699,8 +1745,14 @@
 
         <!-- Story Hook - Why this webinar matters -->
         <div class="story-hook">
-            <div class="hook-image">
-                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771504655/WhatsApp_Image_2026-02-19_at_14.35.40_xc8v7r.jpg" alt="n8n AI Agent Workflow">
+            <div class="hook-image-wrap">
+                <div class="hook-image">
+                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1771504655/WhatsApp_Image_2026-02-19_at_14.35.40_xc8v7r.jpg" alt="n8n AI Agent Workflow">
+                </div>
+                <div class="hook-label">
+                    <span class="hook-label-arrow">&#x279C;</span>
+                    <span class="hook-label-text">!בונים יחד</span>
+                </div>
             </div>
             <div class="hook-question">יש הבדל ענק בין לשחק עם ChatGPT<br>לבין לבנות סוכן AI שעובד בשבילך</div>
             <div class="hook-answer">
