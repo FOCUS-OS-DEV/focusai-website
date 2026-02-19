@@ -1,0 +1,2214 @@
+---
+/**
+ * LIVE Webinar Landing Page - Building first AI Agent in n8n
+ * Event Date: 01.03.2026 at 19:30
+ * Featuring Bot-Camp students: Orian Amoyal & Zohar Yaakov
+ */
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>וובינר LIVE | בניית סוכן AI ראשון ב-n8n | Focus AI</title>
+    <meta name="description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 01.03.2026 בשעה 19:30. הרשמו עכשיו!">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://focusai.co.il/וובינר-לייב-סוכן-AI-ראשון-ב-n8n/">
+    <meta property="og:title" content="וובינר LIVE | בניית סוכן AI ראשון ב-n8n">
+    <meta property="og:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 01.03.2026 בשעה 19:30.">
+    <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:site_name" content="Focus AI">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="וובינר LIVE | בניית סוכן AI ראשון ב-n8n">
+    <meta name="twitter:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 01.03.2026 בשעה 19:30.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1388659336102272');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            zoom: 1 !important;
+        }
+
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --live-red: #ef4444;
+            --dark: #0f0f1a;
+            --darker: #080810;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --glow-primary: rgba(139, 92, 246, 0.4);
+            --glow-secondary: rgba(6, 182, 212, 0.4);
+        }
+
+        body {
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 20% 80%, var(--glow-primary) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, var(--glow-secondary) 0%, transparent 40%),
+                radial-gradient(circle at 40% 40%, rgba(239, 68, 68, 0.1) 0%, transparent 30%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 28px 12px 20px;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            height: 48px;
+            width: auto;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.5));
+        }
+
+        /* LIVE Badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--live-red), #dc2626);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+            animation: livePulse 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .live-badge .live-dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: liveDot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 4px 35px rgba(239, 68, 68, 0.6), 0 0 60px rgba(239, 68, 68, 0.2); }
+        }
+
+        @keyframes liveDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Event Date Badge */
+        .event-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 10px 18px;
+            border-radius: 16px;
+            margin-bottom: 22px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .event-date-badge i {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .event-date-badge .separator {
+            width: 1px;
+            height: 20px;
+            background: var(--card-border);
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .n8n-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .n8n-highlight img {
+            height: 22px;
+            width: auto;
+        }
+
+        .n8n-highlight span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        header .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        header .subtitle strong {
+            color: var(--text);
+        }
+
+        /* No Recording Badge */
+        .no-recording-badge {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            position: relative;
+            animation: noRecPulse 3s ease-in-out infinite;
+        }
+
+        .no-recording-badge i {
+            font-size: 1.6rem;
+            color: var(--live-red);
+            filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.5));
+            animation: noRecShake 4s ease-in-out infinite;
+        }
+
+        .no-rec-text {
+            font-size: 2rem;
+            font-weight: 900;
+            color: transparent;
+            background: linear-gradient(135deg, var(--live-red), #ff6b6b, var(--live-red));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: noRecShimmer 3s linear infinite;
+            letter-spacing: 1px;
+        }
+
+        .no-rec-line {
+            display: block;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--live-red), #ff6b6b, var(--live-red), transparent);
+            border-radius: 2px;
+            animation: noRecLineGrow 2s ease-out 0.5s forwards;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+        }
+
+        @keyframes noRecShimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        @keyframes noRecLineGrow {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes noRecShake {
+            0%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(-5deg); }
+            20% { transform: rotate(5deg); }
+            30% { transform: rotate(0deg); }
+        }
+
+        @keyframes noRecPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* Hero Character */
+        .hero-character {
+            margin: 10px 0 16px;
+        }
+
+        .hero-character img {
+            height: 180px;
+            width: auto;
+            filter: drop-shadow(0 10px 30px rgba(139, 92, 246, 0.3));
+            animation: heroFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .countdown-label {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .countdown-unit {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 10px 12px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .countdown-unit .number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-unit .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: block;
+        }
+
+        .countdown-expired {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--live-red);
+        }
+
+        /* Main Card */
+        .main-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 22px 16px;
+            margin-bottom: 25px;
+            border: 1px solid var(--card-border);
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--live-red), var(--primary), var(--secondary));
+        }
+
+        /* Section title */
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+            max-width: 80px;
+        }
+
+        /* Speakers Section */
+        .speakers-section {
+            margin-bottom: 30px;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .speaker-card {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .speaker-card:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+        }
+
+        .speaker-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            overflow: hidden;
+        }
+
+        .speaker-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Hosts vs Presenters sub-labels */
+        .speakers-sublabel {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .speaker-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .speaker-role {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .speaker-business {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .speaker-business i {
+            font-size: 0.7rem;
+            color: var(--primary);
+        }
+
+        .speaker-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .speaker-badge i {
+            font-size: 0.65rem;
+        }
+
+        /* What you'll see */
+        /* Customer Journey Narrative */
+        .journey-section {
+            margin-bottom: 36px;
+            padding: 0 4px;
+        }
+
+        .journey-opener {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .journey-opener strong {
+            font-weight: 700;
+            color: var(--text);
+            font-style: normal;
+        }
+
+        .journey-highlight {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            margin: 28px 0 16px;
+            line-height: 1.5;
+        }
+
+        .journey-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.9;
+            margin-bottom: 18px;
+        }
+
+        .journey-text strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .journey-text em {
+            color: var(--primary);
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .journey-pullquote {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+            padding: 16px 20px;
+            border-right: 3px solid var(--primary);
+            background: rgba(139, 92, 246, 0.06);
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+            line-height: 1.7;
+        }
+
+        .journey-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            margin: 28px 0;
+            border: none;
+        }
+
+        .journey-chapter {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .journey-chapter::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .journey-big {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text);
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+
+        .journey-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+        }
+
+        .journey-step .step-marker {
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        .journey-step strong {
+            color: var(--text);
+        }
+
+        .journey-closing {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: center;
+            margin-top: 28px;
+            padding: 18px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(6, 182, 212, 0.06));
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            line-height: 1.7;
+        }
+
+        .journey-closing strong {
+            color: var(--primary);
+        }
+
+        /* Exclusive Benefits */
+        .benefits-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(139, 92, 246, 0.05));
+            border-radius: 16px;
+            border: 1px solid rgba(245, 158, 11, 0.25);
+        }
+
+        .benefits-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .benefits-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent), #d97706);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0f0f1a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .benefits-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .benefits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .benefit-item i {
+            font-size: 1.2rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .benefit-item span {
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Target Audience */
+        .audience-note {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 18px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.05));
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .audience-note i {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .audience-note p {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .audience-note strong {
+            color: var(--secondary);
+        }
+
+        /* Form Section */
+        .form-section {
+            padding-top: 25px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group label i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--accent);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.05);
+            box-shadow: 0 0 0 4px var(--glow-primary);
+        }
+
+        /* Prevent autofill from turning inputs white */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px rgba(15, 15, 26, 0.97) inset !important;
+            -webkit-text-fill-color: var(--text) !important;
+            background-color: rgba(255, 255, 255, 0.03) !important;
+            border-color: var(--card-border) !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px rgba(139, 92, 246, 0.08) inset !important;
+            border-color: var(--primary) !important;
+        }
+
+        /* Privacy Section */
+        .privacy-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .privacy-notice {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            padding: 12px 15px;
+            background: rgba(245, 158, 11, 0.05);
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .privacy-notice i {
+            color: var(--accent);
+            margin-top: 2px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .checkbox-label a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .checkbox-label a:hover {
+            color: var(--secondary);
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 20px 30px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--live-red) 0%, #dc2626 50%, #b91c1c 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            box-shadow:
+                0 4px 20px rgba(239, 68, 68, 0.4),
+                0 0 0 0 rgba(239, 68, 68, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 12px 35px rgba(239, 68, 68, 0.5),
+                0 0 0 4px rgba(239, 68, 68, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-submit .btn-text {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-submit i {
+            font-size: 1.3rem;
+            animation: pulse-icon 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Community Section */
+        .community-section {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+        }
+
+        .community-section .section-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .community-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(37, 211, 102, 0.08));
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            border-radius: 14px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .community-btn:hover {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(37, 211, 102, 0.15));
+            border-color: rgba(37, 211, 102, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
+        }
+
+        .community-btn i {
+            font-size: 1.3rem;
+            color: #25d366;
+        }
+
+        .community-btn span {
+            color: #25d366;
+            font-weight: 700;
+        }
+
+        /* Footer/Disclaimer */
+        .disclaimer {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            width: 100%;
+        }
+
+        .disclaimer-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .disclaimer-title i {
+            color: var(--accent);
+        }
+
+        .disclaimer-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .disclaimer-text a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: rgba(139, 92, 246, 0.2);
+            color: #fff;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-links a {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-links a i {
+            font-size: 0.7rem;
+        }
+
+        /* Success Message */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(8, 8, 16, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .success-overlay.show {
+            display: flex;
+        }
+
+        .success-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: successIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes successIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .success-icon i {
+            font-size: 2.2rem;
+            color: white;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .success-message {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .success-details {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .success-details .detail-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .success-details .detail-row i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .success-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .success-note i {
+            color: var(--secondary);
+        }
+
+        /* ===== Story Hook Section ===== */
+        .story-hook {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 24px 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-hook::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+        }
+
+        .story-hook .hook-image {
+            margin-bottom: 18px;
+            padding: 6px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: inline-block;
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.25);
+        }
+
+        .story-hook .hook-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .story-hook .hook-question {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+
+        .story-hook .hook-answer {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto 18px;
+        }
+
+        .story-hook .hook-answer strong {
+            color: var(--text);
+        }
+
+        .story-hook .hook-answer em {
+            color: var(--secondary);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .story-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .story-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 16px;
+            background: rgba(139, 92, 246, 0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            min-width: 80px;
+        }
+
+        .story-stat .stat-number {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .story-stat .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* ===== Projects Showcase Section ===== */
+        /* (project-card + agenda styles replaced by .journey-section) */
+
+        /* ===== MOBILE-FIRST Responsive ===== */
+        /* Base styles above = mobile. Media queries scale UP. */
+
+        /* Tablet (min-width: 480px) */
+        @media (min-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            header {
+                padding: 36px 20px 26px;
+            }
+
+            header h1 {
+                font-size: 2.4rem;
+            }
+
+            .speakers-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .main-card {
+                padding: 30px 24px;
+            }
+
+            .story-stats {
+                flex-wrap: nowrap;
+            }
+        }
+
+        /* Small Desktop (min-width: 768px) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 900px;
+                padding: 30px;
+            }
+
+            header h1 {
+                font-size: 2.8rem;
+            }
+
+            header .subtitle {
+                font-size: 1.1rem;
+                max-width: 600px;
+            }
+
+            .logo {
+                height: 55px;
+                margin-bottom: 25px;
+            }
+
+            .hero-character img {
+                height: 220px;
+            }
+
+            .main-card {
+                padding: 40px;
+                border-radius: 24px;
+            }
+
+            .countdown-unit {
+                min-width: 80px;
+                padding: 16px 20px;
+            }
+
+            .countdown-unit .number {
+                font-size: 2rem;
+            }
+
+            .event-date-badge {
+                flex-wrap: nowrap;
+                font-size: 1rem;
+                gap: 12px;
+                padding: 12px 24px;
+            }
+
+            .n8n-highlight img {
+                height: 28px;
+            }
+
+            .n8n-highlight span {
+                font-size: 1.1rem;
+            }
+
+            .story-hook {
+                padding: 32px 40px;
+            }
+
+            .story-hook .hook-question {
+                font-size: 1.4rem;
+            }
+
+            .story-hook .hook-answer {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .speaker-avatar {
+                width: 180px;
+                height: 180px;
+            }
+
+            .journey-opener {
+                font-size: 1.9rem;
+            }
+
+            .journey-highlight {
+                font-size: 1.5rem;
+            }
+
+            .journey-big {
+                font-size: 2.1rem;
+            }
+
+            .journey-text {
+                font-size: 1.05rem;
+            }
+
+            .journey-pullquote {
+                font-size: 1.25rem;
+            }
+
+            .footer-links {
+                flex-wrap: nowrap;
+                gap: 20px;
+            }
+        }
+
+        /* Large Desktop (min-width: 1024px) */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1000px;
+                padding: 40px;
+            }
+
+            header h1 {
+                font-size: 3.2rem;
+            }
+
+            header .subtitle {
+                font-size: 1.15rem;
+            }
+
+            .hero-character img {
+                height: 260px;
+            }
+
+            .main-card {
+                padding: 50px;
+            }
+
+            .countdown-unit {
+                min-width: 90px;
+                padding: 18px 24px;
+            }
+
+            .countdown-unit .number {
+                font-size: 2.2rem;
+            }
+
+            .story-hook {
+                padding: 40px 50px;
+            }
+
+            .story-hook .hook-question {
+                font-size: 1.5rem;
+            }
+
+            .speaker-avatar {
+                width: 200px;
+                height: 200px;
+            }
+
+            .benefits-section {
+                padding: 28px;
+            }
+
+            .journey-opener {
+                font-size: 2.2rem;
+            }
+
+            .journey-highlight {
+                font-size: 1.7rem;
+            }
+
+            .journey-big {
+                font-size: 2.4rem;
+            }
+
+            .journey-text {
+                font-size: 1.1rem;
+            }
+
+            .journey-pullquote {
+                font-size: 1.35rem;
+                padding: 22px 28px;
+            }
+
+            .journey-step {
+                font-size: 1.1rem;
+            }
+
+            .journey-closing {
+                font-size: 1.2rem;
+            }
+
+            .form-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Loading state */
+        .btn-submit.loading {
+            pointer-events: none;
+        }
+
+        .btn-submit.loading .btn-text {
+            display: none;
+        }
+
+        .btn-submit .spinner {
+            display: none;
+        }
+
+        .btn-submit.loading .spinner {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <a href="/">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo">
+            </a>
+
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                LIVE וובינר
+            </div>
+
+            <div class="event-date-badge">
+                <i class="fas fa-calendar-alt"></i>
+                <span>01.03.2026</span>
+                <span class="separator"></span>
+                <i class="fas fa-clock"></i>
+                <span>19:30</span>
+                <span class="separator"></span>
+                <i class="fas fa-gift"></i>
+                <span>חינם</span>
+            </div>
+
+            <h1>בניית סוכן AI ראשון ב-n8n</h1>
+
+            <div class="hero-character">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_420/v1771022344/36c7efb5-d099-4cb1-94fe-1bd896f53cef_ivfe4n.png" alt="Focus AI Character">
+            </div>
+
+            <p class="subtitle">
+                למדו איך לבנות <strong>סוכן AI אמיתי</strong> שעובד בשבילכם 24/7 - בלי קוד, בלי ניסיון טכני.<br>
+                <strong>+ 2 הטבות בלעדיות</strong> למשתתפי הוובינר בלבד!<br>
+                <span class="no-recording-badge">
+                    <i class="fas fa-video-slash"></i>
+                    <span class="no-rec-text">לא תהיה הקלטה!</span>
+                    <span class="no-rec-line"></span>
+                </span>
+            </p>
+        </header>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-section" id="countdownSection">
+            <div class="countdown-label">הוובינר מתחיל בעוד:</div>
+            <div class="countdown-timer" id="countdownTimer">
+                <div class="countdown-unit">
+                    <span class="number" id="cd-days">--</span>
+                    <span class="label">ימים</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="number" id="cd-hours">--</span>
+                    <span class="label">שעות</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="number" id="cd-minutes">--</span>
+                    <span class="label">דקות</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="number" id="cd-seconds">--</span>
+                    <span class="label">שניות</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Hook - Why this webinar matters -->
+        <div class="story-hook">
+            <div class="hook-image">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1771504655/WhatsApp_Image_2026-02-19_at_14.35.40_xc8v7r.jpg" alt="n8n AI Agent Workflow">
+            </div>
+            <div class="hook-question">יש הבדל ענק בין לשחק עם ChatGPT<br>לבין לבנות סוכן AI שעובד בשבילך</div>
+            <div class="hook-answer">
+                רוב האנשים משתמשים ב-AI בתור צ'אט - שואלים שאלה, מקבלים תשובה, וזהו.<br>
+                אבל מה אם הסוכן שלך יכול <em>לפעול לבד</em>? לקרוא מיילים, לענות ללידים, לנהל משימות - <strong>בלי שתיגעו בו</strong>.<br>
+                זה בדיוק מה שמערכת <strong>n8n</strong> מאפשרת, וזה בדיוק מה שנראה לכם בוובינר הזה - בשידור חי.
+            </div>
+            <div class="story-stats">
+                <div class="story-stat">
+                    <span class="stat-number">n8n</span>
+                    <span class="stat-label">פלטפורמה מובילה</span>
+                </div>
+                <div class="story-stat">
+                    <span class="stat-number">LIVE</span>
+                    <span class="stat-label">בנייה בזמן אמת</span>
+                </div>
+                <div class="story-stat">
+                    <span class="stat-number">0 &#8362;</span>
+                    <span class="stat-label">חינם לגמרי</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-card">
+            <!-- Speakers Section -->
+            <div class="speakers-section">
+                <div class="section-title">
+                    <i class="fas fa-users"></i>
+                    מי מנחה ומציג?
+                </div>
+
+                <!-- Hosts -->
+                <div class="speakers-sublabel">מנחים - Focus AI</div>
+                <div class="speakers-grid" style="margin-bottom: 16px;">
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">
+                            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_400,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה">
+                        </div>
+                        <div class="speaker-name">שחר דדיה</div>
+                        <div class="speaker-role">CEO & Co-Founder</div>
+                        <div class="speaker-badge">
+                            <i class="fas fa-microphone-alt"></i>
+                            Focus AI
+                        </div>
+                    </div>
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">
+                            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_400,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר">
+                        </div>
+                        <div class="speaker-name">אוניל סחר</div>
+                        <div class="speaker-role">CEO & Co-Founder</div>
+                        <div class="speaker-badge">
+                            <i class="fas fa-microphone-alt"></i>
+                            Focus AI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presenters -->
+                <div class="speakers-sublabel">מציגים - בוגרי Bot-Camp</div>
+                <div class="speakers-grid">
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">
+                            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_400,c_fill,g_face/v1771425035/WhatsApp_Image_2026-02-18_at_16.25.30_bxxx7i.jpg" alt="אוריאן אמויאל">
+                        </div>
+                        <div class="speaker-name">אוריאן אמויאל</div>
+                        <div class="speaker-role">רו"ח וארכיטקטית עסקית</div>
+                        <div class="speaker-business">
+                            <i class="fas fa-building"></i>
+                            +NX.
+                        </div>
+                        <div class="speaker-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                            בוגר Bot-Camp
+                        </div>
+                    </div>
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">
+                            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_400,c_fill,g_north/v1771405755/WhatsApp_Image_2026-02-17_at_20.55.26_con5db.jpg" alt="זוהר יעקב">
+                        </div>
+                        <div class="speaker-name">זוהר יעקב</div>
+                        <div class="speaker-role">מומחה אוטומציות AI</div>
+                        <div class="speaker-business">
+                            <i class="fab fa-instagram"></i>
+                            @auto_scale.il
+                        </div>
+                        <div class="speaker-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                            בוגר Bot-Camp
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Journey Narrative -->
+            <div class="journey-section">
+
+                <p class="journey-opener">
+                    כולם מדברים על <strong>AI</strong>.<br>
+                    רובם עדיין רק משחקים עם צ'אט.
+                </p>
+
+                <p class="journey-text">
+                    אתם שואלים את ChatGPT שאלות, אולי בניתם GPT מותאם אישית, אולי אפילו Gem של גוגל. וזה נחמד. אבל בואו נהיה כנים - <strong>זה לא באמת עובד בשבילכם</strong>. אתם עדיין צריכים לפתוח את הכלי, לכתוב את הפרומפט, להעתיק את התשובה, ולהדביק אותה איפה שצריך.
+                </p>
+
+                <div class="journey-pullquote">
+                    מה אם הייתם יכולים לבנות משהו שעושה את כל זה <em style="color: var(--primary);">לבד</em> -
+                    בלי שתצטרכו לגעת בזה?
+                </div>
+
+                <hr class="journey-divider">
+
+                <div class="journey-chapter">הכירו את סוכני AI</div>
+                <div class="journey-big">הבדל בין צ'אט חכם<br>לבין מערכת שעובדת 24/7</div>
+
+                <p class="journey-text">
+                    <em>סוכן AI</em> זה לא עוד צ'אטבוט. זה תוכנה שרצה ברקע, מחוברת ל<strong>מייל</strong>, ל<strong>CRM</strong>, ל<strong>וואטסאפ</strong>, ל<strong>לוחות שנה</strong> - ופועלת בשבילכם אוטומטית. היא קוראת הודעות, מגיבה ללקוחות, מעדכנת מערכות, שולחת תזכורות. <strong>בלי קוד. בלי שרתים. בלי שתיגעו בזה.</strong>
+                </p>
+
+                <p class="journey-text">
+                    ובוובינר הזה, אנחנו לא רק נספר לכם על זה - <strong>אנחנו נראה לכם את זה, לייב</strong>.
+                </p>
+
+                <hr class="journey-divider">
+
+                <div class="journey-chapter">מה קורה בוובינר</div>
+                <div class="journey-big">שעה וחצי של AI אמיתי</div>
+
+                <div class="journey-steps">
+                    <div class="journey-step">
+                        <span class="step-marker">&#x25B8;</span>
+                        <span>בוגרי Bot-Camp <strong>מציגים סוכנים שהם בנו</strong> - אוטומציות שרצות בעסק שלהם כל יום</span>
+                    </div>
+                    <div class="journey-step">
+                        <span class="step-marker">&#x25B8;</span>
+                        <span><strong>בנייה לייב של סוכן AI</strong> מאפס, צעד אחר צעד, בזמן אמת על המסך</span>
+                    </div>
+                    <div class="journey-step">
+                        <span class="step-marker">&#x25B8;</span>
+                        <span>הצצה אל <strong>מאחורי הקלעים של Bot-Camp</strong> - מה לומדים, איך מתרגלים, ואיך מגיעים לתוצאות תוך 30 יום</span>
+                    </div>
+                    <div class="journey-step">
+                        <span class="step-marker">&#x25B8;</span>
+                        <span><strong>שאלות ותשובות בזמן אמת</strong> - תשאלו הכל, תקבלו תשובות ישירות</span>
+                    </div>
+                </div>
+
+                <div class="journey-closing">
+                    זה לא וובינר של שקופיות ומצגות.<br>
+                    זה <strong>שידור חי שבו תראו AI עובד באמת</strong>.
+                </div>
+
+            </div>
+
+            <!-- Exclusive Benefits -->
+            <div class="benefits-section">
+                <div class="benefits-header">
+                    <div class="benefits-badge">
+                        <i class="fas fa-star"></i>
+                        בלעדי למשתתפי הוובינר
+                    </div>
+                    <div class="benefits-title">2 הטבות למחזור מרץ של Bot-Camp</div>
+                </div>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <i class="fas fa-tag"></i>
+                        <span>הנחה מיוחדת על ההרשמה למחזור מרץ - רק למשתתפי הוובינר</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-gift"></i>
+                        <span>בונוס בלעדי שיוענק רק למי שנרשם דרך הוובינר</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Target Audience Note -->
+            <div class="audience-note">
+                <i class="fas fa-user-check"></i>
+                <p><strong>לכולם.</strong> בעלי עסקים, משווקים, יזמים, מנהלים, עצמאיים - כל מי שרוצה לראות איך בונים סוכן AI אמיתי ומתחילים להשתמש ב-AI באופן מעשי.</p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="form-header">
+                    <h2 class="form-title">שמרו לכם מקום בוובינר</h2>
+                    <p class="form-subtitle">המקומות מוגבלים - הבטיחו את מקומכם עכשיו</p>
+                </div>
+
+                <form id="leadForm">
+                    <div class="form-group">
+                        <label for="fullName" class="required">
+                            <i class="fas fa-user"></i>
+                            שם
+                        </label>
+                        <input type="text" id="fullName" name="fullName" placeholder="השם שלך" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="required">
+                            <i class="fas fa-phone"></i>
+                            טלפון
+                        </label>
+                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="required">
+                            <i class="fas fa-envelope"></i>
+                            אימייל
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="כתובת המייל שלך" required>
+                    </div>
+
+                    <!-- Privacy Section -->
+                    <div class="privacy-section">
+                        <div class="privacy-notice">
+                            <i class="fas fa-shield-alt"></i>
+                            <span><strong>יידוע בהתאם לחוק:</strong> הפרטים שלך יישמרו במאגר מידע רשום ויישמשו לשליחת פרטי הוובינר ותכנים רלוונטיים. ניתן לבקש עיון, תיקון או מחיקה בכל עת.</span>
+                        </div>
+
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                            <span class="checkbox-label">
+                                קראתי ואני מסכים/ה ל<a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ול<a href="/terms/" target="_blank">תנאי השימוש</a>. *
+                            </span>
+                        </label>
+
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="marketingConsent" name="marketingConsent" required>
+                            <span class="checkbox-label">
+                                אני מסכים/ה לקבל עדכונים, טיפים ותוכן בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת. *
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <span class="btn-text">שמרו לי מקום בוובינר <i class="fas fa-arrow-left"></i></span>
+                        <span class="spinner"></span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Community Section -->
+            <div class="community-section">
+                <div class="section-label">הצטרפו לקהילה</div>
+                <a href="https://did.li/Focus-community" class="community-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                    טיפים ומדריכים חינם
+                </a>
+            </div>
+        </div>
+
+        <!-- Disclaimer / Footer -->
+        <div class="disclaimer">
+            <div class="disclaimer-title">
+                <i class="fas fa-info-circle"></i>
+                הבהרות משפטיות
+            </div>
+            <div class="disclaimer-text">
+                התכנים בוובינר הינם למטרות לימודיות בלבד ואינם מהווים הבטחה לתוצאות. המידע האישי נשמר במאגר מידע רשום בהתאם לחוק הגנת הפרטיות ותיקון 13 (התשפ"ד-2024). בלחיצה על "שמרו לי מקום" הינך מאשר/ת את שמירת פרטיך ושליחת תוכן רלוונטי. עומדות לך זכויות עיון, תיקון ומחיקה - פנה אלינו בכל עת.
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/focus.creative.ai" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.tiktok.com/@focus.creative.ai" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+            <div class="footer-links">
+                <a href="/privacy-policy/" target="_blank"><i class="fas fa-lock"></i> מדיניות פרטיות</a>
+                <a href="/terms/" target="_blank"><i class="fas fa-file-contract"></i> תנאי שימוש</a>
+                <a href="https://wa.me/972539466408" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> צור קשר</a>
+                <a href="mailto:office@focusai.co.il"><i class="fas fa-envelope"></i> office@focusai.co.il</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="success-title">נרשמת בהצלחה!</h2>
+            <p class="success-message">
+                מקומך בוובינר שמור.<br>
+                <small style="opacity: 0.7;">פרטי ההתחברות יישלחו אלייך למייל ול-WhatsApp</small>
+            </p>
+            <div class="success-details">
+                <div class="detail-row">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>01.03.2026 | יום ראשון</span>
+                </div>
+                <div class="detail-row">
+                    <i class="fas fa-clock"></i>
+                    <span>19:30 שעון ישראל</span>
+                </div>
+                <div class="detail-row">
+                    <i class="fas fa-video"></i>
+                    <span>לינק לזום יישלח למייל</span>
+                </div>
+            </div>
+            <div class="success-note">
+                <i class="fas fa-bell"></i>
+                <span>נשלח לכם תזכורת לפני הוובינר</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        var particlesContainer = document.getElementById('particles');
+        for (var i = 0; i < 25; i++) {
+            var particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Countdown Timer
+        var eventDate = new Date('2026-03-01T19:30:00+02:00'); // Israel timezone
+
+        function updateCountdown() {
+            var now = new Date();
+            var diff = eventDate.getTime() - now.getTime();
+
+            if (diff <= 0) {
+                var section = document.getElementById('countdownSection');
+                if (section) {
+                    section.innerHTML = '<div class="countdown-expired"><i class="fas fa-broadcast-tower"></i> הוובינר מתחיל עכשיו!</div>';
+                }
+                return;
+            }
+
+            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            var daysEl = document.getElementById('cd-days');
+            var hoursEl = document.getElementById('cd-hours');
+            var minutesEl = document.getElementById('cd-minutes');
+            var secondsEl = document.getElementById('cd-seconds');
+
+            if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Phone number formatting
+        var phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            var value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            if (value.length > 3) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            }
+            e.target.value = value;
+        });
+
+        // Validation patterns
+        var patterns = {
+            phone: /^0[2-9]\d{7,8}$/,
+            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            name: /^[\u0590-\u05FFa-zA-Z\s]{2,50}$/
+        };
+
+        // Validation function
+        function validateField(field, pattern) {
+            var value = field.value.replace(/[-\s]/g, '');
+            if (!pattern.test(field.id === 'phone' ? value : field.value)) {
+                field.style.borderColor = '#ef4444';
+                field.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.2)';
+                return false;
+            }
+            field.style.borderColor = '';
+            field.style.boxShadow = '';
+            return true;
+        }
+
+        // Real-time validation
+        document.getElementById('fullName').addEventListener('blur', function() {
+            validateField(this, patterns.name);
+        });
+        document.getElementById('email').addEventListener('blur', function() {
+            validateField(this, patterns.email);
+        });
+        document.getElementById('phone').addEventListener('blur', function() {
+            validateField(this, patterns.phone);
+        });
+
+        // Form handling
+        var form = document.getElementById('leadForm');
+        var submitBtn = document.getElementById('submitBtn');
+        var successOverlay = document.getElementById('successOverlay');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            var fullName = document.getElementById('fullName');
+            var phone = document.getElementById('phone');
+            var email = document.getElementById('email');
+            var privacyConsent = document.getElementById('privacyConsent');
+
+            // Validate all fields
+            var isNameValid = validateField(fullName, patterns.name);
+            var isPhoneValid = validateField(phone, patterns.phone);
+            var isEmailValid = validateField(email, patterns.email);
+
+            if (!isNameValid || !isPhoneValid || !isEmailValid) {
+                alert('נא למלא את כל השדות בצורה תקינה');
+                return;
+            }
+
+            if (!privacyConsent.checked) {
+                alert('יש לאשר את מדיניות הפרטיות כדי להמשיך');
+                return;
+            }
+
+            var marketingConsent = document.getElementById('marketingConsent');
+            if (!marketingConsent.checked) {
+                alert('יש לאשר קבלת עדכונים כדי להמשיך');
+                return;
+            }
+
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            var formData = {
+                fullName: fullName.value.trim(),
+                phone: phone.value.trim(),
+                email: email.value.trim(),
+                privacyConsent: privacyConsent.checked,
+                marketingConsent: marketingConsent.checked,
+                timestamp: new Date().toISOString(),
+                source: 'live webinar n8n march 2026'
+            };
+
+            try {
+                var response = await fetch('https://focus2025.app.n8n.cloud/webhook/free-webinar-onboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    var errorMessage = 'שגיאת שרת (' + response.status + ')';
+                    try {
+                        var errorData = await response.json();
+                        if (errorData.message) {
+                            errorMessage = errorData.message;
+                        } else if (errorData.error) {
+                            errorMessage = errorData.error;
+                        }
+                    } catch (parseErr) {
+                        errorMessage = 'שגיאה: ' + response.status + ' - ' + (response.statusText || 'שגיאה בשרת');
+                    }
+                    throw new Error(errorMessage);
+                }
+
+                successOverlay.classList.add('show');
+                form.reset();
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                var userMessage = 'אירעה שגיאה. אנא נסו שוב.';
+
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    userMessage = 'שגיאת תקשורת: לא ניתן להתחבר לשרת. בדקו את חיבור האינטרנט ונסו שוב.';
+                } else if (error.message.includes('CORS')) {
+                    userMessage = 'שגיאת הרשאות: הגישה לשרת נחסמה. נסו שוב מאוחר יותר.';
+                } else if (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0) {
+                    userMessage = error.message;
+                } else if (error.message) {
+                    userMessage = 'שגיאה: ' + error.message;
+                }
+
+                alert(userMessage);
+            } finally {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Close success overlay on click outside
+        successOverlay.addEventListener('click', function(e) {
+            if (e.target === successOverlay) {
+                successOverlay.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
