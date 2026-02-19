@@ -1335,33 +1335,38 @@
 
         .hook-label {
             position: absolute;
-            bottom: -18px;
-            left: -10px;
+            bottom: -10px;
+            right: -14px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 6px;
-            transform: rotate(3deg);
+            gap: 2px;
+            transform: rotate(-6deg);
         }
 
         .hook-label-arrow {
-            font-size: 1.6rem;
+            font-size: 2.8rem;
+            line-height: 1;
             color: var(--accent);
-            transform: scaleX(-1);
-            animation: hookArrowBounce 1.5s ease-in-out infinite;
+            animation: hookArrowBounce 2s ease-in-out infinite;
         }
 
         .hook-label-text {
-            font-family: 'Heebo', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            color: var(--accent);
-            text-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-            letter-spacing: 0.5px;
+            font-style: italic;
+            color: transparent;
+            background: linear-gradient(135deg, var(--accent), #fbbf24, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4));
+            letter-spacing: 1px;
         }
 
         @keyframes hookArrowBounce {
-            0%, 100% { transform: scaleX(-1) translateX(0); }
-            50% { transform: scaleX(-1) translateX(-5px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(-8deg); }
         }
 
         .story-hook .hook-question {
@@ -1602,7 +1607,16 @@
             }
 
             .hook-label-text {
-                font-size: 1.3rem;
+                font-size: 1.9rem;
+            }
+
+            .hook-label-arrow {
+                font-size: 3.2rem;
+            }
+
+            .hook-label {
+                right: -30px;
+                bottom: -14px;
             }
 
             .story-hook .hook-question {
@@ -1750,8 +1764,8 @@
                     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1771504655/WhatsApp_Image_2026-02-19_at_14.35.40_xc8v7r.jpg" alt="n8n AI Agent Workflow">
                 </div>
                 <div class="hook-label">
-                    <span class="hook-label-arrow">&#x279C;</span>
-                    <span class="hook-label-text">!בונים יחד</span>
+                    <span class="hook-label-text">בונים יחד!</span>
+                    <span class="hook-label-arrow">&#x21A9;</span>
                 </div>
             </div>
             <div class="hook-question">יש הבדל ענק בין לשחק עם ChatGPT<br>לבין לבנות סוכן AI שעובד בשבילך</div>
