@@ -1,0 +1,249 @@
+---
+/**
+ * Client Logos Carousel - 3D auto-scrolling carousel
+ * Center logo large, sides faded and smaller, auto-advances
+ * No arrows, no names - just clean logo cards
+ * Supports dark (cyberpunk) and light (bot-camp) themes
+ */
+import { clients } from '../data/clients';
+
+interface Props {
+  theme?: 'dark' | 'light';
+  title?: string;
+}
+
+const {
+  theme = 'dark',
+  title = 'הם כבר איתנו',
+} = Astro.props;
+
+const isLight = theme === 'light';
+const uid = `lc-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<section class:list={[
+  'py-8 md:py-12 overflow-hidden',
+  isLight ? 'bg-gradient-to-b from-[#f8f4ff] to-white' : 'bg-[#0a0a0f]'
+]} data-section>
+  <div class="container px-4">
+    <h3 class:list={[
+      'text-center text-2xl md:text-3xl font-bold tracking-wide mb-8 md:mb-10',
+      isLight ? 'text-[#a855f7]' : 'text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]'
+    ]} data-animate="fade-up">
+      {title}
+    </h3>
+
+    <div class="clc" id={uid} aria-label="קרוסלת לקוחות">
+      <div class="clc-track">
+        {clients.map((client, i) => (
+          <div class="clc-card" data-clc={i}>
+            <div class:list={['clc-inner', isLight ? 'clc-inner-light' : 'clc-inner-dark']}>
+              <img src={client.logo} alt={client.name} loading="lazy" draggable="false" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clc {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 0 0.5rem;
+  }
+
+  .clc-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 170px;
+  }
+
+  .clc-card {
+    position: absolute;
+    width: 140px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.6s ease;
+    will-change: transform, opacity;
+  }
+
+  .clc-inner {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  /* Light theme card */
+  .clc-inner-light {
+    background: white;
+    border: 1px solid #e0d4f7;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.08);
+  }
+
+  .clc-center .clc-inner-light {
+    border-color: #a855f7;
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.18);
+  }
+
+  /* Dark theme card */
+  .clc-inner-dark {
+    background: linear-gradient(145deg, #15151f 0%, #0d0d14 100%);
+    border: 1px solid #2a2a3a;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .clc-center .clc-inner-dark {
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.12), 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Inner white container for logo visibility on dark */
+  .clc-inner-dark::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 0.75rem;
+    background: white;
+    z-index: 0;
+  }
+
+  .clc-inner {
+    position: relative;
+  }
+
+  .clc-inner img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  @media (min-width: 768px) {
+    .clc-track {
+      height: 210px;
+    }
+    .clc-card {
+      width: 180px;
+    }
+    .clc-inner {
+      width: 150px;
+      height: 150px;
+      padding: 1.25rem;
+    }
+    .clc-inner-dark::before {
+      inset: 10px;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ uid }}>
+(function() {
+  var el = document.getElementById(uid);
+  if (!el || el.dataset.init) return;
+  el.dataset.init = '1';
+
+  var cards = el.querySelectorAll('.clc-card');
+  var total = cards.length;
+  var current = 0;
+  var autoTimer = null;
+  var paused = false;
+
+  function layout() {
+    cards.forEach(function(card, i) {
+      var offset = i - current;
+      if (offset > total / 2) offset -= total;
+      if (offset < -total / 2) offset += total;
+
+      var abs = Math.abs(offset);
+      var sign = offset > 0 ? -1 : 1;
+      var scale, tx, opa, z;
+
+      if (abs === 0) {
+        scale = 1; tx = 0; opa = 1; z = 5;
+      } else if (abs === 1) {
+        scale = 0.82; tx = sign * 110; opa = 0.7; z = 4;
+      } else if (abs === 2) {
+        scale = 0.65; tx = sign * 195; opa = 0.35; z = 3;
+      } else if (abs === 3) {
+        scale = 0.5; tx = sign * 260; opa = 0.15; z = 2;
+      } else {
+        scale = 0.4; tx = sign * 300; opa = 0; z = 0;
+      }
+
+      card.style.transform = 'translateX(' + tx + '%) scale(' + scale + ')';
+      card.style.opacity = opa;
+      card.style.zIndex = z;
+      card.classList.toggle('clc-center', abs === 0);
+    });
+  }
+
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    layout();
+  }
+
+  function startAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = setInterval(function() {
+      if (!paused) goTo(current + 1);
+    }, 2500);
+  }
+
+  // Touch swipe
+  var startX = 0, startY = 0, swiping = false;
+  el.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    swiping = true;
+    paused = true;
+  }, { passive: true });
+
+  el.addEventListener('touchend', function(e) {
+    if (!swiping) return;
+    swiping = false;
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      goTo(current + (dx > 0 ? -1 : 1));
+    }
+    setTimeout(function() { paused = false; }, 4000);
+  });
+
+  // Click side cards
+  cards.forEach(function(card, i) {
+    card.addEventListener('click', function() {
+      if (i !== current) {
+        goTo(i);
+        paused = true;
+        setTimeout(function() { paused = false; }, 4000);
+      }
+    });
+  });
+
+  // Pause on hover
+  el.addEventListener('mouseenter', function() { paused = true; });
+  el.addEventListener('mouseleave', function() { paused = false; });
+
+  // Pause when not visible
+  var observer = new IntersectionObserver(function(entries) {
+    paused = !entries[0].isIntersecting;
+  }, { threshold: 0.3 });
+  observer.observe(el);
+
+  layout();
+  startAuto();
+})();
+</script>
