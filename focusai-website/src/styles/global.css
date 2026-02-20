@@ -153,30 +153,24 @@ body {
 body::before {
   content: '';
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw;
-  max-width: 800px;
-  height: 80vw;
-  max-height: 800px;
+  inset: 0;
   background-image: url('https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png');
-  background-size: contain;
+  background-size: min(80vw, 800px);
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.06;
   pointer-events: none;
   z-index: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-/* Mobile: bigger, more visible continuous fingerprint */
+/* Mobile: bigger, more visible continuous fingerprint - z-index:1 to show above section backgrounds */
 @media (max-width: 1023px) {
   body::before {
-    width: 100vw;
-    height: 100vw;
-    max-width: none;
-    max-height: none;
-    opacity: 0.08;
+    background-size: 100vw;
+    opacity: 0.07;
+    z-index: 1;
   }
 
   /* Hide per-section fingerprints on mobile - they conflict with the global fixed one */
