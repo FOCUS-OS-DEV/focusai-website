@@ -670,6 +670,10 @@ const serviceSchema = {
   const agentsForm = document.getElementById('agents-form') as HTMLFormElement;
   agentsForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const btn = agentsForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalHTML = btn?.innerHTML || '';
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="flex items-center justify-center gap-2">שולח...</span>'; }
+
     const formData = new FormData(agentsForm);
     const params = new URLSearchParams();
     params.append('source', 'ai-agents-contact');
@@ -680,8 +684,13 @@ const serviceSchema = {
     });
 
     try {
-      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
-    } catch {}
+      const res = await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+      if (!res.ok) throw new Error('failed');
+    } catch {
+      alert('אירעה שגיאה בשליחת הטופס. אנא נסו שנית.');
+      if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
+      return;
+    }
 
     if (typeof fbq === 'function') fbq('track', 'Lead');
     window.location.href = '/academy/thank-you';

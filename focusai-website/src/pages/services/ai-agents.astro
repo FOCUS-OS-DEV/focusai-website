@@ -668,7 +668,7 @@ const serviceSchema = {
           </p>
         </header>
 
-        <form class="space-y-6" data-animate="scale-up">
+        <form id="agents-page-form" class="space-y-6" data-animate="scale-up">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
@@ -687,6 +687,7 @@ const serviceSchema = {
                 id="phone"
                 name="phone"
                 required
+                inputmode="tel"
                 class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
               />
             </div>
@@ -699,6 +700,7 @@ const serviceSchema = {
               id="email"
               name="email"
               required
+              dir="ltr"
               class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
             />
           </div>
@@ -750,3 +752,36 @@ const serviceSchema = {
     50% { transform: translateY(-5px); }
   }
 </style>
+
+<script>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+
+  const form = document.getElementById('agents-page-form') as HTMLFormElement;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalHTML = btn?.innerHTML || '';
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="flex items-center justify-center gap-2">שולח...</span>'; }
+
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    params.append('source', 'agents-service-contact');
+    formData.forEach((value, key) => {
+      if (key !== 'consent' && key !== 'privacy') {
+        params.append(key, value.toString());
+      }
+    });
+
+    try {
+      const res = await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+      if (!res.ok) throw new Error('failed');
+    } catch {
+      alert('אירעה שגיאה בשליחת הטופס. אנא נסו שנית.');
+      if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
+      return;
+    }
+
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+    window.location.href = '/academy/thank-you';
+  });
+</script>

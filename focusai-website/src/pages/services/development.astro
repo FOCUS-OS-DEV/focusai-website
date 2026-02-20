@@ -602,6 +602,10 @@ const serviceSchema = {
   const form = document.getElementById('dev-form') as HTMLFormElement;
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = btn?.textContent || '';
+    if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
+
     const formData = new FormData(form);
     const params = new URLSearchParams();
     params.append('source', 'development-contact');
@@ -612,8 +616,13 @@ const serviceSchema = {
     });
 
     try {
-      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
-    } catch {}
+      const res = await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+      if (!res.ok) throw new Error('failed');
+    } catch {
+      alert('אירעה שגיאה בשליחת הטופס. אנא נסו שנית.');
+      if (btn) { btn.disabled = false; btn.textContent = originalText; }
+      return;
+    }
 
     if (typeof fbq === 'function') fbq('track', 'Lead');
     window.location.href = '/academy/thank-you';

@@ -281,17 +281,18 @@ function formatDate(date: Date): string {
       btn.disabled = true;
       btn.textContent = 'שולח...';
 
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
-        mode: 'no-cors'
+        body: params.toString()
       });
+      if (!res.ok) throw new Error('failed');
 
       successMsg?.classList.remove('hidden');
       errorMsg?.classList.add('hidden');
       newsletterForm.reset();
       btn.textContent = 'נרשמת!';
+      setTimeout(() => { btn.disabled = false; btn.textContent = 'הרשמה'; }, 3000);
     } catch {
       errorMsg?.classList.remove('hidden');
       successMsg?.classList.add('hidden');

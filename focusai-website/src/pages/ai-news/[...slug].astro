@@ -69,6 +69,36 @@ const categoryColor = (post.data.category || 'news') === 'guide' ? 'bg-emerald-5
 // Page URL for sharing
 const pageUrl = `https://focusai.co.il/ai-news/${post.id}`;
 
+// BlogPosting structured data for SEO
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": post.data.heroImage || undefined,
+  "datePublished": post.data.pubDate.toISOString(),
+  "dateModified": (post.data.updatedDate || post.data.pubDate).toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": "Focus AI",
+    "url": "https://focusai.co.il"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Focus AI",
+    "logo": {
+      "@type": "ImageObject",
+      "url": siteConfig.assets.logo
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": pageUrl
+  },
+  "wordCount": wordCount,
+  "inLanguage": "he-IL"
+};
+
 // CTA config based on article ctaType
 const ctaType = post.data.ctaType || 'botcamp';
 const ctaConfig = {
@@ -115,7 +145,7 @@ const ctaConfig = {
 }[ctaType];
 ---
 
-<BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description} image={post.data.heroImage} structuredData={blogPostingSchema}>
   <Header slot="header" currentPath="/ai-news" />
 
   <!-- Hero Image - Full Width -->

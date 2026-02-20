@@ -46,9 +46,9 @@ const videoTestimonials = [
   },
   {
     name: "אופיר וינקלר",
-    role: "בוגר הכשרת Focus AI",
+    role: "סטודנט הכשרת Focus AI",
     video: "https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto/v1771523969/IMG_6091_jmy8tw.mp4",
-    poster: "https://res.cloudinary.com/dfudxxzlj/video/upload/so_5,w_400,h_710,c_fill,q_auto,f_jpg/v1771523969/IMG_6091_jmy8tw.jpg",
+    poster: "https://res.cloudinary.com/dfudxxzlj/video/upload/so_4,w_400,h_710,c_fill,q_auto,f_jpg/v1771523969/IMG_6091_jmy8tw.jpg",
   },
 ];
 
@@ -107,6 +107,11 @@ const moreVideos = videoTestimonials.slice(1);
               class="w-full h-full object-cover"
               controls
               playsinline
+              webkit-playsinline
+              preload="none"
+              controlslist="nodownload"
+              disablepictureinpicture
+              oncontextmenu="return false;"
               poster={videoTestimonials[0].poster}
               src={videoTestimonials[0].video}
             ><track kind="captions" default /></video>
@@ -162,13 +167,13 @@ const moreVideos = videoTestimonials.slice(1);
 
   <!-- Video Lightbox -->
   <div id="videoLightbox" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-lg hidden items-center justify-center p-4">
-    <button id="lightbox-close" class="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:scale-110 hover:bg-white/20 transition-all z-10">
+    <button id="lightbox-close" aria-label="סגור" class="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:scale-110 hover:bg-white/20 transition-all z-10">
       <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <div class="max-w-sm w-full">
       <div class="rounded-2xl overflow-hidden border-2 border-[#a855f7]/40 shadow-[0_0_80px_rgba(168,85,247,0.4)]">
         <div class="aspect-[9/16]">
-          <video id="lightbox-video" class="w-full h-full object-cover" controls playsinline><track kind="captions" default /></video>
+          <video id="lightbox-video" class="w-full h-full object-cover" controls playsinline webkit-playsinline preload="none" controlslist="nodownload" disablepictureinpicture oncontextmenu="return false;"><track kind="captions" default /></video>
         </div>
       </div>
       <div class="text-center mt-4">
@@ -206,9 +211,7 @@ const moreVideos = videoTestimonials.slice(1);
   if (featured && isMobileVideo) {
     featured.src = mobileVideoUrl(featured.src);
   }
-  if (featured) {
-    featured.play().catch(() => {});
-  }
+  // User taps play manually — iOS Safari blocks programmatic play()
 
   // Lightbox for more videos
   const lightbox = document.getElementById('videoLightbox');
@@ -230,7 +233,7 @@ const moreVideos = videoTestimonials.slice(1);
       lightbox?.classList.remove('hidden');
       lightbox?.classList.add('flex');
       document.body.style.overflow = 'hidden';
-      setTimeout(() => lightboxVideo?.play(), 150);
+      // User taps play manually — iOS Safari blocks programmatic play()
     });
   });
 

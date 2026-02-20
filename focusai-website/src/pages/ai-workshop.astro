@@ -142,32 +142,32 @@ const stats = [
         <form id="hero-form" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
-              <input type="text" name="name" required placeholder="השם שלך"
+              <label for="hero-name" class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
+              <input type="text" name="name" id="hero-name" required placeholder="השם שלך"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
-              <input type="email" name="email" required placeholder="email@company.com" dir="ltr"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
-              <input type="tel" name="phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
-            <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
-              <input type="text" name="company" placeholder="שם החברה"
+              <label for="hero-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
+              <input type="email" name="email" id="hero-email" required placeholder="email@company.com" dir="ltr"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
-              <select name="employees"
+              <label for="hero-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
+              <input type="tel" name="phone" id="hero-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
+                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+            <div>
+              <label for="hero-company" class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
+              <input type="text" name="company" id="hero-company" placeholder="שם החברה"
+                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="hero-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
+              <select name="employees" id="hero-employees"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white/80 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
                 <option value="" class="bg-[#12121a]">בחרו טווח</option>
                 <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
@@ -178,14 +178,14 @@ const stats = [
               </select>
             </div>
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
-              <input type="text" name="role" placeholder="התפקיד שלך"
+              <label for="hero-role" class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
+              <input type="text" name="role" id="hero-role" placeholder="התפקיד שלך"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
           </div>
           <div>
-            <label class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
-            <textarea name="message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
+            <label for="hero-message" class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
+            <textarea name="message" id="hero-message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
           <div class="flex items-start gap-2">
@@ -634,32 +634,32 @@ const stats = [
         <form id="contact-form" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
-              <input type="text" name="name" required placeholder="השם שלך"
+              <label for="contact-name" class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
+              <input type="text" name="name" id="contact-name" required placeholder="השם שלך"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
-              <input type="email" name="email" required placeholder="email@company.com" dir="ltr"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
-              <input type="tel" name="phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
-            <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
-              <input type="text" name="company" placeholder="שם החברה"
+              <label for="contact-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
+              <input type="email" name="email" id="contact-email" required placeholder="email@company.com" dir="ltr"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
-              <select name="employees"
+              <label for="contact-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
+              <input type="tel" name="phone" id="contact-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
+                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+            <div>
+              <label for="contact-company" class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
+              <input type="text" name="company" id="contact-company" placeholder="שם החברה"
+                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="contact-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
+              <select name="employees" id="contact-employees"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white/80 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
                 <option value="" class="bg-[#12121a]">בחרו טווח</option>
                 <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
@@ -670,14 +670,14 @@ const stats = [
               </select>
             </div>
             <div>
-              <label class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
-              <input type="text" name="role" placeholder="התפקיד שלך"
+              <label for="contact-role" class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
+              <input type="text" name="role" id="contact-role" placeholder="התפקיד שלך"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
           </div>
           <div>
-            <label class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
-            <textarea name="message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
+            <label for="contact-message" class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
+            <textarea name="message" id="contact-message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
           <div class="flex items-start gap-2">
