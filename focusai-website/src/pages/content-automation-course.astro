@@ -186,10 +186,21 @@
             text-shadow: 0 1px 8px rgba(0,0,0,0.9);
         }
 
+        .hero-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .hero-label .sep { opacity: 0.4; margin: 0 4px; }
+
         .hero h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1.45;
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.35;
             margin-bottom: 16px;
         }
 
@@ -199,13 +210,29 @@
         }
 
         .hero .sub {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             margin-bottom: 24px;
             line-height: 1.7;
         }
 
         .hero .sub strong { color: var(--text); }
+
+        .hero-urgency {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* Red underline "limited time" */
+        .limited {
+            color: var(--cta);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: var(--cta);
+            text-underline-offset: 3px;
+            text-decoration-thickness: 2px;
+        }
 
         /* ===== RED CTA BUTTON ===== */
         .btn-cta {
@@ -254,17 +281,39 @@
             margin-bottom: 20px;
         }
 
+        /* Section-specific h2 variety */
+        .section:nth-child(odd) h2 { font-size: 1.95rem; }
+        .who-section h2 { font-size: 2rem; letter-spacing: -0.02em; }
+        .botcamp-section h2 { font-size: 2.1rem; }
+
         .text {
-            font-size: 1.12rem;
+            font-size: 1.08rem;
             color: var(--text-secondary);
-            line-height: 1.9;
+            line-height: 1.85;
             margin-bottom: 16px;
         }
 
         .text strong { color: var(--text); font-weight: 600; }
 
+        /* Large intro paragraph */
+        .text-lg {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .text-lg strong { color: var(--text); font-weight: 600; }
+
+        /* Small supporting text */
+        .text-sm {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
         .quote {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--text);
             padding: 22px 24px;
@@ -815,10 +864,17 @@
 
         /* ===== RESPONSIVE ===== */
         @media (min-width: 768px) {
-            .hero h1 { font-size: 2.4rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero-label { font-size: 0.9rem; }
+            .hero .sub { font-size: 1.25rem; }
             .hero-photo { width: 320px; }
             .hero-photo img { height: 420px; }
             h2 { font-size: 2.2rem; }
+            .section:nth-child(odd) h2 { font-size: 2.3rem; }
+            .who-section h2 { font-size: 2.4rem; }
+            .botcamp-section h2 { font-size: 2.5rem; }
+            .text-lg { font-size: 1.35rem; }
+            .quote { font-size: 1.3rem; }
             .who-photo { width: 300px; }
             .who-photo img { height: 300px; }
         }
@@ -832,7 +888,8 @@
             .hero-photo img { height: 280px; }
             .hero-content { text-align: center; }
             .page { padding: 0 14px; }
-            .hero h1 { font-size: 1.6rem; }
+            .hero h1 { font-size: 1.7rem; }
+            .hero-label { font-size: 0.78rem; }
             .hero .sub { font-size: 1rem; }
             .btn-cta { padding: 16px 30px; font-size: 1.05rem; }
             h2 { font-size: 1.5rem; }
@@ -864,13 +921,15 @@
 
         <div class="hero-split">
             <div class="hero-content">
-                <h1>בניתי אוטומציה שיוצרת תוכן שלם.<br><em>עכשיו אני מלמד אתכם איך.</em></h1>
+                <p class="hero-label">הדרכה מעשית בחינם <span class="sep">|</span> 70 דקות</p>
+                <h1>איך בונים אוטומציה<br>שיוצרת תוכן <em>לבד?</em></h1>
 
-                <p class="sub">מתמונה מקורית ועד טקסט מוכן לפרסום. הכל אוטומטי, הכל עם AI.<br><strong>הדרכה מעשית בחינם. 70 דקות. צפייה מיידית.</strong></p>
+                <p class="sub">תמונות, טקסטים, קופי לרשתות.<br>הכל רץ אוטומטית עם AI, בלי שתיגעו.</p>
 
                 <a href="#leadForm" class="btn-cta">
-                    רוצה לצפות בחינם
+                    לצפייה בחינם
                 </a>
+                <p class="hero-urgency">צפייה <span class="limited">לזמן מוגבל</span></p>
             </div>
 
             <div class="hero-photo">
@@ -890,7 +949,7 @@
     <!-- ========== SHAHAR INTRO ========== -->
     <div class="section">
 
-        <p class="text">
+        <p class="text-lg">
             נעים מאוד, אני שחר דדיה ואני אחד מהמייסדים של Focus AI. הפעם רציתי ללמד אתכם איך לבנות אוטומציה ליצירת תוכן תוך 70 דקות.
         </p>
 
@@ -906,7 +965,7 @@
     <!-- ========== PIPELINE ========== -->
     <div class="section" style="padding-top: 0;">
 
-        <h2>מגדירים פעם אחת.<br>מקבלים תוכן כל היום.</h2>
+        <h2 style="font-size: 2.1rem; letter-spacing: -0.02em;">מגדירים פעם אחת.<br><em style="font-style: normal; color: var(--primary-light);">מקבלים תוכן כל היום.</em></h2>
 
         <div class="pipeline">
             <div class="pipe-step">
@@ -936,7 +995,7 @@
     <!-- ========== WHAT YOU'LL LEARN ========== -->
     <div class="section">
 
-        <h2>אחרי ההדרכה תוכלו...</h2>
+        <h2>אחרי 70 דקות תוכלו...</h2>
 
         <div class="outcomes">
             <div class="outcome">
@@ -966,7 +1025,7 @@
         </div>
 
         <p class="text" style="text-align: center; font-weight: 500;">
-            הדרכה מצולמת, צעד אחר צעד. צפייה חופשית בכל זמן.
+            הדרכה מצולמת, צעד אחר צעד. צפייה <span class="limited">לזמן מוגבל</span>
         </p>
     </div>
 
