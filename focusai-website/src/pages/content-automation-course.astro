@@ -1,8 +1,8 @@
 ---
 /**
  * Content Automation Mini-Course Landing Page
- * Free lead magnet by Shahar Dadia - Building content creation automation from scratch
- * Lead capture for Bot-Camp full training
+ * Free lead magnet by Shahar Dadia
+ * v3 — Human copy, organic design, outcome-focused
  */
 ---
 <!DOCTYPE html>
@@ -13,21 +13,19 @@
     <title>הדרכה חינמית | אוטומציית יצירת תוכן עם AI | Focus AI</title>
     <meta name="description" content="למדו לבנות אוטומציה ליצירת תוכן מ-0 עם AI. תמונות, קופי, טקסט — הכל אוטומטי. הדרכה מעשית בחינם מאת שחר דדיה, Focus AI.">
 
-    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://focusai.co.il/content-automation-course/">
     <meta property="og:title" content="הדרכה חינמית | אוטומציית יצירת תוכן עם AI">
-    <meta property="og:description" content="למדו לבנות אוטומציה ליצירת תוכן מ-0 עם AI. תמונות, קופי, טקסט — הכל אוטומטי. הדרכה מעשית בחינם מאת שחר דדיה.">
+    <meta property="og:description" content="בניתי אוטומציה שמייצרת תוכן שלם לעסקים — תמונות, קופי, פרסום. הדרכה מעשית בחינם.">
     <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771608626/IMG_4946.JPG_daxpou.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="he_IL">
     <meta property="og:site_name" content="Focus AI">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="הדרכה חינמית | אוטומציית יצירת תוכן עם AI">
-    <meta name="twitter:description" content="למדו לבנות אוטומציה ליצירת תוכן מ-0 עם AI. הדרכה מעשית בחינם מאת שחר דדיה, Focus AI.">
+    <meta name="twitter:description" content="בניתי אוטומציה שמייצרת תוכן שלם לעסקים. הדרכה מעשית בחינם.">
     <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771608626/IMG_4946.JPG_daxpou.jpg">
 
     <link rel="canonical" href="https://focusai.co.il/content-automation-course/">
@@ -39,838 +37,472 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1388659336102272');
-    fbq('track', 'PageView');
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1388659336102272');fbq('track','PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"/></noscript>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            zoom: 1 !important;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{zoom:1!important}
 
         :root {
-            --primary: #3b82f6;
-            --primary-dark: #2563eb;
-            --primary-light: #60a5fa;
-            --secondary: #8b5cf6;
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --primary-light: #a78bfa;
             --accent: #f59e0b;
-            --electric: #38bdf8;
-            --dark: #0f0f1a;
-            --darker: #080810;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.65);
-            --glow-primary: rgba(59, 130, 246, 0.35);
-            --glow-secondary: rgba(139, 92, 246, 0.3);
+            --accent-dark: #d97706;
+            --dark: #0c0c18;
+            --darker: #08080f;
+            --card-bg: rgba(255,255,255,0.03);
+            --card-border: rgba(255,255,255,0.07);
+            --text: #f0f0f5;
+            --text-secondary: rgba(255,255,255,0.72);
+            --text-dim: rgba(255,255,255,0.45);
+            --glow: rgba(124,58,237,0.25);
         }
 
         body {
-            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Heebo', sans-serif;
             background: var(--darker);
-            min-height: 100vh;
             color: var(--text);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .bg-animation::before {
+        /* Ambient background */
+        body::before {
             content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
             background:
-                radial-gradient(circle at 20% 80%, var(--glow-primary) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, var(--glow-secondary) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.06) 0%, transparent 30%);
-            animation: bgMove 20s ease-in-out infinite;
+                radial-gradient(ellipse 70% 50% at 20% 80%, var(--glow) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 85% 15%, rgba(245,158,11,0.08) 0%, transparent 70%);
+            animation: ambientShift 25s ease-in-out infinite alternate;
         }
 
-        @keyframes bgMove {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(2%, 2%) rotate(1deg); }
-            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+        @keyframes ambientShift {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
 
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--electric);
-            border-radius: 50%;
-            opacity: 0.2;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.2; }
-            90% { opacity: 0.2; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 16px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* ============================================
-           ELECTRIC CONNECTOR BETWEEN SECTIONS
-           ============================================ */
-        .electric-connector {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 6px 0;
-            position: relative;
-        }
-
-        .node-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--electric);
-            border-radius: 50%;
-            box-shadow: 0 0 14px var(--electric), 0 0 28px rgba(56, 189, 248, 0.3);
-            animation: nodePulse 2s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
-        }
-
-        .node-dot::after {
+        /* Grain overlay */
+        body::after {
             content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 50%;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            animation: nodePulse 2s ease-in-out infinite reverse;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
         }
 
-        @keyframes nodePulse {
-            0%, 100% { box-shadow: 0 0 14px var(--electric), 0 0 28px rgba(56, 189, 248, 0.3); transform: scale(1); }
-            50% { box-shadow: 0 0 22px var(--electric), 0 0 44px rgba(56, 189, 248, 0.4); transform: scale(1.15); }
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 18px;
         }
 
-        .current-line {
-            width: 2px;
-            height: 50px;
-            background: linear-gradient(180deg, rgba(56, 189, 248, 0.4), rgba(139, 92, 246, 0.2), rgba(56, 189, 248, 0.4));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .current-pulse {
-            position: absolute;
-            top: -8px;
-            left: -3px;
-            width: 8px;
-            height: 8px;
-            background: var(--electric);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--electric), 0 0 20px rgba(56, 189, 248, 0.5);
-            animation: currentFlow 2s linear infinite;
-        }
-
-        @keyframes currentFlow {
-            0% { top: -8px; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: calc(100% + 8px); opacity: 0; }
-        }
-
-        /* ============================================
-           HEADER / HERO
-           ============================================ */
-        header {
+        /* ===== HERO ===== */
+        .hero {
             text-align: center;
-            padding: 30px 12px 0;
-            position: relative;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding-top: 32px;
         }
 
-        .logo {
-            height: 48px;
-            width: auto;
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
-            margin-bottom: 22px;
-            transition: all 0.3s ease;
-            display: block;
+        .hero-logo {
+            height: 42px;
+            margin-bottom: 28px;
+            filter: drop-shadow(0 0 12px var(--glow));
+            transition: transform 0.3s;
         }
+        .hero-logo:hover { transform: scale(1.06); }
 
-        .logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.5));
-        }
-
-        .free-badge {
+        .hero-format {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 28px;
-            box-shadow: 0 4px 24px rgba(59, 130, 246, 0.4);
-            animation: badgePulse 3s ease-in-out infinite;
+            gap: 12px;
+            padding: 8px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
         }
 
-        .free-badge i {
-            font-size: 1.1rem;
+        .hero-format .dot {
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
         }
 
-        @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 4px 24px rgba(59, 130, 246, 0.4); }
-            50% { box-shadow: 0 4px 40px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.15); }
-        }
-
-        /* Hero Image */
-        .hero-image-container {
+        .hero-img {
             position: relative;
             width: 100%;
-            max-width: 560px;
-            margin: 0 auto 12px;
-            overflow: hidden;
+            max-width: 520px;
+            margin: 0 auto 16px;
         }
 
-        .hero-image-container img {
+        .hero-img img {
             width: 100%;
-            height: 440px;
+            height: 400px;
             object-fit: cover;
             object-position: center 25%;
             display: block;
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 60%, transparent 100%);
-            mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 58%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 58%, transparent 100%);
         }
 
-        .hero-image-overlay {
+        .hero-img .overlay {
             position: absolute;
-            bottom: 15%;
-            left: 0;
-            right: 0;
+            bottom: 18%;
+            left: 0; right: 0;
             text-align: center;
-            z-index: 2;
         }
 
-        .hero-name {
-            font-size: 2.8rem;
+        .hero-img .overlay h3 {
+            font-size: 2.6rem;
             font-weight: 900;
-            color: white;
-            letter-spacing: -1px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5);
-            line-height: 1.1;
-            margin-bottom: 8px;
+            text-shadow: 0 2px 24px rgba(0,0,0,0.85);
+            margin-bottom: 6px;
         }
 
-        .hero-title {
-            font-size: 1rem;
-            font-weight: 500;
-            color: rgba(255,255,255,0.85);
-            text-shadow: 0 1px 10px rgba(0,0,0,0.8);
-            letter-spacing: 0.5px;
+        .hero-img .overlay p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+            text-shadow: 0 1px 12px rgba(0,0,0,0.85);
         }
 
-        .hero-title span {
-            color: var(--primary-light);
-            font-weight: 700;
-        }
-
-        header h1 {
-            font-size: 1.9rem;
+        .hero h1 {
+            font-size: 1.85rem;
             font-weight: 800;
-            color: var(--text);
-            margin-bottom: 16px;
             line-height: 1.45;
-            max-width: 600px;
+            margin-bottom: 14px;
         }
 
-        header h1 em {
+        .hero h1 em {
             font-style: normal;
-            background: linear-gradient(135deg, var(--primary-light), var(--electric));
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        header .subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-
-        header .subtitle strong {
-            color: var(--text);
-        }
-
-        /* Hero CTA Button */
-        .btn-hero {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 36px;
-            margin-top: 6px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 24px rgba(59, 130, 246, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-hero:hover::before {
-            left: 100%;
-        }
-
-        .btn-hero:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
-        }
-
-        .btn-hero i {
+        .hero .sub {
             font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+            line-height: 1.65;
         }
 
-        /* Mid-page photo */
-        .mid-photo {
-            width: 100%;
-            max-width: 560px;
-            margin: 0 auto;
-            overflow: hidden;
-            position: relative;
-        }
+        .hero .sub strong { color: var(--text); }
 
-        .mid-photo img {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-            object-position: center 20%;
-            display: block;
-            border-radius: 20px;
-        }
-
-        .mid-photo-caption {
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-top: 12px;
-            font-weight: 500;
-        }
-
-        /* ============================================
-           STORY SECTIONS
-           ============================================ */
-        .story-section {
-            width: 100%;
-            padding: 0 4px;
-        }
-
-        .story-chapter {
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--primary-light);
-            margin-bottom: 16px;
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(59, 130, 246, 0.08);
-            padding: 6px 18px 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 18px 38px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245,158,11,0.35);
+            position: relative;
+            overflow: hidden;
         }
 
-        .story-chapter::before {
+        .btn-primary::after {
             content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--primary);
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        .btn-primary:hover::after { transform: translateX(100%); }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(245,158,11,0.45);
         }
 
-        .story-big {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text);
-            line-height: 1.35;
-            margin-bottom: 20px;
+        /* ===== SOCIAL PROOF ===== */
+        .proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 32px 0;
+            padding: 14px 0;
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .story-text {
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.87);
-            line-height: 1.85;
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .proof-item i { color: var(--accent); font-size: 0.85rem; }
+        .proof-item strong { color: var(--text); font-weight: 700; }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 36px 0;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary-light);
             margin-bottom: 18px;
         }
 
-        .story-text strong {
-            color: var(--text);
-            font-weight: 600;
+        .section-label::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
         }
 
-        .story-text em {
-            color: var(--primary-light);
-            font-style: normal;
-            font-weight: 500;
+        h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 20px;
         }
 
-        .story-pullquote {
-            font-size: 1.25rem;
+        .text {
+            font-size: 1.12rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 16px;
+        }
+
+        .text strong { color: var(--text); font-weight: 600; }
+        .text em { color: var(--primary-light); font-style: normal; font-weight: 500; }
+
+        .quote {
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--text);
-            padding: 22px 26px;
-            border-right: 4px solid var(--primary);
-            background: rgba(59, 130, 246, 0.06);
+            padding: 22px 24px;
+            border-right: 3px solid var(--primary);
+            background: rgba(124,58,237,0.06);
             border-radius: 0 16px 16px 0;
             margin: 28px 0;
             line-height: 1.7;
         }
 
-        .story-highlight {
-            display: block;
-            font-size: 1.4rem;
+        .highlight {
+            font-size: 1.35rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-light), var(--electric));
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 28px 0 18px;
+            display: block;
+            margin: 24px 0 16px;
             line-height: 1.5;
         }
 
-        /* ============================================
-           PIPELINE SECTION (The Solution)
-           ============================================ */
-        .pipeline-container {
+        /* ===== PIPELINE ===== */
+        .pipeline {
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: 2px;
             margin: 28px 0;
-            position: relative;
         }
 
-        .pipeline-step {
+        .pipe-step {
             display: flex;
             align-items: flex-start;
             gap: 18px;
             padding: 20px 18px;
-            position: relative;
-        }
-
-        .pipeline-node {
-            flex-shrink: 0;
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pipeline-node.node-ai {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: var(--primary-light);
-        }
-
-        .pipeline-node.node-write {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            color: var(--secondary);
-        }
-
-        .pipeline-node.node-db {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: var(--accent);
-        }
-
-        .pipeline-node.node-publish {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.1));
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            color: var(--electric);
-        }
-
-        .pipeline-content h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 5px;
-        }
-
-        .pipeline-content p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Connector line between pipeline steps */
-        .pipeline-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 42px;
-            width: 2px;
-            height: 20px;
-            background: linear-gradient(180deg, var(--primary), rgba(139, 92, 246, 0.3));
-        }
-
-        /* ============================================
-           GLASS CARD
-           ============================================ */
-        .glass-card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 22px;
-            padding: 32px 24px;
-            margin-bottom: 0;
             border: 1px solid var(--card-border);
-            box-shadow:
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
+            transition: background 0.3s;
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
+        .pipe-step:first-child { border-radius: 18px 18px 4px 4px; }
+        .pipe-step:last-child { border-radius: 4px 4px 18px 18px; }
+        .pipe-step:not(:first-child):not(:last-child) { border-radius: 4px; }
 
-        .glass-card .section-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 28px;
+        .pipe-step:hover { background: rgba(255,255,255,0.05); }
+
+        .pipe-icon {
+            flex-shrink: 0;
+            width: 48px; height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            text-align: center;
-        }
-
-        .glass-card .section-title i {
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
-        .glass-card .section-title::before,
-        .glass-card .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--card-border), transparent);
-            max-width: 80px;
-        }
-
-        /* Learn items */
-        .learn-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .learn-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 18px 20px;
-            background: rgba(59, 130, 246, 0.04);
-            border-radius: 16px;
-            border-right: 3px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        .learn-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            transform: translateX(-3px);
-        }
-
-        .learn-item i {
             font-size: 1.3rem;
-            color: var(--primary-light);
-            flex-shrink: 0;
-            margin-top: 3px;
         }
 
-        .learn-item-text {
+        .pipe-icon.i1 { background: rgba(124,58,237,0.15); color: var(--primary-light); border: 1px solid rgba(124,58,237,0.25); }
+        .pipe-icon.i2 { background: rgba(245,158,11,0.12); color: var(--accent); border: 1px solid rgba(245,158,11,0.22); }
+        .pipe-icon.i3 { background: rgba(56,189,248,0.12); color: #38bdf8; border: 1px solid rgba(56,189,248,0.22); }
+        .pipe-icon.i4 { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.22); }
+
+        .pipe-text h4 {
             font-size: 1.1rem;
-            color: var(--text);
-            line-height: 1.5;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
-        .learn-item-text span {
-            display: block;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-top: 4px;
+        .pipe-text p {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
         }
 
-        .learn-note {
-            text-align: center;
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-top: 22px;
-            padding: 16px;
-            background: rgba(139, 92, 246, 0.06);
-            border-radius: 12px;
-            border: 1px solid rgba(139, 92, 246, 0.15);
-        }
-
-        .learn-note i {
-            color: var(--secondary);
-            margin-left: 8px;
-        }
-
-        /* ============================================
-           WHO IT'S FOR - Simple list
-           ============================================ */
-        .for-list {
+        /* ===== OUTCOMES ===== */
+        .outcomes {
             display: flex;
             flex-direction: column;
             gap: 14px;
             margin: 24px 0;
         }
 
-        .for-item {
+        .outcome {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 14px;
+            padding: 16px 18px;
+            background: rgba(124,58,237,0.04);
+            border-radius: 14px;
+            border-right: 3px solid var(--primary);
+        }
+
+        .outcome i {
+            color: var(--primary-light);
             font-size: 1.15rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .outcome span {
+            font-size: 1.05rem;
             color: var(--text);
+            line-height: 1.55;
             font-weight: 500;
         }
 
-        .for-item i {
-            color: var(--primary-light);
-            font-size: 1.1rem;
-            flex-shrink: 0;
+        .outcome small {
+            display: block;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.92rem;
+            margin-top: 3px;
         }
 
-        /* ============================================
-           BOT-CAMP CTA
-           ============================================ */
-        .botcamp-cta {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.05));
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 22px;
-            padding: 34px 26px;
+        /* ===== MID-PHOTO ===== */
+        .mid-photo {
+            width: calc(100% + 36px);
+            margin: 0 -18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mid-photo img {
             width: 100%;
+            height: 320px;
+            object-fit: cover;
+            object-position: center 25%;
+            display: block;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%);
+        }
+
+        .mid-photo .caption {
+            position: absolute;
+            bottom: 20%;
+            left: 0; right: 0;
             text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            text-shadow: 0 1px 8px rgba(0,0,0,0.8);
         }
 
-        .botcamp-cta .cta-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .botcamp-cta h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 16px;
-        }
-
-        .botcamp-cta .cta-text {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 22px;
-        }
-
-        .botcamp-benefits {
+        /* ===== FOR-WHO ===== */
+        .for-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-bottom: 24px;
-            text-align: right;
+            margin: 20px 0;
         }
 
-        .botcamp-benefit {
+        .for-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--text);
             font-weight: 500;
         }
 
-        .botcamp-benefit i {
-            color: var(--primary-light);
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
+        .for-item i { color: var(--accent); flex-shrink: 0; }
 
-        .btn-botcamp {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            border-radius: 14px;
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .btn-botcamp:hover {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.15));
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
-        }
-
-        .btn-botcamp i {
-            color: var(--primary-light);
-        }
-
-        /* ============================================
-           FORM SECTION
-           ============================================ */
-        .form-card {
+        /* ===== FORM ===== */
+        .form-section {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
             border-radius: 22px;
             padding: 34px 24px;
-            border: 1px solid var(--card-border);
-            box-shadow:
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            margin: 10px 0 0;
             position: relative;
             overflow: hidden;
-            width: 100%;
         }
 
-        .form-card::before {
+        .form-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
         .form-header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 26px;
         }
 
-        .form-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .form-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
         }
 
-        .form-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
+        .form-header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
@@ -878,1121 +510,674 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            color: var(--text);
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-        }
-
-        .form-group label i {
-            color: var(--primary);
+            margin-bottom: 8px;
             font-size: 1rem;
         }
 
-        .required::after {
-            content: " *";
-            color: var(--accent);
-        }
+        .form-group label i { color: var(--primary-light); font-size: 0.9rem; }
+
+        .req::after { content: " *"; color: var(--accent); }
 
         input[type="text"],
         input[type="email"],
         input[type="tel"] {
             width: 100%;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 18px;
+            background: rgba(255,255,255,0.03);
             border: 2px solid var(--card-border);
-            border-radius: 14px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
             font-family: inherit;
             color: var(--text);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        input::placeholder {
-            color: var(--text-muted);
-        }
+        input::placeholder { color: var(--text-dim); }
 
         input:focus {
             outline: none;
             border-color: var(--primary);
-            background: rgba(59, 130, 246, 0.05);
-            box-shadow: 0 0 0 4px var(--glow-primary);
+            background: rgba(124,58,237,0.05);
+            box-shadow: 0 0 0 4px rgba(124,58,237,0.15);
         }
 
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 1000px rgba(15, 15, 26, 0.97) inset !important;
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px rgba(12,12,24,0.97) inset !important;
             -webkit-text-fill-color: var(--text) !important;
-            background-color: rgba(255, 255, 255, 0.03) !important;
-            border-color: var(--card-border) !important;
             transition: background-color 5000s ease-in-out 0s;
         }
 
-        input:-webkit-autofill:focus {
-            -webkit-box-shadow: 0 0 0 1000px rgba(59, 130, 246, 0.08) inset !important;
-            border-color: var(--primary) !important;
-        }
-
-        /* Privacy Section */
-        .privacy-section {
-            margin-top: 22px;
-            padding-top: 22px;
+        .consent {
+            margin-top: 20px;
+            padding-top: 18px;
             border-top: 1px solid var(--card-border);
         }
 
-        .privacy-notice {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            line-height: 1.6;
-            padding: 14px 18px;
-            background: rgba(245, 158, 11, 0.05);
-            border-radius: 12px;
-            border-right: 3px solid var(--accent);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .privacy-notice i {
-            color: var(--accent);
-            margin-top: 2px;
-        }
-
-        .checkbox-group {
+        .consent-check {
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 14px;
             cursor: pointer;
         }
 
-        .checkbox-group input[type="checkbox"] {
-            width: 22px;
-            height: 22px;
+        .consent-check input[type="checkbox"] {
+            width: 22px; height: 22px;
             flex-shrink: 0;
             margin-top: 2px;
             accent-color: var(--primary);
             cursor: pointer;
         }
 
-        .checkbox-label {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            line-height: 1.5;
+        .consent-check span {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
         }
 
-        .checkbox-label a {
-            color: var(--primary);
-            text-decoration: underline;
-        }
+        .consent-check a { color: var(--primary-light); text-decoration: underline; }
 
-        .checkbox-label a:hover {
-            color: var(--secondary);
-        }
-
-        /* Submit Button */
         .btn-submit {
             width: 100%;
-            padding: 22px 30px;
-            margin-top: 22px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
-            color: white;
+            padding: 20px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: #fff;
             border: none;
-            border-radius: 16px;
-            font-size: 1.25rem;
+            border-radius: 14px;
+            font-size: 1.2rem;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: inherit;
-            box-shadow:
-                0 4px 24px rgba(59, 130, 246, 0.4),
-                0 0 0 0 rgba(59, 130, 246, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(245,158,11,0.35);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             position: relative;
             overflow: hidden;
         }
 
-        .btn-submit::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-submit:hover::before {
-            left: 100%;
-        }
-
         .btn-submit:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 12px 35px rgba(59, 130, 246, 0.5),
-                0 0 0 4px rgba(59, 130, 246, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(245,158,11,0.45);
         }
 
-        .btn-submit:active {
-            transform: translateY(-2px);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .btn-submit .btn-text {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-submit i {
-            font-size: 1.3rem;
-            animation: pulse-icon 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-icon {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .btn-submit .spinner {
-            display: none;
-        }
-
-        .btn-submit.loading .btn-text {
-            display: none;
-        }
-
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn-submit .spinner { display: none; }
+        .btn-submit.loading .btn-text { display: none; }
         .btn-submit.loading .spinner {
             display: inline-block;
-            width: 24px;
-            height: 24px;
+            width: 22px; height: 22px;
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== BOTCAMP NUDGE (after form) ===== */
+        .nudge {
+            text-align: center;
+            padding: 28px 20px;
+            margin-top: 24px;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .nudge p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            line-height: 1.7;
         }
 
-        /* ============================================
-           FOOTER / DISCLAIMER
-           ============================================ */
-        .disclaimer {
-            margin-top: 28px;
-            padding: 22px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 18px;
-            border: 1px solid var(--card-border);
-            width: 100%;
-        }
-
-        .disclaimer-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            display: flex;
+        .nudge a {
+            display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 12px 24px;
+            border: 1px solid rgba(124,58,237,0.3);
+            border-radius: 12px;
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
         }
 
-        .disclaimer-title i {
-            color: var(--accent);
+        .nudge a:hover {
+            background: rgba(124,58,237,0.1);
+            border-color: rgba(124,58,237,0.5);
         }
 
-        .disclaimer-text {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        /* ===== FOOTER ===== */
+        .site-footer {
+            margin-top: 32px;
+            padding: 20px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 18px;
+            border: 1px solid var(--card-border);
+        }
+
+        .footer-legal {
+            font-size: 0.78rem;
+            color: var(--text-dim);
             line-height: 1.7;
-            opacity: 0.8;
+            margin-bottom: 16px;
         }
 
-        .disclaimer-text a {
-            color: var(--primary);
-            text-decoration: underline;
-        }
+        .footer-legal a { color: var(--primary-light); text-decoration: underline; }
 
-        .social-links {
+        .footer-social {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 22px 0;
+            gap: 14px;
+            margin-bottom: 14px;
         }
 
-        .social-link {
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.05);
+        .footer-social a {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.05);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            transition: all 0.3s;
+            color: var(--text-dim);
             text-decoration: none;
+            transition: all 0.3s;
         }
 
-        .social-link:hover {
-            background: rgba(59, 130, 246, 0.2);
-            color: #fff;
-        }
+        .footer-social a:hover { background: rgba(124,58,237,0.2); color: #fff; }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 16px;
-            padding-top: 16px;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-top: 14px;
             border-top: 1px solid var(--card-border);
         }
 
         .footer-links a {
-            font-size: 0.82rem;
-            color: var(--text-muted);
+            font-size: 0.78rem;
+            color: var(--text-dim);
             text-decoration: none;
-            transition: color 0.3s;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            color: var(--primary);
-        }
+        .footer-links a:hover { color: var(--primary-light); }
 
-        .footer-links a i {
-            font-size: 0.75rem;
-        }
-
-        /* ============================================
-           SUCCESS OVERLAY
-           ============================================ */
+        /* ===== SUCCESS OVERLAY ===== */
         .success-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(8, 8, 16, 0.95);
+            inset: 0;
+            background: rgba(8,8,15,0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-
-        .success-overlay.show {
-            display: flex;
-        }
+        .success-overlay.show { display: flex; }
 
         .success-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            padding: 44px 34px;
-            max-width: 460px;
+            padding: 40px 30px;
+            max-width: 440px;
             width: 100%;
             text-align: center;
             border: 1px solid var(--card-border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: successIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: popIn 0.4s ease;
         }
 
-        @keyframes successIn {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.92) translateY(16px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .success-icon {
-            width: 85px;
-            height: 85px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        .success-card .icon {
+            width: 76px; height: 76px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 28px;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 24px rgba(245,158,11,0.3);
         }
 
-        .success-icon i {
-            font-size: 2.4rem;
-            color: white;
-        }
-
-        .success-title {
-            font-size: 1.7rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--text);
-        }
-
-        .success-message {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 28px;
-        }
-
-        .countdown-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-light), var(--electric));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .success-link {
+        .success-card .icon i { font-size: 2rem; color: #fff; }
+        .success-card h2 { font-size: 1.5rem; margin-bottom: 12px; }
+        .success-card p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+        .success-card .countdown { font-size: 3rem; font-weight: 800; color: var(--accent); }
+        .success-card .link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 16px;
-            padding: 14px 24px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            color: var(--primary-light);
+            gap: 6px;
+            margin-top: 14px;
+            padding: 10px 20px;
+            border: 1px solid rgba(245,158,11,0.3);
+            border-radius: 10px;
+            color: var(--accent);
             text-decoration: none;
-            font-size: 1rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            transition: all 0.3s;
         }
+        .success-card .link:hover { background: rgba(245,158,11,0.1); }
 
-        .success-link:hover {
-            background: rgba(59, 130, 246, 0.2);
-        }
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* ===== RESPONSIVE ===== */
         @media (min-width: 768px) {
-            .container {
-                padding: 24px;
-            }
-
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-image-container img {
-                height: 500px;
-            }
-
-            .hero-name {
-                font-size: 3.4rem;
-            }
-
-            .hero-title {
-                font-size: 1.15rem;
-            }
-
-            .story-big {
-                font-size: 2.5rem;
-            }
-
-            .current-line {
-                height: 60px;
-            }
-
-            .mid-photo img {
-                height: 400px;
-            }
+            .hero h1 { font-size: 2.6rem; }
+            .hero-img img { height: 480px; }
+            .hero-img .overlay h3 { font-size: 3.2rem; }
+            h2 { font-size: 2.2rem; }
+            .mid-photo img { height: 380px; }
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 14px;
-            }
-
-            header {
-                padding: 24px 8px 0;
-            }
-
-            header h1 {
-                font-size: 1.6rem;
-            }
-
-            .hero-image-container img {
-                height: 380px;
-            }
-
-            .hero-name {
-                font-size: 2.3rem;
-            }
-
-            .hero-title {
-                font-size: 0.88rem;
-            }
-
-            .story-big {
-                font-size: 1.65rem;
-            }
-
-            .story-pullquote {
-                font-size: 1.1rem;
-                padding: 18px 20px;
-            }
-
-            .glass-card {
-                padding: 26px 18px;
-            }
-
-            .pipeline-step {
-                padding: 16px 12px;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .btn-hero {
-                padding: 16px 28px;
-                font-size: 1.05rem;
-            }
-
-            .mid-photo img {
-                height: 260px;
-            }
+            .page { padding: 0 14px; }
+            .hero { padding-top: 24px; }
+            .hero h1 { font-size: 1.55rem; }
+            .hero-img img { height: 340px; }
+            .hero-img .overlay h3 { font-size: 2.1rem; }
+            .hero-img .overlay p { font-size: 0.85rem; }
+            .hero .sub { font-size: 1rem; }
+            .btn-primary { padding: 16px 28px; font-size: 1.05rem; }
+            h2 { font-size: 1.55rem; }
+            .proof { flex-direction: column; gap: 8px; }
+            .form-section { padding: 26px 18px; }
+            .mid-photo { width: calc(100% + 28px); margin: 0 -14px; }
+            .mid-photo img { height: 240px; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    <div class="particles" id="particles"></div>
 
-    <div class="container">
+<div class="page">
 
-        <!-- ============================
-             HERO SECTION
-             ============================ -->
-        <header>
-            <a href="/">
-                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo">
-            </a>
+    <!-- ========== HERO ========== -->
+    <div class="hero">
+        <a href="/">
+            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="hero-logo">
+        </a>
 
-            <div class="free-badge">
-                <i class="fas fa-play-circle"></i>
-                הדרכה חינמית | צפייה מיידית
-            </div>
-
-            <div class="hero-image-container">
-                <img
-                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1771608626/IMG_4946.JPG_daxpou.jpg"
-                    alt="שחר דדיה - מייסד ומנכ״ל משותף Focus AI"
-                    width="800"
-                    height="600"
-                    loading="eager"
-                >
-                <div class="hero-image-overlay">
-                    <div class="hero-name">שחר דדיה</div>
-                    <div class="hero-title"><span>מייסד ומנכ״ל משותף Focus AI</span></div>
-                </div>
-            </div>
-
-            <h1><em>AI יוצר תוכן במקומכם.</em><br>אני מראה לכם איך לבנות את זה.</h1>
-
-            <p class="subtitle">הדרכה מעשית, צעד אחר צעד. <strong>בחינם.</strong></p>
-
-            <a href="#leadForm" class="btn-hero">
-                צפו בהדרכה בחינם
-                <i class="fas fa-play-circle"></i>
-            </a>
-        </header>
-
-        <!-- Electric Connector -->
-        <div class="electric-connector">
-            <div class="node-dot"></div>
-            <div class="current-line"><div class="current-pulse"></div></div>
-            <div class="node-dot"></div>
+        <div class="hero-format">
+            <span class="dot"></span>
+            הדרכת וידאו &middot; צפייה מיידית &middot; חינם לחלוטין
         </div>
 
-        <!-- ============================
-             THE PROBLEM (Short)
-             ============================ -->
-        <div class="story-section">
-            <div class="story-chapter">הבעיה</div>
-            <div class="story-big">יצירת תוכן גוזלת לכם את החיים?</div>
-
-            <p class="story-text">
-                כל שבוע אתם שורפים שעות על פוסטים, משלמים <strong>אלפי שקלים</strong> לפרילנסרים או למשרד פרסום — או פשוט <em>לא מפרסמים</em> כי אין זמן. הרשתות לא מחכות, והנוכחות הדיגיטלית שלכם נפגעת.
-            </p>
-
-            <div class="story-pullquote">
-                שאלתי את עצמי: אם AI יודע ליצור תמונות ולכתוב טקסטים — למה שלא אבנה <strong>מערכת אחת שעושה הכל לבד?</strong>
-            </div>
-        </div>
-
-        <!-- Electric Connector -->
-        <div class="electric-connector">
-            <div class="node-dot"></div>
-            <div class="current-line"><div class="current-pulse"></div></div>
-            <div class="node-dot"></div>
-        </div>
-
-        <!-- ============================
-             THE SOLUTION - Pipeline
-             ============================ -->
-        <div class="story-section">
-            <div class="story-chapter">הפתרון</div>
-            <div class="story-big">אוטומציה שיוצרת תוכן מוכן — מ-A עד Z</div>
-
-            <p class="story-text">
-                בניתי תהליך אוטומטי אחד ב-<strong>n8n</strong> שעושה את כל העבודה. אתם מגדירים פעם אחת — והמערכת רצה לבד, כל יום, בלי שתיגעו:
-            </p>
-
-            <div class="pipeline-container">
-                <div class="pipeline-step">
-                    <div class="pipeline-node node-ai">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="pipeline-content">
-                        <h4>יצירת תמונה מקורית עם AI</h4>
-                        <p>מודל Google Imagen (Nano Banana) מייצר תמונות מקצועיות ומותאמות — אין צורך בגרפיקאי</p>
-                    </div>
-                </div>
-
-                <div class="pipeline-step">
-                    <div class="pipeline-node node-write">
-                        <i class="fas fa-pen-nib"></i>
-                    </div>
-                    <div class="pipeline-content">
-                        <h4>כתיבת קופי וטקסט מלווה</h4>
-                        <p>AI כותב כותרת, טקסט, וגם האשטאגים — בדיוק בטון ובשפה שלכם</p>
-                    </div>
-                </div>
-
-                <div class="pipeline-step">
-                    <div class="pipeline-node node-db">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <div class="pipeline-content">
-                        <h4>אחסון חכם ב-Supabase</h4>
-                        <p>כל פוסט נשמר במאגר מסודר — תמונה, טקסט, סטטוס פרסום. הכל תחת שליטה מלאה</p>
-                    </div>
-                </div>
-
-                <div class="pipeline-step">
-                    <div class="pipeline-node node-publish">
-                        <i class="fas fa-share-nodes"></i>
-                    </div>
-                    <div class="pipeline-content">
-                        <h4>פרסום אוטומטי לרשתות</h4>
-                        <p>התוכן עולה ישירות לרשתות החברתיות — כולל תזמון, התאמה לפלטפורמה, והכל בלי מגע יד</p>
-                    </div>
-                </div>
-            </div>
-
-            <span class="story-highlight">מערכת אחת, 24/7, שמייצרת תוכן מקצועי ושומרת על הנוכחות הדיגיטלית שלכם — בלי מאמץ.</span>
-        </div>
-
-        <!-- Electric Connector -->
-        <div class="electric-connector">
-            <div class="node-dot"></div>
-            <div class="current-line"><div class="current-pulse"></div></div>
-            <div class="node-dot"></div>
-        </div>
-
-        <!-- ============================
-             WHAT YOU'LL LEARN
-             ============================ -->
-        <div class="glass-card">
-            <div class="section-title">
-                <i class="fas fa-graduation-cap"></i>
-                מה תלמדו בהדרכה
-            </div>
-
-            <div class="learn-list">
-                <div class="learn-item">
-                    <i class="fas fa-diagram-project"></i>
-                    <div class="learn-item-text">
-                        בניית אוטומציה שלמה מ-0 ב-n8n
-                        <span>פלטפורמת No-Code — בלי קוד, בלי ידע טכני מוקדם</span>
-                    </div>
-                </div>
-
-                <div class="learn-item">
-                    <i class="fas fa-wand-magic-sparkles"></i>
-                    <div class="learn-item-text">
-                        חיבור AI ליצירת תמונות מקצועיות
-                        <span>מודל Google Imagen (Nano Banana) — יצירת תמונות באוטומט</span>
-                    </div>
-                </div>
-
-                <div class="learn-item">
-                    <i class="fas fa-pen-fancy"></i>
-                    <div class="learn-item-text">
-                        הגדרת AI שכותב קופי מותאם
-                        <span>כותרות, טקסטים והאשטאגים — מותאם לכל פלטפורמה</span>
-                    </div>
-                </div>
-
-                <div class="learn-item">
-                    <i class="fas fa-server"></i>
-                    <div class="learn-item-text">
-                        שמירה חכמה ב-Supabase
-                        <span>בסיס נתונים שמאחסן ומנהל את כל התוכן שלכם</span>
-                    </div>
-                </div>
-
-                <div class="learn-item">
-                    <i class="fas fa-bolt"></i>
-                    <div class="learn-item-text">
-                        הפעלת המערכת — ומשם היא רצה לבד
-                        <span>מגדירים פעם אחת, נהנים כל יום</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="learn-note">
-                <i class="fas fa-play-circle"></i>
-                הדרכה מצולמת, צפייה חופשית בכל זמן — ללא הגבלה
-            </div>
-        </div>
-
-        <!-- Electric Connector -->
-        <div class="electric-connector">
-            <div class="node-dot"></div>
-            <div class="current-line"><div class="current-pulse"></div></div>
-            <div class="node-dot"></div>
-        </div>
-
-        <!-- ============================
-             WHO IT'S FOR (simple)
-             ============================ -->
-        <div class="story-section">
-            <div class="story-chapter">למי זה מתאים</div>
-            <div class="story-big">אם יצירת תוכן גוזלת לכם זמן — זה בשבילכם</div>
-
-            <div class="for-list">
-                <div class="for-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>בעלי עסקים שרוצים נוכחות דיגיטלית בלי לבזבז שעות</span>
-                </div>
-                <div class="for-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>משווקים שרוצים לייעל ולהכפיל תפוקה</span>
-                </div>
-                <div class="for-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>פרילנסרים שרוצים להציע שירות אוטומציית תוכן ללקוחות</span>
-                </div>
-                <div class="for-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>כל מי שמשלם אלפים למשרד פרסום ורוצה חלופה חכמה</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Teaching Photo -->
-        <div class="mid-photo">
+        <div class="hero-img">
             <img
-                src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1764629960/gg2wr5be9du0rvwjjyvz.png"
-                alt="שחר דדיה מלמד סטודנטים בהכשרה מעשית"
-                width="700"
-                height="400"
-                loading="lazy"
+                src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1771608626/IMG_4946.JPG_daxpou.jpg"
+                alt="שחר דדיה - מייסד ומנכ״ל משותף Focus AI"
+                width="800" height="600" loading="eager"
             >
-            <p class="mid-photo-caption">מתוך הכשרה מעשית של Bot-Camp — ללמוד ע״י עשייה</p>
+            <div class="overlay">
+                <h3>שחר דדיה</h3>
+                <p>מייסד ומנכ״ל משותף Focus AI</p>
+            </div>
         </div>
 
-        <!-- Electric Connector -->
-        <div class="electric-connector">
-            <div class="node-dot"></div>
-            <div class="current-line"><div class="current-pulse"></div></div>
-            <div class="node-dot"></div>
+        <h1>30 פוסטים בחודש.<br><em>בלי לגעת בהם.</em><br>אני מראה לכם איך.</h1>
+
+        <p class="sub">בניתי אוטומציה שמייצרת תוכן שלם לעסקים — תמונות, טקסט, פרסום.<br><strong>בהדרכה הזו אני מלמד אתכם לבנות את זה מאפס.</strong></p>
+
+        <a href="#leadForm" class="btn-primary">
+            רוצה לצפות בחינם
+            <i class="fas fa-play"></i>
+        </a>
+    </div>
+
+    <!-- ========== SOCIAL PROOF ========== -->
+    <div class="proof">
+        <div class="proof-item">
+            <i class="fas fa-users"></i>
+            <span><strong>800+</strong> נרשמו להדרכה</span>
         </div>
-
-        <!-- ============================
-             BOT-CAMP CTA (Subtle)
-             ============================ -->
-        <div class="botcamp-cta">
-            <div class="cta-label">
-                <i class="fas fa-graduation-cap"></i>
-                רוצים ללמוד יותר?
-            </div>
-
-            <h3>ההדרכה הזו? זו רק ההתחלה.</h3>
-
-            <p class="cta-text">
-                את תוכניות ההכשרה שלנו אנחנו מעבירים גם במוסדות מובילים כמו <strong>הטכניון ואוניברסיטת חיפה</strong>. ה-Bot-Camp הוא המסלול המלא שלנו — פתוח לכולם, <strong>פרונטלי בהרצליה וב-Zoom Live</strong>.
-            </p>
-
-            <div class="botcamp-benefits">
-                <div class="botcamp-benefit">
-                    <i class="fas fa-check-circle"></i>
-                    <span>12 מפגשים מקצועיים — סוכני AI, אוטומציות, מערכות שלמות</span>
-                </div>
-                <div class="botcamp-benefit">
-                    <i class="fas fa-check-circle"></i>
-                    <span>תעודה מקצועית בליווי אוניברסיטת חיפה</span>
-                </div>
-                <div class="botcamp-benefit">
-                    <i class="fas fa-check-circle"></i>
-                    <span>תיק עבודות אמיתי — לא תרגילים</span>
-                </div>
-                <div class="botcamp-benefit">
-                    <i class="fas fa-check-circle"></i>
-                    <span>פרונטלי בהרצליה או Zoom Live — אתם בוחרים</span>
-                </div>
-                <div class="botcamp-benefit">
-                    <i class="fas fa-check-circle"></i>
-                    <span>קהילת בוגרים פעילה + 2-3 מנחים בכל מפגש</span>
-                </div>
-            </div>
-
-            <a href="/academy/" class="btn-botcamp">
-                <i class="fas fa-arrow-left"></i>
-                גלו עוד על Bot-Camp
-            </a>
-        </div>
-
-        <!-- Electric Connector -->
-        <div class="electric-connector">
-            <div class="node-dot"></div>
-            <div class="current-line"><div class="current-pulse"></div></div>
-            <div class="node-dot"></div>
-        </div>
-
-        <!-- ============================
-             LEAD CAPTURE FORM
-             ============================ -->
-        <div class="form-card">
-            <div class="form-header">
-                <h2 class="form-title">מוכנים? ההדרכה מחכה לכם</h2>
-                <p class="form-subtitle">השאירו פרטים וקבלו גישה מיידית — בחינם</p>
-            </div>
-
-            <form id="leadForm">
-                <div class="form-group">
-                    <label for="fullName" class="required">
-                        <i class="fas fa-user"></i>
-                        שם מלא
-                    </label>
-                    <input type="text" id="fullName" name="fullName" placeholder="השם שלך" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone" class="required">
-                        <i class="fas fa-phone"></i>
-                        טלפון
-                    </label>
-                    <input type="tel" id="phone" name="phone" placeholder="052-0000000" required inputmode="tel" dir="ltr">
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="required">
-                        <i class="fas fa-envelope"></i>
-                        אימייל
-                    </label>
-                    <input type="email" id="email" name="email" placeholder="כתובת המייל שלך" required dir="ltr">
-                </div>
-
-                <!-- Privacy Section -->
-                <div class="privacy-section">
-                    <div class="privacy-notice">
-                        <i class="fas fa-shield-alt"></i>
-                        <span><strong>יידוע בהתאם לחוק:</strong> הפרטים שלך יישמרו במאגר מידע רשום ויישמשו לשליחת גישה להדרכה ותכנים רלוונטיים. ניתן לבקש עיון, תיקון או מחיקה בכל עת.</span>
-                    </div>
-
-                    <label class="checkbox-group">
-                        <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
-                        <span class="checkbox-label">
-                            קראתי ואני מסכים/ה ל<a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ול<a href="/terms/" target="_blank">תנאי השימוש</a>. *
-                        </span>
-                    </label>
-
-                    <label class="checkbox-group">
-                        <input type="checkbox" id="marketingConsent" name="marketingConsent" required>
-                        <span class="checkbox-label">
-                            אני מסכים/ה לקבל עדכונים, טיפים ותוכן בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת. *
-                        </span>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn-submit" id="submitBtn">
-                    <span class="btn-text">שלחו לי את ההדרכה בחינם <i class="fas fa-play-circle"></i></span>
-                    <span class="spinner"></span>
-                </button>
-            </form>
-        </div>
-
-        <!-- Community Section -->
-        <div style="text-align: center; margin-top: 24px; width: 100%;">
-            <a href="https://did.li/Focus-community" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 12px; padding: 16px 30px; background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(37, 211, 102, 0.08)); border: 1px solid rgba(37, 211, 102, 0.4); border-radius: 14px; color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 600; transition: all 0.3s ease;">
-                <i class="fab fa-whatsapp" style="font-size: 1.4rem; color: #25d366;"></i>
-                הצטרפו לקהילת ה-WhatsApp שלנו — טיפים ומדריכים חינם
-            </a>
-        </div>
-
-        <!-- ============================
-             FOOTER / DISCLAIMER
-             ============================ -->
-        <div class="disclaimer">
-            <div class="disclaimer-title">
-                <i class="fas fa-info-circle"></i>
-                הבהרות משפטיות
-            </div>
-            <div class="disclaimer-text">
-                התכנים בהדרכה הינם למטרות לימודיות בלבד ואינם מהווים הבטחה לתוצאות. המידע האישי נשמר במאגר מידע רשום בהתאם לחוק הגנת הפרטיות ותיקון 13 (התשפ"ד-2024). בלחיצה על "שלחו לי את ההדרכה" הינך מאשר/ת את שמירת פרטיך ושליחת תוכן רלוונטי. עומדות לך זכויות עיון, תיקון ומחיקה — פנה אלינו בכל עת.
-            </div>
-            <div class="social-links">
-                <a href="https://www.instagram.com/focus.creative.ai" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.tiktok.com/@focus.creative.ai" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-            <div class="footer-links">
-                <a href="/privacy-policy/" target="_blank"><i class="fas fa-lock"></i> מדיניות פרטיות</a>
-                <a href="/terms/" target="_blank"><i class="fas fa-file-contract"></i> תנאי שימוש</a>
-                <a href="https://wa.me/972539466408" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> צור קשר</a>
-                <a href="mailto:office@focusai.co.il"><i class="fas fa-envelope"></i> office@focusai.co.il</a>
-            </div>
+        <div class="proof-item">
+            <i class="fas fa-star"></i>
+            <span><strong>ללא ידע טכני</strong> מוקדם</span>
         </div>
     </div>
 
-    <!-- ============================
-         SUCCESS OVERLAY
-         ============================ -->
-    <div class="success-overlay" id="successOverlay">
-        <div class="success-card">
-            <div class="success-icon">
-                <i class="fas fa-check"></i>
+    <!-- ========== THE STORY ========== -->
+    <div class="section">
+        <div class="section-label">הסיפור</div>
+
+        <h2>הלקוח ששילם 4,500&#8362; על תוכן ולא קיבל אפילו ליד אחד</h2>
+
+        <p class="text">
+            לפני כשנה ישב אצלי בעל עסק ואמר: <em>״שחר, אני מוציא 4,500 שקל בחודש על תוכן לרשתות ולא חוזר לי שקל.״</em>
+        </p>
+
+        <p class="text">
+            פתחתי את הפרופיל שלו. 18 פוסטים עם 5 לייקים כל אחד. משרד הפרסום שלו עבד מתבנית — אותו עיצוב, אותו טון, שום דבר אישי. <strong>והוא לא היחיד.</strong> רוב העסקים שאני פוגש נמצאים באותו מקום בדיוק.
+        </p>
+
+        <div class="quote">
+            אז שאלתי את עצמי: אם AI כבר יודע ליצור תמונות ולכתוב טקסטים ברמה גבוהה — למה שלא אחבר את הכל <strong>למערכת אחת שעושה את העבודה לבד?</strong>
+        </div>
+
+        <p class="text">
+            ובניתי. תהליך אחד ב-n8n — פלטפורמת אוטומציה ויזואלית, בלי קוד — שמייצר תוכן מלא מ-A ועד Z. <strong>ועכשיו אני מלמד אתכם לעשות את אותו הדבר.</strong>
+        </p>
+    </div>
+
+    <!-- ========== PIPELINE ========== -->
+    <div class="section" style="padding-top: 0;">
+        <div class="section-label">איך זה עובד</div>
+
+        <h2>מגדירים פעם אחת.<br>מקבלים תוכן כל יום.</h2>
+
+        <div class="pipeline">
+            <div class="pipe-step">
+                <div class="pipe-icon i1"><i class="fas fa-image"></i></div>
+                <div class="pipe-text">
+                    <h4>AI מייצר תמונה מקורית</h4>
+                    <p>מודל Google Imagen יוצר תמונות מקצועיות שמותאמות לעסק שלכם — בלי גרפיקאי</p>
+                </div>
             </div>
-            <h2 class="success-title">נרשמת בהצלחה!</h2>
-            <p class="success-message">
-                מעבירים אותך ישירות להדרכה...<br>
-                <small style="opacity: 0.7;">הגישה נשלחה גם למייל שלך</small>
-            </p>
-            <div style="margin: 28px 0;">
-                <div class="countdown-number" id="countdownNumber">5</div>
-                <p style="color: var(--text-muted); font-size: 1rem; margin-top: 8px;">שניות להעברה</p>
+            <div class="pipe-step">
+                <div class="pipe-icon i2"><i class="fas fa-pen-nib"></i></div>
+                <div class="pipe-text">
+                    <h4>AI כותב את הטקסט</h4>
+                    <p>כותרת, קופי, האשטאגים — בטון שלכם, מותאם לכל פלטפורמה</p>
+                </div>
             </div>
-            <a href="#" class="success-link" id="directLink">
-                <i class="fas fa-play-circle"></i>
-                או לחצו כאן לצפייה מיידית
-            </a>
+            <div class="pipe-step">
+                <div class="pipe-icon i3"><i class="fas fa-database"></i></div>
+                <div class="pipe-text">
+                    <h4>הכל נשמר ומתועד</h4>
+                    <p>Supabase מאחסן כל פוסט — תמונה, טקסט, סטטוס. שליטה מלאה</p>
+                </div>
+            </div>
+            <div class="pipe-step">
+                <div class="pipe-icon i4"><i class="fas fa-share-nodes"></i></div>
+                <div class="pipe-text">
+                    <h4>הפוסט עולה לרשתות לבד</h4>
+                    <p>תזמון, התאמה, פרסום — בלי שתיגעו. בכל יום, 24/7</p>
+                </div>
+            </div>
+        </div>
+
+        <span class="highlight">תכל׳ס? מערכת אחת שמחליפה משרד פרסום.</span>
+    </div>
+
+    <!-- ========== WHAT YOU'LL BE ABLE TO DO ========== -->
+    <div class="section">
+        <div class="section-label">מה תקבלו</div>
+
+        <h2>אחרי ההדרכה תוכלו...</h2>
+
+        <div class="outcomes">
+            <div class="outcome">
+                <i class="fas fa-bolt"></i>
+                <span>להפעיל אוטומציה שמייצרת פוסטים מלאים — תמונה + טקסט + פרסום
+                    <small>בלי לכתוב שורה אחת בעצמכם</small>
+                </span>
+            </div>
+            <div class="outcome">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                <span>לחבר מודל AI ליצירת תמונות מקצועיות לכל פוסט
+                    <small>Google Imagen / Nano Banana — חינמי</small>
+                </span>
+            </div>
+            <div class="outcome">
+                <i class="fas fa-database"></i>
+                <span>לנהל את כל התוכן שלכם במאגר מסודר
+                    <small>Supabase — כמו אקסל חכם בענן</small>
+                </span>
+            </div>
+            <div class="outcome">
+                <i class="fas fa-clock"></i>
+                <span>לחסוך 15-20 שעות בחודש שאתם מבזבזים על תוכן
+                    <small>ולהפסיק לשלם אלפי שקלים למשרד פרסום</small>
+                </span>
+            </div>
+        </div>
+
+        <p class="text" style="text-align: center; font-weight: 500;">
+            <i class="fas fa-play-circle" style="color: var(--accent); margin-left: 6px;"></i>
+            הדרכה מצולמת, צעד אחר צעד. צפייה חופשית בכל זמן.
+        </p>
+    </div>
+
+    <!-- ========== MID-PAGE PHOTO ========== -->
+    <div class="mid-photo">
+        <img
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900/v1764629960/gg2wr5be9du0rvwjjyvz.png"
+            alt="הכשרה מעשית של Focus AI"
+            width="900" height="400" loading="lazy"
+        >
+        <p class="caption">מתוך הכשרה מעשית — ככה אנחנו מלמדים: על המסך, יחד</p>
+    </div>
+
+    <!-- ========== WHO ========== -->
+    <div class="section">
+        <div class="section-label">למי זה</div>
+
+        <h2>אם יצירת תוכן מרגישה כמו עבודה נוספת — זה בדיוק בשבילכם</h2>
+
+        <div class="for-list">
+            <div class="for-item"><i class="fas fa-check"></i> בעלי עסקים שיודעים שהם צריכים נוכחות דיגיטלית אבל אין להם זמן</div>
+            <div class="for-item"><i class="fas fa-check"></i> משווקים שרוצים להכפיל תפוקה בלי להכפיל שעות</div>
+            <div class="for-item"><i class="fas fa-check"></i> פרילנסרים שרוצים להציע שירות אוטומציה ללקוחות</div>
+            <div class="for-item"><i class="fas fa-check"></i> כל מי שמשלם אלפים על תוכן ותוהה אם יש דרך חכמה יותר</div>
+        </div>
+
+        <p class="text" style="font-weight: 500;">
+            <strong>לא צריך ידע טכני.</strong> לא צריך לדעת קוד. ההדרכה מתחילה מ-0 ומתקדמת צעד אחר צעד.
+        </p>
+    </div>
+
+    <!-- ========== FORM ========== -->
+    <div class="form-section" id="leadForm">
+        <div class="form-header">
+            <h2>ההדרכה מחכה לכם</h2>
+            <p>השאירו פרטים — וצפו מיידית. בחינם.</p>
+        </div>
+
+        <form id="leadForm-form">
+            <div class="form-group">
+                <label for="fullName" class="req"><i class="fas fa-user"></i> שם מלא</label>
+                <input type="text" id="fullName" name="fullName" placeholder="איך קוראים לך?" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="req"><i class="fas fa-phone"></i> טלפון</label>
+                <input type="tel" id="phone" name="phone" placeholder="052-0000000" required inputmode="tel" dir="ltr">
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="req"><i class="fas fa-envelope"></i> אימייל</label>
+                <input type="email" id="email" name="email" placeholder="כתובת המייל שלך" required dir="ltr">
+            </div>
+
+            <div class="consent">
+                <label class="consent-check">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <span>
+                        קראתי ואני מסכים/ה ל<a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ול<a href="/terms/" target="_blank">תנאי השימוש</a>, ולקבלת עדכונים ותוכן בנושאי AI באימייל ו/או WhatsApp. ניתן לבטל בכל עת. *
+                    </span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span class="btn-text">שלחו לי את ההדרכה <i class="fas fa-play"></i></span>
+                <span class="spinner"></span>
+            </button>
+        </form>
+    </div>
+
+    <!-- ========== BOTCAMP NUDGE ========== -->
+    <div class="nudge">
+        <p>
+            ההדרכה הזו היא טעימה מ-<strong>Bot-Camp</strong> — תוכנית ההכשרה המלאה שלנו.<br>
+            12 מפגשים, תעודה בליווי אוניברסיטת חיפה, פרונטלי בהרצליה או Zoom Live.
+        </p>
+        <a href="/academy/">
+            <i class="fas fa-arrow-left"></i>
+            גלו עוד על Bot-Camp
+        </a>
+    </div>
+
+    <!-- WhatsApp Community -->
+    <div style="text-align: center; margin: 24px 0;">
+        <a href="https://did.li/Focus-community" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3); border-radius: 12px; color: var(--text); text-decoration: none; font-weight: 600; transition: all 0.3s;">
+            <i class="fab fa-whatsapp" style="font-size: 1.3rem; color: #25d366;"></i>
+            הצטרפו לקהילת ה-WhatsApp — טיפים ומדריכים חינם
+        </a>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div class="site-footer">
+        <p class="footer-legal">
+            התכנים בהדרכה הינם למטרות לימודיות בלבד ואינם מהווים הבטחה לתוצאות. המידע האישי נשמר בהתאם לחוק הגנת הפרטיות. עומדות לך זכויות עיון, תיקון ומחיקה — <a href="mailto:office@focusai.co.il">פנו אלינו</a>.
+        </p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/focus.creative.ai" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@focus.creative.ai" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="footer-links">
+            <a href="/privacy-policy/" target="_blank"><i class="fas fa-lock"></i> מדיניות פרטיות</a>
+            <a href="/terms/" target="_blank"><i class="fas fa-file-contract"></i> תנאי שימוש</a>
+            <a href="https://wa.me/972539466408" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> צור קשר</a>
+            <a href="mailto:office@focusai.co.il"><i class="fas fa-envelope"></i> office@focusai.co.il</a>
         </div>
     </div>
 
-    <!-- ============================
-         SCRIPTS
-         ============================ -->
-    <script>
-        // Create floating particles
-        var particlesContainer = document.getElementById('particles');
-        for (var i = 0; i < 20; i++) {
-            var particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            particlesContainer.appendChild(particle);
+</div>
+
+<!-- ========== SUCCESS OVERLAY ========== -->
+<div class="success-overlay" id="successOverlay">
+    <div class="success-card">
+        <div class="icon"><i class="fas fa-check"></i></div>
+        <h2>נרשמת בהצלחה!</h2>
+        <p>מעבירים אותך ישירות להדרכה...</p>
+        <div style="margin: 20px 0;">
+            <div class="countdown" id="countdownNumber">5</div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 6px;">שניות</p>
+        </div>
+        <a href="#" class="link" id="directLink">
+            <i class="fas fa-play"></i> לחצו כאן לצפייה מיידית
+        </a>
+    </div>
+</div>
+
+<!-- ========== SCRIPT ========== -->
+<script>
+    var form = document.getElementById('leadForm-form');
+    var submitBtn = document.getElementById('submitBtn');
+    var successOverlay = document.getElementById('successOverlay');
+    var WEBHOOK_URL = 'PLACEHOLDER_WEBHOOK_URL';
+    var VIEWING_URL = '/content-automation-watch/';
+
+    // Phone formatting
+    var phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+        var v = e.target.value.replace(/\D/g, '');
+        if (v.length > 10) v = v.slice(0, 10);
+        if (v.length > 3) v = v.slice(0, 3) + '-' + v.slice(3);
+        e.target.value = v;
+    });
+
+    var patterns = {
+        phone: /^0[2-9]\d{7,8}$/,
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        name: /^[\u0590-\u05FFa-zA-Z\s]{2,50}$/
+    };
+
+    function validate(field, pattern) {
+        var val = field.value.replace(/[-\s]/g, '');
+        if (!pattern.test(field.id === 'phone' ? val : field.value.trim())) {
+            field.style.borderColor = '#ef4444';
+            field.style.boxShadow = '0 0 0 4px rgba(239,68,68,0.15)';
+            return false;
+        }
+        field.style.borderColor = '';
+        field.style.boxShadow = '';
+        return true;
+    }
+
+    document.getElementById('fullName').addEventListener('blur', function() { validate(this, patterns.name); });
+    document.getElementById('email').addEventListener('blur', function() { validate(this, patterns.email); });
+    phoneInput.addEventListener('blur', function() { validate(this, patterns.phone); });
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var fn = document.getElementById('fullName');
+        var ph = document.getElementById('phone');
+        var em = document.getElementById('email');
+        var consent = document.getElementById('consent');
+
+        if (!validate(fn, patterns.name) || !validate(ph, patterns.phone) || !validate(em, patterns.email)) {
+            alert('נא למלא את כל השדות בצורה תקינה');
+            return;
+        }
+        if (!consent.checked) {
+            alert('יש לאשר את התנאים כדי להמשיך');
+            return;
         }
 
-        // ============================
-        // FORM HANDLING
-        // ============================
-        var form = document.getElementById('leadForm');
-        var submitBtn = document.getElementById('submitBtn');
-        var successOverlay = document.getElementById('successOverlay');
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
 
-        // TODO: Replace with actual webhook URL from n8n
-        var WEBHOOK_URL = 'PLACEHOLDER_WEBHOOK_URL';
-        // Course viewing page
-        var VIEWING_URL = '/content-automation-watch/';
+        try {
+            var res = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                mode: 'cors',
+                body: JSON.stringify({
+                    fullName: fn.value.trim(),
+                    phone: ph.value.trim().replace(/[-\s]/g, ''),
+                    email: em.value.trim(),
+                    consent: true,
+                    timestamp: new Date().toISOString(),
+                    source: 'content-automation-course'
+                })
+            });
 
-        // Phone number formatting
-        var phoneInput = document.getElementById('phone');
-        phoneInput.addEventListener('input', function(e) {
-            var value = e.target.value.replace(/\D/g, '');
-            if (value.length > 10) value = value.slice(0, 10);
-            if (value.length > 3) {
-                value = value.slice(0, 3) + '-' + value.slice(3);
-            }
-            e.target.value = value;
-        });
+            if (!res.ok) throw new Error('server-' + res.status);
+            if (typeof fbq === 'function') fbq('track', 'Lead');
 
-        // Validation patterns
-        var patterns = {
-            phone: /^0[2-9]\d{7,8}$/,
-            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            name: /^[\u0590-\u05FFa-zA-Z\s]{2,50}$/
-        };
-
-        // Validation function
-        function validateField(field, pattern) {
-            var value = field.value.replace(/[-\s]/g, '');
-            if (!pattern.test(field.id === 'phone' ? value : field.value.trim())) {
-                field.style.borderColor = '#ef4444';
-                field.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.2)';
-                return false;
-            }
-            field.style.borderColor = '';
-            field.style.boxShadow = '';
-            return true;
+            successOverlay.classList.add('show');
+            form.reset();
+            startCountdown();
+        } catch (err) {
+            console.error(err);
+            var msg = 'אירעה שגיאה. אנא נסו שוב.';
+            if (err.message && err.message.includes('fetch')) msg = 'שגיאת תקשורת — בדקו את חיבור האינטרנט.';
+            alert(msg);
+        } finally {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
         }
+    });
 
-        // Real-time validation
-        document.getElementById('fullName').addEventListener('blur', function() {
-            validateField(this, patterns.name);
-        });
-        document.getElementById('email').addEventListener('blur', function() {
-            validateField(this, patterns.email);
-        });
-        document.getElementById('phone').addEventListener('blur', function() {
-            validateField(this, patterns.phone);
-        });
+    document.getElementById('directLink').href = VIEWING_URL;
 
-        // Form submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
+    function startCountdown() {
+        var el = document.getElementById('countdownNumber');
+        var c = 5;
+        var t = setInterval(function() {
+            c--;
+            if (el) el.textContent = c;
+            if (c <= 0) { clearInterval(t); window.location.href = VIEWING_URL; }
+        }, 1000);
+    }
 
-            var fullName = document.getElementById('fullName');
-            var phone = document.getElementById('phone');
-            var email = document.getElementById('email');
-            var privacyConsent = document.getElementById('privacyConsent');
+    successOverlay.addEventListener('click', function(e) {
+        if (e.target === successOverlay) successOverlay.classList.remove('show');
+    });
+</script>
 
-            // Validate all fields
-            var isNameValid = validateField(fullName, patterns.name);
-            var isPhoneValid = validateField(phone, patterns.phone);
-            var isEmailValid = validateField(email, patterns.email);
-
-            if (!isNameValid || !isPhoneValid || !isEmailValid) {
-                alert('נא למלא את כל השדות בצורה תקינה');
-                return;
-            }
-
-            if (!privacyConsent.checked) {
-                alert('יש לאשר את מדיניות הפרטיות כדי להמשיך');
-                return;
-            }
-
-            var marketingConsent = document.getElementById('marketingConsent');
-            if (!marketingConsent.checked) {
-                alert('יש לאשר קבלת עדכונים כדי להמשיך');
-                return;
-            }
-
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-
-            var formData = {
-                fullName: fullName.value.trim(),
-                phone: phone.value.trim().replace(/[-\s]/g, ''),
-                email: email.value.trim(),
-                privacyConsent: privacyConsent.checked,
-                marketingConsent: marketingConsent.checked,
-                timestamp: new Date().toISOString(),
-                source: 'content-automation-course'
-            };
-
-            try {
-                var response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    mode: 'cors',
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    var errorMessage = 'שגיאת שרת (' + response.status + ')';
-                    try {
-                        var errorData = await response.json();
-                        if (errorData.message) {
-                            errorMessage = errorData.message;
-                        } else if (errorData.error) {
-                            errorMessage = errorData.error;
-                        }
-                    } catch (parseErr) {
-                        errorMessage = 'שגיאה: ' + response.status + ' - ' + (response.statusText || 'שגיאה בשרת');
-                    }
-                    throw new Error(errorMessage);
-                }
-
-                // Track conversion
-                if (typeof fbq === 'function') fbq('track', 'Lead');
-
-                successOverlay.classList.add('show');
-                form.reset();
-
-                // Start countdown and redirect
-                startCountdownAndRedirect();
-
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                var userMessage = 'אירעה שגיאה. אנא נסו שוב.';
-
-                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                    userMessage = 'שגיאת תקשורת: לא ניתן להתחבר לשרת. בדקו את חיבור האינטרנט ונסו שוב.';
-                } else if (error.message.includes('CORS')) {
-                    userMessage = 'שגיאת הרשאות: הגישה לשרת נחסמה. נסו שוב מאוחר יותר.';
-                } else if (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0) {
-                    userMessage = error.message;
-                } else if (error.message) {
-                    userMessage = 'שגיאה: ' + error.message;
-                }
-
-                alert(userMessage);
-            } finally {
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-            }
-        });
-
-        // Set direct link URL
-        var directLinkEl = document.getElementById('directLink');
-        if (directLinkEl) {
-            directLinkEl.href = VIEWING_URL;
-        }
-
-        // Countdown and redirect function
-        function startCountdownAndRedirect() {
-            var countdownElement = document.getElementById('countdownNumber');
-            var count = 5;
-
-            var countdown = setInterval(function() {
-                count--;
-                if (countdownElement) {
-                    countdownElement.textContent = count;
-                }
-
-                if (count <= 0) {
-                    clearInterval(countdown);
-                    window.location.href = VIEWING_URL;
-                }
-            }, 1000);
-        }
-
-        // Close success overlay on click outside
-        successOverlay.addEventListener('click', function(e) {
-            if (e.target === successOverlay) {
-                successOverlay.classList.remove('show');
-            }
-        });
-    </script>
 </body>
 </html>
