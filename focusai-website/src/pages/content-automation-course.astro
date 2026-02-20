@@ -364,20 +364,30 @@
             margin-top: 3px;
         }
 
-        /* ===== MID-PHOTO ===== */
-        .mid-photo {
-            position: relative;
-            margin: 16px 0;
+        /* ===== WHO SPLIT ===== */
+        .who-split {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-top: 20px;
+        }
+
+        .who-photo {
+            flex-shrink: 0;
+            width: 260px;
             border-radius: 16px;
             overflow: hidden;
         }
 
-        .mid-photo img {
+        .who-photo img {
             width: 100%;
-            height: 220px;
+            height: 260px;
             object-fit: cover;
-            object-position: center 25%;
             display: block;
+        }
+
+        .who-content {
+            flex: 1;
         }
 
         /* ===== FOR-WHO ===== */
@@ -809,6 +819,8 @@
             .hero-photo { width: 320px; }
             .hero-photo img { height: 420px; }
             h2 { font-size: 2.2rem; }
+            .who-photo { width: 300px; }
+            .who-photo img { height: 300px; }
         }
 
         @media (max-width: 700px) {
@@ -827,7 +839,12 @@
             .form-section { padding: 26px 18px; }
             .botcamp-section { padding: 28px 18px; }
             .botcamp-grid { grid-template-columns: 1fr; }
-            .mid-photo img { height: 160px; }
+            .who-split {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .who-photo { width: 200px; }
+            .who-photo img { height: 200px; }
         }
     </style>
 </head>
@@ -953,30 +970,32 @@
         </p>
     </div>
 
-    <!-- ========== MID-PAGE PHOTO ========== -->
-    <div class="mid-photo">
-        <img
-            src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_820,c_fill,h_440,g_center/v1764629960/gg2wr5be9du0rvwjjyvz.png"
-            alt="הכשרה מעשית של Focus AI"
-            width="820" height="220" loading="lazy"
-        >
-    </div>
-
     <!-- ========== WHO ========== -->
-    <div class="section">
+    <div class="section who-section">
 
         <h2>למי ההדרכה הזו מתאימה?</h2>
 
-        <div class="for-list">
-            <div class="for-item"><i class="fas fa-check"></i> בעלי עסקים שצריכים נוכחות דיגיטלית אבל אין להם זמן</div>
-            <div class="for-item"><i class="fas fa-check"></i> משווקים שרוצים להכפיל תפוקה בלי להכפיל שעות</div>
-            <div class="for-item"><i class="fas fa-check"></i> פרילנסרים שרוצים להציע שירות אוטומציה ללקוחות</div>
-            <div class="for-item"><i class="fas fa-check"></i> כל מי שרוצה להבין איך AI יכול לעבוד בשבילו</div>
-        </div>
+        <div class="who-split">
+            <div class="who-photo">
+                <img
+                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_500,c_fill,h_500,g_faces/v1764629960/gg2wr5be9du0rvwjjyvz.png"
+                    alt="הכשרה מעשית של Focus AI"
+                    width="500" height="500" loading="lazy"
+                >
+            </div>
+            <div class="who-content">
+                <div class="for-list">
+                    <div class="for-item"><i class="fas fa-check"></i> בעלי עסקים שצריכים נוכחות דיגיטלית אבל אין להם זמן</div>
+                    <div class="for-item"><i class="fas fa-check"></i> משווקים שרוצים להכפיל תפוקה בלי להכפיל שעות</div>
+                    <div class="for-item"><i class="fas fa-check"></i> פרילנסרים שרוצים להציע שירות אוטומציה ללקוחות</div>
+                    <div class="for-item"><i class="fas fa-check"></i> כל מי שרוצה להבין איך AI יכול לעבוד בשבילו</div>
+                </div>
 
-        <p class="text" style="font-weight: 500;">
-            <strong>לא צריך ידע טכני.</strong> לא צריך לדעת קוד. ההדרכה מתחילה מאפס ומתקדמת צעד אחר צעד.
-        </p>
+                <p class="text" style="font-weight: 500;">
+                    <strong>לא צריך ידע טכני.</strong> לא צריך לדעת קוד. ההדרכה מתחילה מאפס ומתקדמת צעד אחר צעד.
+                </p>
+            </div>
+        </div>
     </div>
 
     <!-- ========== FORM ========== -->
