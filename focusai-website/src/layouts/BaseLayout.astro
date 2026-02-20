@@ -134,6 +134,9 @@ const websiteSchema = {
   <slot name="head" />
 </head>
 <body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active">
+  <!-- Brand fingerprint watermark - fixed background, real element for stable positioning -->
+  <div class="fingerprint-fixed" aria-hidden="true"></div>
+
   <!-- Skip to content (a11y) -->
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[9999] focus:bg-[#a855f7] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold">דלג לתוכן</a>
 

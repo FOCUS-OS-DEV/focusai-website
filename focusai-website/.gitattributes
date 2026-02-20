@@ -1,0 +1,3 @@
+# Dist files are build output - force LF to match npm build output
+focusai-website/dist/** text eol=lf
+dist/** text eol=lf

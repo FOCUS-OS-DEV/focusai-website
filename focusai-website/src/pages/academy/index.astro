@@ -512,72 +512,220 @@ const courseSchema = {
     </div>
   </section>
 
-  <!-- Client Logos - Static Grid -->
-  <section class="py-8 md:py-12 bg-gradient-to-b from-[#f8f4ff] to-white">
+  <!-- Client Logos - Auto-scrolling 3D Carousel -->
+  <section class="py-8 md:py-12 bg-gradient-to-b from-[#f8f4ff] to-white overflow-hidden">
     <div class="container px-4">
-      <h3 class="text-center text-2xl md:text-3xl font-bold text-[#a855f7] tracking-wide mb-10 md:mb-12">
+      <h3 class="text-center text-2xl md:text-3xl font-bold text-[#a855f7] tracking-wide mb-8 md:mb-10">
         סומכים עלינו
       </h3>
 
-      <!-- Mobile: 2-col grid -->
-      <div class="grid grid-cols-3 gap-4 max-w-sm mx-auto md:hidden">
-        {clientLogos.map((client) => (
-          <div class="client-logo-static" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" />
-          </div>
-        ))}
-      </div>
-
-      <!-- Desktop: two rows -->
-      <div class="hidden md:flex flex-wrap justify-center items-center gap-x-10 gap-y-6 mb-6" data-animate="fade-up">
-        {clientLogos.slice(0, 6).map((client) => (
-          <div class="client-logo-static" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" />
-          </div>
-        ))}
-      </div>
-      <div class="hidden md:flex flex-wrap justify-center items-center gap-x-10 gap-y-6" data-animate="fade-up" data-delay="0.1">
-        {clientLogos.slice(6).map((client) => (
-          <div class="client-logo-static" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" />
-          </div>
-        ))}
+      <!-- 3D Logo Carousel -->
+      <div class="logo-carousel" aria-label="קרוסלת לוגואים">
+        <div class="lc-track">
+          {clientLogos.map((client, i) => (
+            <div class="lc-card" data-lc={i}>
+              <div class="lc-inner">
+                <img src={client.logo} alt={client.name} loading="lazy" draggable="false" />
+              </div>
+              <p class="lc-name">{client.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
   <style>
-    .client-logo-static {
+    .logo-carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .lc-track {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      height: 150px;
+      height: 200px;
     }
 
-    .client-logo-static img {
+    .lc-card {
+      position: absolute;
+      width: 160px;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.6s ease;
+      will-change: transform, opacity;
+      text-align: center;
+    }
+
+    .lc-inner {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto;
+      border-radius: 1.25rem;
+      background: white;
+      border: 1px solid #e0d4f7;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    .lc-center .lc-inner {
+      border-color: #a855f7;
+      box-shadow: 0 8px 32px rgba(168, 85, 247, 0.18);
+    }
+
+    .lc-inner img {
       max-width: 100%;
       max-height: 100%;
-      height: 125px;
-      width: auto;
       object-fit: contain;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    .client-logo-static:hover img {
-      transform: scale(1.08);
+    .lc-name {
+      margin-top: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #6a6a8a;
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
     }
 
-    @media (max-width: 768px) {
-      .client-logo-static {
-        height: 100px;
+    .lc-center .lc-name {
+      opacity: 1;
+      color: #a855f7;
+    }
+
+    @media (min-width: 768px) {
+      .lc-track {
+        height: 240px;
       }
-      .client-logo-static img {
-        height: 80px;
-        max-width: 140px;
+      .lc-card {
+        width: 200px;
+      }
+      .lc-inner {
+        width: 170px;
+        height: 170px;
+        padding: 1.25rem;
       }
     }
   </style>
+
+  <script is:inline>
+  (function() {
+    var carousel = document.querySelector('.logo-carousel');
+    if (!carousel || carousel.dataset.init) return;
+    carousel.dataset.init = '1';
+
+    var cards = carousel.querySelectorAll('.lc-card');
+    var total = cards.length;
+    var current = 0;
+    var autoTimer = null;
+    var paused = false;
+
+    function layout() {
+      cards.forEach(function(card, i) {
+        var offset = i - current;
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        var abs = Math.abs(offset);
+        var sign = offset > 0 ? -1 : 1;
+        var scale, tx, opa, z;
+
+        if (abs === 0) {
+          scale = 1; tx = 0; opa = 1; z = 5;
+        } else if (abs === 1) {
+          scale = 0.82; tx = sign * 110; opa = 0.7; z = 4;
+        } else if (abs === 2) {
+          scale = 0.65; tx = sign * 195; opa = 0.35; z = 3;
+        } else if (abs === 3) {
+          scale = 0.5; tx = sign * 260; opa = 0.15; z = 2;
+        } else {
+          scale = 0.4; tx = sign * 300; opa = 0; z = 0;
+        }
+
+        card.style.transform = 'translateX(' + tx + '%) scale(' + scale + ')';
+        card.style.opacity = opa;
+        card.style.zIndex = z;
+        card.classList.toggle('lc-center', abs === 0);
+      });
+    }
+
+    function goTo(idx) {
+      current = ((idx % total) + total) % total;
+      layout();
+    }
+
+    function next() {
+      goTo(current + 1);
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(function() {
+        if (!paused) next();
+      }, 2500);
+    }
+
+    function stopAuto() {
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    }
+
+    // Touch swipe
+    var startX = 0, startY = 0, swiping = false;
+    carousel.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      swiping = true;
+      paused = true;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function(e) {
+      if (!swiping) return;
+      swiping = false;
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        goTo(current + (dx > 0 ? -1 : 1));
+      }
+      // Resume auto after 4s pause
+      setTimeout(function() { paused = false; }, 4000);
+    });
+
+    // Click side cards to navigate
+    cards.forEach(function(card, i) {
+      card.addEventListener('click', function() {
+        if (i !== current) {
+          goTo(i);
+          paused = true;
+          setTimeout(function() { paused = false; }, 4000);
+        }
+      });
+    });
+
+    // Pause on hover (desktop)
+    carousel.addEventListener('mouseenter', function() { paused = true; });
+    carousel.addEventListener('mouseleave', function() { paused = false; });
+
+    // Init
+    layout();
+    startAuto();
+
+    // Pause when not visible
+    var observer = new IntersectionObserver(function(entries) {
+      paused = !entries[0].isIntersecting;
+    }, { threshold: 0.3 });
+    observer.observe(carousel);
+  })();
+  </script>
 
   <!-- Video Testimonials -->
   <VideoTestimonials title="הבוגרים שלנו מספרים" subtitle="צפו בבוגרי Bot-Camp מספרים על החוויה שלהם" badge="ALUMNI_STORIES" theme="light" />

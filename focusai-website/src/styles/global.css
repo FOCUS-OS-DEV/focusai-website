@@ -149,11 +149,15 @@ body {
   line-height: 1.6;
 }
 
-/* Brand fingerprint watermark background */
-body::before {
-  content: '';
+/* Brand fingerprint watermark - real element (see BaseLayout.astro), NOT pseudo-element */
+/* pseudo-elements on body jitter on mobile due to address bar viewport changes */
+.fingerprint-fixed {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  height: 100vh; /* fallback for older browsers */
   background-image: url('https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png');
   background-size: min(80vw, 800px);
   background-repeat: no-repeat;
@@ -161,13 +165,22 @@ body::before {
   opacity: 0.06;
   pointer-events: none;
   z-index: 0;
+  /* Force own GPU compositing layer - prevents repaint/jitter on scroll */
+  transform: translateZ(0);
+  will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-/* Mobile: bigger, more visible continuous fingerprint - z-index:1 to show above section backgrounds */
+@supports (height: 100svh) {
+  .fingerprint-fixed {
+    height: 100svh;
+  }
+}
+
+/* Mobile: bigger, more visible, above section backgrounds */
 @media (max-width: 1023px) {
-  body::before {
+  .fingerprint-fixed {
     background-size: 100vw;
     opacity: 0.07;
     z-index: 1;
