@@ -693,123 +693,50 @@
 
         .botcamp-partners img:hover { opacity: 1; }
 
-        /* ===== SLOT MACHINE ===== */
-        .slot-machine {
-            position: relative;
-            margin: 28px -24px;   /* bleed to card edges */
-            height: 240px;        /* 3 slots × 80px */
-            overflow: hidden;
+        /* ===== FEATURE GRID ===== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin: 24px 0;
+        }
+        @media (max-width: 640px) {
+            .feature-grid { grid-template-columns: 1fr 1fr; }
         }
 
-        /* Gradient fade masks */
-        .slot-machine::before,
-        .slot-machine::after {
-            content: '';
-            position: absolute;
-            left: 0; right: 0;
-            height: 80px;
-            z-index: 3;
-            pointer-events: none;
-        }
-        .slot-machine::before {
-            top: 0;
-            background: linear-gradient(to bottom, var(--dark) 0%, transparent 100%);
-        }
-        .slot-machine::after {
-            bottom: 0;
-            background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
-        }
-
-        /* Center highlight band — full card width */
-        .slot-highlight {
-            position: absolute;
-            left: 0; right: 0;
-            top: 80px;
-            height: 80px;
-            background: linear-gradient(90deg, transparent 0%, rgba(168,85,247,0.1) 15%, rgba(168,85,247,0.1) 85%, transparent 100%);
-            border-top: 1px solid rgba(168,85,247,0.4);
-            border-bottom: 1px solid rgba(168,85,247,0.4);
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        /* Shimmer sweep */
-        .slot-highlight::after {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0;
-            left: -50%;
-            width: 40%;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.13) 50%, transparent 100%);
-            animation: slotShimmer 3s ease-in-out infinite;
-        }
-        @keyframes slotShimmer {
-            0%   { left: -50%; }
-            100% { left: 110%; }
-        }
-
-        /* Arrow markers */
-        .slot-arrow-r, .slot-arrow-l {
-            position: absolute;
-            top: 80px;
-            height: 80px;
+        .fg-item {
             display: flex;
-            align-items: center;
-            z-index: 4;
+            align-items: flex-start;
+            gap: 9px;
+            padding: 11px 13px;
+            background: rgba(168,85,247,0.03);
+            border: 1px solid rgba(168,85,247,0.08);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s ease, transform 0.35s ease,
+                        background 0.25s, border-color 0.25s;
         }
-        .slot-arrow-r { right: 8px; }
-        .slot-arrow-l { left: 8px; }
-        .slot-arrow-r::before, .slot-arrow-l::before {
-            content: '';
-            width: 0; height: 0;
-            border-top: 9px solid transparent;
-            border-bottom: 9px solid transparent;
+        .fg-item.vis {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .slot-arrow-r::before { border-right: 9px solid rgba(168,85,247,0.5); }
-        .slot-arrow-l::before { border-left:  9px solid rgba(168,85,247,0.5); }
-
-        /* Items */
-        .slot-item {
-            position: absolute;
-            left: 0; right: 0;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            text-align: center;
-            padding: 0 52px;
-            will-change: transform, opacity;
-            z-index: 2;
+        .fg-item:hover {
+            background: rgba(168,85,247,0.08);
+            border-color: rgba(168,85,247,0.22);
         }
-
-        .slot-item i {
-            color: rgba(168,85,247,0.4);
-            font-size: 1rem;
+        .fg-item i {
+            color: var(--primary-light);
+            font-size: 0.82rem;
+            margin-top: 3px;
             flex-shrink: 0;
-            transition: color 450ms ease, font-size 450ms ease, filter 450ms ease;
+            opacity: 0.8;
         }
-
-        .slot-item span {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: rgba(255,255,255,0.28);
-            line-height: 1.3;
-            transition: font-size 450ms ease, font-weight 450ms ease, color 450ms ease, text-shadow 450ms ease;
-        }
-
-        /* Center/active item */
-        .slot-item.center i {
-            color: #c084fc;
-            font-size: 1.5rem;
-            filter: drop-shadow(0 0 8px rgba(192,132,252,0.75));
-        }
-        .slot-item.center span {
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: #f5f0ff;
-            text-shadow: 0 0 22px rgba(192,132,252,0.6), 0 0 50px rgba(168,85,247,0.3);
-            letter-spacing: -0.3px;
+        .fg-item span {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.4;
         }
 
         .botcamp-badges {
@@ -1231,10 +1158,19 @@
             </div>
         </div>
 
-        <div class="slot-machine" id="slotMachine">
-            <div class="slot-highlight"></div>
-            <div class="slot-arrow-r"></div>
-            <div class="slot-arrow-l"></div>
+        <div class="feature-grid" id="featureGrid">
+            <div class="fg-item"><i class="fas fa-certificate"></i><span>תעודה מקצועית בליווי אוניברסיטת חיפה</span></div>
+            <div class="fg-item"><i class="fas fa-briefcase"></i><span>תיק עבודות עם פרויקטים אמיתיים</span></div>
+            <div class="fg-item"><i class="fas fa-chalkboard-teacher"></i><span>12 מפגשים מקצועיים (17:00–21:00)</span></div>
+            <div class="fg-item"><i class="fas fa-users"></i><span>קבוצות קטנות עד 18 משתתפים</span></div>
+            <div class="fg-item"><i class="fas fa-building"></i><span>פרונטלי בהרצליה או Zoom Live</span></div>
+            <div class="fg-item"><i class="fas fa-video"></i><span>הקלטות מפגשים וחומרי עזר</span></div>
+            <div class="fg-item"><i class="fas fa-robot"></i><span>סוכני AI ייעודיים ללמידה</span></div>
+            <div class="fg-item"><i class="fas fa-people-group"></i><span>קהילת בוגרים מקצועית מכל הארץ</span></div>
+            <div class="fg-item"><i class="fas fa-laptop-code"></i><span>אזור לימוד אישי עם סיכומי AI</span></div>
+            <div class="fg-item"><i class="fas fa-tasks"></i><span>מטלות אינטראקטיביות עם ליווי מותאם</span></div>
+            <div class="fg-item"><i class="fas fa-code"></i><span>ללא ידע בקוד. שליטה בסיסית בלבד</span></div>
+            <div class="fg-item"><i class="fas fa-graduation-cap"></i><span>הכנה להשמה ומסלולי קריירה</span></div>
         </div>
 
         <div class="botcamp-badges">
@@ -1409,79 +1345,18 @@
 
 <script>
 (function() {
-    var features = [
-        { icon: 'fa-certificate',       text: 'תעודה מקצועית בליווי אוניברסיטת חיפה' },
-        { icon: 'fa-briefcase',          text: 'תיק עבודות עם פרויקטים אמיתיים' },
-        { icon: 'fa-chalkboard-teacher', text: '12 מפגשים מקצועיים (17:00 עד 21:00)' },
-        { icon: 'fa-users',              text: 'קבוצות קטנות של עד 18 משתתפים' },
-        { icon: 'fa-building',           text: 'פרונטלי בהרצליה או Zoom Live' },
-        { icon: 'fa-video',              text: 'הקלטות מפגשים וחומרי עזר' },
-        { icon: 'fa-robot',              text: 'סוכני AI ייעודיים שיעזרו לכם ללמוד' },
-        { icon: 'fa-people-group',       text: 'קהילת בוגרים מקצועית מכל הארץ' },
-        { icon: 'fa-laptop-code',        text: 'אזור לימוד אישי עם סיכומי AI' },
-        { icon: 'fa-tasks',              text: 'מטלות אינטראקטיביות עם ליווי מותאם' },
-        { icon: 'fa-code',               text: 'ללא ידע בקוד. שליטה בסיסית במחשב בלבד' },
-        { icon: 'fa-graduation-cap',     text: 'הכנה להשמה ומסלולי קריירה' }
-    ];
-
-    // 3 visible slots: [0]=top dim, [1]=center bright, [2]=bottom dim
-    var SLOT    = 80;   // px per slot
-    var ANIM    = 480;  // transition ms
-    var PAUSE   = 2200; // ms between ticks
-
-    var container = document.getElementById('slotMachine');
-    if (!container) return;
-
-    var nextIdx = 0;
-    var domItems = [];
-
-    function makeEl(f) {
-        var el = document.createElement('div');
-        el.className = 'slot-item';
-        el.innerHTML = '<i class="fas ' + f.icon + '"></i><span>' + f.text + '</span>';
-        return el;
-    }
-
-    function place(el, slot, animated) {
-        el.style.transition = animated
-            ? 'transform ' + ANIM + 'ms cubic-bezier(0.3,0,0.2,1), opacity ' + ANIM + 'ms ease'
-            : 'none';
-        el.style.transform = 'translateY(' + (slot * SLOT) + 'px)';
-        // opacity: center=1, top/bottom dim=0.32, out of view=0
-        var op = (slot === 1) ? 1 : (slot === 0 || slot === 2) ? 0.32 : 0;
-        el.style.opacity = op;
-        el.classList.toggle('center', slot === 1);
-    }
-
-    // Seed 3 items in slots 0, 1, 2
-    for (var i = 0; i < 3; i++) {
-        var el = makeEl(features[nextIdx++ % features.length]);
-        container.appendChild(el);
-        place(el, i, false);
-        domItems.push(el);
-    }
-
-    function tick() {
-        // slide all up by 1 slot
-        domItems.forEach(function(el, i) { place(el, i - 1, true); });
-
-        // new item enters from slot 3 (bottom, hidden) → slot 2
-        var newEl = makeEl(features[nextIdx++ % features.length]);
-        container.appendChild(newEl);
-        place(newEl, 3, false);
-        requestAnimationFrame(function() { requestAnimationFrame(function() {
-            place(newEl, 2, true);
-        }); });
-
-        // cleanup: remove top item after animation, update array
-        setTimeout(function() {
-            domItems[0].remove();
-            domItems.shift();
-            domItems.push(newEl);
-        }, ANIM + 60);
-    }
-
-    setInterval(tick, PAUSE);
+    var grid = document.getElementById('featureGrid');
+    if (!grid) return;
+    var items = grid.querySelectorAll('.fg-item');
+    var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+            items.forEach(function(item, i) {
+                setTimeout(function() { item.classList.add('vis'); }, i * 55);
+            });
+            obs.disconnect();
+        }
+    }, { threshold: 0.15 });
+    obs.observe(grid);
 })();
 </script>
 
