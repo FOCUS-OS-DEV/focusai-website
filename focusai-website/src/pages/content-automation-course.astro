@@ -807,89 +807,6 @@
 
         .botcamp-note strong { color: var(--cta); font-weight: 600; }
 
-        /* ===== EXPLORE GRID ===== */
-        .explore-section {
-            margin: 12px 0 28px;
-        }
-        .explore-section h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 14px;
-            text-align: center;
-        }
-        .explore-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .explore-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.25s;
-            font-size: 0.9rem;
-            font-weight: 500;
-            line-height: 1.35;
-        }
-        .explore-card:hover {
-            background: rgba(168,85,247,0.06);
-            border-color: rgba(168,85,247,0.22);
-            transform: translateY(-2px);
-        }
-        .explore-card i {
-            color: var(--primary-light);
-            font-size: 1.05rem;
-            flex-shrink: 0;
-            width: 20px;
-            text-align: center;
-        }
-        .explore-card.span-full { grid-column: span 2; }
-        @media (max-width: 500px) {
-            .explore-grid { grid-template-columns: 1fr; }
-            .explore-card.span-full { grid-column: span 1; }
-        }
-
-        /* ===== SUCCESS LINKS ===== */
-        .success-links {
-            margin-top: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            text-align: right;
-        }
-        .success-links-label {
-            font-size: 0.78rem;
-            color: var(--text-dim);
-            margin: 0 0 4px;
-        }
-        .success-quick-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .success-quick-link:hover {
-            background: rgba(168,85,247,0.08);
-            border-color: rgba(168,85,247,0.2);
-            color: var(--text);
-        }
-        .success-quick-link i { flex-shrink: 0; width: 16px; text-align: center; }
-
         /* ===== FOOTER ===== */
         .site-footer {
             margin-top: 32px;
@@ -1283,33 +1200,6 @@
         </a>
     </div>
 
-    <!-- ========== EXPLORE FOCUS AI ========== -->
-    <div class="explore-section">
-        <h3>עוד ממשפחת Focus AI</h3>
-        <div class="explore-grid">
-            <a href="/academy/" class="explore-card">
-                <i class="fas fa-rocket"></i>
-                <span>Bot-Camp – קורס AI מקצועי</span>
-            </a>
-            <a href="/ai-news/" class="explore-card">
-                <i class="fas fa-newspaper"></i>
-                <span>חדשות AI – כתבות ועדכונים</span>
-            </a>
-            <a href="/tools/" class="explore-card">
-                <i class="fas fa-toolbox"></i>
-                <span>מרכז כלי AI – כל הכלים</span>
-            </a>
-            <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" target="_blank" rel="noopener" class="explore-card">
-                <i class="fas fa-wand-magic-sparkles"></i>
-                <span>Prompt Master V3 – GPT חינמי</span>
-            </a>
-            <a href="https://did.li/Focus-community" target="_blank" rel="noopener" class="explore-card span-full">
-                <i class="fab fa-whatsapp" style="color: #25d366;"></i>
-                <span>קהילת WhatsApp חינמית – טיפים, מדריכים ועדכוני AI שבועיים</span>
-            </a>
-        </div>
-    </div>
-
     <!-- ========== FOOTER ========== -->
     <div class="site-footer">
         <p class="footer-legal">
@@ -1321,13 +1211,10 @@
             <a href="https://www.tiktok.com/@focus.creative.ai" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
         </div>
         <div class="footer-links">
-            <a href="/" target="_blank"><i class="fas fa-home"></i> Focus AI</a>
-            <a href="/academy/" target="_blank"><i class="fas fa-rocket"></i> Bot-Camp</a>
-            <a href="/ai-news/" target="_blank"><i class="fas fa-newspaper"></i> חדשות AI</a>
-            <a href="/tools/" target="_blank"><i class="fas fa-toolbox"></i> כלי AI</a>
-            <a href="https://did.li/Focus-community" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> קהילה</a>
-            <a href="/privacy-policy/" target="_blank"><i class="fas fa-lock"></i> פרטיות</a>
+            <a href="/" target="_blank"><i class="fas fa-home"></i> לאתר Focus AI</a>
+            <a href="/privacy-policy/" target="_blank"><i class="fas fa-lock"></i> מדיניות פרטיות</a>
             <a href="/terms/" target="_blank"><i class="fas fa-file-contract"></i> תנאי שימוש</a>
+            <a href="https://wa.me/972539466408" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> צור קשר</a>
             <a href="mailto:office@focusai.co.il"><i class="fas fa-envelope"></i> office@focusai.co.il</a>
         </div>
     </div>
@@ -1347,18 +1234,6 @@
         <a href="#" class="link" id="directLink">
             לחצו כאן לצפייה מיידית
         </a>
-        <div class="success-links">
-            <p class="success-links-label">בזמן שמחכים:</p>
-            <a href="https://did.li/Focus-community" target="_blank" rel="noopener" class="success-quick-link">
-                <i class="fab fa-whatsapp" style="color: #25d366;"></i> קהילת WhatsApp – טיפים וכלים חינמיים
-            </a>
-            <a href="/ai-news/" class="success-quick-link">
-                <i class="fas fa-newspaper" style="color: var(--primary-light);"></i> חדשות AI – עדכונים שבועיים
-            </a>
-            <a href="/tools/" class="success-quick-link">
-                <i class="fas fa-toolbox" style="color: var(--primary-light);"></i> מרכז כלי AI
-            </a>
-        </div>
     </div>
 </div>
 
