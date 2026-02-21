@@ -349,17 +349,24 @@
 
         .pipe-icon {
             flex-shrink: 0;
-            width: 48px; height: 48px;
-            border-radius: 12px;
+            width: 56px; height: 56px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            overflow: hidden;
         }
 
-        .pipe-icon.i1 { background: rgba(168,85,247,0.15); color: var(--primary-light); border: 1px solid rgba(168,85,247,0.25); }
-        .pipe-icon.i2 { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.22); }
-        .pipe-icon.i3 { background: rgba(56,189,248,0.12); color: #38bdf8; border: 1px solid rgba(56,189,248,0.22); }
+        .pipe-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 4px;
+        }
+
+        .pipe-icon.i1 { background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); }
+        .pipe-icon.i2 { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.18); }
+        .pipe-icon.i3 { background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.18); }
 
         .pipe-text h4 {
             font-size: 1.1rem;
@@ -370,32 +377,6 @@
         .pipe-text p {
             font-size: 0.98rem;
 
-        /* ===== PROVIDER LOGOS ===== */
-        .provider-logos {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 32px;
-            margin: 28px 0;
-        }
-
-        .provider-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 80px;
-        }
-
-        .provider-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            opacity: 0.85;
-            transition: opacity 0.3s;
-        }
-
-        .provider-logo img:hover { opacity: 1; }
             color: var(--text-secondary);
             line-height: 1.55;
         }
@@ -686,13 +667,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 28px;
-            margin: 20px 0 8px;
+            gap: 48px;
+            margin: 24px auto 8px;
+            max-width: 500px;
         }
 
         .botcamp-partners img {
-            height: 210px;
-            width: auto;
+            height: auto;
+            max-height: 100px;
+            width: 200px;
+            object-fit: contain;
             opacity: 0.85;
             transition: opacity 0.3s;
         }
@@ -946,11 +930,6 @@
             }
             .who-photo { width: 200px; }
             .who-photo img { height: 200px; }
-            .provider-logos {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .provider-logo { width: 160px; height: 60px; }
         }
     </style>
 </head>
@@ -1014,37 +993,25 @@
 
         <div class="pipeline">
             <div class="pipe-step">
-                <div class="pipe-icon i1"><i class="fas fa-image"></i></div>
+                <div class="pipe-icon i1"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_80/v1771662945/c4c0d724-b3cf-4e97-9c22-5a3691341a4d_ke16oa.png" alt="Nano Banana Pro"></div>
                 <div class="pipe-text">
                     <h4>AI מייצר תמונה מקורית</h4>
                     <p>מודל Nano Banana Pro יוצר תמונות מקצועיות שמותאמות לעסק שלכם, בלי גרפיקאי</p>
                 </div>
             </div>
             <div class="pipe-step">
-                <div class="pipe-icon i2"><i class="fas fa-pen-nib"></i></div>
+                <div class="pipe-icon i2"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_80/v1771662945/6f166386-9890-4237-9017-29ca1b786125_tt8vko.png" alt="OpenRouter"></div>
                 <div class="pipe-text">
                     <h4>AI כותב את הטקסט</h4>
                     <p>כותרת, קופי, האשטאגים. בטון שלכם, מותאם לכל פלטפורמה</p>
                 </div>
             </div>
             <div class="pipe-step">
-                <div class="pipe-icon i3"><i class="fas fa-database"></i></div>
+                <div class="pipe-icon i3"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_80/v1771662944/94f1efbe-8554-4709-b5ea-db00172627a1_vjyzhb.png" alt="Supabase"></div>
                 <div class="pipe-text">
                     <h4>הכל נשמר ומתועד</h4>
                     <p>Supabase מאחסן כל פוסט. תמונה, טקסט, סטטוס. שליטה מלאה</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="provider-logos">
-            <div class="provider-logo">
-                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_160/v1771662945/c4c0d724-b3cf-4e97-9c22-5a3691341a4d_ke16oa.png" alt="Nano Banana Pro" loading="lazy">
-            </div>
-            <div class="provider-logo">
-                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_160/v1771662945/6f166386-9890-4237-9017-29ca1b786125_tt8vko.png" alt="OpenRouter" loading="lazy">
-            </div>
-            <div class="provider-logo">
-                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_160/v1771662944/94f1efbe-8554-4709-b5ea-db00172627a1_vjyzhb.png" alt="Supabase" loading="lazy">
             </div>
         </div>
     </div>
