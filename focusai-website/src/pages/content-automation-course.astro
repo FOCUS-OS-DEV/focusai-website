@@ -693,63 +693,130 @@
 
         .botcamp-partners img:hover { opacity: 1; }
 
-        /* ===== FEATURE TICKER ===== */
-        .feature-ticker {
+        /* ===== SLOT MACHINE ===== */
+        .slot-machine {
             position: relative;
-            overflow: hidden;
-            height: 246px; /* (4-1)*64 + 54 */
             margin: 28px 0;
+            height: 192px; /* 3 slots × 64px */
+            overflow: hidden;
         }
 
-        .feature-ticker::before,
-        .feature-ticker::after {
+        /* Heavy gradient fade top + bottom */
+        .slot-machine::before,
+        .slot-machine::after {
             content: '';
             position: absolute;
             left: 0; right: 0;
-            height: 56px;
-            z-index: 2;
+            height: 72px;
+            z-index: 3;
             pointer-events: none;
         }
-        .feature-ticker::before {
+        .slot-machine::before {
             top: 0;
-            background: linear-gradient(to bottom, #0d0d15 0%, transparent 100%);
+            background: linear-gradient(to bottom, #0a0a12 20%, transparent 100%);
         }
-        .feature-ticker::after {
+        .slot-machine::after {
             bottom: 0;
-            background: linear-gradient(to top, #0d0d15 0%, transparent 100%);
+            background: linear-gradient(to top, #0a0a12 20%, transparent 100%);
         }
 
-        .ticker-item {
+        /* Center highlight band */
+        .slot-highlight {
             position: absolute;
             left: 0; right: 0;
+            top: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(168,85,247,0.13) 0%, rgba(192,132,252,0.07) 100%);
+            border-top: 1px solid rgba(168,85,247,0.45);
+            border-bottom: 1px solid rgba(168,85,247,0.45);
+            box-shadow: 0 0 28px rgba(168,85,247,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Shimmer sweep */
+        .slot-highlight::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            left: -60%;
+            width: 45%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.14) 50%, transparent 100%);
+            animation: slotShimmer 2.8s cubic-bezier(0.4,0,0.6,1) infinite;
+        }
+
+        @keyframes slotShimmer {
+            0%   { left: -60%; }
+            100% { left: 115%; }
+        }
+
+        /* Side arrow markers on highlight */
+        .slot-arrow-r,
+        .slot-arrow-l {
+            position: absolute;
+            top: 64px;
+            height: 64px;
+            width: 6px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 13px 16px;
-            height: 54px;
-            background: rgba(168,85,247,0.04);
-            border: 1px solid rgba(168,85,247,0.1);
-            border-radius: 12px;
+            z-index: 4;
+        }
+        .slot-arrow-r { right: 0; }
+        .slot-arrow-l { left: 0; }
+        .slot-arrow-r::before,
+        .slot-arrow-l::before {
+            content: '';
+            width: 0; height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .slot-arrow-r::before {
+            border-right: 8px solid rgba(168,85,247,0.55);
+        }
+        .slot-arrow-l::before {
+            border-left: 8px solid rgba(168,85,247,0.55);
+        }
+
+        /* Items */
+        .slot-item {
+            position: absolute;
+            left: 0; right: 0;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            padding: 0 24px;
             will-change: transform, opacity;
+            z-index: 2;
         }
 
-        .ticker-item i {
-            color: var(--primary-light);
-            font-size: 0.95rem;
+        .slot-item i {
+            color: rgba(192,132,252,0.6);
+            font-size: 1rem;
             flex-shrink: 0;
+            transition: color 0.3s, filter 0.3s;
         }
 
-        .ticker-item span {
-            font-size: 0.92rem;
-            color: var(--text);
+        .slot-item span {
+            font-size: 0.9rem;
             font-weight: 500;
+            color: rgba(255,255,255,0.45);
             line-height: 1.3;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
-        .ticker-item.lit {
-            background: rgba(168,85,247,0.08);
-            border-color: rgba(168,85,247,0.22);
-            box-shadow: 0 0 16px rgba(168,85,247,0.12);
+        /* Center/active item */
+        .slot-item.center i {
+            color: #c084fc;
+            filter: drop-shadow(0 0 6px rgba(192,132,252,0.8));
+        }
+        .slot-item.center span {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 14px rgba(192,132,252,0.5);
         }
 
         .botcamp-badges {
@@ -1171,7 +1238,11 @@
             </div>
         </div>
 
-        <div class="feature-ticker" id="featureTicker"></div>
+        <div class="slot-machine" id="slotMachine">
+            <div class="slot-highlight"></div>
+            <div class="slot-arrow-r"></div>
+            <div class="slot-arrow-l"></div>
+        </div>
 
         <div class="botcamp-badges">
             <span class="botcamp-badge">הסבת מקצוע</span>
@@ -1360,14 +1431,12 @@
         { icon: 'fa-graduation-cap',     text: 'הכנה להשמה ומסלולי קריירה' }
     ];
 
-    var VISIBLE = 4;
-    var ITEM_H  = 54;
-    var GAP     = 10;
-    var SLOT    = ITEM_H + GAP;
-    var ANIM    = 520;
-    var PAUSE   = 2000;
+    // 3 visible slots: [0]=top dim, [1]=center bright, [2]=bottom dim
+    var SLOT    = 64;   // px per slot
+    var ANIM    = 480;  // transition ms
+    var PAUSE   = 2200; // ms between ticks
 
-    var container = document.getElementById('featureTicker');
+    var container = document.getElementById('slotMachine');
     if (!container) return;
 
     var nextIdx = 0;
@@ -1375,41 +1444,43 @@
 
     function makeEl(f) {
         var el = document.createElement('div');
-        el.className = 'ticker-item';
+        el.className = 'slot-item';
         el.innerHTML = '<i class="fas ' + f.icon + '"></i><span>' + f.text + '</span>';
         return el;
     }
 
-    function place(el, slot, opacity, animated) {
+    function place(el, slot, animated) {
         el.style.transition = animated
-            ? 'transform ' + ANIM + 'ms cubic-bezier(0.4,0,0.2,1), opacity ' + ANIM + 'ms ease'
+            ? 'transform ' + ANIM + 'ms cubic-bezier(0.3,0,0.2,1), opacity ' + ANIM + 'ms ease'
             : 'none';
         el.style.transform = 'translateY(' + (slot * SLOT) + 'px)';
-        el.style.opacity   = opacity;
-        el.classList.toggle('lit', slot === 1 || slot === 2);
+        // opacity: 0=dim top, 1=center bright, 2=dim bottom, -1 & 3 = hidden
+        var op = (slot === 1) ? 1 : (slot === 0 || slot === 2) ? 0 : 0;
+        el.style.opacity = op;
+        el.classList.toggle('center', slot === 1);
     }
 
-    // seed initial items
-    for (var i = 0; i < VISIBLE; i++) {
+    // Seed 3 items in slots 0, 1, 2
+    for (var i = 0; i < 3; i++) {
         var el = makeEl(features[nextIdx++ % features.length]);
         container.appendChild(el);
-        place(el, i, 1, false);
+        place(el, i, false);
         domItems.push(el);
     }
 
     function tick() {
-        // slide all up
-        domItems.forEach(function(el, i) { place(el, i - 1, i === 0 ? 0 : 1, true); });
+        // slide all up by 1 slot
+        domItems.forEach(function(el, i) { place(el, i - 1, true); });
 
-        // new item enters from bottom
+        // new item enters from slot 3 (bottom, hidden) → slot 2
         var newEl = makeEl(features[nextIdx++ % features.length]);
         container.appendChild(newEl);
-        place(newEl, VISIBLE, 0, false);
+        place(newEl, 3, false);
         requestAnimationFrame(function() { requestAnimationFrame(function() {
-            place(newEl, VISIBLE - 1, 1, true);
+            place(newEl, 2, true);
         }); });
 
-        // cleanup after animation
+        // cleanup: remove top item after animation, update array
         setTimeout(function() {
             domItems[0].remove();
             domItems.shift();
