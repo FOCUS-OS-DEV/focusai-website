@@ -874,7 +874,7 @@ const courseSchema = {
     <div class="container px-4">
       <div class="text-center mb-10" data-animate="fade-up">
         <h2 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e]">
-          לקבלת הסילבוס <span class="text-[#a855f7]">השאירו פרטים</span>
+          לפרטים נוספים <span class="text-[#a855f7]">השאירו פרטים וצפו בסילבוס</span>
         </h2>
       </div>
 
@@ -987,7 +987,7 @@ const courseSchema = {
       <div class="max-w-4xl mx-auto">
         <div class="rounded-2xl overflow-hidden mb-8 shadow-lg" data-animate="scale-up">
           <img
-            src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png"
+            src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900,e_sharpen:150/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png"
             alt="כיתת הלימוד בהרצליה פיתוח"
             class="w-full"
           />
@@ -1208,9 +1208,29 @@ const courseSchema = {
 
   // Syllabus form
   const syllabusForm = document.getElementById('syllabus-form-element') as HTMLFormElement;
-  syllabusForm?.addEventListener('submit', (e) => {
+  syllabusForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    handleFormSubmit(syllabusForm, 'bot-camp-syllabus');
+    const submitBtn = syllabusForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalHTML = submitBtn?.innerHTML || '';
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'שולח...'; }
+
+    const formData = new FormData(syllabusForm);
+    const params = new URLSearchParams();
+    params.append('source', 'bot-camp-syllabus');
+    formData.forEach((value, key) => {
+      if (key !== 'consent' && key !== 'privacy') {
+        params.append(key, value.toString());
+      }
+    });
+
+    try {
+      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
+      if (typeof fbq === 'function') fbq('track', 'Lead');
+      window.location.href = '/bot-camp-syllabus';
+    } catch {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalHTML; }
+      alert('שגיאה בשליחת הטופס. אנא נסו שנית.');
+    }
   });
 
   // Mid-page form
