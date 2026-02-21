@@ -209,8 +209,18 @@ body {
   transform: scaleX(-1);
 }
 
-/* Form inputs that should remain LTR */
-input[type="email"],
+/* Email inputs - RTL aligned for Hebrew site */
+input[type="email"] {
+  direction: rtl;
+  text-align: right;
+}
+/* Only inputs explicitly marked dir=ltr stay LTR (English placeholders) */
+input[type="email"][dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Other inputs that should remain LTR */
 input[type="url"],
 input[type="number"] {
   direction: ltr;
