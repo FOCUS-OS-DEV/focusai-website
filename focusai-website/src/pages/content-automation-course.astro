@@ -369,6 +369,33 @@
 
         .pipe-text p {
             font-size: 0.98rem;
+
+        /* ===== PROVIDER LOGOS ===== */
+        .provider-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            margin: 28px 0;
+        }
+
+        .provider-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 80px;
+        }
+
+        .provider-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .provider-logo img:hover { opacity: 1; }
             color: var(--text-secondary);
             line-height: 1.55;
         }
@@ -919,6 +946,11 @@
             }
             .who-photo { width: 200px; }
             .who-photo img { height: 200px; }
+            .provider-logos {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .provider-logo { width: 160px; height: 60px; }
         }
     </style>
 </head>
@@ -1001,6 +1033,18 @@
                     <h4>הכל נשמר ומתועד</h4>
                     <p>Supabase מאחסן כל פוסט. תמונה, טקסט, סטטוס. שליטה מלאה</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="provider-logos">
+            <div class="provider-logo">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_160/v1771662945/c4c0d724-b3cf-4e97-9c22-5a3691341a4d_ke16oa.png" alt="Nano Banana Pro" loading="lazy">
+            </div>
+            <div class="provider-logo">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_160/v1771662945/6f166386-9890-4237-9017-29ca1b786125_tt8vko.png" alt="OpenRouter" loading="lazy">
+            </div>
+            <div class="provider-logo">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_160/v1771662944/94f1efbe-8554-4709-b5ea-db00172627a1_vjyzhb.png" alt="Supabase" loading="lazy">
             </div>
         </div>
     </div>
