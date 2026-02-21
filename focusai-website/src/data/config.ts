@@ -24,7 +24,7 @@ export const siteConfig = {
     whatsappDisplay: "053-946-6408",
 
     // Department-specific emails
-    privacyEmail: "privacy@focusai.co.il",
+    privacyEmail: "office@focusai.co.il",
     legalEmail: "legal@focusai.co.il",
     supportEmail: "office@focusai.co.il", // Same as main for now
   },
