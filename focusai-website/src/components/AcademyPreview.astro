@@ -222,7 +222,13 @@ const courses = [
             <div class="flex items-start gap-2 text-right">
               <input type="checkbox" id="academy-consult-privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
               <label for="academy-consult-privacy" class="text-xs text-white/50">
-                קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומאשר/ת קבלת דיוור שיווקי. ניתן לבטל בכל עת.
+                קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
+              </label>
+            </div>
+            <div class="flex items-start gap-2 text-right">
+              <input type="checkbox" id="academy-consult-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
+              <label for="academy-consult-marketing" class="text-xs text-white/50">
+                אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
               </label>
             </div>
 
@@ -635,8 +641,10 @@ const courses = [
     const formData = new FormData(academyForm);
     const params = new URLSearchParams();
     params.append('source', 'homepage-academy-consult');
+    const marketingCheckbox = academyForm.querySelector('input[name="marketing"]') as HTMLInputElement;
+    params.append('marketing_consent', marketingCheckbox?.checked ? 'yes' : 'no');
     formData.forEach((value, key) => {
-      if (key !== 'consent' && key !== 'privacy') {
+      if (key !== 'consent' && key !== 'privacy' && key !== 'marketing') {
         params.append(key, value.toString());
       }
     });

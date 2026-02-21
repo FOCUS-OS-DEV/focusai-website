@@ -20,7 +20,7 @@
         🍪 אנחנו משתמשים בעוגיות
       </h3>
       <p id="cookie-description" class="text-white/60 text-sm">
-        האתר משתמש בעוגיות לצורך שיפור חוויית המשתמש וניתוח תעבורה.
+        האתר משתמש בעוגיות אנליטיקס (Google Analytics 4, Microsoft Clarity) ושיווקיות (Meta Pixel) בהסכמתכם בלבד.
         <a href="/privacy-policy" class="text-[#c084fc] hover:underline">למידע נוסף</a>
       </p>
     </div>
@@ -33,9 +33,9 @@
       </button>
       <button
         id="cookie-accept-essential"
-        class="px-6 py-2.5 min-h-[44px] rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition-colors"
+        class="px-6 py-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/30 text-white/90 font-medium hover:bg-white/15 hover:border-white/50 transition-colors"
       >
-        עוגיות הכרחיות בלבד
+        הכרחיות בלבד
       </button>
       <button
         id="cookie-settings"
@@ -255,8 +255,8 @@
     const consent = getConsent();
 
     if (!consent) {
-      // No consent yet, show banner after 1 second
-      setTimeout(showBanner, 1000);
+      // No consent yet, show banner immediately
+      showBanner();
     } else {
       // Apply existing consent and show WhatsApp immediately
       applyConsent(consent);
@@ -337,5 +337,16 @@
         hideModal();
       }
     });
+
+    // Expose global function so footer link can open settings
+    (window as any).openCookieSettings = () => {
+      hideBanner();
+      showModal();
+      const currentConsent = getConsent();
+      const analyticsToggle = document.getElementById('analytics-toggle') as HTMLInputElement;
+      const marketingToggle = document.getElementById('marketing-toggle') as HTMLInputElement;
+      if (analyticsToggle) analyticsToggle.checked = currentConsent?.analytics ?? false;
+      if (marketingToggle) marketingToggle.checked = currentConsent?.marketing ?? false;
+    };
   });
 </script>

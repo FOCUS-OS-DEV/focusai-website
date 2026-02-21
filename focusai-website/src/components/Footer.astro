@@ -24,6 +24,7 @@ const footerLinks = {
     { href: '#contact', label: 'צור קשר' },
     { href: '/terms', label: 'תנאי שימוש' },
     { href: '/privacy-policy', label: 'מדיניות פרטיות' },
+    { href: '#cookie-settings', label: 'הגדרות עוגיות' },
   ],
 };
 
@@ -171,3 +172,17 @@ const socialLinks = [
     <p class="text-xs text-[#b0b0c0]/40 font-mono">&copy; {currentYear} Focus AI. כל הזכויות שמורות.</p>
   </div>
 </footer>
+
+<script>
+  // Open cookie settings modal from footer link
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href="#cookie-settings"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof (window as any).openCookieSettings === 'function') {
+          (window as any).openCookieSettings();
+        }
+      });
+    });
+  });
+</script>

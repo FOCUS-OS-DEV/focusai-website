@@ -2,10 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { siteConfig } from '../data';
 
-const lastUpdated = "05.02.2026";
-const privacyEmail = siteConfig.contact.privacyEmail;
+const lastUpdated = "21.02.2026";
+const privacyEmail = "privacy@focusai.co.il";
 ---
 
 <BaseLayout title="מדיניות פרטיות | Focus AI">
@@ -13,132 +12,383 @@ const privacyEmail = siteConfig.contact.privacyEmail;
 
   <section class="py-20 lg:py-32">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
       <!-- Header -->
       <div class="text-center mb-16">
         <h1 class="text-3xl lg:text-5xl font-bold text-white mb-4">מדיניות פרטיות</h1>
         <p class="text-text-muted">עודכן לאחרונה: {lastUpdated}</p>
+        <p class="text-text-muted text-sm mt-2">בהתאם לחוק הגנת הפרטיות, התשמ"א-1981 ותיקון 13 (בתוקף מ-14.8.2025)</p>
       </div>
 
       <!-- Content -->
       <div class="prose prose-invert prose-lg max-w-none">
-        <div class="space-y-8 text-text-muted">
+        <div class="space-y-10 text-text-muted">
 
+          <!-- 1. פרטי החברה -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">1. מבוא</h2>
-            <p>
-              Focus AI ("החברה", "אנחנו") מכבדת את פרטיותך ומחויבת להגן על המידע האישי שלך.
-              מדיניות פרטיות זו מתארת כיצד אנו אוספים, משתמשים ומגנים על המידע שלך בהתאם לחוק הגנת הפרטיות, התשמ"א-1981 ותקנון הגנת הפרטיות (אבטחת מידע), התשע"ז-2017.
+            <h2 class="text-2xl font-bold text-white mb-4">1. פרטי החברה (בעל מאגר המידע)</h2>
+            <div class="p-6 rounded-xl bg-white/5 border border-white/10">
+              <p><strong class="text-white">שם החברה:</strong> Focus AI בע"מ</p>
+              <p class="mt-2"><strong class="text-white">כתובת:</strong> חיפה, ישראל</p>
+              <p class="mt-2"><strong class="text-white">אתר האינטרנט:</strong> focusai.co.il</p>
+              <p class="mt-2"><strong class="text-white">דוא"ל לענייני פרטיות:</strong> <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a></p>
+            </div>
+            <p class="mt-4">
+              Focus AI מכבדת את פרטיותכם ומחויבת להגן על המידע האישי שלכם. מדיניות פרטיות זו מסבירה אילו מידע אנו אוספים, כיצד אנו משתמשים בו, למי אנו מעבירים אותו ומהן הזכויות שלכם.
             </p>
           </section>
 
+          <!-- 2. מידע שנאסף -->
           <section>
             <h2 class="text-2xl font-bold text-white mb-4">2. המידע שאנו אוספים</h2>
-            <h3 class="text-xl font-semibold text-white mt-6 mb-3">2.1 מידע שאתם מספקים</h3>
-            <ul class="list-disc list-inside space-y-2 mr-4">
+
+            <h3 class="text-xl font-semibold text-white mt-6 mb-3">2.1 מידע שאתם מספקים ישירות</h3>
+            <p>בעת מילוי טפסים באתר (יצירת קשר, הרשמה להדרכות, בקשת סילבוס וכד') אנו אוספים:</p>
+            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
               <li>שם מלא</li>
               <li>כתובת דואר אלקטרוני</li>
               <li>מספר טלפון</li>
-              <li>שם חברה/ארגון (אופציונלי)</li>
-              <li>תחום עניין ותוכן הודעות</li>
+              <li>שם חברה / ארגון (אופציונלי)</li>
+              <li>תוכן ההודעה / הפנייה</li>
+              <li>העדפת קבלת תוכן שיווקי (כן/לא — על פי בחירתכם)</li>
             </ul>
 
-            <h3 class="text-xl font-semibold text-white mt-6 mb-3">2.2 מידע שנאסף אוטומטית</h3>
-            <ul class="list-disc list-inside space-y-2 mr-4">
+            <h3 class="text-xl font-semibold text-white mt-6 mb-3">2.2 מידע הנאסף אוטומטית</h3>
+            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
               <li>כתובת IP</li>
-              <li>סוג הדפדפן ומערכת ההפעלה</li>
-              <li>דפים שנצפו ומשך הביקור</li>
-              <li>מקור ההגעה לאתר</li>
+              <li>סוג דפדפן ומערכת הפעלה</li>
+              <li>דפים שנצפו, זמן שהייה, מקור ההפניה</li>
+              <li>מזהי עוגיות (ראו סעיף 4)</li>
             </ul>
           </section>
 
+          <!-- 3. מטרות עיבוד ובסיס משפטי -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">3. עוגיות (Cookies)</h2>
-            <p>האתר משתמש בעוגיות לצורך:</p>
-            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li><strong class="text-white">עוגיות הכרחיות</strong> - נדרשות לתפעול האתר</li>
-              <li><strong class="text-white">עוגיות אנליטיקס</strong> - עוזרות לנו להבין כיצד משתמשים באתר (Google Analytics)</li>
-              <li><strong class="text-white">עוגיות שיווקיות</strong> - משמשות להצגת תוכן רלוונטי (Facebook Pixel)</li>
-            </ul>
-            <p class="mt-4">
-              תוכלו לנהל את העדפות העוגיות שלכם באמצעות הבאנר המופיע בתחתית האתר או בהגדרות הדפדפן.
-            </p>
-          </section>
+            <h2 class="text-2xl font-bold text-white mb-4">3. מטרות עיבוד המידע ובסיס משפטי</h2>
+            <p>אנו מעבדים מידע אישי אך ורק כאשר קיים לכך בסיס משפטי. להלן פירוט מטרות העיבוד:</p>
 
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">4. שימוש במידע</h2>
-            <p>אנו משתמשים במידע שנאסף למטרות הבאות:</p>
-            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li>מתן שירות ומענה לפניות</li>
-              <li>שליחת עדכונים ומידע שיווקי (בהסכמתכם)</li>
-              <li>שיפור האתר והשירותים</li>
-              <li>ניתוח סטטיסטי ומחקר</li>
-              <li>עמידה בדרישות חוקיות</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">5. שיתוף מידע</h2>
-            <p>
-              אנו לא מוכרים את המידע האישי שלכם. אנו עשויים לשתף מידע עם:
-            </p>
-            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li>ספקי שירות (למשל, שירותי דיוור, ניתוח נתונים)</li>
-              <li>רשויות החוק כנדרש על פי דין</li>
-              <li>צדדים שלישיים בהסכמתכם המפורשת</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">6. אבטחת מידע</h2>
-            <p>
-              אנו מיישמים אמצעי אבטחה מתאימים להגנה על המידע שלכם, כולל:
-            </p>
-            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li>הצפנת SSL לכל תעבורת האתר</li>
-              <li>גישה מוגבלת למידע רגיש</li>
-              <li>ניטור ובקרה שוטפים</li>
-              <li>גיבוי נתונים</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">7. הזכויות שלכם</h2>
-            <p>בהתאם לחוק, יש לכם זכות:</p>
-            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li>לעיין במידע שנאסף עליכם</li>
-              <li>לתקן מידע שגוי</li>
-              <li>לבקש מחיקת המידע</li>
-              <li>להתנגד לשימוש מסוים במידע</li>
-              <li>לבטל הסכמה לקבלת דיוור</li>
-            </ul>
-            <p class="mt-4">
-              לצורך מימוש הזכויות, פנו אלינו בדוא"ל: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a>
-            </p>
-          </section>
-
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">8. שמירת מידע</h2>
-            <p>
-              אנו שומרים את המידע שלכם כל עוד הדבר נדרש למטרות שלשמן נאסף, או כנדרש על פי דין.
-              מידע שלא נדרש עוד יימחק או יהפוך לאנונימי.
-            </p>
-          </section>
-
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">9. שינויים במדיניות</h2>
-            <p>
-              אנו עשויים לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר.
-              המשך השימוש באתר לאחר שינויים מהווה הסכמה למדיניות המעודכנת.
-            </p>
-          </section>
-
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">10. יצירת קשר</h2>
-            <p>לשאלות בנוגע למדיניות הפרטיות:</p>
-            <div class="mt-4 p-6 rounded-xl bg-white/5 border border-white/10">
-              <p class="font-semibold text-white mb-2">Focus AI</p>
-              <p>דוא"ל: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a></p>
+            <div class="mt-6 overflow-x-auto">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-white/10">
+                    <th class="text-right p-3 font-semibold text-white border border-white/10 min-w-[140px]">מטרה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10 min-w-[140px]">בסיס משפטי</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">פירוט</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">מענה לפניות ויצירת קשר</td>
+                    <td class="p-3 border border-white/10">אינטרס לגיטימי / הסכם</td>
+                    <td class="p-3 border border-white/10">מענה לשאלות, הצעות מחיר, תמיכה</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">מתן שירות / קורסים</td>
+                    <td class="p-3 border border-white/10">ביצוע הסכם</td>
+                    <td class="p-3 border border-white/10">הרשמה לקורסים, שיעורים, הדרכות</td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">שיווק ישיר / דיוור</td>
+                    <td class="p-3 border border-white/10">הסכמה מפורשת</td>
+                    <td class="p-3 border border-white/10">עדכונים, מבצעים, תוכן AI — רק אם הסכמתם</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">אנליטיקס ושיפור האתר</td>
+                    <td class="p-3 border border-white/10">הסכמה (עוגיות) / אינטרס לגיטימי</td>
+                    <td class="p-3 border border-white/10">ניתוח דפוסי שימוש, שיפור חוויית המשתמש</td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">פרסום ממוקד</td>
+                    <td class="p-3 border border-white/10">הסכמה (עוגיות)</td>
+                    <td class="p-3 border border-white/10">רימרקטינג ב-Meta, Google</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">עמידה בדרישות חוקיות</td>
+                    <td class="p-3 border border-white/10">חובה חוקית</td>
+                    <td class="p-3 border border-white/10">רשויות מס, רגולציה, בתי משפט</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </section>
+
+          <!-- 4. עוגיות -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">4. עוגיות (Cookies)</h2>
+            <p>
+              האתר משתמש בעוגיות. בהתאם לחוק התקשורת (תיקון), שימוש בעוגיות שאינן הכרחיות מחייב את הסכמתכם המפורשת.
+              הסכמתכם נשאלת דרך הבאנר שמופיע בכניסה לאתר, וניתן לשנותה בכל עת.
+            </p>
+
+            <div class="mt-6 overflow-x-auto">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-white/10">
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">כלי</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">קטגוריה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">מטרה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">חברה</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">cookie_consent</td>
+                    <td class="p-3 border border-white/10">הכרחי</td>
+                    <td class="p-3 border border-white/10">שמירת העדפות עוגיות</td>
+                    <td class="p-3 border border-white/10">Focus AI</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">Google Tag Manager</td>
+                    <td class="p-3 border border-white/10">אנליטיקס</td>
+                    <td class="p-3 border border-white/10">ניהול תגיות וסקריפטים</td>
+                    <td class="p-3 border border-white/10">Google LLC</td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">Google Analytics 4</td>
+                    <td class="p-3 border border-white/10">אנליטיקס</td>
+                    <td class="p-3 border border-white/10">ניתוח תנועה לאתר, התנהגות משתמשים</td>
+                    <td class="p-3 border border-white/10">Google LLC</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">Microsoft Clarity</td>
+                    <td class="p-3 border border-white/10">אנליטיקס</td>
+                    <td class="p-3 border border-white/10">הקלטת סשנים, מפות חום</td>
+                    <td class="p-3 border border-white/10">Microsoft Corporation</td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">Meta Pixel</td>
+                    <td class="p-3 border border-white/10">שיווקי</td>
+                    <td class="p-3 border border-white/10">פרסום ממוקד, רימרקטינג ב-Facebook/Instagram</td>
+                    <td class="p-3 border border-white/10">Meta Platforms, Inc.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="mt-4 text-sm">
+              לניהול העדפות העוגיות שלכם, לחצו על הקישור "הגדרות עוגיות" בתחתית האתר, או שנו את הגדרות הדפדפן שלכם.
+            </p>
+          </section>
+
+          <!-- 5. שיתוף מידע עם צדדים שלישיים -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">5. שיתוף מידע עם צדדים שלישיים</h2>
+            <p>
+              אנו לא מוכרים את המידע האישי שלכם. אנו עשויים להעביר מידע לגורמים הבאים בלבד:
+            </p>
+
+            <div class="mt-6 overflow-x-auto">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-white/10">
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">גורם</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">מטרה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">מדינה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">מסמך פרטיות</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">Google LLC</td>
+                    <td class="p-3 border border-white/10">אנליטיקס, פרסום, שירותי ענן</td>
+                    <td class="p-3 border border-white/10">ארה"ב</td>
+                    <td class="p-3 border border-white/10"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-purple-light hover:underline">privacy.google.com</a></td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">Meta Platforms, Inc.</td>
+                    <td class="p-3 border border-white/10">פרסום ממוקד, Meta Pixel</td>
+                    <td class="p-3 border border-white/10">ארה"ב</td>
+                    <td class="p-3 border border-white/10"><a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener" class="text-purple-light hover:underline">facebook.com/privacy</a></td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">Microsoft Corporation</td>
+                    <td class="p-3 border border-white/10">Microsoft Clarity (הקלטת סשנים)</td>
+                    <td class="p-3 border border-white/10">ארה"ב</td>
+                    <td class="p-3 border border-white/10"><a href="https://privacy.microsoft.com" target="_blank" rel="noopener" class="text-purple-light hover:underline">privacy.microsoft.com</a></td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">n8n GmbH</td>
+                    <td class="p-3 border border-white/10">עיבוד טפסים, אוטומציות</td>
+                    <td class="p-3 border border-white/10">גרמניה</td>
+                    <td class="p-3 border border-white/10"><a href="https://n8n.io/legal/privacy" target="_blank" rel="noopener" class="text-purple-light hover:underline">n8n.io/legal/privacy</a></td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">Cloudinary Ltd.</td>
+                    <td class="p-3 border border-white/10">אחסון ואספקת תמונות/וידאו</td>
+                    <td class="p-3 border border-white/10">ארה"ב</td>
+                    <td class="p-3 border border-white/10"><a href="https://cloudinary.com/privacy" target="_blank" rel="noopener" class="text-purple-light hover:underline">cloudinary.com/privacy</a></td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">רשויות חוק</td>
+                    <td class="p-3 border border-white/10">ציות לדרישות חוקיות / צו שיפוטי</td>
+                    <td class="p-3 border border-white/10">ישראל</td>
+                    <td class="p-3 border border-white/10">—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 6. תקופות שמירה -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">6. תקופות שמירת מידע</h2>
+            <p>אנו שומרים מידע אישי רק כל עוד הדבר נדרש למטרה שלשמה נאסף:</p>
+
+            <div class="mt-6 overflow-x-auto">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-white/10">
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">סוג מידע</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">תקופת שמירה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">סיבה</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">פניות יצירת קשר</td>
+                    <td class="p-3 border border-white/10">3 שנים</td>
+                    <td class="p-3 border border-white/10">מענה מתמשך, רישומים עסקיים</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">רשומות לקוחות / קורסים</td>
+                    <td class="p-3 border border-white/10">7 שנים</td>
+                    <td class="p-3 border border-white/10">חוק החשבונאות, מס הכנסה</td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">רשימות דיוור שיווקי</td>
+                    <td class="p-3 border border-white/10">עד ביטול ההסכמה</td>
+                    <td class="p-3 border border-white/10">חוק התקשורת, סעיף 30א</td>
+                  </tr>
+                  <tr class="bg-white/[0.02] border border-white/10">
+                    <td class="p-3 border border-white/10">נתוני אנליטיקס (GA4, Clarity)</td>
+                    <td class="p-3 border border-white/10">14 חודשים</td>
+                    <td class="p-3 border border-white/10">הגדרת ברירת מחדל של הכלי</td>
+                  </tr>
+                  <tr class="border border-white/10">
+                    <td class="p-3 border border-white/10">עוגיות</td>
+                    <td class="p-3 border border-white/10">לפי הגדרות כל עוגייה</td>
+                    <td class="p-3 border border-white/10">ראו טבלת עוגיות בסעיף 4</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="mt-4">
+              מידע שפג תוקפו נמחק או הופך לאנונימי. לבקשת מחיקה מוקדמת פנו אלינו בכתובת: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a>
+            </p>
+          </section>
+
+          <!-- 7. הזכויות שלכם -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">7. הזכויות שלכם (תיקון 13 לחוק הגנת הפרטיות)</h2>
+            <p>בהתאם לחוק הגנת הפרטיות (תיקון 13, בתוקף מ-14.8.2025), יש לכם את הזכויות הבאות:</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p class="font-semibold text-white mb-1">📋 זכות עיון</p>
+                <p class="text-sm">לקבל פירוט של המידע האישי שמוחזק עליכם</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p class="font-semibold text-white mb-1">✏️ זכות תיקון</p>
+                <p class="text-sm">לדרוש תיקון מידע שגוי, חלקי או מטעה</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p class="font-semibold text-white mb-1">🗑️ זכות מחיקה</p>
+                <p class="text-sm">לבקש מחיקת מידע ("הזכות להישכח"), בכפוף לחובות חוקיות</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p class="font-semibold text-white mb-1">⛔ זכות התנגדות</p>
+                <p class="text-sm">להתנגד לעיבוד מידע לצרכי שיווק ישיר</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p class="font-semibold text-white mb-1">📦 זכות ניידות</p>
+                <p class="text-sm">לקבל את המידע שלכם בפורמט מובנה ולהעבירו</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p class="font-semibold text-white mb-1">🚫 ביטול הסכמה</p>
+                <p class="text-sm">לבטל בכל עת הסכמה לשיווק, מבלי שזה ישפיע על עיבוד עבר</p>
+              </div>
+            </div>
+
+            <p class="mt-6">
+              למימוש כל הזכויות האמורות, פנו אלינו בדוא"ל: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a><br/>
+              אנו נשיב תוך 30 יום. במקרים מורכבים ניתן להאריך ל-60 יום תוך הודעה.
+            </p>
+          </section>
+
+          <!-- 8. שיווק ישיר -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">8. שיווק ישיר ודיוור (חוק התקשורת, סעיף 30א)</h2>
+            <p>
+              אנו שולחים תכנים שיווקיים (עדכונים, מבצעים, תוכן AI) אך ורק למי שנתן הסכמה מפורשת ומוקדמת לכך.
+            </p>
+            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
+              <li>כל הודעה שיווקית תסומן במפורש ("פרסומת")</li>
+              <li>בכל הודעה יופיע קישור ברור לביטול ההרשמה (Unsubscribe)</li>
+              <li>ניתן לבטל את ההסכמה בכל עת, ללא תשלום וללא צורך בהסבר</li>
+              <li>ביטול ייכנס לתוקף תוך 30 יום לכל היותר</li>
+              <li>ביטול ההסכמה לדיוור לא ישפיע על קבלת שירות מהחברה</li>
+            </ul>
+            <p class="mt-4">
+              לביטול הרשמה לדיוור: <a href={`mailto:${privacyEmail}?subject=ביטול הרשמה לדיוור`} class="text-purple-light hover:underline">{privacyEmail}</a>
+            </p>
+          </section>
+
+          <!-- 9. קטינים -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">9. קטינים</h2>
+            <p>
+              השירותים באתר מיועדים לבני 18 ומעלה. אנו אינם אוספים ביודעין מידע אישי מקטינים מתחת לגיל 18.
+              אם הגעתם לידיעה שקטין מסר לנו מידע אישי, אנא פנו אלינו ונמחק אותו מיד.
+            </p>
+          </section>
+
+          <!-- 10. העברות בינלאומיות -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">10. העברת מידע לחו"ל</h2>
+            <p>
+              חלק מספקי השירות שלנו (Google, Meta, Microsoft, Cloudinary) ממוקמים בארצות הברית ובמדינות אחרות.
+              העברות אלו מתבצעות בהתאם להסדרים חוקיים מתאימים (לרבות מנגנוני DPF / סעיפים חוזיים סטנדרטיים),
+              ובהתאם להנחיות הרשות להגנת הפרטיות בישראל.
+            </p>
+          </section>
+
+          <!-- 11. אבטחת מידע -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">11. אבטחת מידע</h2>
+            <p>אנו נוקטים באמצעי אבטחה מתאימים להגנה על המידע שלכם:</p>
+            <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
+              <li>הצפנת SSL/TLS לכל תעבורת האתר</li>
+              <li>גישה מוגבלת למידע רגיש (עקרון הרשאות מינימליות)</li>
+              <li>ניטור ובקרה שוטפים</li>
+              <li>גיבוי נתונים מוצפן</li>
+            </ul>
+            <p class="mt-4 text-sm">
+              במקרה של פרצת אבטחה שיש לה סיכון גבוה לזכויות נושאי המידע, נודיע לרשות להגנת הפרטיות ולנפגעים בהתאם לדרישות תיקון 13.
+            </p>
+          </section>
+
+          <!-- 12. שינויים במדיניות -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">12. שינויים במדיניות</h2>
+            <p>
+              אנו עשויים לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר לפחות 30 יום לפני כניסתם לתוקף,
+              ונשלח הודעה לרשומים לרשימות הדיוור שלנו.
+              תאריך העדכון האחרון מופיע בראש עמוד זה.
+            </p>
+          </section>
+
+          <!-- 13. יצירת קשר -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">13. יצירת קשר — ממונה על הגנת פרטיות</h2>
+            <p>לכל שאלה, פנייה, תלונה, או מימוש זכות לפי חוק הגנת הפרטיות:</p>
+            <div class="mt-4 p-6 rounded-xl bg-white/5 border border-white/10">
+              <p class="font-semibold text-white mb-3">Focus AI — טיפול בפניות פרטיות</p>
+              <p>דוא"ל: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a></p>
+              <p class="mt-2 text-sm text-text-muted">זמן תגובה: עד 30 יום ממועד קבלת הפנייה</p>
+            </div>
+            <p class="mt-4 text-sm">
+              אם אינכם מרוצים מהטיפול בפנייתכם, ביכולתכם לפנות לרשות להגנת הפרטיות בישראל: <a href="https://www.gov.il/he/departments/units/ppa" target="_blank" rel="noopener" class="text-purple-light hover:underline">gov.il/he/departments/units/ppa</a>
+            </p>
           </section>
 
         </div>
