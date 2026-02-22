@@ -164,13 +164,28 @@
             filter: drop-shadow(0 8px 32px rgba(168,85,247,0.2));
         }
 
+        .hero-mockup-mobile {
+            display: none;
+        }
+
         @media (max-width: 700px) {
             .hero-split {
                 flex-direction: column;
                 text-align: center;
             }
             .hero-content { text-align: center; }
-            .hero-mockup { width: 280px; }
+            .hero-mockup { display: none; }
+            .hero-mockup-mobile {
+                display: block;
+                width: 280px;
+                margin: 0 auto 20px;
+            }
+            .hero-mockup-mobile img {
+                width: 100%;
+                height: auto;
+                display: block;
+                filter: drop-shadow(0 8px 32px rgba(168,85,247,0.2));
+            }
         }
 
         /* Presenter section */
@@ -1008,6 +1023,14 @@
                 <h1>איך בונים אוטומציה<br>שיוצרת תוכן <em>לבד?</em></h1>
 
                 <p class="sub">תמונות, טקסטים, קופי לרשתות.<br>הכל קורה אוטומטית בשילוב AI.</p>
+
+                <div class="hero-mockup-mobile">
+                    <img
+                        src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_560/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png"
+                        alt="הדרכה מעשית לאוטומציית תוכן עם AI"
+                        loading="eager"
+                    >
+                </div>
 
                 <a href="#leadForm" class="btn-cta">
                     לצפייה בחינם
