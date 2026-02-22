@@ -4,6 +4,7 @@
  * Hidden (noindex) - Only accessible after form submission
  * Video: Shahar Dadia teaching content creation automation
  */
+import VideoTestimonials from '../components/VideoTestimonials.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -18,7 +19,7 @@
   <meta property="og:url" content="https://focusai.co.il/content-automation-watch/">
   <meta property="og:title" content="צפייה בהדרכה | אוטומציית יצירת תוכן עם AI">
   <meta property="og:description" content="הדרכה מעשית בחינם - איך לבנות אוטומציה ליצירת תוכן מאפס עם AI. מאת שחר דדיה, Focus AI.">
-  <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771608626/IMG_4946.JPG_daxpou.jpg">
+  <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="he_IL">
@@ -432,6 +433,188 @@
     }
     .footer-legal a { color: var(--primary-light); text-decoration: none; }
 
+    /* ===== BONUS SECTION ===== */
+    .bonus-section {
+      text-align: center;
+      padding: 28px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      margin-bottom: 28px;
+    }
+
+    .bonus-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .bonus-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .bonus-section p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .bonus-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-bonus {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 28px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      min-width: 240px;
+    }
+    .btn-bonus:hover { transform: translateY(-2px); }
+
+    .btn-bonus.chatgpt {
+      background: rgba(168,85,247,0.06);
+      border: 1px solid rgba(168,85,247,0.2);
+      color: var(--primary-light);
+    }
+    .btn-bonus.chatgpt:hover {
+      background: rgba(168,85,247,0.12);
+      box-shadow: 0 4px 16px rgba(168,85,247,0.2);
+    }
+
+    .btn-bonus.gemini {
+      background: rgba(37,211,102,0.06);
+      border: 1px solid rgba(37,211,102,0.2);
+      color: #4ade80;
+    }
+    .btn-bonus.gemini:hover {
+      background: rgba(37,211,102,0.12);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.2);
+    }
+
+    /* ===== TESTIMONIALS WRAPPER ===== */
+    .testimonials-wrapper {
+      margin: 8px -20px 28px;
+    }
+
+    /* ===== AI NEWS SECTION ===== */
+    .news-section {
+      text-align: center;
+      padding: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    .news-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #f59e0b;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .news-section h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .news-section p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .btn-news {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 10px;
+      color: #fbbf24;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-news:hover {
+      background: rgba(245,158,11,0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(245,158,11,0.2);
+    }
+
+    /* ===== SOCIAL SECTION ===== */
+    .social-section {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .social-section p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.35s;
+    }
+    .social-btn:hover { transform: translateY(-2px); }
+
+    .social-btn.tiktok:hover {
+      border-color: #ff0050;
+      color: #ff0050;
+      box-shadow: 0 4px 16px rgba(255,0,80,0.2);
+    }
+    .social-btn.instagram:hover {
+      border-color: #E4405F;
+      color: #E4405F;
+      box-shadow: 0 4px 16px rgba(228,64,95,0.2);
+    }
+    .social-btn.facebook:hover {
+      border-color: #1877F2;
+      color: #1877F2;
+      box-shadow: 0 4px 16px rgba(24,119,242,0.2);
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (min-width: 768px) {
       header h1 { font-size: 2.4rem; }
@@ -488,6 +671,21 @@
     </div>
   </div>
 
+  <!-- ========== PROMPT MASTER BONUS ========== -->
+  <div class="bonus-section">
+    <p class="bonus-label">Bonus</p>
+    <h3>מתנה מאיתנו: Prompt Master</h3>
+    <p>סוכן AI שיעזור לכם לכתוב פרומפטים מדויקים לכל מטרה. בחרו את הפלטפורמה שלכם:</p>
+    <div class="bonus-buttons">
+      <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" target="_blank" rel="noopener noreferrer" class="btn-bonus chatgpt">
+        <i class="fas fa-wand-magic-sparkles"></i> Prompt Master ל-ChatGPT
+      </a>
+      <a href="https://gemini.google.com/gem/16N9ZpLWbtXUJ6_RJW7z9My6xqT4zAAqZ?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-bonus gemini">
+        <i class="fas fa-wand-magic-sparkles"></i> Prompt Master ל-Gemini
+      </a>
+    </div>
+  </div>
+
   <!-- ========== BOT-CAMP ========== -->
   <div class="botcamp-section">
     <div class="botcamp-header">
@@ -530,11 +728,47 @@
     <p class="botcamp-note"><strong>נותרו מקומות אחרונים למחזור הקרוב</strong></p>
   </div>
 
+  <!-- ========== VIDEO TESTIMONIALS ========== -->
+  <div class="testimonials-wrapper">
+    <VideoTestimonials
+      title="מה אומרים בוגרי ההכשרות שלנו"
+      subtitle="שמעו ישירות ממי שכבר עבר את התהליך"
+      badge="TESTIMONIALS"
+      theme="dark"
+    />
+  </div>
+
+  <!-- ========== AI NEWS ========== -->
+  <div class="news-section">
+    <p class="news-label">AI News</p>
+    <h3>כי AI לא מחכה לאף אחד</h3>
+    <p>כל שבוע קורה משהו שמשנה את הכללים. אנחנו מסכמים את מה שחשוב בעברית פשוטה.</p>
+    <a href="/ai-news/" class="btn-news">
+      <i class="fas fa-newspaper"></i> לחדשות AI
+    </a>
+  </div>
+
   <!-- ========== WHATSAPP COMMUNITY ========== -->
   <a href="https://did.li/Focus-community" target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
     <i class="fab fa-whatsapp"></i>
     הצטרפו לקהילת הWhatsApp. טיפים ומדריכים חינם
   </a>
+
+  <!-- ========== SOCIAL ========== -->
+  <div class="social-section">
+    <p>עוקבים אחרינו</p>
+    <div class="social-buttons">
+      <a href="https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh" target="_blank" rel="noopener noreferrer" class="social-btn tiktok">
+        <i class="fab fa-tiktok"></i> TikTok
+      </a>
+      <a href="https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==" target="_blank" rel="noopener noreferrer" class="social-btn instagram">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </a>
+    </div>
+  </div>
 
   <!-- ========== FOOTER ========== -->
   <div class="site-footer">
