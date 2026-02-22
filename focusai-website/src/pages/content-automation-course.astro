@@ -173,35 +173,66 @@
             .hero-mockup { width: 280px; }
         }
 
-        /* Presenter strip */
+        /* Presenter section */
         .presenter {
             display: flex;
             align-items: center;
-            gap: 16px;
-            justify-content: center;
-            margin-bottom: 28px;
+            gap: 28px;
+            margin: 8px 0 20px;
         }
 
-        .presenter img {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
+        .presenter-photo {
+            flex-shrink: 0;
+            width: 200px;
+            position: relative;
+        }
+
+        .presenter-photo img {
+            width: 100%;
+            height: 260px;
             object-fit: cover;
             object-position: center 15%;
-            border: 2px solid rgba(168,85,247,0.4);
-            flex-shrink: 0;
+            border-radius: 18px;
+            display: block;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
         }
 
-        .presenter-info h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 2px;
+        .presenter-photo .name {
+            position: absolute;
+            bottom: 8%;
+            left: 0; right: 0;
+            text-align: center;
         }
 
-        .presenter-info p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .presenter-photo .name h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.9);
+        }
+
+        .presenter-photo .name p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+            text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+        }
+
+        .presenter-text {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .presenter-photo { width: 260px; }
+            .presenter-photo img { height: 340px; }
+        }
+
+        @media (max-width: 700px) {
+            .presenter {
+                flex-direction: column;
+                text-align: center;
+            }
+            .presenter-photo { width: 180px; }
+            .presenter-photo img { height: 230px; }
         }
 
         .hero-label {
@@ -971,18 +1002,6 @@
             <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1765265415/2_fxdcio.png" alt="Focus AI" class="hero-logo">
         </a>
 
-        <div class="presenter">
-            <img
-                src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,g_north/v1771608626/IMG_4946.JPG_daxpou.jpg"
-                alt="שחר דדיה"
-                width="56" height="56" loading="eager"
-            >
-            <div class="presenter-info">
-                <h3>שחר דדיה</h3>
-                <p>מייסד ומנכ״ל משותף Focus AI</p>
-            </div>
-        </div>
-
         <div class="hero-split">
             <div class="hero-content">
                 <p class="hero-label">הדרכה מעשית בחינם <span class="sep">|</span> 70 דקות</p>
@@ -1008,14 +1027,29 @@
 
     <!-- ========== SHAHAR INTRO ========== -->
     <div class="section">
+        <div class="presenter">
+            <div class="presenter-photo">
+                <img
+                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_520,c_fill,g_north,h_680/v1771608626/IMG_4946.JPG_daxpou.jpg"
+                    alt="שחר דדיה"
+                    width="260" height="340" loading="eager"
+                >
+                <div class="name">
+                    <h3>שחר דדיה</h3>
+                    <p>מייסד ומנכ״ל משותף Focus AI</p>
+                </div>
+            </div>
 
-        <p class="text-lg">
-            נעים מאוד, אני שחר דדיה ואני אחד מהמייסדים של Focus AI. הפעם רציתי ללמד אתכם איך לבנות אוטומציה ליצירת תוכן תוך 70 דקות.
-        </p>
+            <div class="presenter-text">
+                <p class="text-lg">
+                    נעים מאוד, אני שחר דדיה ואני אחד מהמייסדים של Focus AI. הפעם רציתי ללמד אתכם איך לבנות אוטומציה ליצירת תוכן תוך 70 דקות.
+                </p>
 
-        <p class="text">
-            בהדרכה הזו אני מראה לכם בדיוק איך בניתי אוטומציה ליצירת תוכן מאפס, צעד אחר צעד, כדי שגם אתם תוכלו לבנות אוטומציה לשימוש אישי או עסקי.
-        </p>
+                <p class="text">
+                    בהדרכה הזו אני מראה לכם בדיוק איך בניתי אוטומציה ליצירת תוכן מאפס, צעד אחר צעד, כדי שגם אתם תוכלו לבנות אוטומציה לשימוש אישי או עסקי.
+                </p>
+            </div>
+        </div>
     </div>
 
     <!-- ========== PIPELINE ========== -->
