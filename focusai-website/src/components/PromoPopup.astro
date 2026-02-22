@@ -1,0 +1,367 @@
+---
+/**
+ * PromoPopup - Rotating promotional popup notifications
+ * Shows one elegant popup per visit, cycling through messages.
+ * Uses sessionStorage (once per visit) + localStorage (rotation index).
+ */
+---
+
+<!-- Popup container - hidden by default -->
+<div id="promo-popup" class="promo-popup" aria-hidden="true">
+  <div class="promo-card">
+    <!-- Close button -->
+    <button id="promo-close" class="promo-close" aria-label="סגור">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M1 13L13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+
+    <!-- Content -->
+    <div class="promo-body">
+      <div class="promo-icon" id="promo-icon"></div>
+      <div class="promo-text">
+        <p class="promo-label" id="promo-label"></p>
+        <p class="promo-title" id="promo-title"></p>
+        <p class="promo-desc" id="promo-desc"></p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a id="promo-cta" class="promo-cta" href="/" target="_self">
+      <span id="promo-cta-text"></span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Progress bar -->
+    <div class="promo-progress">
+      <div class="promo-progress-bar" id="promo-progress-bar"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .promo-popup {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 48;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .promo-popup.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .promo-popup.is-hiding {
+    opacity: 0;
+    transform: translateY(12px);
+    transition-duration: 0.3s;
+  }
+
+  .promo-card {
+    position: relative;
+    width: 340px;
+    background: rgba(18, 18, 26, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(168, 85, 247, 0.05);
+  }
+
+  .promo-close {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 2;
+  }
+  .promo-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .promo-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 20px 14px;
+  }
+
+  .promo-icon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 20px;
+  }
+
+  .promo-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .promo-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    color: #a855f7;
+  }
+
+  .promo-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f5f5fa;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .promo-desc {
+    font-size: 0.8rem;
+    color: #9090a8;
+    line-height: 1.5;
+  }
+
+  .promo-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 16px 16px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.08));
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 10px;
+    color: #c084fc;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .promo-cta:hover {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.12));
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .promo-progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .promo-progress-bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    border-radius: 0 0 0 18px;
+    transform-origin: right;
+    transition: transform linear;
+  }
+
+  /* CTA color variants */
+  .promo-cta.cta-green {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(37, 211, 102, 0.08));
+    border-color: rgba(37, 211, 102, 0.2);
+    color: #4ade80;
+  }
+  .promo-cta.cta-green:hover {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(37, 211, 102, 0.12));
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
+  }
+
+  .promo-cta.cta-amber {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+    border-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+  .promo-cta.cta-amber:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.12));
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .promo-popup {
+      left: 12px;
+      right: 12px;
+      bottom: 80px; /* above WhatsApp float */
+    }
+    .promo-card {
+      width: 100%;
+    }
+  }
+</style>
+
+<script is:inline>
+(function() {
+  var SESSION_KEY = 'focus_promo_shown';
+  var ROTATION_KEY = 'focus_promo_index';
+  var SHOW_DELAY = 5000;
+  var AUTO_DISMISS = 8000;
+
+  // Excluded pages - don't show on landing/funnel pages
+  var excluded = ['/content-automation-watch', '/content-automation-course'];
+  var path = window.location.pathname.replace(/\/$/, '');
+  for (var i = 0; i < excluded.length; i++) {
+    if (path === excluded[i]) return;
+  }
+
+  // Once per visit
+  if (sessionStorage.getItem(SESSION_KEY)) return;
+
+  // Messages pool
+  var messages = [
+    {
+      label: 'ACADEMY',
+      title: '\u05de\u05e7\u05d5\u05de\u05d5\u05ea \u05d0\u05d7\u05e8\u05d5\u05e0\u05d9\u05dd \u05dc\u05de\u05d7\u05d6\u05d5\u05e8 \u05d4\u05e7\u05e8\u05d5\u05d1',
+      desc: 'Bot-Camp \u2013 \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05d4\u05db\u05e9\u05e8\u05d4 \u05de\u05e7\u05e6\u05d5\u05e2\u05d9\u05ea \u05dc\u05d0\u05d5\u05d8\u05d5\u05de\u05e6\u05d9\u05d5\u05ea \u05d5\u05e1\u05d5\u05db\u05e0\u05d9 AI \u05d1\u05dc\u05d9\u05d5\u05d5\u05d9 \u05d0\u05e7\u05d3\u05de\u05d9',
+      cta: '\u05dc\u05e4\u05e8\u05d8\u05d9\u05dd \u05e0\u05d5\u05e1\u05e4\u05d9\u05dd',
+      href: '/academy/',
+      icon: '\u{1F393}',
+      iconBg: 'rgba(168,85,247,0.12)',
+      labelColor: '#a855f7',
+      ctaClass: ''
+    },
+    {
+      label: 'FREE',
+      title: '\u05d4\u05d3\u05e8\u05db\u05d4 \u05d7\u05d9\u05e0\u05de\u05d9\u05ea: \u05d0\u05d5\u05d8\u05d5\u05de\u05e6\u05d9\u05d9\u05ea \u05ea\u05d5\u05db\u05df',
+      desc: '\u05d0\u05d9\u05da \u05dc\u05d1\u05e0\u05d5\u05ea \u05d0\u05d5\u05d8\u05d5\u05de\u05e6\u05d9\u05d4 \u05e9\u05dc\u05de\u05d4 \u05dc\u05d9\u05e6\u05d9\u05e8\u05ea \u05ea\u05d5\u05db\u05df \u05e2\u05dd AI',
+      cta: '\u05dc\u05e6\u05e4\u05d9\u05d9\u05d4 \u05d1\u05d7\u05d9\u05e0\u05dd',
+      href: '/content-automation-course/',
+      icon: '\u25B6\uFE0F',
+      iconBg: 'rgba(99,102,241,0.12)',
+      labelColor: '#818cf8',
+      ctaClass: ''
+    },
+    {
+      label: 'COMMUNITY',
+      title: '\u05d4\u05e6\u05d8\u05e8\u05e4\u05d5 \u05dc\u05e7\u05d4\u05d9\u05dc\u05ea AI \u05e9\u05dc\u05e0\u05d5',
+      desc: '\u05d8\u05d9\u05e4\u05d9\u05dd, \u05de\u05d3\u05e8\u05d9\u05db\u05d9\u05dd \u05d5\u05e2\u05d3\u05db\u05d5\u05e0\u05d9\u05dd \u2013 \u05d9\u05e9\u05d9\u05e8\u05d5\u05ea \u05d1-WhatsApp',
+      cta: '\u05dc\u05e7\u05d4\u05d9\u05dc\u05d4',
+      href: 'https://did.li/Focus-community',
+      icon: '\u{1F4AC}',
+      iconBg: 'rgba(37,211,102,0.12)',
+      labelColor: '#25D366',
+      ctaClass: 'cta-green',
+      external: true
+    },
+    {
+      label: 'AI NEWS',
+      title: 'AI \u05dc\u05d0 \u05de\u05d7\u05db\u05d4 \u05dc\u05d0\u05e3 \u05d0\u05d7\u05d3',
+      desc: '\u05db\u05dc \u05de\u05d4 \u05e9\u05d7\u05e9\u05d5\u05d1 \u05dc\u05d3\u05e2\u05ea \u05e2\u05dc \u05e2\u05d5\u05dc\u05dd \u05d4-AI, \u05d1\u05e2\u05d1\u05e8\u05d9\u05ea \u05e4\u05e9\u05d5\u05d8\u05d4',
+      cta: '\u05dc\u05d7\u05d3\u05e9\u05d5\u05ea',
+      href: '/ai-news/',
+      icon: '\u{1F4F0}',
+      iconBg: 'rgba(245,158,11,0.12)',
+      labelColor: '#f59e0b',
+      ctaClass: 'cta-amber'
+    },
+    {
+      label: 'FREE TOOL',
+      title: 'Prompt Master \u2013 \u05db\u05dc\u05d9 \u05d7\u05d9\u05e0\u05de\u05d9',
+      desc: '\u05e1\u05d5\u05db\u05df AI \u05e9\u05d9\u05e2\u05d6\u05d5\u05e8 \u05dc\u05db\u05dd \u05dc\u05db\u05ea\u05d5\u05d1 \u05e4\u05e8\u05d5\u05de\u05e4\u05d8\u05d9\u05dd \u05de\u05d3\u05d5\u05d9\u05e7\u05d9\u05dd',
+      cta: '\u05dc\u05e0\u05e1\u05d5\u05ea \u05d1\u05d7\u05d9\u05e0\u05dd',
+      href: 'https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3',
+      icon: '\u2728',
+      iconBg: 'rgba(168,85,247,0.12)',
+      labelColor: '#a855f7',
+      ctaClass: '',
+      external: true
+    },
+    {
+      label: 'ENTERPRISE',
+      title: '\u05d4\u05db\u05e9\u05e8\u05ea \u05e2\u05d5\u05d1\u05d3\u05d9\u05dd \u05d1-AI',
+      desc: 'AI Ready \u2013 \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05d4\u05db\u05e9\u05e8\u05d4 \u05d0\u05e8\u05d2\u05d5\u05e0\u05d9\u05ea \u05dc\u05e6\u05d5\u05d5\u05ea\u05d9\u05dd',
+      cta: '\u05dc\u05e4\u05e8\u05d8\u05d9\u05dd',
+      href: '/academy/ai-ready/',
+      icon: '\u{1F3E2}',
+      iconBg: 'rgba(56,189,248,0.12)',
+      labelColor: '#38bdf8',
+      ctaClass: ''
+    }
+  ];
+
+  // Rotation: get next index
+  var idx = parseInt(localStorage.getItem(ROTATION_KEY) || '0', 10);
+  if (isNaN(idx) || idx < 0) idx = 0;
+  var msg = messages[idx % messages.length];
+  localStorage.setItem(ROTATION_KEY, String((idx + 1) % messages.length));
+
+  // Wait for DOM
+  document.addEventListener('DOMContentLoaded', function() {
+    var popup = document.getElementById('promo-popup');
+    if (!popup) return;
+
+    // Populate content
+    document.getElementById('promo-icon').textContent = msg.icon;
+    document.getElementById('promo-icon').style.background = msg.iconBg;
+    document.getElementById('promo-label').textContent = msg.label;
+    document.getElementById('promo-label').style.color = msg.labelColor;
+    document.getElementById('promo-title').textContent = msg.title;
+    document.getElementById('promo-desc').textContent = msg.desc;
+    document.getElementById('promo-cta-text').textContent = msg.cta;
+
+    var ctaEl = document.getElementById('promo-cta');
+    ctaEl.href = msg.href;
+    if (msg.external) {
+      ctaEl.target = '_blank';
+      ctaEl.rel = 'noopener noreferrer';
+    }
+    if (msg.ctaClass) ctaEl.classList.add(msg.ctaClass);
+
+    var progressBar = document.getElementById('promo-progress-bar');
+    var dismissTimer = null;
+
+    function showPopup() {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      popup.classList.add('is-visible');
+      popup.setAttribute('aria-hidden', 'false');
+
+      // Start progress bar animation
+      progressBar.style.transition = 'transform ' + AUTO_DISMISS + 'ms linear';
+      requestAnimationFrame(function() {
+        progressBar.style.transform = 'scaleX(0)';
+      });
+
+      dismissTimer = setTimeout(hidePopup, AUTO_DISMISS);
+    }
+
+    function hidePopup() {
+      if (dismissTimer) clearTimeout(dismissTimer);
+      popup.classList.add('is-hiding');
+      popup.classList.remove('is-visible');
+      popup.setAttribute('aria-hidden', 'true');
+      setTimeout(function() {
+        popup.style.display = 'none';
+      }, 350);
+    }
+
+    // Close button
+    document.getElementById('promo-close').addEventListener('click', hidePopup);
+
+    // Show after delay
+    setTimeout(showPopup, SHOW_DELAY);
+  });
+})();
+</script>
