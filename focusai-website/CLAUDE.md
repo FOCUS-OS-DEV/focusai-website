@@ -5,6 +5,24 @@
 
 ---
 
+## ⚠️ Critical Legal URLs — NEVER CHANGE WITHOUT EXPLICIT INSTRUCTION
+
+| Purpose | URL | Rule |
+|---------|-----|------|
+| **הסרה מדיוור** | `/unsubscribe-any` | **THE ONLY** unsubscribe URL for ALL marketing lists, emails, WhatsApp, SMS, automations |
+| מדיניות פרטיות | `/privacy-policy` | All forms must link here |
+| תנאי שימוש | `/terms` | All forms must link here |
+
+**In code: always import from `siteConfig.legal`** — never hardcode these paths.
+```ts
+import { siteConfig } from '@/data/config';
+siteConfig.legal.unsubscribe   // '/unsubscribe-any'
+siteConfig.legal.privacyPolicy // '/privacy-policy'
+siteConfig.legal.terms         // '/terms'
+```
+
+---
+
 ## Quick Links
 
 - [Design System](./docs/DESIGN_SYSTEM.md) - Full design documentation (partially outdated - refer to this file for latest)

@@ -93,6 +93,18 @@ if echo "$CONTENT" | grep -qiE 'marketing.*required|required.*marketing' 2>/dev/
 fi
 
 # ============================================================
+# CHECK 4: Unsubscribe links must point to /unsubscribe-any
+# ============================================================
+if echo "$CONTENT" | grep -qiE 'unsubscribe|הסר|הסרה' 2>/dev/null; then
+  # If there's an href with unsubscribe-related text but NOT pointing to /unsubscribe-any
+  if echo "$CONTENT" | grep -qiE 'href.*unsubscrib|href.*הסר' 2>/dev/null; then
+    if ! echo "$CONTENT" | grep -qE 'unsubscribe-any' 2>/dev/null; then
+      ISSUES="${ISSUES}[חובה] קישור הסרה לא מצביע ל-/unsubscribe-any — יש לשנות לנתיב הרשמי. "
+    fi
+  fi
+fi
+
+# ============================================================
 # Output
 # ============================================================
 if [ -n "$ISSUES" ]; then

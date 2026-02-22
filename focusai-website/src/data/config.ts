@@ -45,6 +45,13 @@ export const siteConfig = {
     cloudinaryBase: "https://res.cloudinary.com/dfudxxzlj/image/upload",
   },
 
+  // Legal & Compliance URLs — DO NOT CHANGE without updating all references
+  legal: {
+    privacyPolicy: '/privacy-policy',
+    terms: '/terms',
+    unsubscribe: '/unsubscribe-any', // THE canonical unsubscribe URL for ALL marketing lists
+  },
+
   // Stats (for social proof)
   stats: {
     graduates: "500+",
