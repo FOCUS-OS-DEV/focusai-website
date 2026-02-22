@@ -16,6 +16,10 @@ export default defineConfig({
     locales: ['he'],
   },
 
+  redirects: {
+    '/ai-tools': '/tools',
+  },
+
   vite: {
     plugins: [tailwindcss()],
     // Optimize for production
