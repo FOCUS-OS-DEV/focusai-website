@@ -29,13 +29,20 @@ export const siteConfig = {
     supportEmail: "office@focusai.co.il", // Same as main for now
   },
 
-  // Social Media Links
+  // Social Media Links — CANONICAL. Always use these, never hardcode elsewhere.
   social: {
     instagram: "https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==",
     facebook: "https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/",
     tiktok: "https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh",
     linkedin: "#", // TBD - add when available
     whatsappCommunity: "https://did.li/Focus-community",
+    youtube: "#", // TBD - add when available
+  },
+
+  // AI Tools — Focus AI branded tools
+  aiTools: {
+    promptMasterGpt: "https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3",
+    promptMasterGemini: "https://gemini.google.com/gem/16N9ZpLWbtXUJ6_RJW7z9My6xqT4zAAqZ?usp=sharing",
   },
 
   // Assets

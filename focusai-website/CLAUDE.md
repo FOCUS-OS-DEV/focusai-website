@@ -5,20 +5,43 @@
 
 ---
 
-## ⚠️ Critical Legal URLs — NEVER CHANGE WITHOUT EXPLICIT INSTRUCTION
+## ⚠️ Canonical Links — SINGLE SOURCE OF TRUTH
 
-| Purpose | URL | Rule |
-|---------|-----|------|
-| **הסרה מדיוור** | `/unsubscribe-any` | **THE ONLY** unsubscribe URL for ALL marketing lists, emails, WhatsApp, SMS, automations |
-| מדיניות פרטיות | `/privacy-policy` | All forms must link here |
-| תנאי שימוש | `/terms` | All forms must link here |
+> All links live in `src/data/config.ts`.
+> **Astro components**: import via `siteConfig`. **Standalone HTML pages**: copy exact values from this table — NEVER invent or guess a URL.
 
-**In code: always import from `siteConfig.legal`** — never hardcode these paths.
+### Contact
+| Key | Value |
+|-----|-------|
+| `contact.email` | `office@focusai.co.il` |
+| `contact.phone` | `053-946-6408` |
+| `contact.whatsapp` | `https://wa.me/972539466408` |
+
+### Social Media
+| Key | Value |
+|-----|-------|
+| `social.instagram` | `https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==` |
+| `social.facebook` | `https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/` |
+| `social.tiktok` | `https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh` |
+| `social.whatsappCommunity` | `https://did.li/Focus-community` |
+
+### Legal (DO NOT CHANGE)
+| Key | Value |
+|-----|-------|
+| `legal.unsubscribe` | `/unsubscribe-any` — **THE ONLY unsubscribe URL** for all lists |
+| `legal.privacyPolicy` | `/privacy-policy` |
+| `legal.terms` | `/terms` |
+
+### AI Tools
+| Key | Value |
+|-----|-------|
+| `aiTools.promptMasterGpt` | `https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3` |
+| `aiTools.promptMasterGemini` | `https://gemini.google.com/gem/16N9ZpLWbtXUJ6_RJW7z9My6xqT4zAAqZ?usp=sharing` |
+
 ```ts
+// Astro components
 import { siteConfig } from '@/data/config';
-siteConfig.legal.unsubscribe   // '/unsubscribe-any'
-siteConfig.legal.privacyPolicy // '/privacy-policy'
-siteConfig.legal.terms         // '/terms'
+const { social, contact, legal, aiTools } = siteConfig;
 ```
 
 ---
