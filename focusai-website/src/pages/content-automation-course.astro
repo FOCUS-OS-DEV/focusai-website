@@ -152,21 +152,16 @@
             flex: 1;
         }
 
-        .hero-photo {
+        .hero-mockup {
             flex-shrink: 0;
-            width: 280px;
-            position: relative;
+            width: 340px;
         }
 
-        .hero-photo img {
+        .hero-mockup img {
             width: 100%;
-            height: 360px;
-            object-fit: cover;
-            object-position: center 15%;
-            border-radius: 20px;
+            height: auto;
             display: block;
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
+            filter: drop-shadow(0 8px 32px rgba(168,85,247,0.2));
         }
 
         @media (max-width: 700px) {
@@ -175,27 +170,38 @@
                 text-align: center;
             }
             .hero-content { text-align: center; }
-            .hero-photo { width: 240px; }
-            .hero-photo img { height: 300px; }
+            .hero-mockup { width: 280px; }
         }
 
-        .hero-photo .name {
-            position: absolute;
-            bottom: 12%;
-            left: 0; right: 0;
-            text-align: center;
+        /* Presenter strip */
+        .presenter {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 28px;
         }
 
-        .hero-photo .name h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            text-shadow: 0 2px 16px rgba(0,0,0,0.9);
+        .presenter img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 15%;
+            border: 2px solid rgba(168,85,247,0.4);
+            flex-shrink: 0;
         }
 
-        .hero-photo .name p {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.75);
-            text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+        .presenter-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .presenter-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
         .hero-label {
@@ -921,8 +927,7 @@
             .hero h1 { font-size: 2.8rem; }
             .hero-label { font-size: 0.95rem; }
             .hero .sub { font-size: 1.3rem; }
-            .hero-photo { width: 340px; }
-            .hero-photo img { height: 430px; }
+            .hero-mockup { width: 380px; }
             h2 { font-size: 2.2rem; }
             .section:nth-child(odd) h2 { font-size: 2.3rem; }
             .who-section h2 { font-size: 2.4rem; }
@@ -966,6 +971,18 @@
             <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1765265415/2_fxdcio.png" alt="Focus AI" class="hero-logo">
         </a>
 
+        <div class="presenter">
+            <img
+                src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,g_north/v1771608626/IMG_4946.JPG_daxpou.jpg"
+                alt="שחר דדיה"
+                width="56" height="56" loading="eager"
+            >
+            <div class="presenter-info">
+                <h3>שחר דדיה</h3>
+                <p>מייסד ומנכ״ל משותף Focus AI</p>
+            </div>
+        </div>
+
         <div class="hero-split">
             <div class="hero-content">
                 <p class="hero-label">הדרכה מעשית בחינם <span class="sep">|</span> 70 דקות</p>
@@ -979,16 +996,12 @@
                 <p class="hero-urgency">צפייה <span class="limited">לזמן מוגבל</span></p>
             </div>
 
-            <div class="hero-photo">
+            <div class="hero-mockup">
                 <img
-                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_640,c_fill,g_north,h_840/v1771608626/IMG_4946.JPG_daxpou.jpg"
-                    alt="שחר דדיה"
-                    width="320" height="420" loading="eager"
+                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_680/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png"
+                    alt="הדרכה מעשית לאוטומציית תוכן עם AI"
+                    width="340" height="auto" loading="eager"
                 >
-                <div class="name">
-                    <h3>שחר דדיה</h3>
-                    <p>מייסד ומנכ״ל משותף Focus AI</p>
-                </div>
             </div>
         </div>
     </div>
