@@ -179,12 +179,14 @@ focusai-website/
 | `/blog/[slug]` | **Live** | Blog article pages |
 | `/privacy` | Live | Privacy policy |
 | `/terms` | Live | Terms of service |
+| `/וובינר-לייב-סוכן-AI-ראשון-ב-n8n` | **Live** | Live webinar landing page (01.03.2026) - direct link only |
 
 ### Important Route Notes
 
 - **`/blog` is LIVE on production** - accessible via "חדשות AI" in navigation
 - **`/ai-workshop`** redirects to external registration link
 - **AI First card** is hidden on mobile in homepage (`hidden lg:block`)
+- **Webinar page** is standalone (no BaseLayout, no nav link) - accessible only via direct URL
 
 ---
 
@@ -562,7 +564,35 @@ npm run preview  # Preview production build
 
 ---
 
+## Hooks (Claude Code)
+
+Project-level hooks configured in `../.claude/settings.json`:
+
+| Hook | Event | What it does |
+|------|-------|-------------|
+| `pre-commit-build.sh` | PreToolUse (Bash) | Auto-runs `npm run build` + `git add dist/` before any `git commit` |
+| `pre-push-verify.sh` | PreToolUse (Bash) | Blocks `git push` if dist/ has unstaged changes |
+| `post-edit-validate.sh` | PostToolUse (Edit/Write) | Async `astro check` after editing .astro/.ts/.tsx files |
+| `post-task-save.js` | PostToolUse (Task) | Saves subagent output to `memory/sessions/subagents/` |
+| `pre-compact-memory-save.js` | PreCompact | Saves full session transcript as MD before context compaction |
+| `session-start-context.sh` | SessionStart | Injects project reminders (Hebrew, build, design rules) |
+| `stop-update-claude-md.sh` | Stop | Warns if src/ changed but CLAUDE.md wasn't updated |
+
+Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Windows compatibility)
+
+---
+
 ## Recent Changes Log
+
+### 2026-02-20
+- **Live webinar landing page** created at `/וובינר-לייב-סוכן-AI-ראשון-ב-n8n/`
+  - Standalone page (no BaseLayout), direct link access only
+  - Countdown timer, speakers section, customer journey narrative
+  - N8N webhook form submission
+  - Meta Pixel tracking
+- **Claude Code hooks** configured for the project
+  - Pre-commit auto-build, pre-push verify, post-edit validation
+  - Session start context injection, stop CLAUDE.md update reminder
 
 ### 2026-02-15
 - **Rebuilt VideoTestimonials.astro from scratch** - 3D transform carousel with lightbox
