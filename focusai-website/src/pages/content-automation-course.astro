@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://focusai.co.il/content-automation-course/">
     <meta property="og:title" content="הדרכה חינמית | אוטומציית יצירת תוכן עם AI">
     <meta property="og:description" content="בניתי אוטומציה שמייצרת תוכן שלם לעסקים. תמונות, קופי, טקסט. הדרכה מעשית בחינם.">
-    <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png">
+    <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="he_IL">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="הדרכה חינמית | אוטומציית יצירת תוכן עם AI">
     <meta name="twitter:description" content="בניתי אוטומציה שמייצרת תוכן שלם לעסקים. הדרכה מעשית בחינם.">
-    <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png">
 
     <link rel="canonical" href="https://focusai.co.il/content-automation-course/">
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -1026,7 +1026,7 @@
 
                 <div class="hero-mockup-mobile">
                     <img
-                        src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_560/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png"
+                        src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_560/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png"
                         alt="הדרכה מעשית לאוטומציית תוכן עם AI"
                         loading="eager"
                     >
@@ -1040,7 +1040,7 @@
 
             <div class="hero-mockup">
                 <img
-                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_680/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png"
+                    src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_680/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png"
                     alt="הדרכה מעשית לאוטומציית תוכן עם AI"
                     width="340" height="auto" loading="eager"
                 >
@@ -1201,9 +1201,9 @@
                     </span>
                 </label>
                 <label class="consent-check" style="margin-top: 8px;">
-                    <input type="checkbox" id="marketing-consent" name="marketing">
+                    <input type="checkbox" id="marketing-consent" name="marketing" required>
                     <span>
-                        אני מסכים/ה לקבל עדכונים ותוכן בנושאי AI באימייל ו/או WhatsApp. ניתן לבטל בכל עת.
+                        אני מסכים/ה לקבל עדכונים ותוכן בנושאי AI באימייל ו/או WhatsApp. ניתן לבטל בכל עת. *
                     </span>
                 </label>
             </div>
@@ -1323,8 +1323,8 @@
 
     var patterns = {
         phone: /^0[2-9]\d{7,8}$/,
-        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        name: /^[\u0590-\u05FFa-zA-Z\s]{2,50}$/
+        email: /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/,
+        name: /^[\u0590-\u05FFa-zA-Z\s'\-"]{2,50}$/
     };
 
     function validate(field, pattern) {
@@ -1349,13 +1349,14 @@
         var ph = document.getElementById('phone');
         var em = document.getElementById('email');
         var consent = document.getElementById('consent');
+        var marketingConsent = document.getElementById('marketing-consent');
 
         if (!validate(fn, patterns.name) || !validate(ph, patterns.phone) || !validate(em, patterns.email)) {
             alert('נא למלא את כל השדות בצורה תקינה');
             return;
         }
-        if (!consent.checked) {
-            alert('יש לאשר את התנאים כדי להמשיך');
+        if (!consent.checked || !marketingConsent.checked) {
+            alert('יש לאשר את שני התנאים כדי להמשיך');
             return;
         }
 
@@ -1372,6 +1373,7 @@
                     phone: ph.value.trim().replace(/[-\s]/g, ''),
                     email: em.value.trim(),
                     consent: true,
+                    marketingConsent: true,
                     timestamp: new Date().toISOString(),
                     source: 'content-automation-course'
                 })
