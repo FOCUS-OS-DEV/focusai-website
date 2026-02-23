@@ -1,7 +1,7 @@
 ---
 /**
  * LIVE Webinar Landing Page - Building first AI Agent in n8n
- * Event Date: 01.03.2026 at 19:30
+ * Event Date: 04.03.2026 at 19:30
  * Featuring Bot-Camp students: Orian Amoyal & Zohar Yaakov
  */
 ---
@@ -11,13 +11,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>וובינר LIVE | בניית סוכן AI ראשון ב-n8n | Focus AI</title>
-    <meta name="description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 01.03.2026 בשעה 19:30. הרשמו עכשיו!">
+    <meta name="description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 04.03.2026 בשעה 19:30. הרשמו עכשיו!">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://focusai.co.il/וובינר-לייב-סוכן-AI-ראשון-ב-n8n/">
     <meta property="og:title" content="וובינר LIVE | בניית סוכן AI ראשון ב-n8n">
-    <meta property="og:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 01.03.2026 בשעה 19:30.">
+    <meta property="og:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 04.03.2026 בשעה 19:30.">
     <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="וובינר LIVE | בניית סוכן AI ראשון ב-n8n">
-    <meta name="twitter:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 01.03.2026 בשעה 19:30.">
+    <meta name="twitter:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 04.03.2026 בשעה 19:30.">
     <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
 
     <link rel="canonical" href="https://focusai.co.il/%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8-%D7%9C%D7%99%D7%99%D7%91-%D7%A1%D7%95%D7%9B%D7%9F-AI-%D7%A8%D7%90%D7%A9%D7%95%D7%9F-%D7%91-n8n/">
@@ -662,7 +662,7 @@
         }
 
         .journey-chapter {
-            font-size: 0.75rem;
+            font-size: 1.875rem;
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -670,16 +670,17 @@
             margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 14px;
         }
 
         .journey-chapter::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 20px;
+            height: 20px;
             background: var(--secondary);
             border-radius: 50%;
             display: inline-block;
+            flex-shrink: 0;
         }
 
         .journey-big {
@@ -1301,7 +1302,7 @@
             border: 1px solid var(--card-border);
             text-align: center;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .story-hook::before {
@@ -1312,11 +1313,12 @@
             right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+            z-index: 1;
         }
 
         .story-hook .hook-image-wrap {
             position: relative;
-            margin: 0 auto 28px;
+            margin: 18px auto 28px;
             max-width: 340px;
         }
 
@@ -1341,38 +1343,19 @@
 
         .hook-label {
             position: absolute;
-            bottom: -10px;
-            right: -14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            transform: rotate(-6deg);
-        }
-
-        .hook-label-arrow {
-            font-size: 2.8rem;
-            line-height: 1;
-            color: var(--accent);
-            animation: hookArrowBounce 2s ease-in-out infinite;
+            top: -20px;
+            right: -10px;
+            transform: rotate(6deg);
         }
 
         .hook-label-text {
-            font-size: 1.6rem;
-            font-weight: 900;
-            font-style: italic;
-            color: transparent;
-            background: linear-gradient(135deg, var(--accent), #fbbf24, var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            text-shadow: none;
-            filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4));
-            letter-spacing: 1px;
-        }
-
-        @keyframes hookArrowBounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-4px) rotate(-8deg); }
+            font-size: 2rem;
+            font-weight: 800;
+            font-style: normal;
+            color: var(--live-red);
+            filter: drop-shadow(0 2px 8px rgba(239, 68, 68, 0.5));
+            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         .story-hook .hook-question {
@@ -1613,16 +1596,12 @@
             }
 
             .hook-label-text {
-                font-size: 1.9rem;
-            }
-
-            .hook-label-arrow {
-                font-size: 3.2rem;
+                font-size: 2.6rem;
             }
 
             .hook-label {
-                right: -30px;
-                bottom: -14px;
+                right: -24px;
+                top: -24px;
             }
 
             .story-hook .hook-question {
@@ -1714,7 +1693,7 @@
 
             <div class="event-date-badge">
                 <i class="fas fa-calendar-alt"></i>
-                <span>01.03.2026</span>
+                <span>04.03.2026</span>
                 <span class="separator"></span>
                 <i class="fas fa-clock"></i>
                 <span>19:30</span>
@@ -1771,7 +1750,6 @@
                 </div>
                 <div class="hook-label">
                     <span class="hook-label-text">בונים יחד!</span>
-                    <span class="hook-label-arrow">&#x21A9;</span>
                 </div>
             </div>
             <div class="hook-question">יש הבדל ענק בין לשחק עם ChatGPT<br>לבין לבנות סוכן AI שעובד בשבילך</div>
@@ -1871,8 +1849,8 @@
             <div class="journey-section">
 
                 <p class="journey-opener">
-                    כולם מדברים על <strong>AI</strong>.<br>
-                    רובם עדיין רק משחקים עם צ'אט.
+                    <strong>סוכן AI</strong> זה לא עוד צ'אטבוט...<br>
+                    זה מערכת שעובדת בשבילכם, 24/7.
                 </p>
 
                 <p class="journey-text">
@@ -1880,8 +1858,7 @@
                 </p>
 
                 <div class="journey-pullquote">
-                    מה אם הייתם יכולים לבנות משהו שעושה את כל זה <em style="color: var(--primary);">לבד</em> -
-                    בלי שתצטרכו לגעת בזה?
+                    מה אם הייתם יכולים לבנות משהו שעושה את כל זה <em style="color: var(--primary);">לבד</em>?
                 </div>
 
                 <hr class="journey-divider">
@@ -1890,7 +1867,7 @@
                 <div class="journey-big">הבדל בין צ'אט חכם<br>לבין מערכת שעובדת 24/7</div>
 
                 <p class="journey-text">
-                    <em>סוכן AI</em> זה לא עוד צ'אטבוט. זה תוכנה שרצה ברקע, מחוברת ל<strong>מייל</strong>, ל<strong>CRM</strong>, ל<strong>וואטסאפ</strong>, ל<strong>לוחות שנה</strong> - ופועלת בשבילכם אוטומטית. היא קוראת הודעות, מגיבה ללקוחות, מעדכנת מערכות, שולחת תזכורות. <strong>בלי קוד. בלי שרתים. בלי שתיגעו בזה.</strong>
+                    <em>סוכן AI</em> זה לא עוד צ'אטבוט. זה תוכנה שרצה ברקע, מחוברת ל<strong>מייל</strong>, ל<strong>CRM</strong>, ל<strong>וואטסאפ</strong>, ל<strong>לוחות שנה</strong> - ופועלת בשבילכם אוטומטית. היא קוראת הודעות, מגיבה ללקוחות, מעדכנת מערכות, שולחת תזכורות. <strong>היום ניתן לפתח את כל זה לבד וללא ידע בקוד!</strong>
                 </p>
 
                 <p class="journey-text">
@@ -2074,7 +2051,7 @@
             <div class="success-details">
                 <div class="detail-row">
                     <i class="fas fa-calendar-alt"></i>
-                    <span>01.03.2026 | יום ראשון</span>
+                    <span>04.03.2026 | יום רביעי</span>
                 </div>
                 <div class="detail-row">
                     <i class="fas fa-clock"></i>
@@ -2105,7 +2082,7 @@
         }
 
         // Countdown Timer
-        var eventDate = new Date('2026-03-01T19:30:00+02:00'); // Israel timezone
+        var eventDate = new Date('2026-03-04T19:30:00+02:00'); // Israel timezone
 
         function updateCountdown() {
             var now = new Date();
