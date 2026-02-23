@@ -38,7 +38,7 @@ const uid = `lc-${Math.random().toString(36).slice(2, 8)}`;
         {clients.map((client, i) => (
           <div class="clc-card" data-clc={i}>
             <div class:list={['clc-inner', isLight ? 'clc-inner-light' : 'clc-inner-dark']}>
-              <img src={client.logo} alt={client.name} loading="lazy" draggable="false" />
+              <img src={client.logo} alt={client.name} loading="lazy" draggable="false" width="170" height="100" />
             </div>
           </div>
         ))}

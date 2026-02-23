@@ -271,7 +271,7 @@ WhatsApp
   var AUTO_DISMISS = 12000;
 
   // Excluded pages
-  var excluded = ['/content-automation-watch', '/content-automation-course'];
+  var excluded = ['/content-automation-watch', '/content-automation-course', '/webinar-n8n-agent', '/webinar-n8n-thank-you'];
   var path = window.location.pathname.replace(/\/$/, '');
   for (var i = 0; i < excluded.length; i++) {
     if (path === excluded[i]) return;

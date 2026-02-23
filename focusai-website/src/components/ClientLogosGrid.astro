@@ -30,7 +30,7 @@ const row2 = clients.slice(half);
       <div class="marquee-track">
         {[...row1, ...row1, ...row1].map((client) => (
           <div class="logo-card" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" width="140" height="90" />
           </div>
         ))}
       </div>
@@ -41,7 +41,7 @@ const row2 = clients.slice(half);
       <div class="marquee-track">
         {[...row2, ...row2, ...row2].map((client) => (
           <div class="logo-card" title={client.name}>
-            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" width="140" height="90" />
           </div>
         ))}
       </div>

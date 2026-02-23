@@ -18,6 +18,8 @@ export default defineConfig({
 
   redirects: {
     '/ai-tools': '/tools',
+    '/services/ai-agents': '/ai-agents',
+    '/academy/ai-ready/syllabus': '/ai-ready-syllabus',
   },
 
   vite: {
@@ -32,7 +34,13 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/links') && !page.includes('GPTS'),
+      filter: (page) =>
+        !page.includes('/links') &&
+        !page.includes('GPTS') &&
+        !page.includes('thank-you') &&
+        !page.includes('unsubscribe') &&
+        !page.includes('content-automation-watch') &&
+        !page.includes('/services/'),
     }),
     icon({
       include: {

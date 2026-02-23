@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /privacy-policy
-Disallow: /terms
 
 Sitemap: https://focusai.co.il/sitemap-index.xml
