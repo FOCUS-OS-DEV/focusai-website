@@ -1,0 +1,545 @@
+---
+/**
+ * Webinar N8N Agent - Thank You Page
+ * Hidden (noindex) - Only accessible after form submission
+ * Fires Meta Pixel Lead event
+ */
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>נרשמת בהצלחה! | וובינר סוכן AI ב-N8N | Focus AI</title>
+  <meta name="description" content="ההרשמה לוובינר בניית סוכן AI ראשון ב-N8N התקבלה בהצלחה. הצטרפו לקהילת הוואטסאפ לקבלת לינק הזום.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://focusai.co.il/webinar-n8n-thank-you/">
+  <meta property="og:title" content="נרשמת בהצלחה! | וובינר סוכן AI ב-N8N">
+  <meta property="og:description" content="ההרשמה לוובינר התקבלה. נתראה ב-04.03.2026!">
+  <meta property="og:locale" content="he_IL">
+  <meta property="og:site_name" content="Focus AI">
+
+  <link rel="canonical" href="https://focusai.co.il/webinar-n8n-thank-you/">
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <meta name="theme-color" content="#080810">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1388659336102272');
+  fbq('track', 'PageView');
+  fbq('track', 'Lead');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #080810;
+      --surface: #12121a;
+      --primary: #a855f7;
+      --primary-glow: rgba(168, 85, 247, 0.3);
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.3);
+      --text: #e8e0ff;
+      --text-secondary: #9590b0;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    /* Background glow */
+    .bg-glow {
+      position: fixed;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Logo */
+    .logo {
+      margin-bottom: 40px;
+    }
+    .logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    /* Success Icon */
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 0 40px var(--green-glow);
+      animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .success-icon i {
+      font-size: 36px;
+      color: #fff;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Title */
+    .success-title {
+      font-size: 2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 8px;
+      animation: fadeUp 0.6s 0.2s both;
+    }
+    .success-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Event Details Card */
+    .event-card {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.4s both;
+    }
+    .event-card-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-row i {
+      width: 20px;
+      text-align: center;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+    .detail-row span {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* WhatsApp CTA - Main highlight */
+    .whatsapp-cta {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(22,163,74,0.05));
+      border: 1.5px solid rgba(34,197,94,0.3);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+      animation: fadeUp 0.6s 0.5s both;
+    }
+    .whatsapp-cta .cta-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 30px rgba(34,197,94,0.3);
+    }
+    .whatsapp-cta .cta-icon i {
+      font-size: 28px;
+      color: #fff;
+    }
+    .whatsapp-cta h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .whatsapp-cta p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .whatsapp-cta .highlight {
+      color: #4ade80;
+      font-weight: 700;
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    }
+    .whatsapp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(34,197,94,0.4);
+    }
+    .whatsapp-btn i {
+      font-size: 1.2rem;
+    }
+
+    /* Links Grid */
+    .links-section {
+      width: 100%;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.6s both;
+    }
+    .links-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+    .link-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(168,85,247,0.3);
+      transform: translateY(-1px);
+    }
+    .link-card i {
+      font-size: 1.1rem;
+      color: var(--primary);
+      width: 20px;
+      text-align: center;
+    }
+    .link-card span {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Social links */
+    .social-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.7s both;
+    }
+    .social-link {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+    .social-link:hover {
+      background: rgba(168,85,247,0.1);
+      border-color: rgba(168,85,247,0.3);
+      color: var(--primary);
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      animation: fadeUp 0.6s 0.8s both;
+    }
+    .page-footer p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.25);
+    }
+    .page-footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 30px;
+      transition: color 0.3s;
+      animation: fadeUp 0.5s 0.1s both;
+    }
+    .back-link:hover {
+      color: var(--primary);
+    }
+    .back-link i {
+      font-size: 0.75rem;
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      top: -10px;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .page-wrap {
+        padding: 30px 16px 50px;
+      }
+      .success-title {
+        font-size: 1.6rem;
+      }
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+      .whatsapp-cta h3 {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <!-- Confetti -->
+  <div class="confetti-container" id="confetti"></div>
+
+  <div class="page-wrap">
+
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_72/v1765265415/2_fxdcio.png" alt="Focus AI">
+    </a>
+
+    <!-- Success Icon -->
+    <div class="success-icon">
+      <i class="fas fa-check"></i>
+    </div>
+
+    <!-- Title -->
+    <h1 class="success-title">נרשמת בהצלחה!</h1>
+    <p class="success-subtitle">מקומך בוובינר שמור. נתראה ב-04.03!</p>
+
+    <!-- Event Details -->
+    <div class="event-card">
+      <div class="event-card-title">פרטי הוובינר</div>
+      <div class="detail-row">
+        <i class="fas fa-calendar-alt"></i>
+        <span>04.03.2026 | יום רביעי</span>
+      </div>
+      <div class="detail-row">
+        <i class="fas fa-clock"></i>
+        <span>19:30 שעון ישראל</span>
+      </div>
+      <div class="detail-row">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>בניית סוכן AI ראשון ב-N8N - לייב</span>
+      </div>
+      <div class="detail-row">
+        <i class="fas fa-video"></i>
+        <span>הוובינר ייערך בזום</span>
+      </div>
+    </div>
+
+    <!-- WhatsApp CTA - Main Focus -->
+    <div class="whatsapp-cta">
+      <div class="cta-icon">
+        <i class="fab fa-whatsapp"></i>
+      </div>
+      <h3>הצטרפו לקהילת ה-WhatsApp שלנו</h3>
+      <p>
+        <span class="highlight">לינק הזום לוובינר יישלח לקהילה 15 דקות לפני תחילת המפגש.</span><br>
+        בנוסף תקבלו עדכונים, טיפים וכלים חדשים בעולם ה-AI.
+      </p>
+      <a href="https://did.li/Focus-community" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+        הצטרפות לקהילה
+      </a>
+    </div>
+
+    <!-- Links -->
+    <div class="links-section">
+      <div class="links-title">בינתיים, כדאי להכיר</div>
+      <div class="links-grid">
+        <a href="/academy" class="link-card">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Bot-Camp</span>
+        </a>
+        <a href="/academy/ai-ready" class="link-card">
+          <i class="fas fa-users"></i>
+          <span>AI Ready</span>
+        </a>
+        <a href="/ai-news" class="link-card">
+          <i class="fas fa-newspaper"></i>
+          <span>חדשות AI</span>
+        </a>
+        <a href="/tools" class="link-card">
+          <i class="fas fa-tools"></i>
+          <span>כלי AI</span>
+        </a>
+        <a href="/content-automation-course" class="link-card">
+          <i class="fas fa-play-circle"></i>
+          <span>הדרכה חינמית</span>
+        </a>
+        <a href="/" class="link-card">
+          <i class="fas fa-home"></i>
+          <span>דף הבית</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="social-section">
+      <a href="https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==" target="_blank" rel="noopener noreferrer" class="social-link">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener noreferrer" class="social-link">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh" target="_blank" rel="noopener noreferrer" class="social-link">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+      <p><a href="/">Focus AI</a> &copy; 2026</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Confetti effect
+    var container = document.getElementById('confetti');
+    var colors = ['#a855f7', '#22c55e', '#f59e0b', '#3b82f6', '#ec4899', '#14b8a6'];
+
+    for (var i = 0; i < 40; i++) {
+      var confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+      confetti.style.animationDelay = (Math.random() * 2) + 's';
+      confetti.style.width = (5 + Math.random() * 8) + 'px';
+      confetti.style.height = (5 + Math.random() * 8) + 'px';
+      container.appendChild(confetti);
+    }
+
+    // Remove confetti after animation
+    setTimeout(function() {
+      container.style.display = 'none';
+    }, 6000);
+  </script>
+
+</body>
+</html>

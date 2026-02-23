@@ -2201,16 +2201,13 @@
             submitBtn.disabled = true;
 
             var formData = {
-                firstName: firstName.value.trim(),
-                lastName: lastName.value.trim(),
+                fullName: firstName.value.trim() + ' ' + lastName.value.trim(),
                 email: email.value.trim(),
                 phone: phone.value.trim().replace(/[-\s]/g, ''),
-                consent: 'on',
-                formType: 'quick'
             };
 
             try {
-                var response = await fetch('https://focus2025.app.n8n.cloud/webhook/n8n-ai-agent-webinar', {
+                var response = await fetch('https://focus2025.app.n8n.cloud/webhook/webinar-n8n-agent', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2234,8 +2231,7 @@
                     throw new Error(errorMessage);
                 }
 
-                successOverlay.classList.add('show');
-                form.reset();
+                window.location.href = '/webinar-n8n-thank-you/';
 
             } catch (error) {
                 console.error('Error submitting form:', error);
