@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>הדרכה מעשית | אוטומציית תוכן עם AI</title>
+  <!--[if mso]>
+  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+  <![endif]-->
+  <style>
+    body { margin: 0 !important; padding: 0 !important; background-color: #f0eff4 !important; }
+    table { border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    td { padding: 0; }
+    img { border: 0; display: block; line-height: 0; }
+    a { text-decoration: none; }
+    @media (prefers-color-scheme: dark) {
+      body, .body-bg { background-color: #111118 !important; }
+      .email-wrap { background-color: #1a1a2e !important; border-color: #2a2a40 !important; }
+      .sec-w { background-color: #1a1a2e !important; }
+      .hdr-title { color: #ffffff !important; }
+      .hdr-badge { color: rgba(255,255,255,0.85) !important; }
+      .hdr-badge-wrap { background-color: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.2) !important; }
+      .txt-h { color: #e8e0ff !important; }
+      .txt-p { color: #9595b8 !important; }
+      .txt-m { color: #6565a0 !important; }
+      .feat { background-color: #20203a !important; border-color: #2e2e50 !important; }
+      .dv { background-color: #2a2a40 !important; }
+      .btn-pm1 { background-color: #1e1640 !important; border-color: #4a30a0 !important; }
+      .btn-pm2 { background-color: #0a1a10 !important; border-color: #1a5030 !important; }
+      .btn-news { background-color: #1a1400 !important; border-color: #4a3a00 !important; }
+      .btn-bc { background-color: #1e1640 !important; border-color: #4a30a0 !important; }
+      .card-t { background-color: #20203a !important; border-color: #2e2e50 !important; }
+      .card-wa { background-color: #0a1a10 !important; border-color: #1a3020 !important; }
+      .unsub-link { color: #a78bfa !important; }
+      .footer-subtle { color: #6a5a80 !important; }
+    }
+    [data-ogsc] .hdr-title { color: #ffffff !important; }
+    [data-ogsc] .hdr-badge { color: rgba(255,255,255,0.85) !important; }
+    [data-ogsc] .hdr-badge-wrap { background-color: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.2) !important; }
+    [data-ogsc] .txt-h { color: #e8e0ff !important; }
+    [data-ogsc] .txt-p { color: #9595b8 !important; }
+    [data-ogsc] .txt-m { color: #6565a0 !important; }
+    [data-ogsc] .sec-w { background-color: #1a1a2e !important; }
+    [data-ogsc] .feat { background-color: #20203a !important; border-color: #2e2e50 !important; }
+    [data-ogsc] .card-t { background-color: #20203a !important; border-color: #2e2e50 !important; }
+    [data-ogsc] .card-wa { background-color: #0a1a10 !important; border-color: #1a3020 !important; }
+    [data-ogsc] .unsub-link { color: #a78bfa !important; }
+    [data-ogsc] .footer-subtle { color: #6a5a80 !important; }
+    @media screen and (max-width: 600px) {
+      .email-wrap { width: 100% !important; }
+      .mob-pad { padding: 24px 18px !important; }
+      .mob-col { display: block !important; width: 100% !important; padding: 6px 0 !important; }
+    }
+  </style>
+</head>
+<body class="body-bg" style="margin:0;padding:0;background-color:#f0eff4;">
+
+  <div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0;">
+    {{ $json.body.fullName }}, ההרשמה התקבלה. שמחים מאוד שהצטרפת אלינו.&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="body-bg" style="background-color:#f0eff4;">
+  <tr><td align="center" style="padding:24px 12px;">
+
+  <table role="presentation" class="email-wrap" width="600" cellpadding="0" cellspacing="0" border="0"
+         style="max-width:600px;background-color:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e0dde8;box-shadow:0 2px 20px rgba(0,0,0,0.06);">
+
+    <!-- HEADER -->
+    <tr>
+      <td style="background:linear-gradient(160deg,#1a0a30 0%,#2d1060 50%,#1a0a30 100%);padding:0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr><td height="3" style="background:linear-gradient(90deg,#7c3aed,#a855f7,#7c3aed);font-size:0;line-height:0;">&nbsp;</td></tr>
+        </table>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center" style="padding:36px 32px 30px;text-align:center;">
+              <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_50/v1765265415/2_fxdcio.png"
+                   alt="Focus AI" height="50" style="height:50px;width:auto;display:block;margin:0 auto 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 18px;">
+                <tr>
+                  <td class="hdr-badge-wrap" style="background-color:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:30px;padding:5px 20px;">
+                    <span class="hdr-badge" style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:2.5px;text-transform:uppercase;">CONTENT AUTOMATION</span>
+                  </td>
+                </tr>
+              </table>
+              <h1 class="hdr-title" style="font-family:Arial,sans-serif;font-size:26px;font-weight:800;color:#ffffff;margin:0 0 24px;line-height:1.35;text-align:center;direction:rtl;">
+                הדרכה מעשית לאוטומציית תוכן עם AI
+              </h1>
+              <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_480/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png"
+                   alt="Focus AI - אוטומציית תוכן עם AI" width="480"
+                   style="width:480px;max-width:100%;height:auto;display:block;margin:0 auto;">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- GREETING -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:36px 40px 30px;text-align:center;background-color:#ffffff;">
+        <h2 class="txt-h" style="font-family:Arial,sans-serif;font-size:21px;font-weight:700;color:#1a1a2e;margin:0 0 18px;line-height:1.4;text-align:center;direction:rtl;">
+          היי {{ $json.body.fullName }},
+        </h2>
+        <p class="txt-p" style="font-family:Arial,sans-serif;font-size:15px;color:#555570;line-height:1.9;margin:0 0 10px;text-align:center;direction:rtl;">
+          שמחים מאוד שהצטרפת אלינו.
+        </p>
+        <p class="txt-p" style="font-family:Arial,sans-serif;font-size:15px;color:#555570;line-height:1.9;margin:0 0 28px;text-align:center;direction:rtl;">
+          נרשמת להדרכה מעשית שמראה צעד אחר צעד איך לבנות אוטומציה שמייצרת תוכן שלם לעסק, מתמונות ועד קופי, ברמה מקצועית.
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+          <tr>
+            <td style="border-radius:10px;background:linear-gradient(135deg,#9333ea,#7c3aed);box-shadow:0 4px 20px rgba(124,58,237,0.3);">
+              <a href="https://focusai.co.il/content-automation-watch/"
+                 style="display:block;font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;padding:13px 34px;border-radius:10px;text-align:center;">
+                להדרכה המלאה
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr><td class="sec-w" style="padding:0 40px;background-color:#ffffff;"><table role="presentation" width="100%"><tr><td class="dv" height="1" style="background-color:#eeeef4;font-size:0;"></td></tr></table></td></tr>
+
+    <!-- FEATURES -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:32px 40px;text-align:center;background-color:#ffffff;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 8px;">
+          <tr>
+            <td><img src="https://cdn-icons-png.flaticon.com/32/2088/2088617.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;margin:0 auto;opacity:0.7;"></td>
+          </tr>
+        </table>
+        <h3 class="txt-h" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#1a1a2e;margin:0 0 24px;text-align:center;direction:rtl;">
+          אחרי 70 דקות תוכלו...
+        </h3>
+
+        <!-- Feature 1: Automation -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+          <tr>
+            <td class="feat" style="background-color:#f8f7fc;border:1px solid #e8e6f0;border-right:3px solid #7c3aed;border-radius:10px;padding:15px 18px;direction:rtl;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="30" valign="top" style="padding-left:10px;">
+                    <img src="https://cdn-icons-png.flaticon.com/32/4616/4616559.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;opacity:0.65;">
+                  </td>
+                  <td valign="top" style="text-align:right;">
+                    <p class="txt-h" style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 3px;text-align:right;">להפעיל אוטומציה שמייצרת פוסטים מלאים - תמונה + טקסט</p>
+                    <p class="txt-m" style="font-family:Arial,sans-serif;font-size:12px;color:#6e6e88;margin:0;line-height:1.6;text-align:right;">בלי לכתוב שורת קוד אחת!</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Feature 2: Images -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+          <tr>
+            <td class="feat" style="background-color:#f8f7fc;border:1px solid #e8e6f0;border-right:3px solid #7c3aed;border-radius:10px;padding:15px 18px;direction:rtl;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="30" valign="top" style="padding-left:10px;">
+                    <img src="https://cdn-icons-png.flaticon.com/32/1375/1375106.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;opacity:0.65;">
+                  </td>
+                  <td valign="top" style="text-align:right;">
+                    <p class="txt-h" style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 3px;text-align:right;">לחבר מודל AI ליצירת תמונות מקצועיות לכל פוסט</p>
+                    <p class="txt-m" style="font-family:Arial,sans-serif;font-size:12px;color:#6e6e88;margin:0;line-height:1.6;text-align:right;">Nano Banana Pro</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Feature 3: Database -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+          <tr>
+            <td class="feat" style="background-color:#f8f7fc;border:1px solid #e8e6f0;border-right:3px solid #7c3aed;border-radius:10px;padding:15px 18px;direction:rtl;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="30" valign="top" style="padding-left:10px;">
+                    <img src="https://cdn-icons-png.flaticon.com/32/2906/2906274.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;opacity:0.65;">
+                  </td>
+                  <td valign="top" style="text-align:right;">
+                    <p class="txt-h" style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 3px;text-align:right;">לנהל את כל התוכן שלכם במאגר מסודר</p>
+                    <p class="txt-m" style="font-family:Arial,sans-serif;font-size:12px;color:#6e6e88;margin:0;line-height:1.6;text-align:right;">Supabase. כמו אקסל חכם בענן</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Feature 4: Save time -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="feat" style="background-color:#f8f7fc;border:1px solid #e8e6f0;border-right:3px solid #7c3aed;border-radius:10px;padding:15px 18px;direction:rtl;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="30" valign="top" style="padding-left:10px;">
+                    <img src="https://cdn-icons-png.flaticon.com/32/2784/2784459.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;opacity:0.65;">
+                  </td>
+                  <td valign="top" style="text-align:right;">
+                    <p class="txt-h" style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 3px;text-align:right;">לחסוך שעות עבודה כל שבוע על יצירת תוכן</p>
+                    <p class="txt-m" style="font-family:Arial,sans-serif;font-size:12px;color:#6e6e88;margin:0;line-height:1.6;text-align:right;">תנו למערכת לעבוד ותתעסקו בעסק עצמו</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr><td class="sec-w" style="padding:0 40px;background-color:#ffffff;"><table role="presentation" width="100%"><tr><td class="dv" height="1" style="background-color:#eeeef4;font-size:0;"></td></tr></table></td></tr>
+
+    <!-- PROMPT MASTER -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:30px 40px;text-align:center;background-color:#ffffff;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 8px;">
+          <tr>
+            <td><img src="https://cdn-icons-png.flaticon.com/32/3208/3208726.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;margin:0 auto;opacity:0.7;"></td>
+          </tr>
+        </table>
+        <p style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#7c3aed;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 10px;text-align:center;">BONUS</p>
+        <h3 class="txt-h" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#1a1a2e;margin:0 0 10px;text-align:center;direction:rtl;line-height:1.4;">
+          מתנה מאיתנו: Prompt Master
+        </h3>
+        <p class="txt-p" style="font-family:Arial,sans-serif;font-size:14px;color:#555570;line-height:1.85;margin:0 0 22px;text-align:center;direction:rtl;">
+          סוכני AI שיעזרו לכם לכתוב פרומפטים לכל מטרה.
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+          <tr>
+            <td>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td class="btn-pm1" style="background-color:#f3f0ff;border:1.5px solid #d4c8f0;border-radius:10px;min-width:260px;">
+                    <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3"
+                       style="display:block;font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#6d28d9;text-decoration:none;padding:12px 28px;border-radius:9px;text-align:center;direction:rtl;">
+                      Prompt Master ל-ChatGPT
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="btn-pm2" style="background-color:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;min-width:260px;">
+                    <a href="https://gemini.google.com/gem/16N9ZpLWbtXUJ6_RJW7z9My6xqT4zAAqZ?usp=sharing"
+                       style="display:block;font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#15803d;text-decoration:none;padding:12px 28px;border-radius:9px;text-align:center;direction:rtl;">
+                      Prompt Master ל-Gemini
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr><td class="sec-w" style="padding:0 40px;background-color:#ffffff;"><table role="presentation" width="100%"><tr><td class="dv" height="1" style="background-color:#eeeef4;font-size:0;"></td></tr></table></td></tr>
+
+    <!-- AI NEWS -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:30px 40px;text-align:center;background-color:#ffffff;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 8px;">
+          <tr>
+            <td><img src="https://cdn-icons-png.flaticon.com/32/2965/2965879.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;margin:0 auto;opacity:0.7;"></td>
+          </tr>
+        </table>
+        <p style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#b45309;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 10px;text-align:center;">AI NEWS</p>
+        <h3 class="txt-h" style="font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#1a1a2e;margin:0 0 10px;line-height:1.4;text-align:center;direction:rtl;">
+          כי AI לא מחכה לאף אחד
+        </h3>
+        <p class="txt-p" style="font-family:Arial,sans-serif;font-size:14px;color:#555570;line-height:1.9;margin:0 0 22px;text-align:center;direction:rtl;">
+          כל שבוע קורה משהו שמשנה את הכללים מחדש. אנחנו מסכמים את כל מה שחשוב בעברית פשוטה עם ההשלכות הרלוונטיות לכם.
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+          <tr>
+            <td class="btn-news" style="background-color:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;">
+              <a href="https://focusai.co.il/ai-news/"
+                 style="display:block;font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#92400e;text-decoration:none;padding:11px 28px;border-radius:9px;text-align:center;">
+                לחדשות AI
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr><td class="sec-w" style="padding:0 40px;background-color:#ffffff;"><table role="presentation" width="100%"><tr><td class="dv" height="1" style="background-color:#eeeef4;font-size:0;"></td></tr></table></td></tr>
+
+    <!-- BOT-CAMP -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:30px 40px;text-align:center;background-color:#ffffff;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 8px;">
+          <tr>
+            <td><img src="https://cdn-icons-png.flaticon.com/32/2784/2784461.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;margin:0 auto;opacity:0.7;"></td>
+          </tr>
+        </table>
+        <p style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#7c3aed;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 10px;text-align:center;">BOT CAMP</p>
+        <h3 class="txt-h" style="font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#1a1a2e;margin:0 0 10px;line-height:1.4;text-align:center;direction:rtl;">
+          הכשרת מפתחי אוטומציות וסוכני AI
+        </h3>
+        <p class="txt-p" style="font-family:Arial,sans-serif;font-size:14px;color:#555570;line-height:1.9;margin:0 0 22px;text-align:center;direction:rtl;">
+          מ-0 ועד לפרודקשן. בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה.
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+          <tr>
+            <td class="btn-bc" style="background-color:#f3f0ff;border:1.5px solid #d4c8f0;border-radius:10px;">
+              <a href="https://focusai.co.il/academy/"
+                 style="display:block;font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#6d28d9;text-decoration:none;padding:11px 28px;border-radius:9px;text-align:center;direction:rtl;">
+                לפרטים נוספים על תכנית Bot Camp
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr><td class="sec-w" style="padding:0 40px;background-color:#ffffff;"><table role="presentation" width="100%"><tr><td class="dv" height="1" style="background-color:#eeeef4;font-size:0;"></td></tr></table></td></tr>
+
+    <!-- TOOLS + COMMUNITY -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:30px 40px;text-align:center;background-color:#ffffff;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="48%" valign="top" class="mob-col">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="card-t" style="background-color:#f8f7fc;border:1px solid #e8e6f0;border-radius:10px;padding:0;text-align:center;height:200px;vertical-align:top;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height:200px;">
+                      <tr>
+                        <td valign="top" style="padding:20px 20px 0;">
+                          <img src="https://cdn-icons-png.flaticon.com/32/4616/4616734.png" alt="" width="26" height="26" style="width:26px;height:26px;display:block;margin:0 auto 10px;opacity:0.65;">
+                          <p class="txt-h" style="font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#1a1a2e;margin:0 0 6px;text-align:center;direction:rtl;">מרכז כלי AI</p>
+                          <p class="txt-m" style="font-family:Arial,sans-serif;font-size:12px;color:#6e6e88;margin:0;line-height:1.6;text-align:center;direction:rtl;">כל הכלים שאנחנו ממליצים, מסווגים לפי שימוש.</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="bottom" style="padding:10px 20px 20px;">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+                            <tr>
+                              <td style="background-color:#f3f0ff;border:1.5px solid #d4c8f0;border-radius:8px;">
+                                <a href="https://focusai.co.il/ai-tools/"
+                                   style="display:block;font-family:Arial,sans-serif;font-size:12px;font-weight:600;color:#6d28d9;text-decoration:none;padding:8px 22px;border-radius:7px;text-align:center;">
+                                  לכניסה
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="4%"></td>
+            <td width="48%" valign="top" class="mob-col">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="card-wa" style="background-color:#f0fdf4;border:1px solid #dcfce7;border-radius:10px;padding:0;text-align:center;height:200px;vertical-align:top;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height:200px;">
+                      <tr>
+                        <td valign="top" style="padding:20px 20px 0;">
+                          <img src="https://cdn-icons-png.flaticon.com/32/733/733585.png" alt="" width="26" height="26" style="width:26px;height:26px;display:block;margin:0 auto 10px;opacity:0.65;">
+                          <p class="txt-h" style="font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#1a1a2e;margin:0 0 6px;text-align:center;direction:rtl;">קהילת WhatsApp</p>
+                          <p class="txt-m" style="font-family:Arial,sans-serif;font-size:12px;color:#6e6e88;margin:0;line-height:1.6;text-align:center;direction:rtl;">שאלות, תובנות ועדכונים טריים.</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="bottom" style="padding:10px 20px 20px;">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+                            <tr>
+                              <td style="background-color:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;">
+                                <a href="https://did.li/Focus-community"
+                                   style="display:block;font-family:Arial,sans-serif;font-size:12px;font-weight:600;color:#15803d;text-decoration:none;padding:8px 22px;border-radius:7px;text-align:center;">
+                                  להצטרפות
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr><td class="sec-w" style="padding:0 40px;background-color:#ffffff;"><table role="presentation" width="100%"><tr><td class="dv" height="1" style="background-color:#eeeef4;font-size:0;"></td></tr></table></td></tr>
+
+    <!-- CONTACT -->
+    <tr>
+      <td class="sec-w mob-pad" style="padding:28px 40px 32px;text-align:center;background-color:#ffffff;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 8px;">
+          <tr>
+            <td><img src="https://cdn-icons-png.flaticon.com/32/1041/1041916.png" alt="" width="22" height="22" style="width:22px;height:22px;display:block;margin:0 auto;opacity:0.7;"></td>
+          </tr>
+        </table>
+        <p class="txt-h" style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 8px;text-align:center;direction:rtl;">יש שאלה? אנחנו כאן</p>
+        <p class="txt-m" style="font-family:Arial,sans-serif;font-size:13px;color:#6e6e88;line-height:1.8;margin:0 0 20px;text-align:center;direction:rtl;">
+          אם תקעתם, אם משהו לא ברור, אנחנו זמינים.
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+          <tr>
+            <td style="background:linear-gradient(135deg,#15803d,#16a34a);border-radius:10px;box-shadow:0 4px 16px rgba(22,163,74,0.25);">
+              <a href="https://wa.me/972539466408"
+                 style="display:block;font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#ffffff;text-decoration:none;padding:12px 30px;border-radius:10px;text-align:center;">
+                שלחו לנו הודעה
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td style="background-color:#1a0a30;padding:24px 32px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center" style="padding-bottom:14px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding:0 7px;">
+                    <a href="https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==">
+                      <img src="https://cdn-icons-png.flaticon.com/32/2111/2111463.png" alt="Instagram" width="24" height="24" style="width:24px;height:24px;display:block;opacity:0.7;">
+                    </a>
+                  </td>
+                  <td style="padding:0 7px;">
+                    <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/">
+                      <img src="https://cdn-icons-png.flaticon.com/32/733/733547.png" alt="Facebook" width="24" height="24" style="width:24px;height:24px;display:block;opacity:0.7;">
+                    </a>
+                  </td>
+                  <td style="padding:0 7px;">
+                    <a href="https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh">
+                      <img src="https://cdn-icons-png.flaticon.com/32/3046/3046121.png" alt="TikTok" width="24" height="24" style="width:24px;height:24px;display:block;opacity:0.7;">
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding-bottom:8px;">
+              <p style="font-family:Arial,sans-serif;font-size:12px;color:#8070a0;margin:0;text-align:center;line-height:1.9;">
+                <strong style="color:#c084fc;">Focus AI</strong>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="https://focusai.co.il" style="color:#8070a0;text-decoration:none;">focusai.co.il</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="mailto:office@focusai.co.il" style="color:#8070a0;text-decoration:none;">office@focusai.co.il</a>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <p style="font-family:Arial,sans-serif;font-size:13px;color:#8070a0;margin:0;text-align:center;direction:rtl;">
+                קיבלתם מייל זה כי נרשמתם להדרכה.
+                &nbsp;
+                <a class="unsub-link" href="https://focusai.co.il/unsubscribe-any" style="color:#c084fc;font-size:14px;font-weight:600;text-decoration:underline;">הסרה מרשימת הדיוור</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+  </td></tr>
+  </table>
+</body>
+</html>

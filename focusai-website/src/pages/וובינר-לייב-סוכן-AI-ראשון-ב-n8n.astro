@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Meta Pixel Code -->
-    <script>
+    <script is:inline>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -93,6 +93,23 @@
             min-height: 100vh;
             color: var(--text);
             overflow-x: hidden;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            text-decoration: none;
+            padding: 12px 0 8px;
+            transition: color 0.3s;
+        }
+        .back-home:hover {
+            color: var(--primary);
+        }
+        .back-home i {
+            font-size: 0.75rem;
         }
 
         /* Animated Background */
@@ -1681,6 +1698,7 @@
     <div class="particles" id="particles"></div>
 
     <div class="container">
+        <a href="/" class="back-home"><i class="fas fa-arrow-right"></i> חזרה לאתר Focus AI</a>
         <header>
             <a href="/">
                 <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo">

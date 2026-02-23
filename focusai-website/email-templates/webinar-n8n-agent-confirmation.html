@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light only">
+    <!--[if mso]>
+    <style type="text/css">
+        body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+    </style>
+    <![endif]-->
+    <style>
+        :root {
+            color-scheme: light only;
+        }
+
+        u + .body, #MessageViewBody, .body {
+            background-color: #f5f5f7 !important;
+        }
+
+        .header-title, .header-title span {
+            color: #a78bfa !important;
+        }
+
+        .header-subtitle, .header-subtitle span {
+            color: #c4b5fd !important;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .header-title, .header-title span {
+                color: #a78bfa !important;
+            }
+            .header-subtitle, .header-subtitle span {
+                color: #c4b5fd !important;
+            }
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+            .header-title {
+                font-size: 22px !important;
+            }
+            .mobile-padding {
+                padding: 30px 20px !important;
+            }
+            .header-padding {
+                padding: 35px 25px !important;
+            }
+            .logo-mobile {
+                max-width: 130px !important;
+            }
+            .cta-button {
+                padding: 14px 30px !important;
+                font-size: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body class="body" style="margin: 0; padding: 0; font-family: 'Rubik', Arial, Helvetica, sans-serif; background-color: #f5f5f7 !important;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f7 !important; padding: 40px 20px;" bgcolor="#f5f5f7">
+        <tr>
+            <td align="center" bgcolor="#f5f5f7">
+                <table width="600" cellpadding="0" cellspacing="0" class="email-container" style="background-color: #ffffff !important; border-radius: 12px; overflow: hidden;" bgcolor="#ffffff">
+
+                    <!-- Header -->
+                    <tr>
+                        <td class="header-padding" style="padding: 40px 40px 30px 40px; text-align: center; background-color: #1a1a2e;" bgcolor="#1a1a2e">
+                            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1764501675/FOCUSAI_LOGO-04_1_wqvr6m.png" alt="Focus AI Logo" class="logo-mobile" style="max-width: 150px; height: auto; margin-bottom: 20px;" border="0">
+                            <h1 class="header-title" style="color: #a78bfa !important; margin: 0 0 8px 0; font-size: 26px; font-weight: 600; line-height: 1.3; direction: rtl; background-color: transparent !important;">
+                                <span style="color: #a78bfa !important;">נרשמת בהצלחה לוובינר</span>
+                            </h1>
+                            <p class="header-subtitle" style="color: #c4b5fd !important; margin: 0; font-size: 15px; font-weight: 400; direction: rtl;">
+                                <span style="color: #c4b5fd !important;">בניית סוכן AI ראשון ב-N8N - לייב</span>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Status Bar -->
+                    <tr>
+                        <td style="background-color: #8b5cf6; padding: 12px 20px; text-align: center;" bgcolor="#8b5cf6">
+                            <p style="margin: 0; color: #ffffff !important; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;">
+                                המקום שלך שמור
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td class="mobile-padding" style="padding: 40px; direction: rtl; background-color: #ffffff !important;" bgcolor="#ffffff">
+                            <p style="font-size: 16px; color: #1a1a2e !important; line-height: 1.7; margin: 0 0 20px 0; direction: rtl; text-align: right; background-color: #ffffff;" bgcolor="#ffffff">
+                                היי <strong style="color: #1a1a2e !important;">{{ $('Webhook1').item.json.body.fullName }}</strong>,
+                            </p>
+
+                            <p style="font-size: 15px; color: #3f3f46 !important; line-height: 1.8; margin: 0 0 30px 0; direction: rtl; text-align: right; background-color: #ffffff;" bgcolor="#ffffff">
+                                שמחים שהצטרפת! הוובינר הקרוב שלנו הוא הזדמנות לראות איך בונים סוכן AI אמיתי מאפס - לייב, צעד אחר צעד.
+                            </p>
+
+                            <!-- Details Box -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f3ff !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 1px solid #ddd6fe;" bgcolor="#f5f3ff">
+                                <tr>
+                                    <td style="padding: 25px; direction: rtl; background-color: #f5f3ff !important;" bgcolor="#f5f3ff">
+                                        <p style="margin: 0 0 18px 0; font-size: 14px; font-weight: 600; color: #6d28d9 !important; letter-spacing: 0.3px; direction: rtl; text-align: right;">
+                                            פרטי הוובינר
+                                        </p>
+
+                                        <p style="margin: 10px 0; font-size: 15px; direction: rtl; text-align: right; color: #1a1a2e !important;">
+                                            <span style="color: #6b7280 !important;">תאריך:</span> <span style="color: #1a1a2e !important; font-weight: 500;">יום רביעי, 04.03.2026</span>
+                                        </p>
+                                        <p style="margin: 10px 0; font-size: 15px; direction: rtl; text-align: right; color: #1a1a2e !important;">
+                                            <span style="color: #6b7280 !important;">שעה:</span> <span style="color: #1a1a2e !important; font-weight: 500;">19:30</span>
+                                        </p>
+                                        <p style="margin: 10px 0; font-size: 15px; direction: rtl; text-align: right; color: #1a1a2e !important;">
+                                            <span style="color: #6b7280 !important;">פלטפורמה:</span> <span style="color: #1a1a2e !important; font-weight: 500;">Zoom</span>
+                                        </p>
+                                        <p style="margin: 10px 0; font-size: 15px; direction: rtl; text-align: right; color: #1a1a2e !important;">
+                                            <span style="color: #6b7280 !important;">משך:</span> <span style="color: #1a1a2e !important; font-weight: 500;">כ-90 דקות</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- IMPORTANT: WhatsApp Only Access -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fef3c7 !important; border-radius: 10px; margin: 25px 0; border-right: 3px solid #f59e0b; direction: rtl;" bgcolor="#fef3c7">
+                                <tr>
+                                    <td style="padding: 20px; direction: rtl; background-color: #fef3c7 !important;" bgcolor="#fef3c7">
+                                        <p style="font-size: 14px; line-height: 1.8; margin: 0; direction: rtl; text-align: right; color: #78350f !important;">
+                                            <strong style="color: #78350f !important;">חשוב!</strong> הגישה לוובינר היא אך ורק דרך קהילת ה-WhatsApp הסגורה שלנו. לינק הזום יישלח לקהילה 15 דקות לפני תחילת המפגש. ללא הצטרפות לקהילה - לא תקבלו את הלינק.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- WhatsApp Community CTA -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f0fdf4 !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 2px solid #22c55e;" bgcolor="#f0fdf4">
+                                <tr>
+                                    <td style="padding: 25px; direction: rtl; background-color: #f0fdf4 !important; text-align: center;" bgcolor="#f0fdf4">
+                                        <p style="margin: 0 0 5px 0; font-size: 12px; font-weight: 600; color: #15803d !important; letter-spacing: 1px; text-transform: uppercase;">
+                                            שלב חובה
+                                        </p>
+                                        <p style="font-size: 17px; font-weight: 700; color: #1a1a2e !important; line-height: 1.5; margin: 0 0 8px 0; direction: rtl;">
+                                            הצטרפו עכשיו לקהילת ה-WhatsApp
+                                        </p>
+                                        <p style="font-size: 14px; color: #4b5563 !important; line-height: 1.7; margin: 0 0 20px 0; direction: rtl;">
+                                            שם תקבלו את לינק הזום, עדכונים, טיפים וכלים חדשים בעולם ה-AI
+                                        </p>
+                                        <a href="https://did.li/Focus-community" class="cta-button" style="display: inline-block; background-color: #25D366 !important; color: #ffffff !important; text-decoration: none; padding: 14px 35px; border-radius: 8px; font-size: 16px; font-weight: 700;">
+                                            הצטרפות לקהילת הוואצאפ
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin: 35px 0;">
+                                <tr>
+                                    <td style="border-top: 1px solid #e4e4e7; background-color: #ffffff !important;" bgcolor="#ffffff"></td>
+                                </tr>
+                            </table>
+
+                            <!-- What We'll Learn Section -->
+                            <p style="margin: 0 0 18px 0; font-size: 14px; font-weight: 600; color: #6d28d9 !important; letter-spacing: 0.3px; direction: rtl; text-align: right; background-color: #ffffff !important;" bgcolor="#ffffff">
+                                מה יהיה בוובינר
+                            </p>
+
+                            <ul style="color: #3f3f46 !important; font-size: 15px; line-height: 2.2; margin: 0 0 30px 0; padding-right: 18px; direction: rtl; text-align: right; background-color: #ffffff !important;" bgcolor="#ffffff">
+                                <li style="color: #3f3f46 !important;">בוגרי Bot-Camp <strong style="color: #1a1a2e !important;">מציגים סוכנים שהם בנו</strong> - אוטומציות שרצות בעסק שלהם כל יום</li>
+                                <li style="color: #3f3f46 !important;"><strong style="color: #1a1a2e !important;">בנייה לייב של סוכן AI מאפס</strong> - צעד אחר צעד, בזמן אמת על המסך</li>
+                                <li style="color: #3f3f46 !important;">הצצה אל <strong style="color: #1a1a2e !important;">מאחורי הקלעים של Bot-Camp</strong> - מה לומדים, איך מתרגלים, ואיך מגיעים לתוצאות תוך 30 יום</li>
+                                <li style="color: #3f3f46 !important;"><strong style="color: #1a1a2e !important;">שאלות ותשובות בזמן אמת</strong> - תשאלו הכל, תקבלו תשובות ישירות</li>
+                            </ul>
+
+                            <!-- Bonus Section -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f5 !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 1px solid #e4e4e7;" bgcolor="#f4f4f5">
+                                <tr>
+                                    <td style="padding: 25px; direction: rtl; background-color: #f4f4f5 !important;" bgcolor="#f4f4f5">
+                                        <p style="margin: 0 0 15px 0; font-size: 14px; font-weight: 600; color: #6d28d9 !important; letter-spacing: 0.3px; direction: rtl; text-align: right;">
+                                            בונוס למשתתפים
+                                        </p>
+
+                                        <ul style="color: #3f3f46 !important; font-size: 15px; line-height: 2; margin: 0; padding-right: 18px; direction: rtl; text-align: right;">
+                                            <li style="color: #3f3f46 !important;"><strong style="color: #1a1a2e !important;">סוכן AI</strong> ליצירת פרומפטים לכל מטרה <span style="color: #6d28d9 !important;">(הגישה מחכה לכם בסוף המייל!)</span></li>
+                                            <li style="color: #3f3f46 !important;"><strong style="color: #1a1a2e !important;">הנחה משמעותית</strong> ברכישת ההכשרה המלאה למפתחי סוכני AI ואוטומציות עסקיות</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin: 35px 0;">
+                                <tr>
+                                    <td style="border-top: 1px solid #e4e4e7; background-color: #ffffff !important;" bgcolor="#ffffff"></td>
+                                </tr>
+                            </table>
+
+                            <!-- Training Program Box -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f3ff !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 1px solid #ddd6fe;" bgcolor="#f5f3ff">
+                                <tr>
+                                    <td style="padding: 30px; text-align: center; direction: rtl; background-color: #f5f3ff !important;" bgcolor="#f5f3ff">
+                                        <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #6d28d9 !important; letter-spacing: 0.3px;">
+                                            הכשרה מקצועית
+                                        </p>
+
+                                        <p style="margin: 0 0 8px 0; font-size: 17px; line-height: 1.5; direction: rtl; font-weight: 600; color: #1a1a2e !important;">
+                                            הכשרת מפתחי סוכני AI ואוטומציות עסקיות
+                                        </p>
+                                        <p style="margin: 0 0 15px 0; font-size: 14px; color: #4b5563 !important;">
+                                            בליווי אקדמי של אוניברסיטת חיפה
+                                        </p>
+                                        <p style="margin: 0 0 20px 0; font-size: 14px; font-weight: 500; color: #6d28d9 !important;">
+                                            משתתפי הוובינר יקבלו הנחה מיוחדת
+                                        </p>
+
+                                        <a href="https://focusai.co.il/academy" style="display: inline-block; background-color: #ffffff !important; color: #6d28d9 !important; text-decoration: none; padding: 12px 30px; border-radius: 8px; font-size: 14px; font-weight: 600; border: 2px solid #6d28d9;">
+                                            פרטים על ההכשרה
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin: 35px 0;">
+                                <tr>
+                                    <td style="border-top: 1px solid #e4e4e7; background-color: #ffffff !important;" bgcolor="#ffffff"></td>
+                                </tr>
+                            </table>
+
+                            <!-- Free Course -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f5 !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 1px solid #e4e4e7;" bgcolor="#f4f4f5">
+                                <tr>
+                                    <td style="padding: 25px; text-align: center; direction: rtl; background-color: #f4f4f5 !important;" bgcolor="#f4f4f5">
+                                        <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #6d28d9 !important; letter-spacing: 0.3px;">
+                                            הדרכה חינמית
+                                        </p>
+                                        <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1a1a2e !important; direction: rtl;">
+                                            אוטומציית יצירת תוכן עם AI
+                                        </p>
+                                        <p style="margin: 0 0 18px 0; font-size: 14px; color: #4b5563 !important; line-height: 1.7; direction: rtl;">
+                                            70 דקות מעשיות - איך לבנות אוטומציה ליצירת תוכן מאפס
+                                        </p>
+                                        <a href="https://focusai.co.il/content-automation-course/" style="display: inline-block; background-color: #6d28d9 !important; color: #ffffff !important; text-decoration: none; padding: 12px 30px; border-radius: 8px; font-size: 14px; font-weight: 600;">
+                                            צפייה בהדרכה
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- AI Tools Section -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f5 !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 1px solid #e4e4e7;" bgcolor="#f4f4f5">
+                                <tr>
+                                    <td style="padding: 25px; text-align: center; direction: rtl; background-color: #f4f4f5 !important;" bgcolor="#f4f4f5">
+                                        <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1a1a2e !important; direction: rtl;">
+                                            מרגישים מבולבלים מכל הכלים?
+                                        </p>
+                                        <p style="margin: 0 0 18px 0; font-size: 14px; color: #4b5563 !important; line-height: 1.7; direction: rtl;">
+                                            עשינו לכם סדר! כל כלי ה-AI המומלצים לפי מטרה
+                                        </p>
+                                        <a href="https://focusai.co.il/ai-tools/" style="display: inline-block; background-color: #6d28d9 !important; color: #ffffff !important; text-decoration: none; padding: 12px 30px; border-radius: 8px; font-size: 14px; font-weight: 600;">
+                                            מומלץ לשמור במועדפים
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- AI News -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 1px solid #fde68a;" bgcolor="#fffbeb">
+                                <tr>
+                                    <td style="padding: 25px; text-align: center; direction: rtl; background-color: #fffbeb !important;" bgcolor="#fffbeb">
+                                        <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1a1a2e !important; direction: rtl;">
+                                            חדשות AI שחשוב לדעת
+                                        </p>
+                                        <p style="margin: 0 0 18px 0; font-size: 14px; color: #4b5563 !important; line-height: 1.7; direction: rtl;">
+                                            כל שבוע קורה משהו שמשנה את הכללים. אנחנו מסכמים בעברית פשוטה.
+                                        </p>
+                                        <a href="https://focusai.co.il/ai-news/" style="display: inline-block; background-color: #92400e !important; color: #ffffff !important; text-decoration: none; padding: 12px 30px; border-radius: 8px; font-size: 14px; font-weight: 600;">
+                                            לחדשות AI
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin: 35px 0;">
+                                <tr>
+                                    <td style="border-top: 1px solid #e4e4e7; background-color: #ffffff !important;" bgcolor="#ffffff"></td>
+                                </tr>
+                            </table>
+
+                            <!-- Focus AI Prompt Master Section -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f3ff !important; border-radius: 10px; margin: 25px 0; direction: rtl; border: 2px solid #8b5cf6;" bgcolor="#f5f3ff">
+                                <tr>
+                                    <td style="padding: 30px; text-align: center; direction: rtl; background-color: #f5f3ff !important;" bgcolor="#f5f3ff">
+                                        <p style="margin: 0 0 5px 0; font-size: 12px; font-weight: 600; color: #6d28d9 !important; letter-spacing: 1px; text-transform: uppercase;">
+                                            מתנה מאיתנו
+                                        </p>
+                                        <p style="margin: 0 0 10px 0; font-size: 20px; font-weight: 700; color: #1a1a2e !important; direction: rtl;">
+                                            Focus AI Prompt Master
+                                        </p>
+                                        <p style="margin: 0 0 20px 0; font-size: 15px; color: #4b5563 !important; line-height: 1.7; direction: rtl;">
+                                            הסוכן שיכתוב עבורכם פרומפטים מושלמים לכל מטרה
+                                        </p>
+                                        <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" style="display: inline-block; background-color: #6d28d9 !important; color: #ffffff !important; text-decoration: none; padding: 14px 35px; border-radius: 8px; font-size: 15px; font-weight: 600; margin-bottom: 10px;">
+                                            Prompt Master ל-ChatGPT
+                                        </a>
+                                        <br>
+                                        <a href="https://gemini.google.com/gem/c9c0363a0699?usp=sharing" style="display: inline-block; background-color: #ffffff !important; color: #6d28d9 !important; text-decoration: none; padding: 12px 30px; border-radius: 8px; font-size: 14px; font-weight: 600; border: 2px solid #6d28d9; margin-top: 10px;">
+                                            Prompt Master ל-Gemini
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- See You -->
+                            <p style="font-size: 15px; line-height: 1.6; margin: 35px 0 0 0; text-align: center; direction: rtl; color: #3f3f46 !important; background-color: #ffffff !important;" bgcolor="#ffffff">
+                                מצפים לראות אותך,<br>
+                                <strong style="color: #1a1a2e !important;">צוות Focus AI</strong>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f4f4f5 !important; padding: 25px 40px; text-align: center; border-top: 1px solid #e4e4e7;" bgcolor="#f4f4f5">
+                            <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #1a1a2e !important;">
+                                FOCUS AI
+                            </p>
+                            <p style="margin: 0 0 15px 0; font-size: 13px; color: #4b5563 !important;">
+                                <a href="mailto:office@focusai.co.il" style="color: #6d28d9 !important; text-decoration: none;">office@focusai.co.il</a>
+                                <span style="color: #9ca3af !important;"> &middot; </span>
+                                <a href="https://wa.me/972539466408" style="color: #6d28d9 !important; text-decoration: none;">WhatsApp</a>
+                                <span style="color: #9ca3af !important;"> &middot; </span>
+                                <a href="https://focusai.co.il" style="color: #6d28d9 !important; text-decoration: none;">focusai.co.il</a>
+                            </p>
+                            <p style="margin: 0; font-size: 12px; color: #6b7280 !important;">
+                                <a href="https://focusai.co.il/unsubscribe-any" style="color: #6b7280 !important; text-decoration: underline;">הסרה מרשימת הדיוור</a>
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
