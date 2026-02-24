@@ -8,8 +8,8 @@ import ClientLogosCarousel from '../components/ClientLogosCarousel.astro';
 import { founders } from '../data/team';
 
 const workshopBios: Record<string, string> = {
-  unil: "יזם, מנהל רשתות וסמנכ\u05F4ל תפעול ושיווק לשעבר ברשתות קמעונאיות. מומחה בפיתוח עסקי, יישום פתרונות AI ובניית אוטומציות מורכבות שמייעלות תהליכים. מרצה בטכניון ובאוניברסיטת חיפה, מפתח תוכניות לימוד בתחום האוטומציה ו-AI באקדמיה, ויוצר בתחומי הספרות והשירה.",
-  shahar: "עורך דין ויזם עם רקע עשיר בשיווק דיגיטלי. מתמחה באפיון והטמעה של סוכני AI חכמים לעסקים ובהנגשת טכנולוגיה לצוותים לא טכנולוגיים. מרצה בטכניון ובאוניברסיטת חיפה בתחומי פיתוח AI ומפתח תוכניות לימוד בתחום סוכני הבינה המלאכותית והאוטומציה.",
+  shahar: "עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה. מאמין שטכנולוגיה צריכה לשרת את האדם, לא להפך.",
+  unil: 'יזם, מנהל רשתות, בעל ניסיון עשיר בניהול, תפעול וצמיחה עסקית. סמנכ"ל תפעול ושיווק לשעבר ברשתות קמעונאיות מובילות, מביא פרספקטיבה עסקית לפתרונות טכנולוגיים. מפתח מערכות בשילוב AI, פיתוח עסקי ויישום פתרונות AI עם הבנה עמוקה לצרכי הלקוח והארגון. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.',
 };
 
 const webhookUrl = "https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c";
@@ -509,7 +509,7 @@ const stats = [
                 src={founder.image}
                 alt={founder.name}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                style="object-position: center"
+                style={`object-position: ${founder.id === 'shahar' ? 'center 20%' : '40% center'}`}
                 loading="lazy"
               />
             </div>
@@ -523,12 +523,6 @@ const stats = [
               <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">{founder.name}</h3>
               <p class="text-[#a855f7] text-sm font-medium mb-3">{founder.role}</p>
               <p class="text-[#b0b0c0] text-sm leading-relaxed">{workshopBios[founder.id]}</p>
-              <!-- Credentials -->
-              <div class="flex flex-wrap gap-2 mt-4">
-                {founder.credentials.map((cred) => (
-                  <span class="px-3 py-1 bg-[#a855f7]/10 text-[#a855f7] text-xs rounded-full">{cred}</span>
-                ))}
-              </div>
             </div>
           </div>
         ))}
