@@ -21,6 +21,7 @@ const navLinks = [
   { href: '/ai-agents', label: 'סוכני AI', code: 'AGENTS' },
   { href: '/ai-workshop', label: 'סדנאות', code: 'WORKSHOPS' },
   { href: '/ai-news', label: 'חדשות AI', code: 'NEWS' },
+  { href: '#', label: 'וובינרים והדרכות', code: 'WEBINARS', hasDropdown: true, dropdownType: 'webinars' },
   { href: '/tools', label: 'כלי AI', code: 'TOOLS', hasDropdown: true, dropdownType: 'tools' },
   { href: '/about', label: 'אודות', code: 'ABOUT' },
 ];
@@ -30,14 +31,23 @@ const academyLinks = [
   { href: '/academy', label: 'Bot-Camp', code: 'BOT_CMP', description: 'מפתחי אוטומציות וסוכני AI' },
 ];
 
+const webinarsLinks = [
+  { href: '/%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8-%D7%91%D7%9E%D7%AA%D7%A0%D7%94-%D7%A1%D7%95%D7%9B%D7%A0%D7%99-%D7%91%D7%99%D7%A0%D7%94-%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA/', label: 'הדרכה: סוכני AI', code: 'GUIDE', description: 'בניית סוכן AI מאפס - צעד אחר צעד' },
+  { href: '/webinar-n8n-agent', label: 'וובינר Live: סוכן AI ב-N8N', code: 'LIVE', description: 'בניית סוכן AI ראשון ב-N8N - לייב', isLive: true },
+  { href: '/content-automation-course', label: 'הדרכה: אוטומציית תוכן', code: 'FREE', description: 'יצירת תוכן מלא עם AI - מאפס ועד פוסט מוכן' },
+];
+
 const toolsLinks = [
   { href: '/tools', label: 'מרכז הכלים', code: 'CENTER', description: 'כלי AI מומלצים ומדריכים' },
-  { href: '/content-automation-course', label: 'הדרכה חינמית: אוטומציית תוכן', code: 'FREE', description: 'יצירת תוכן מלא עם AI - מאפס ועד פוסט מוכן' },
-  { href: '/%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8-%D7%91%D7%9E%D7%AA%D7%A0%D7%94-%D7%A1%D7%95%D7%9B%D7%A0%D7%99-%D7%91%D7%99%D7%A0%D7%94-%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA/', label: 'הדרכה חינמית: סוכני AI', code: 'GUIDE', description: 'בניית סוכן AI מאפס - צעד אחר צעד' },
-  { href: '/webinar-n8n-agent', label: 'וובינר לייב: סוכן AI ב-N8N', code: 'WEBINAR', description: 'בניית סוכן AI ראשון ב-N8N - לייב' },
   { href: 'https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3', label: 'Prompt Master V3', code: 'GPT', description: 'סוכן AI ב-ChatGPT' },
   { href: 'https://gemini.google.com/gem/c9c0363a0699?usp=sharing', label: 'Prompt Master Gemini', code: 'GEMINI', description: 'סוכן AI ב-Gemini' },
 ];
+
+const dropdownLinksMap: Record<string, typeof toolsLinks> = {
+  academy: academyLinks,
+  webinars: webinarsLinks,
+  tools: toolsLinks,
+};
 ---
 
 <header class={`fixed top-0 left-0 right-0 z-50 p-3 md:p-4 pointer-events-none ${isLight ? 'header-theme-light' : ''}`} id="main-header">
@@ -75,7 +85,8 @@ const toolsLinks = [
                   href={link.href}
                   class={`nav-link-glass flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                     (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
-                    (link.dropdownType === 'tools' && currentPath === '/tools')
+                    (link.dropdownType === 'tools' && currentPath === '/tools') ||
+                    (link.dropdownType === 'webinars' && (currentPath.startsWith('/webinar') || currentPath.startsWith('/content-automation')))
                       ? 'text-[#a855f7] bg-[#a855f7]/10'
                       : isLight
                         ? 'text-[#2a2a3a]/80 hover:text-[#2a2a3a] hover:bg-black/5 header-nav-light'
@@ -92,19 +103,27 @@ const toolsLinks = [
                   <div class="dropdown-glass">
                     {/* Menu Items */}
                     <div class="p-3">
-                      {(link.dropdownType === 'academy' ? academyLinks : toolsLinks).map((sublink) => (
+                      {(dropdownLinksMap[link.dropdownType || ''] || toolsLinks).map((sublink) => (
                         <a
                           href={sublink.href}
                           {...(sublink.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                           class={`group/item flex flex-col px-4 py-3.5 rounded-2xl transition-all duration-300 ${
-                            currentPath === sublink.href
-                              ? 'text-[#a855f7] bg-white/10'
-                              : 'text-white/90 hover:text-white hover:bg-white/8'
+                            sublink.isLive
+                              ? 'live-menu-item bg-gradient-to-r from-[#a855f7]/10 to-[#ec4899]/10 border border-[#a855f7]/20 hover:from-[#a855f7]/20 hover:to-[#ec4899]/20 hover:border-[#a855f7]/40 text-white'
+                              : currentPath === sublink.href
+                                ? 'text-[#a855f7] bg-white/10'
+                                : 'text-white/90 hover:text-white hover:bg-white/8'
                           }`}
                         >
                           <div class="flex items-center justify-between mb-1">
                             <span class="font-semibold text-base flex items-center gap-2">
                               {sublink.label}
+                              {sublink.isLive && (
+                                <span class="live-badge inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/90 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_12px_rgba(239,68,68,0.5)]">
+                                  <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span>
+                                  LIVE
+                                </span>
+                              )}
                               {sublink.href.startsWith('http') && (
                                 <svg class="w-3 h-3 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -216,7 +235,8 @@ const toolsLinks = [
               <div
                 class={`flex items-center justify-between px-5 py-4 rounded-2xl transition-all duration-300 ${
                   (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
-                  (link.dropdownType === 'tools' && currentPath === '/tools')
+                  (link.dropdownType === 'tools' && currentPath === '/tools') ||
+                  (link.dropdownType === 'webinars' && (currentPath.startsWith('/webinar') || currentPath.startsWith('/content-automation')))
                     ? 'text-[#a855f7] bg-[#a855f7]/10'
                     : 'text-white/90 hover:bg-white/5'
                 }`}
@@ -226,19 +246,27 @@ const toolsLinks = [
               </div>
               {/* Sub-links */}
               <div class="mt-1 mr-4 space-y-1">
-                {(link.dropdownType === 'academy' ? academyLinks : toolsLinks).map((sublink) => (
+                {(dropdownLinksMap[link.dropdownType || ''] || toolsLinks).map((sublink) => (
                   <a
                     href={sublink.href}
                     {...(sublink.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     class={`flex flex-col px-5 py-3 rounded-xl transition-all duration-300 ${
-                      currentPath === sublink.href
-                        ? 'text-[#a855f7] bg-[#a855f7]/10'
-                        : 'text-white/70 hover:text-white hover:bg-white/5'
+                      sublink.isLive
+                        ? 'live-menu-item bg-gradient-to-r from-[#a855f7]/10 to-[#ec4899]/10 border border-[#a855f7]/20 text-white'
+                        : currentPath === sublink.href
+                          ? 'text-[#a855f7] bg-[#a855f7]/10'
+                          : 'text-white/70 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <div class="flex items-center justify-between mb-0.5">
                       <span class="font-medium flex items-center gap-2">
                         {sublink.label}
+                        {sublink.isLive && (
+                          <span class="live-badge inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/90 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_12px_rgba(239,68,68,0.5)]">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span>
+                            LIVE
+                          </span>
+                        )}
                         {sublink.href.startsWith('http') && (
                           <svg class="w-3 h-3 text-[#a855f7]/50 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -642,6 +670,47 @@ const toolsLinks = [
   .header-theme-light.header-switched-dark .mobile-burger-light:hover {
     color: white !important;
     background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* LIVE badge animations */
+  .live-badge {
+    animation: livePulse 2s ease-in-out infinite;
+  }
+
+  .live-dot {
+    animation: liveDotBlink 1s ease-in-out infinite;
+  }
+
+  @keyframes livePulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 40px rgba(239, 68, 68, 0.3); }
+  }
+
+  @keyframes liveDotBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* LIVE menu item glow on hover */
+  .live-menu-item {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .live-menu-item::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(239, 68, 68, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(8px);
+  }
+
+  .live-menu-item:hover::before {
+    opacity: 1;
   }
 
   /* Responsive adjustments */
