@@ -329,20 +329,21 @@ const courseSchema = {
 >
   <Header slot="header" currentPath="/academy" theme="light" />
 
-  <!-- Meta Pixel Code -->
+  <!-- Academy Meta Pixel (loaded after main pixel via Analytics component) -->
   <script is:inline>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '801192442681278');
-    fbq('track', 'PageView');
+    (function() {
+      function initAcademyPixel() {
+        if (window.__academy_pixel_inited) return;
+        window.__academy_pixel_inited = true;
+        if (typeof fbq === 'function') {
+          fbq('init', '801192442681278');
+          fbq('trackSingle', '801192442681278', 'PageView');
+        }
+      }
+      document.addEventListener('meta-pixel-ready', initAcademyPixel);
+      if (window.__meta_pixel_loaded && typeof fbq === 'function') initAcademyPixel();
+    })();
   </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=801192442681278&ev=PageView&noscript=1" /></noscript>
 
   <!-- Breadcrumb Schema (visually hidden - hero design takes priority) -->
   <script type="application/ld+json" set:html={JSON.stringify({
@@ -613,11 +614,11 @@ const courseSchema = {
 
     <!-- Gartner quote floating in transition -->
     <div class="absolute inset-0 flex items-center justify-center z-10">
-      <div class="text-center px-4" data-animate="fade-up">
-        <p class="text-white/80 text-base md:text-lg font-medium max-w-3xl mx-auto drop-shadow-lg">
+      <div class="text-center px-4">
+        <p class="text-white/80 text-base md:text-lg lg:text-xl font-medium max-w-3xl mx-auto drop-shadow-lg" data-animate="word-reveal">
           "הצפי לשנת 2027: 80% מהאינטראקציות עם לקוחות ינוהלו על ידי סוכני AI"
         </p>
-        <p class="text-white/40 text-sm mt-1.5 font-mono">— Gartner</p>
+        <p class="text-white/40 text-sm mt-1.5 font-mono" data-animate="fade-up" data-delay="0.3">— Gartner</p>
       </div>
     </div>
   </div>
@@ -985,9 +986,9 @@ const courseSchema = {
 
   <!-- Differentiators -->
   <section class="py-4 bg-gradient-to-r from-[#a855f7] to-[#d946ef]">
-    <div class="container px-4 text-center" data-animate="fade-up">
-      <h3 class="text-2xl font-bold text-white mb-2">מה מייחד אותנו?</h3>
-      <p class="text-white/80">
+    <div class="container px-4 text-center">
+      <h3 class="text-2xl font-bold text-white mb-2" data-animate="fade-up">מה מייחד אותנו?</h3>
+      <p class="text-white/80 text-base md:text-lg" data-animate="word-reveal">
         חיבור מעשי בין התעשייה לאקדמיה, ושיטות עבודה פרקטיות על בסיס פרויקטים אמיתיים
       </p>
     </div>

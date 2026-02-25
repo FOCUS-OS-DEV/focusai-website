@@ -41,23 +41,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code (consent-aware) -->
     <script is:inline>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1388659336102272');
-    fbq('track', 'PageView');
+    (function() {
+      function hasMarketingConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.marketing === true;
+        } catch(e) { return false; }
+      }
+      function loadPixel() {
+        if (window.__meta_pixel_loaded) return;
+        window.__meta_pixel_loaded = true;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1388659336102272');
+        fbq('track', 'PageView');
+      }
+      if (hasMarketingConsent()) loadPixel();
+      document.addEventListener('marketing-consent-granted', loadPixel);
+    })();
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
 
     <style>
         * {

@@ -61,21 +61,22 @@ const moreVideos = videoTestimonials.slice(1);
   </Fragment>
   <Header slot="header" />
 
-  <!-- Meta Pixel Code - PageView + Lead -->
+  <!-- Academy Meta Pixel + Lead (loaded after main pixel via Analytics component) -->
   <script is:inline>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '801192442681278');
-    fbq('track', 'PageView');
-    fbq('track', 'Lead');
+    (function() {
+      function initAcademyPixelAndLead() {
+        if (window.__academy_pixel_inited) return;
+        window.__academy_pixel_inited = true;
+        if (typeof fbq === 'function') {
+          fbq('init', '801192442681278');
+          fbq('trackSingle', '801192442681278', 'PageView');
+          fbq('track', 'Lead');
+        }
+      }
+      document.addEventListener('meta-pixel-ready', initAcademyPixelAndLead);
+      if (window.__meta_pixel_loaded && typeof fbq === 'function') initAcademyPixelAndLead();
+    })();
   </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=801192442681278&ev=PageView&noscript=1" /></noscript>
 
   <!-- Hero Message -->
   <section class="pt-32 pb-8 bg-[#0a0a0f] text-center">

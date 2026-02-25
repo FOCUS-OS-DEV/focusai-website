@@ -10,7 +10,7 @@
  */
 import { siteConfig } from '../data/config';
 
-const { gtmId, clarityId, ga4Id } = siteConfig.analytics;
+const { gtmId, clarityId, ga4Id, metaPixelId } = siteConfig.analytics;
 ---
 
 {/* Google Tag Manager - Head Script */}
@@ -69,6 +69,38 @@ const { gtmId, clarityId, ga4Id } = siteConfig.analytics;
 
       if (hasAnalyticsConsent()) loadClarity();
       document.addEventListener('analytics-consent-granted', loadClarity);
+    })();
+  </script>
+)}
+
+{/* Meta Pixel (Facebook) - Marketing */}
+{metaPixelId && (
+  <script is:inline define:vars={{ metaPixelId }}>
+    (function() {
+      function hasMarketingConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.marketing === true;
+        } catch(e) { return false; }
+      }
+
+      function loadMetaPixel() {
+        if (window.__meta_pixel_loaded) return;
+        window.__meta_pixel_loaded = true;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaPixelId);
+        fbq('track', 'PageView');
+        document.dispatchEvent(new CustomEvent('meta-pixel-ready'));
+      }
+
+      if (hasMarketingConsent()) loadMetaPixel();
+      document.addEventListener('marketing-consent-granted', loadMetaPixel);
     })();
   </script>
 )}

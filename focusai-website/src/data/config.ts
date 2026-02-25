@@ -77,6 +77,10 @@ export const siteConfig = {
 
     // Google Analytics 4 (מוגדר דרך GTM)
     ga4Id: "",
+
+    // Meta Pixel (Facebook)
+    metaPixelId: "1388659336102272",
+    metaPixelIdAcademy: "801192442681278",
   },
 } as const;
 
