@@ -13,7 +13,7 @@ const jobs = [
     id: 'education-consultant',
     title: 'יועצ/ת לימודים',
     type: 'משרה מלאה / חלקית',
-    location: 'היברידי - חיפה / מרחוק',
+    location: 'רמת גן',
     tag: 'SALES',
     description: 'חיפוש יועצי לימודים לתכניות ההכשרה המובילות שלנו בתחום ה-AI.',
     requirements: [
@@ -26,8 +26,8 @@ const jobs = [
   {
     id: 'n8n-developer',
     title: 'מפתח/ת אוטומציות וסוכני AI',
-    type: 'פרילנס / משרה מלאה',
-    location: 'מרחוק',
+    type: 'משרה מלאה / חלקית',
+    location: '',
     tag: 'N8N_DEV',
     description: 'בניית אוטומציות מורכבות וסוכני AI למערכת N8N עבור לקוחות מגוונים.',
     requirements: [
@@ -41,8 +41,8 @@ const jobs = [
   {
     id: 'fullstack-ai',
     title: 'מתכנת/ת Full-Stack AI',
-    type: 'משרה מלאה / פרילנס',
-    location: 'היברידי / מרחוק',
+    type: 'משרה מלאה / חלקית',
+    location: '',
     tag: 'FULLSTACK',
     description: 'פיתוח מוצרים ופתרונות טכנולוגיים בשילוב כלי AI מתקדמים.',
     requirements: [
@@ -56,8 +56,8 @@ const jobs = [
   {
     id: 'solution-engineer',
     title: 'Solution Engineer',
-    type: 'משרה מלאה',
-    location: 'היברידי - חיפה / מרחוק',
+    type: 'משרה מלאה / חלקית',
+    location: '',
     tag: 'SOLUTION',
     description: 'אפיון והובלת תהליכי הטמעה של בינה מלאכותית בארגונים, כולל ניהול תיק לקוחות.',
     requirements: [
@@ -67,6 +67,39 @@ const jobs = [
       'יכולת תרגום צרכים עסקיים לפתרונות טכנולוגיים',
       'ניסיון בעבודה עם N8N, Make או כלי אוטומציה דומים',
       'יתרון - רקע בייעוץ עסקי / ניהולי',
+    ],
+  },
+  {
+    id: 'lecturer-automation',
+    title: 'מרצה לפיתוח אוטומציות וסוכני AI',
+    type: 'משרה חלקית / פרילנס',
+    location: '',
+    tag: 'LECTURER',
+    description: 'הוראה והעברת תכנים מקצועיים בתחום פיתוח אוטומציות וסוכני AI, כולל הרצאות פרונטליות, שיעורי Zoom Live והקלטת מדריכים דיגיטליים.',
+    requirements: [
+      'ניסיון מוכח בפיתוח אוטומציות וסוכני AI (N8N, Make, LangChain וכד׳)',
+      'יכולת העברת תכנים מורכבים בצורה ברורה ומעניינת',
+      'נוחות בעמידה מול מצלמה והקלטת מדריכים דיגיטליים',
+      'זמינות להרצאות פרונטליות ו/או שיעורי Zoom Live',
+      'יתרון - ניסיון קודם בהוראה / הדרכה',
+      'יתרון - ניסיון עם מודלי AI (OpenAI, Claude, Gemini)',
+    ],
+  },
+  {
+    id: 'mentor-ai',
+    title: 'מנטור/ית - ליווי סטודנטים',
+    type: 'משרה חלקית / שילוב עם תפקידים נוספים',
+    location: '',
+    tag: 'MENTOR',
+    description: 'ליווי אישי ומקצועי של סטודנטים בתכניות ההכשרה שלנו בתחום N8N ופיתוח באמצעות AI, באמצעות פגישות Zoom היברידיות.',
+    requirements: [
+      'ניסיון מעשי בעבודה עם N8N ופיתוח אוטומציות',
+      'ניסיון בפיתוח באמצעות כלי AI (Cursor, Claude Code, Copilot וכד׳)',
+      'יכולת הנגשת תכנים טכניים והובלת סטודנטים צעד אחר צעד',
+      'זמינות לפגישות Zoom קבועות עם סטודנטים',
+      'סבלנות, אמפתיה ויכולת תקשורת בין-אישית גבוהה',
+      'יתרון - ניסיון בחונכות / הדרכה',
+      'ניתן לשלב עם תפקידים נוספים בחברה',
     ],
   },
 ];
@@ -112,8 +145,12 @@ const jobs = [
               </div>
               <div class="flex items-center gap-4 text-xs text-white/40">
                 <span>{job.type}</span>
-                <span class="w-1 h-1 rounded-full bg-white/20"></span>
-                <span>{job.location}</span>
+                {job.location && (
+                  <>
+                    <span class="w-1 h-1 rounded-full bg-white/20"></span>
+                    <span>{job.location}</span>
+                  </>
+                )}
               </div>
             </div>
 
