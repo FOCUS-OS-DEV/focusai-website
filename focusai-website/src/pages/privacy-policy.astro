@@ -26,7 +26,7 @@ const privacyEmail = "office@focusai.co.il";
 
           <!-- 1. פרטי העסק -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">1. פרטי העסק (בעל מאגר המידע)</h2>
+            <h2 class="text-2xl font-bold text-white mb-4">1. פרטי העסק</h2>
             <div class="p-6 rounded-xl bg-white/5 border border-white/10">
               <p><strong class="text-white">שם העסק:</strong> Focus AI</p>
               <p class="mt-2"><strong class="text-white">כתובת:</strong> אריה שנקר 14, הרצליה</p>
@@ -34,7 +34,7 @@ const privacyEmail = "office@focusai.co.il";
               <p class="mt-2"><strong class="text-white">דוא"ל לענייני פרטיות:</strong> <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a></p>
             </div>
             <p class="mt-4">
-              Focus AI מכבדת את פרטיותכם ומחויבת להגן על המידע האישי שלכם. מדיניות פרטיות זו מסבירה אילו מידע אנו אוספים, כיצד אנו משתמשים בו, למי אנו מעבירים אותו ומהן הזכויות שלכם.
+              Focus AI מכבדת את פרטיותכם ומחויבת להגן על המידע האישי שלכם. מדיניות פרטיות זו מסבירה אילו מידע אנו אוספים, כיצד אנו משתמשים בו, למי אנו מעבירים אותו ומהן הזכויות שלכם בהתאם לחוק.
             </p>
           </section>
 
@@ -43,7 +43,7 @@ const privacyEmail = "office@focusai.co.il";
             <h2 class="text-2xl font-bold text-white mb-4">2. המידע שאנו אוספים</h2>
 
             <h3 class="text-xl font-semibold text-white mt-6 mb-3">2.1 מידע שאתם מספקים ישירות</h3>
-            <p>בעת מילוי טפסים באתר (יצירת קשר, הרשמה להדרכות, בקשת סילבוס וכד') אנו אוספים:</p>
+            <p>בעת מילוי טפסים באתר (יצירת קשר, הרשמה להכשרות, בקשת סילבוס וכד') אנו אוספים:</p>
             <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
               <li>שם מלא</li>
               <li>כתובת דואר אלקטרוני</li>
@@ -52,10 +52,14 @@ const privacyEmail = "office@focusai.co.il";
               <li>תוכן ההודעה / הפנייה</li>
               <li>העדפת קבלת תוכן שיווקי (כן/לא — על פי בחירתכם)</li>
             </ul>
+            <p class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-sm">
+              <strong class="text-white">חשוב:</strong> מסירת המידע בטפסים היא וולונטרית. אין חובה חוקית למסור לנו מידע אישי. עם זאת, אי-מסירת פרטי קשר בסיסיים (שם, טלפון, מייל) תמנע מאיתנו לטפל בפנייתכם או לספק לכם את השירות המבוקש.
+            </p>
 
             <h3 class="text-xl font-semibold text-white mt-6 mb-3">2.2 מידע הנאסף אוטומטית</h3>
+            <p>בעת גלישה באתר, ובכפוף להסכמתכם לעוגיות, עשוי להיאסף מידע הכולל:</p>
             <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li>כתובת IP</li>
+              <li>כתובת IP ומזהים מקוונים</li>
               <li>סוג דפדפן ומערכת הפעלה</li>
               <li>דפים שנצפו, זמן שהייה, מקור ההפניה</li>
               <li>מזהי עוגיות (ראו סעיף 4)</li>
@@ -93,14 +97,16 @@ const privacyEmail = "office@focusai.co.il";
                 <p class="text-sm">שמירת רשומות לפי דרישות רשויות מס, רגולציה או צו שיפוטי</p>
               </div>
             </div>
+            <p class="mt-4 text-sm">
+              אנו לא נעבד את המידע שלכם למטרות שחורגות מהמטרות שפורטו לעיל, אלא אם ניתנה הסכמתכם המפורשת לכך או שהדבר נדרש על פי דין.
+            </p>
           </section>
 
           <!-- 4. עוגיות -->
           <section>
             <h2 class="text-2xl font-bold text-white mb-4">4. עוגיות (Cookies)</h2>
             <p>
-              האתר משתמש בעוגיות. בהתאם לחוק התקשורת (תיקון), שימוש בעוגיות שאינן הכרחיות מחייב את הסכמתכם המפורשת.
-              הסכמתכם נשאלת דרך הבאנר שמופיע בכניסה לאתר, וניתן לשנותה בכל עת.
+              האתר משתמש בעוגיות — קבצים קטנים הנשמרים במכשירכם. בהתאם להמלצות הרשות להגנת הפרטיות, שימוש בעוגיות שאינן הכרחיות לתפקוד האתר מחייב את הסכמתכם המפורשת.
             </p>
 
             <div class="mt-6 overflow-x-auto">
@@ -110,7 +116,7 @@ const privacyEmail = "office@focusai.co.il";
                     <th class="text-right p-3 font-semibold text-white border border-white/10">כלי</th>
                     <th class="text-right p-3 font-semibold text-white border border-white/10">קטגוריה</th>
                     <th class="text-right p-3 font-semibold text-white border border-white/10">מטרה</th>
-                    <th class="text-right p-3 font-semibold text-white border border-white/10">חברה</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">ספק</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -149,7 +155,7 @@ const privacyEmail = "office@focusai.co.il";
             </div>
 
             <p class="mt-4 text-sm">
-              לניהול העדפות העוגיות שלכם, לחצו על הקישור "הגדרות עוגיות" בתחתית האתר, או שנו את הגדרות הדפדפן שלכם.
+              תוכלו לנהל את העדפות העוגיות שלכם בכל עת דרך הגדרות הדפדפן שלכם, או באמצעות הקישור "הגדרות עוגיות" בתחתית האתר. שימו לב שחסימת עוגיות מסוימות עשויה להשפיע על חוויית הגלישה.
             </p>
           </section>
 
@@ -157,17 +163,17 @@ const privacyEmail = "office@focusai.co.il";
           <section>
             <h2 class="text-2xl font-bold text-white mb-4">5. שיתוף מידע עם צדדים שלישיים</h2>
             <p>
-              אנו לא מוכרים את המידע האישי שלכם. אנו עשויים להעביר מידע לגורמים הבאים בלבד:
+              אנו לא מוכרים ולא סוחרים במידע האישי שלכם. אנו עשויים להעביר מידע לגורמים הבאים בלבד, לצורך מתן השירות ותפעול האתר:
             </p>
 
             <div class="mt-6 overflow-x-auto">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-white/10">
-                    <th class="text-right p-3 font-semibold text-white border border-white/10">גורם</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">ספק</th>
                     <th class="text-right p-3 font-semibold text-white border border-white/10">מטרה</th>
                     <th class="text-right p-3 font-semibold text-white border border-white/10">מדינה</th>
-                    <th class="text-right p-3 font-semibold text-white border border-white/10">מסמך פרטיות</th>
+                    <th class="text-right p-3 font-semibold text-white border border-white/10">מדיניות פרטיות</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -185,7 +191,7 @@ const privacyEmail = "office@focusai.co.il";
                   </tr>
                   <tr class="border border-white/10">
                     <td class="p-3 border border-white/10">Microsoft Corporation</td>
-                    <td class="p-3 border border-white/10">Microsoft Clarity (הקלטת סשנים)</td>
+                    <td class="p-3 border border-white/10">Microsoft Clarity (ניתוח התנהגות)</td>
                     <td class="p-3 border border-white/10">ארה"ב</td>
                     <td class="p-3 border border-white/10"><a href="https://privacy.microsoft.com" target="_blank" rel="noopener" class="text-purple-light hover:underline">privacy.microsoft.com</a></td>
                   </tr>
@@ -210,11 +216,25 @@ const privacyEmail = "office@focusai.co.il";
                 </tbody>
               </table>
             </div>
+
+            <p class="mt-4 text-sm">
+              ספקים אלה פועלים כמעבדי מידע מטעמנו ומחויבים לשמור על סודיות המידע ולהשתמש בו אך ורק למטרות שלשמן הועבר.
+            </p>
           </section>
 
-          <!-- 6. תקופות שמירה -->
+          <!-- 6. העברת מידע לחו"ל -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">6. תקופות שמירת מידע</h2>
+            <h2 class="text-2xl font-bold text-white mb-4">6. העברת מידע לחו"ל</h2>
+            <p>
+              חלק מספקי השירות שלנו (Google, Meta, Microsoft, Cloudinary) ממוקמים בארצות הברית ובמדינות אחרות.
+              העברות אלו מתבצעות בהתאם להסדרים חוקיים מתאימים (לרבות מנגנוני DPF / סעיפים חוזיים סטנדרטיים),
+              ובהתאם להנחיות הרשות להגנת הפרטיות בישראל.
+            </p>
+          </section>
+
+          <!-- 7. תקופות שמירה -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">7. תקופות שמירת מידע</h2>
             <p>אנו שומרים מידע אישי רק כל עוד הדבר נדרש למטרה שלשמה נאסף:</p>
 
             <div class="mt-6 overflow-x-auto">
@@ -233,7 +253,7 @@ const privacyEmail = "office@focusai.co.il";
                     <td class="p-3 border border-white/10">מענה מתמשך, רישומים עסקיים</td>
                   </tr>
                   <tr class="bg-white/[0.02] border border-white/10">
-                    <td class="p-3 border border-white/10">רשומות לקוחות / קורסים</td>
+                    <td class="p-3 border border-white/10">רשומות לקוחות / הכשרות</td>
                     <td class="p-3 border border-white/10">7 שנים</td>
                     <td class="p-3 border border-white/10">חוק החשבונאות, מס הכנסה</td>
                   </tr>
@@ -260,10 +280,10 @@ const privacyEmail = "office@focusai.co.il";
             </p>
           </section>
 
-          <!-- 7. הזכויות שלכם -->
+          <!-- 8. הזכויות שלכם -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">7. הזכויות שלכם (תיקון 13 לחוק הגנת הפרטיות)</h2>
-            <p>בהתאם לחוק הגנת הפרטיות (תיקון 13, בתוקף מ-14.8.2025), יש לכם את הזכויות הבאות:</p>
+            <h2 class="text-2xl font-bold text-white mb-4">8. הזכויות שלכם</h2>
+            <p>בהתאם לחוק הגנת הפרטיות (תיקון 13), יש לכם את הזכויות הבאות:</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
               <div class="p-4 rounded-xl bg-white/5 border border-white/10">
@@ -284,31 +304,31 @@ const privacyEmail = "office@focusai.co.il";
               </div>
               <div class="p-4 rounded-xl bg-white/5 border border-white/10">
                 <p class="font-semibold text-white mb-1">זכות ניידות</p>
-                <p class="text-sm">לקבל את המידע שלכם בפורמט מובנה ולהעבירו</p>
+                <p class="text-sm">לקבל את המידע שלכם בפורמט מובנה ולהעבירו לגורם אחר</p>
               </div>
               <div class="p-4 rounded-xl bg-white/5 border border-white/10">
                 <p class="font-semibold text-white mb-1">ביטול הסכמה</p>
-                <p class="text-sm">לבטל בכל עת הסכמה לשיווק, מבלי שזה ישפיע על עיבוד עבר</p>
+                <p class="text-sm">לבטל בכל עת הסכמה שנתתם, מבלי שהדבר ישפיע על חוקיות העיבוד שבוצע לפני הביטול</p>
               </div>
             </div>
 
             <p class="mt-6">
               למימוש כל הזכויות האמורות, פנו אלינו בדוא"ל: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a><br/>
-              אנו נשיב תוך 30 יום. במקרים מורכבים ניתן להאריך ל-60 יום תוך הודעה.
+              אנו נשיב לפנייתכם תוך 30 יום. במקרים מורכבים ניתן להאריך ל-60 יום תוך הודעה מוקדמת.
             </p>
           </section>
 
-          <!-- 8. שיווק ישיר -->
+          <!-- 9. שיווק ישיר -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">8. שיווק ישיר ודיוור (חוק התקשורת, סעיף 30א)</h2>
+            <h2 class="text-2xl font-bold text-white mb-4">9. שיווק ישיר ודיוור</h2>
             <p>
-              אנו שולחים תכנים שיווקיים (עדכונים, מבצעים, תוכן AI) אך ורק למי שנתן הסכמה מפורשת ומוקדמת לכך.
+              בהתאם לחוק התקשורת (בזק ושידורים), סעיף 30א, אנו שולחים תכנים שיווקיים אך ורק למי שנתן הסכמה מפורשת ומוקדמת לכך.
             </p>
             <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
-              <li>כל הודעה שיווקית תסומן במפורש ("פרסומת")</li>
-              <li>בכל הודעה יופיע קישור ברור לביטול ההרשמה (Unsubscribe)</li>
+              <li>כל הודעה שיווקית תסומן כ<strong class="text-white">"דבר פרסומת"</strong> ותכלול את שם השולח ופרטי התקשרות</li>
+              <li>בכל הודעה יופיע קישור ברור לביטול ההרשמה</li>
               <li>ניתן לבטל את ההסכמה בכל עת, ללא תשלום וללא צורך בהסבר</li>
-              <li>ביטול ייכנס לתוקף תוך 30 יום לכל היותר</li>
+              <li>ביטול ייכנס לתוקף בהקדם האפשרי</li>
               <li>ביטול ההסכמה לדיוור לא ישפיע על קבלת שירות מ-Focus AI</li>
             </ul>
             <p class="mt-4">
@@ -316,37 +336,27 @@ const privacyEmail = "office@focusai.co.il";
             </p>
           </section>
 
-          <!-- 9. קטינים -->
+          <!-- 10. אבטחת מידע -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">9. קטינים</h2>
-            <p>
-              השירותים באתר מיועדים לבני 18 ומעלה. אנו אינם אוספים ביודעין מידע אישי מקטינים מתחת לגיל 18.
-              אם הגעתם לידיעה שקטין מסר לנו מידע אישי, אנא פנו אלינו ונמחק אותו מיד.
-            </p>
-          </section>
-
-          <!-- 10. העברות בינלאומיות -->
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">10. העברת מידע לחו"ל</h2>
-            <p>
-              חלק מספקי השירות שלנו (Google, Meta, Microsoft, Cloudinary) ממוקמים בארצות הברית ובמדינות אחרות.
-              העברות אלו מתבצעות בהתאם להסדרים חוקיים מתאימים (לרבות מנגנוני DPF / סעיפים חוזיים סטנדרטיים),
-              ובהתאם להנחיות הרשות להגנת הפרטיות בישראל.
-            </p>
-          </section>
-
-          <!-- 11. אבטחת מידע -->
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-4">11. אבטחת מידע</h2>
+            <h2 class="text-2xl font-bold text-white mb-4">10. אבטחת מידע</h2>
             <p>אנו נוקטים באמצעי אבטחה מתאימים להגנה על המידע שלכם:</p>
             <ul class="list-disc list-inside space-y-2 mr-4 mt-3">
               <li>הצפנת SSL/TLS לכל תעבורת האתר</li>
-              <li>גישה מוגבלת למידע רגיש (עקרון הרשאות מינימליות)</li>
+              <li>גישה מוגבלת למידע (עקרון הרשאות מינימליות)</li>
               <li>ניטור ובקרה שוטפים</li>
               <li>גיבוי נתונים מוצפן</li>
             </ul>
             <p class="mt-4 text-sm">
-              במקרה של פרצת אבטחה שיש לה סיכון גבוה לזכויות נושאי המידע, נודיע לרשות להגנת הפרטיות ולנפגעים בהתאם לדרישות תיקון 13.
+              במקרה של אירוע אבטחה חמור שעלול לפגוע בזכויותיכם, נדווח לרשות להגנת הפרטיות באופן מיידי ונעדכן אתכם בהתאם לנדרש בחוק.
+            </p>
+          </section>
+
+          <!-- 11. קטינים -->
+          <section>
+            <h2 class="text-2xl font-bold text-white mb-4">11. קטינים</h2>
+            <p>
+              השירותים באתר מיועדים לבני 18 ומעלה. איננו אוספים ביודעין מידע אישי מקטינים מתחת לגיל 18.
+              אם הגעתם לידיעה שקטין מסר לנו מידע אישי, אנא פנו אלינו ונמחק אותו מיד.
             </p>
           </section>
 
@@ -354,7 +364,7 @@ const privacyEmail = "office@focusai.co.il";
           <section>
             <h2 class="text-2xl font-bold text-white mb-4">12. שינויים במדיניות</h2>
             <p>
-              אנו עשויים לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר לפחות 30 יום לפני כניסתם לתוקף,
+              אנו עשויים לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר,
               ונשלח הודעה לרשומים לרשימות הדיוור שלנו.
               תאריך העדכון האחרון מופיע בראש עמוד זה.
             </p>
@@ -362,13 +372,17 @@ const privacyEmail = "office@focusai.co.il";
 
           <!-- 13. יצירת קשר -->
           <section>
-            <h2 class="text-2xl font-bold text-white mb-4">13. יצירת קשר — ממונה על הגנת פרטיות</h2>
+            <h2 class="text-2xl font-bold text-white mb-4">13. יצירת קשר</h2>
             <p>לכל שאלה, פנייה, תלונה, או מימוש זכות לפי חוק הגנת הפרטיות:</p>
             <div class="mt-4 p-6 rounded-xl bg-white/5 border border-white/10">
-              <p class="font-semibold text-white mb-3">Focus AI — טיפול בפניות פרטיות</p>
+              <p class="font-semibold text-white mb-3">Focus AI — פניות בנושא פרטיות</p>
               <p>דוא"ל: <a href={`mailto:${privacyEmail}`} class="text-purple-light hover:underline">{privacyEmail}</a></p>
+              <p class="mt-2">כתובת: אריה שנקר 14, הרצליה</p>
               <p class="mt-2 text-sm text-text-muted">זמן תגובה: עד 30 יום ממועד קבלת הפנייה</p>
             </div>
+            <p class="mt-4 text-sm">
+              ניתן גם להגיש תלונה לרשות להגנת הפרטיות באתר: <a href="https://www.gov.il/he/departments/the_privacy_protection_authority" target="_blank" rel="noopener" class="text-purple-light hover:underline">הרשות להגנת הפרטיות</a>
+            </p>
           </section>
 
         </div>
