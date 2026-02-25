@@ -50,6 +50,34 @@
       if (hasAnalyticsConsent()) loadClarity();
       document.addEventListener('analytics-consent-granted', loadClarity);
     })();
+  })();</script><script>(function(){const metaPixelId = "1388659336102272";
+
+    (function() {
+      function hasMarketingConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.marketing === true;
+        } catch(e) { return false; }
+      }
+
+      function loadMetaPixel() {
+        if (window.__meta_pixel_loaded) return;
+        window.__meta_pixel_loaded = true;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaPixelId);
+        fbq('track', 'PageView');
+        document.dispatchEvent(new CustomEvent('meta-pixel-ready'));
+      }
+
+      if (hasMarketingConsent()) loadMetaPixel();
+      document.addEventListener('marketing-consent-granted', loadMetaPixel);
+    })();
   })();</script><!-- Page-specific head content --> <meta name="robots" content="noindex, nofollow"> <link rel="stylesheet" href="/_astro/about.DYgN4U4Y.css">
 <link rel="stylesheet" href="/_astro/about.i6MaJk1e.css"></head> <body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active"> <!-- Brand fingerprint watermark - fixed background, real element for stable positioning --> <div class="fingerprint-fixed" aria-hidden="true"></div> <!-- Skip to content (a11y) --> <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[9999] focus:bg-[#a855f7] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold">דלג לתוכן</a> <!-- Preloader (first child - renders before everything) --> <!-- Preloader overlay --><div id="preloader" class="preloader" aria-live="polite" aria-label="טוען..." data-astro-cid-whrugjgn> <div class="preloader-bg" data-astro-cid-whrugjgn></div> <div class="preloader-content" data-astro-cid-whrugjgn> <!-- Fingerprint logo with glow --> <div class="preloader-logo-wrap" data-astro-cid-whrugjgn> <div class="preloader-glow" data-astro-cid-whrugjgn></div> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="preloader-logo" width="120" height="120" fetchpriority="high" loading="eager" data-astro-cid-whrugjgn> <!-- Scan line --> <div class="preloader-scanline" data-astro-cid-whrugjgn></div> </div> <!-- Progress bar --> <div class="preloader-progress-track" data-astro-cid-whrugjgn> <div class="preloader-progress-bar" id="preloaderBar" data-astro-cid-whrugjgn></div> </div> <!-- Status text --> <div class="preloader-status" data-astro-cid-whrugjgn> <span class="preloader-dot" data-astro-cid-whrugjgn></span> <span class="preloader-text" id="preloaderStatus" data-astro-cid-whrugjgn>INITIALIZING_</span> </div> </div> </div> <noscript> <style>
     #preloader { display: none !important; }
@@ -177,18 +205,20 @@ LIVE
 </a> </div>  <div class="mt-6 flex items-center justify-between text-xs font-mono text-white/30" data-astro-cid-3ef6ksr2> <span class="flex items-center gap-2" data-astro-cid-3ef6ksr2> <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse shadow-[0_0_8px_#a855f7]" data-astro-cid-3ef6ksr2></span>
 ONLINE
 </span> <span data-astro-cid-3ef6ksr2>v2.0</span> </div> </nav> </div> </header> <script type="module">const i=document.getElementById("mobile-menu-button"),p=document.getElementById("mobile-menu-close"),s=document.getElementById("mobile-menu"),u=document.getElementById("menu-icon-open"),f=document.getElementById("menu-icon-close");let c=!1;function h(){c=!c,c?(s?.classList.remove("-translate-x-full"),s?.classList.add("translate-x-0"),s?.setAttribute("aria-hidden","false"),u?.classList.add("hidden"),f?.classList.remove("hidden"),i?.setAttribute("aria-expanded","true"),document.body.style.overflow="hidden"):(s?.classList.add("-translate-x-full"),s?.classList.remove("translate-x-0"),s?.setAttribute("aria-hidden","true"),u?.classList.remove("hidden"),f?.classList.add("hidden"),i?.setAttribute("aria-expanded","false"),document.body.style.overflow="")}function m(){c&&(c=!1,s?.classList.add("-translate-x-full"),s?.classList.remove("translate-x-0"),s?.setAttribute("aria-hidden","true"),u?.classList.remove("hidden"),f?.classList.add("hidden"),i?.setAttribute("aria-expanded","false"),document.body.style.overflow="")}i?.addEventListener("click",h);p?.addEventListener("click",m);document.addEventListener("keydown",e=>{e.key==="Escape"&&c&&m()});const L=s?.querySelectorAll("a");L?.forEach(e=>{e.addEventListener("click",m)});function y(e){if(e.key!=="Tab"||!c||!s)return;const o=s.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');if(o.length===0)return;const t=o[0],n=o[o.length-1];e.shiftKey?document.activeElement===t&&(e.preventDefault(),n.focus()):document.activeElement===n&&(e.preventDefault(),t.focus())}document.addEventListener("keydown",y);document.querySelectorAll(".nav-dropdown").forEach(e=>{const o=e.querySelector("a"),t=e.querySelector(".dropdown-menu");!o||!t||(o.addEventListener("keydown",n=>{if(n.key==="Enter"||n.key===" "){n.preventDefault();const a=t.classList.contains("dropdown-open");document.querySelectorAll(".dropdown-menu.dropdown-open").forEach(d=>d.classList.remove("dropdown-open")),a||(t.classList.add("dropdown-open"),t.querySelector("a")?.focus())}n.key==="ArrowDown"&&(n.preventDefault(),t.classList.add("dropdown-open"),t.querySelector("a")?.focus())}),t.querySelectorAll("a").forEach((n,a,d)=>{n.addEventListener("keydown",r=>{r.key==="ArrowDown"&&(r.preventDefault(),(d[a+1]||d[0])?.focus()),r.key==="ArrowUp"&&(r.preventDefault(),(d[a-1]||d[d.length-1])?.focus()),r.key==="Escape"&&(r.preventDefault(),t.classList.remove("dropdown-open"),o.focus())})}))});document.addEventListener("click",e=>{e.target?.closest(".nav-dropdown")||document.querySelectorAll(".dropdown-menu.dropdown-open").forEach(o=>o.classList.remove("dropdown-open"))});const l=document.getElementById("main-header"),v=l?.classList.contains("header-theme-light");window.addEventListener("scroll",()=>{if(window.scrollY>20?l?.classList.add("header-scrolled"):l?.classList.remove("header-scrolled"),v){const o=document.querySelectorAll("[data-section]");let t=!1;o.forEach(n=>{const a=n.getBoundingClientRect();if(a.top<=80&&a.bottom>80){const r=window.getComputedStyle(n).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);r&&(parseInt(r[1])+parseInt(r[2])+parseInt(r[3]))/3<30&&(t=!0)}}),t?l?.classList.add("header-switched-dark"):l?.classList.remove("header-switched-dark")}},{passive:!0});</script>  <main id="main-content">     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '801192442681278');
-    fbq('track', 'PageView');
-    fbq('track', 'Lead');
-  </script> <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=801192442681278&ev=PageView&noscript=1"></noscript>  <section class="pt-32 pb-8 bg-[#0a0a0f] text-center"> <div class="container px-4"> <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-[#12121a] border border-green-500/30 mb-6"> <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span> <span class="font-mono text-sm font-semibold text-green-400 uppercase tracking-[0.15em]">RECEIVED</span> </div> <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4">
+    (function() {
+      function initAcademyPixelAndLead() {
+        if (window.__academy_pixel_inited) return;
+        window.__academy_pixel_inited = true;
+        if (typeof fbq === 'function') {
+          fbq('init', '801192442681278');
+          fbq('trackSingle', '801192442681278', 'PageView');
+          fbq('track', 'Lead');
+        }
+      }
+      document.addEventListener('meta-pixel-ready', initAcademyPixelAndLead);
+      if (window.__meta_pixel_loaded && typeof fbq === 'function') initAcademyPixelAndLead();
+    })();
+  </script>  <section class="pt-32 pb-8 bg-[#0a0a0f] text-center"> <div class="container px-4"> <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-[#12121a] border border-green-500/30 mb-6"> <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span> <span class="font-mono text-sm font-semibold text-green-400 uppercase tracking-[0.15em]">RECEIVED</span> </div> <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4">
 תודה! <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#c084fc]">הפרטים נקלטו</span> </h1> <p class="text-xl md:text-2xl text-[#b0b0c0] max-w-2xl mx-auto">
 יועץ לימודים כבר יחזור אליך בהקדם
 </p> </div> </section>  <section class="py-10 bg-[#0a0a0f]"> <div class="container px-4"> <div class="text-center mb-8"> <h2 class="text-2xl md:text-3xl font-bold text-white">

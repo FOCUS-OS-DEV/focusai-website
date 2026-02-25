@@ -50,6 +50,34 @@
       if (hasAnalyticsConsent()) loadClarity();
       document.addEventListener('analytics-consent-granted', loadClarity);
     })();
+  })();</script><script>(function(){const metaPixelId = "1388659336102272";
+
+    (function() {
+      function hasMarketingConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.marketing === true;
+        } catch(e) { return false; }
+      }
+
+      function loadMetaPixel() {
+        if (window.__meta_pixel_loaded) return;
+        window.__meta_pixel_loaded = true;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaPixelId);
+        fbq('track', 'PageView');
+        document.dispatchEvent(new CustomEvent('meta-pixel-ready'));
+      }
+
+      if (hasMarketingConsent()) loadMetaPixel();
+      document.addEventListener('marketing-consent-granted', loadMetaPixel);
+    })();
   })();</script><!-- Page-specific head content --><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/about.DYgN4U4Y.css">
 <link rel="stylesheet" href="/_astro/ai-ready.CVrdGZoQ.css">
 <link rel="stylesheet" href="/_astro/links.D5rXkE71.css"></head> <body class="bg-[#0a0a0f] text-[#f5f5fa] font-sans antialiased preloader-active"> <!-- Brand fingerprint watermark - fixed background, real element for stable positioning --> <div class="fingerprint-fixed" aria-hidden="true"></div> <!-- Skip to content (a11y) --> <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[9999] focus:bg-[#a855f7] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold">דלג לתוכן</a> <!-- Preloader (first child - renders before everything) --> <!-- Preloader overlay --><div id="preloader" class="preloader" aria-live="polite" aria-label="טוען..." data-astro-cid-whrugjgn> <div class="preloader-bg" data-astro-cid-whrugjgn></div> <div class="preloader-content" data-astro-cid-whrugjgn> <!-- Fingerprint logo with glow --> <div class="preloader-logo-wrap" data-astro-cid-whrugjgn> <div class="preloader-glow" data-astro-cid-whrugjgn></div> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="preloader-logo" width="120" height="120" fetchpriority="high" loading="eager" data-astro-cid-whrugjgn> <!-- Scan line --> <div class="preloader-scanline" data-astro-cid-whrugjgn></div> </div> <!-- Progress bar --> <div class="preloader-progress-track" data-astro-cid-whrugjgn> <div class="preloader-progress-bar" id="preloaderBar" data-astro-cid-whrugjgn></div> </div> <!-- Status text --> <div class="preloader-status" data-astro-cid-whrugjgn> <span class="preloader-dot" data-astro-cid-whrugjgn></span> <span class="preloader-text" id="preloaderStatus" data-astro-cid-whrugjgn>INITIALIZING_</span> </div> </div> </div> <noscript> <style>
