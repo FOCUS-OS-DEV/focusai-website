@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = 'דרושים | Focus AI - הצטרפו לצוות';
+const pageDescription = 'מחפשים אנשים מוכשרים שרוצים להוביל את מהפכת ה-AI בישראל. בואו להצטרף לצוות Focus AI.';
+
+const currentPath = '/careers';
+
+const jobs = [
+  {
+    id: 'education-consultant',
+    title: 'יועצ/ת לימודים',
+    type: 'משרה מלאה / חלקית',
+    location: 'היברידי - חיפה / מרחוק',
+    tag: 'SALES',
+    description: 'חיפוש יועצי לימודים לתכניות ההכשרה המובילות שלנו בתחום ה-AI.',
+    requirements: [
+      'ניסיון במכירות / ייעוץ לימודים / שירות לקוחות',
+      'יכולת שכנוע ותקשורת בין-אישית מצוינת',
+      'אוריינטציה ליעדים ותוצאות',
+      'יתרון - היכרות עם עולם ה-AI וההכשרות המקצועיות',
+    ],
+  },
+  {
+    id: 'n8n-developer',
+    title: 'מפתח/ת אוטומציות וסוכני AI',
+    type: 'פרילנס / משרה מלאה',
+    location: 'מרחוק',
+    tag: 'N8N_DEV',
+    description: 'בניית אוטומציות מורכבות וסוכני AI למערכת N8N עבור לקוחות מגוונים.',
+    requirements: [
+      'ניסיון מוכח בפיתוח workflows ב-N8N',
+      'הבנה מעמיקה של APIs ואינטגרציות',
+      'ניסיון בעבודה עם מודלי AI (OpenAI, Claude, Gemini)',
+      'יכולת בניית סוכני AI אוטונומיים',
+      'יתרון - ניסיון עם Make / Zapier',
+    ],
+  },
+  {
+    id: 'fullstack-ai',
+    title: 'מתכנת/ת Full-Stack AI',
+    type: 'משרה מלאה / פרילנס',
+    location: 'היברידי / מרחוק',
+    tag: 'FULLSTACK',
+    description: 'פיתוח מוצרים ופתרונות טכנולוגיים בשילוב כלי AI מתקדמים.',
+    requirements: [
+      'ניסיון בפיתוח Full-Stack (React/Next.js + Node.js/Python)',
+      'ניסיון בעבודה עם AI APIs ו-SDKs',
+      'הבנה של ארכיטקטורת מערכות ו-Cloud',
+      'יכולת עבודה עצמאית וניהול פרויקטים',
+      'יתרון - ניסיון עם RAG, Vector DBs, LangChain',
+    ],
+  },
+  {
+    id: 'solution-engineer',
+    title: 'Solution Engineer',
+    type: 'משרה מלאה',
+    location: 'היברידי - חיפה / מרחוק',
+    tag: 'SOLUTION',
+    description: 'אפיון והובלת תהליכי הטמעה של בינה מלאכותית בארגונים, כולל ניהול תיק לקוחות.',
+    requirements: [
+      'ניסיון באפיון מערכות מורכבות ותהליכים עסקיים',
+      'הבנה מעמיקה של טכנולוגיות AI, אוטומציות וסוכנים',
+      'ניסיון בניהול לקוחות ופרויקטים מקצה לקצה',
+      'יכולת תרגום צרכים עסקיים לפתרונות טכנולוגיים',
+      'ניסיון בעבודה עם N8N, Make או כלי אוטומציה דומים',
+      'יתרון - רקע בייעוץ עסקי / ניהולי',
+    ],
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header slot="header" currentPath={currentPath} />
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+    <!-- Ambient glow -->
+    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#a855f7]/15 rounded-full blur-[180px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[#ec4899]/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-full px-5 py-2 mb-8">
+        <span class="w-1.5 h-1.5 bg-[#a855f7] animate-pulse rounded-full"></span>
+        <span class="text-xs text-[#a855f7] uppercase tracking-wider font-mono">WE'RE HIRING</span>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        הצטרפו <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#a855f7] to-[#ec4899]">לצוות</span>
+      </h1>
+      <p class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+        אנחנו מחפשים אנשים מוכשרים שרוצים להוביל את מהפכת ה-AI בישראל.
+        <br />אם את/ה אוהב/ת לבנות, ליצור ולחדש - יש לך מקום אצלנו.
+      </p>
+    </div>
+  </section>
+
+  <!-- Job Listings -->
+  <section class="relative pb-16 md:pb-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="grid gap-6">
+        {jobs.map((job) => (
+          <div class="group bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-[#a855f7]/30 transition-all duration-300">
+            <!-- Glass header -->
+            <div class="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl">
+              <div class="flex items-center gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+                <span class="font-mono text-xs text-[#b0b0c0]/60 tracking-wider uppercase">{job.tag}</span>
+              </div>
+              <div class="flex items-center gap-4 text-xs text-white/40">
+                <span>{job.type}</span>
+                <span class="w-1 h-1 rounded-full bg-white/20"></span>
+                <span>{job.location}</span>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 md:p-8">
+              <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-[#a855f7] transition-colors duration-300">{job.title}</h2>
+              <p class="text-white/50 mb-6 leading-relaxed">{job.description}</p>
+
+              <div class="space-y-2.5">
+                <h3 class="text-sm font-mono text-[#a855f7] uppercase tracking-wider mb-3">דרישות</h3>
+                {job.requirements.map((req) => (
+                  <div class="flex items-start gap-3">
+                    <span class="w-1 h-1 rounded-full bg-[#a855f7]/60 mt-2.5 shrink-0"></span>
+                    <span class="text-white/60 text-sm leading-relaxed">{req}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-8">
+                <a
+                  href="#apply"
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-[#a855f7]/10 border border-[#a855f7]/30 text-[#a855f7] font-medium rounded-full hover:bg-[#a855f7]/20 hover:border-[#a855f7]/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 text-sm"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+                  הגשת מועמדות
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section id="apply" class="relative py-16 md:py-24">
+    <!-- Ambient glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/10 rounded-full blur-[200px] pointer-events-none"></div>
+
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+      <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <!-- Glass header -->
+        <div class="flex items-center gap-3 px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60 tracking-wider uppercase">APPLICATION_FORM</span>
+        </div>
+
+        <!-- Form Content -->
+        <div class="p-8 lg:p-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">הגשת מועמדות</h2>
+          <p class="text-white/50 mb-8">מלאו את הפרטים והעלו קורות חיים - ניצור קשר בהקדם.</p>
+
+          <form id="careers-form" class="space-y-6">
+            <!-- Name Fields Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2 font-mono">
+                  <span class="text-[#b0b0c0]">[REQ]</span> שם פרטי
+                </label>
+                <input
+                  type="text"
+                  name="first_name"
+                  required
+                  placeholder="שם פרטי_"
+                  class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2 font-mono">
+                  <span class="text-[#b0b0c0]">[REQ]</span> שם משפחה
+                </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  required
+                  placeholder="שם משפחה_"
+                  class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+                />
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <label class="block text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2 font-mono">
+                <span class="text-[#b0b0c0]">[REQ]</span> טלפון
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                inputmode="tel"
+                required
+                placeholder="050-0000000_"
+                class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+              />
+            </div>
+
+            <!-- Position Select -->
+            <div>
+              <label class="block text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2 font-mono">
+                <span class="text-[#b0b0c0]">[REQ]</span> משרה מבוקשת
+              </label>
+              <select
+                name="position"
+                required
+                class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl appearance-none cursor-pointer"
+              >
+                <option value="" disabled selected class="text-white/30">בחרו משרה_</option>
+                {jobs.map((job) => (
+                  <option value={job.id}>{job.title}</option>
+                ))}
+                <option value="other">אחר</option>
+              </select>
+            </div>
+
+            <!-- CV Upload -->
+            <div>
+              <label class="block text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2 font-mono">
+                <span class="text-[#b0b0c0]">[REQ]</span> קורות חיים
+              </label>
+              <div class="relative">
+                <input
+                  type="file"
+                  name="cv"
+                  id="cv-input"
+                  required
+                  accept=".pdf,.doc,.docx"
+                  class="hidden"
+                />
+                <label
+                  for="cv-input"
+                  class="cv-upload-area flex flex-col items-center justify-center gap-3 w-full py-8 px-4 bg-[#0a0a0f] border-2 border-dashed border-[#2a2a3a] rounded-xl cursor-pointer hover:border-[#a855f7]/50 hover:bg-[#a855f7]/5 transition-all duration-300"
+                >
+                  <svg class="w-8 h-8 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                  <span class="text-white/40 text-sm" id="cv-label">PDF, DOC, DOCX — עד 10MB</span>
+                  <span class="text-[#a855f7] text-xs font-medium">לחצו לבחירת קובץ</span>
+                </label>
+                <!-- Selected file indicator -->
+                <div id="cv-selected" class="hidden mt-3 flex items-center gap-3 px-4 py-2.5 bg-[#a855f7]/10 border border-[#a855f7]/20 rounded-xl">
+                  <svg class="w-4 h-4 text-[#a855f7] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span class="text-[#a855f7] text-sm truncate" id="cv-filename"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Privacy Consent -->
+            <div class="space-y-3 pt-2">
+              <div class="flex items-start gap-2 text-right">
+                <input type="checkbox" id="privacy" name="privacy" required class="mt-1 accent-[#a855f7]" />
+                <label for="privacy" class="text-xs text-white/50">
+                  קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline hover:text-[#a855f7]/80">תנאי השימוש</a>
+                  ול<a href="/privacy-policy" class="text-[#a855f7] underline hover:text-[#a855f7]/80">מדיניות הפרטיות</a>. *
+                </label>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="submit-btn group w-full min-h-[52px] py-4 bg-[#a855f7] text-[#0a0a0f] font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)] hover:brightness-110 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 rounded-full"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
+              <span>שליחת מועמדות</span>
+            </button>
+          </form>
+
+          <!-- Success Message (hidden by default) -->
+          <div id="form-success" class="hidden text-center py-10">
+            <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+              <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">קיבלנו!</h3>
+            <p class="text-white/50 leading-relaxed">
+              המועמדות שלך התקבלה בהצלחה.<br />
+              צוות HR שלנו ייצור איתך קשר בהקדם.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script is:inline>
+  const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+  // File input handling
+  const cvInput = document.getElementById('cv-input');
+  const cvLabel = document.getElementById('cv-label');
+  const cvSelected = document.getElementById('cv-selected');
+  const cvFilename = document.getElementById('cv-filename');
+
+  cvInput?.addEventListener('change', function() {
+    const file = this.files?.[0];
+    if (file) {
+      if (file.size > MAX_FILE_SIZE) {
+        alert('הקובץ גדול מדי. גודל מקסימלי: 10MB');
+        this.value = '';
+        return;
+      }
+      cvSelected?.classList.remove('hidden');
+      if (cvFilename) cvFilename.textContent = file.name;
+    } else {
+      cvSelected?.classList.add('hidden');
+    }
+  });
+
+  // Form submission
+  const form = document.getElementById('careers-form');
+  const formSuccess = document.getElementById('form-success');
+
+  form?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const btnText = submitBtn?.querySelector('span:last-child');
+    const originalText = btnText?.textContent || '';
+
+    // Loading state
+    if (submitBtn) submitBtn.disabled = true;
+    if (btnText) btnText.textContent = 'שולח...';
+
+    try {
+      const formData = new FormData(form);
+      const fileInput = document.getElementById('cv-input');
+      const file = fileInput?.files?.[0];
+
+      // Read file as base64
+      let fileBase64 = '';
+      let fileName = '';
+      let fileType = '';
+
+      if (file) {
+        fileName = file.name;
+        fileType = file.type;
+        fileBase64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const result = reader.result;
+            // Remove data URL prefix to get pure base64
+            const base64 = result.split(',')[1] || result;
+            resolve(base64);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Build payload
+      const payload = {
+        source: 'careers-application',
+        first_name: formData.get('first_name'),
+        last_name: formData.get('last_name'),
+        phone: formData.get('phone'),
+        position: formData.get('position'),
+        cv_file: fileBase64,
+        cv_filename: fileName,
+        cv_filetype: fileType,
+      };
+
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      // Track conversion
+      if (typeof fbq === 'function') fbq('track', 'Lead');
+
+      // Show success
+      form.classList.add('hidden');
+      formSuccess?.classList.remove('hidden');
+
+    } catch (err) {
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnText) btnText.textContent = originalText;
+      alert('אירעה שגיאה בשליחת הטופס. אנא נסו שנית.');
+    }
+  });
+</script>
