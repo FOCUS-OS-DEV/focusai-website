@@ -17,6 +17,7 @@
  * - counter: Number counter animation
  * - blur-in: Blur to sharp fade in
  * - split-text: Split text character animation
+ * - word-reveal: Scroll-scrubbed word-by-word opacity reveal (like Apple keynotes)
  */
 
 import { gsap } from 'gsap';
@@ -470,6 +471,61 @@ const animations = {
       },
       '-=0.2'
     );
+  },
+
+  // Word-by-word scroll-scrubbed reveal (scroll-tied opacity, per word)
+  // Preserves inner <span> elements with their classes/styles
+  'word-reveal': (el: Element, delay: number = 0) => {
+    const htmlEl = el as HTMLElement;
+
+    // Walk DOM tree and wrap every word in a .wr-word span
+    function processNode(source: Node, target: HTMLElement) {
+      source.childNodes.forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const parts = (child.textContent || '').split(/(\s+)/);
+          parts.forEach(part => {
+            if (/^\s*$/.test(part)) {
+              if (part) target.appendChild(document.createTextNode(part));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'wr-word';
+              span.textContent = part;
+              target.appendChild(span);
+            }
+          });
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          const srcEl = child as HTMLElement;
+          if (srcEl.tagName === 'BR') {
+            target.appendChild(srcEl.cloneNode());
+          } else {
+            // Clone element shell (preserving classes, styles, attributes)
+            const clone = srcEl.cloneNode(false) as HTMLElement;
+            processNode(srcEl, clone);
+            target.appendChild(clone);
+          }
+        }
+      });
+    }
+
+    const temp = document.createElement('div');
+    processNode(htmlEl, temp);
+    htmlEl.innerHTML = temp.innerHTML;
+
+    const words = htmlEl.querySelectorAll('.wr-word');
+
+    // Set initial state
+    gsap.set(words, { opacity: 0.15, display: 'inline-block' });
+
+    gsap.to(words, {
+      opacity: 1,
+      stagger: isMobile ? 0.04 : 0.06,
+      scrollTrigger: {
+        trigger: el,
+        start: isMobile ? 'top 90%' : 'top 70%',
+        end: isMobile ? 'top 30%' : 'bottom 50%',
+        scrub: isMobile ? 0.3 : 0.8
+      }
+    });
   },
 
   // Flip card reveal

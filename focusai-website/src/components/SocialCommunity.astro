@@ -30,13 +30,13 @@ const socials = [
 ];
 ---
 
-<section class="py-16 md:py-24 bg-[#0a0a0f] relative overflow-hidden" data-section>
+<section class="py-8 md:py-12 bg-[#0a0a0f] relative overflow-hidden" data-section>
   <!-- Background glow -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>
 
   <div class="container relative z-10 max-w-3xl mx-auto px-4">
-    <!-- Robot mascot image -->
-    <div class="flex justify-center mb-8" data-animate="scale-up">
+    <!-- Robot mascot image - overlaps behind the card below -->
+    <div class="flex justify-center relative" style="z-index: 1; margin-bottom: -120px;" data-animate="scale-up">
       <img
         src={robotImage}
         alt="חבובוט Focus AI עם לוגואים של הרשתות החברתיות"
@@ -48,8 +48,8 @@ const socials = [
       />
     </div>
 
-    <!-- Glass card -->
-    <div class="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden" data-animate="fade-up">
+    <!-- Glass card - higher z-index so mascot is behind it -->
+    <div class="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden" style="z-index: 5;" data-animate="fade-up">
       <!-- Glass header -->
       <div class="px-6 py-3 border-b border-white/[0.06] bg-white/[0.03] backdrop-blur-sm rounded-t-2xl flex items-center gap-2">
         <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
