@@ -1,16 +1,18 @@
 ---
-// AI Fullstack — Cinematic Landing Page v5
+// AI Builder — Cinematic Landing Page v5
 // Focus AI | Claude Code Training Program
 // Vanta.js + SplitType + GSAP + Bento + Cinematic
+import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Fullstack | קורס פיתוח AI מאפס בלי רקע טכני | Focus AI</title>
-<meta name="description" content="קורס AI Fullstack של Focus AI — 94 שעות, 18 מודולים, מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. הסבת קריירה לתחום ה-AI."/>
-<meta property="og:title" content="AI Fullstack | קורס פיתוח AI מאפס | Focus AI"/>
+<title>AI Builder | תכנית הכשרה לבניית מוצרים דיגיטליים עם AI | Focus AI</title>
+<meta name="description" content="AI Builder של Focus AI — 94 שעות, 18 מודולים, מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. בליווי אקדמי של אוניברסיטת חיפה."/>
+<meta property="og:title" content="AI Builder | תכנית הכשרה לבניית מוצרים דיגיטליים עם AI | Focus AI"/>
 <meta property="og:description" content="94 שעות. 18 מודולים. VS Code + Claude Code. מאפס לפרודקשן — בלי רקע בתכנות."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image:width" content="1200"/>
@@ -21,8 +23,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "AI Fullstack - קורס פיתוח AI מאפס לפרודקשן",
-  "description": "94 שעות, 18 מודולים. מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. הסבת קריירה מקצועית לתחום ה-AI.",
+  "name": "AI Builder - תכנית הכשרה לבניית מוצרים דיגיטליים עם AI",
+  "description": "94 שעות, 18 מודולים. מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. בליווי אקדמי של אוניברסיטת חיפה.",
   "url": "https://focusai.co.il/ai-fullstack",
   "provider": {
     "@type": "Organization",
@@ -55,15 +57,8 @@
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js" defer></script>
 <script is:inline src="https://unpkg.com/split-type" defer></script>
-<script is:inline>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1388659336102272');fbq('track','PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"/></noscript>
+<!-- Analytics (GTM, Clarity, Meta Pixel) - managed by Analytics.astro -->
+<Analytics />
 <style is:inline>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{zoom:1!important;scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{font-family:'Heebo',sans-serif;background:#080810;color:#e0e0e8;overflow-x:hidden;line-height:1.7;direction:rtl}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer;border:none;background:none}img{max-width:100%;display:block}input,select,textarea{font-family:inherit;font-size:inherit}.mono{font-family:'Space Mono',monospace}
 /* Ambient page background — subtle dot grid + color zones */
@@ -80,7 +75,7 @@ fbq('init','1388659336102272');fbq('track','PageView');
 .clc-inner::before{content:'';position:absolute;inset:8px;border-radius:.75rem;background:#fff;z-index:0}
 .clc-center .clc-inner{border-color:rgba(168,85,247,.5);box-shadow:0 0 30px rgba(168,85,247,.12),0 8px 32px rgba(0,0,0,.3)}
 .clc-inner img{position:relative;z-index:1;max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
-@media(min-width:768px){.clc-track{height:210px}.clc-card{width:180px}.clc-inner{width:150px;height:150px;padding:1.25rem}.clc-inner::before{inset:10px}}
+@media(min-width:768px){.clc-track{height:210px}.clc-card{width:180px}.clc-inner{width:150px;height:150px;padding:1.25rem}.clc-inner::before{inset:10px}.lp-cards{width:420px;height:300px}.lp-grid{gap:64px}}
 /* Tech section title */
 .tech-section{padding:48px 0 32px;overflow:hidden;position:relative;z-index:2}
 .tech-title{text-align:center;font-family:'Space Mono',monospace;font-size:13px;color:#a855f7;letter-spacing:.12em;margin-bottom:8px}
@@ -103,7 +98,10 @@ fbq('init','1388659336102272');fbq('track','PageView');
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:18px 40px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;font-weight:700;font-size:17px;border-radius:16px;transition:all .3s;position:relative;overflow:hidden;will-change:transform}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(168,85,247,.35)}.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .5s}.btn-primary:hover::after{left:100%}
 .btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:18px 40px;background:transparent;color:#e0e0e8;font-weight:600;font-size:17px;border-radius:16px;border:1px solid rgba(255,255,255,.15);transition:all .3s}.btn-ghost:hover{border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.08);transform:translateY(-3px)}
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:100px 0 80px;overflow:hidden}#vantaBg{position:absolute;inset:0;z-index:0}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}.hero-text h1{font-size:clamp(38px,6.5vw,72px);font-weight:900;line-height:1.1;margin-bottom:24px;color:#fff}.hero-text h1 .gradient-text{background:linear-gradient(135deg,#a855f7,#00f5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.hero-line{overflow:hidden;display:block}.hero-line-inner{display:block;transform:translateY(115%);opacity:0}.hero-text .subtitle{font-size:clamp(16px,2vw,20px);color:rgba(224,224,232,.7);margin-bottom:36px;line-height:1.8;font-weight:300}.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:52px}.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.stat-item{text-align:center;padding:20px 8px;background:rgba(255,255,255,.03);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.06);border-radius:16px;transition:border-color .3s}.stat-item:hover{border-color:rgba(168,85,247,.2)}.stat-number{font-family:'Space Mono',monospace;font-size:clamp(24px,3vw,36px);font-weight:700;color:#a855f7;display:block}.stat-label{font-size:12px;color:rgba(224,224,232,.5);margin-top:4px;font-weight:300}
-.code-editor{perspective:1000px}.code-editor-inner{transform:rotateY(-6deg) rotateX(3deg);transition:transform .6s cubic-bezier(.22,1,.36,1)}.code-editor-inner:hover{transform:rotateY(0) rotateX(0)}.code-body{padding:24px;font-family:'Space Mono',monospace;font-size:13px;line-height:2;color:rgba(224,224,232,.8);min-height:260px}.code-line{opacity:0;transform:translateX(20px)}.code-line .prompt{color:#a855f7}.code-line .string{color:#00f5ff}.code-line .comment{color:rgba(224,224,232,.3);font-style:italic}.code-line .success{color:#39ff14}.code-line .file{color:#ff006e}.typing-cursor{display:inline-block;width:8px;height:16px;background:#a855f7;animation:blink 1s step-end infinite;vertical-align:middle;margin-right:4px}@keyframes blink{50%{opacity:0}}
+.code-editor{perspective:1000px}.code-editor-inner{transform:rotateY(-6deg) rotateX(3deg);transition:transform .6s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}.code-editor-inner:hover{transform:rotateY(0) rotateX(0)}.code-body{padding:24px;font-family:'Space Mono',monospace;font-size:13px;line-height:2;color:rgba(224,224,232,.8);min-height:260px;transition:opacity .8s ease}.code-line{opacity:0;transform:translateX(20px)}.code-line .prompt{color:#a855f7}.code-line .string{color:#00f5ff}.code-line .comment{color:rgba(224,224,232,.3);font-style:italic}.code-line .success{color:#39ff14}.code-line .file{color:#ff006e}.typing-cursor{display:inline-block;width:8px;height:16px;background:#a855f7;animation:blink 1s step-end infinite;vertical-align:middle;margin-right:4px}@keyframes blink{50%{opacity:0}}
+.hero-cert{display:flex;align-items:center;gap:14px;padding:14px 20px;background:rgba(255,255,255,.03);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:16px;margin-top:24px;max-width:fit-content}
+.hero-cert img{width:48px;height:auto;flex-shrink:0}
+.hero-cert span{font-size:13px;color:rgba(224,224,232,.6);line-height:1.5}
 .statement-section{padding:200px 0;position:relative;overflow:hidden}.statement-text{font-size:clamp(30px,5.5vw,64px);font-weight:800;line-height:1.3;color:#fff;text-align:center;max-width:950px;margin:0 auto}.statement-text .word{display:inline-block;opacity:.08;margin:0 6px}.statement-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%);border-radius:50%;filter:blur(80px);pointer-events:none;animation:breathe2 8s ease-in-out infinite}
 .clip-reveal{clip-path:inset(8% 0 8% 0);opacity:.15;will-change:clip-path,opacity}
 .pain-stack{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:20px}.pain-row{display:flex;align-items:flex-start;gap:20px;padding:28px 24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;opacity:0;transform:translateY(40px);transition:border-color .3s}.pain-row:hover{border-color:rgba(168,85,247,.2)}.pain-num{font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,56px);font-weight:700;color:rgba(168,85,247,.12);line-height:1;flex-shrink:0;min-width:60px;transition:all .5s}.pain-row:hover .pain-num{color:rgba(168,85,247,.35);text-shadow:0 0 60px rgba(168,85,247,.15)}.pain-content{padding-top:4px}.pain-content h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}.pain-content p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.7}
@@ -266,7 +264,48 @@ fbq('init','1388659336102272');fbq('track','PageView');
 .track-cta.primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,85,247,.3)}
 .track-cta.ghost{background:transparent;color:rgba(224,224,232,.7);border:1px solid rgba(255,255,255,.12)}
 .track-cta.ghost:hover{border-color:rgba(168,85,247,.4);color:#fff;background:rgba(168,85,247,.06)}
-.portal-bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(160px,auto);gap:16px;margin-top:48px}.portal-lg{grid-column:span 2;grid-row:span 2;padding:36px;display:flex;flex-direction:column;justify-content:center}.portal-lg .p-icon{width:56px;height:56px;margin-bottom:20px;background:rgba(168,85,247,.1);border-radius:16px;display:flex;align-items:center;justify-content:center}.portal-lg h4{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}.portal-lg p{font-size:15px;color:rgba(224,224,232,.6);line-height:1.7;max-width:320px}.portal-sm{padding:24px;display:flex;flex-direction:column;justify-content:center}.p-icon{width:44px;height:44px;margin-bottom:14px;background:rgba(168,85,247,.08);border-radius:12px;display:flex;align-items:center;justify-content:center}.portal-sm h4{font-size:15px;font-weight:600;color:#fff;margin-bottom:6px}.portal-sm p{font-size:13px;color:rgba(224,224,232,.45);line-height:1.5}.portal-wide{grid-column:span 2;padding:28px;display:flex;align-items:center;gap:20px}.portal-wide h4{font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}.portal-wide p{font-size:13px;color:rgba(224,224,232,.45);line-height:1.4}
+/* Learning Portal — replica of LearningPortal.astro */
+.lp-section{padding:64px 0 96px;position:relative;overflow:hidden;background:#0a0a0f}
+.lp-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:rgba(168,85,247,.04);border-radius:50%;filter:blur(120px);pointer-events:none}
+.lp-badge-wrap{display:flex;justify-content:center;margin-bottom:24px}
+.lp-badge{display:inline-flex;align-items:center;gap:12px;padding:8px 16px;background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:999px}
+.lp-badge-dot{width:6px;height:6px;border-radius:50%;background:#a855f7;animation:pulse 2s ease-in-out infinite}
+.lp-badge span:last-child:not(.lp-badge-dot){font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#a855f7}
+.lp-title{font-size:clamp(28px,4vw,48px);font-weight:900;text-align:center;color:#fff;margin-bottom:12px}
+.lp-title .lp-grad{color:transparent;background:linear-gradient(90deg,#a855f7,#c084fc);-webkit-background-clip:text;background-clip:text}
+.lp-subtitle{text-align:center;font-size:clamp(16px,2vw,18px);color:#b0b0c0;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto}
+.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.lp-features{order:2;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lp-feat{display:flex;align-items:start;gap:12px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;transition:all .3s}
+.lp-feat:hover{border-color:rgba(168,85,247,.3);background:rgba(255,255,255,.05)}
+.lp-feat-icon{width:36px;height:36px;border-radius:8px;background:rgba(168,85,247,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.lp-feat-icon svg{width:20px;height:20px;color:#a855f7;stroke:#a855f7;fill:none;stroke-width:1.5}
+.lp-feat h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.lp-feat p{font-size:12px;color:#8a8aa0;line-height:1.5}
+.lp-cards-wrap{order:1;display:flex;justify-content:center}
+.lp-cards{position:relative;width:320px;height:230px}
+.lp-card{position:absolute;inset:0;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,.1);box-shadow:0 12px 40px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.lp-card img{width:100%;height:100%;object-fit:cover;object-position:top}
+.lp-card-back{transform:rotate(4deg) translate(18%,18%);z-index:1}
+.lp-card-front{transform:rotate(-2deg) translate(-8%,-10%);z-index:2;border-color:rgba(168,85,247,.3);box-shadow:0 16px 48px rgba(168,85,247,.15)}
+.lp-cards:hover .lp-card-back{transform:rotate(6deg) translate(22%,22%)}
+.lp-cards:hover .lp-card-front{transform:rotate(-4deg) translate(-12%,-14%)}
+/* Phone Testimonials */
+.pt-section{padding:64px 0;position:relative;overflow:hidden;background:#0a0a0f}
+.pt-title{text-align:center;font-size:clamp(24px,4vw,40px);font-weight:900;color:#fff;margin-bottom:8px}
+.pt-subtitle{text-align:center;font-size:16px;color:#b0b0c0;margin-bottom:48px}
+.phone-wrapper{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.phone-nav{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);color:#a855f7;cursor:pointer;transition:all .3s;backdrop-filter:blur(10px)}
+.phone-nav:hover{background:rgba(168,85,247,.3);transform:scale(1.1);box-shadow:0 0 20px rgba(168,85,247,.3)}
+.phone-nav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+.phone-frame{position:relative;width:340px;height:700px;border-radius:48px;padding:14px;background:#1a1a2e;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08),0 25px 70px rgba(0,0,0,.5),0 0 50px rgba(168,85,247,.15),0 0 0 1px rgba(255,255,255,.05);cursor:grab}
+.phone-frame:active{cursor:grabbing}
+.phone-island{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:100px;height:30px;background:#000;border-radius:20px;z-index:10}
+.phone-screen{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#000;position:relative}
+.phone-scroll{width:100%;height:100%;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.phone-scroll::-webkit-scrollbar{display:none}
+.phone-scroll img{width:100%;height:auto;display:block}
+.phone-home{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:130px;height:5px;background:rgba(255,255,255,.3);border-radius:5px;z-index:10}
 .instructors-cinema{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:48px;max-width:840px;margin-left:auto;margin-right:auto}.instructor-cinema{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;transition:transform .5s cubic-bezier(.22,1,.36,1)}.instructor-cinema:hover{transform:translateY(-8px)}.instructor-cinema img{width:100%;height:100%;object-fit:cover;filter:grayscale(.6) brightness(.85);transition:all .7s cubic-bezier(.22,1,.36,1);transform:scale(1.06)}.instructor-cinema:hover img{filter:grayscale(0) brightness(1);transform:scale(1)}.instructor-cinema::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,#080810 0%,rgba(8,8,16,.8) 30%,rgba(8,8,16,.2) 55%,transparent 75%);pointer-events:none;transition:all .5s}.instructor-cinema:hover::after{background:linear-gradient(to top,#080810 0%,rgba(8,8,16,.6) 25%,transparent 55%)}.instructor-info{position:absolute;bottom:0;left:0;right:0;padding:32px;z-index:2}.instructor-info h3{font-size:clamp(22px,3vw,30px);font-weight:800;color:#fff;margin-bottom:4px}.instructor-info .role{color:#a855f7;font-size:15px;font-weight:500;margin-bottom:14px;display:block}.instructor-info .bio{font-size:14px;color:rgba(224,224,232,.65);line-height:1.6;opacity:0;transform:translateY(16px);transition:all .5s cubic-bezier(.22,1,.36,1) .1s;max-height:0;overflow:hidden}.instructor-cinema:hover .instructor-info .bio{opacity:1;transform:translateY(0);max-height:200px}.instructor-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;opacity:0;transform:translateY(12px);transition:all .5s cubic-bezier(.22,1,.36,1) .2s}.instructor-cinema:hover .instructor-badges{opacity:1;transform:translateY(0)}.instructor-badge{display:inline-flex;align-items:center;padding:4px 12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-size:12px;color:rgba(224,224,232,.7)}.instructor-glow-bg{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);width:280px;height:120px;background:radial-gradient(ellipse,rgba(168,85,247,.25),transparent 70%);filter:blur(40px);pointer-events:none;z-index:1;opacity:0;transition:opacity .5s}.instructor-cinema:hover .instructor-glow-bg{opacity:1}
 .urgency-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:999px;font-size:14px;font-weight:600;color:#ef4444;animation:urgPulse 2.5s ease-in-out infinite;margin-bottom:24px}.urgency-pill .dot{width:8px;height:8px;border-radius:50%;background:#ef4444;animation:urgDot 1.5s ease-in-out infinite}@keyframes urgPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.3)}50%{box-shadow:0 0 24px 4px rgba(239,68,68,.15)}}@keyframes urgDot{0%,100%{opacity:1}50%{opacity:.3}}
 .faq-list{max-width:800px;margin:48px auto 0;display:flex;flex-direction:column;gap:12px}.faq-item{border-radius:16px;overflow:hidden;position:relative}.faq-item::before{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:#a855f7;transform:scaleY(0);transition:transform .4s cubic-bezier(.22,1,.36,1);transform-origin:top;z-index:3;border-radius:2px}.faq-item.open::before{transform:scaleY(1)}.faq-question{width:100%;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:16px;font-weight:600;text-align:right;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;transition:all .3s}.faq-question:hover{background:rgba(255,255,255,.05)}.faq-question .arrow{font-size:20px;transition:transform .3s;color:#a855f7;font-family:'Space Mono',monospace}.faq-item.open .faq-question{border-radius:16px 16px 0 0;border-bottom-color:transparent}.faq-item.open .arrow{transform:rotate(45deg)}.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-top:none;border-radius:0 0 16px 16px}.faq-answer-inner{padding:20px 24px;color:rgba(224,224,232,.6);font-size:15px;line-height:1.8}
@@ -274,8 +313,8 @@ fbq('init','1388659336102272');fbq('track','PageView');
 .form-section{max-width:640px;margin:0 auto}.form-card{padding:48px 40px;position:relative}.form-card::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:linear-gradient(90deg,#a855f7,#00f5ff,#ff006e);border-radius:20px 20px 0 0}.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;color:rgba(224,224,232,.7);margin-bottom:8px}.form-input{width:100%;padding:15px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;color:#fff;font-size:15px;transition:all .3s;outline:none}.form-input:focus{border-color:rgba(168,85,247,.5);background:rgba(255,255,255,.06);box-shadow:0 0 24px rgba(168,85,247,.1)}.form-input::placeholder{color:rgba(224,224,232,.3)}select.form-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%23a855f7'%3E%3Cpath d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 16px center;padding-left:40px}select.form-input option{background:#1a1a2e;color:#fff}textarea.form-input{resize:vertical;min-height:80px}.checkbox-group{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}.checkbox-group input[type="checkbox"]{width:18px;height:18px;margin-top:3px;accent-color:#a855f7;flex-shrink:0}.checkbox-group label{font-size:13px;color:rgba(224,224,232,.6);line-height:1.5}.checkbox-group a{color:#a855f7;text-decoration:underline}.btn-submit{width:100%;padding:18px;font-size:17px;font-weight:700;margin-top:8px}.btn-submit.loading{pointer-events:none;opacity:.7}.form-success{display:none;text-align:center;padding:60px 24px}.form-success h3{font-size:28px;font-weight:800;color:#fff;margin-bottom:12px}.form-success p{color:rgba(224,224,232,.6);font-size:16px}.form-error{color:#ff006e;font-size:13px;margin-top:6px;display:none}
 .footer{padding:60px 0 40px;border-top:1px solid rgba(255,255,255,.06);position:relative;z-index:2}.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px}.footer-logo img{height:40px;margin-bottom:12px}.footer-logo p{font-size:13px;color:rgba(224,224,232,.4);line-height:1.6}.footer-links h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:12px}.footer-links a{display:block;font-size:14px;color:rgba(224,224,232,.5);padding:4px 0;transition:color .2s}.footer-links a:hover{color:#a855f7}.footer-social{display:flex;gap:14px;margin-top:16px}.footer-social a{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:all .3s;color:rgba(224,224,232,.6)}.footer-social a:hover{background:rgba(168,85,247,.15);border-color:rgba(168,85,247,.3);color:#a855f7}.footer-social svg{width:16px;height:16px;fill:currentColor}.footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(224,224,232,.3)}.footer-bottom a{color:rgba(224,224,232,.4);margin:0 8px}.footer-bottom a:hover{color:#a855f7}
 .reveal-group .reveal-item{opacity:0;transform:translateY(60px)}
-@media(max-width:1024px){.hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}.hero-buttons{justify-content:center}.stats-bar{grid-template-columns:repeat(2,1fr)}.code-editor-inner{transform:none!important}.code-editor-inner:hover{transform:none!important}.journey-grid{grid-template-columns:1fr;gap:32px}.ide-window{height:340px}.journey-dots{position:relative;flex-direction:row;justify-content:center;top:auto;transform:none;margin-bottom:24px}.bento{grid-template-columns:repeat(2,1fr)}.bento-hero{grid-column:span 2}.bento-full{grid-column:span 2}.portal-bento{grid-template-columns:repeat(2,1fr)}.portal-lg{grid-column:span 2}.portal-wide{grid-column:span 2}}
-@media(max-width:768px){.container{padding:0 16px}.section{padding:80px 0}.section-divider{height:60px}.bento{grid-template-columns:1fr}.bento-hero{grid-column:span 1;grid-row:span 1;min-height:auto;padding:32px 24px}.bento-full{grid-column:span 1;flex-direction:column;text-align:center}.tracks-grid{grid-template-columns:1fr}.track-card.featured{transform:none}.portal-bento{grid-template-columns:1fr}.portal-lg{grid-column:span 1;grid-row:span 1}.portal-wide{grid-column:span 1;flex-direction:column}.instructors-cinema{grid-template-columns:1fr;max-width:380px}.instructor-cinema{aspect-ratio:4/5}.instructor-info .bio{opacity:1;transform:none;max-height:200px}.instructor-badges{opacity:1;transform:none}.pricing-grid{grid-template-columns:1fr;max-width:380px}.pricing-card.featured{transform:none}.footer-grid{grid-template-columns:1fr;gap:28px;text-align:center}.footer-social{justify-content:center}.form-card{padding:32px 20px}.statement-section{padding:120px 0}.breathing-orb,.floating-code{display:none}.cursor-glow{display:none!important}.scroll-progress{width:2px}.pain-stack{grid-template-columns:1fr}.pain-row{padding:20px 18px;gap:14px}.pain-num{min-width:auto;font-size:32px}.section-watermark{display:none}.ambient-dots{background-size:32px 32px}.carousel-section{padding:32px 0}.logos-section{padding:40px 0}
+@media(max-width:1024px){.hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}.hero-buttons{justify-content:center}.hero-cert{justify-content:center}.stats-bar{grid-template-columns:repeat(2,1fr)}.code-editor-inner{transform:none!important}.code-editor-inner:hover{transform:none!important}.journey-grid{grid-template-columns:1fr;gap:32px}.ide-window{height:340px}.journey-dots{position:relative;flex-direction:row;justify-content:center;top:auto;transform:none;margin-bottom:24px}.bento{grid-template-columns:repeat(2,1fr)}.bento-hero{grid-column:span 2}.bento-full{grid-column:span 2}.lp-grid{gap:32px}.lp-cards{width:380px;height:270px}}
+@media(max-width:768px){.container{padding:0 16px}.section{padding:80px 0}.section-divider{height:60px}.bento{grid-template-columns:1fr}.bento-hero{grid-column:span 1;grid-row:span 1;min-height:auto;padding:32px 24px}.bento-full{grid-column:span 1;flex-direction:column;text-align:center}.tracks-grid{grid-template-columns:1fr}.track-card.featured{transform:none}.lp-grid{grid-template-columns:1fr}.lp-features{order:1}.lp-cards-wrap{order:2}.lp-cards{width:300px;height:210px}.lp-card-back{transform:rotate(3deg) translate(14%,14%)}.lp-card-front{transform:rotate(-1.5deg) translate(-6%,-8%)}.phone-frame{width:280px;height:580px;border-radius:42px;padding:12px}.phone-island{top:14px;width:86px;height:26px}.phone-screen{border-radius:32px}.phone-home{bottom:16px;width:110px}.instructors-cinema{grid-template-columns:1fr;max-width:380px}.instructor-cinema{aspect-ratio:4/5}.instructor-info .bio{opacity:1;transform:none;max-height:200px}.instructor-badges{opacity:1;transform:none}.pricing-grid{grid-template-columns:1fr;max-width:380px}.pricing-card.featured{transform:none}.footer-grid{grid-template-columns:1fr;gap:28px;text-align:center}.footer-social{justify-content:center}.form-card{padding:32px 20px}.statement-section{padding:120px 0}.breathing-orb,.floating-code{display:none}.cursor-glow{display:none!important}.scroll-progress{width:2px}.pain-stack{grid-template-columns:1fr}.pain-row{padding:20px 18px;gap:14px}.pain-num{min-width:auto;font-size:32px}.section-watermark{display:none}.ambient-dots{background-size:32px 32px}.carousel-section{padding:32px 0}.logos-section{padding:40px 0}
 .ide-window{height:300px}.ide-gutter{width:32px}.ide-line-num{font-size:10px}.ide-line{font-size:11px}.ide-tab{padding:6px 10px;font-size:10px}.ide-titlebar{padding:6px 12px}.ide-content{padding:10px 12px}.ide-statusbar{padding:3px 10px}.journey-stage h3{font-size:28px}.journey-stage p{font-size:16px}
 .journey-mobile-cards{display:flex;flex-direction:column;gap:32px}
 .jm-card{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
@@ -287,10 +326,11 @@ fbq('init','1388659336102272');fbq('track','PageView');
 .hl-grid{grid-template-columns:1fr;gap:32px}.hl-text{order:1;text-align:center}.hl-collage{order:2}.hl-features{max-width:400px;margin:0 auto 40px}
 .term-body{padding:14px 12px;font-size:11px;line-height:1.9}.term-cols{grid-template-columns:1fr;gap:4px 0}.term-module .tm-name{min-width:140px;font-size:11px}.term-module .tm-bar span{width:4px;height:10px}.term-module .tm-hours{font-size:10px}.term-summary{font-size:11px;flex-direction:column;gap:4px}.term-cmd{font-size:12px}
 }
-@media(max-width:480px){.stats-bar{grid-template-columns:repeat(2,1fr);gap:10px}.hero{padding-top:60px}.term-module .tm-bar{display:none}.term-module .tm-name{min-width:120px}}
+@media(max-width:480px){.stats-bar{grid-template-columns:repeat(2,1fr);gap:10px}.hero{padding-top:60px}.term-module .tm-bar{display:none}.term-module .tm-name{min-width:120px}.lp-features{grid-template-columns:1fr}.lp-cards{width:260px;height:185px}.phone-frame{width:260px;height:540px;border-radius:38px;padding:10px}.phone-island{top:12px;width:76px;height:24px}.phone-screen{border-radius:28px}}
 </style>
 </head>
 <body>
+<AnalyticsBody />
 <div class="ambient-layer ambient-dots"></div><div class="ambient-layer ambient-glow"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="breathing-orb orb-1"></div><div class="breathing-orb orb-2"></div><div class="breathing-orb orb-3"></div>
@@ -313,13 +353,15 @@ const &#123; data &#125; = await supabase
 <!-- HERO -->
 <section class="hero section"><div id="vantaBg"></div><div class="container"><div id="heroZoom"><div class="hero-grid">
 <div class="hero-text">
-<div class="eyebrow" style="opacity:0" id="heroEyebrow">// AI FULLSTACK PROGRAM</div>
-<h1><span class="hero-line"><span class="hero-line-inner">בנה אפליקציות</span></span><span class="hero-line"><span class="hero-line-inner">מלאות עם <span class="gradient-text">AI</span></span></span></h1>
-<p class="subtitle" style="opacity:0" id="heroSub">94 שעות. 18 מודולים. VS Code + Claude Code.<br/>מאפס לפרודקשן — בלי רקע בתכנות.</p>
+<div class="eyebrow" style="opacity:0" id="heroEyebrow">// AI BUILDER PROGRAM</div>
+<h1><span class="hero-line"><span class="hero-line-inner">תבנה. תשגר.</span></span><span class="hero-line"><span class="hero-line-inner"><span class="gradient-text">AI כותב את הקוד.</span></span></span></h1>
+<p class="subtitle" style="opacity:0" id="heroSub">תכנית ההכשרה המקצועית לבניית אפליקציות ומוצרים דיגיטליים עם AI.<br/>94 שעות מעשיות. פרונטלי + Zoom. בליווי אקדמי של אוניברסיטת חיפה.</p>
 <div class="hero-buttons" style="opacity:0" id="heroBtns"><a href="#register" class="btn-primary magnetic-btn">הרשמה עכשיו</a><a href="#syllabus" class="btn-ghost magnetic-btn">לסילבוס המלא</a></div>
 <div class="stats-bar" style="opacity:0" id="heroStats"><div class="stat-item"><span class="stat-number" data-target="94">0</span><span class="stat-label">שעות הכשרה</span></div><div class="stat-item"><span class="stat-number" data-target="18">0</span><span class="stat-label">מודולים</span></div><div class="stat-item"><span class="stat-number" data-target="8" data-prefix="1:">0</span><span class="stat-label">יחס מרצה:תלמיד</span></div><div class="stat-item"><span class="stat-number" data-target="2">0</span><span class="stat-label">מרצים בכל מפגש</span></div></div>
+<div class="hero-cert" style="opacity:0" id="heroCert"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120/v1770476772/%D7%9C%D7%95%D7%92%D7%95_1_e1pxnh.png" alt="היחידה ללימודי חוץ, אוניברסיטת חיפה" width="120" height="auto"/><span>תעודה מקצועית בליווי אקדמי של היחידה ללימודי חוץ, אוניברסיטת חיפה</span></div>
 </div>
-<div class="code-editor" style="opacity:0" id="heroEditor"><div class="code-editor-inner glass"><div class="glass-header"><span class="pulse-dot"></span><span>agent.ts</span></div><div class="code-body"><div class="code-line"><span class="prompt">$</span> claude <span class="string">"build me a todo app with auth"</span></div><div class="code-line"><span class="comment">// Claude is thinking...</span></div><div class="code-line"><span class="file">CREATE</span> src/app/page.tsx</div><div class="code-line"><span class="file">CREATE</span> src/app/api/auth/route.ts</div><div class="code-line"><span class="file">CREATE</span> src/lib/db.ts</div><div class="code-line"><span class="success">&#10003; App ready at localhost:3000</span><span class="typing-cursor"></span></div></div></div></div>
+<div class="code-editor" style="opacity:0" id="heroEditor"><div class="code-editor-inner glass"><div class="glass-header"><span class="pulse-dot"></span><span>agent.ts</span></div><div class="code-body"><div class="code-line"><span class="prompt">$</span> claude <span class="string">"build me a todo app with auth"</span></div><div class="code-line"><span class="comment">// Claude is thinking...</span></div><div class="code-line"><span class="file">CREATE</span> src/app/page.tsx</div><div class="code-line"><span class="file">CREATE</span> src/app/api/auth/route.ts</div><div class="code-line"><span class="file">CREATE</span> src/lib/db.ts</div><div class="code-line"><span class="success">&#10003; App ready at localhost:3000</span><span class="typing-cursor"></span></div></div>
+</div></div>
 </div></div></div></section>
 
 <div class="section-divider"></div>
@@ -360,52 +402,60 @@ const &#123; data &#125; = await supabase
 
 <div class="section-divider"></div>
 
-<!-- HUMAN LEARNING -->
-<section class="section" id="solution"><div class="container" style="position:relative"><div class="section-watermark">LEARN</div>
-<div class="clip-reveal" id="solutionReveal">
-<div class="human-grid">
+<!-- HUMAN LEARNING — exact replica of AcademyIntro -->
+<section class="hl-section" id="solution">
+<div class="hl-bg"><div class="hl-bg-glow"></div></div>
+<div class="container" style="position:relative;z-index:10">
 
-<div class="human-text">
-<div class="eyebrow">// HOW WE LEARN</div>
-<h3>לומדים בינה מלאכותית<br><span class="gradient-accent">בצורה אנושית</span></h3>
-<p>אצלנו לומדים <strong style="color:#fff">פנים מול פנים</strong> — בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.</p>
-<div class="human-features">
-<div class="hf-item"><div class="hf-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><span>שיעורים פרונטליים בהרצליה</span></div>
-<div class="hf-item"><div class="hf-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><span>Zoom Live - מכל מקום</span></div>
-<div class="hf-item"><div class="hf-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><span>2-3 מרצים בכל מפגש</span></div>
-<div class="hf-item"><div class="hf-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div><span>תרגול מעשי בזמן אמת</span></div>
+<!-- Badge -->
+<div class="hl-badge-wrap">
+<div class="hl-badge"><span>[FOCUS_AI_ACADEMY]</span><span class="hl-badge-dot"></span></div>
+</div>
+
+<!-- Grid: text + collage -->
+<div class="hl-grid">
+
+<!-- Text Content -->
+<div class="hl-text">
+<h2>לומדים בינה מלאכותית<span class="hl-grad">בצורה אנושית</span></h2>
+<p>אצלנו לומדים <strong>פנים מול פנים</strong> - בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.</p>
+<div class="hl-features">
+<div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><span>שיעורים פרונטליים בהרצליה</span></div>
+<div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><span>Zoom Live - מכל מקום</span></div>
+<div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><span>2-3 מרצים בכל מפגש</span></div>
+<div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div><span>תרגול מעשי בזמן אמת</span></div>
 </div>
 </div>
 
-<div class="human-mosaic">
-<div class="human-mosaic-glow"></div>
-<div class="collage">
-<!-- Top row — scattered thumbnails -->
-<div class="collage-row top">
-<div class="collage-thumb md" style="transform:rotate(-3deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_auto/v1764239338/41_nufstk.png" alt="אוניברסיטת חיפה" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb sm hide-mobile" style="transform:rotate(4deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1770468490/WhatsApp_Image_2026-02-07_at_14.47.47_cham41.jpg" alt="הרצאה" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb lg" style="transform:rotate(2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1764629960/gg2wr5be9du0rvwjjyvz.png" alt="תלמידים לומדים AI" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb md" style="transform:rotate(-2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1764514114/WhatsApp_Image_2025-11-30_at_16.48.20_da8cf5.jpg" alt="מפגש לימודי" loading="lazy" width="200" height="200"/></div>
+<!-- Image Collage -->
+<div class="hl-collage">
+<div class="hl-collage-glow"></div>
+<div class="hl-collage-inner">
+<!-- Top row -->
+<div class="hl-row top">
+<div class="hl-thumb t1" style="transform:rotate(-3deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764629960/gg2wr5be9du0rvwjjyvz.png" alt="תלמידים לומדים AI" loading="lazy" width="200" height="200"/></div>
+<div class="hl-thumb t2" style="transform:rotate(2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764514114/WhatsApp_Image_2025-11-30_at_16.48.20_da8cf5.jpg" alt="מפגש לימודי" loading="lazy" width="200" height="200"/></div>
+<div class="hl-thumb t3 hide-sm" style="transform:rotate(4deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1770468490/WhatsApp_Image_2026-02-07_at_14.47.47_cham41.jpg" alt="הרצאה" loading="lazy" width="200" height="200"/></div>
+<div class="hl-thumb t4 hide-md" style="transform:rotate(-2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764239338/41_nufstk.png" alt="אוניברסיטת חיפה" loading="lazy" width="200" height="200"/></div>
 </div>
 <!-- Main classroom image -->
-<div class="collage-main">
-<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900,e_sharpen:150/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png" alt="כיתת הלימוד של Focus AI" loading="lazy" width="900" height="385"/>
-<div class="collage-live"><span class="live-dot"></span>שידור חי</div>
+<div class="hl-main">
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900,e_sharpen:150/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png" alt="כיתת הלימוד של Focus AI Academy - לימוד בינה מלאכותית בצורה אנושית" loading="lazy" width="700" height="300"/>
+<div class="hl-live"><span class="hl-live-dot"></span><span>שידור חי</span></div>
 </div>
-<!-- Bottom row — scattered thumbnails -->
-<div class="collage-row bottom">
-<div class="collage-thumb md hide-mobile" style="transform:rotate(2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_auto/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="למידה מעשית" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb sm" style="transform:rotate(-1deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_auto/v1765177221/2_ytkcuf.jpg" alt="סדנת AI" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb lg" style="transform:rotate(3deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_auto/v1765177222/5_iudgl3.jpg" alt="קהילת הלומדים" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb md" style="transform:rotate(-2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1764513069/WhatsApp_Image_2025-11-30_at_16.29.03_1_ttrimh.jpg" alt="הרצאה בכיתה" loading="lazy" width="200" height="200"/></div>
-<div class="collage-thumb sm hide-mobile" style="transform:rotate(-3deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1764514114/WhatsApp_Image_2025-11-30_at_16.48.20_da8cf5.jpg" alt="למידה בקבוצות" loading="lazy" width="200" height="200"/></div>
+<!-- Bottom row -->
+<div class="hl-row bottom">
+<div class="hl-thumb b1 hide-md" style="transform:rotate(2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="למידה מעשית" loading="lazy" width="200" height="200"/></div>
+<div class="hl-thumb b2" style="transform:rotate(3deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765177221/2_ytkcuf.jpg" alt="סדנת AI" loading="lazy" width="200" height="200"/></div>
+<div class="hl-thumb b3" style="transform:rotate(-2deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765177222/5_iudgl3.jpg" alt="קהילת הלומדים" loading="lazy" width="200" height="200"/></div>
+<div class="hl-thumb b4 hide-sm" style="transform:rotate(-3deg)"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764513069/WhatsApp_Image_2025-11-30_at_16.29.03_1_ttrimh.jpg" alt="הרצאה בכיתה" loading="lazy" width="200" height="200"/></div>
 </div>
 </div>
 </div>
 
 </div>
 </div>
-</div></section>
+</section>
 
 <div class="section-divider"></div>
 
@@ -585,7 +635,7 @@ const &#123; data &#125; = await supabase
 <div class="term-title">focus-ai install</div>
 </div>
 <div class="term-body" id="termBody">
-<div class="term-cmd">$ focus-ai install ai-fullstack@2026 --modules=22</div>
+<div class="term-cmd">$ focus-ai install ai-builder@2026 --modules=22</div>
 <div class="term-cols">
 
 <div class="term-col">
@@ -642,7 +692,7 @@ const &#123; data &#125; = await supabase
 <div class="term-progress-bar"><div class="term-progress-fill" id="termProgressFill"></div></div>
 </div>
 <div class="term-statusbar">
-<span>ai-fullstack@2026.2</span>
+<span>ai-builder@2026.2</span>
 <span id="termStatusText">waiting...</span>
 <span>22 packages</span>
 </div>
@@ -695,7 +745,7 @@ const &#123; data &#125; = await supabase
 </div>
 <div class="track-body">
 <div class="track-subtitle">[ההכשרה המקצועית]</div>
-<h3>AI Fullstack Herzliya</h3>
+<h3>AI Builder Herzliya</h3>
 <div class="track-uni">בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה</div>
 <div class="track-date">
 <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
@@ -751,18 +801,64 @@ const &#123; data &#125; = await supabase
 
 <div class="section-divider"></div>
 
-<!-- PORTAL — BENTO -->
-<section class="section" id="portal"><div class="container reveal-group" style="position:relative"><div class="section-watermark">PORTAL</div>
-<div class="reveal-item"><div class="eyebrow">// LEARNING PORTAL</div><h2 class="section-title">פורטל לימוד מבוסס AI</h2><p style="color:rgba(224,224,232,.5);font-size:17px;max-width:600px">כל מה שצריך כדי ללמוד, לתרגל, ולבנות — במקום אחד.</p></div>
-<div class="portal-bento">
-<div class="glass portal-lg reveal-item"><div class="p-icon"><svg width="24" height="24" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div><h4>סוכן AI אישי</h4><p>סוכן שעונה על כל שאלה, מפנה לחומר הרלוונטי, ומלווה אותך לאורך כל התוכנית. כמו מרצה פרטי 24/7.</p></div>
-<div class="glass portal-sm reveal-item"><div class="p-icon"><svg width="20" height="20" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h4>סיכומי AI חכמים</h4><p>סיכום אוטומטי של כל שיעור</p></div>
-<div class="glass portal-sm reveal-item"><div class="p-icon"><svg width="20" height="20" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h4>מטלות אינטראקטיביות</h4><p>תרגילים מונחים שלב-אחר-שלב</p></div>
-<div class="glass portal-sm reveal-item"><div class="p-icon"><svg width="20" height="20" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h4>Playground לתרגול</h4><p>ממשקים אינטראקטיביים לתרגול</p></div>
-<div class="glass portal-sm reveal-item"><div class="p-icon"><svg width="20" height="20" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h4>מדריכים מקצועיים</h4><p>מדריכים מעמיקים לכל נושא</p></div>
-<div class="glass portal-wide reveal-item"><div class="p-icon" style="flex-shrink:0"><svg width="20" height="20" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><h4>הקלטות מפגשים</h4><p>גישה מלאה להקלטות כל המפגשים לצפייה חוזרת</p></div></div>
-<div class="glass portal-wide reveal-item"><div class="p-icon" style="flex-shrink:0"><svg width="20" height="20" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>מרכז כלי AI + סוכנים מקצועיים</h4><p>כלי AI מקוטלגים + סוכנים ייעודיים לכל תחום</p></div></div>
-</div></div></section>
+<!-- PORTAL — replica of LearningPortal.astro -->
+<section class="lp-section" id="portal">
+<div class="lp-glow"></div>
+<div class="container" style="position:relative;z-index:10">
+<div class="lp-badge-wrap"><div class="lp-badge"><span class="lp-badge-dot"></span><span>LEARNING_PORTAL</span></div></div>
+<h2 class="lp-title">פורטל הלימוד שמלווה אתכם<span class="lp-grad"> 24/7</span></h2>
+<p class="lp-subtitle">כל מה שצריך כדי ללמוד, לתרגל ולהתקדם - במקום אחד</p>
+
+<div class="lp-grid">
+<!-- Features -->
+<div class="lp-features">
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg></div><div><h4>סיכומי AI חכמים</h4><p>סיכום אוטומטי של כל שיעור, כולל תשובות לשאלות</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg></div><div><h4>סוכן AI אישי</h4><p>שאלו כל שאלה - הסוכן יענה ויפנה לסעיפים הרלוונטיים</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><h4>מטלות אינטראקטיביות</h4><p>ליווי צעד אחר צעד בהכנת שיעורי הבית</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg></div><div><h4>מדריכים מקצועיים</h4><p>מדריכים מעמיקים לכל נושא שנלמד</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"/></svg></div><div><h4>Playground לתרגול</h4><p>ממשקי תרגול אינטראקטיביים לחידוד מיומנויות</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg></div><div><h4>סוכני AI מקצועיים</h4><p>סוכנים חכמים לסיוע בתחומים שונים</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"/></svg></div><div><h4>מצגות השיעורים</h4><p>גישה מלאה לכל המצגות שהועברו</p></div></div>
+<div class="lp-feat"><div class="lp-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg></div><div><h4>מרכז כלי AI</h4><p>כל הכלים שלמדנו, מסווגים לפי שימוש</p></div></div>
+</div>
+<!-- Stacked Card Images -->
+<div class="lp-cards-wrap">
+<div class="lp-cards">
+<div class="lp-card lp-card-back"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800,ar_16:10,c_fill,g_north/v1771625565/WhatsApp_Image_2026-02-21_at_00.11.54_byd8nf.jpg" alt="פורטל הלימוד של Focus AI" loading="lazy" width="800" height="500"/></div>
+<div class="lp-card lp-card-front"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800,ar_16:10,c_fill,g_north/v1771625565/WhatsApp_Image_2026-02-21_at_00.10.59_um7mqm.jpg" alt="סיכום שיעור עם AI" loading="lazy" width="800" height="500"/></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PHONE TESTIMONIALS — replica of PhoneTestimonials.astro -->
+<section class="pt-section">
+<div class="container" style="text-align:center">
+<h2 class="pt-title">סטודנטים מספרים על החוויה שלהם</h2>
+<p class="pt-subtitle">ככה זה נראה בקבוצה של המחזור הנוכחי</p>
+<div class="phone-wrapper">
+<button class="phone-nav" onclick="this.closest('.phone-wrapper').querySelector('.phone-scroll').scrollBy({top:-250,behavior:'smooth'})" aria-label="גלול למעלה"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg></button>
+<div class="phone-frame" id="phoneFrame">
+<div class="phone-island"></div>
+<div class="phone-screen">
+<div class="phone-scroll" id="phoneScroll">
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.33_uxlvn0.jpg" alt="פידבק מסטודנט 1" loading="lazy" width="300" height="650"/>
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1769108296/WhatsApp_Image_2026-01-22_at_19.57.14_t4lh0q.jpg" alt="פידבק מסטודנט 2" loading="lazy" width="300" height="650"/>
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1769108295/WhatsApp_Image_2026-01-22_at_19.55.36_qc8mqk.jpg" alt="פידבק מסטודנט 3" loading="lazy" width="300" height="650"/>
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1769108295/WhatsApp_Image_2026-01-22_at_19.54.38_zgosjo.jpg" alt="פידבק מסטודנט 4" loading="lazy" width="300" height="650"/>
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1769108295/WhatsApp_Image_2026-01-22_at_19.54.38_1_z35b4a.jpg" alt="פידבק מסטודנט 5" loading="lazy" width="300" height="650"/>
+<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1769108295/WhatsApp_Image_2026-01-22_at_19.53.28_jjdzdw.jpg" alt="פידבק מסטודנט 6" loading="lazy" width="300" height="650"/>
+</div>
+</div>
+<div class="phone-home"></div>
+</div>
+<button class="phone-nav" onclick="this.closest('.phone-wrapper').querySelector('.phone-scroll').scrollBy({top:250,behavior:'smooth'})" aria-label="גלול למטה"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button>
+</div>
+</div>
+</section>
 
 <div class="section-divider"></div>
 
@@ -861,6 +957,10 @@ layout();startAuto();
 }
 initCarousel('brandsCarousel');
 initCarousel('techCarousel');
+// Hero cert badge fade-in
+var heroCert=document.getElementById('heroCert');if(heroCert)setTimeout(function(){heroCert.style.opacity='1';heroCert.style.transition='opacity 1s ease'},3500);
+// Phone testimonials auto-scroll
+(function(){var el=document.getElementById('phoneScroll');if(!el)return;var paused=false,started=false;var frame=document.getElementById('phoneFrame');if(frame){frame.addEventListener('mouseenter',function(){paused=true});frame.addEventListener('mouseleave',function(){paused=false});frame.addEventListener('wheel',function(e){e.preventDefault();el.scrollTop+=e.deltaY},{passive:false})}function startAuto(){if(started)return;started=true;setInterval(function(){if(paused)return;var max=el.scrollHeight-el.clientHeight;if(el.scrollTop>=max-1){el.scrollTo({top:0,behavior:'smooth'});paused=true;setTimeout(function(){paused=false},2000)}else{el.scrollTop+=0.5}},16)}var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){startAuto();obs.unobserve(entry.target)}})},{threshold:0.3});obs.observe(el)})();
 function waitGSAP(cb){if(window.gsap&&window.ScrollTrigger){cb();return}var t=setInterval(function(){if(window.gsap&&window.ScrollTrigger){clearInterval(t);cb()}},50)}
 waitGSAP(function(){
 gsap.registerPlugin(ScrollTrigger);if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var isMobile=window.innerWidth<=768;
