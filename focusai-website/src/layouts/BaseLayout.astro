@@ -5,7 +5,8 @@ import Analytics from '../components/Analytics.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
 import BackToTop from '../components/BackToTop.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
-import PromoPopup from '../components/PromoPopup.astro';
+import VideoPopup from '../components/VideoPopup.astro';
+// import PromoPopup from '../components/PromoPopup.astro'; // Replaced by VideoPopup
 import Preloader from '../components/Preloader.astro';
 import { siteConfig } from '../data/config';
 
@@ -166,7 +167,7 @@ const websiteSchema = {
   <!-- Floating UI -->
   <BackToTop />
   <WhatsAppFloat />
-  <PromoPopup />
+  <VideoPopup />
 
   <!-- Lenis Smooth Scroll + GSAP Scroll Animations (deferred for performance) -->
   <script>

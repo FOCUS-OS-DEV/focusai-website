@@ -127,9 +127,14 @@ const imgPortal = 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_au
         </div>
       </div>
 
-      <!-- Left side (RTL) = Stacked Card Images -->
-      <div class="order-1 lg:order-2 flex justify-center">
-        <div class="portal-cards relative w-[320px] h-[230px] sm:w-[420px] sm:h-[300px] md:w-[500px] md:h-[350px]">
+      <!-- Left side (RTL) = Stacked Card Images + Play Button -->
+      <div class="order-1 lg:order-2 flex flex-col items-center gap-5">
+        <button
+          type="button"
+          class="portal-cards-btn relative w-[320px] h-[230px] sm:w-[420px] sm:h-[300px] md:w-[500px] md:h-[350px] cursor-pointer group"
+          onclick="window.openVideoPopup && window.openVideoPopup()"
+          aria-label="צפו בסיור בפורטל הלימוד"
+        >
           <!-- Back card (portal homepage) -->
           <div class:list={[
             'portal-card-back absolute inset-0 rounded-2xl overflow-hidden transition-transform duration-500',
@@ -164,7 +169,36 @@ const imgPortal = 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_au
               height="500"
             />
           </div>
-        </div>
+
+          <!-- Play overlay -->
+          <div class="portal-play-overlay absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+            <div class:list={[
+              'portal-play-btn flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full transition-all duration-300 group-hover:scale-110',
+              isLight
+                ? 'bg-[#a855f7] shadow-[0_8px_30px_rgba(168,85,247,0.4)]'
+                : 'bg-[#a855f7]/90 backdrop-blur-sm shadow-[0_8px_30px_rgba(168,85,247,0.5)]'
+            ]}>
+              <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white mr-[-2px]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5.14v14.72a1 1 0 001.5.86l11.24-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <!-- Tour CTA button below cards -->
+        <button
+          type="button"
+          class:list={[
+            'portal-tour-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer',
+            isLight
+              ? 'bg-[#a855f7]/10 text-[#a855f7] border border-[#a855f7]/25 hover:bg-[#a855f7]/20 hover:border-[#a855f7]/40'
+              : 'bg-white/[0.05] text-[#c084fc] border border-white/[0.1] hover:bg-white/[0.08] hover:border-[#a855f7]/30'
+          ]}
+          onclick="window.openVideoPopup && window.openVideoPopup()"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14.72a1 1 0 001.5.86l11.24-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/></svg>
+          <span>סיור בפורטל הלימוד</span>
+        </button>
       </div>
 
     </div>
@@ -182,12 +216,21 @@ const imgPortal = 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_au
     z-index: 2;
   }
 
-  .portal-cards:hover .portal-card-back {
+  .portal-cards-btn:hover .portal-card-back {
     transform: rotate(6deg) translate(22%, 22%);
   }
 
-  .portal-cards:hover .portal-card-front {
+  .portal-cards-btn:hover .portal-card-front {
     transform: rotate(-4deg) translate(-12%, -14%);
+  }
+
+  .portal-play-btn {
+    animation: portal-play-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes portal-play-pulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4); }
+    50% { box-shadow: 0 8px 40px rgba(168, 85, 247, 0.6), 0 0 0 12px rgba(168, 85, 247, 0.1); }
   }
 
   @media (max-width: 640px) {

@@ -1,0 +1,458 @@
+---
+/**
+ * VideoPopup - Learning Portal showcase video popup
+ * Shows a portrait video after 5s delay on first visit.
+ * Replaces PromoPopup in BaseLayout.
+ *
+ * Performance: preload="none" + poster = zero video bandwidth until user presses play.
+ * iOS-safe: direct src in HTML, native controls, playsinline, no JS play().
+ * Mobile-first: portrait video layout, 44px+ tap targets.
+ */
+
+const VIDEO_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto/v1772129607/IMG_7879_jz34kj.mp4';
+const POSTER_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/so_1,w_480,c_limit,q_auto,f_jpg/v1772129607/IMG_7879_jz34kj.jpg';
+---
+
+<!-- Backdrop overlay -->
+<div id="vp-overlay" class="vp-overlay" aria-hidden="true">
+  <!-- Modal card -->
+  <div id="vp-card" class="vp-card" role="dialog" aria-modal="true" aria-label="חווית הלימוד של Focus AI">
+
+    <!-- Close button (top-left for RTL) -->
+    <button id="vp-close" class="vp-close" aria-label="סגור">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M3 3l12 12M3 15L15 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Badge -->
+    <div class="vp-badge">
+      <span class="vp-badge-dot"></span>
+      <span>LEARNING PORTAL</span>
+    </div>
+
+    <!-- Video container -->
+    <div class="vp-video-wrap">
+      <video
+        id="vp-video"
+        src={VIDEO_URL}
+        poster={POSTER_URL}
+        preload="none"
+        playsinline
+        webkit-playsinline
+        controls
+        controlslist="nodownload"
+      ></video>
+    </div>
+
+    <!-- Content below video -->
+    <div class="vp-content">
+      <h3 class="vp-title">גלו את חווית הלימוד שלנו</h3>
+      <p class="vp-desc">פורטל לימוד חדשני עם סוכני AI אישיים, סיכומים חכמים ומטלות אינטראקטיביות</p>
+
+      <a href="/academy/" class="vp-cta">
+        <span>לפרטים על הקורסים</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 8H4M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <button id="vp-dismiss" class="vp-dismiss">לא עכשיו, תודה</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ===== OVERLAY ===== */
+  .vp-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 12px;
+  }
+
+  .vp-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .vp-overlay.is-hiding {
+    opacity: 0;
+    pointer-events: none;
+    transition-duration: 0.25s;
+  }
+
+  /* ===== MODAL CARD ===== */
+  .vp-card {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #12121a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(168, 85, 247, 0.08),
+      0 0 60px rgba(168, 85, 247, 0.06);
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .vp-card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vp-overlay.is-visible .vp-card {
+    transform: scale(1) translateY(0);
+  }
+
+  .vp-overlay.is-hiding .vp-card {
+    transform: scale(0.95) translateY(10px);
+    transition-duration: 0.25s;
+  }
+
+  /* ===== CLOSE BUTTON ===== */
+  .vp-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 5;
+  }
+
+  .vp-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* ===== BADGE ===== */
+  .vp-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 16px 6px;
+  }
+
+  .vp-badge span:last-child {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a855f7;
+  }
+
+  .vp-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a855f7;
+    animation: vp-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes vp-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ===== VIDEO ===== */
+  .vp-video-wrap {
+    padding: 6px 10px 0;
+  }
+
+  .vp-video-wrap video {
+    width: 100%;
+    height: auto;
+    max-height: 58vh;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #000;
+    display: block;
+  }
+
+  /* ===== CONTENT ===== */
+  .vp-content {
+    padding: 10px 16px 14px;
+    text-align: center;
+  }
+
+  .vp-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #f5f5fa;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .vp-desc {
+    font-size: 0.78rem;
+    color: #9090a8;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  /* ===== CTA BUTTON ===== */
+  .vp-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 20px;
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+  }
+
+  .vp-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+    background: linear-gradient(135deg, #b86ef7, #8b5cf6);
+  }
+
+  /* ===== DISMISS ===== */
+  .vp-dismiss {
+    display: block;
+    margin: 8px auto 0;
+    padding: 4px;
+    background: none;
+    border: none;
+    color: #606078;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .vp-dismiss:hover {
+    color: #9090a8;
+  }
+
+  /* ===== RESPONSIVE: Tablet+ ===== */
+  @media (min-width: 768px) {
+    .vp-overlay {
+      padding: 24px;
+    }
+
+    .vp-card {
+      max-width: 400px;
+      border-radius: 24px;
+    }
+
+    .vp-close {
+      top: 12px;
+      left: 12px;
+      width: 44px;
+      height: 44px;
+    }
+
+    .vp-badge {
+      padding: 14px 20px 8px;
+    }
+
+    .vp-video-wrap {
+      padding: 8px 14px 0;
+    }
+
+    .vp-video-wrap video {
+      max-height: 65vh;
+      border-radius: 14px;
+    }
+
+    .vp-content {
+      padding: 14px 20px 18px;
+    }
+
+    .vp-title {
+      font-size: 1.2rem;
+    }
+
+    .vp-desc {
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    .vp-cta {
+      padding: 13px 24px;
+      font-size: 0.95rem;
+      border-radius: 14px;
+    }
+  }
+
+  /* ===== Small phones (SE, etc.) ===== */
+  @media (max-width: 380px) {
+    .vp-overlay {
+      padding: 8px;
+    }
+
+    .vp-card {
+      max-width: 100%;
+      border-radius: 16px;
+    }
+
+    .vp-video-wrap {
+      padding: 4px 8px 0;
+    }
+
+    .vp-video-wrap video {
+      max-height: 50vh;
+      border-radius: 10px;
+    }
+
+    .vp-content {
+      padding: 8px 12px 12px;
+    }
+
+    .vp-title {
+      font-size: 0.95rem;
+    }
+
+    .vp-desc {
+      font-size: 0.72rem;
+    }
+
+    .vp-cta {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* ===== Landscape mobile ===== */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .vp-card {
+      max-height: 95vh;
+      max-width: 280px;
+    }
+
+    .vp-badge {
+      padding: 8px 12px 4px;
+    }
+
+    .vp-video-wrap video {
+      max-height: 40vh;
+    }
+
+    .vp-content {
+      padding: 6px 12px 10px;
+    }
+
+    .vp-title {
+      font-size: 0.9rem;
+    }
+
+    .vp-desc {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+(function() {
+  var SESSION_KEY = 'focus_video_popup_shown';
+  var PROMO_KEY = 'focus_promo_shown';
+  var SHOW_DELAY = 5000;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.getElementById('vp-overlay');
+    if (!overlay) return;
+
+    var video = document.getElementById('vp-video');
+    var closeBtn = document.getElementById('vp-close');
+    var dismissBtn = document.getElementById('vp-dismiss');
+
+    function show() {
+      // Reset display in case it was hidden after a previous close
+      overlay.style.display = '';
+      overlay.classList.remove('is-hiding');
+      overlay.classList.add('is-visible');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hide() {
+      overlay.classList.add('is-hiding');
+      overlay.classList.remove('is-visible');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      // Pause video on close
+      if (video && !video.paused) {
+        video.pause();
+      }
+
+      setTimeout(function() {
+        overlay.style.display = 'none';
+      }, 300);
+    }
+
+    // Close handlers
+    if (closeBtn) closeBtn.addEventListener('click', hide);
+    if (dismissBtn) dismissBtn.addEventListener('click', hide);
+
+    // Click outside card to close
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) hide();
+    });
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('is-visible')) hide();
+    });
+
+    // ===== GLOBAL API: allow external buttons to open the popup =====
+    window.openVideoPopup = function() {
+      show();
+    };
+
+    // ===== AUTO-SHOW: 5s delay on first visit (excluded pages skip auto) =====
+    var excluded = [
+      '/content-automation-watch',
+      '/content-automation-course',
+      '/webinar-n8n-agent',
+      '/webinar-n8n-thank-you',
+      '/academy/thank-you'
+    ];
+    var path = window.location.pathname.replace(/\/$/, '');
+    var isExcluded = false;
+    for (var i = 0; i < excluded.length; i++) {
+      if (path === excluded[i]) { isExcluded = true; break; }
+    }
+
+    if (!isExcluded && !sessionStorage.getItem(SESSION_KEY)) {
+      sessionStorage.setItem(PROMO_KEY, '1'); // Block PromoPopup
+      sessionStorage.setItem(SESSION_KEY, '1');
+      setTimeout(show, SHOW_DELAY);
+    }
+  });
+})();
+</script>

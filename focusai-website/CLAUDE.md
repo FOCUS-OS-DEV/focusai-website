@@ -456,6 +456,39 @@ LIGHTBOX (pre-rendered video elements in HTML):
 
 ---
 
+## Video Popup System (Learning Portal Showcase)
+
+### Architecture
+- **Component:** `VideoPopup.astro` (replaces PromoPopup in BaseLayout)
+- **PromoPopup** is still available at `PromoPopup.astro` — swap back in BaseLayout if needed
+- **Video URL:** `https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto/v1772129607/IMG_7879_jz34kj.mp4`
+- **Poster:** Auto-generated from Cloudinary video-to-image transform
+
+### Behavior
+- Shows after **5 seconds** delay on first visit (session-based)
+- Session key: `focus_video_popup_shown` (also sets `focus_promo_shown` to block PromoPopup)
+- Excluded pages: campaign pages, thank-you pages
+- Close: X button, "לא עכשיו" button, click outside, Escape key
+- Video pauses on close
+- `document.body.overflow = hidden` while open (prevents background scroll)
+
+### Performance Rules for Video Popups
+1. **`preload="none"`** — no video data downloads until user presses play
+2. **Poster image** from Cloudinary video transform (lightweight JPG)
+3. **Direct `src` in HTML** — no lazy-loading via JS (iOS-safe)
+4. **No autoplay** — user initiates playback via native controls
+5. **`playsinline webkit-playsinline`** — required for iOS inline playback
+6. **`controlslist="nodownload"`** — prevents download button
+7. **z-index: 60** — above PromoPopup (55) to ensure priority if both loaded
+
+### Mobile-First Layout
+- Card max-width: 340px (mobile) → 400px (desktop)
+- Video max-height: 58vh (mobile) → 65vh (desktop) → 50vh (small phones)
+- Landscape mode: condensed layout, description hidden
+- Close button: 40x40 (mobile) → 44x44 (desktop) — meets tap target requirements
+
+---
+
 ## Animation System
 
 ### GSAP (Deferred)
@@ -627,6 +660,10 @@ Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Wind
 ## Recent Changes Log
 
 ### 2026-02-26
+- **VideoPopup component** created — replaces PromoPopup as the main site popup
+  - Portrait video showcasing learning portal, 5s delay, once per session
+  - Mobile-first design, iOS-safe (preload=none, native controls, playsinline)
+  - PromoPopup.astro preserved for future use (commented out in BaseLayout)
 - **New article:** `anthropic-claude-cowork-enterprise-agents` - Anthropic's enterprise push: Claude Cowork plugins + Vercept acquisition
 - **New article:** `ai-agents-adoption-2026-state-of-market` - State of AI Agents 2026: 57% of companies in production, Israeli market context
 
