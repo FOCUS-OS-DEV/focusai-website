@@ -5,7 +5,7 @@ pubDate: 2025-01-10
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029352/blog/ai-tools-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["tools", "guides", "automation"]
-ctaType: "ai-ready"
+ctaType: "botcamp"
 ---
 
 ## הכלים שמשנים את כללי המשחק
@@ -84,14 +84,14 @@ ctaType: "ai-ready"
 3. **מה רמת המורכבות?** - חלק מהכלים דורשים למידה
 4. **האם יש אינטגרציה?** - חשוב שהכלי יתחבר למערכות שלכם
 
-<a href="/academy/ai-ready" class="blog-cta-banner">
-  <span class="cta-badge">AI Ready</span>
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
   <div class="cta-title">רוצים לדעת להשתמש בכלים האלה באמת?</div>
-  <div class="cta-desc">בתוכנית AI Ready תלמדו לעבוד עם כלי AI ביום-יום. לא תיאוריה - תרגול מעשי שמשנה את שגרת העבודה.</div>
+  <div class="cta-desc">בתוכנית Bot-Camp תלמדו לעבוד עם כלי AI ביום-יום. לא תיאוריה - תרגול מעשי שמשנה את שגרת העבודה.</div>
   <div class="cta-tags"><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span><span class="cta-tag">Gemini</span><span class="cta-tag">Prompt Engineering</span></div>
   <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ---
 
-**רוצים ללמוד יותר?** בקורסים של [Focus AI Academy](/academy/ai-ready) אנחנו מלמדים איך להשתמש בכל הכלים האלה ביום-יום.
+**רוצים ללמוד יותר?** בקורסים של [Focus AI Academy](/academy) אנחנו מלמדים איך להשתמש בכל הכלים האלה ביום-יום.

@@ -5,7 +5,7 @@ pubDate: 2025-01-05
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029364/blog/prompt-guide-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["guides", "tools", "ai-agents"]
-ctaType: "ai-ready"
+ctaType: "botcamp"
 ---
 
 ## למה Prompt Engineering זה קריטי?
@@ -126,10 +126,10 @@ AI לא יכול לדעת מידע עדכני, לקרוא קבצים שלא שי
 מה הפתרון שאתה ממליץ? תסביר למה.
 ```
 
-<a href="/academy/ai-ready" class="blog-cta-banner">
-  <span class="cta-badge">AI Ready</span>
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
   <div class="cta-title">רוצים לקחת את ה-Prompt Engineering שלכם לשלב הבא?</div>
-  <div class="cta-desc">בתוכנית AI Ready תלמדו טכניקות מתקדמות שחוסכות שעות עבודה כל יום. תרגול מעשי, לא תיאוריה.</div>
+  <div class="cta-desc">בתוכנית Bot-Camp תלמדו טכניקות מתקדמות שחוסכות שעות עבודה כל יום. תרגול מעשי, לא תיאוריה.</div>
   <div class="cta-tags"><span class="cta-tag">Prompt Engineering</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span><span class="cta-tag">Gemini</span></div>
   <span class="cta-button">לפרטים והרשמה</span>
 </a>
@@ -148,4 +148,4 @@ AI לא יכול לדעת מידע עדכני, לקרוא קבצים שלא שי
 
 ## רוצים ללמוד יותר?
 
-בקורס [AI Ready](/academy/ai-ready) אנחנו מקדישים מודול שלם ל-Prompt Engineering עם תרגול מעשי. מומלץ בחום!
+בקורס [Bot-Camp](/academy) אנחנו מקדישים מודול שלם ל-Prompt Engineering עם תרגול מעשי. מומלץ בחום!

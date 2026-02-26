@@ -153,15 +153,11 @@ body {
 /* pseudo-elements on body jitter on mobile due to address bar viewport changes */
 .fingerprint-fixed {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100svh;
-  height: 100vh; /* fallback for older browsers */
+  inset: 0;
   background-image: url('https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png');
   background-size: min(80vw, 800px);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
   opacity: 0.06;
   pointer-events: none;
   z-index: 0;
@@ -172,11 +168,7 @@ body {
   backface-visibility: hidden;
 }
 
-@supports (height: 100svh) {
-  .fingerprint-fixed {
-    height: 100svh;
-  }
-}
+/* inset: 0 handles full coverage, no height override needed */
 
 /* Mobile: bigger, more visible, above section backgrounds */
 @media (max-width: 1023px) {

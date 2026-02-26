@@ -6,7 +6,7 @@ heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_12
 author: "צוות Focus AI"
 category: "news"
 tags: ["news", "tools", "automation", "guides"]
-ctaType: "ai-ready"
+ctaType: "botcamp"
 ---
 
 ## המצגת שגוגל תמיד הבטיחה - ועכשיו סוף סוף אפשר לערוך אותה
@@ -55,12 +55,12 @@ NotebookLM עם העדכון הזה מאפשר לדחוס את שלושת השל
 
 **צוותי HR** שמכינים הדרכות ואוריינטציות לעובדים חדשים יכולים לבנות מצגות על בסיס מדיניות החברה, נהלים ומסמכים פנימיים.
 
-<a href="/academy/ai-ready" class="blog-cta-banner">
-  <span class="cta-badge">תוכנית AI Ready</span>
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
   <div class="cta-title">רוצים לדעת איך להפיק מקסימום מכלי AI כמו NotebookLM?</div>
-  <div class="cta-desc">בתוכנית AI Ready של Focus AI לומדים לשלב כלי AI מעשיים בעבודה היומיומית - מצגות, ניתוח נתונים, כתיבה מקצועית ועוד. הכשרה ממוקדת תוצאות לעובדים ומנהלים.</div>
-  <div class="cta-tags"><span class="cta-tag">AI Ready</span><span class="cta-tag">הכשרת עובדים</span><span class="cta-tag">כלים מעשיים</span><span class="cta-tag">Google AI</span></div>
-  <span class="cta-button">לפרטים על תוכנית AI Ready</span>
+  <div class="cta-desc">בתוכנית Bot-Camp של Focus AI לומדים לשלב כלי AI מעשיים בעבודה היומיומית - מצגות, ניתוח נתונים, כתיבה מקצועית ועוד. הכשרה מקצועית עם תעודה בליווי אקדמי.</div>
+  <div class="cta-tags"><span class="cta-tag">Bot-Camp</span><span class="cta-tag">כלי AI מעשיים</span><span class="cta-tag">אוטומציות</span><span class="cta-tag">Google AI</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## NotebookLM במבט רחב - הכלי שמתגבש
@@ -98,4 +98,4 @@ NotebookLM הפך לכלי שכדאי לשים בארגז הכלים של כל �
 
 ב-Focus AI אנחנו מלמדים ארגונים בישראל איך לשלב כלים כמו NotebookLM, ChatGPT, Gemini ואחרים בתהליכי עבודה אמיתיים - לא רק לנסות אותם, אלא לבנות שגרות עבודה שמייצרות תפוקה מדידה.
 
-[לתוכנית AI Ready - הכשרת עובדים בכלי AI](/academy/ai-ready)
+[לתוכנית Bot-Camp - הכשרה מקצועית בכלי AI](/academy)

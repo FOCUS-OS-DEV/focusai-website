@@ -19,7 +19,6 @@ export default defineConfig({
   redirects: {
     '/ai-tools': '/tools',
     '/services/ai-agents': '/ai-agents',
-    '/academy/ai-ready/syllabus': '/ai-ready-syllabus',
   },
 
   vite: {

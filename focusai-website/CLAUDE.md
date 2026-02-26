@@ -129,7 +129,7 @@ Focus AI is **NOT just a training company**. Full-service AI consultancy:
 2. AI Agents & Bots
 3. Automations (N8N, Make, Zapier)
 4. Dashboards & Analytics
-5. Academy (Bot-Camp, AI Ready, AI First)
+5. Academy (Bot-Camp, AI First)
 
 ### Differentiators
 - Learn from practitioners (not theorists)
@@ -207,7 +207,7 @@ focusai-website/
 | `/` | Live | Homepage - hero, services, academy preview, testimonials |
 | `/about` | Live | About page - founders, mission, partners |
 | `/academy` | Live | Bot-Camp course page (main academy landing) |
-| `/academy/ai-ready` | Live | AI Ready course page |
+| `/academy/_drafts/ai-ready` | Draft | AI Ready course page (REMOVED from site, kept in drafts) |
 | `/academy/_drafts/ai-first` | Draft | AI First course (NOT routed) |
 | `/academy/thank-you` | Live | Form submission thank-you |
 | `/ai-agents` | Live | AI Agents service page |
@@ -237,7 +237,6 @@ focusai-website/
 Header navLinks:
 ├── בית (/)
 ├── אקדמיה (#academy) ← dropdown
-│   ├── AI Ready (/academy/ai-ready)
 │   └── Bot-Camp (/academy)
 ├── סוכני AI (/ai-agents)
 ├── סדנאות (/ai-workshop)
@@ -283,14 +282,16 @@ The hero (`HeroSection.astro`) is **pure Astro + CSS** - no React, no Framer Mot
 | `n8n-funding-ai-automation` | n8n גייסה 180 מיליון דולר | Bot-Camp |
 | `what-is-ai-agent` | מה זה סוכן AI | Bot-Camp |
 | `openai-frontier-enterprise-ai` | OpenAI Frontier לארגונים | Consulting |
-| `prompt-engineering-guide` | מדריך פרומפט אנג'ינירינג | AI Ready |
+| `prompt-engineering-guide` | מדריך פרומפט אנג'ינירינג | Bot-Camp |
 | `automation-examples` | דוגמאות אוטומציה | Bot-Camp |
-| `top-10-ai-tools-2025` | 10 כלי AI מובילים | AI Ready |
+| `top-10-ai-tools-2025` | 10 כלי AI מובילים | Bot-Camp |
 | `google-ai-transformation-2026` | גוגל כבר לא מנוע חיפוש - חברת תשתיות AI | Consulting |
+| `anthropic-claude-cowork-enterprise-agents` | Anthropic תוקפת את שוק הארגונים: Claude Cowork ורכישת Vercept | Consulting |
+| `ai-agents-adoption-2026-state-of-market` | מצב שוק סוכני ה-AI ב-2026: 57% מהחברות כבר בייצור | Agents |
 
 ### CTA Banner System
 - Glassmorphism HTML banners (NOT image CTAs)
-- Per-article CTA type via `ctaType` frontmatter: `botcamp` / `ai-ready` / `agents` / `consulting`
+- Per-article CTA type via `ctaType` frontmatter: `botcamp` / `agents` / `consulting`
 - NO arrows in buttons
 - CSS in `[...slug].astro`: `.blog-cta-banner`, `.cta-badge`, `.cta-title`, `.cta-desc`, `.cta-tags`, `.cta-button`
 
@@ -625,6 +626,10 @@ Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Wind
 
 ## Recent Changes Log
 
+### 2026-02-26
+- **New article:** `anthropic-claude-cowork-enterprise-agents` - Anthropic's enterprise push: Claude Cowork plugins + Vercept acquisition
+- **New article:** `ai-agents-adoption-2026-state-of-market` - State of AI Agents 2026: 57% of companies in production, Israeli market context
+
 ### 2026-02-20
 - **Live webinar landing page** created at `/וובינר-לייב-סוכן-AI-ראשון-ב-n8n/`
   - Standalone page (no BaseLayout), direct link access only
@@ -640,7 +645,7 @@ Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Wind
   - Poster images in carousel (no `<video>` elements) → iOS safe
   - Pre-rendered videos in lightbox HTML with direct `src` and native controls
   - Infinite loop, arrow navigation, RTL-aware, no-download protection
-  - Deployed on: homepage, Bot-Camp, AI Ready, AI Workshop
+  - Deployed on: homepage, Bot-Camp, AI Workshop
 - Documented iOS Video Playback rules in CLAUDE.md (critical for future video work)
 - Updated Zohar Yaakov's video URL to latest version
 - Fixed form text color on Bot-Camp page (white on white → dark text)
@@ -701,7 +706,7 @@ Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Wind
 - [x] Deploy blog to production (add back to nav) ✅ 2026-02-14
 - [x] Replace FormSubmit.co with N8N webhooks ✅ 2026-02-14
 - [ ] Create more blog articles (AI news, guides)
-- [ ] Create AI-Ready and AI-First syllabus pages
+- [ ] Create AI-First syllabus page
 - [ ] Deploy /services pages to production (currently deleted by .cpanel.yml)
 - [ ] PageSpeed: remaining optimizations (video captions, carousel dot a11y)
 

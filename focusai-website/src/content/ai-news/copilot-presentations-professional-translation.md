@@ -6,7 +6,7 @@ heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_12
 author: "צוות Focus AI"
 category: "guide"
 tags: ["news", "tools", "guides", "automation"]
-ctaType: "ai-ready"
+ctaType: "botcamp"
 ---
 
 ## הבעיה שכולם מכירים אבל אף אחד לא מדבר עליה
@@ -127,12 +127,12 @@ ctaType: "ai-ready"
 
 זה לא חיסרון. זו הסיבה שמנהלים ויועצים מנוסים עדיין חשובים.
 
-<a href="/academy/ai-ready" class="blog-cta-banner">
-  <span class="cta-badge">תוכנית AI Ready</span>
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
   <div class="cta-title">רוצים להפסיק לבזבז זמן על מצגות ולהתחיל לייצר תוצאות עם AI?</div>
-  <div class="cta-desc">בתוכנית AI Ready של Focus AI לומדים לעבוד נכון עם כלים כמו Copilot, ChatGPT ו-Gemini - לא לנסות אותם, אלא לשלב אותם בתהליכי עבודה אמיתיים. הכשרה ממוקדת תוצאות לעובדים ומנהלים בישראל.</div>
-  <div class="cta-tags"><span class="cta-tag">AI Ready</span><span class="cta-tag">Microsoft Copilot</span><span class="cta-tag">מצגות מקצועיות</span><span class="cta-tag">פרומפט אנג'ינירינג</span></div>
-  <span class="cta-button">לפרטים על תוכנית AI Ready</span>
+  <div class="cta-desc">בתוכנית Bot-Camp של Focus AI לומדים לעבוד נכון עם כלים כמו Copilot, ChatGPT ו-Gemini - לא לנסות אותם, אלא לשלב אותם בתהליכי עבודה אמיתיים. הכשרה מקצועית עם תעודה בליווי אקדמי.</div>
+  <div class="cta-tags"><span class="cta-tag">Bot-Camp</span><span class="cta-tag">Microsoft Copilot</span><span class="cta-tag">מצגות מקצועיות</span><span class="cta-tag">פרומפט אנג'ינירינג</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## איפה להתחיל
@@ -148,4 +148,4 @@ ctaType: "ai-ready"
 
 ב-Focus AI אנחנו מלמדים את המיומנויות האלה - לא כתיאוריה, אלא דרך תרגול אמיתי עם כלים שאתם כבר משתמשים בהם בעבודה היומיומית.
 
-[לכל הפרטים על תוכנית AI Ready](/academy/ai-ready)
+[לכל הפרטים על תוכנית Bot-Camp](/academy)
