@@ -23,7 +23,87 @@
     if (hasMarketingConsent()) loadPixel();
     document.addEventListener('marketing-consent-granted', loadPixel);
   })();
-  </script><link rel="stylesheet" href="/_astro/webinar-n8n-thank-you.CB_i2squ.css"></head> <body data-astro-cid-hbiviflt> <div class="bg-glow" data-astro-cid-hbiviflt></div> <!-- Confetti --> <div class="confetti-container" id="confetti" data-astro-cid-hbiviflt></div> <div class="page-wrap" data-astro-cid-hbiviflt> <!-- Logo --> <a href="/" class="logo" data-astro-cid-hbiviflt> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_72/v1765265415/2_fxdcio.png" alt="Focus AI" data-astro-cid-hbiviflt> </a> <!-- Success Icon --> <div class="success-icon" data-astro-cid-hbiviflt> <i class="fas fa-check" data-astro-cid-hbiviflt></i> </div> <!-- Title --> <h1 class="success-title" data-astro-cid-hbiviflt>נרשמת בהצלחה!</h1> <p class="success-subtitle" data-astro-cid-hbiviflt>מקומך בוובינר שמור. נתראה ב-04.03!</p> <!-- WhatsApp CTA - Main Focus (FIRST!) --> <div class="whatsapp-cta" data-astro-cid-hbiviflt> <div class="cta-icon" data-astro-cid-hbiviflt> <i class="fab fa-whatsapp" data-astro-cid-hbiviflt></i> </div> <h3 data-astro-cid-hbiviflt>חובה להצטרף לקהילת ה-WhatsApp</h3> <p data-astro-cid-hbiviflt> <span class="highlight" data-astro-cid-hbiviflt>הגישה לוובינר היא אך ורק דרך קהילת ה-WhatsApp הסגורה שלנו.</span><br data-astro-cid-hbiviflt>
+  </script><script>(function(){const gtmId = "GTM-M33PM5WV";
+
+    // Only load if user has consented to analytics cookies
+    (function() {
+      function hasAnalyticsConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.analytics === true;
+        } catch(e) { return false; }
+      }
+
+      function loadGTM() {
+        if (window.__gtm_loaded) return;
+        window.__gtm_loaded = true;
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      }
+
+      if (hasAnalyticsConsent()) loadGTM();
+      document.addEventListener('analytics-consent-granted', loadGTM);
+    })();
+  })();</script><script>(function(){const clarityId = "vddsj5y6bj";
+
+    // Only load if user has consented to analytics cookies
+    (function() {
+      function hasAnalyticsConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.analytics === true;
+        } catch(e) { return false; }
+      }
+
+      function loadClarity() {
+        if (window.__clarity_loaded) return;
+        window.__clarity_loaded = true;
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window,document,"clarity","script",clarityId);
+      }
+
+      if (hasAnalyticsConsent()) loadClarity();
+      document.addEventListener('analytics-consent-granted', loadClarity);
+    })();
+  })();</script><script>(function(){const metaPixelId = "1388659336102272";
+
+    (function() {
+      function hasMarketingConsent() {
+        try {
+          var raw = localStorage.getItem('focus_ai_cookie_consent');
+          if (!raw) return false;
+          var consent = JSON.parse(raw);
+          return consent && consent.marketing === true;
+        } catch(e) { return false; }
+      }
+
+      function loadMetaPixel() {
+        if (window.__meta_pixel_loaded) return;
+        window.__meta_pixel_loaded = true;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaPixelId);
+        fbq('track', 'PageView');
+        document.dispatchEvent(new CustomEvent('meta-pixel-ready'));
+      }
+
+      if (hasMarketingConsent()) loadMetaPixel();
+      document.addEventListener('marketing-consent-granted', loadMetaPixel);
+    })();
+  })();</script><link rel="stylesheet" href="/_astro/webinar-n8n-thank-you.CB_i2squ.css"></head> <body data-astro-cid-hbiviflt> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <div class="bg-glow" data-astro-cid-hbiviflt></div> <!-- Confetti --> <div class="confetti-container" id="confetti" data-astro-cid-hbiviflt></div> <div class="page-wrap" data-astro-cid-hbiviflt> <!-- Logo --> <a href="/" class="logo" data-astro-cid-hbiviflt> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_72/v1765265415/2_fxdcio.png" alt="Focus AI" data-astro-cid-hbiviflt> </a> <!-- Success Icon --> <div class="success-icon" data-astro-cid-hbiviflt> <i class="fas fa-check" data-astro-cid-hbiviflt></i> </div> <!-- Title --> <h1 class="success-title" data-astro-cid-hbiviflt>נרשמת בהצלחה!</h1> <p class="success-subtitle" data-astro-cid-hbiviflt>מקומך בוובינר שמור. נתראה ב-04.03!</p> <!-- WhatsApp CTA - Main Focus (FIRST!) --> <div class="whatsapp-cta" data-astro-cid-hbiviflt> <div class="cta-icon" data-astro-cid-hbiviflt> <i class="fab fa-whatsapp" data-astro-cid-hbiviflt></i> </div> <h3 data-astro-cid-hbiviflt>חובה להצטרף לקהילת ה-WhatsApp</h3> <p data-astro-cid-hbiviflt> <span class="highlight" data-astro-cid-hbiviflt>הגישה לוובינר היא אך ורק דרך קהילת ה-WhatsApp הסגורה שלנו.</span><br data-astro-cid-hbiviflt>
 לינק הזום יישלח לקהילה 15 דקות לפני תחילת המפגש.<br data-astro-cid-hbiviflt>
 ללא הצטרפות לקהילה - לא תקבלו את הלינק.
 </p> <a href="https://did.li/Focus-community" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" data-astro-cid-hbiviflt> <i class="fab fa-whatsapp" data-astro-cid-hbiviflt></i>
