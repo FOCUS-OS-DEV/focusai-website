@@ -2,7 +2,7 @@
 title: "NotebookLM עכשיו עם עריכת מצגות: סוף עידן ה-PDF"
 description: "גוגל שחררה עדכון משמעותי ל-NotebookLM שמאפשר עריכת מצגות ישירות בתוך הכלי ויצוא ל-PPTX. מה זה אומר לכל מי שמכין מצגות בארגון?"
 pubDate: 2026-02-26
-heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1772058396/blog/notebooklm-presentation-hero.png"
+heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1772090207/blog/notebooklm-presentation-hero-v2.png"
 author: "צוות Focus AI"
 category: "news"
 tags: ["news", "tools", "automation", "guides"]
