@@ -96,7 +96,20 @@ const blogPostingSchema = {
     "@id": pageUrl
   },
   "wordCount": wordCount,
-  "inLanguage": "he-IL"
+  "inLanguage": "he-IL",
+  "keywords": post.data.tags?.join(', ') || '',
+  "articleSection": post.data.category === 'guide' ? 'מדריכים' : post.data.category === 'tutorial' ? 'הדרכות' : 'חדשות AI'
+};
+
+// BreadcrumbList structured data
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "בית", "item": "https://focusai.co.il/" },
+    { "@type": "ListItem", "position": 2, "name": "חדשות AI", "item": "https://focusai.co.il/ai-news/" },
+    { "@type": "ListItem", "position": 3, "name": post.data.title, "item": pageUrl }
+  ]
 };
 
 // CTA config based on article ctaType
@@ -145,7 +158,7 @@ const ctaConfig = {
 }[ctaType];
 ---
 
-<BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description} image={post.data.heroImage} ogType="article" structuredData={blogPostingSchema}>
+<BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description} image={post.data.heroImage} ogType="article" structuredData={[blogPostingSchema, breadcrumbSchema]}>
   <Header slot="header" currentPath="/ai-news" />
 
   <!-- Hero Image - Full Width -->

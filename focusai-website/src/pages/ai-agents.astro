@@ -221,9 +221,22 @@ const serviceSchema = {
   "areaServed": { "@type": "Country", "name": "Israel" },
   "availableChannel": { "@type": "ServiceChannel", "serviceUrl": "https://focusai.co.il/ai-agents" }
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} structuredData={serviceSchema}>
+<BaseLayout title={pageTitle} description={pageDescription} structuredData={[serviceSchema, faqSchema]}>
   <Header slot="header" currentPath="/ai-agents" />
 
   <Breadcrumbs items={[
