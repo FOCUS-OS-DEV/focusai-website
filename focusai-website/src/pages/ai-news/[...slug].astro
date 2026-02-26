@@ -145,7 +145,7 @@ const ctaConfig = {
 }[ctaType];
 ---
 
-<BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description} image={post.data.heroImage} structuredData={blogPostingSchema}>
+<BaseLayout title={`${post.data.title} | Focus AI`} description={post.data.description} image={post.data.heroImage} ogType="article" structuredData={blogPostingSchema}>
   <Header slot="header" currentPath="/ai-news" />
 
   <!-- Hero Image - Full Width -->
