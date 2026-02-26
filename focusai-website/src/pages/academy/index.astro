@@ -308,24 +308,55 @@ const faqs = [
   }
 ];
 
-// Schema for SEO
+// Schema for SEO - enriched Course schema
 const courseSchema = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "Bot-Camp - הכשרת מפתחי סוכני AI",
-  "description": courseInfo.description,
+  "name": "Bot-Camp - הכשרת מפתחי סוכני AI ואוטומציות עסקיות",
+  "description": "תוכנית הכשרה מקצועית בשיתוף אוניברסיטת חיפה. 12 מפגשים פרונטליים בהרצליה פיתוח. הכשרה מעשית לפיתוח סוכני AI, בוטים ואוטומציות עסקיות עם n8n.",
+  "url": "https://focusai.co.il/academy",
   "provider": {
     "@type": "Organization",
     "name": "Focus AI",
     "url": "https://focusai.co.il"
-  }
+  },
+  "inLanguage": "he",
+  "educationalCredentialAwarded": "תעודה מקצועית בשיתוף אוניברסיטת חיפה",
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "Blended",
+    "instructor": [
+      { "@type": "Person", "name": "שחר דדיה", "jobTitle": "מנכ\"ל ואסטרטג AI" },
+      { "@type": "Person", "name": "אוניל סהר", "jobTitle": "סמנכ\"ל תפעול ופיתוח עסקי" }
+    ],
+    "location": [
+      { "@type": "Place", "name": "הרצליה פיתוח", "address": { "@type": "PostalAddress", "addressLocality": "הרצליה", "addressCountry": "IL" } },
+      { "@type": "VirtualLocation", "url": "https://focusai.co.il/academy", "name": "Zoom" }
+    ]
+  },
+  "competencyRequired": "לא נדרש רקע טכני",
+  "about": ["סוכני AI", "אוטומציות עסקיות", "פרומפט אנג'ינירינג", "n8n", "No-Code", "בוטים"]
+};
+
+// FAQ Schema for rich snippets
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
 };
 ---
 
 <BaseLayout
-  title={`${courseInfo.title} | Focus AI Academy`}
-  description={courseInfo.description}
-  structuredData={[courseSchema]}
+  title="Bot-Camp | קורס AI מקצועי בהרצליה | Focus AI Academy"
+  description="הכשרת Bot-Camp - קורס AI מקצועי בשיתוף אוניברסיטת חיפה. 12 מפגשים בהרצליה פיתוח. סוכני AI, אוטומציות עם n8n, ותעודה מקצועית. קבוצה של 18 משתתפים."
+  structuredData={[courseSchema, faqSchema]}
 >
   <Header slot="header" currentPath="/academy" theme="light" />
 

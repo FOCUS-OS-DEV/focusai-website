@@ -15,9 +15,56 @@ import VideoTestimonials from '../components/VideoTestimonials.astro';
 import CTAContact from '../components/CTAContact.astro';
 import RelatedContent from '../components/RelatedContent.astro';
 import ClientLogosCarousel from '../components/ClientLogosCarousel.astro';
+import { siteConfig } from '../data/config';
+
+// LocalBusiness Schema for Google rich results
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["ProfessionalService", "EducationalOrganization"],
+  "name": "Focus AI",
+  "alternateName": "פוקוס AI",
+  "description": "מגשרים על הפער בין אנשים לטכנולוגיה. הכשרות מקצועיות ב-AI, פיתוח סוכני AI, אוטומציות עסקיות וייעוץ אסטרטגי לארגונים.",
+  "url": "https://focusai.co.il",
+  "logo": siteConfig.assets.logo,
+  "image": "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png",
+  "telephone": "+972539466408",
+  "email": "office@focusai.co.il",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "הרצליה",
+    "addressRegion": "מחוז תל אביב",
+    "addressCountry": "IL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "32.1628",
+    "longitude": "34.7896"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "founder": [
+    { "@type": "Person", "name": "שחר דדיה", "jobTitle": "מנכ\"ל ואסטרטג AI" },
+    { "@type": "Person", "name": "אוניל סהר", "jobTitle": "סמנכ\"ל תפעול ופיתוח עסקי" }
+  ],
+  "sameAs": [
+    siteConfig.social.instagram,
+    siteConfig.social.facebook,
+    siteConfig.social.tiktok
+  ],
+  "knowsAbout": ["בינה מלאכותית", "סוכני AI", "אוטומציות עסקיות", "הכשרות AI", "n8n", "Claude Code", "ייעוץ אסטרטגי AI"],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Israel"
+  },
+  "priceRange": "$$"
+};
 ---
 
-<BaseLayout title="Focus AI | מגשרים על הפער בין אנשים לטכנולוגיה">
+<BaseLayout title="Focus AI | הכשרות AI, סוכני AI ואוטומציות | הרצליה ותל אביב" description="Focus AI - הכשרות מקצועיות ב-AI בשיתוף אוניברסיטת חיפה והטכניון. קורסי Bot-Camp, AI Ready, סוכני AI, אוטומציות ופתרונות AI לעסקים. הרצליה פיתוח." structuredData={[localBusinessSchema]}>
   <Header slot="header" currentPath="/" />
 
   <!-- Hero -->

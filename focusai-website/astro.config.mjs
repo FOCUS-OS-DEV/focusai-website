@@ -40,7 +40,7 @@ export default defineConfig({
         !page.includes('thank-you') &&
         !page.includes('unsubscribe') &&
         !page.includes('content-automation-watch') &&
-        !page.includes('/services/ai-agents'),
+        !page.includes('/services/'),
     }),
     icon({
       include: {

@@ -147,36 +147,43 @@ const courseTracks = [
   }
 ];
 
-// Course Schema for SEO
+// Course Schema for SEO - enriched
 const courseSchema = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "AI READY - הכשרת AI מעשית",
-  "description": courseInfo.description,
+  "name": "AI Ready - הכשרת עובדים בכלי AI מתקדמים",
+  "description": "הכשרה יישומית לכלי AI מתקדמים. 8 מפגשים מעשיים - ChatGPT, Claude, Gemini, יצירת תוכן, אוטומציות ועוד. בהרצליה פיתוח או Zoom. מתאים לכל רמה.",
+  "url": "https://focusai.co.il/academy/ai-ready",
   "provider": {
     "@type": "Organization",
     "name": "Focus AI",
     "url": "https://focusai.co.il"
   },
+  "inLanguage": "he",
+  "educationalCredentialAwarded": "תעודת סיום",
+  "competencyRequired": "לא נדרש רקע טכני",
   "hasCourseInstance": {
     "@type": "CourseInstance",
-    "courseMode": "blended",
-    "courseWorkload": "PT30H",
+    "courseMode": "Blended",
+    "courseWorkload": "PT24H",
     "startDate": "2026-04-29",
-    "location": {
-      "@type": "Place",
-      "name": "הרצליה פיתוח + Zoom"
-    }
+    "instructor": [
+      { "@type": "Person", "name": "שחר דדיה", "jobTitle": "מנכ\"ל ואסטרטג AI" },
+      { "@type": "Person", "name": "אוניל סהר", "jobTitle": "סמנכ\"ל תפעול ופיתוח עסקי" }
+    ],
+    "location": [
+      { "@type": "Place", "name": "הרצליה פיתוח", "address": { "@type": "PostalAddress", "addressLocality": "הרצליה", "addressCountry": "IL" } },
+      { "@type": "VirtualLocation", "url": "https://focusai.co.il/academy/ai-ready", "name": "Zoom" }
+    ]
   },
-  "numberOfCredits": 8,
-  "inLanguage": "he"
+  "about": ["ChatGPT", "Claude", "Gemini", "Prompt Engineering", "יצירת תוכן עם AI", "אוטומציות"]
 };
 ---
 
 <BaseLayout
-  title="AI READY | הכשרת AI מעשית | Focus AI"
-  description="הכשרה יישומית לכלי AI מתקדמים. 8 מפגשים מעשיים שישנו את אופן העבודה שלכם."
-  structuredData={courseSchema}
+  title="AI Ready | הכשרת עובדים ב-AI | קורס AI מעשי בהרצליה | Focus AI"
+  description="הכשרת AI Ready - 8 מפגשים מעשיים לשימוש בכלי AI מתקדמים. ChatGPT, Claude, Gemini, יצירת תוכן ואוטומציות. בהרצליה פיתוח או Zoom. מתאים לכל רמה, ללא רקע טכני."
+  structuredData={[courseSchema]}
 >
   <Header slot="header" currentPath="/academy/ai-ready" />
   <Breadcrumbs items={[
