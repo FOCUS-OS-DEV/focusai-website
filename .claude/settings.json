@@ -46,6 +46,12 @@
             "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/privacy-compliance-check.sh\"",
             "timeout": 10,
             "statusMessage": "בודק ציות לתקנות פרטיות..."
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/analytics-check.sh\"",
+            "timeout": 10,
+            "statusMessage": "בודק שיש Analytics בכל דף..."
           }
         ]
       },

@@ -4,6 +4,8 @@
  * Only accessible via direct link: /webinar
  * Content: Free webinar - "סוכן AI לכל מטרה"
  */
+import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -32,32 +34,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Meta Pixel Code (consent-aware) -->
+  <!-- Fire Lead event after Meta Pixel loads (init handled by Analytics.astro) -->
   <script is:inline>
-    (function() {
-      function hasMarketingConsent() {
-        try {
-          var raw = localStorage.getItem('focus_ai_cookie_consent');
-          if (!raw) return false;
-          var consent = JSON.parse(raw);
-          return consent && consent.marketing === true;
-        } catch(e) { return false; }
-      }
-      function loadPixel() {
-        if (window.__meta_pixel_loaded) return;
-        window.__meta_pixel_loaded = true;
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-        document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1388659336102272');
-        fbq('track', 'PageView');
-        fbq('track', 'Lead');
-      }
-      if (hasMarketingConsent()) loadPixel();
-      document.addEventListener('marketing-consent-granted', loadPixel);
-    })();
+    function fireLead() { if (typeof fbq === 'function') fbq('track', 'Lead'); }
+    if (window.__meta_pixel_loaded) fireLead();
+    else document.addEventListener('meta-pixel-ready', fireLead);
   </script>
 
   <style>
@@ -420,8 +401,10 @@
       }
     }
   </style>
+  <Analytics />
 </head>
 <body>
+  <AnalyticsBody />
   <div class="bg-animation"></div>
   <div class="particles" id="particles"></div>
 

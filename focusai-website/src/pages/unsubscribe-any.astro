@@ -1,5 +1,7 @@
 ---
 // Standalone unsubscribe page - no BaseLayout
+import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -215,8 +217,10 @@
       h1 { font-size: 22px; }
     }
   </style>
+  <Analytics />
 </head>
 <body>
+  <AnalyticsBody />
   <div class="container">
 
     <div id="formContent">
