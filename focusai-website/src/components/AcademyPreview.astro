@@ -6,49 +6,49 @@
 
 const courses = [
   {
-    id: "01",
-    name: "AI First",
-    tagline: "הצעד הראשון",
-    outcome: "מבינים ומתחילים להשתמש",
-    duration: "5 מפגשים",
-    hours: "15 שעות",
-    description: "הכניסה שלכם לעולם ה-AI. לומדים להשתמש ב-ChatGPT, Claude ועוד כלים בצורה מקצועית.",
-    features: [
-      "הכרת כלי AI מרכזיים",
-      "כתיבת פרומפטים אפקטיביים",
-      "שימוש ביום-יום בעבודה",
-      "תעודת השתתפות"
-    ],
-    color: "#06b6d4",
-    colorSecondary: "#0ea5e9",
-    featured: false,
-    level: "למתחילים",
-    href: "#contact",
-    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`
-  },
-  {
-    id: "02",
-    name: "Bot-Camp",
+    id: "herzliya",
+    name: "Bot-Camp Herzliya",
     tagline: "ההכשרה המקצועית",
-    outcome: "יוצאים עם תיק עבודות ויכולת להרוויח",
     duration: "12 מפגשים",
     hours: "72 שעות",
-    description: "הכשרה מקיפה לבניית סוכני AI, בוטים ואוטומציות. יוצאים עם תעודה בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה.",
+    description: "הכשרה מקיפה פנים אל פנים בהרצליה פיתוח. קבוצות קטנות, 2-3 מרצים בכל מפגש, ותגבורים לפני ואחרי כל שיעור.",
     features: [
-      "פרונטלי / Zoom Live",
+      "12 מפגשים פרונטליים (ימי ראשון)",
+      "קבוצות קטנות של עד 18 משתתפים",
       "2-3 מרצים בכל מפגש",
-      "פורטל לימוד + סוכני AI",
-      "קהילת בוגרים ונטוורקינג",
+      "תגבורים לפני ואחרי כל מפגש",
       "תיק עבודות מוכן",
-      "תעודה בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה"
+      "תעודה בליווי אקדמי של אוניברסיטת חיפה"
     ],
     color: "#a855f7",
     colorSecondary: "#c084fc",
     featured: true,
-    level: "לכל הרמות",
+    level: "פרונטלי",
     href: "/academy",
-    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`
   },
+  {
+    id: "zoom",
+    name: "מסלול Zoom",
+    tagline: "ללמוד מכל מקום",
+    duration: "12 מפגשים",
+    hours: "72 שעות",
+    description: "אותו תוכן איכותי — דרך Zoom. הקלטות מלאות, גישה מכל מקום, ותמיכה דיגיטלית לאורך כל הדרך.",
+    features: [
+      "12 מפגשים דרך Zoom (ימי ראשון)",
+      "גישה מלאה להקלטות המפגשים",
+      "קבוצת שאלות ותמיכה",
+      "פורטל לימוד + סוכני AI",
+      "תיק עבודות מוכן",
+      "תעודה בליווי אקדמי של אוניברסיטת חיפה"
+    ],
+    color: "#06b6d4",
+    colorSecondary: "#0ea5e9",
+    featured: false,
+    level: "מרחוק",
+    href: "/academy",
+    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`
+  }
 ];
 ---
 
@@ -78,25 +78,25 @@ const courses = [
         המסלולים שלנו
       </h2>
       <p class="text-lg text-white/50 max-w-xl mx-auto">
-        בחרו את הרמה שמתאימה לכם ותתחילו את המסע
+        הכשרה מקצועית לבניית סוכני AI, בוטים ואוטומציות
       </p>
     </div>
 
     <!-- Glass Cards Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6 mb-8 lg:items-center" data-animate="stagger">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8 md:items-stretch" data-animate="stagger">
       {courses.map((course, index) => (
         <div
-          class={`glass-card group ${course.featured ? 'featured' : ''} ${course.name === 'AI First' ? 'hidden lg:block' : ''}`}
+          class={`glass-card group ${course.featured ? 'featured' : ''}`}
           style={`--accent: ${course.color}; --accent-secondary: ${course.colorSecondary}; --delay: ${index * 0.1}s`}
         >
 
           {/* Main glass surface */}
-          <div class="glass-surface">
+          <div class="glass-surface h-full flex flex-col">
             {/* Gradient border */}
             <div class="glass-border"></div>
 
             {/* Inner content */}
-            <div class="glass-content">
+            <div class="glass-content flex flex-col flex-grow">
               {/* Header */}
               <div class="flex items-start justify-between mb-8">
                 {/* Icon */}
@@ -155,7 +155,7 @@ const courses = [
               <a href={course.href} class={`cta-btn ${course.featured ? 'featured' : ''}`}>
                 <span class="btn-bg"></span>
                 <span class="btn-text">
-                  {course.featured ? 'התחילו עכשיו' : 'לפרטים נוספים'}
+                  {course.featured ? 'לפרטים והרשמה' : 'לפרטים נוספים'}
                   <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                   </svg>
@@ -175,9 +175,9 @@ const courses = [
       <div class="glass-cta-content">
         <div class="max-w-xl mx-auto text-center">
           <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
-            לא בטוחים איזה מסלול מתאים?
+            רוצים לשמוע עוד?
           </h3>
-          <p class="text-base text-white/50 mb-6">השאירו פרטים ויועץ לימודים יצור עמכם קשר</p>
+          <p class="text-base text-white/50 mb-6">השאירו פרטים ונחזור אליכם עם כל המידע על המחזור הקרוב</p>
 
           <form id="academy-consult-form" class="space-y-4">
             <div class="flex flex-col sm:flex-row gap-3">
@@ -253,12 +253,10 @@ const courses = [
     outline: none;
   }
 
-  /* Non-featured cards - smaller from top and bottom on desktop */
-  @media (min-width: 1024px) {
-    .glass-card:not(.featured) {
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+  /* Cards stretch to equal height in grid */
+  .glass-card {
+    display: flex;
+    flex-direction: column;
   }
 
   .glass-surface {
