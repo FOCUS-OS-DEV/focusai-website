@@ -660,24 +660,30 @@ This ensures every new session starts with accurate context.
 
 ---
 
-## Workflow Rules (CRITICAL)
+## Operational Standards (CRITICAL)
 
-**Follow the deployment flow — no shortcuts:**
-1. After making changes: `npm run build` → verify 0 errors
-2. Ask user: "רוצה שאעשה commit + push?"
-3. Only after push: "נדחף. תמשוך מ-cPanel כשנוח לך."
-4. **NEVER** tell the user to "refresh" or "check the site" before push is done
+### Core Principle: Act on what you know
 
-**Be consistent with what you know:**
-- CLAUDE.md and MEMORY.md are loaded every session — act on them
-- The deployment flow is documented — follow it every time
-- If you built but didn't push, say so explicitly
+CLAUDE.md and MEMORY.md are loaded every session. Everything documented here is **active knowledge** — not reference material. If something is written here, behave accordingly without being reminded.
 
-**Communication style:**
+### This applies to ALL areas:
+
+- **Deployment flow**: build → commit → push → user pulls from cPanel. Don't skip steps, don't tell user to check the site before pushing.
+- **Design system**: dark bg, purple neon, glassmorphism cards. Don't introduce off-brand patterns.
+- **Brand language**: "כתבות" not "מאמרים", "חדשות AI" not "בלוג". Apply consistently in all generated content.
+- **Component patterns**: use siteConfig for contact/social links, never hardcode. Check existing components before creating new ones.
+- **Business model**: Focus AI = consultancy + academy, not "just a training company". Reflect this in any copy or structure decisions.
+- **Page architecture**: BaseLayout for marketing pages, standalone for campaign pages. Analytics on all pages. Check Navigation struct when adding pages.
+- **Image handling**: Cloudinary with q_auto,f_auto. No local images in production.
+- **Existing content**: Before changing any section, read the current code first. Understand what exists before proposing changes.
+
+### Communication
+
 - Hebrew (תענה בעברית)
 - Short and direct
-- Don't repeat information the user already knows
-- When finishing a task, state what was done and what's the next step (commit? push? done?)
+- After completing work, state clearly: what was done → what's the current state (built? committed? pushed?)
+- Don't tell the user things they already know
+- Don't suggest actions that contradict the documented workflow
 
 ---
 
