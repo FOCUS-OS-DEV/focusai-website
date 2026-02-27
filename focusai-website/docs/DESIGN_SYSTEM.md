@@ -1,8 +1,11 @@
 # Focus AI Website - Design System Documentation
 
+> **⚠️ DEPRECATED (2026-02-27)** — This document is outdated and references old patterns (traffic light dots, clip-path corners, Framer Motion, etc.).
+> **Use `CLAUDE.md` as the single source of truth** for all current design decisions, component patterns, and project context.
+
 > **Version:** 1.0.0
 > **Last Updated:** 2026-02-06
-> **Status:** Production
+> **Status:** DEPRECATED — see CLAUDE.md
 
 ---
 

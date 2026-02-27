@@ -3,8 +3,6 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import icon from 'astro-icon';
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://focusai.co.il',
@@ -40,12 +38,6 @@ export default defineConfig({
         !page.includes('unsubscribe') &&
         !page.includes('content-automation-watch') &&
         !page.includes('/services/'),
-    }),
-    icon({
-      include: {
-        lucide: ['*'],  // All Lucide icons
-        mdi: ['*'],     // All Material Design icons
-      },
     }),
   ],
 

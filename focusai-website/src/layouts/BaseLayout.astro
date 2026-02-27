@@ -6,7 +6,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 import BackToTop from '../components/BackToTop.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import VideoPopup from '../components/VideoPopup.astro';
-// import PromoPopup from '../components/PromoPopup.astro'; // Replaced by VideoPopup
 import Preloader from '../components/Preloader.astro';
 import { siteConfig } from '../data/config';
 
@@ -49,8 +48,10 @@ const organizationSchema = {
   "sameAs": [
     siteConfig.social.instagram,
     siteConfig.social.facebook,
-    siteConfig.social.tiktok
-  ],
+    siteConfig.social.tiktok,
+    siteConfig.social.linkedin,
+    siteConfig.social.youtube,
+  ].filter(url => url && url !== '#'),
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": siteConfig.contact.phone,

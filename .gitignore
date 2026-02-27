@@ -1,1 +1,29 @@
+# Vercel
 .vercel
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Local settings (machine-specific)
+*.local
+.claude/settings.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+nul
+
+# Development artifacts
+*.psi.json
+pagespeed-result.json
+ai-news-digest.json
+
+# Session transcripts (auto-generated, grow unbounded)
+memory/sessions/
+
+# Generated images (output of generate-*.mjs scripts)
+focusai-website/generated-images/

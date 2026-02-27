@@ -1,7 +1,7 @@
 # Focus AI Website - System Prompt
 
 > This file contains all instructions and context for Claude Code.
-> **Last Updated:** 2026-02-15
+> **Last Updated:** 2026-02-27
 
 ---
 
@@ -48,7 +48,6 @@ const { social, contact, legal, aiTools } = siteConfig;
 
 ## Quick Links
 
-- [Design System](./docs/DESIGN_SYSTEM.md) - Full design documentation (partially outdated - refer to this file for latest)
 - [Business Model](../memory/focusai-business-model.md) - Company intel & user journeys
 - [Assets Library](../memory/focusai-assets.md) - All Cloudinary asset references
 - [Deployment Flow](../memory/deployment-workflow.md) - cPanel deployment process
@@ -106,7 +105,7 @@ Styling:        Tailwind CSS 4.x
 Interactivity:  React 19.x (islands - minimal usage)
 Animations:     GSAP + ScrollTrigger (deferred loading)
 Smooth Scroll:  Lenis (deferred with requestIdleCallback)
-Icons:          Lucide + MDI (astro-icon)
+Icons:          Inline SVGs (no icon library)
 Images:         Cloudinary CDN + Sharp
 Analytics:      GTM (GTM-M33PM5WV) + Microsoft Clarity (vddsj5y6bj)
 Forms:          N8N Webhooks (AJAX) → CRM
@@ -146,7 +145,6 @@ Focus AI is **NOT just a training company**. Full-service AI consultancy:
 focusai-website/
 ├── src/
 │   ├── components/
-│   │   ├── ui/                          # Aceternity UI (React islands)
 │   │   ├── Header.astro                 # Glassmorphism floating nav
 │   │   ├── Footer.astro
 │   │   ├── HeroSection.astro            # Hero (Pure Astro+CSS, NO React!)
@@ -156,41 +154,40 @@ focusai-website/
 │   │   ├── ServicesPreview.astro         # Services grid
 │   │   ├── StorySection.astro           # Problem/Solution/Proof
 │   │   ├── Testimonials.astro           # Text testimonials
-│   │   ├── VideoTestimonialsCarousel.astro # Video testimonial carousel
+│   │   ├── VideoTestimonials.astro      # Video testimonial 3D carousel + lightbox
 │   │   ├── PhoneTestimonials.astro      # Phone screenshot testimonials
 │   │   ├── StudentTestimonials.astro    # Student feedback
-│   │   ├── TeamFounders.astro           # Founders section
 │   │   ├── CTAContact.astro             # Contact form CTA
-│   │   ├── ClientLogos.tsx              # Logo carousel (React island)
+│   │   ├── ClientLogosCarousel.astro    # Logo infinite carousel
 │   │   ├── ClientLogosGrid.astro        # Logo grid (static)
 │   │   ├── TechLogosMarquee.astro       # Tech logos scroll
+│   │   ├── LearningPortal.astro         # Learning portal showcase
+│   │   ├── SocialCommunity.astro        # Social/community CTA
 │   │   ├── TerminalTypewriter.astro     # Reusable typewriter effect
 │   │   ├── TerminalText.tsx             # Terminal text (React, legacy)
 │   │   ├── WhatsAppFloat.astro          # Floating WhatsApp button
 │   │   ├── WhatsAppCommunity.astro      # WhatsApp community CTA
 │   │   ├── BackToTop.astro              # Back to top button
 │   │   ├── CookieConsent.astro          # GDPR cookie consent
+│   │   ├── VideoPopup.astro             # Video popup (session-based)
 │   │   ├── Analytics.astro              # GTM + Clarity (head)
 │   │   ├── AnalyticsBody.astro          # GTM noscript (body)
 │   │   ├── Breadcrumbs.astro            # SEO breadcrumbs
 │   │   ├── RelatedContent.astro         # Related articles
 │   │   ├── SyllabusGate.tsx             # Form gate (React)
-│   │   ├── SyllabusViewer.tsx           # Gallery viewer (React)
-│   │   └── SyllabusButton.tsx           # Direct syllabus access (React)
+│   │   └── SyllabusViewer.tsx           # Gallery viewer (React)
 │   ├── content/
-│   │   └── blog/                        # Blog articles (Markdown)
+│   │   └── ai-news/                     # Blog articles (Markdown)
 │   ├── data/
 │   │   ├── config.ts                    # Site constants (contact, social, analytics)
 │   │   ├── clients.ts                   # Client logos data
 │   │   ├── team.ts                      # Founders data
 │   │   └── index.ts
 │   ├── layouts/
-│   │   └── BaseLayout.astro             # Base HTML layout + SEO + Schema.org
+│   │   └── BaseLayout.astro             # Base HTML layout + SEO + Schema.org + noindex support
 │   ├── pages/                           # Routes (see Page Routes below)
 │   └── styles/
 │       └── global.css                   # Global styles + Tailwind imports
-├── docs/
-│   └── DESIGN_SYSTEM.md                 # Design documentation (v1.0, 2026-02-06)
 ├── public/
 │   ├── .htaccess                        # Apache security headers
 │   ├── robots.txt
@@ -202,32 +199,56 @@ focusai-website/
 
 ## Page Routes
 
-| Route | Status | Description |
-|-------|--------|-------------|
-| `/` | Live | Homepage - hero, services, academy preview, testimonials |
-| `/about` | Live | About page - founders, mission, partners |
-| `/academy` | Live | Bot-Camp course page (main academy landing) |
-| `/academy/_drafts/ai-ready` | Draft | AI Ready course page (REMOVED from site, kept in drafts) |
-| `/academy/_drafts/ai-first` | Draft | AI First course (NOT routed) |
-| `/academy/thank-you` | Live | Form submission thank-you |
-| `/ai-agents` | Live | AI Agents service page |
-| `/ai-workshop` | Live | AI Workshops page (redirects to external link) |
-| `/services/strategy` | Live | Strategic consulting |
-| `/services/ai-agents` | Live | AI agents service detail |
-| `/services/development` | Live | Development services |
-| `/tools` | Live | AI Tools directory |
-| `/blog` | **Live** | Blog index - AI news articles |
-| `/blog/[slug]` | **Live** | Blog article pages |
-| `/privacy` | Live | Privacy policy |
-| `/terms` | Live | Terms of service |
-| `/וובינר-לייב-סוכן-AI-ראשון-ב-n8n` | **Live** | Live webinar landing page (01.03.2026) - direct link only |
+### Marketing Pages (BaseLayout)
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage - hero, services, academy preview, testimonials |
+| `/about` | About page - founders, mission, partners |
+| `/academy` | Bot-Camp course page (main academy landing) |
+| `/ai-agents` | AI Agents service page |
+| `/ai-workshop` | AI Workshops page |
+| `/ai-news` | Blog index - AI news articles (14 articles) |
+| `/ai-news/[slug]` | Blog article pages |
+| `/tools` | AI Tools directory |
+| `/careers` | Careers/jobs page |
+| `/services/strategy` | Strategic consulting |
+| `/services/ai-agents` | AI agents service detail |
+| `/services/development` | Development services |
+
+### Standalone Pages (own HTML, no BaseLayout)
+| Route | Description |
+|-------|-------------|
+| `/ai-fullstack` | AI Fullstack Builder course landing page |
+| `/webinar-n8n-agent` | Webinar: Build first AI agent with N8N |
+| `/content-automation-course` | Free course: Content automation with AI |
+| `/content-automation-watch` | Watch content automation webinar |
+| `/וובינר-במתנה-סוכני-בינה-מלאכותית` | Hebrew webinar: AI agents guide |
+| `/צפייה-בוובינר-בניית-סוכן-GPTS` | Watch: Building a GPTs agent |
+
+### Utility Pages (noindex)
+| Route | Description |
+|-------|-------------|
+| `/privacy-policy` | Privacy policy (noindex) |
+| `/terms` | Terms of service (noindex) |
+| `/404` | Not found page (noindex) |
+| `/academy/thank-you` | Form submission thank-you |
+| `/webinar-n8n-thank-you` | Webinar registration thank-you |
+| `/unsubscribe-any` | Universal unsubscribe |
+| `/links` | Linktree-style social links |
+| `/bot-camp-syllabus` | Syllabus download gate |
+
+### Draft Pages (not routed)
+| Route | Description |
+|-------|-------------|
+| `/academy/_drafts/ai-ready` | AI Ready course (REMOVED from site) |
+| `/academy/_drafts/ai-first` | AI First course |
 
 ### Important Route Notes
 
-- **`/blog` is LIVE on production** - accessible via "חדשות AI" in navigation
-- **`/ai-workshop`** redirects to external registration link
+- **Blog path is `/ai-news/`** (NOT `/blog/`) — collection folder is `content/ai-news/`
+- **Standalone pages** MUST include Analytics + AnalyticsBody components
 - **AI First card** is hidden on mobile in homepage (`hidden lg:block`)
-- **Webinar page** is standalone (no BaseLayout, no nav link) - accessible only via direct URL
+- **Redirects** configured in astro.config.mjs: `/ai-tools` → `/tools`, `/services/ai-agents` → `/ai-agents`
 
 ---
 
@@ -236,12 +257,20 @@ focusai-website/
 ```
 Header navLinks:
 ├── בית (/)
-├── אקדמיה (#academy) ← dropdown
+├── אקדמיה (/academy) ← dropdown
 │   └── Bot-Camp (/academy)
 ├── סוכני AI (/ai-agents)
 ├── סדנאות (/ai-workshop)
-├── חדשות AI (/blog)
+├── חדשות AI (/ai-news)
+├── וובינרים והדרכות (#) ← dropdown
+│   ├── וובינר Live: סוכן AI ב-N8N (/webinar-n8n-agent)
+│   ├── הדרכה: סוכני AI (/וובינר-במתנה-סוכני-בינה-מלאכותית/)
+│   └── הדרכה: אוטומציית תוכן (/content-automation-course)
 ├── כלי AI (/tools) ← dropdown
+│   ├── מרכז הכלים (/tools)
+│   ├── Prompt Master V3 (external GPT)
+│   └── Prompt Master Gemini (external Gem)
+├── דרושים (/careers)
 └── אודות (/about)
 ```
 
@@ -266,14 +295,15 @@ The hero (`HeroSection.astro`) is **pure Astro + CSS** - no React, no Framer Mot
 ## Blog System (LIVE)
 
 ### Architecture
-- Content collection using Astro's `getCollection('blog')`
+- Content collection: `src/content/ai-news/` (collection name: `ai-news`)
+- URL path: **`/ai-news/`** (NOT `/blog/`)
 - Schema: `content.config.ts` defines title, description, pubDate, heroImage, author, category, tags, ctaType, difficulty
 - Categories: `news` | `guide` | `tutorial`
-- Template: `pages/blog/[...slug].astro` with glassmorphism CTA banners
-- Blog index: `pages/blog/index.astro` - fully clickable cards, newsletter form with webhook
+- Template: `pages/ai-news/[...slug].astro` with glassmorphism CTA banners
+- Blog index: `pages/ai-news/index.astro` - fully clickable cards, newsletter form with webhook
 - Terminology: "כתבות" (NOT "מאמרים" or "בלוג")
 
-### Existing Articles
+### Existing Articles (14)
 | Slug | Title | CTA |
 |------|-------|-----|
 | `openai-100b-funding` | 100 מיליארד דולר ל-OpenAI | Bot-Camp |
@@ -286,8 +316,10 @@ The hero (`HeroSection.astro`) is **pure Astro + CSS** - no React, no Framer Mot
 | `automation-examples` | דוגמאות אוטומציה | Bot-Camp |
 | `top-10-ai-tools-2025` | 10 כלי AI מובילים | Bot-Camp |
 | `google-ai-transformation-2026` | גוגל כבר לא מנוע חיפוש - חברת תשתיות AI | Consulting |
-| `anthropic-claude-cowork-enterprise-agents` | Anthropic תוקפת את שוק הארגונים: Claude Cowork ורכישת Vercept | Consulting |
-| `ai-agents-adoption-2026-state-of-market` | מצב שוק סוכני ה-AI ב-2026: 57% מהחברות כבר בייצור | Agents |
+| `anthropic-claude-cowork-enterprise-agents` | Anthropic תוקפת את שוק הארגונים | Consulting |
+| `ai-agents-adoption-2026-state-of-market` | מצב שוק סוכני ה-AI ב-2026 | Agents |
+| `copilot-presentations-professional-translation` | Copilot Presentations - תרגום מקצועי | Bot-Camp |
+| `notebooklm-presentation-editing` | NotebookLM - עריכת מצגות | Bot-Camp |
 
 ### CTA Banner System
 - Glassmorphism HTML banners (NOT image CTAs)
@@ -460,7 +492,7 @@ LIGHTBOX (pre-rendered video elements in HTML):
 
 ### Architecture
 - **Component:** `VideoPopup.astro` (replaces PromoPopup in BaseLayout)
-- **PromoPopup** is still available at `PromoPopup.astro` — swap back in BaseLayout if needed
+- **PromoPopup** was removed during 2026-02-27 cleanup (dead code)
 - **Video URL:** `https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto/v1772129607/IMG_7879_jz34kj.mp4`
 - **Poster:** Auto-generated from Cloudinary video-to-image transform
 
@@ -589,9 +621,8 @@ Centralized in `src/data/config.ts`.
 |-----------|---------|
 | `SyllabusGate.tsx` | Form gate - requires submission before viewing |
 | `SyllabusViewer.tsx` | Gallery modal with keyboard nav |
-| `SyllabusButton.tsx` | Direct access (no gate) |
 
-Flow: Click → Form (name, phone, email) → FormSubmit.co → Syllabus viewer opens.
+Flow: Click → Form (name, phone, email) → N8N Webhook → Syllabus viewer opens.
 
 ---
 
@@ -652,12 +683,63 @@ Project-level hooks configured in `../.claude/settings.json`:
 | `pre-compact-memory-save.js` | PreCompact | Saves full session transcript as MD before context compaction |
 | `session-start-context.sh` | SessionStart | Injects project reminders (Hebrew, build, design rules) |
 | `stop-update-claude-md.sh` | Stop | Warns if src/ changed but CLAUDE.md wasn't updated |
+| `secret-scan.sh` | PreToolUse (Bash) | Blocks git commits containing API keys or .env files |
+| `new-page-guard.sh` | PostToolUse (Edit/Write) | Warns when new .astro page created — checks BaseLayout, meta, navigation |
 
 Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Windows compatibility)
 
 ---
 
+## Claude Code Infrastructure
+
+### Rules (`.claude/rules/`)
+Path-specific rules that auto-load when editing matching files:
+
+| Rule | Path Pattern | Enforces |
+|------|-------------|----------|
+| `pages.md` | `src/pages/**/*.astro` | BaseLayout, SEO, analytics, forms compliance, images |
+| `blog.md` | `src/content/**/*.md` | Frontmatter schema, content guidelines, terminology |
+| `components.md` | `src/components/**/*` | No hardcoded contact, siteConfig usage, design consistency |
+| `standalone-pages.md` | Standalone page files | Analytics, meta robots, fonts, privacy links |
+
+### Skills (`.claude/skills/`)
+User-invocable workflows (use `/skill-name`):
+
+| Skill | Description |
+|-------|-------------|
+| `/new-page` | Checklist + scaffolding for new pages |
+| `/new-article` | Blog article creation with frontmatter template |
+| `/audit` | Comprehensive site audit (SEO, links, schema, a11y) |
+
+### Agents (`.claude/agents/`)
+Specialized subagents for specific tasks:
+
+| Agent | Description |
+|-------|-------------|
+| `content-from-url` | Creates blog articles from source URLs |
+| `architecture-guard` | Cross-page integrity validation (links, nav, sitemap, schema) |
+| `seo-auditor` | SEO audit (meta tags, OG, canonical, structured data) |
+
+---
+
 ## Recent Changes Log
+
+### 2026-02-27
+- **Major codebase cleanup** (Wave 1):
+  - Expanded .gitignore (was just `.vercel`)
+  - Removed 6 dead packages (framer-motion, @studio-freight/lenis, @gsap/react, astro-icon, @iconify-json/*)
+  - Fixed siteConfig: `linkedin: "#"` → `""`, `youtube: "#"` → `""` (prevents schema.org pollution)
+  - Added sameAs filtering in BaseLayout (empty URLs filtered out)
+  - Deleted 6 dead components (PromoPopup, ClientLogos.tsx, TeamFounders, SyllabusButton.tsx, entire ui/ directory)
+  - Deleted workshop.css (unused)
+  - Removed astro-icon integration from astro.config.mjs
+  - Added `noindex` prop to BaseLayout; applied to privacy-policy, terms, 404
+- **Dev infrastructure** (Wave 2):
+  - Created 4 rules: pages, blog, components, standalone-pages
+  - Created 3 skills: /new-page, /new-article, /audit
+  - Created 2 agents: architecture-guard, seo-auditor
+  - Created 2 hooks: secret-scan.sh, new-page-guard.sh
+  - Full CLAUDE.md rewrite — accurate route table, blog path fix, component list update
 
 ### 2026-02-26
 - **VideoPopup component** created — replaces PromoPopup as the main site popup
@@ -742,12 +824,13 @@ Hook scripts location: `../.claude/hooks/` (bash scripts + node scripts for Wind
 
 - [x] Deploy blog to production (add back to nav) ✅ 2026-02-14
 - [x] Replace FormSubmit.co with N8N webhooks ✅ 2026-02-14
+- [x] Major codebase cleanup + dev infrastructure ✅ 2026-02-27
 - [ ] Create more blog articles (AI news, guides)
 - [ ] Create AI-First syllabus page
-- [ ] Deploy /services pages to production (currently deleted by .cpanel.yml)
 - [ ] PageSpeed: remaining optimizations (video captions, carousel dot a11y)
+- [ ] Add LinkedIn/YouTube social links when available (currently empty in siteConfig)
 
 ---
 
-> **For complete design system details, see [docs/DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)**
-> Note: DESIGN_SYSTEM.md was last updated 2026-02-06 and may reference old patterns. This CLAUDE.md is the source of truth for current design decisions.
+> **This CLAUDE.md is the source of truth for all design decisions and project context.**
+> `docs/DESIGN_SYSTEM.md` is deprecated (2026-02-06, references old patterns). Do not rely on it.
