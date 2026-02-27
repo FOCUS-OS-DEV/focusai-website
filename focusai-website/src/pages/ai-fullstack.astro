@@ -415,14 +415,66 @@ window.__meta_pixel_loaded = true;
 .video-intro.exiting{animation:pullIntoScreen 1.4s cubic-bezier(.4,0,.2,1) forwards;transform-origin:50% 45%}
 @keyframes pullIntoScreen{0%{transform:scale(1);filter:brightness(1) blur(0);opacity:1}35%{transform:scale(2.5);filter:brightness(1.8) blur(2px);opacity:1}65%{transform:scale(5);filter:brightness(3) blur(6px);opacity:.7}100%{transform:scale(8);filter:brightness(0) blur(12px);opacity:0}}
 body.intro-playing{overflow:hidden!important}
-body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!important}
+body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code,.term-chrome-top,.term-chrome-bottom{opacity:0!important}
+/* ═══ Terminal Chrome — Sticky IDE Frame ═══ */
+.term-chrome-top{position:fixed;top:0;left:0;right:0;z-index:9990;background:rgba(13,13,26,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);transition:opacity .6s ease,transform .4s ease}
+body.intro-playing .term-chrome-top{opacity:0!important;transform:translateY(-100%)}
+.term-titlebar{display:flex;align-items:center;gap:10px;padding:8px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.term-titlebar .pulse-dot{width:7px;height:7px;border-radius:50%;background:#a855f7;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+.term-titlebar .mono{font-family:'Space Mono',monospace;font-size:12px;color:rgba(224,224,232,.6);letter-spacing:.03em}
+.term-titlebar .dim{color:rgba(224,224,232,.25);margin-right:auto}
+.term-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:0 12px}
+.term-tabs::-webkit-scrollbar{display:none}
+.term-tab{padding:10px 16px;font-family:'Space Mono',monospace;font-size:12px;color:rgba(224,224,232,.4);white-space:nowrap;border-bottom:2px solid transparent;transition:all .3s;cursor:pointer;text-decoration:none;display:block}
+.term-tab:hover{color:rgba(224,224,232,.7);background:rgba(255,255,255,.02)}
+.term-tab.active{color:#a855f7;border-bottom-color:#a855f7;background:rgba(168,85,247,.04)}
+.term-chrome-bottom{position:fixed;bottom:0;left:0;right:0;z-index:9990;background:rgba(13,13,26,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.06);transition:opacity .6s ease}
+.term-progress-bar{height:2px;background:rgba(255,255,255,.04)}
+.term-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#a855f7,#00f5ff);transition:width .1s linear;border-radius:0 2px 2px 0}
+.term-status{display:flex;align-items:center;gap:16px;padding:6px 20px;font-family:'Space Mono',monospace;font-size:11px;color:rgba(224,224,232,.3);overflow-x:auto;white-space:nowrap}
+.term-status span:first-child{color:rgba(168,85,247,.6)}
+/* Terminal command headers per section */
+.term-cmd{padding:12px 24px;font-family:'Space Mono',monospace;font-size:13px;margin-bottom:8px}
+.term-prompt{color:rgba(168,85,247,.6);margin-left:10px;user-select:none}
+.term-command{color:rgba(224,224,232,.5)}
+/* Body padding for chrome bars */
+body:not(.intro-playing){padding-top:80px;padding-bottom:36px}
+/* Hide old scroll progress — replaced by terminal progress */
+.scroll-progress{display:none!important}
+@media(max-width:768px){.term-titlebar{padding:6px 12px}.term-titlebar .mono{font-size:11px}.term-tab{padding:8px 12px;font-size:11px}.term-status{padding:4px 12px;font-size:10px;gap:10px}.term-cmd{padding:8px 16px;font-size:12px}body:not(.intro-playing){padding-top:72px;padding-bottom:32px}}
 </style>
 </head>
 <body>
 <AnalyticsBody />
 <div class="fingerprint-bg" aria-hidden="true"></div>
 <div class="ambient-layer ambient-dots"></div><div class="ambient-layer ambient-glow"></div>
-<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- TERMINAL CHROME — Top Bar -->
+<div class="term-chrome-top" id="termChromeTop">
+<div class="term-titlebar">
+<span class="pulse-dot"></span>
+<span class="mono">focus-ai-builder</span>
+<span class="mono dim">// session.2026</span>
+</div>
+<div class="term-tabs" id="termTabs">
+<a class="term-tab active" href="#readme" data-section="readme">readme.md</a>
+<a class="term-tab" href="#build" data-section="build">build.sh</a>
+<a class="term-tab" href="#learn" data-section="learn">learn.md</a>
+<a class="term-tab" href="#syllabus" data-section="syllabus">syllabus/</a>
+<a class="term-tab" href="#tracks" data-section="tracks">tracks.md</a>
+<a class="term-tab" href="#register" data-section="register">&gt; register</a>
+</div>
+</div>
+
+<!-- TERMINAL CHROME — Bottom Status Bar -->
+<div class="term-chrome-bottom" id="termChromeBottom">
+<div class="term-progress-bar"><div class="term-progress-fill" id="termProgressFill2"></div></div>
+<div class="term-status">
+<span id="termStatusText2">initializing...</span>
+<span>120 academic hours</span>
+<span>UTF-8</span>
+</div>
+</div>
 <div class="breathing-orb orb-1"></div><div class="breathing-orb orb-2"></div><div class="breathing-orb orb-3"></div>
 <div class="floating-code fc-1">const ai = await claude.init()
 const result = ai.generate(&#123;
@@ -450,7 +502,9 @@ const &#123; data &#125; = await supabase
 <button id="skipIntro" class="skip-intro">דלג ←</button>
 </section>
 
-<!-- HERO -->
+<!-- HERO / README -->
+<div id="readme"></div>
+<div class="term-cmd"><span class="term-prompt">focusai ~$</span><span class="term-command">cat README.md</span></div>
 <section class="hero section"><canvas id="netBg"></canvas><div class="container"><div id="heroZoom"><div class="hero-grid">
 <div class="hero-text">
 <div class="eyebrow" style="opacity:0" id="heroEyebrow">// AI BUILDER PROGRAM</div>
@@ -527,7 +581,9 @@ const &#123; data &#125; = await supabase
 </div>
 </section>
 
-<!-- TECH STACK 3D CAROUSEL -->
+<!-- BUILD — TECH + CAPABILITIES -->
+<div id="build"></div>
+<div class="term-cmd"><span class="term-prompt">focusai ~$</span><span class="term-command">focus-ai build --list-capabilities</span></div>
 <section class="carousel-section tech-section">
 <div class="tech-title">// TECH STACK</div>
 <h2 class="tech-subtitle">הכלים שנלמד לעבוד איתם</h2>
@@ -570,7 +626,9 @@ const &#123; data &#125; = await supabase
 
 <div class="section-divider"></div>
 
-<!-- HUMAN LEARNING — exact replica of AcademyIntro -->
+<!-- LEARN — METHOD + INSTRUCTORS + PORTAL -->
+<div id="learn"></div>
+<div class="term-cmd"><span class="term-prompt">focusai ~$</span><span class="term-command">cat LEARNING_METHOD.md</span></div>
 <section class="hl-section" id="solution">
 <div class="hl-bg"><div class="hl-bg-glow"></div></div>
 <div class="container" style="position:relative;z-index:10">
@@ -793,6 +851,7 @@ const &#123; data &#125; = await supabase
 <div class="section-divider"></div>
 
 <!-- SYLLABUS — Terminal Install -->
+<div class="term-cmd"><span class="term-prompt">focusai ~$</span><span class="term-command">focus-ai install ai-builder@2026 --modules=22</span></div>
 <section class="section" id="syllabus"><div class="container">
 <div class="reveal-group"><div class="reveal-item"><div class="eyebrow">// CURRICULUM</div><h2 class="section-title">22 מודולים. מ-zero לפרודקשן.</h2></div></div>
 
@@ -869,7 +928,9 @@ const &#123; data &#125; = await supabase
 
 </div></section>
 
-<!-- BRAND LOGOS 3D CAROUSEL -->
+<!-- TRACKS — PRICING + LOGOS + TESTIMONIALS -->
+<div id="tracks"></div>
+<div class="term-cmd"><span class="term-prompt">focusai ~$</span><span class="term-command">focus-ai show --tracks</span></div>
 <section class="carousel-section">
 <h3 class="carousel-title">ארגונים שכבר עובדים איתנו</h3>
 <div class="container"><div class="clc" id="brandsCarousel"><div class="clc-track">
@@ -1039,7 +1100,9 @@ const &#123; data &#125; = await supabase
 
 <div class="section-divider"></div>
 
-<!-- FAQ -->
+<!-- REGISTER — FAQ + FORM -->
+<div id="register"></div>
+<div class="term-cmd"><span class="term-prompt">focusai ~$</span><span class="term-command">focus-ai register --interactive</span></div>
 <section class="section" id="faq"><div class="container reveal-group">
 <div class="reveal-item" style="text-align:center"><div class="eyebrow">// FAQ</div><h2 class="section-title">שאלות נפוצות</h2></div>
 <div class="faq-list">
@@ -1054,7 +1117,7 @@ const &#123; data &#125; = await supabase
 <div class="section-divider"></div>
 
 <!-- FORM -->
-<section class="section" id="register"><div class="container"><div class="form-section reveal-group">
+<section class="section" id="registerForm2"><div class="container"><div class="form-section reveal-group">
 <div class="reveal-item" style="text-align:center;margin-bottom:40px"><div class="eyebrow">// REGISTER</div><h2 class="section-title">הרשמה לתוכנית</h2><p style="color:rgba(224,224,232,.5);font-size:17px">השאירו פרטים ונחזור אליכם תוך 24 שעות</p></div>
 <div class="glass form-card reveal-item">
 <form id="registerForm" novalidate>
@@ -1099,13 +1162,36 @@ if(mob)video.style.objectPosition='65% 50%';
 function endIntro(){if(done)return;done=true;window.__introComplete=true;video.pause();
 intro.classList.add('exiting');
 setTimeout(function(){intro.remove();document.body.classList.remove('intro-playing');
+var ct=document.getElementById('termChromeTop'),cb=document.getElementById('termChromeBottom');
+if(ct){ct.style.opacity='1';ct.style.transform='none'}if(cb)cb.style.opacity='1';
 if(window.__startHeroTimeline)window.__startHeroTimeline()},1500)}
 video.addEventListener('timeupdate',function(){if(mob){var p=Math.min(video.currentTime/5.2,1);video.style.objectPosition=(65-p*30)+'% 50%'}if(!done&&video.currentTime>=5.2)endIntro()});
 video.addEventListener('ended',endIntro);
 if(skipBtn)skipBtn.addEventListener('click',endIntro);
 var pp=video.play();if(pp&&pp.catch)pp.catch(function(){setTimeout(endIntro,500)});
 setTimeout(function(){if(!done)endIntro()},10000)})();
-var prog=document.getElementById('scrollProgress');if(prog)window.addEventListener('scroll',function(){var h=document.documentElement;prog.style.height=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'},{passive:true});
+/* Terminal Chrome — tab highlighting, progress bar, status text */
+(function(){
+var tabs=document.querySelectorAll('.term-tab'),fill=document.getElementById('termProgressFill2'),statusEl=document.getElementById('termStatusText2');
+var sections=[{id:'readme',label:'readme.md'},{id:'build',label:'build.sh'},{id:'learn',label:'learn.md'},{id:'syllabus',label:'syllabus/'},{id:'tracks',label:'tracks.md'},{id:'register',label:'> register'}];
+var statusTexts=['cat README.md','building capabilities...','loading methods...','installing modules...','loading tracks...','ready to register'];
+var chromeTop=80;
+/* Tab click → smooth scroll */
+tabs.forEach(function(tab){tab.addEventListener('click',function(e){e.preventDefault();var target=document.getElementById(tab.dataset.section);if(target)target.scrollIntoView({behavior:'smooth',block:'start'})})});
+/* Scroll → update active tab + progress + status */
+window.addEventListener('scroll',function(){
+var h=document.documentElement,scrollPct=h.scrollTop/(h.scrollHeight-h.clientHeight);
+if(fill)fill.style.width=(scrollPct*100)+'%';
+var activeIdx=0;
+for(var i=sections.length-1;i>=0;i--){var el=document.getElementById(sections[i].id);if(el&&el.getBoundingClientRect().top<=chromeTop+50){activeIdx=i;break}}
+tabs.forEach(function(t,ti){t.classList.toggle('active',ti===activeIdx)});
+if(statusEl)statusEl.textContent=statusTexts[activeIdx]||'session active';
+/* Show chrome after intro */
+var ct=document.getElementById('termChromeTop'),cb=document.getElementById('termChromeBottom');
+if(ct&&!document.body.classList.contains('intro-playing')){ct.style.opacity='1';ct.style.transform='none'}
+if(cb&&!document.body.classList.contains('intro-playing'))cb.style.opacity='1';
+},{passive:true});
+})();
 var cg=document.getElementById('cursorGlow'),mx=0,my=0,gx=0,gy=0,hh=window.matchMedia('(hover:hover)').matches;if(hh&&cg){document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});(function l(){gx+=(mx-gx)*.1;gy+=(my-gy)*.1;cg.style.transform='translate('+(gx-250)+'px,'+(gy-250)+'px)';requestAnimationFrame(l)})()}
 if(hh)document.querySelectorAll('.tilt-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2;c.style.transform='perspective(800px) rotateX('+((y-cy)/cy*-6)+'deg) rotateY('+((x-cx)/cx*6)+'deg) scale(1.02)';var g=c.querySelector('.card-glow');if(g){g.style.opacity='1';g.style.background='radial-gradient(circle at '+x+'px '+y+'px,rgba(168,85,247,.1),transparent 60%)'}});c.addEventListener('mouseleave',function(){c.style.transform='';var g=c.querySelector('.card-glow');if(g)g.style.opacity='0'})});
 if(hh)document.querySelectorAll('.magnetic-btn').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)'});b.addEventListener('mouseleave',function(){b.style.transform='';b.style.transition='transform .4s cubic-bezier(.22,1,.36,1)';setTimeout(function(){b.style.transition=''},400)})});
