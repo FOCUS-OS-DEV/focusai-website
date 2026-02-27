@@ -459,7 +459,7 @@ window.__meta_pixel_loaded = true;
 .video-intro-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(8,8,16,.5));pointer-events:none}
 .skip-intro{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);padding:10px 28px;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:999px;color:rgba(255,255,255,.5);font-size:14px;font-weight:400;cursor:pointer;transition:all .3s;z-index:2;font-family:'Heebo',sans-serif;letter-spacing:.02em}
 .skip-intro:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
-.video-intro.exiting{animation:pullIntoScreen 1.4s cubic-bezier(.4,0,.2,1) forwards}
+.video-intro.exiting{animation:pullIntoScreen 1.4s cubic-bezier(.4,0,.2,1) forwards;transform-origin:50% 45%}
 @keyframes pullIntoScreen{0%{transform:scale(1);filter:brightness(1) blur(0);opacity:1}35%{transform:scale(2.5);filter:brightness(1.8) blur(2px);opacity:1}65%{transform:scale(5);filter:brightness(3) blur(6px);opacity:.7}100%{transform:scale(8);filter:brightness(0) blur(12px);opacity:0}}
 body.intro-playing{overflow:hidden!important}
 body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!important}
@@ -481,12 +481,12 @@ document.addEventListener('DOMContentLoaded',function(){
 var intro=document.getElementById('videoIntro'),video=document.getElementById('introVideo'),skipBtn=document.getElementById('skipIntro');
 if(!intro||!video){window.__introComplete=true;return}
 document.body.classList.add('intro-playing');window.__introComplete=false;var done=false;
-video.playbackRate=1.8;
+video.playbackRate=1;var sped=false;
 function endIntro(){if(done)return;done=true;window.__introComplete=true;video.pause();
 intro.classList.add('exiting');
 setTimeout(function(){intro.remove();document.body.classList.remove('intro-playing');
 if(window.__startHeroTimeline)window.__startHeroTimeline()},1500)}
-video.addEventListener('timeupdate',function(){if(!done&&video.currentTime>=5.2)endIntro()});
+video.addEventListener('timeupdate',function(){if(!sped&&video.currentTime>=2){sped=true;video.playbackRate=2.8}if(!done&&video.currentTime>=5.2)endIntro()});
 video.addEventListener('ended',endIntro);
 if(skipBtn)skipBtn.addEventListener('click',endIntro);
 var pp=video.play();if(pp&&pp.catch)pp.catch(function(){setTimeout(endIntro,500)});
