@@ -415,7 +415,7 @@ window.__meta_pixel_loaded = true;
 .video-intro.exiting{animation:pullIntoScreen 1.4s cubic-bezier(.4,0,.2,1) forwards;transform-origin:50% 45%}
 @keyframes pullIntoScreen{0%{transform:scale(1);filter:brightness(1) blur(0);opacity:1}35%{transform:scale(2.5);filter:brightness(1.8) blur(2px);opacity:1}65%{transform:scale(5);filter:brightness(3) blur(6px);opacity:.7}100%{transform:scale(8);filter:brightness(0) blur(12px);opacity:0}}
 body.intro-playing{overflow:hidden!important}
-body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code,.term-chrome-top,.term-chrome-bottom{opacity:0!important}
+body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code,body.intro-playing .term-chrome-top,body.intro-playing .term-chrome-bottom{opacity:0!important}
 /* ═══ Terminal Chrome — Sticky IDE Frame ═══ */
 .term-chrome-top{position:fixed;top:0;left:0;right:0;z-index:9990;background:rgba(13,13,26,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);transition:opacity .6s ease,transform .4s ease}
 body.intro-playing .term-chrome-top{opacity:0!important;transform:translateY(-100%)}
