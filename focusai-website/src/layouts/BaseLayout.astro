@@ -16,6 +16,7 @@ interface Props {
   image?: string;
   ogType?: string;
   structuredData?: object | object[];
+  noindex?: boolean;
 }
 
 const {
@@ -23,7 +24,8 @@ const {
   description = "Focus AI - מגשרים על הפער בין אנשים לטכנולוגיה. הכשרות מקצועיות ונציגי AI לעסקים.",
   image = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png",
   ogType = "website",
-  structuredData
+  structuredData,
+  noindex = false
 } = Astro.props;
 
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
@@ -82,6 +84,7 @@ const websiteSchema = {
   <!-- SEO -->
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph / Facebook -->
