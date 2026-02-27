@@ -660,6 +660,27 @@ This ensures every new session starts with accurate context.
 
 ---
 
+## Workflow Rules (CRITICAL)
+
+**Follow the deployment flow — no shortcuts:**
+1. After making changes: `npm run build` → verify 0 errors
+2. Ask user: "רוצה שאעשה commit + push?"
+3. Only after push: "נדחף. תמשוך מ-cPanel כשנוח לך."
+4. **NEVER** tell the user to "refresh" or "check the site" before push is done
+
+**Be consistent with what you know:**
+- CLAUDE.md and MEMORY.md are loaded every session — act on them
+- The deployment flow is documented — follow it every time
+- If you built but didn't push, say so explicitly
+
+**Communication style:**
+- Hebrew (תענה בעברית)
+- Short and direct
+- Don't repeat information the user already knows
+- When finishing a task, state what was done and what's the next step (commit? push? done?)
+
+---
+
 ## Commands
 
 ```bash
