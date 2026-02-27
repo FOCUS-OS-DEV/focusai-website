@@ -406,6 +406,16 @@ window.__meta_pixel_loaded = true;
 .term-body{padding:14px 12px;font-size:11px;line-height:1.9}.term-cols{grid-template-columns:1fr;gap:4px 0}.term-module .tm-name{min-width:140px;font-size:11px}.term-module .tm-bar span{width:4px;height:10px}.term-module .tm-hours{font-size:10px}.term-summary{font-size:11px;flex-direction:column;gap:4px}.term-cmd{font-size:12px}
 }
 @media(max-width:480px){.stats-bar{grid-template-columns:repeat(2,1fr);gap:10px}.hero{padding-top:60px}.term-module .tm-bar{display:none}.term-module .tm-name{min-width:120px}.lp-features{grid-template-columns:1fr}.lp-cards{width:260px;height:185px}.phone-frame{width:260px;height:540px;border-radius:38px;padding:10px}.phone-island{top:12px;width:76px;height:24px}.phone-screen{border-radius:28px}.st-body{padding:16px 12px;font-size:13px;line-height:2}.statement-text{font-size:24px!important}.statement-img{max-width:240px}.retro-screen{min-height:180px}.retro-top-vents{padding:0 30px}.cert-reveal img{width:140px}.cert-title{font-size:18px}.cert-sub{font-size:12px}}
+/* Video Intro — fullscreen autoplay cinematic opener */
+.video-intro{position:fixed;inset:0;z-index:100000;background:#080810;overflow:hidden}
+.video-intro video{width:100%;height:100%;object-fit:cover}
+.video-intro-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(8,8,16,.5));pointer-events:none}
+.skip-intro{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);padding:10px 28px;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:999px;color:rgba(255,255,255,.5);font-size:14px;font-weight:400;cursor:pointer;transition:all .3s;z-index:2;font-family:'Heebo',sans-serif;letter-spacing:.02em}
+.skip-intro:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
+.video-intro.exiting{animation:pullIntoScreen 1.4s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes pullIntoScreen{0%{transform:scale(1);filter:brightness(1) blur(0);opacity:1}35%{transform:scale(2.5);filter:brightness(1.8) blur(2px);opacity:1}65%{transform:scale(5);filter:brightness(3) blur(6px);opacity:.7}100%{transform:scale(8);filter:brightness(0) blur(12px);opacity:0}}
+body.intro-playing{overflow:hidden!important}
+body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!important}
 </style>
 </head>
 <body>
@@ -429,6 +439,16 @@ const &#123; data &#125; = await supabase
   .from('users')
   .select('*')</div>
 <div class="scanlines"></div><div class="film-grain"></div><div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- VIDEO INTRO — cinematic opener, autoplay then pull-into-screen transition -->
+<section id="videoIntro" class="video-intro">
+<video id="introVideo" autoplay muted playsinline webkit-playsinline preload="auto"
+  poster="https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto,f_auto,w_1280,so_0/freepik_brstarting-from-a-wide-establishing-shot-of-the-pu_veo3_1_4K_16-9_24fps_37099_vvccvr.jpg">
+  <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto,w_1280/freepik_brstarting-from-a-wide-establishing-shot-of-the-pu_veo3_1_4K_16-9_24fps_37099_vvccvr.mp4" type="video/mp4"/>
+</video>
+<div class="video-intro-gradient"></div>
+<button id="skipIntro" class="skip-intro">דלג ←</button>
+</section>
 
 <!-- HERO -->
 <section class="hero section"><canvas id="netBg"></canvas><div class="container"><div id="heroZoom"><div class="hero-grid">
@@ -1069,6 +1089,21 @@ const &#123; data &#125; = await supabase
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded',function(){
+/* Video Intro Handler — autoplay → pull-into-screen → reveal page */
+(function(){
+var intro=document.getElementById('videoIntro'),video=document.getElementById('introVideo'),skipBtn=document.getElementById('skipIntro');
+if(!intro||!video){window.__introComplete=true;return}
+document.body.classList.add('intro-playing');window.__introComplete=false;var done=false;
+video.playbackRate=1.8;
+function endIntro(){if(done)return;done=true;window.__introComplete=true;video.pause();
+intro.classList.add('exiting');
+setTimeout(function(){intro.remove();document.body.classList.remove('intro-playing');
+if(window.__startHeroTimeline)window.__startHeroTimeline()},1500)}
+video.addEventListener('timeupdate',function(){if(!done&&video.currentTime>=5.2)endIntro()});
+video.addEventListener('ended',endIntro);
+if(skipBtn)skipBtn.addEventListener('click',endIntro);
+var pp=video.play();if(pp&&pp.catch)pp.catch(function(){setTimeout(endIntro,500)});
+setTimeout(function(){if(!done)endIntro()},10000)})();
 var prog=document.getElementById('scrollProgress');if(prog)window.addEventListener('scroll',function(){var h=document.documentElement;prog.style.height=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'},{passive:true});
 var cg=document.getElementById('cursorGlow'),mx=0,my=0,gx=0,gy=0,hh=window.matchMedia('(hover:hover)').matches;if(hh&&cg){document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});(function l(){gx+=(mx-gx)*.1;gy+=(my-gy)*.1;cg.style.transform='translate('+(gx-250)+'px,'+(gy-250)+'px)';requestAnimationFrame(l)})()}
 if(hh)document.querySelectorAll('.tilt-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2;c.style.transform='perspective(800px) rotateX('+((y-cy)/cy*-6)+'deg) rotateY('+((x-cx)/cx*6)+'deg) scale(1.02)';var g=c.querySelector('.card-glow');if(g){g.style.opacity='1';g.style.background='radial-gradient(circle at '+x+'px '+y+'px,rgba(168,85,247,.1),transparent 60%)'}});c.addEventListener('mouseleave',function(){c.style.transform='';var g=c.querySelector('.card-glow');if(g)g.style.opacity='0'})});
@@ -1130,7 +1165,8 @@ setTimeout(function(){if(screen)screen.style.boxShadow='inset 0 0 60px rgba(168,
 function waitGSAP(cb){if(window.gsap&&window.ScrollTrigger){cb();return}var t=setInterval(function(){if(window.gsap&&window.ScrollTrigger){clearInterval(t);cb()}},50)}
 waitGSAP(function(){
 gsap.registerPlugin(ScrollTrigger);if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var isMobile=window.innerWidth<=768;
-var tl=gsap.timeline({delay:.4});tl.to('.hero-line-inner',{y:'0%',opacity:1,duration:1.2,stagger:.15,ease:'power4.out'}).to('#heroEyebrow',{opacity:.9,duration:.6,ease:'power2.out'},'-=.6').to('#heroSub',{opacity:1,duration:.8,ease:'power2.out'},'-=.3').to('#heroBtns',{opacity:1,duration:.6},'-=.4').to('#heroStats',{opacity:1,duration:.6},'-=.3').to('#heroEditor',{opacity:1,duration:.8,onComplete:function(){if(window.startCrtSequence)window.startCrtSequence()}},'-=.5');
+function _heroTL(){var tl=gsap.timeline({delay:.4});tl.to('.hero-line-inner',{y:'0%',opacity:1,duration:1.2,stagger:.15,ease:'power4.out'}).to('#heroEyebrow',{opacity:.9,duration:.6,ease:'power2.out'},'-=.6').to('#heroSub',{opacity:1,duration:.8,ease:'power2.out'},'-=.3').to('#heroBtns',{opacity:1,duration:.6},'-=.4').to('#heroStats',{opacity:1,duration:.6},'-=.3').to('#heroEditor',{opacity:1,duration:.8,onComplete:function(){if(window.startCrtSequence)window.startCrtSequence()}},'-=.5')}
+if(window.__introComplete){_heroTL()}else{window.__startHeroTimeline=_heroTL}
 if(!isMobile)gsap.to('#heroZoom',{scale:.92,opacity:.3,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
 document.querySelectorAll('.stat-number').forEach(function(el){var tgt=parseInt(el.dataset.target),pre=el.dataset.prefix||'';gsap.to({val:0},{val:tgt,duration:2,ease:'power2.out',snap:{val:1},scrollTrigger:{trigger:el,start:'top 85%',once:true},onUpdate:function(){el.textContent=pre+Math.round(this.targets()[0].val)}})});
 var se=document.getElementById('statementText');if(se){var w=se.textContent.trim().split(/\s+/);var brDone=false;se.innerHTML=w.map(function(x){var s='<span class="word">'+x+'</span>';if(!brDone&&x.indexOf('.')>-1){brDone=true;s+='<br>'}return s}).join(' ');gsap.to('#statementText .word',{opacity:1,stagger:.06,scrollTrigger:{trigger:'#statement',start:isMobile?'top 70%':'top 55%',end:isMobile?'bottom 40%':'bottom 45%',scrub:isMobile?.5:1}})}

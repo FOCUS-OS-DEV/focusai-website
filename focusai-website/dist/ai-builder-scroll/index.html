@@ -94,88 +94,96 @@ body{font-family:'Heebo',sans-serif;background:#080810;color:#e0e0e8;overflow-x:
 a{color:inherit;text-decoration:none}
 .mono{font-family:'Space Mono',monospace}
 
-/* ── Scroll Container ── */
-.scroll-container{
-  position:relative;
-  height:600vh;
-}
+/* ═══════════════════════════════════
+   PHASE 1: CINEMATIC VIDEO INTRO
+   ═══════════════════════════════════ */
 
-/* ── Sticky Viewport ── */
-.sticky-viewport{
+.video-section{
+  position:relative;
+  height:400vh; /* scroll space for video scrubbing */
+}
+.video-sticky{
   position:sticky;
   top:0;
   height:100vh;
   width:100%;
   overflow:hidden;
 }
-
-/* ── Video Layer ── */
-.video-layer{
-  position:absolute;
-  inset:0;
+.video-sticky video{
+  position:relative;
   z-index:1;
-}
-.video-layer video{
   width:100%;
   height:100%;
   object-fit:cover;
 }
-
-/* ── Gradient Fallback (behind video) ── */
-.gradient-fallback{
+.video-gradient-bg{
   position:absolute;
   inset:0;
   z-index:0;
   background:
-    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(168,85,247,.15), transparent),
-    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(6,182,212,.08), transparent),
-    radial-gradient(ellipse 50% 40% at 50% 80%, rgba(236,72,153,.06), transparent),
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(168,85,247,.12), transparent),
+    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(6,182,212,.06), transparent),
     linear-gradient(180deg, #080810 0%, #0a0a1a 50%, #080810 100%);
-  animation: gradientPulse 12s ease-in-out infinite;
-}
-@keyframes gradientPulse{
-  0%,100%{opacity:.8}
-  50%{opacity:1}
 }
 
-/* ── Dark Overlay on Video ── */
-.video-overlay{
+/* Scroll indicator */
+.scroll-hint{
   position:absolute;
-  inset:0;
-  z-index:2;
-  background:
-    linear-gradient(180deg, rgba(8,8,16,.3) 0%, rgba(8,8,16,.1) 30%, rgba(8,8,16,.1) 70%, rgba(8,8,16,.5) 100%),
-    radial-gradient(ellipse 100% 80% at 50% 50%, transparent 30%, rgba(8,8,16,.6) 100%);
-  pointer-events:none;
-}
-
-/* ── Content Panels ── */
-.panel{
-  position:absolute;
-  inset:0;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
   z-index:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  opacity:.7;
+  animation:hintBounce 2s ease-in-out infinite;
+  transition:opacity .5s;
+}
+.scroll-hint span{
+  font-size:.7rem;
+  color:rgba(224,224,232,.5);
+  font-family:'Space Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+.scroll-hint .arrow{
+  width:20px;height:20px;
+  border-left:2px solid rgba(168,85,247,.5);
+  border-bottom:2px solid rgba(168,85,247,.5);
+  transform:rotate(-45deg);
+}
+@keyframes hintBounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
+
+/* ═══════════════════════════════════
+   TRANSITION: PULL INTO SCREEN
+   ═══════════════════════════════════ */
+
+.transition-section{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  background:#080810;
+}
+.transition-warp{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 40%, rgba(168,85,247,.08), transparent),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(6,182,212,.05), transparent);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
-  opacity:0;
-  pointer-events:none;
-  transition:pointer-events 0s;
   padding:24px;
 }
-.panel.active{pointer-events:auto}
-
-/* Panel: Hero */
-.panel-hero .logo-mark{
-  width:80px;
-  height:80px;
-  margin-bottom:24px;
-  opacity:.9;
-  filter:drop-shadow(0 0 30px rgba(168,85,247,.4));
-}
-.panel-hero h1{
-  font-size:clamp(3rem,8vw,6rem);
+.transition-warp h2{
+  font-size:clamp(2.5rem,6vw,4.5rem);
   font-weight:900;
   letter-spacing:-0.03em;
   line-height:1.05;
@@ -183,41 +191,79 @@ a{color:inherit;text-decoration:none}
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
-  margin-bottom:16px;
+  opacity:0;
+  transform:scale(.9);
 }
-.panel-hero .tagline{
-  font-size:clamp(1.1rem,2.5vw,1.5rem);
-  color:rgba(224,224,232,.7);
+.transition-warp .tagline{
+  font-size:clamp(1rem,2.5vw,1.4rem);
+  color:rgba(224,224,232,.6);
   font-weight:300;
+  margin-top:16px;
   max-width:500px;
+  opacity:0;
+  transform:translateY(20px);
+}
+/* Scanline overlay for "entering the screen" feel */
+.scanlines{
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(168,85,247,.02) 2px,
+    rgba(168,85,247,.02) 4px
+  );
+  pointer-events:none;
+  opacity:0;
+  z-index:5;
 }
 
-/* Panel: Message */
-.panel-message h2{
+/* ═══════════════════════════════════
+   PHASE 2: LANDING PAGE SECTIONS
+   ═══════════════════════════════════ */
+
+.landing{
+  position:relative;
+  background:#080810;
+  /* Subtle ambient background */
+  background-image:
+    radial-gradient(ellipse 50% 30% at 20% 20%, rgba(168,85,247,.04), transparent),
+    radial-gradient(ellipse 50% 30% at 80% 80%, rgba(6,182,212,.03), transparent);
+}
+.section{
+  max-width:800px;
+  margin:0 auto;
+  padding:100px 24px;
+  text-align:center;
+}
+
+/* Section: Message */
+.section-message h2{
   font-size:clamp(2rem,5vw,3.5rem);
   font-weight:800;
   line-height:1.15;
-  max-width:700px;
   background:linear-gradient(135deg,#fff 30%,#a855f7 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
+  margin-bottom:20px;
 }
-.panel-message .sub{
+.section-message p{
   font-size:clamp(1rem,2vw,1.25rem);
-  color:rgba(224,224,232,.6);
-  margin-top:16px;
+  color:rgba(224,224,232,.55);
   max-width:500px;
+  margin:0 auto;
 }
 
-/* Panel: Stats */
-.panel-stats h2{
-  font-size:clamp(2rem,5vw,3.5rem);
+/* Section: Stats */
+.section-stats h2{
+  font-size:clamp(1.8rem,4vw,2.8rem);
   font-weight:800;
   color:#fff;
-  margin-bottom:32px;
+  margin-bottom:40px;
 }
-.panel-stats .stats-grid{
+.stats-grid{
   display:flex;
   gap:24px;
   flex-wrap:wrap;
@@ -229,13 +275,12 @@ a{color:inherit;text-decoration:none}
   -webkit-backdrop-filter:blur(20px);
   border:1px solid rgba(255,255,255,.08);
   border-radius:16px;
-  padding:24px 32px;
+  padding:28px 36px;
   min-width:160px;
-  text-align:center;
 }
 .stat-card .number{
   font-family:'Space Mono',monospace;
-  font-size:2.5rem;
+  font-size:2.8rem;
   font-weight:700;
   background:linear-gradient(135deg,#a855f7,#06b6d4);
   -webkit-background-clip:text;
@@ -245,17 +290,17 @@ a{color:inherit;text-decoration:none}
 .stat-card .label{
   font-size:.85rem;
   color:rgba(224,224,232,.5);
-  margin-top:4px;
+  margin-top:6px;
 }
 
-/* Panel: Method */
-.panel-method h2{
-  font-size:clamp(1.8rem,4vw,3rem);
+/* Section: Method */
+.section-method h2{
+  font-size:clamp(1.8rem,4vw,2.8rem);
   font-weight:800;
   color:#fff;
-  margin-bottom:12px;
+  margin-bottom:16px;
 }
-.panel-method .method-badge{
+.method-badge{
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -265,132 +310,122 @@ a{color:inherit;text-decoration:none}
   padding:8px 20px;
   margin-bottom:24px;
 }
-.panel-method .method-badge .dot{
-  width:6px;height:6px;border-radius:50%;background:#a855f7;animation:pulse 2s ease-in-out infinite;
+.method-badge .dot{
+  width:6px;height:6px;border-radius:50%;background:#a855f7;
+  animation:pulse 2s ease-in-out infinite;
 }
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
-.panel-method .method-badge span{
+.method-badge span{
   font-family:'Space Mono',monospace;
   font-size:.8rem;
   color:#a855f7;
   text-transform:uppercase;
 }
-.panel-method .tools{
+.tools-row{
   display:flex;
   gap:16px;
   align-items:center;
   justify-content:center;
-  margin-top:20px;
+  margin:24px 0;
 }
-.panel-method .tool{
+.tool-card{
   background:rgba(255,255,255,.03);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,.08);
   border-radius:12px;
-  padding:16px 24px;
-  font-size:1rem;
+  padding:18px 28px;
+  font-size:1.05rem;
   font-weight:600;
   color:rgba(224,224,232,.8);
 }
-.panel-method .tool-plus{
-  font-size:1.5rem;
-  color:rgba(168,85,247,.5);
-}
-.panel-method .sub{
+.tool-plus{font-size:1.5rem;color:rgba(168,85,247,.5)}
+.section-method p{
   font-size:1rem;
   color:rgba(224,224,232,.5);
-  margin-top:20px;
   max-width:480px;
+  margin:0 auto;
 }
 
-/* Panel: Academic */
-.panel-academic h2{
-  font-size:clamp(1.8rem,4vw,3rem);
+/* Section: Academic */
+.section-academic h2{
+  font-size:clamp(1.8rem,4vw,2.8rem);
   font-weight:800;
   color:#fff;
   margin-bottom:16px;
 }
-.panel-academic .uni-logo{
-  width:64px;
-  height:64px;
+.uni-logo{
+  width:72px;height:72px;
   border-radius:50%;
   object-fit:cover;
   border:2px solid rgba(168,85,247,.3);
-  margin-bottom:20px;
+  margin:0 auto 24px;
   filter:drop-shadow(0 0 20px rgba(168,85,247,.3));
 }
-.panel-academic .sub{
-  font-size:clamp(1rem,2vw,1.2rem);
-  color:rgba(224,224,232,.6);
+.section-academic p{
+  font-size:clamp(1rem,2vw,1.15rem);
+  color:rgba(224,224,232,.55);
   max-width:520px;
-  margin-top:8px;
+  margin:0 auto 24px;
 }
-.panel-academic .features{
+.features-row{
   display:flex;
-  gap:16px;
+  gap:20px;
   flex-wrap:wrap;
   justify-content:center;
-  margin-top:24px;
 }
-.panel-academic .feature{
+.feature-item{
   display:flex;
   align-items:center;
   gap:8px;
   font-size:.9rem;
   color:rgba(224,224,232,.7);
 }
-.panel-academic .feature .check{
-  color:#a855f7;
-  font-size:1.1rem;
-}
+.feature-item .check{color:#a855f7;font-size:1.1rem}
 
-/* Panel: CTA */
-.panel-cta h2{
+/* Section: CTA */
+.section-cta{
+  padding-bottom:120px;
+}
+.section-cta h2{
   font-size:clamp(2rem,5vw,3.5rem);
   font-weight:900;
   background:linear-gradient(135deg,#fff 30%,#a855f7 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
-  margin-bottom:24px;
+  margin-bottom:32px;
 }
-.panel-cta .cta-form{
+.cta-form{
   display:flex;
   flex-direction:column;
-  gap:12px;
-  width:100%;
+  gap:14px;
   max-width:400px;
+  margin:0 auto;
 }
-.panel-cta .cta-form input,
-.panel-cta .cta-form select{
+.cta-form input,
+.cta-form select{
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,.1);
   border-radius:12px;
-  padding:14px 18px;
+  padding:15px 18px;
   font-size:1rem;
   color:#e0e0e8;
   outline:none;
   transition:border-color .3s;
   direction:rtl;
 }
-.panel-cta .cta-form input::placeholder{color:rgba(224,224,232,.35)}
-.panel-cta .cta-form input:focus,
-.panel-cta .cta-form select:focus{
-  border-color:rgba(168,85,247,.4);
-}
-.panel-cta .cta-form select{
-  appearance:none;
-  -webkit-appearance:none;
+.cta-form input::placeholder{color:rgba(224,224,232,.35)}
+.cta-form input:focus,
+.cta-form select:focus{border-color:rgba(168,85,247,.4)}
+.cta-form select{
+  appearance:none;-webkit-appearance:none;
   color:rgba(224,224,232,.5);
 }
-.panel-cta .cta-form select option{
-  background:#1a1a2e;
-  color:#e0e0e8;
-}
-.panel-cta .cta-btn{
+.cta-form select option{background:#1a1a2e;color:#e0e0e8}
+.cta-btn{
   background:linear-gradient(135deg,#a855f7,#7c3aed);
   color:#fff;
   font-size:1.1rem;
@@ -401,206 +436,164 @@ a{color:inherit;text-decoration:none}
   border:none;
   transition:transform .2s,box-shadow .2s;
 }
-.panel-cta .cta-btn:hover{
+.cta-btn:hover{
   transform:translateY(-2px);
   box-shadow:0 8px 30px rgba(168,85,247,.4);
 }
-.panel-cta .cta-btn:active{transform:translateY(0)}
-.panel-cta .cta-btn:disabled{
-  opacity:.6;cursor:not-allowed;transform:none;
-}
-.panel-cta .whatsapp-link{
+.cta-btn:active{transform:translateY(0)}
+.cta-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.whatsapp-link{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  margin-top:16px;
+  margin-top:20px;
   color:rgba(224,224,232,.6);
   font-size:.9rem;
   transition:color .3s;
 }
-.panel-cta .whatsapp-link:hover{color:#25d366}
-.panel-cta .whatsapp-link svg{width:20px;height:20px}
-.panel-cta .form-success{
-  display:none;
-  text-align:center;
-  padding:24px;
-}
-.panel-cta .form-success.show{display:block}
-.panel-cta .form-success h3{
-  color:#a855f7;
-  font-size:1.5rem;
-  margin-bottom:8px;
-}
+.whatsapp-link:hover{color:#25d366}
+.whatsapp-link svg{width:20px;height:20px}
+.form-success{display:none;text-align:center;padding:24px}
+.form-success.show{display:block}
+.form-success h3{color:#a855f7;font-size:1.5rem;margin-bottom:8px}
 
-/* ── Scroll Indicator ── */
-.scroll-indicator{
-  position:absolute;
-  bottom:32px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:20;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  opacity:.6;
-  animation:scrollBounce 2s ease-in-out infinite;
+/* Section reveal animations */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s ease,transform .8s ease;
 }
-.scroll-indicator span{
-  font-size:.75rem;
-  color:rgba(224,224,232,.5);
-  font-family:'Space Mono',monospace;
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
-.scroll-indicator .arrow{
-  width:24px;
-  height:24px;
-  border-left:2px solid rgba(168,85,247,.5);
-  border-bottom:2px solid rgba(168,85,247,.5);
-  transform:rotate(-45deg);
-}
-@keyframes scrollBounce{
-  0%,100%{transform:translateX(-50%) translateY(0)}
-  50%{transform:translateX(-50%) translateY(8px)}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* ── Progress Bar ── */
 .progress-bar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:3px;
-  z-index:100;
+  position:fixed;top:0;left:0;right:0;
+  height:3px;z-index:100;
   background:rgba(255,255,255,.05);
 }
 .progress-bar .fill{
-  height:100%;
-  width:0%;
+  height:100%;width:0%;
   background:linear-gradient(90deg,#a855f7,#06b6d4);
-  transition:width .1s linear;
 }
 
 /* ── Responsive ── */
 @media(max-width:768px){
-  .stat-card{min-width:130px;padding:16px 20px}
-  .stat-card .number{font-size:1.8rem}
-  .panel-method .tools{flex-direction:column;gap:12px}
-  .panel-academic .features{flex-direction:column;align-items:center}
-  .scroll-indicator{bottom:20px}
+  .stat-card{min-width:130px;padding:20px 24px}
+  .stat-card .number{font-size:2rem}
+  .tools-row{flex-direction:column;gap:12px}
+  .features-row{flex-direction:column;align-items:center}
+  .section{padding:80px 20px}
 }
 @media(max-width:480px){
   .stats-grid{gap:12px}
-  .stat-card{min-width:110px;padding:14px 16px}
+  .stat-card{min-width:110px;padding:16px 18px}
 }
-</style></head> <body> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- Progress Bar --> <div class="progress-bar"><div class="fill" id="progressFill"></div></div> <!-- Scroll Container --> <section class="scroll-container" id="scrollContainer"> <div class="sticky-viewport" id="stickyViewport"> <!-- Gradient Fallback --> <div class="gradient-fallback"></div> <!-- Video Layer --> <div class="video-layer"> <video id="scrollVideo" muted playsinline webkit-playsinline preload="auto" poster="https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto,f_auto,so_0/Website_Hero_Video_Generation_o9atkv.jpg"> <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto/Website_Hero_Video_Generation_o9atkv.mp4" type="video/mp4"> </video> </div> <!-- Dark Overlay --> <div class="video-overlay"></div> <!-- Panel 1: Hero (0%-15%) --> <div class="panel panel-hero" id="panel1"> <img class="logo-mark" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_160/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" width="80" height="80"> <h1>AI Builder</h1> <p class="tagline">תכנית ההכשרה לבניית מוצרים דיגיטליים עם AI</p> <!-- Scroll indicator --> <div class="scroll-indicator" id="scrollIndicator"> <span>Scroll</span> <div class="arrow"></div> </div> </div> <!-- Panel 2: Message (15%-30%) --> <div class="panel panel-message" id="panel2"> <h2>אתם לא צריכים<br>ללמוד לתכנת.</h2> <p class="sub">אתם צריכים ללמוד לדבר עם AI — וליצור איתו הכל.</p> </div> <!-- Panel 3: Stats (30%-50%) --> <div class="panel panel-stats" id="panel3"> <h2>הנתונים מדברים</h2> <div class="stats-grid"> <div class="stat-card"> <div class="number">94</div> <div class="label">שעות הכשרה</div> </div> <div class="stat-card"> <div class="number">18</div> <div class="label">מודולים</div> </div> <div class="stat-card"> <div class="number">1</div> <div class="label">פרויקט גמר</div> </div> </div> </div> <!-- Panel 4: Method (50%-70%) --> <div class="panel panel-method" id="panel4"> <div class="method-badge"> <div class="dot"></div> <span>The Method</span> </div> <h2>Claude Code + VS Code</h2> <div class="tools"> <div class="tool">Claude Code</div> <span class="tool-plus">+</span> <div class="tool">VS Code</div> </div> <p class="sub">שיטת AI-First — לא לומדים לכתוב קוד, לומדים לבנות מוצרים שלמים עם AI כשותף.</p> </div> <!-- Panel 5: Academic (70%-85%) --> <div class="panel panel-academic" id="panel5"> <img class="uni-logo" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_128/v1770476772/university-haifa-logo-light_e1pxnh.png" alt="אוניברסיטת חיפה" width="64" height="64"> <h2>בליווי אקדמי<br>של אוניברסיטת חיפה</h2> <p class="sub">ההכשרה מלווה אקדמית ע״י אוניברסיטת חיפה — תוכנית ייחודית שמחברת בין עולם ה-AI לעולם האקדמיה.</p> <div class="features"> <div class="feature"><span class="check">&#10003;</span> ליווי מרצים מהתעשייה</div> <div class="feature"><span class="check">&#10003;</span> 2-3 מרצים בכל מפגש</div> <div class="feature"><span class="check">&#10003;</span> קבוצות קטנות</div> </div> </div> <!-- Panel 6: CTA (85%-100%) --> <div class="panel panel-cta" id="panel6"> <h2>מוכנים להתחיל?</h2> <form class="cta-form" id="ctaForm"> <input type="text" name="name" placeholder="שם מלא" required autocomplete="name"> <input type="tel" name="phone" placeholder="טלפון" required autocomplete="tel" dir="ltr"> <input type="email" name="email" placeholder="אימייל" autocomplete="email" dir="ltr"> <select name="track" required> <option value="" disabled selected>מסלול מועדף</option> <option value="herzliya">Bot-Camp הרצליה (פרונטלי)</option> <option value="zoom">מסלול Zoom (מרחוק)</option> </select> <button type="submit" class="cta-btn" id="ctaBtn">שלחו לי פרטים</button> </form> <div class="form-success" id="formSuccess"> <h3>תודה!</h3> <p>קיבלנו את הפרטים, נחזור אליכם בהקדם.</p> </div> <a href="https://wa.me/972543300904?text=היי%2C%20אשמח%20לשמוע%20על%20AI%20Builder" target="_blank" rel="noopener" class="whatsapp-link"> <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+</style></head> <body> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- Progress Bar --> <div class="progress-bar"><div class="fill" id="progressFill"></div></div> <!-- ═══ PHASE 1: VIDEO INTRO ═══ --> <section class="video-section" id="videoSection"> <div class="video-sticky"> <div class="video-gradient-bg"></div> <video id="scrollVideo" muted playsinline webkit-playsinline preload="auto" poster="https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto,f_auto,w_1280,so_0/freepik_brstarting-from-a-wide-establishing-shot-of-the-pu_veo3_1_4K_16-9_24fps_37099_vvccvr.jpg"> <source src="https://res.cloudinary.com/dfudxxzlj/video/upload/q_auto,w_1280/freepik_brstarting-from-a-wide-establishing-shot-of-the-pu_veo3_1_4K_16-9_24fps_37099_vvccvr.mp4" type="video/mp4"> </video> <div class="scroll-hint" id="scrollHint"> <span>Scroll</span> <div class="arrow"></div> </div> </div> </section> <!-- ═══ TRANSITION: INTO THE SCREEN ═══ --> <section class="transition-section" id="transitionSection"> <div class="scanlines" id="scanlines"></div> <div class="transition-warp" id="transitionWarp"> <h2>AI Builder</h2> <p class="tagline">תכנית ההכשרה לבניית מוצרים דיגיטליים עם AI</p> </div> </section> <!-- ═══ PHASE 2: LANDING PAGE ═══ --> <main class="landing"> <!-- Message --> <div class="section section-message reveal"> <h2>אתם לא צריכים<br>ללמוד לתכנת.</h2> <p>אתם צריכים ללמוד לדבר עם AI — וליצור איתו הכל.</p> </div> <!-- Stats --> <div class="section section-stats reveal"> <h2>הנתונים מדברים</h2> <div class="stats-grid"> <div class="stat-card"> <div class="number">94</div> <div class="label">שעות הכשרה</div> </div> <div class="stat-card"> <div class="number">18</div> <div class="label">מודולים</div> </div> <div class="stat-card"> <div class="number">1</div> <div class="label">פרויקט גמר</div> </div> </div> </div> <!-- Method --> <div class="section section-method reveal"> <div class="method-badge"> <div class="dot"></div> <span>The Method</span> </div> <h2>Claude Code + VS Code</h2> <div class="tools-row"> <div class="tool-card">Claude Code</div> <span class="tool-plus">+</span> <div class="tool-card">VS Code</div> </div> <p>שיטת AI-First — לא לומדים לכתוב קוד, לומדים לבנות מוצרים שלמים עם AI כשותף.</p> </div> <!-- Academic --> <div class="section section-academic reveal"> <img class="uni-logo" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_128/v1770476772/university-haifa-logo-light_e1pxnh.png" alt="אוניברסיטת חיפה" width="72" height="72"> <h2>בליווי אקדמי<br>של אוניברסיטת חיפה</h2> <p>ההכשרה מלווה אקדמית ע״י אוניברסיטת חיפה — תוכנית ייחודית שמחברת בין עולם ה-AI לעולם האקדמיה.</p> <div class="features-row"> <div class="feature-item"><span class="check">&#10003;</span> ליווי מרצים מהתעשייה</div> <div class="feature-item"><span class="check">&#10003;</span> 2-3 מרצים בכל מפגש</div> <div class="feature-item"><span class="check">&#10003;</span> קבוצות קטנות</div> </div> </div> <!-- CTA --> <div class="section section-cta reveal"> <h2>מוכנים להתחיל?</h2> <form class="cta-form" id="ctaForm"> <input type="text" name="name" placeholder="שם מלא" required autocomplete="name"> <input type="tel" name="phone" placeholder="טלפון" required autocomplete="tel" dir="ltr"> <input type="email" name="email" placeholder="אימייל" autocomplete="email" dir="ltr"> <select name="track" required> <option value="" disabled selected>מסלול מועדף</option> <option value="herzliya">Bot-Camp הרצליה (פרונטלי)</option> <option value="zoom">מסלול Zoom (מרחוק)</option> </select> <button type="submit" class="cta-btn" id="ctaBtn">שלחו לי פרטים</button> </form> <div class="form-success" id="formSuccess"> <h3>תודה!</h3> <p>קיבלנו את הפרטים, נחזור אליכם בהקדם.</p> </div> <a href="https://wa.me/972543300904?text=היי%2C%20אשמח%20לשמוע%20על%20AI%20Builder" target="_blank" rel="noopener" class="whatsapp-link"> <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
 או דברו איתנו ב-WhatsApp
-</a> </div> </div> </section> <!-- GSAP Scroll Logic --> <script>
+</a> </div> </main> <!-- ═══ SCRIPTS ═══ --> <!-- Phase 1: Video Scrub --> <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Wait for GSAP
   function init() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       return setTimeout(init, 100);
     }
     gsap.registerPlugin(ScrollTrigger);
 
-    const video = document.getElementById('scrollVideo');
-    const panels = [
-      { el: document.getElementById('panel1'), start: 0,    end: 0.15 },
-      { el: document.getElementById('panel2'), start: 0.15, end: 0.30 },
-      { el: document.getElementById('panel3'), start: 0.30, end: 0.50 },
-      { el: document.getElementById('panel4'), start: 0.50, end: 0.70 },
-      { el: document.getElementById('panel5'), start: 0.70, end: 0.85 },
-      { el: document.getElementById('panel6'), start: 0.85, end: 1.00 }
-    ];
-    const progressFill = document.getElementById('progressFill');
-    const scrollIndicator = document.getElementById('scrollIndicator');
-    let videoReady = false;
+    var video = document.getElementById('scrollVideo');
+    var scrollHint = document.getElementById('scrollHint');
+    var progressFill = document.getElementById('progressFill');
+    var videoReady = false;
+    var targetTime = 0;
+    var smoothTime = 0;
 
-    // Ensure video is loaded
-    video.addEventListener('loadedmetadata', function() {
-      videoReady = true;
-      video.currentTime = 0;
-    });
+    // Wait for video data
+    video.addEventListener('loadeddata', function() { videoReady = true; });
+    if (video.readyState >= 2) videoReady = true;
+    video.load();
 
-    // Force load on iOS
-    if (video.readyState >= 1) {
-      videoReady = true;
+    // Smooth video seeking
+    function tick() {
+      if (videoReady && video.duration) {
+        smoothTime += (targetTime - smoothTime) * 0.12;
+        if (Math.abs(smoothTime - targetTime) > 0.01) {
+          video.currentTime = Math.min(smoothTime, video.duration);
+        }
+      }
+      requestAnimationFrame(tick);
     }
+    requestAnimationFrame(tick);
 
-    // Panel opacity calculation
-    function getPanelOpacity(progress, panelStart, panelEnd) {
-      var fadeIn = 0.03;   // 3% fade in
-      var fadeOut = 0.03;  // 3% fade out
-      var inStart = panelStart;
-      var inEnd = panelStart + fadeIn;
-      var outStart = panelEnd - fadeOut;
-      var outEnd = panelEnd;
-
-      if (progress < inStart || progress > outEnd) return 0;
-      if (progress < inEnd) return (progress - inStart) / fadeIn;
-      if (progress > outStart) return 1 - (progress - outStart) / fadeOut;
-      return 1;
-    }
-
-    // Main scroll trigger
+    // Video scrub scroll trigger
     ScrollTrigger.create({
-      trigger: '#scrollContainer',
+      trigger: '#videoSection',
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.3,
+      scrub: true,
       onUpdate: function(self) {
-        var progress = self.progress;
+        var p = self.progress;
+        if (video.duration) targetTime = p * video.duration;
 
-        // Update progress bar
-        progressFill.style.width = (progress * 100) + '%';
+        // Progress bar (video section = first 60% of total page feel)
+        var totalSections = document.querySelector('.landing');
+        var pageH = document.body.scrollHeight - window.innerHeight;
+        var scrolled = window.scrollY || window.pageYOffset;
+        progressFill.style.width = ((scrolled / pageH) * 100) + '%';
 
-        // Scrub video
-        if (videoReady && video.duration) {
-          video.currentTime = progress * video.duration;
-        }
-
-        // Hide scroll indicator after 5%
-        if (progress > 0.05) {
-          scrollIndicator.style.opacity = '0';
-          scrollIndicator.style.pointerEvents = 'none';
-        } else {
-          scrollIndicator.style.opacity = '0.6';
-          scrollIndicator.style.pointerEvents = 'auto';
-        }
-
-        // Update panels
-        for (var i = 0; i < panels.length; i++) {
-          var p = panels[i];
-          var opacity = getPanelOpacity(progress, p.start, p.end);
-          p.el.style.opacity = opacity;
-          if (opacity > 0) {
-            p.el.classList.add('active');
-            // Slight parallax: scale from 0.95 to 1 on fade in
-            var scale = 0.95 + (opacity * 0.05);
-            p.el.style.transform = 'scale(' + scale + ')';
-          } else {
-            p.el.classList.remove('active');
-          }
-        }
+        // Hide scroll hint
+        scrollHint.style.opacity = p > 0.05 ? '0' : '0.7';
       }
     });
 
-    // Set first panel visible initially
-    panels[0].el.style.opacity = '1';
-    panels[0].el.classList.add('active');
-    panels[0].el.style.transform = 'scale(1)';
+    // Transition section: "AI Builder" text reveal
+    var tWarp = document.getElementById('transitionWarp');
+    var scanlines = document.getElementById('scanlines');
+
+    ScrollTrigger.create({
+      trigger: '#transitionSection',
+      start: 'top 80%',
+      end: 'top 20%',
+      scrub: true,
+      onUpdate: function(self) {
+        var p = self.progress;
+        var h2 = tWarp.querySelector('h2');
+        var tag = tWarp.querySelector('.tagline');
+        // Fade in + scale
+        h2.style.opacity = p;
+        h2.style.transform = 'scale(' + (0.9 + p * 0.1) + ')';
+        tag.style.opacity = Math.max(0, (p - 0.3) / 0.7);
+        tag.style.transform = 'translateY(' + (20 * (1 - p)) + 'px)';
+        // Scanlines
+        scanlines.style.opacity = p * 0.5;
+      }
+    });
+
+    // Landing sections: reveal on scroll
+    var reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(function(el) {
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        onEnter: function() { el.classList.add('visible'); },
+      });
+    });
+
+    // Update progress bar on general scroll
+    window.addEventListener('scroll', function() {
+      var pageH = document.body.scrollHeight - window.innerHeight;
+      var scrolled = window.scrollY || window.pageYOffset;
+      if (pageH > 0) progressFill.style.width = ((scrolled / pageH) * 100) + '%';
+    }, { passive: true });
   }
 
   init();
 });
-</script> <!-- Form Submission (N8N webhook) --> <script>
+</script> <!-- Form Submission --> <script>
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('ctaForm');
   var btn = document.getElementById('ctaBtn');
   var success = document.getElementById('formSuccess');
-
   if (!form) return;
 
   form.addEventListener('submit', function(e) {
