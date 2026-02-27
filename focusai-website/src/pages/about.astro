@@ -44,28 +44,6 @@ const integrationPillar = {
   ]
 };
 
-const differentiators = [
-  {
-    number: "01",
-    title: "הידע מגיע מהשטח",
-    desc: "מפרויקטים ואתגרים אמיתיים. לא תיאוריה מספרי לימוד - פתרונות שעובדים.",
-  },
-  {
-    number: "02",
-    title: "מקרי בוחן אמיתיים",
-    desc: "חלק ממקרי הבוחן שמוצגים בהכשרות הם מלקוחות אמיתיים שלנו.",
-  },
-  {
-    number: "03",
-    title: "גיבוי אקדמי",
-    desc: "תכניות בשיתוף היחידה ללימודי חוץ באוניברסיטת חיפה. תעודה מוכרת ומוערכת.",
-  },
-  {
-    number: "04",
-    title: "2-3 מרצים בכל מפגש",
-    desc: "לא מרצה בודד. צוות מלא שמביא פרספקטיבות שונות ותשומת לב אישית.",
-  },
-];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -261,40 +239,6 @@ const differentiators = [
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- 4. FROM THE FIELD - Differentiator           -->
-  <!-- ============================================ -->
-  <section class="relative py-20 lg:py-28 overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#a855f7]/5 rounded-full blur-[150px]"></div>
-    </div>
-
-    <div class="container mx-auto px-4 max-w-5xl relative z-10">
-
-      <div class="text-center mb-16">
-        <p class="font-mono text-[#a855f7] text-sm mb-4 tracking-wider">[WHY_US]</p>
-        <h2 class="text-3xl md:text-5xl font-black mb-6">
-          <span class="text-[#f5f5fa]">ללמוד ממי שעושים</span>
-          <span class="text-[#a855f7]"> את זה בעצמם</span>
-        </h2>
-        <p class="text-[#b0b0c0] text-lg max-w-2xl mx-auto">
-          הידע שלנו מגיע מהשטח. מפרויקטים ואתגרים אמיתיים ופתרונות שעובדים.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-        {differentiators.map((d) => (
-          <div class="diff-card relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 md:p-8 hover:border-[#a855f7]/30 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-            <span class="font-mono text-4xl font-black text-[#a855f7]/15 absolute top-4 left-4 md:top-6 md:left-6">{d.number}</span>
-            <div class="relative">
-              <h3 class="text-xl font-bold text-white mb-3">{d.title}</h3>
-              <p class="text-[#b0b0c0] leading-relaxed">{d.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- ============================================ -->
   <!-- 5. FOUNDERS                                  -->
