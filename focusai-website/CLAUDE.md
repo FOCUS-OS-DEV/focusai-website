@@ -544,6 +544,38 @@ Loaded via `requestIdleCallback` to avoid blocking.
 
 ---
 
+## Brand Writing (CRITICAL)
+
+Full guide: `.claude/skills/copywriting/SKILL.md` — invoke with `/copywriting`
+
+### Core Voice
+- **Practitioner speaking to peer** — not professor lecturing, not salesperson pitching
+- **Direct (דוגריות)** — say the thing. Hedging language = delete.
+- **Proof-backed** — replace every superlative with a number or a name
+- **Active voice always**
+
+### Banned Words/Patterns
+- פורץ דרך, חדשני, פתרונות מתקדמים, הוליסטי, סינרגיה, מנוף
+- "unlock your potential", "empower your journey"
+- Starting with "We/Our/אנחנו/אצלנו" — start with the customer's situation
+- Passive voice ("יכולים להיות מיושמים")
+- Hedging: אולי, ייתכן, בדרך כלל
+- Em-dash (—) in headlines → use period instead
+- Vague endings: "ועוד הרבה מעבר" / "עד הסוף" → replace with specific number/outcome
+- "לפרטים והרשמה" CTA → always use outcome verb ("שמור לי מקום")
+- CV bios: listing credentials → practitioner story ("בנה X, ועכשיו מלמד...")
+
+### CTA Rules
+- Describe outcome, not action: "שמור מקום" not "שלח"
+- First person or imperative: "התחל את ה-Bot-Camp שלי"
+- Add friction-reducer below every CTA button
+
+### Testimonials
+- Must include: specific metric + name + role/company
+- "קורס מדהים, ממליץ בחום!" = zero trust (never use)
+
+---
+
 ## Deployment
 
 ### PRIMARY: cPanel (Apache)
@@ -571,6 +603,7 @@ Loaded via `requestIdleCallback` to avoid blocking.
 - Permissions-Policy: camera/mic/geo disabled
 
 ### Pre-Deployment Checklist
+- [ ] `npm run lint` passes (0 errors)
 - [ ] `npm run build` passes
 - [ ] No console errors in dev
 - [ ] dist/ included in commit
@@ -693,7 +726,27 @@ CLAUDE.md and MEMORY.md are loaded every session. Everything documented here is 
 npm run dev      # Development server (localhost:4321)
 npm run build    # Production build → dist/
 npm run preview  # Preview production build
+npm run lint     # ESLint — check src/ for errors
+npm run lint:fix # ESLint — auto-fix what's possible
 ```
+
+---
+
+## Linting (ESLint)
+
+**Config:** `eslint.config.mjs` (flat config, ESLint 10)
+**Git pre-commit hook:** `.git/hooks/pre-commit` — runs ESLint on staged files + builds dist/
+
+### Rules
+- `.ts/.tsx` files: `no-debugger`, `no-var`, `prefer-const`, `eqeqeq` + TypeScript parser
+- `.astro` files: Astro recommended rules only (`no-var`/`no-alert` OFF — inline scripts use `var` intentionally)
+- `_drafts/` excluded from linting
+
+### Writing ESLint-safe Code
+- Use `&gt;` instead of `>` as text content in Astro templates (ESLint JSX parser)
+- No HTML comments (`<!-- -->`) inside JSX expressions — remove or use `{/* */}`
+- Use `let`/`const` in `.ts/.tsx` files (not `var`)
+- `var` is allowed in `<script is:inline>` blocks within `.astro` files
 
 ---
 
@@ -737,6 +790,8 @@ User-invocable workflows (use `/skill-name`):
 | `/new-page` | Checklist + scaffolding for new pages |
 | `/new-article` | Blog article creation with frontmatter template |
 | `/audit` | Comprehensive site audit (SEO, links, schema, a11y) |
+| `/copywriting` | Brand writing guide — voice, tone, frameworks, copy rules for all pages |
+| `/creating-skills` | Scaffolds a new skill following Anthropic best practices (frontmatter, progressive disclosure, descriptions) |
 
 ### Agents (`.claude/agents/`)
 Specialized subagents for specific tasks:
@@ -750,6 +805,16 @@ Specialized subagents for specific tasks:
 ---
 
 ## Recent Changes Log
+
+### 2026-02-28
+- **AI Builder page** (`/ai-fullstack`) — extensive redesign:
+  - Sticky terminal chrome (titlebar + tabs + status bar + progress)
+  - Hero typewriter effect with cycling terminal commands
+  - Avatar pain cards redesign (5 robot avatars, circular images)
+  - Story terminal humor sequence + CRT immediate start
+  - Section spacing standardization
+- **`/copywriting` skill** created — brand writing guide with voice, tone, frameworks (PAS, AIDA, StoryBrand, JTBD), CTA rules, anti-patterns
+- **Brand Writing section** added to CLAUDE.md
 
 ### 2026-02-27
 - **Major codebase cleanup** (Wave 1):
