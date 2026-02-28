@@ -30,6 +30,7 @@ export default [
       'no-undef': 'off',
       'no-unused-vars': 'off',
       'no-debugger': 'error',
+      'no-console': 'warn',
       'no-var': 'error',
       'prefer-const': 'warn',
       'eqeqeq': ['warn', 'smart'],
@@ -41,6 +42,7 @@ export default [
     files: ['src/**/*.js'],
     rules: {
       'no-debugger': 'error',
+      'no-console': 'warn',
       'prefer-const': 'warn',
     },
   },
@@ -53,6 +55,7 @@ export default [
       'no-unused-vars': 'off',
       'no-var': 'off',
       'no-alert': 'off',
+      'no-console': 'off',
       'prefer-const': 'off',
       'eqeqeq': 'off',
     },
