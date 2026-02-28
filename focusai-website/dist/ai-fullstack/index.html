@@ -549,7 +549,7 @@ var cg=document.getElementById('cursorGlow'),mx=0,my=0,gx=0,gy=0,hh=window.match
 if(hh)document.querySelectorAll('.tilt-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2;c.style.transform='perspective(800px) rotateX('+((y-cy)/cy*-6)+'deg) rotateY('+((x-cx)/cx*6)+'deg) scale(1.02)';var g=c.querySelector('.card-glow');if(g){g.style.opacity='1';g.style.background='radial-gradient(circle at '+x+'px '+y+'px,rgba(168,85,247,.1),transparent 60%)'}});c.addEventListener('mouseleave',function(){c.style.transform='';var g=c.querySelector('.card-glow');if(g)g.style.opacity='0'})});
 if(hh)document.querySelectorAll('.magnetic-btn').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)'});b.addEventListener('mouseleave',function(){b.style.transform='';b.style.transition='transform .4s cubic-bezier(.22,1,.36,1)';setTimeout(function(){b.style.transition=''},400)})});
 document.querySelectorAll('.faq-question').forEach(function(btn){btn.addEventListener('click',function(){var it=btn.closest('.faq-item'),a=it.querySelector('.faq-answer'),o=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-answer').style.maxHeight='0'});if(!o){it.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}})});
-var form=document.getElementById('registerForm'),fs=document.getElementById('formSuccess');if(form)form.addEventListener('submit',function(e){e.preventDefault();var v=true;document.querySelectorAll('.form-error').forEach(function(el){el.style.display='none'});var n=document.getElementById('name'),p=document.getElementById('phone'),em=document.getElementById('email'),t=document.getElementById('track'),pr=document.getElementById('privacy'),mk=document.getElementById('marketing'),bg=document.getElementById('background');if(!n.value.trim()){document.getElementById('nameError').style.display='block';v=false}if(!p.value.trim()||p.value.trim().length<9){document.getElementById('phoneError').style.display='block';v=false}if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){document.getElementById('emailError').style.display='block';v=false}if(!t.value){document.getElementById('trackError').style.display='block';v=false}if(!pr.checked){document.getElementById('privacyError').style.display='block';v=false}if(!v)return;var sb=form.querySelector('.btn-submit');sb.classList.add('loading');sb.textContent='שולח...';fetch('https://n8n.focusai.co.il/webhook/ai-fullstack-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n.value.trim(),phone:p.value.trim(),email:em.value.trim(),track:t.value,background:bg.value.trim(),source:'ai-fullstack',marketing_consent:mk.checked})}).then(function(){form.style.display='none';fs.style.display='block';if(typeof fbq==='function')fbq('track','Lead')}).catch(function(){form.style.display='none';fs.style.display='block'}).finally(function(){sb.classList.remove('loading');sb.textContent='שלח הרשמה'})});
+var form=document.getElementById('registerForm'),fs=document.getElementById('formSuccess');if(form)form.addEventListener('submit',function(e){e.preventDefault();var v=true;document.querySelectorAll('.form-error').forEach(function(el){el.style.display='none'});var n=document.getElementById('name'),p=document.getElementById('phone'),em=document.getElementById('email'),t=document.getElementById('track'),pr=document.getElementById('privacy'),mk=document.getElementById('marketing'),bg=document.getElementById('background');if(!n.value.trim()){document.getElementById('nameError').style.display='block';v=false}if(!p.value.trim()||p.value.trim().length<9){document.getElementById('phoneError').style.display='block';v=false}if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){document.getElementById('emailError').style.display='block';v=false}if(!t.value){document.getElementById('trackError').style.display='block';v=false}if(!pr.checked){document.getElementById('privacyError').style.display='block';v=false}if(!v)return;var sb=form.querySelector('.btn-submit');sb.classList.add('loading');sb.textContent='שולח...';fetch('https://n8n.focusai.co.il/webhook/ai-fullstack-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n.value.trim(),phone:p.value.trim(),email:em.value.trim(),track:t.value,background:bg.value.trim(),source:'ai-fullstack',marketing_consent:mk.checked})}).then(function(r){if(!r.ok)throw new Error('status '+r.status);form.style.display='none';fs.style.display='block';if(typeof fbq==='function')fbq('track','Lead')}).catch(function(){sb.classList.remove('loading');sb.textContent='שמור מקום עכשיו';alert('אירעה שגיאה בשליחת הטופס. אנא נסו שוב או צרו קשר בטלפון.')}).finally(function(){sb.classList.remove('loading');sb.textContent='שמור מקום עכשיו'})});
 /* Purple net canvas animation */
 (function(){
 var c=document.getElementById('netBg');if(!c)return;
@@ -567,7 +567,10 @@ if(mx>-999){var dmx=p.x-mx,dmy=p.y-my,dm=Math.sqrt(dmx*dmx+dmy*dmy);if(dm<200){v
 p.vx*=.99;p.vy*=.99;
 for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);if(d<DIST){var a=.15*(1-d/DIST);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(168,85,247,'+a+')';ctx.lineWidth=.8;ctx.stroke()}}
 ctx.beginPath();ctx.arc(p.x,p.y,2,0,6.28);ctx.fillStyle='rgba(168,85,247,.6)';ctx.fill()}
-requestAnimationFrame(draw)}draw()
+if(netVisible)requestAnimationFrame(draw)}
+var netVisible=true;
+new IntersectionObserver(function(e){netVisible=e[0].isIntersecting;if(netVisible)draw()},{threshold:0}).observe(c.parentElement);
+draw()
 })();
 /* Init 3D carousels */
 function initCarousel(id){
@@ -730,7 +733,9 @@ var chars=['0','1','1','0','0','1','AI','→','{ }','//','fn','const','let','awa
 var cols,drops,spds;
 function init(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;var cw=28;cols=Math.floor(canvas.width/cw);drops=[];spds=[];for(var i=0;i<cols;i++){drops[i]=Math.random()*-canvas.height;spds[i]=.15+Math.random()*.25;}}
 init();window.addEventListener('resize',init);
-var cw=28;setInterval(function(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.font='11px Space Mono,monospace';
+var matrixVisible=true;
+new IntersectionObserver(function(e){matrixVisible=e[0].isIntersecting},{threshold:0}).observe(canvas);
+var cw=28;setInterval(function(){if(!matrixVisible)return;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.font='11px Space Mono,monospace';
 for(var i=0;i<cols;i++){var ch=chars[Math.floor(Math.random()*chars.length)];var y=drops[i];if(y>0&&y<canvas.height){var a=Math.min(.16,y/canvas.height*.22);ctx.fillStyle='rgba(168,85,247,'+a+')';ctx.fillText(ch,i*cw,y);}
 drops[i]+=spds[i];if(drops[i]>canvas.height+20)drops[i]=Math.random()*-150;}},60);})();
 /* Scroll reveal animations — CSS defaults handle hidden state */
@@ -797,7 +802,7 @@ lines.forEach(function(line,li){setTimeout(function(){line.style.transition='opa
 }
 }
 function initDecode(){if(!window.SplitType)return;document.querySelectorAll('.decode-text').forEach(function(el){var split=new SplitType(el,{types:'chars'});var chars=split.chars;if(!chars||!chars.length)return;var originals=chars.map(function(c){return c.textContent});var pool='ABCDEFGHIJKLMNOPQRSTUVWXYZאבגדהוזחטיכלמנסעפצקרשת0123456789!@#$%';chars.forEach(function(c){c.style.opacity='0'});ScrollTrigger.create({trigger:el,start:'top 80%',once:true,onEnter:function(){chars.forEach(function(c,i){var delay=i*40;setTimeout(function(){c.style.opacity='1';var scrambleCount=0;var si=setInterval(function(){c.textContent=pool[Math.floor(Math.random()*pool.length)];scrambleCount++;if(scrambleCount>4+Math.random()*4){clearInterval(si);c.textContent=originals[i]}},50)},delay)})}})})}
-var dst=setInterval(function(){if(window.SplitType){clearInterval(dst);initDecode()}},100);
+var dst=setInterval(function(){if(window.SplitType){clearInterval(dst);initDecode()}},100);setTimeout(function(){clearInterval(dst)},10000);
 if(window.innerWidth>1024)document.querySelectorAll('.floating-code').forEach(function(el,i){gsap.to(el,{y:-200-i*60,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:2}})});
 if(!isMobile)document.querySelectorAll('.instructor-cinema img').forEach(function(img){gsap.to(img,{y:-30,ease:'none',scrollTrigger:{trigger:img.closest('.instructor-cinema'),start:'top bottom',end:'bottom top',scrub:1}})});
 /* Neural Network — tech stack canvas + orbit */
@@ -805,7 +810,8 @@ if(!isMobile)document.querySelectorAll('.instructor-cinema img').forEach(functio
 var canvas=document.getElementById('nnCanvas'),wrap=document.getElementById('nnWrap'),grid=document.getElementById('nnGrid');
 if(!canvas||!wrap||!grid)return;
 var ctx=canvas.getContext('2d'),dpr=window.devicePixelRatio||1;
-var cw,ch,nodePos=[],conns=[],pulses=[],time=0,running=false,posCount=0;
+var cw,ch,nodePos=[],conns=[],pulses=[],time=0,running=false,posCount=0,nnVisible=true;
+new IntersectionObserver(function(e){nnVisible=e[0].isIntersecting;if(nnVisible&&running)frame()},{threshold:0}).observe(wrap);
 var MAXD=isMobile?240:500;
 function resize(){
 var r=wrap.getBoundingClientRect();cw=r.width;ch=r.height;
@@ -827,7 +833,7 @@ if(d<MAXD)conns.push({a:i,b:j,d:d});
 }}
 }
 function frame(){
-if(!running)return;
+if(!running||!nnVisible)return;
 posCount++;
 if(isMobile&&posCount%8===0)getPos();
 ctx.clearRect(0,0,cw,ch);
