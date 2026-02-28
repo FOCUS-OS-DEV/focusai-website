@@ -17,6 +17,7 @@ export default defineConfig({
   redirects: {
     '/ai-tools': '/tools',
     '/services/ai-agents': '/ai-agents',
+    '/links': '/',
   },
 
   vite: {

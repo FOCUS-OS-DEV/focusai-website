@@ -585,7 +585,7 @@ Loaded via `requestIdleCallback` to avoid blocking.
 | Logo (light bg) | `v1765265415/2_fxdcio.png` |
 | Logo (dark bg) | `v1765265416/5_mckdsj.png` |
 | Fingerprint | `v1765571815/FOCUS_LOGO-06_2_grkja9.png` |
-| Chavobot (new) | `v1771022344/36c7efb5-d099-4cb1-94fe-1bd896f53cef_ivfe4n.png` |
+| Hero Image | `v1772262543/freepik__-br-__5935-Picsart-BackgroundRemover_kswxhk.png` |
 
 Base URL: `https://res.cloudinary.com/dfudxxzlj/image/upload/`
 
