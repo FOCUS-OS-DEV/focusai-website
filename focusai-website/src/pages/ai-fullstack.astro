@@ -363,13 +363,16 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .syl-tag{display:inline-block;padding:1px 8px;border-radius:4px;background:rgba(168,85,247,.1);color:#c084fc;font-size:11px;margin:0 3px;font-weight:500}
 @media(max-width:768px){
 .syl-layout{flex-direction:column;min-height:auto}
-.syl-sidebar{width:100%;border-left:none;border-bottom:1px solid #30363d;flex-direction:row;overflow-x:auto}
-.syl-sb-dots{display:none}.syl-sb-tree{display:flex;padding:8px 12px;gap:4px;flex:none;overflow-x:auto}
+.syl-sidebar{width:100%;border-left:none;border-bottom:1px solid #30363d;flex-direction:column;overflow-x:visible}
+.syl-sb-dots{display:none}.syl-sb-tree{display:grid;grid-template-columns:repeat(3,1fr);padding:10px;gap:6px;flex:none;overflow-x:visible}
 .syl-sf,.syl-sf-active{display:none}
-.syl-file{padding:6px 12px;border-radius:8px;white-space:nowrap;font-size:11px;flex-shrink:0;padding-right:12px}
-.syl-code{min-height:360px;font-size:12px;padding:16px;line-height:1.9}
-.syl-gutter{min-width:28px;font-size:12px;line-height:1.9}.syl-line{font-size:12px;line-height:1.9}
-.syl-cls{font-size:13px}
+.syl-file{padding:10px 8px;border-radius:10px;white-space:nowrap;font-size:11px;flex-shrink:0;text-align:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.syl-file.active{background:rgba(13,166,242,.1);border-color:rgba(13,166,242,.25);color:#0da6f2}
+.syl-code{min-height:380px;font-size:13px;padding:18px 14px;line-height:2}
+.syl-gutter{min-width:28px;font-size:12px;line-height:2}.syl-line{font-size:13px;line-height:2}
+.syl-cls{font-size:15px}
+.syl-topic{font-size:14px}.syl-cm{font-size:12px}
+.syl-kw,.syl-fn,.syl-op,.syl-num{opacity:.5}
 }
 .tracks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;align-items:stretch}
 .track-card{padding:0;position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
@@ -510,7 +513,7 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 #journeyMobile{display:flex!important;flex-direction:column;gap:24px}
 .jm-card-text h3{font-size:20px}.jm-card-text p{font-size:14px}.jm-card-ide{height:200px}
 /* Syllabus mobile improvements */
-.syl-ide{border-radius:10px;overflow:hidden}.syl-sidebar{-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}.syl-sidebar::-webkit-scrollbar{display:none}.syl-sb-tree{padding:10px 12px;gap:6px}.syl-file{padding:8px 14px;font-size:12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}.syl-file.active{background:rgba(13,166,242,.08);border-color:rgba(13,166,242,.2)}.syl-code{min-height:320px;font-size:11px;padding:14px 12px;line-height:1.85;-webkit-overflow-scrolling:touch}.syl-gutter{min-width:24px;font-size:11px;line-height:1.85}.syl-line{font-size:11px;line-height:1.85}.syl-prompt{font-size:12px;padding:8px 14px}.syl-heading{font-size:clamp(24px,6vw,36px)}
+.syl-ide{border-radius:10px;overflow:hidden}.syl-sidebar{-webkit-overflow-scrolling:touch}.syl-prompt{font-size:12px;padding:8px 14px}.syl-heading{font-size:clamp(24px,6vw,36px)}
 /* NN section mobile */
 .nn-wrap{padding:0 12px}.tech-subtitle{font-size:clamp(20px,5vw,28px);margin-bottom:24px}
 /* Insight sections mobile enhance */
@@ -534,7 +537,7 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 .hero-meta{flex-direction:column;gap:6px;align-items:center}.hero-meta-sep{display:none}
 /* Journey + syllabus extra small */
 .jm-card-text{padding:20px 16px 16px}.jm-card-text h3{font-size:18px}.jm-card-ide{height:180px}
-.syl-code{min-height:280px;font-size:10px;line-height:1.8;padding:10px 8px}.syl-gutter{min-width:20px;font-size:10px;line-height:1.8}.syl-line{font-size:10px;line-height:1.8}.syl-cls{font-size:11px}
+.syl-code{min-height:300px;font-size:12px;line-height:1.9;padding:14px 10px}.syl-gutter{min-width:22px;font-size:11px;line-height:1.9}.syl-line{font-size:12px;line-height:1.9}.syl-cls{font-size:14px}.syl-topic{font-size:13px}.syl-sb-tree{gap:5px;padding:8px}.syl-file{padding:8px 6px;font-size:10px}
 .hl-text h2{font-size:clamp(22px,6vw,32px)}.hl-text>p{font-size:14px}
 }
 /* Video Intro — fullscreen autoplay cinematic opener */
