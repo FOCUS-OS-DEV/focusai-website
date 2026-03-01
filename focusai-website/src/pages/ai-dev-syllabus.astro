@@ -686,6 +686,7 @@ body {
     color-adjust: exact !important;
   }
   .toolbar { display: none !important; }
+  .pdf-download-btn { display: none !important; }
   .viewer { padding: 0; gap: 0; }
   .page { box-shadow: none; page-break-after: always; page-break-inside: avoid; }
   .page:last-child { page-break-after: auto; }
@@ -845,7 +846,17 @@ body {
   .closing-logo-item { border-radius: 10px; padding: 3px; }
   .closing-logo-item::before { inset: 4px; border-radius: 6px; }
   .closing-logo-item img { max-width: 80%; max-height: 80%; }
+  /* Hide last 6 client logos on mobile (keep 8 of 14) */
+  .closing-logo-item:nth-child(n+9) { display: none; }
   .closing-url { font-size: 16px; }
+
+  /* Simplify heavy effects for mobile performance */
+  .lyr-grid { display: none !important; }
+  .nn-circle::before { background: #fff !important; }
+  .nn-circle::after { opacity: 0.35 !important; }
+  .cover-character { display: none !important; }
+  .mod-ring { box-shadow: none !important; }
+  .page { box-shadow: none !important; }
 }
 
 /* Tablet (769px-1024px) — scaled A4 */
@@ -862,6 +873,10 @@ body {
 <nav class="toolbar">
   <a href="/"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="toolbar-logo"></a>
   <div class="toolbar-actions">
+    <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/v1772383956/syllabus/ai-dev-syllabus-2026" download="Focus-AI-DEV-Syllabus-2026.pdf" class="toolbar-btn toolbar-btn-ghost pdf-download-btn">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+      הורד PDF
+    </a>
     <a href="/ai-fullstack" class="toolbar-btn toolbar-btn-primary">חזרה לעמוד התכנית</a>
   </div>
 </nav>
