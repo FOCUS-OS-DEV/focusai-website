@@ -348,6 +348,7 @@ body {
   letter-spacing: -0.04em; text-shadow: 0 0 60px rgba(168,85,247,0.1);
 }
 .cover-title .gradient {
+  display: block;
   background: linear-gradient(135deg, #e0b3ff 0%, #c084fc 25%, #a855f7 50%, #7c3aed 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
@@ -431,7 +432,7 @@ body {
 }
 
 .about-intro {
-  font-size: 12pt; color: var(--text-dim); line-height: 1.7;
+  font-size: 10pt; color: var(--text-dim); line-height: 1.6;
   display: flex; flex-direction: column; gap: 2.5mm;
 }
 .about-intro p { margin: 0; }
@@ -462,7 +463,7 @@ body {
   width: 42mm;
 }
 .instructor-img {
-  width: 24mm; height: 34mm; border-radius: 4mm;
+  width: 20mm; height: 28mm; border-radius: 4mm;
   object-fit: cover;
   border: 2px solid rgba(168,85,247,0.3);
   box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 3px rgba(168,85,247,0.08);
@@ -470,13 +471,13 @@ body {
   mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 .instructor-name {
-  font-size: 12pt; font-weight: 600; color: #fff; text-align: center;
+  font-size: 10pt; font-weight: 600; color: #fff; text-align: center;
 }
 .instructor-role {
-  font-size: 12pt; color: var(--text-dim); text-align: center; line-height: 1.3;
+  font-size: 8.5pt; color: var(--text-dim); text-align: center; line-height: 1.3;
 }
 .guest-badge {
-  font-size: 12pt; color: var(--purple-light);
+  font-size: 8.5pt; color: var(--purple-light);
   opacity: 0.45; text-align: center; margin-top: 0.5mm;
   font-style: italic;
 }
@@ -669,6 +670,11 @@ body {
   .glass-card { background: var(--bg-card-solid) !important; backdrop-filter: none !important; }
   * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
   .lyr-noise { opacity: 0.015; }
+  .cover-title .gradient {
+    -webkit-text-fill-color: #a855f7 !important;
+    color: #a855f7 !important;
+    background: none !important;
+  }
 }
 
 /* =============================================
@@ -869,7 +875,7 @@ body {
     <!-- Center: Title + Info -->
     <div class="cover-center">
       <span class="cover-pre">// FULL PROGRAM SYLLABUS</span>
-      <h1 class="cover-title">FOCUS<br><span class="gradient">AI DEV</span></h1>
+      <h1 class="cover-title">FOCUS<span class="gradient">AI DEV</span></h1>
       <div class="cover-line"></div>
       <p class="cover-subtitle">מאפס לפרודקשן</p>
       <p class="cover-academic-sub">בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה</p>
