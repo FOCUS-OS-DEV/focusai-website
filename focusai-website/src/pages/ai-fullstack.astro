@@ -212,19 +212,16 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .retro-keyboard::before{content:'';position:absolute;inset:0;border-radius:6px 6px 14px 14px;background:linear-gradient(180deg,rgba(255,255,255,.1) 0%,transparent 40%);pointer-events:none}
 .retro-keys{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
 .retro-keys span{height:13px;background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(0,0,0,.02) 100%);border-radius:2.5px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.25),0 2px 4px rgba(0,0,0,.08)}
-/* Keyboard cable — goes from keyboard top to monitor bottom */
-.retro-kb-cable{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:20px;height:18px;opacity:.85}
-/* Wired Mouse — right side, cable curves into monitor */
-.retro-mouse-area{position:absolute;right:-50px;bottom:0;display:flex;flex-direction:column;align-items:center;gap:0;height:100%}
-.retro-mouse-cable{width:80px;height:calc(100% - 30px);position:absolute;bottom:44px;right:0;opacity:.85}
+/* Wired Mouse — right side of keyboard */
+.retro-mouse-area{position:absolute;right:-50px;bottom:-8px;display:flex;flex-direction:column;align-items:center;gap:0}
 .retro-mouse{width:28px;height:42px;background:linear-gradient(178deg,#d6ccae 0%,#c4b896 40%,#b0a37a 100%);border-radius:10px 10px 12px 12px;box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.1);position:relative;flex-shrink:0}
 .retro-mouse::before{content:'';position:absolute;inset:0;border-radius:10px 10px 12px 12px;background:linear-gradient(165deg,rgba(255,255,255,.15) 0%,transparent 50%);pointer-events:none}
 .retro-mouse-btns{display:flex;gap:1.5px;padding:4px 4px 0;justify-content:center}
 .retro-mouse-btns span{flex:1;height:14px;background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(0,0,0,.03) 100%);border-radius:3px 3px 1px 1px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08),0 1px 0 rgba(255,255,255,.15)}
 .retro-mouse-wheel{width:4px;height:6px;background:rgba(0,0,0,.15);border-radius:3px;margin:2px auto 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
 .retro-mouse-body{height:12px}
-@media(max-width:768px){.retro-kb-cable{top:-14px;height:14px;width:16px}.retro-mouse-area{right:-38px}.retro-mouse-cable{width:65px;height:calc(100% - 26px);bottom:32px}.retro-mouse{width:22px;height:34px;border-radius:8px 8px 10px 10px}.retro-mouse::before{border-radius:8px 8px 10px 10px}.retro-mouse-btns span{height:11px}.retro-mouse-wheel{width:3px;height:5px}}
-@media(max-width:480px){.retro-kb-cable{top:-10px;height:10px;width:12px}.retro-mouse-area{right:-28px}.retro-mouse-cable{width:50px;height:calc(100% - 20px);bottom:24px}.retro-mouse{width:18px;height:28px;border-radius:6px 6px 8px 8px}.retro-mouse::before{border-radius:6px 6px 8px 8px}.retro-mouse-btns{padding:3px 3px 0}.retro-mouse-btns span{height:9px}.retro-mouse-wheel{width:2.5px;height:4px}.retro-mouse-body{height:8px}}
+@media(max-width:768px){.retro-mouse-area{right:-38px}.retro-mouse{width:22px;height:34px;border-radius:8px 8px 10px 10px}.retro-mouse::before{border-radius:8px 8px 10px 10px}.retro-mouse-btns span{height:11px}.retro-mouse-wheel{width:3px;height:5px}}
+@media(max-width:480px){.retro-mouse-area{right:-28px}.retro-mouse{width:18px;height:28px;border-radius:6px 6px 8px 8px}.retro-mouse::before{border-radius:6px 6px 8px 8px}.retro-mouse-btns{padding:3px 3px 0}.retro-mouse-btns span{height:9px}.retro-mouse-wheel{width:2.5px;height:4px}.retro-mouse-body{height:8px}}
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 .code-particle{position:absolute;font-family:'Space Mono',monospace;pointer-events:none;z-index:1;will-change:transform,opacity;animation:codeFloat var(--cf-dur,6s) ease-in-out infinite,codeBlink var(--cb-dur,4s) ease-in-out infinite;animation-delay:var(--cf-delay,0s),var(--cb-delay,0s)}
 @keyframes codeFloat{0%,100%{transform:translateY(0) rotate(var(--cf-rot,0deg))}50%{transform:translateY(var(--cf-drift,-18px)) rotate(calc(var(--cf-rot,0deg) + 3deg))}}
@@ -699,14 +696,12 @@ const &#123; data &#125; = await supabase
 <div class="retro-led" id="crtLed"></div>
 </div>
 </div>
-<!-- Keyboard with cable -->
+<!-- Keyboard -->
 <div class="retro-keyboard">
 <div class="retro-keys"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-<svg class="retro-kb-cable" viewBox="0 0 20 30" fill="none" preserveAspectRatio="none"><path d="M10,30 C10,20 8,12 10,0" stroke="#8a7d62" stroke-width="2.5" stroke-linecap="round"/><path d="M10,30 C10,20 8,12 10,0" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-linecap="round"/></svg>
 </div>
-<!-- Wired Mouse (right side, cable curves into monitor) -->
+<!-- Mouse (right side of keyboard, no cable) -->
 <div class="retro-mouse-area">
-<svg class="retro-mouse-cable" viewBox="0 0 80 200" fill="none"><path d="M40,200 C40,180 42,160 40,140 C36,110 30,90 20,60 C12,38 6,20 0,0" stroke="#8a7d62" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M40,200 C40,180 42,160 40,140 C36,110 30,90 20,60 C12,38 6,20 0,0" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
 <div class="retro-mouse"><div class="retro-mouse-btns"><span></span><span></span></div><div class="retro-mouse-wheel"></div><div class="retro-mouse-body"></div></div>
 </div>
 </div>
@@ -1282,7 +1277,7 @@ const &#123; data &#125; = await supabase
 <section class="section" id="instructors"><div class="container"><div class="sec-label">// INSTRUCTORS</div><div class="clip-reveal" id="instructorsReveal">
 <div style="text-align:center;margin-bottom:16px"><h2 class="section-title">קצת עלינו</h2><p style="color:rgba(224,224,232,.6);font-size:clamp(16px,2vw,19px);line-height:1.8;max-width:640px;margin:0 auto 16px">Focus AI מגשרים על הפער בין אנשים לטכנולוגיה. מלמדים AI באוניברסיטת חיפה ובטכניון, בונים סוכנים ואוטומציות לעסקים, ומלווים ארגונים בהטמעת AI שנותנת תוצאות.</p></div>
 <div class="instructors-cinema">
-<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="Shahar Dadia" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>שחר דדיה</h3><span class="role">CEO &amp; Co-Founder</span><p class="bio">עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה.</p><div class="instructor-badges"><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">עורך דין</span><span class="instructor-badge">יזם</span></div></div></div>
+<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1772386471/IMG_1318.JPG_o1lijm.jpg" alt="Shahar Dadia" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>שחר דדיה</h3><span class="role">CEO &amp; Co-Founder</span><p class="bio">עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה.</p><div class="instructor-badges"><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">עורך דין</span><span class="instructor-badge">יזם</span></div></div></div>
 <div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="Unil Sahar" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>אוניל סחר</h3><span class="role">CEO &amp; Co-Founder</span><p class="bio">יזם, מנהל רשתות, בעל ניסיון עשיר בניהול, תפעול וצמיחה עסקית. סמנכ"ל תפעול ושיווק לשעבר ברשתות קמעונאיות מובילות. מפתח מערכות בשילוב AI ופיתוח עסקי עם הבנה עמוקה לצרכי הלקוח והארגון. מרצה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.</p><div class="instructor-badges"><span class="instructor-badge">טכניון</span><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">AI Ops</span></div></div></div>
 </div></div></div></section>
 
