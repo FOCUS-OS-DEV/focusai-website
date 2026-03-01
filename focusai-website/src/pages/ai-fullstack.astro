@@ -229,7 +229,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .bento-sm{padding:32px 28px}.bento-sm .bento-icon{width:44px;height:44px;border-radius:12px;font-size:15px;margin-bottom:16px}.bento-sm h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}.bento-sm p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.7}.bento-icon{display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-weight:700}.bento-icon.purple{background:rgba(168,85,247,.1);color:#a855f7}.bento-icon.cyan{background:rgba(0,245,255,.08);color:#00f5ff}.bento-icon.pink{background:rgba(255,0,110,.08);color:#ff006e}.bento-icon.green{background:rgba(57,255,20,.08);color:#39ff14}
 .bento-full{grid-column:1/-1;padding:32px 40px;display:flex;align-items:center;gap:28px}.bento-full .bento-icon{flex-shrink:0}.bento-full h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}.bento-full p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.6}
 .journey-section{position:relative}
-.journey-pin{position:relative;height:100vh;display:flex;align-items:center;z-index:10;background:#0a0a0f}
+.journey-pin{position:relative;height:100vh;display:flex;align-items:center;z-index:10}
 .journey-viewport{position:relative;width:100%}
 .journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
 .journey-stages{position:relative;min-height:280px}
@@ -388,8 +388,9 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .syl-topic{font-size:14px}.syl-cm{font-size:12px}
 .syl-kw,.syl-fn,.syl-op,.syl-num{opacity:.5}
 }
-.tracks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;align-items:stretch}
-.track-card{padding:0;position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
+#tracks .sec-label,#tracks .section-title{text-align:center}
+.tracks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;align-items:stretch;max-width:900px;margin-left:auto;margin-right:auto}
+.track-card{padding:0;position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;display:flex;flex-direction:column}
 .track-card:hover{box-shadow:0 20px 50px rgba(0,0,0,.4)}
 .track-card.featured{border-color:rgba(168,85,247,.3);box-shadow:0 16px 48px rgba(168,85,247,.12)}
 .track-card.featured::before{content:'';position:absolute;inset:-1px;border-radius:21px;padding:1px;background:linear-gradient(135deg,#a855f7,#c084fc,#a855f7);background-size:200% 200%;animation:gradShift 4s ease infinite;mask:linear-gradient(#fff 0 0)content-box,linear-gradient(#fff 0 0);-webkit-mask:linear-gradient(#fff 0 0)content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask-composite:xor;pointer-events:none;z-index:1}
@@ -404,7 +405,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .featured .track-icon::before{background:#a855f7}
 .track-card:not(.featured) .track-icon::before{background:#00f5ff}
 .track-icon svg{width:20px;height:20px}
-.track-body{padding:16px 24px 20px}
+.track-body{padding:16px 24px 20px;flex:1;display:flex;flex-direction:column}
 .track-subtitle{font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.6);margin-bottom:6px}
 .track-card h3{font-size:clamp(22px,3vw,28px);font-weight:800;margin-bottom:6px;background:linear-gradient(135deg,#a855f7,#fff 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .track-card:not(.featured) h3{background:linear-gradient(135deg,#00f5ff,#fff 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -414,7 +415,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .track-date-text{display:flex;flex-direction:column;gap:2px}
 .track-date-text strong{font-size:14px;color:#fff;font-weight:700}
 .track-date-text span{font-size:12px;color:rgba(224,224,232,.4)}
-.track-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.track-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px;flex:1}
 .track-features li{display:flex;align-items:center;gap:8px;color:rgba(224,224,232,.6);font-size:13px;line-height:1.5}
 .track-features li::before{content:'';width:6px;height:6px;border-radius:50%;background:#a855f7;flex-shrink:0}
 .track-card:not(.featured) .track-features li::before{background:#00f5ff}
@@ -496,7 +497,7 @@ body.no-gsap .hero-line-inner,body.no-gsap #heroEyebrow,body.no-gsap #heroSub,bo
 @media(max-width:1024px){.hero-grid{grid-template-columns:1fr;gap:16px;text-align:center}.hero-text{padding-top:0;display:contents}.hero-text h1{min-height:auto}.hero-buttons{justify-content:center;order:10}.hero-details{justify-content:center}.hero-rotate{order:4}.retro-pc{order:5;max-width:300px;margin:10px auto}.hero-rotate{font-size:clamp(16px,2.5vw,22px)}.retro-pc{max-width:300px}.retro-monitor{transform:none!important}.retro-monitor:hover{transform:none!important}.journey-pin{display:none!important}#journeyMobile{display:flex!important;flex-direction:column;gap:32px}.ide-window{height:340px}.bento{grid-template-columns:repeat(2,1fr)}.bento-hero{grid-column:span 2}.bento-full{grid-column:span 2}.lp-grid{gap:32px}.lp-cards{width:380px;height:270px}}
 @media(max-width:768px){.container{padding:0 16px}.section{padding:60px 0}.section-divider{height:32px}
 /* Hero mobile */
-.hero{min-height:100vh;min-height:100dvh;padding:100px 0 40px;justify-content:center}.hero-text{padding-top:0}.hero-text h1{font-size:clamp(54px,14vw,72px)}.hero-line-he{font-size:clamp(23px,6.5vw,34px);margin-top:6px}.hero-text .subtitle{font-size:clamp(18px,5vw,23px);line-height:1.55;font-weight:500}.hero-stack{font-size:clamp(15px,4vw,18px);margin-bottom:4px}.hero-no-bg{font-size:clamp(14px,3.8vw,16px);margin-bottom:16px;padding:6px 16px;display:inline-block;border:1px solid rgba(168,85,247,.2);border-radius:999px;background:rgba(168,85,247,.06)}.hero-details{flex-direction:column;gap:10px;align-items:center;margin-top:14px}.hero-detail{font-size:clamp(16px,4.5vw,20px);gap:10px}.hero-detail svg{width:28px;height:28px}.hero-rotate{font-size:clamp(15px,4vw,20px);margin-top:10px;margin-bottom:10px}.hero-buttons{flex-direction:column;width:100%;max-width:360px;margin:0 auto}.hero-buttons .btn-primary{width:100%;justify-content:center;padding:16px 24px;font-size:16px;font-weight:700;box-shadow:0 0 24px rgba(168,85,247,.35),0 4px 16px rgba(0,0,0,.3)}.hero-buttons .btn-ghost{width:100%;justify-content:center;padding:14px 24px;font-size:15px}.retro-pc{max-width:280px;margin:20px auto 10px}.retro-screen{aspect-ratio:1/1}.retro-monitor{transform:none!important;border-radius:14px 14px 8px 8px;padding:10px 10px 6px}.retro-monitor:hover{transform:none!important}.retro-screen-frame{padding:10px;border-radius:8px}.retro-keyboard{padding:8px 10px 10px}.retro-panel{padding:6px 10px 2px}
+.hero{min-height:100vh;min-height:100dvh;padding:100px 0 40px;justify-content:center}.hero-text{padding-top:0}.hero-text h1{font-size:clamp(54px,14vw,72px)}.hero-line-he{font-size:clamp(23px,6.5vw,34px);margin-top:6px}.hero-text .subtitle{font-size:clamp(18px,5vw,23px);line-height:1.55;font-weight:500}.hero-stack{font-size:clamp(15px,4vw,18px);margin-bottom:4px}.hero-no-bg{font-size:clamp(14px,3.8vw,16px);margin-bottom:16px;padding:6px 16px;display:inline-block;border:1px solid rgba(168,85,247,.2);border-radius:999px;background:rgba(168,85,247,.06)}.hero-details{flex-direction:column;gap:10px;align-items:center;margin-top:14px}.hero-detail{font-size:clamp(16px,4.5vw,20px);gap:10px}.hero-detail svg{width:28px;height:28px}.hero-rotate{font-size:clamp(15px,4vw,20px);margin-top:10px;margin-bottom:10px}.hero-buttons{flex-direction:column;width:100%;max-width:360px;margin:0 auto}.hero-buttons .btn-primary{width:100%;justify-content:center;padding:16px 24px;font-size:16px;font-weight:700;background:linear-gradient(160deg,rgba(168,85,247,.25) 0%,rgba(255,255,255,.1) 40%,rgba(168,85,247,.15) 100%);border-color:rgba(168,85,247,.4);box-shadow:0 0 30px rgba(168,85,247,.4),0 0 60px rgba(168,85,247,.15),0 4px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.25)}.hero-buttons .btn-ghost{width:100%;justify-content:center;padding:14px 24px;font-size:15px;border-color:rgba(168,85,247,.25);box-shadow:0 0 20px rgba(168,85,247,.12),inset 0 1px 0 rgba(255,255,255,.12);background:linear-gradient(160deg,rgba(168,85,247,.08) 0%,rgba(255,255,255,.03) 50%,rgba(168,85,247,.06) 100%)}.retro-pc{max-width:280px;margin:20px auto 10px}.retro-screen{aspect-ratio:1/1}.retro-monitor{transform:none!important;border-radius:14px 14px 8px 8px;padding:10px 10px 6px}.retro-monitor:hover{transform:none!important}.retro-screen-frame{padding:10px;border-radius:8px}.retro-keyboard{padding:8px 10px 10px}.retro-panel{padding:6px 10px 2px}
 /* Problem section mobile */
 .avatar-pain-grid{gap:16px}.avatar-pain-card{padding:24px 14px 20px;display:flex;flex-direction:column;align-items:center}.avatar-pain-img{width:150px}.avatar-pain-card h3{font-size:16px;margin-bottom:8px;min-height:auto}.avatar-pain-card p{font-size:14px;line-height:1.6}
 /* Statement mobile */
@@ -652,7 +653,7 @@ const &#123; data &#125; = await supabase
 </div>
 </div>
 <div class="hero-rotate" id="heroRotate"><span class="hero-rotate-prompt">&gt; </span><span class="hero-rotate-fixed">פיתוח </span><span class="hero-rotate-value" id="heroRotateValue"></span><span class="hero-rotate-cursor">_</span></div>
-<div class="hero-buttons" id="heroBtns"><a href="#register" class="btn-primary btn-shimmer magnetic-btn">אני רוצה ללמוד לפתח עם AI</a><a href="#syllabus" class="btn-ghost magnetic-btn">לסילבוס המלא</a></div>
+<div class="hero-buttons" id="heroBtns"><a href="#register" class="btn-primary btn-shimmer magnetic-btn">אני רוצה ללמוד לפתח עם AI</a><a href="/ai-dev-syllabus" class="btn-ghost magnetic-btn">לסילבוס המלא</a></div>
 </div>
 <div class="retro-pc" id="heroEditor">
 <!-- Monitor -->
@@ -1029,7 +1030,7 @@ const &#123; data &#125; = await supabase
 
 <!-- BRAND LOGOS 3D CAROUSEL -->
 <section class="carousel-section">
-<h3 class="carousel-title">ארגונים שכבר עובדים איתנו</h3>
+<h3 class="carousel-title">חברות וארגונים שכבר הצטרפו למשפחה</h3>
 <div class="container"><div class="clc" id="brandsCarousel"><div class="clc-track">
 <div class="clc-card"><div class="clc-inner"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250,c_fit/v1764239338/41_nufstk.png" alt="אוניברסיטת חיפה" loading="lazy"/></div></div>
 <div class="clc-card"><div class="clc-inner"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250,c_fit/v1764239319/24_fcxmpa.png" alt="הטכניון" loading="lazy"/></div></div>
@@ -1053,14 +1054,14 @@ const &#123; data &#125; = await supabase
 <div class="section-divider"></div>
 
 <!-- TRACKS -->
-<section class="section" id="tracks"><div class="container"><div class="sec-label">// TRACKS</div><div class="clip-reveal" id="tracksReveal"><h2 class="section-title">המסלולים שלנו</h2>
+<section class="section" id="tracks"><div class="container"><div class="sec-label">// LEARNING_PATHS</div><div class="clip-reveal" id="tracksReveal"><h2 class="section-title">המסלולים שלנו</h2>
 <div class="tracks-grid">
 
 <!-- FRONTAL -->
 <div class="track-card featured">
 <div class="track-header">
 <span class="track-badge frontal">פרונטלי</span>
-<div class="track-icon"><svg fill="none" stroke="#a855f7" stroke-width="1.5" viewBox="0 0 24 24" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+<div class="track-icon"><svg fill="none" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="28" height="28"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 018 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-3.5 2.5-6 6-6a5.9 5.9 0 012.8.6"/><path d="M17.6 9.4c.3.8.4 1.7.4 2.6 0 5-2 8-4 10"/><path d="M10 12c0 5.5-1.5 8-3 10"/><path d="M14 12c0 3-1 5.5-2 8"/><path d="M12 12a2 2 0 104 0"/></svg></div>
 </div>
 <div class="track-body">
 <div class="track-subtitle">[ההכשרה המקצועית]</div>
