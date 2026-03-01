@@ -50,8 +50,8 @@ const POSTER_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/so_1,w_480
       <h3 class="vp-title">גלו את חווית הלימוד שלנו</h3>
       <p class="vp-desc">פורטל לימוד חדשני עם סוכני AI אישיים, סיכומים חכמים ומטלות אינטראקטיביות</p>
 
-      <a href="/academy/" class="vp-cta">
-        <span>לפרטים על הקורסים</span>
+      <a id="vp-cta-link" href="/academy/" class="vp-cta">
+        <span id="vp-cta-text">לפרטים על הקורסים</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 8H4M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
 
@@ -380,7 +380,6 @@ const POSTER_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/so_1,w_480
 (function() {
   var SESSION_KEY = 'focus_video_popup_shown';
   var PROMO_KEY = 'focus_promo_shown';
-  var SHOW_DELAY = 5000;
 
   document.addEventListener('DOMContentLoaded', function() {
     var overlay = document.getElementById('vp-overlay');
@@ -389,9 +388,17 @@ const POSTER_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/so_1,w_480
     var video = document.getElementById('vp-video');
     var closeBtn = document.getElementById('vp-close');
     var dismissBtn = document.getElementById('vp-dismiss');
+    var ctaLink = document.getElementById('vp-cta-link');
+    var ctaText = document.getElementById('vp-cta-text');
+
+    // Dynamic CTA based on current page
+    var path = window.location.pathname.replace(/\/$/, '');
+    if (path === '/ai-fullstack') {
+      if (ctaLink) ctaLink.href = '#register';
+      if (ctaText) ctaText.textContent = 'להרשמה לתוכנית';
+    }
 
     function show() {
-      // Reset display in case it was hidden after a previous close
       overlay.style.display = '';
       overlay.classList.remove('is-hiding');
       overlay.classList.add('is-visible');
@@ -405,7 +412,6 @@ const POSTER_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/so_1,w_480
       overlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
 
-      // Pause video on close
       if (video && !video.paused) {
         video.pause();
       }
@@ -419,39 +425,59 @@ const POSTER_URL = 'https://res.cloudinary.com/dfudxxzlj/video/upload/so_1,w_480
     if (closeBtn) closeBtn.addEventListener('click', hide);
     if (dismissBtn) dismissBtn.addEventListener('click', hide);
 
-    // Click outside card to close
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) hide();
     });
 
-    // Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && overlay.classList.contains('is-visible')) hide();
     });
 
-    // ===== GLOBAL API: allow external buttons to open the popup =====
+    // CTA link also closes popup (for #register scroll)
+    if (ctaLink) ctaLink.addEventListener('click', function() {
+      hide();
+    });
+
+    // Global API for manual open (portal buttons)
     window.openVideoPopup = function() {
       show();
     };
 
-    // ===== AUTO-SHOW: 5s delay on first visit (excluded pages skip auto) =====
+    // Auto-show: excluded pages + dual condition (20s + scroll past 100px)
     var excluded = [
       '/content-automation-watch',
       '/content-automation-course',
       '/webinar-n8n-agent',
       '/webinar-n8n-thank-you',
-      '/academy/thank-you'
+      '/academy/thank-you',
+      '/ai-fullstack'
     ];
-    var path = window.location.pathname.replace(/\/$/, '');
     var isExcluded = false;
     for (var i = 0; i < excluded.length; i++) {
       if (path === excluded[i]) { isExcluded = true; break; }
     }
 
     if (!isExcluded && !sessionStorage.getItem(SESSION_KEY)) {
-      sessionStorage.setItem(PROMO_KEY, '1'); // Block PromoPopup
+      sessionStorage.setItem(PROMO_KEY, '1');
       sessionStorage.setItem(SESSION_KEY, '1');
-      setTimeout(show, SHOW_DELAY);
+      var hasScrolled = false;
+      var timeReached = false;
+      var shown = false;
+      function tryShow() {
+        if (shown || !hasScrolled || !timeReached) return;
+        shown = true;
+        show();
+      }
+      window.addEventListener('scroll', function() {
+        if (!hasScrolled && window.pageYOffset > 100) {
+          hasScrolled = true;
+          tryShow();
+        }
+      }, { passive: true });
+      setTimeout(function() {
+        timeReached = true;
+        tryShow();
+      }, 20000);
     }
   });
 })();
