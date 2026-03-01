@@ -129,9 +129,12 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 @keyframes nnRingSpin{to{--ring-angle:360deg}}
 .nn-logo::after{animation:nnRingSpin 6s linear infinite}
 .nn-lg .nn-logo::after{animation:nnRingSpin 4s linear infinite}
+.nn-orbit-fp{display:none}
 /* Mobile: Orbital rings */
 @media(max-width:768px){
 .nn-grid.nn-orbit-mode{height:400px;display:block;overflow:visible}
+.nn-orbit-mode .nn-orbit-fp{display:block;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:80px;height:80px;opacity:.12;pointer-events:none;z-index:0}
+.nn-orbit-mode .nn-orbit-fp img{width:100%;height:100%;object-fit:contain}
 .nn-orbit-mode .nn-node{position:absolute;left:50%;top:50%;margin:-32px 0 0 -28px;transform:none;animation:nnOrbit var(--orb-t,40s) linear infinite;animation-delay:var(--orb-d,0s)}
 .nn-orbit-mode .nn-node.nn-orbit-rev{animation-direction:reverse}
 .nn-orbit-mode .nn-logo{width:56px;height:56px;padding:10px}
@@ -288,6 +291,10 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .insight-label{font-family:'Space Mono',monospace;font-size:11px;color:rgba(168,85,247,.7);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .insight-label::before{content:'';width:20px;height:1px;background:rgba(168,85,247,.5);display:inline-block}
 .insight-headline{font-size:clamp(26px,3.2vw,42px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:18px}
+.insight-headline-lg{font-size:clamp(28px,5vw,52px);margin-bottom:24px}
+.claude-code-brand{font-family:'Söhne Mono','Space Mono',monospace;color:#D4845E;letter-spacing:-.02em;font-weight:700}
+.insight-body-lg{font-size:clamp(17px,2vw,20px);color:rgba(224,224,232,.85);font-weight:600;line-height:1.8}
+.insight-stacked{flex-direction:column;text-align:center}.insight-stacked .insight-visual{flex:none;width:100%;max-width:480px;margin:0 auto}
 .insight-body{font-size:17px;color:rgba(224,224,232,.6);line-height:1.85;margin-bottom:28px}
 .insight-callout{background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.15);border-radius:14px;padding:20px 24px;position:relative}
 .insight-callout::before{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.2));border-radius:0 14px 14px 0}
@@ -527,7 +534,7 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 .avatar-pain-grid{grid-template-columns:1fr;max-width:320px;margin-left:auto;margin-right:auto}.avatar-pain-img{width:100px;height:100px}.avatar-pain-card{padding:20px 16px 18px}
 .section-title{font-size:clamp(22px,6vw,32px)}.sec-label{font-size:11px}
 .statement-text{font-size:22px!important}.statement-img{max-width:200px}
-.insight-headline{font-size:clamp(20px,5vw,26px)}
+.insight-headline{font-size:clamp(20px,5vw,26px)}.insight-headline-lg{font-size:clamp(22px,6vw,32px)}.insight-body-lg{font-size:clamp(15px,3.5vw,18px)}
 .lp-features{grid-template-columns:1fr}.lp-cards{width:260px;height:185px}
 .phone-frame{width:260px;height:540px;border-radius:38px;padding:10px}.phone-island{top:12px;width:76px;height:24px}.phone-screen{border-radius:28px}
 .track-card h3{font-size:18px}.track-body{padding:12px 16px 16px}
@@ -685,6 +692,7 @@ const &#123; data &#125; = await supabase
 <div class="nn-wrap" id="nnWrap">
 <canvas class="nn-canvas" id="nnCanvas"></canvas>
 <div class="nn-grid" id="nnGrid">
+<div class="nn-orbit-fp"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="" loading="lazy"/></div>
 <div class="nn-node nn-lg" style="--nx:8;--ny:8"><div class="nn-logo"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_200/q_auto,f_auto/v1770932830/Claude_AI_logo.svg_ytgq64.png" alt="Claude AI" loading="lazy"/></div><span class="nn-label">Claude AI</span></div>
 <div class="nn-node" style="--nx:26;--ny:5"><div class="nn-logo"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_200/q_auto,f_auto/v1770932829/4178d5a0a14d32e3d5672090d840ac58_obowc5.jpg" alt="OpenAI" loading="lazy"/></div><span class="nn-label">OpenAI</span></div>
 <div class="nn-node nn-lg" style="--nx:44;--ny:12"><div class="nn-logo"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_200/q_auto,f_auto/v1770733892/39809fe7-d4d5-40a5-98a6-3b63a366d2a6_phdbq0.png" alt="n8n" loading="lazy"/></div><span class="nn-label">n8n</span></div>
@@ -715,14 +723,10 @@ const &#123; data &#125; = await supabase
 <section class="insight-section section" id="insight-security">
 <div class="container">
 <div class="sec-label">// HOW IT WORKS</div>
-<div class="insight-grid">
-<div class="insight-text">
-<div class="insight-label">ללמוד את היסודות כמו שצריך</div>
-<h2 class="insight-headline">אתה בונה<br/>עם <span style="font-family:'Space Mono',monospace;color:#D4845E;letter-spacing:-.02em">Claude Code</span>.</h2>
-<p class="insight-body">לפני שמדברים עם AI, לומדים לחשוב כמו מפתח. ארכיטקטורה, מבני נתונים, לוגיקה עסקית ו־prompt engineering מתקדם. כי מי שיודע מה לבקש, מקבל תוצאות טובות פי 10.</p>
-<div class="insight-callout">
-<p>אתה מתאר מה אתה רוצה, ו־Claude Code כותב את הקוד. אבל אתה לא רק צופה, אתה מבין כל שורה. למה React? למה API route? איך עובד auth? כי רק מי שמבין, יכול לכוון.</p>
-</div>
+<div class="insight-grid insight-stacked">
+<div class="insight-text" style="text-align:center">
+<h2 class="insight-headline insight-headline-lg">ללמוד לפתח בצורה נכונה עם<br/><span class="claude-code-brand">Claude Code</span></h2>
+<p class="insight-body insight-body-lg">לפני שמדברים עם AI, לומדים לחשוב כמו מפתח. ארכיטקטורה, מבני נתונים, אוטומציות בשילוב AI, סוכני AI, לוגיקה עסקית, Prompt Engineering ועוד...<br/>כי מי שיודע מה לבקש, מקבל תוצאות טובות פי 10.</p>
 </div>
 <div class="insight-visual">
 <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772108173/freepik__-__66888_g30pbn.png" alt="לומדים לבנות עם Claude Code" id="securityImg" loading="lazy"/>
