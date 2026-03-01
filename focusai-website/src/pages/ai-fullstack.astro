@@ -25,8 +25,8 @@ const structuredData = {
     "courseMode": "Blended",
     "courseWorkload": "PT120H",
     "instructor": [
-      { "@type": "Person", "name": "שחר דדיה", "jobTitle": "מנכ\"ל ואסטרטג AI" },
-      { "@type": "Person", "name": "אוניל סהר", "jobTitle": "סמנכ\"ל תפעול ופיתוח עסקי" }
+      { "@type": "Person", "name": "שחר דדיה", "jobTitle": "CEO & Co-Founder" },
+      { "@type": "Person", "name": "אוניל סהר", "jobTitle": "CEO & Co-Founder" }
     ],
     "location": [
       { "@type": "Place", "name": "הרצליה פיתוח", "address": { "@type": "PostalAddress", "addressLocality": "הרצליה", "addressCountry": "IL" } },
@@ -459,6 +459,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 /* Phone Testimonials */
 .pt-section{padding:80px 0;position:relative;overflow:hidden;background:#0a0a0f}
 .pt-title{text-align:center;font-size:clamp(24px,4vw,40px);font-weight:900;color:#fff;margin-bottom:8px}
+.pt-title .gradient-text{background:linear-gradient(135deg,#c084fc,#a855f7,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .pt-subtitle{text-align:center;font-size:16px;color:#b0b0c0;margin-bottom:48px}
 .phone-wrapper{display:flex;flex-direction:column;align-items:center;gap:1rem}
 .phone-nav{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);color:#a855f7;cursor:pointer;transition:all .3s;backdrop-filter:blur(10px)}
@@ -1259,10 +1260,10 @@ const &#123; data &#125; = await supabase
 
 <!-- INSTRUCTORS — CINEMATIC -->
 <section class="section" id="instructors"><div class="container"><div class="sec-label">// INSTRUCTORS</div><div class="clip-reveal" id="instructorsReveal">
-<div style="text-align:center;margin-bottom:16px"><h2 class="section-title">המרצים שלנו</h2><p style="color:rgba(224,224,232,.5);font-size:17px;margin-bottom:16px">מיישמים AI בשטח. מלמדים מה שעובד.</p></div>
+<div style="text-align:center;margin-bottom:16px"><h2 class="section-title">קצת עלינו</h2><p style="color:rgba(224,224,232,.6);font-size:clamp(16px,2vw,19px);line-height:1.8;max-width:640px;margin:0 auto 16px">Focus AI מגשרים על הפער בין אנשים לטכנולוגיה. מלמדים AI באוניברסיטת חיפה ובטכניון, בונים סוכנים ואוטומציות לעסקים, ומלווים ארגונים בהטמעת AI שנותנת תוצאות.</p></div>
 <div class="instructors-cinema">
-<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="Shahar Dadia" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>שחר דדיה</h3><span class="role">CEO &amp; AI Strategy</span><p class="bio">עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה.</p><div class="instructor-badges"><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">עורך דין</span><span class="instructor-badge">יזם</span></div></div></div>
-<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="Unil Sahar" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>יוניל סהר</h3><span class="role">COO &amp; Business Dev</span><p class="bio">יזם, מנהל רשתות, בעל ניסיון עשיר בניהול, תפעול וצמיחה עסקית. סמנכ"ל תפעול ושיווק לשעבר ברשתות קמעונאיות מובילות. מפתח מערכות בשילוב AI ופיתוח עסקי עם הבנה עמוקה לצרכי הלקוח והארגון. מרצה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.</p><div class="instructor-badges"><span class="instructor-badge">טכניון</span><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">AI Ops</span></div></div></div>
+<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="Shahar Dadia" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>שחר דדיה</h3><span class="role">CEO &amp; Co-Founder</span><p class="bio">עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה.</p><div class="instructor-badges"><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">עורך דין</span><span class="instructor-badge">יזם</span></div></div></div>
+<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="Unil Sahar" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>אוניל סהר</h3><span class="role">CEO &amp; Co-Founder</span><p class="bio">יזם, מנהל רשתות, בעל ניסיון עשיר בניהול, תפעול וצמיחה עסקית. סמנכ"ל תפעול ושיווק לשעבר ברשתות קמעונאיות מובילות. מפתח מערכות בשילוב AI ופיתוח עסקי עם הבנה עמוקה לצרכי הלקוח והארגון. מרצה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.</p><div class="instructor-badges"><span class="instructor-badge">טכניון</span><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">AI Ops</span></div></div></div>
 </div></div></div></section>
 
 <div class="section-divider"></div>
