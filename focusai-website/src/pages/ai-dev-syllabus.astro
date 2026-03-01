@@ -428,7 +428,7 @@ body {
 }
 .about-intro p { margin: 0; }
 
-.format-bar { margin-top: auto; padding: 4mm 5mm; }
+.format-bar { margin-top: auto; padding: 3mm 5mm; }
 .format-inner {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm;
   position: relative; z-index: 2;
@@ -441,23 +441,23 @@ body {
 .fmt-item .label { font-size: 12pt; color: var(--text-dim); display: block; margin-top: 1mm; }
 
 /* ---- Instructors mini-section ---- */
-.instructors { margin-top: 4mm; }
+.instructors { margin-top: 3mm; }
 .instructors-title {
   font-size: 12pt; font-weight: 700; color: #fff;
   margin-bottom: 3mm; text-align: center;
 }
 .instructors-row {
-  display: flex; justify-content: center; gap: 6mm; align-items: flex-start;
+  display: flex; justify-content: center; gap: 10mm; align-items: flex-start;
 }
 .instructor {
   display: flex; flex-direction: column; align-items: center; gap: 1.5mm;
-  position: relative;
+  width: 42mm;
 }
 .instructor-img {
-  width: 18mm; height: 18mm; border-radius: 50%;
-  object-fit: cover; object-position: center top;
-  border: 1.5px solid rgba(168,85,247,0.3);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  width: 20mm; height: 20mm; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(168,85,247,0.35);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 3px rgba(168,85,247,0.08);
 }
 .instructor-name {
   font-size: 12pt; font-weight: 600; color: #fff; text-align: center;
@@ -467,7 +467,8 @@ body {
 }
 .guest-badge {
   font-size: 12pt; color: var(--purple-light);
-  opacity: 0.5; text-align: center; margin-top: 0.5mm;
+  opacity: 0.45; text-align: center; margin-top: 0.5mm;
+  font-style: italic;
 }
 
 /* =============================================
@@ -1066,17 +1067,17 @@ body {
       <h3 class="instructors-title">מרצי התכנית</h3>
       <div class="instructors-row">
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_300,c_thumb,g_face,z_1.3/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img">
           <span class="instructor-name">שחר דדיה</span>
           <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
         </div>
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_300,c_thumb,g_face,z_1.3/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img">
           <span class="instructor-name">אוניל סחר</span>
           <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
         </div>
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_300,c_thumb,g_face,z_1.3/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img">
           <span class="instructor-name">אסף עמירה</span>
           <span class="instructor-role">מייסד ומנכ"ל<br>FixDigital CRM</span>
           <span class="guest-badge">מרצה אורח</span>
