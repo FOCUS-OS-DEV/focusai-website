@@ -620,21 +620,21 @@ body {
   color: #fff; letter-spacing: 0.04em;
 }
 .closing-row {
-  display: flex; justify-content: center; align-items: center; gap: 3mm;
+  display: flex; justify-content: center; align-items: center; gap: 5mm;
+  flex-wrap: wrap;
 }
 .closing-row:nth-child(3) {
-  transform: translateX(18mm);
+  transform: translateX(12mm);
 }
-.closing-logo-card {
+.closing-logo-item {
   display: flex; align-items: center; justify-content: center;
-  width: 34mm; height: 22mm;
-  background: rgba(255,255,255,0.75); border-radius: 3.5mm;
-  padding: 1.5mm 2mm;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  width: 28mm; height: 18mm;
 }
-.closing-logo-card img {
-  width: auto; max-width: 130%; max-height: 130%;
-  object-fit: contain; opacity: 0.9;
+.closing-logo-item img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  opacity: 0.85;
+  filter: brightness(1.1) drop-shadow(0 0 6px rgba(168,85,247,0.12));
 }
 
 .closing-url {
@@ -820,8 +820,8 @@ body {
   .closing-clients-title { font-size: 16px; }
   .closing-row { flex-wrap: wrap; gap: 10px; }
   .closing-row:nth-child(3) { transform: none; }
-  .closing-logo-card { width: 100px; height: 60px; border-radius: 12px; padding: 8px 10px; }
-  .closing-logo-card img { opacity: 0.9; }
+  .closing-logo-item { width: 80px; height: 50px; }
+  .closing-logo-item img { opacity: 0.8; }
   .closing-url { font-size: 16px; }
 }
 
@@ -1428,23 +1428,23 @@ body {
       <span class="closing-clients-title">כבר חלק מהמשפחה שלנו</span>
       <!-- Row 1 -->
       <div class="closing-row">
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239338/41_nufstk.png" alt="אוניברסיטת חיפה"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239319/24_fcxmpa.png" alt="הטכניון"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239322/28_wg1jv8.png" alt="ניו מארק"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239335/40_xskhce.png" alt="דיקיפר"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239334/38_ornkqc.png" alt="ג'ונגל סיטי"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239327/35_gopg6v.png" alt="בי בי בייבי"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239326/34_hfdzkq.png" alt="דרכא"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982317/workshop-clients/client-29.png" alt="אוניברסיטת חיפה"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982356/workshop-clients/client-123546321.png" alt="הטכניון"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982344/workshop-clients/client-28.png" alt="ניומארק"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239335/40_xskhce.png" alt="דיקיפר"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239334/38_ornkqc.png" alt="ג'ונגל סיטי"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374432/%D7%94%D7%95%D7%A8%D7%93%D7%94__5_-removebg-preview_ohgatj.png" alt="BB Baby"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981996/workshop-clients/client-34.png" alt="דרכא"></div>
       </div>
       <!-- Row 2 — offset -->
       <div class="closing-row">
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239324/31_brygr5.png" alt="היסוד הבסיסי"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239320/26_opmxu4.png" alt="Kimama"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239331/37_xm34qd.png" alt="אגודת הסטודנטים"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239325/32_fy3shq.png" alt="ויצו הדסים"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239329/36_ddwaud.png" alt="דיקנאט הסטודנטים"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239334/39_oc5dfg.png" alt="לקוח"></div>
-        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239320/25_nxubzg.png" alt="לקוח"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982350/workshop-clients/client-25.png" alt="סאקסס קולג'"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982353/workshop-clients/client-635434.png" alt="רשגד"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982263/workshop-clients/client-36.png" alt="דיקנאט הסטודנטים"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981977/workshop-clients/client-32.png" alt="ויצו הדסים"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982106/workshop-clients/client-37.png" alt="אגודת הסטודנטים"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374335/Logo-iJump_k7ahkw.png" alt="iJump"></div>
+        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982387/workshop-clients/client-31.png" alt="היסוד הבסיסי"></div>
       </div>
     </div>
 
