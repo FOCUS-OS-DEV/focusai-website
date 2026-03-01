@@ -511,19 +511,19 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 /* Journey mobile */
 .journey-intro{grid-template-columns:1fr;gap:20px;text-align:center}.journey-intro-img{max-width:240px}
 .ide-window{height:300px}.ide-gutter{width:32px}.ide-line-num{font-size:10px}.ide-line{font-size:11px}.ide-tab{padding:6px 10px;font-size:10px}.ide-titlebar{padding:6px 12px}.ide-content{padding:10px 12px}.ide-statusbar{padding:3px 10px}.journey-stage h3{font-size:28px}.journey-stage p{font-size:16px}
-.journey-mobile-cards{display:flex;flex-direction:column;gap:32px}
-.jm-card{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
-.jm-card-text{padding:28px 20px 20px}
+.journey-mobile-cards .container{display:flex;flex-direction:column;gap:20px}
+.jm-card{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.jm-card-text{padding:28px 24px 20px}
 .jm-card-text .eyebrow{margin-bottom:8px}
 .jm-card-text h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:10px}
-.jm-card-text p{color:rgba(224,224,232,.55);font-size:15px;line-height:1.7}
+.jm-card-text p{color:rgba(224,224,232,.6);font-size:15px;line-height:1.7}
 .jm-card-ide{height:220px;border-top:1px solid rgba(255,255,255,.06)}
 /* Human Learning mobile */
 .hl-grid{grid-template-columns:1fr;gap:32px}.hl-text{order:1;text-align:center}.hl-collage{order:2}.hl-features{max-width:400px;margin:0 auto 40px}
 .hl-text>p{font-size:16px}.hl-text h2{font-size:clamp(26px,6vw,40px)}
 /* Journey mobile — CSS fallback: hide desktop pin, show mobile cards */
 .journey-pin{display:none!important}.journey-intro{display:none!important}
-#journeyMobile{display:flex!important;flex-direction:column;gap:24px}
+#journeyMobile{display:flex!important;flex-direction:column;gap:32px}
 .jm-card-text h3{font-size:20px}.jm-card-text p{font-size:14px}.jm-card-ide{height:200px}
 /* Syllabus mobile improvements */
 .syl-ide{border-radius:10px;overflow:hidden}.syl-sidebar{-webkit-overflow-scrolling:touch}.syl-prompt{font-size:12px;padding:8px 14px}.syl-heading{font-size:clamp(24px,6vw,36px)}
@@ -818,14 +818,9 @@ const &#123; data &#125; = await supabase
 <!-- JOURNEY — Live IDE -->
 <section class="section journey-section" id="journey"><div class="container">
 <div class="sec-label">// YOUR JOURNEY</div>
-<div class="journey-intro">
-<div class="journey-intro-text">
-<h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2">AI לא מחליף ידע.<br/>הוא מעצים אותו.</h2>
-<p style="color:rgba(224,224,232,.5);font-size:17px;line-height:1.8">לכן אנחנו מלמדים יסודות: ארכיטקטורה, לוגיקה, מבנה קוד, וחשיבה כמו מפתח. ככל שתבין יותר, ככה Claude Code יבנה טוב יותר. <strong style="color:#fff">בלי רקע קודם.</strong></p>
-</div>
-<div class="journey-intro-img">
-<img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1772283789/freepik__-br-your-journeyai-claude-code-brbr-br-br-br__31993_tcnf75.png" alt="AI Builder — מסע הלמידה עם Claude Code" loading="lazy" width="600" height="600" style="width:100%;display:block"/>
-</div>
+<div style="text-align:center;margin-bottom:48px">
+<h2 class="section-title">AI לא מחליף ידע. הוא מעצים אותו.</h2>
+<p style="color:rgba(224,224,232,.6);font-size:clamp(16px,2vw,19px);line-height:1.8;max-width:640px;margin:0 auto;font-weight:500">ככל שתבין יותר, ככה Claude Code יבנה טוב יותר. לכן מלמדים ארכיטקטורה, לוגיקה, מבנה קוד, וחשיבה כמו מפתח. <strong style="color:#fff">בלי צורך ברקע קודם.</strong></p>
 </div>
 
 <!-- DESKTOP: Sticky pinned with IDE -->
@@ -946,7 +941,6 @@ const &#123; data &#125; = await supabase
 <!-- MOBILE: Stacked journey cards (hidden on desktop, shown on mobile via JS) -->
 <div class="journey-mobile-cards" id="journeyMobile" style="display:none">
 <div class="container">
-<div style="margin-bottom:32px"><div class="eyebrow">// YOUR JOURNEY</div><p style="color:rgba(224,224,232,.5);font-size:15px;line-height:1.8;margin-top:12px">AI כותב את הקוד. אתה צריך לדעת מה לבקש. לכן מלמדים יסודות. <strong style="color:#fff">בלי רקע קודם.</strong></p></div>
 
 <div class="jm-card" data-jm="0">
 <div class="jm-card-text"><div class="eyebrow">// STEP 01</div><h3>אתה לומד את היסודות</h3><p>ארכיטקטורה, מבני נתונים, לוגיקה עסקית, ו-prompt engineering מתקדם. כי מי שיודע מה לבקש — מקבל תוצאות פי 10.</p></div>
