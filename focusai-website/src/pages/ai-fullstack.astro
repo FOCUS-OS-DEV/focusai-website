@@ -232,15 +232,18 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .journey-section{position:relative}
 .journey-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:48px}
 .journey-intro-img{max-width:480px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid rgba(168,85,247,.15);box-shadow:0 8px 40px rgba(168,85,247,.08)}
-.journey-pin{min-height:400vh}
-.journey-viewport{height:100vh;display:flex;align-items:center;overflow:hidden}
-.journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
-.journey-stages{position:relative;min-height:200px}
-.journey-stage{opacity:0;transform:translateY(40px);transition:all .6s cubic-bezier(.22,1,.36,1);position:absolute;top:0;right:0;width:100%}
-.journey-stage.active{opacity:1;transform:translateY(0)}
+.journey-pin{position:relative}
+.journey-viewport{position:relative}
+.journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;width:100%}
+.journey-stages{display:flex;flex-direction:column;gap:0;position:relative;padding-right:40px}
+.journey-stage{padding:14vh 0;opacity:.2;transition:opacity .5s ease;position:relative}
+.journey-stage:first-child{padding-top:6vh}
+.journey-stage:last-child{padding-bottom:6vh}
+.journey-stage.active{opacity:1}
 .journey-stage h3{font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;margin-bottom:20px;line-height:1.2}
 .journey-stage p{color:rgba(224,224,232,.6);font-size:18px;line-height:1.9;max-width:480px}
-.journey-dots{position:absolute;left:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:16px;z-index:5}
+.journey-ide-sticky{position:sticky;top:14vh;align-self:start}
+.journey-dots{position:sticky;top:50vh;display:flex;flex-direction:column;gap:16px;z-index:5;width:fit-content;float:left;margin-left:-36px}
 .journey-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(168,85,247,.3);background:transparent;transition:all .4s}
 .journey-dot.active{background:#a855f7;border-color:#a855f7;box-shadow:0 0 16px rgba(168,85,247,.6)}
 /* IDE Terminal */
@@ -485,7 +488,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 body.no-gsap .clip-reveal{clip-path:none!important;opacity:1!important}
 body.no-gsap .reveal-item,body.no-gsap .avatar-pain-card,body.no-gsap .nn-node,body.no-gsap .syl-ln,body.no-gsap .decode-text .char{opacity:1!important;transform:none!important}
 body.no-gsap .statement-text .word{opacity:1!important}
-body.no-gsap .journey-stage:first-child{opacity:1!important;transform:none!important}
+body.no-gsap .journey-stage{opacity:1!important;transform:none!important}
 body.no-gsap #sylIde{opacity:1!important;transform:none!important}
 body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 @media(max-width:1024px){.hero-grid{grid-template-columns:1fr;gap:16px;text-align:center}.hero-text{padding-top:0;display:contents}.hero-text h1{min-height:auto}.hero-buttons{justify-content:center;order:10}.hero-details{justify-content:center}.hero-rotate{order:4}.retro-pc{order:5;max-width:300px;margin:10px auto}.hero-rotate{font-size:clamp(16px,2.5vw,22px)}.retro-pc{max-width:300px}.retro-monitor{transform:none!important}.retro-monitor:hover{transform:none!important}.journey-intro{grid-template-columns:1fr;gap:24px;text-align:center}.journey-intro-img{max-width:280px}.journey-grid{grid-template-columns:1fr;gap:32px}.ide-window{height:340px}.journey-dots{position:relative;flex-direction:row;justify-content:center;top:auto;transform:none;margin-bottom:24px}.bento{grid-template-columns:repeat(2,1fr)}.bento-hero{grid-column:span 2}.bento-full{grid-column:span 2}.lp-grid{gap:32px}.lp-cards{width:380px;height:270px}}
@@ -840,7 +843,8 @@ const &#123; data &#125; = await supabase
 <div class="journey-stage" data-index="3"><div class="eyebrow">// STEP 04</div><h3>Deploy לפרודקשן</h3><p>דומיין, HTTPS, database, CI/CD. הכל חי באינטרנט. לא תרגיל אקדמי, מוצר אמיתי עם משתמשים אמיתיים. לדעת בדיוק איך הכל עובד מתחת למכסה.</p></div>
 </div>
 
-<!-- IDE Window -->
+<!-- IDE Window (sticky on desktop) -->
+<div class="journey-ide-sticky">
 <div class="ide-window" id="ideWindow">
 <div class="ide-titlebar">
 <div class="ide-titlebar-right"><div class="ide-dots"><div class="ide-dot-r"></div><div class="ide-dot-y"></div><div class="ide-dot-g"></div></div></div>
@@ -942,6 +946,7 @@ const &#123; data &#125; = await supabase
 <span>UTF-8</span>
 </div>
 </div>
+</div><!-- /journey-ide-sticky -->
 
 </div></div></div></div></section>
 
@@ -1537,32 +1542,34 @@ ScrollTrigger.create({trigger:sylIde,start:'top 80%',once:true,onEnter:function(
 }
 /* Journey — IDE Terminal with typewriter */
 var jp=document.getElementById('journeyPin'),jm=document.getElementById('journeyMobile');
-var tabNames=['prompt.md','terminal','diff','deploy.sh'];
 var statusTexts=['claude@focusai ~ analyzing...','claude@focusai ~ building...','claude@focusai ~ reviewing...','claude@focusai ~ deploying...'];
 if(jp&&!isMobile){
-/* Desktop: sticky pin + IDE sync */
+/* Desktop: CSS sticky IDE + per-stage scroll triggers */
 var jsec=document.getElementById('journey');if(jsec)jsec.style.display='block';if(jm)jm.style.display='none';
 var st=document.querySelectorAll('#journeyStages .journey-stage'),
     sc=document.querySelectorAll('#ideWindow .ide-screen'),
     dt=document.querySelectorAll('.journey-dot'),
     tabs=document.querySelectorAll('#ideTabs .ide-tab'),
     statusEl=document.getElementById('ideStatus'),
-    prevIdx=-1;
-ScrollTrigger.create({trigger:jp,start:'top top',end:'bottom bottom',pin:'.journey-viewport',scrub:1,
-onUpdate:function(self){
-var tl2=st.length,ai=Math.min(Math.floor(self.progress*tl2),tl2-1);
-if(ai===prevIdx)return;prevIdx=ai;
-st.forEach(function(s,i){s.classList.toggle('active',i===ai)});
-sc.forEach(function(s,i){s.classList.toggle('active',i===ai)});
-dt.forEach(function(d,i){d.classList.toggle('active',i===ai)});
-tabs.forEach(function(t,i){t.classList.toggle('active',i===ai)});
-if(statusEl)statusEl.textContent=statusTexts[ai]||'claude@focusai ~';
-/* Progress bar for build & deploy screens */
+    prevIdx=0;
+/* Activate first stage immediately */
+st[0]&&st[0].classList.add('active');
+/* Each stage triggers when it reaches center of viewport */
+st.forEach(function(stage,i){
+ScrollTrigger.create({trigger:stage,start:'top 60%',end:'bottom 40%',
+onToggle:function(self){
+if(!self.isActive)return;
+if(i===prevIdx)return;prevIdx=i;
+st.forEach(function(s,j){s.classList.toggle('active',j===i)});
+sc.forEach(function(s,j){s.classList.toggle('active',j===i)});
+dt.forEach(function(d,j){d.classList.toggle('active',j===i)});
+tabs.forEach(function(t,j){t.classList.toggle('active',j===i)});
+if(statusEl)statusEl.textContent=statusTexts[i]||'claude@focusai ~';
 var pb1=document.getElementById('ideProgress1'),pb3=document.getElementById('ideProgress3');
-if(pb1)pb1.style.width=(ai>=1?'100%':'0%');
-if(pb3)pb3.style.width=(ai>=3?'100%':'0%');
+if(pb1)pb1.style.width=(i>=1?'100%':'0%');
+if(pb3)pb3.style.width=(i>=3?'100%':'0%');
 /* Typewriter effect on screen lines */
-var activeScreen=sc[ai];if(activeScreen&&!activeScreen.dataset.typed){
+var activeScreen=sc[i];if(activeScreen&&!activeScreen.dataset.typed){
 activeScreen.dataset.typed='1';
 var lines=activeScreen.querySelectorAll('.ide-line');
 lines.forEach(function(line,li){
@@ -1571,9 +1578,9 @@ setTimeout(function(){
 line.style.transition='opacity .3s ease, transform .3s ease';
 line.style.opacity='1';line.style.transform='translateY(0)';
 },li*80);
-});
-}
+});}
 }});
+});
 }else{
 /* Mobile: hide desktop pin+intro, show mobile cards */
 if(jp)jp.style.display='none';var jIntro=document.querySelector('.journey-intro');if(jIntro)jIntro.style.display='none';if(jm){jm.style.display='block';
