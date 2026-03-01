@@ -615,7 +615,140 @@ body {
   .lyr-noise { opacity: 0.015; }
 }
 
-@media screen and (max-width: 220mm) {
+/* =============================================
+   MOBILE RESPONSIVE (<768px)
+   Break out of A4 — flowing sections
+   ============================================= */
+@media screen and (max-width: 768px) {
+  /* Viewer & Pages — full-width flowing sections */
+  .viewer { padding: 0; gap: 0; }
+  .page {
+    width: 100%; height: auto; min-height: auto;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(168,85,247,0.08);
+  }
+  .page-inner { padding: 28px 20px; height: auto; }
+
+  /* Toolbar */
+  .toolbar { padding: 10px 16px; }
+  .toolbar-btn { font-size: 12px; padding: 6px 14px; }
+
+  /* Decorative — simplify for mobile */
+  .corners { display: none; }
+  .blob { opacity: 0.5; }
+  .lyr-grid { opacity: 0.3; }
+  .page-num { position: static; transform: none; text-align: center; padding-top: 16px; font-size: 12px; }
+
+  /* ---- COVER ---- */
+  .cover .page-inner {
+    padding: 24px 20px 32px;
+    justify-content: flex-start; gap: 20px;
+  }
+  .cover-top {
+    flex-direction: column-reverse; align-items: center; gap: 12px;
+  }
+  .cover-logo { width: 45vw; max-width: 200px; }
+  .cover-uni-logo { height: 15vw; max-height: 70px; }
+  .cover-fingerprint { display: none; }
+  .cover-character {
+    position: relative; bottom: auto; left: auto; transform: none;
+    width: 70vw; height: 50vw; max-width: 300px; max-height: 220px;
+    margin: 0 auto; opacity: 0.25;
+  }
+  .cover-center { gap: 12px; }
+  .cover-pre { font-size: 11px; letter-spacing: 0.2em; margin-bottom: 0; }
+  .cover-title { font-size: clamp(36px, 12vw, 64px); }
+  .cover-line { width: 50vw; margin: 8px auto; }
+  .cover-subtitle { font-size: clamp(18px, 5vw, 24px); margin-bottom: 0; }
+  .cover-academic-sub { font-size: 16px; margin-top: 4px; }
+  .cover-desc { font-size: 16px; max-width: 100%; }
+  .cover-info { margin-top: 16px; }
+  .cover-info-title { font-size: 18px; }
+  .cover-info-details { font-size: 16px; }
+  .cover-bottom { margin-top: 16px; }
+  .cover-contact { font-size: 16px; gap: 16px; }
+  .cover-contact .sep { height: 16px; }
+
+  /* Neural network circles — responsive wrap */
+  .nn-tech { margin-top: 12px; }
+  .nn-mesh { display: none; }
+  .nn-row { flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .nn-row + .nn-row { margin-top: 8px; }
+  .nn-row-sm { gap: 8px; }
+  .nn-circle { width: 48px; height: 48px; padding: 8px; }
+  .nn-circle.nn-lg { width: 56px; height: 56px; padding: 10px; }
+  .nn-circle.nn-xl { width: 64px; height: 64px; padding: 12px; }
+  .nn-lbl { font-size: 10px; }
+  .nn-title { font-size: 16px; margin-top: 12px; margin-bottom: 8px; }
+
+  /* ---- ABOUT (page 2) ---- */
+  .about-grid { grid-template-columns: 1fr; gap: 16px; }
+  .about-card { padding: 16px; }
+  .about-card h3 { font-size: 18px; }
+  .about-card li { font-size: 16px; }
+  .about-icon { width: 36px; height: 36px; }
+  .about-icon svg { width: 18px; height: 18px; }
+  .format-bar { padding: 16px; }
+  .format-inner { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .fmt-item .num { font-size: 28px; }
+  .fmt-item .label { font-size: 16px; }
+
+  /* ---- Page headers ---- */
+  .pg-header { margin-bottom: 16px; }
+  .pg-header .glow-line { margin-bottom: 12px; }
+  .pg-label { font-size: 12px; }
+  .pg-title { font-size: clamp(22px, 6vw, 32px); }
+
+  /* ---- MODULES (pages 3-4) ---- */
+  .mod-grid { gap: 16px; }
+  .mod-card { grid-template-columns: 1fr; padding: 16px; gap: 12px; }
+  .mod-num-col { flex-direction: row; align-items: center; gap: 12px; padding: 0; margin-bottom: 4px; }
+  .mod-ring { width: 48px; height: 48px; }
+  .mod-ring .n { font-size: 16px; }
+  .mod-hrs { font-size: 14px; }
+  .mod-body h3 { font-size: 18px; }
+  .mod-meta { font-size: 14px; margin-bottom: 8px; }
+  .mod-items { grid-template-columns: 1fr; gap: 6px; }
+  .mod-items li { font-size: 16px; padding-right: 16px; }
+  .mod-accent { display: none; }
+  .mod-total { padding: 12px 16px; }
+  .mod-total span { font-size: 16px; }
+  .mod-total strong { font-size: 20px; }
+
+  /* ---- BONUSES (page 5) ---- */
+  .bonus-grid { grid-template-columns: 1fr; gap: 16px; }
+  .bonus-card { padding: 16px; }
+  .bonus-card h4 { font-size: 18px; }
+  .bonus-card p { font-size: 16px; }
+  .bonus-tag { font-size: 14px; padding: 4px 10px; }
+  .bonus-icon { width: 36px; height: 36px; }
+  .bonus-icon svg { width: 18px; height: 18px; }
+  .bonus-banner { padding: 16px; }
+  .bonus-banner h4 { font-size: 18px; }
+  .bonus-banner p { font-size: 16px; }
+
+  /* ---- CLOSING (page 6) ---- */
+  .closing .page-inner { padding: 40px 20px; gap: 16px; }
+  .closing-logo { width: 80px; }
+  .closing-headline { font-size: clamp(24px, 7vw, 36px); }
+  .closing-sub { font-size: 16px; }
+  .closing-cta { font-size: 18px; padding: 14px 32px; border-radius: 12px; }
+  .closing-details { flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .closing-detail { font-size: 16px; }
+  .closing-detail svg { width: 14px; height: 14px; }
+  .closing-sep { width: 60vw; }
+  .closing-logos { gap: 12px; }
+  .closing-logos img { height: 28px; }
+  .closing-logos .sep { height: 20px; }
+  .closing-clients { gap: 12px; }
+  .closing-clients-title { font-size: 14px; }
+  .closing-clients-grid { gap: 10px 16px; }
+  .closing-clients-grid img { height: 24px; }
+  .closing-url { font-size: 16px; }
+}
+
+/* Tablet (769px-1024px) — scaled A4 */
+@media screen and (min-width: 769px) and (max-width: 220mm) {
   .page { width: 100vw; height: auto; aspect-ratio: 210 / 297; }
   .viewer { padding: 16px 0; gap: 20px; }
   .toolbar { padding: 10px 16px; }
