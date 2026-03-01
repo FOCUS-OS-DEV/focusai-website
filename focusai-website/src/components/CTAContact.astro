@@ -58,6 +58,8 @@ const interestOptions = [
       aria-hidden="true"
       loading="lazy"
       decoding="async"
+      width="700"
+      height="700"
       class="absolute top-1/2 right-0 w-[500px] lg:w-[700px] h-auto -translate-y-1/2 opacity-[0.15] pointer-events-none select-none"
     />
   </div>
@@ -328,13 +330,30 @@ const interestOptions = [
     });
 
     try {
-      await fetch(WEBHOOK_URL, { method: 'POST', body: params });
-      if (typeof fbq === 'function') fbq('track', 'Lead');
-      window.location.href = '/academy/thank-you';
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      let lastError;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          await fetch(WEBHOOK_URL, { method: 'POST', body: params, signal: controller.signal });
+          clearTimeout(timeout);
+          if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
+          window.location.href = '/academy/thank-you';
+          return;
+        } catch (err) {
+          lastError = err;
+          if (attempt < 2) await new Promise(r => setTimeout(r, (attempt + 1) * 1000));
+        }
+      }
+      throw lastError;
     } catch {
       if (submitBtn) submitBtn.disabled = false;
       if (btnText) btnText.textContent = originalText;
-      alert('שגיאה בשליחת הטופס. אנא נסו שנית.');
+      const errEl = form.querySelector('.form-error') || document.createElement('div');
+      errEl.className = 'form-error';
+      errEl.textContent = 'שגיאה בשליחת הטופס. אנא נסו שנית.';
+      errEl.style.cssText = 'color:#ef4444;font-size:14px;text-align:center;margin-top:12px;padding:8px;background:rgba(239,68,68,0.1);border-radius:8px';
+      if (!form.querySelector('.form-error')) form.appendChild(errEl);
     }
   });
 </script>

@@ -195,6 +195,7 @@
   vtc.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') { goTo(current + 1); e.preventDefault(); }
     else if (e.key === 'ArrowRight') { goTo(current - 1); e.preventDefault(); }
+    else if (e.key === 'Enter' || e.key === ' ') { openLightbox(current); e.preventDefault(); }
   });
 
   // === Lightbox ===

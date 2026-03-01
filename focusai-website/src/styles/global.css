@@ -121,7 +121,22 @@ html {
 @media (min-width: 1024px) {
   html {
     font-size: 118%; /* ~19px on desktop */
-    zoom: 0.85; /* Fit more content in viewport - 100% view looks like 85% browser zoom */
+    zoom: 0.85; /* Fit more content in viewport */
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    zoom: 0.9; /* Less aggressive zoom on larger screens */
+  }
+}
+
+/* Ultra-wide: constrain content width */
+@media (min-width: 1920px) {
+  main {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -1248,7 +1263,8 @@ input[type="checkbox"]:not(.sr-only) + label {
 
 /* Hero container - fits viewport with navbar consideration */
 .hero-section {
-  min-height: calc(100svh - 80px); /* Account for navbar */
+  min-height: calc(100vh - 80px); /* Fallback for older browsers */
+  min-height: calc(100dvh - 80px); /* Dynamic viewport for iOS */
   padding-top: 1rem;
   padding-bottom: 1rem;
   display: flex;
@@ -1258,7 +1274,8 @@ input[type="checkbox"]:not(.sr-only) + label {
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: calc(100svh - 64px);
+    min-height: calc(100vh - 64px);
+    min-height: calc(100dvh - 64px);
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }

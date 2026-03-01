@@ -68,7 +68,7 @@ const ogImage = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&subset=hebrew,latin&display=swap" rel="stylesheet"/>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <!-- SplitType inlined to avoid CDN failures -->
@@ -119,16 +119,15 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .nn-node{position:absolute;left:calc(var(--nx)*1%);top:calc(var(--ny)*1%);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;transition:opacity .6s ease,filter .3s}
 .nn-node.nn-visible{opacity:1}
 .nn-logo{width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:14px;position:relative;background:linear-gradient(145deg,#18182a 0%,#0c0c18 100%);border:2px solid transparent;background-clip:padding-box;transition:box-shadow .4s,transform .4s}
-.nn-logo::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(from var(--ring-angle,0deg),#a855f7,#c084fc,#e879f9,#a855f7);z-index:-1;opacity:.6;transition:opacity .4s}
+.nn-logo::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(from 0deg,#a855f7,#c084fc,#e879f9,#a855f7);z-index:-1;opacity:.6;transition:opacity .4s}
 .nn-logo::before{content:'';position:absolute;inset:4px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff 0%,#f5f5fa 60%,#e8e8f0 100%);z-index:0;box-shadow:inset 0 2px 6px rgba(0,0,0,.08)}
 .nn-logo img{position:relative;z-index:1;max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))}
 .nn-node:hover .nn-logo{box-shadow:0 0 40px rgba(168,85,247,.35),0 0 80px rgba(168,85,247,.15);transform:scale(1.12)}
 .nn-node:hover .nn-logo::after{opacity:1}
 .nn-lg .nn-logo{width:110px;height:110px;padding:18px}
-.nn-lg .nn-logo::after{opacity:.75;background:conic-gradient(from var(--ring-angle,0deg),#a855f7,#7c3aed,#c084fc,#e879f9,#a855f7)}
+.nn-lg .nn-logo::after{opacity:.75;background:conic-gradient(from 0deg,#a855f7,#7c3aed,#c084fc,#e879f9,#a855f7)}
 .nn-label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,.5);text-align:center;white-space:nowrap;letter-spacing:.05em;text-shadow:0 0 12px rgba(168,85,247,.3)}
-@property --ring-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
-@keyframes nnRingSpin{to{--ring-angle:360deg}}
+@keyframes nnRingSpin{to{transform:rotate(360deg)}}
 .nn-logo::after{animation:nnRingSpin 6s linear infinite}
 .nn-lg .nn-logo::after{animation:nnRingSpin 4s linear infinite}
 .nn-orbit-fp{display:none}

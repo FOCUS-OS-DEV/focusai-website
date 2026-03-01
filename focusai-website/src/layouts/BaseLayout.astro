@@ -110,13 +110,10 @@ const websiteSchema = {
   <link rel="icon" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
 
-  <!-- Fonts - Cyberpunk Theme (Optimized Loading) -->
+  <!-- Fonts - Optimized Loading (Hebrew subset, critical weights only) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Critical font: Rubik (body text) - loaded immediately -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap">
-  <!-- Removed JetBrains Mono + Orbitron - site uses Rubik only -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&subset=hebrew,latin&display=swap">
 
   <!-- Cloudinary CDN - Preconnect for faster asset loading -->
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -179,45 +176,50 @@ const websiteSchema = {
     const isMobile = window.innerWidth < 768;
 
     async function initSmoothScrollAndAnimations() {
-      const [{ default: Lenis }, { gsap }, { ScrollTrigger }, { initScrollAnimations }] = await Promise.all([
-        import('lenis'),
-        import('gsap'),
-        import('gsap/ScrollTrigger'),
-        import('../scripts/scroll-animations'),
-      ]);
+      try {
+        const [{ default: Lenis }, { gsap }, { ScrollTrigger }, { initScrollAnimations }] = await Promise.all([
+          import('lenis'),
+          import('gsap'),
+          import('gsap/ScrollTrigger'),
+          import('../scripts/scroll-animations'),
+        ]);
 
-      gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger);
 
-      // Initialize Lenis smooth scrolling - faster on mobile
-      const lenis = new Lenis({
-        duration: isMobile ? 0.6 : 1.0,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 2,
-      });
+        // Initialize Lenis smooth scrolling - faster on mobile
+        const lenis = new Lenis({
+          duration: isMobile ? 0.6 : 1.0,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 2,
+        });
 
-      // Connect Lenis to GSAP ScrollTrigger
-      lenis.on('scroll', ScrollTrigger.update);
+        // Connect Lenis to GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
 
-      gsap.ticker.add((time: number) => {
-        lenis.raf(time * 1000);
-      });
+        gsap.ticker.add((time: number) => {
+          lenis.raf(time * 1000);
+        });
 
-      gsap.ticker.lagSmoothing(0);
+        gsap.ticker.lagSmoothing(0);
 
-      // Make lenis available globally for other scripts
-      (window as any).lenis = lenis;
+        // Make lenis available globally for other scripts
+        (window as any).lenis = lenis;
 
-      // Initialize scroll animations
-      initScrollAnimations();
+        // Initialize scroll animations
+        initScrollAnimations();
+      } catch (e) {
+        // If modules fail to load, page still works with native scroll
+        console.warn('Smooth scroll init failed:', e);
+      }
     }
 
     function startInit() {
       if (isMobile && 'requestIdleCallback' in window) {
-        requestIdleCallback(() => initSmoothScrollAndAnimations(), { timeout: 200 });
+        requestIdleCallback(() => initSmoothScrollAndAnimations(), { timeout: 1000 });
       } else {
         initSmoothScrollAndAnimations();
       }
@@ -235,8 +237,8 @@ const websiteSchema = {
   <!-- Global form validation -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function() {
-      // Israeli phone regex: starts with 0, 9-10 digits, allows dashes
-      var phoneRegex = /^0[2-9]\d?-?\d{3}-?\d{4}$/;
+      // Israeli phone regex: starts with 0 or +972, 9-10 digits, allows dashes
+      var phoneRegex = /^(?:0[2-9]\d?-?\d{3}-?\d{4}|\+972-?[2-9]\d?-?\d{3}-?\d{4})$/;
       var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       document.querySelectorAll('form').forEach(function(form) {
