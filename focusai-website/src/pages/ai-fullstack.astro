@@ -1497,22 +1497,28 @@ if(!isMobile)document.querySelectorAll('.instructor-cinema img').forEach(functio
 var canvas=document.getElementById('nnCanvas'),wrap=document.getElementById('nnWrap'),grid=document.getElementById('nnGrid');
 if(!canvas||!wrap||!grid)return;
 var ctx=canvas.getContext('2d'),dpr=window.devicePixelRatio||1;
-var cw,ch,nodePos=[],conns=[],pulses=[],time=0,running=false,posCount=0,nnVisible=true;
+var cw,ch,nodePos=[],conns=[],pulses=[],time=0,running=false,posCount=0,nnVisible=true,orbitMode=false,orbits=[],orbitCx=0,orbitCy=0,orbitStart=0;
 new IntersectionObserver(function(e){nnVisible=e[0].isIntersecting;if(nnVisible&&running)frame()},{threshold:0}).observe(wrap);
 var MAXD=isMobile?240:500;
 function resize(){
 var r=wrap.getBoundingClientRect();cw=r.width;ch=r.height;
 canvas.width=cw*dpr;canvas.height=ch*dpr;
 ctx.setTransform(dpr,0,0,dpr,0,0);
+if(orbitMode){var gr=grid.getBoundingClientRect();var wr=wrap.getBoundingClientRect();orbitCx=gr.left+gr.width/2-wr.left;orbitCy=gr.top+gr.height/2-wr.top}
 getPos();
 }
 function getPos(){
 nodePos=[];conns=[];
+if(orbitMode){
+var t=(performance.now()/1000)-orbitStart;
+for(var i=0;i<orbits.length;i++){var o=orbits[i];var angle=(t-o.delay)/o.period*6.2832;if(o.rev)angle=-angle;nodePos.push({x:orbitCx+o.r*Math.cos(angle),y:orbitCy+o.r*Math.sin(angle),rad:28})}
+}else{
 var wr=wrap.getBoundingClientRect();
 grid.querySelectorAll('.nn-node .nn-logo').forEach(function(logo){
 var r=logo.getBoundingClientRect();
 nodePos.push({x:r.left+r.width/2-wr.left,y:r.top+r.height/2-wr.top,rad:r.width/2});
 });
+}
 for(var i=0;i<nodePos.length;i++){
 for(var j=i+1;j<nodePos.length;j++){
 var dx=nodePos[i].x-nodePos[j].x,dy=nodePos[i].y-nodePos[j].y,d=Math.sqrt(dx*dx+dy*dy);
@@ -1522,7 +1528,7 @@ if(d<MAXD)conns.push({a:i,b:j,d:d});
 function frame(){
 if(!running||!nnVisible)return;
 posCount++;
-if(posCount%10===0)getPos();
+if(orbitMode||posCount%10===0)getPos();
 ctx.clearRect(0,0,cw,ch);
 time+=.016;
 /* Draw lines center-to-center */
@@ -1554,7 +1560,7 @@ requestAnimationFrame(frame);
 }
 resize();
 window.addEventListener('resize',function(){resize()});
-/* Mobile: orbital layout */
+/* Mobile: orbital layout with math-synced canvas */
 if(isMobile){
 var nodes=grid.querySelectorAll('.nn-node');
 var outerR=Math.min((grid.offsetWidth/2)-36,145);
@@ -1564,12 +1570,17 @@ nodes.forEach(function(n,i){
 var isOuter=i<12,idx=isOuter?i:i-12,total=isOuter?12:10;
 var period=isOuter?50:38,r=isOuter?outerR:innerR;
 var delay=-(period/total)*idx;
+var rev=!isOuter;
+orbits.push({period:period,delay:delay,r:r,rev:rev});
 n.style.setProperty('--orb-t',period+'s');
 n.style.setProperty('--orb-d',delay+'s');
 n.style.setProperty('--orb-r',r+'px');
-if(!isOuter)n.classList.add('nn-orbit-rev');
+if(rev)n.classList.add('nn-orbit-rev');
 n.classList.add('nn-visible');
 });
+orbitMode=true;orbitStart=performance.now()/1000;
+var gr=grid.getBoundingClientRect();var wr2=wrap.getBoundingClientRect();
+orbitCx=gr.left+gr.width/2-wr2.left;orbitCy=gr.top+gr.height/2-wr2.top;
 setTimeout(function(){running=true;getPos();frame()},500);
 }else{
 /* Desktop: scroll-triggered reveal */
