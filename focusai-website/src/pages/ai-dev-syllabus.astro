@@ -186,35 +186,34 @@ body {
 .cover-logo { height: 18mm; width: auto; opacity: 0.9; filter: drop-shadow(0 0 20px rgba(168,85,247,0.1)); }
 .cover-uni-logo { height: 36mm; width: auto; opacity: 0.8; }
 
-/* Fingerprint watermark on cover — right side, bleeding off edge */
+/* Fingerprint watermark on cover — left side, away from character */
 .cover-fingerprint {
   position: absolute;
-  top: 50%;
-  right: -35%;
+  top: 55%;
+  left: -40%;
   transform: translateY(-50%);
-  width: 180mm;
+  width: 170mm;
   height: auto;
-  opacity: 0.05;
+  opacity: 0.04;
   pointer-events: none;
-  z-index: 2;
+  z-index: 0;
   filter: drop-shadow(0 0 60px rgba(168,85,247,0.15));
 }
 
-/* Character mascot on cover — top area, behind title */
+/* Character mascot on cover — top-left area, behind title */
 .cover-character {
   position: absolute;
-  top: -8mm;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 180mm;
-  height: 185mm;
+  top: -5mm;
+  right: 5mm;
+  width: 160mm;
+  height: 170mm;
   object-fit: cover;
   object-position: center 15%;
-  opacity: 0.4;
+  opacity: 0.35;
   z-index: 1;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 38%, rgba(0,0,0,0.9) 25%, transparent 65%);
-  mask-image: radial-gradient(ellipse 90% 90% at 50% 38%, rgba(0,0,0,0.9) 25%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 55% 40%, rgba(0,0,0,0.85) 15%, transparent 60%);
+  mask-image: radial-gradient(ellipse 85% 85% at 55% 40%, rgba(0,0,0,0.85) 15%, transparent 60%);
 }
 
 /* ---- Neural Network Tech Logos ---- */
