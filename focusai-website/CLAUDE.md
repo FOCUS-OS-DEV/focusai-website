@@ -594,6 +594,31 @@ Full guide: `.claude/skills/copywriting/SKILL.md` — invoke with `/copywriting`
 - No Node.js on server - static files only
 - Vercel also auto-deploys but is NOT the primary target
 
+### Git Remotes & Backup
+
+| Remote | URL | Purpose |
+|--------|-----|---------|
+| `origin` | `github.com/FOCUS-OS-DEV/focusai-website.git` | Primary (cPanel pulls from here) |
+| `backup` | `github.com/FOCUS-OS-DEV/focusai-backup.git` | Mirror backup (private) |
+
+**After important pushes**, sync backup:
+```bash
+git push backup main --tags
+```
+
+### Version Tags
+
+- `v1.0-stable` — Production snapshot (2026-03-01)
+- Create new tags after major milestones: `git tag -a v1.x-description -m "message"`
+- Push tags: `git push origin --tags && git push backup --tags`
+
+### Git Safety
+
+- **Force push blocked** by local pre-push hook (`.claude/hooks/pre-push-verify.sh`)
+- **Branch protection** requires GitHub Pro for private repos (not currently enabled)
+- **No secrets in repo** — `.env` excluded via `.gitignore`
+- Repo is **public** (required for cPanel pull without token — no Terminal access on host)
+
 ### Security Headers (public/.htaccess)
 - HSTS (1 year)
 - X-Frame-Options: SAMEORIGIN
@@ -805,6 +830,20 @@ Specialized subagents for specific tasks:
 ---
 
 ## Recent Changes Log
+
+### 2026-03-01
+- **AI Builder page** (`/ai-fullstack`) — visual polish & layout:
+  - Statement section: larger character image, floating code particles (0/1, {}, <>, =>) with white/purple glow blink
+  - Insight sections: split layout (text right + image left, alternating with `.flip` class)
+  - All buttons redesigned: glassmorphic metallic Apple style (btn-primary, btn-ghost, dev-form-submit)
+  - Dev-form subtitle: bigger (clamp 16-20px), bolder, brand purple
+  - Hero scroll fade-out removed (stays visible)
+  - Hero subtitle: single-line "תעודה" text
+- **Git workflow improvements**:
+  - Backup remote (`focusai-backup`) for disaster recovery
+  - Version tag `v1.0-stable` created
+  - Pre-push hook: force-push blocked, dist/ validation
+  - CLAUDE.md updated with Git Remotes, Version Tags, Git Safety sections
 
 ### 2026-02-28
 - **AI Builder page** (`/ai-fullstack`) — extensive redesign:

@@ -294,7 +294,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .insight-grid{display:flex;align-items:center;gap:64px;max-width:1100px;margin:0 auto}
 .insight-grid.flip{flex-direction:row-reverse}
 .insight-text{flex:1;min-width:0}
-.insight-visual{flex:0 0 400px;position:relative}
+.insight-visual{flex:0 0 460px;position:relative}
 .insight-visual img{width:100%;border-radius:20px;display:block;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 88%,transparent 100%),linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-composite:destination-in;mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 88%,transparent 100%),linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);mask-composite:intersect}
 .insight-label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.7);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .insight-label::before{content:'';width:20px;height:1px;background:rgba(168,85,247,.5);display:inline-block}
@@ -755,8 +755,8 @@ const &#123; data &#125; = await supabase
 <section class="insight-section section" id="insight-security">
 <div class="container">
 <div class="sec-label">// HOW IT WORKS</div>
-<div class="insight-grid insight-stacked">
-<div class="insight-text" style="text-align:center">
+<div class="insight-grid">
+<div class="insight-text">
 <h2 class="insight-headline insight-headline-lg">ללמוד לפתח בצורה נכונה עם<br/><span class="claude-code-brand">Claude Code</span></h2>
 <p class="insight-body insight-body-lg">לפני שמדברים עם AI, לומדים לחשוב כמו מפתח. ארכיטקטורה, מבני נתונים, אוטומציות בשילוב AI, סוכני AI, לוגיקה עסקית, Prompt Engineering ועוד...<br/>כי מי שיודע מה לבקש, מקבל תוצאות טובות פי 10.</p>
 </div>
@@ -773,8 +773,8 @@ const &#123; data &#125; = await supabase
 <section class="insight-section section" id="insight-n8n">
 <div class="container">
 <div class="sec-label">// AUTOMATION & AI AGENTS</div>
-<div class="insight-grid insight-stacked">
-<div class="insight-text" style="text-align:center">
+<div class="insight-grid flip">
+<div class="insight-text">
 <h2 class="insight-headline insight-headline-lg">n8n זו לא רק פלטפורמה לאוטומציות וסוכנים<br/><span class="n8n-brand">זו שפה ויזואלית</span></h2>
 <p class="insight-body insight-body-lg">יש תהליכים שבקוד בלתי מובנים. אבל כשרואים את זרימת הנתונים ויזואלית, הכל מתחבר. n8n מאפשרת לבנות סוכני AI, לחבר אלפי שירותים חיצוניים, ולהבין ארכיטקטורה שתשפר את הקוד שתכתוב. מה שמתחיל ככלי לאוטומציה הופך לחלק מהארכיטקטורה של המוצר שתבנה.</p>
 </div>
