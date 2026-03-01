@@ -399,9 +399,9 @@ body {
 /* =============================================
    PAGE 2: ABOUT
    ============================================= */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; flex: 1; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
 
-.about-card { padding: 5mm; display: flex; flex-direction: column; }
+.about-card { padding: 3.5mm 4mm; display: flex; flex-direction: column; }
 .about-icon {
   width: 10mm; height: 10mm; border-radius: 8px;
   background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(168,85,247,0.05));
@@ -410,7 +410,7 @@ body {
 }
 .about-icon svg { width: 5mm; height: 5mm; color: var(--purple-light); }
 
-.about-card h3 { font-size: 12pt; font-weight: 700; color: #fff; margin-bottom: 2.5mm; }
+.about-card h3 { font-size: 12pt; font-weight: 700; color: #fff; margin-bottom: 1.5mm; }
 .about-card ul { list-style: none; display: flex; flex-direction: column; gap: 1.5mm; }
 .about-card li {
   font-size: 12pt; color: var(--text-mid); padding-right: 4mm;
@@ -421,6 +421,12 @@ body {
   width: 1.5mm; height: 1.5mm; border-radius: 50%;
   background: var(--purple); box-shadow: 0 0 4px var(--purple);
 }
+
+.about-intro {
+  font-size: 12pt; color: var(--text-dim); line-height: 1.7;
+  display: flex; flex-direction: column; gap: 2.5mm;
+}
+.about-intro p { margin: 0; }
 
 .format-bar { margin-top: auto; padding: 4mm 5mm; }
 .format-inner {
@@ -433,6 +439,36 @@ body {
   color: var(--purple); display: block; line-height: 1.2;
 }
 .fmt-item .label { font-size: 12pt; color: var(--text-dim); display: block; margin-top: 1mm; }
+
+/* ---- Instructors mini-section ---- */
+.instructors { margin-top: 4mm; }
+.instructors-title {
+  font-size: 12pt; font-weight: 700; color: #fff;
+  margin-bottom: 3mm; text-align: center;
+}
+.instructors-row {
+  display: flex; justify-content: center; gap: 6mm; align-items: flex-start;
+}
+.instructor {
+  display: flex; flex-direction: column; align-items: center; gap: 1.5mm;
+  position: relative;
+}
+.instructor-img {
+  width: 18mm; height: 18mm; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  border: 1.5px solid rgba(168,85,247,0.3);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.instructor-name {
+  font-size: 12pt; font-weight: 600; color: #fff; text-align: center;
+}
+.instructor-role {
+  font-size: 12pt; color: var(--text-dim); text-align: center; line-height: 1.3;
+}
+.guest-badge {
+  font-size: 12pt; color: var(--purple-light);
+  opacity: 0.5; text-align: center; margin-top: 0.5mm;
+}
 
 /* =============================================
    PAGES 3-4: MODULES
@@ -687,12 +723,20 @@ body {
   .nn-title { font-size: 16px; margin-top: 16px; margin-bottom: 8px; }
 
   /* ---- ABOUT (page 2) ---- */
+  .about-intro { font-size: 16px; gap: 16px; line-height: 1.8; }
   .about-grid { grid-template-columns: 1fr; gap: 16px; }
   .about-card { padding: 20px; }
   .about-card h3 { font-size: 20px; }
   .about-card li { font-size: 16px; }
   .about-icon { width: 40px; height: 40px; }
   .about-icon svg { width: 20px; height: 20px; }
+  .instructors { margin-top: 32px; }
+  .instructors-title { font-size: 22px; margin-bottom: 20px; }
+  .instructors-row { flex-wrap: wrap; gap: 24px; }
+  .instructor-img { width: 80px; height: 80px; }
+  .instructor-name { font-size: 17px; }
+  .instructor-role { font-size: 15px; }
+  .guest-badge { font-size: 14px; }
   .format-bar { padding: 20px; }
   .format-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .fmt-item .num { font-size: 32px; }
@@ -966,6 +1010,11 @@ body {
       <h2 class="pg-title">על התכנית</h2>
     </div>
 
+    <div class="about-intro">
+      <p>תוכנית ללימודי תעודה בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה. התוכנית פותחה על ידי Focus AI ומועברת במתכונת דומה גם בטכניון, באוניברסיטת חיפה ובמוסדות אקדמיים מובילים נוספים. התכנית שמה דגש יישומי, עסקי ופרקטי ומסמיכה בוגרים רבים כמפתחי Full-Stack עם AI, סוכני AI ואוטומציות עסקיות.</p>
+      <p>Focus AI שותפה רשמית של n8n בישראל ומלווה חברות וארגונים גדולים בתהליכי טרנספורמציה דיגיטלית באמצעות הטמעת פתרונות AI ואוטומציה מותאמים אישית. בתוכנית ההכשרה שזורים מקרי בוחן של לקוחות אמיתיים ושיטות עבודה ייחודיות, אשר מחברים את התאוריה לפרקטיקה ומעניקים למשתתפים יתרון תחרותי ייחודי. נלמד, בין היתר, איך לאסוף מידע איכותי, לשאול את השאלות הנכונות ולהציג פתרונות אפקטיביים מול מקבלי ההחלטות בארגון. כך, בוגרי התוכנית יוצאים מוכנים לתפקידים המבוקשים ביותר בשוק.</p>
+    </div>
+
     <div class="about-grid">
       <div class="about-card glass-card">
         <div class="about-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg></div>
@@ -975,7 +1024,6 @@ body {
           <li>אנשי עסקים שרוצים להבין ולהטמיע AI</li>
           <li>אנשי שיווק ומכירות שרוצים כלים חכמים</li>
           <li>מחליפי קריירה לעולם הטכנולוגיה</li>
-          <li>פרילנסרים שרוצים להרחיב שירותים</li>
         </ul>
       </div>
 
@@ -987,7 +1035,6 @@ body {
           <li>ליצור אוטומציות עסקיות חכמות ב-N8N</li>
           <li>לפתח סוכני AI וצ'אטבוטים מתקדמים</li>
           <li>לעבוד עם Claude Code כמפתח מקצועי</li>
-          <li>לפרוס ולנהל מוצרים בפרודקשן</li>
         </ul>
       </div>
 
@@ -999,7 +1046,6 @@ body {
           <li>Claude Code כותב, אתה מבין ומכוון</li>
           <li>כל שיעור משלב תרגול מעשי</li>
           <li>Vibe Coding — בונים מוצר אמיתי תוך כדי</li>
-          <li>מבינים ארכיטקטורה, לוגיקה ומבנה קוד</li>
         </ul>
       </div>
 
@@ -1009,10 +1055,32 @@ body {
         <ul>
           <li>אפס ידע בתכנות? מצוין, בדיוק בשביל זה</li>
           <li>מתחילים מהיסודות ומתקדמים בקצב</li>
-          <li>2–3 מרצים בכל מפגש</li>
-          <li>ליווי אישי לאורך כל התכנית</li>
+          <li>2–3 מרצים בכל מפגש וליווי אישי</li>
           <li>קהילת בוגרים פעילה לאחר סיום</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Instructors -->
+    <div class="instructors">
+      <h3 class="instructors-title">מרצי התכנית</h3>
+      <div class="instructors-row">
+        <div class="instructor">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img">
+          <span class="instructor-name">שחר דדיה</span>
+          <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
+        </div>
+        <div class="instructor">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img">
+          <span class="instructor-name">אוניל סחר</span>
+          <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
+        </div>
+        <div class="instructor">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_face/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img">
+          <span class="instructor-name">אסף עמירה</span>
+          <span class="instructor-role">מייסד ומנכ"ל<br>FixDigital CRM</span>
+          <span class="guest-badge">מרצה אורח</span>
+        </div>
       </div>
     </div>
 
