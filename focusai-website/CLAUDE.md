@@ -621,34 +621,54 @@ git push backup main --tags
 - **No Terminal access on cPanel** — if deploy breaks, the only fix is delete & re-clone the repo in cPanel
 - **`.gitattributes`** enforces LF line endings + marks binary files — prevents CRLF→LF dirty worktree on Linux server
 
-### Deployment Safety Rules (CRITICAL — Learned from Incident 2026-03-01)
+### Deployment Safety Rules
 
-**What happened:** A 2.87MB PDF was accidentally committed to `dist/`. On the Linux server, git converted line endings on the binary, creating a permanent dirty worktree. cPanel refused to deploy ("The system cannot deploy") because of uncommitted changes. Without Terminal access, the only fix was deleting and re-cloning the repo.
+#### Incident #1: Binary File Corruption (2026-03-01)
+**What happened:** A 2.87MB PDF was committed to `dist/`. On the Linux server, git converted line endings on the binary, creating a permanent dirty worktree. cPanel refused to deploy.
 
-**Rules to prevent this:**
+#### Incident #2: CSS Hash Mismatch — SITE DOWN (2026-03-01)
+**What happened:** Astro generates content-hashed CSS filenames (`about.HASH.css`). Over several commits, only some `dist/*.html` files were committed. The rebuild generated a NEW CSS file but it was never committed — only the old CSS remained in git. All pages referenced a CSS file that didn't exist on the server. **The entire site lost styling.**
 
-1. **NEVER commit binary files to git** (PDF, images, videos, ZIP)
+**Root cause:** Partial dist/ commits. HTML was committed with references to new CSS hash, but the actual CSS file was left as untracked.
+
+#### Rules to prevent BOTH incidents:
+
+1. **ALWAYS commit ALL of dist/ as a complete unit** — never cherry-pick individual dist files
+   - After `npm run build`, run `git add dist/` to stage EVERYTHING
+   - Astro's content-hashed filenames create invisible dependencies between HTML and CSS/JS
+   - Committing some HTML but not the new CSS = broken site
+
+2. **ALWAYS verify CSS/JS asset integrity before pushing:**
+   ```bash
+   # Check for orphaned/renamed CSS/JS files
+   git status dist/_astro/
+   # Verify no HTML references missing files
+   for f in $(grep -roh '_astro/[^"]*\.\(css\|js\)' dist/ 2>/dev/null | sort -u); do
+     [ ! -f "dist/$f" ] && echo "MISSING: dist/$f"
+   done
+   ```
+
+3. **If commit fails with "no changes added to commit"** after a hook rebuild:
+   - This is a RED FLAG — the hook rebuilt dist/ but staging failed
+   - Run `git status dist/_astro/` immediately — look for deleted/untracked CSS/JS
+   - Manually `git add dist/` and retry
+
+4. **NEVER commit binary files to git** (PDF, images, videos, ZIP)
    - PDFs → upload to Cloudinary, link via URL
    - Images → always Cloudinary CDN (`q_auto,f_auto`)
    - The `.gitignore` blocks `dist/**/*.pdf`, `dist/**/*.mp4`, `*.pdf`
-   - The pre-commit hook only stages `*.html`, `*.css`, `*.js`, `*.xml`, `*.json` from dist/
 
-2. **NEVER use `git add dist/` or `git add .`** — these stage everything blindly
-   - The pre-commit hook uses selective glob patterns instead
-   - If you need to add a specific binary, do it explicitly: `git add path/to/file`
-
-3. **Before every push, verify no large/binary files are staged:**
+5. **Before every push, verify no large/binary files are staged:**
    ```bash
    git diff --cached --stat | grep -E '\.(pdf|png|jpg|mp4|zip)'
    ```
 
-4. **If cPanel shows "The system cannot deploy":**
+6. **If cPanel shows "The system cannot deploy":**
    - Root cause is almost always a dirty working tree on the server
    - Without Terminal: delete repo in cPanel → re-clone → deploy
-   - Use a new path name if old directory still has files
    - The live site at `public_html/` is NOT affected by repo deletion
 
-5. **`package-lock.json` changes** can add 1000+ lines — only commit when dependencies actually changed, not as a side effect of other work
+7. **`package-lock.json` changes** — only commit when dependencies actually changed
 
 ### Security Headers (public/.htaccess)
 - HSTS (1 year)
@@ -662,7 +682,9 @@ git push backup main --tags
 - [ ] `npm run lint` passes (0 errors)
 - [ ] `npm run build` passes
 - [ ] No console errors in dev
-- [ ] dist/ included in commit
+- [ ] **ALL of dist/ staged** (`git add dist/`) — not just changed HTML files!
+- [ ] **CSS/JS integrity verified** — no HTML references to missing `_astro/` files
+- [ ] `git status dist/_astro/` shows no orphaned/untracked CSS/JS files
 - [ ] No sensitive files (.env, credentials)
 - [ ] No binary files accidentally staged (`git diff --cached --stat`)
 - [ ] No `package-lock.json` changes unless dependencies were intentionally modified
@@ -865,6 +887,14 @@ Specialized subagents for specific tasks:
 ## Recent Changes Log
 
 ### 2026-03-01
+- **INCIDENT: CSS Hash Mismatch — Site Styling Broken**
+  - Partial dist/ commits caused HTML to reference `about.Cf2_RjaX.css` that didn't exist in git
+  - Old CSS (`about.DQGXbAB1.css`) remained in git but no pages referenced it
+  - ALL BaseLayout pages lost styling — purple orbs/gradients filled viewport
+  - Fix: committed complete dist/ sync (30 files, CSS rename + all HTML)
+  - Prevention: updated Deployment Safety Rules + Pre-Deployment Checklist in CLAUDE.md
+  - Full report: `memory/incident-css-hash-mismatch-2026-03-01.md`
+- **AI DEV page changes**: journey section hidden on desktop (mobile only), cable revert, form webhooks, thank-you video autoplay
 - **AI Builder page** (`/ai-fullstack`) — visual polish & layout:
   - Statement section: larger character image, floating code particles (0/1, {}, <>, =>) with white/purple glow blink
   - Insight sections: split layout (text right + image left, alternating with `.flip` class)
