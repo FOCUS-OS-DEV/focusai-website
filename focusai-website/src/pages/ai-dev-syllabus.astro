@@ -184,7 +184,7 @@ body {
 
 .cover-top { display: flex; justify-content: space-between; align-items: center; }
 .cover-logo { height: 18mm; width: auto; opacity: 0.9; filter: drop-shadow(0 0 20px rgba(168,85,247,0.1)); }
-.cover-uni-logo { height: 18mm; width: auto; opacity: 0.8; }
+.cover-uni-logo { height: 36mm; width: auto; opacity: 0.8; }
 
 /* Fingerprint watermark on cover — right side, bleeding off edge */
 .cover-fingerprint {
@@ -200,21 +200,21 @@ body {
   filter: drop-shadow(0 0 60px rgba(168,85,247,0.15));
 }
 
-/* Character mascot on cover */
+/* Character mascot on cover — top area, behind title */
 .cover-character {
   position: absolute;
-  bottom: 5mm;
+  top: -5mm;
   left: 50%;
   transform: translateX(-50%);
-  width: 140mm;
-  height: 130mm;
+  width: 170mm;
+  height: 160mm;
   object-fit: cover;
-  object-position: center 15%;
-  opacity: 0.35;
-  z-index: 3;
+  object-position: center 20%;
+  opacity: 0.4;
+  z-index: 1;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 35%, rgba(0,0,0,0.8) 10%, transparent 60%);
-  mask-image: radial-gradient(ellipse 80% 75% at 50% 35%, rgba(0,0,0,0.8) 10%, transparent 60%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 40%, rgba(0,0,0,0.9) 20%, transparent 65%);
+  mask-image: radial-gradient(ellipse 90% 85% at 50% 40%, rgba(0,0,0,0.9) 20%, transparent 65%);
 }
 
 /* ---- Neural Network Tech Logos ---- */
@@ -790,12 +790,12 @@ body {
   <!-- Fingerprint watermark -->
   <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="" class="cover-fingerprint" aria-hidden="true">
   <!-- Character mascot -->
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/c_fill,g_north,w_900,h_800,q_auto,f_auto/v1772361214/freepik__a-cute-purple-furry-3d-robot-character-sitting-at-__33207_eyibvv.png" alt="" class="cover-character" aria-hidden="true">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/c_fill,g_center,w_1000,h_1000,q_auto,f_auto/v1772361214/freepik__a-cute-purple-furry-3d-robot-character-sitting-at-__33207_eyibvv.png" alt="" class="cover-character" aria-hidden="true">
 
   <div class="page-inner">
     <!-- Top: Logos (RTL: first=right, second=left → Uni right, Focus left) -->
     <div class="cover-top">
-      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_400/v1770476772/%D7%9C%D7%95%D7%92%D7%95_1_e1pxnh.png" alt="אוניברסיטת חיפה" class="cover-uni-logo">
+      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_600/v1770476772/%D7%9C%D7%95%D7%92%D7%95_1_e1pxnh.png" alt="אוניברסיטת חיפה" class="cover-uni-logo">
       <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765265415/2_fxdcio.png" alt="Focus AI" class="cover-logo">
     </div>
 
