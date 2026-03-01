@@ -614,27 +614,33 @@ body {
 .closing-logos img { height: 9mm; opacity: 0.4; }
 .closing-logos .sep { width: 1px; height: 7mm; background: rgba(255,255,255,0.06); }
 
-.closing-clients { display: flex; flex-direction: column; align-items: center; gap: 3mm; }
+.closing-clients { display: flex; flex-direction: column; align-items: center; gap: 4mm; }
 .closing-clients-title {
   font-family: 'Rubik', sans-serif; font-size: 12pt; font-weight: 600;
-  color: #fff; letter-spacing: 0.04em;
+  color: #fff; letter-spacing: 0.04em; margin-bottom: 1mm;
 }
 .closing-row {
-  display: flex; justify-content: center; align-items: center; gap: 5mm;
-  flex-wrap: wrap;
+  display: flex; justify-content: center; align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 3mm;
+  padding: 2mm 3mm;
 }
 .closing-row:nth-child(3) {
-  transform: translateX(12mm);
+  transform: translateX(10mm);
 }
 .closing-logo-item {
   display: flex; align-items: center; justify-content: center;
-  width: 28mm; height: 18mm;
+  height: 14mm; padding: 0 4mm;
+  border-left: 1px solid rgba(255,255,255,0.08);
 }
+.closing-logo-item:last-child { border-left: none; }
 .closing-logo-item img {
-  max-width: 100%; max-height: 100%;
+  max-width: 22mm; max-height: 11mm;
   object-fit: contain;
-  opacity: 0.85;
-  filter: brightness(1.1) drop-shadow(0 0 6px rgba(168,85,247,0.12));
+  opacity: 0.9;
+  filter: brightness(1.15);
 }
 
 .closing-url {
@@ -820,8 +826,10 @@ body {
   .closing-clients-title { font-size: 16px; }
   .closing-row { flex-wrap: wrap; gap: 10px; }
   .closing-row:nth-child(3) { transform: none; }
-  .closing-logo-item { width: 80px; height: 50px; }
-  .closing-logo-item img { opacity: 0.8; }
+  .closing-row { flex-wrap: wrap; padding: 12px 16px; border-radius: 12px; }
+  .closing-row:nth-child(3) { transform: none; }
+  .closing-logo-item { height: 40px; padding: 0 12px; }
+  .closing-logo-item img { max-width: 70px; max-height: 32px; opacity: 0.8; }
   .closing-url { font-size: 16px; }
 }
 
