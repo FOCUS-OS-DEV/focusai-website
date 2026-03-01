@@ -716,13 +716,16 @@ body {
   .toolbar { padding: 10px 16px; }
   .toolbar-btn { font-size: 13px; padding: 8px 16px; }
 
-  /* Decorative — simplify for mobile */
+  /* Decorative — simplify for mobile perf */
   .corners { display: none; }
   .blob { display: none; }
   .lyr-grid { opacity: 0.2; }
   .lyr-vig { display: none; }
+  .lyr-noise { display: none; }
   .page-num { display: none; }
   .page-footer { display: none; }
+  .glass-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .cover-title { text-shadow: 0 2px 0 #a1a1aa, 0 4px 6px rgba(0,0,0,0.3); }
 
   /* ---- COVER ---- */
   .cover .page-inner {
@@ -876,15 +879,15 @@ body {
   <div class="lyr-vig"></div>
   <div class="corners"><b></b></div>
   <!-- Fingerprint watermark -->
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="" class="cover-fingerprint" aria-hidden="true">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="" class="cover-fingerprint" aria-hidden="true">
   <!-- Character mascot -->
-  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/c_fill,g_north,w_1000,h_1200,q_auto,f_auto/v1772361214/freepik__a-cute-purple-furry-3d-robot-character-sitting-at-__33207_eyibvv.png" alt="" class="cover-character" aria-hidden="true">
+  <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/c_fill,g_north,w_500,h_600,q_auto,f_auto/v1772361214/freepik__a-cute-purple-furry-3d-robot-character-sitting-at-__33207_eyibvv.png" alt="" class="cover-character" aria-hidden="true">
 
   <div class="page-inner">
     <!-- Top: Logos (RTL: first=right, second=left → Uni right, Focus left) -->
     <div class="cover-top">
-      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_600/v1770476772/%D7%9C%D7%95%D7%92%D7%95_1_e1pxnh.png" alt="אוניברסיטת חיפה" class="cover-uni-logo">
-      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765265415/2_fxdcio.png" alt="Focus AI" class="cover-logo">
+      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_200/v1770476772/%D7%9C%D7%95%D7%92%D7%95_1_e1pxnh.png" alt="אוניברסיטת חיפה" class="cover-uni-logo">
+      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265415/2_fxdcio.png" alt="Focus AI" class="cover-logo">
     </div>
 
     <!-- Center: Title + Info -->
@@ -960,23 +963,23 @@ body {
         <!-- Row 1: Main platforms (large circles) -->
         <div class="nn-row">
           <div class="nn-item">
-            <div class="nn-circle nn-lg"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932830/Claude_AI_logo.svg_ytgq64.png" alt="Claude AI"></div>
+            <div class="nn-circle nn-lg"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932830/Claude_AI_logo.svg_ytgq64.png" alt="Claude AI"></div>
             <span class="nn-lbl">Claude AI</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle nn-lg"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932829/4178d5a0a14d32e3d5672090d840ac58_obowc5.jpg" alt="OpenAI"></div>
+            <div class="nn-circle nn-lg"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932829/4178d5a0a14d32e3d5672090d840ac58_obowc5.jpg" alt="OpenAI"></div>
             <span class="nn-lbl">OpenAI</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle nn-xl"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/c_fit,h_120/q_auto,f_auto/v1772097942/CjT7L3wBN8-3564_cisyto.webp" alt="Claude Code"></div>
+            <div class="nn-circle nn-xl"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/c_fit,h_120/q_auto,f_auto/v1772097942/CjT7L3wBN8-3564_cisyto.webp" alt="Claude Code"></div>
             <span class="nn-lbl">Claude Code</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle nn-lg"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770733892/39809fe7-d4d5-40a5-98a6-3b63a366d2a6_phdbq0.png" alt="n8n"></div>
+            <div class="nn-circle nn-lg"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770733892/39809fe7-d4d5-40a5-98a6-3b63a366d2a6_phdbq0.png" alt="n8n"></div>
             <span class="nn-lbl">n8n</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle nn-lg"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932830/%D7%94%D7%95%D7%A8%D7%93%D7%94_2_jza1on.png" alt="Supabase"></div>
+            <div class="nn-circle nn-lg"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932830/%D7%94%D7%95%D7%A8%D7%93%D7%94_2_jza1on.png" alt="Supabase"></div>
             <span class="nn-lbl">Supabase</span>
           </div>
         </div>
@@ -984,39 +987,39 @@ body {
         <!-- Row 2: Dev tools (smaller circles) -->
         <div class="nn-row nn-row-sm">
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311027/tech-logos/tech-logos/react.svg" alt="React"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311027/tech-logos/tech-logos/react.svg" alt="React"></div>
             <span class="nn-lbl">React</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311034/tech-logos/tech-logos/nextjs.svg" alt="Next.js"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311034/tech-logos/tech-logos/nextjs.svg" alt="Next.js"></div>
             <span class="nn-lbl">Next.js</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311044/tech-logos/tech-logos/vscode.svg" alt="VS Code"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311044/tech-logos/tech-logos/vscode.svg" alt="VS Code"></div>
             <span class="nn-lbl">VS Code</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772312337/tech-logos/tech-logos/typescript.svg" alt="TypeScript"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772312337/tech-logos/tech-logos/typescript.svg" alt="TypeScript"></div>
             <span class="nn-lbl">TypeScript</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772312430/tech-logos/tech-logos/nodejs.svg" alt="Node.js"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772312430/tech-logos/tech-logos/nodejs.svg" alt="Node.js"></div>
             <span class="nn-lbl">Node.js</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311041/tech-logos/tech-logos/tailwindcss.svg" alt="Tailwind"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772311041/tech-logos/tech-logos/tailwindcss.svg" alt="Tailwind"></div>
             <span class="nn-lbl">Tailwind</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1772096447/1dff1029-7d2b-4388-ad1d-ab3a559e0853_votjzi.png" alt="Vercel"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1772096447/1dff1029-7d2b-4388-ad1d-ab3a559e0853_votjzi.png" alt="Vercel"></div>
             <span class="nn-lbl">Vercel</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772312254/tech-logos/tech-logos/git.svg" alt="Git"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1772312254/tech-logos/tech-logos/git.svg" alt="Git"></div>
             <span class="nn-lbl">Git</span>
           </div>
           <div class="nn-item">
-            <div class="nn-circle"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932830/google_cloud_logo_icon_170066_fwf7x8.webp" alt="Google Cloud"></div>
+            <div class="nn-circle"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_trim:20/c_fit,h_120/q_auto,f_auto/v1770932830/google_cloud_logo_icon_170066_fwf7x8.webp" alt="Google Cloud"></div>
             <span class="nn-lbl">GCP</span>
           </div>
         </div>
@@ -1111,17 +1114,17 @@ body {
       <h3 class="instructors-title">מרצי התכנית</h3>
       <div class="instructors-row">
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_560,c_thumb,g_face,z_0.45/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_280,c_thumb,g_face,z_0.45/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img" loading="lazy">
           <span class="instructor-name">שחר דדיה</span>
           <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
         </div>
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_560,c_thumb,g_face,z_0.45/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_280,c_thumb,g_face,z_0.45/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img" loading="lazy">
           <span class="instructor-name">אוניל סחר</span>
           <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
         </div>
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400,h_560,c_thumb,g_face,z_0.45/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_280,c_thumb,g_face,z_0.45/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img" loading="lazy">
           <span class="instructor-name">אסף עמירה</span>
           <span class="instructor-role">מייסד ומנכ"ל<br>FixDigital CRM</span>
           <span class="guest-badge">מרצה אורח</span>
@@ -1410,7 +1413,7 @@ body {
   <div class="corners"><b></b></div>
 
   <div class="page-inner">
-    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="closing-logo">
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765571815/FOCUS_LOGO-06_2_grkja9.png" alt="Focus AI" class="closing-logo">
 
     <h2 class="closing-headline">זה המקום שלך<br>להשאיר חותם <span class="gradient">אמיתי.</span></h2>
 
@@ -1441,20 +1444,20 @@ body {
     <div class="closing-clients">
       <span class="closing-clients-title">כבר חלק מהמשפחה שלנו</span>
       <div class="closing-grid">
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982317/workshop-clients/client-29.png" alt="אוניברסיטת חיפה"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982356/workshop-clients/client-123546321.png" alt="הטכניון"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982344/workshop-clients/client-28.png" alt="ניומארק"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239335/40_xskhce.png" alt="דיקיפר"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239334/38_ornkqc.png" alt="ג'ונגל סיטי"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374432/%D7%94%D7%95%D7%A8%D7%93%D7%94__5_-removebg-preview_ohgatj.png" alt="BB Baby"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981996/workshop-clients/client-34.png" alt="דרכא"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982350/workshop-clients/client-25.png" alt="סאקסס קולג'"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374282/%D7%94%D7%95%D7%A8%D7%93%D7%94__2_-removebg-preview_tziibd.png" alt="רשגד"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982263/workshop-clients/client-36.png" alt="דיקנאט הסטודנטים"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981977/workshop-clients/client-32.png" alt="ויצו הדסים"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982106/workshop-clients/client-37.png" alt="אגודת הסטודנטים"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1764239334/38_ornkqc.png" alt="iJump"></div>
-        <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982387/workshop-clients/client-31.png" alt="היסוד הבסיסי"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982317/workshop-clients/client-29.png" alt="אוניברסיטת חיפה"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982356/workshop-clients/client-123546321.png" alt="הטכניון"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982344/workshop-clients/client-28.png" alt="ניומארק"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_150/f_auto/q_auto/v1764239335/40_xskhce.png" alt="דיקיפר"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_150/f_auto/q_auto/v1764239334/38_ornkqc.png" alt="ג'ונגל סיטי"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374432/%D7%94%D7%95%D7%A8%D7%93%D7%94__5_-removebg-preview_ohgatj.png" alt="BB Baby"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981996/workshop-clients/client-34.png" alt="דרכא"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982350/workshop-clients/client-25.png" alt="סאקסס קולג'"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374282/%D7%94%D7%95%D7%A8%D7%93%D7%94__2_-removebg-preview_tziibd.png" alt="רשגד"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982263/workshop-clients/client-36.png" alt="דיקנאט הסטודנטים"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981977/workshop-clients/client-32.png" alt="ויצו הדסים"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982106/workshop-clients/client-37.png" alt="אגודת הסטודנטים"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_400/v1764239334/38_ornkqc.png" alt="iJump"></div>
+        <div class="closing-logo-item"><img loading="lazy" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982387/workshop-clients/client-31.png" alt="היסוד הבסיסי"></div>
       </div>
     </div>
 
