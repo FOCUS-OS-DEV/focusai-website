@@ -687,11 +687,12 @@ body::after {
   min-height: 48px;
   padding: 1rem 1.25rem 1rem 2.5rem;
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid rgba(168, 85, 247, 0.15);
   color: var(--color-neon-green);
   font-family: var(--font-family-mono);
   font-size: 0.875rem;
   transition: all var(--transition-base);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .input-cyber::placeholder {
@@ -701,8 +702,9 @@ body::after {
 
 .input-cyber:focus {
   outline: none;
-  border-color: var(--color-neon-green);
-  box-shadow: var(--glow-green-sm), 0 0 0 2px rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15), 0 0 40px rgba(168, 85, 247, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Input with terminal prefix */
