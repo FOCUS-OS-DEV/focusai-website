@@ -12,7 +12,7 @@ import BackToTop from '../components/BackToTop.astro';
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "Focus AI Dev — תכנית הכשרה לבניית מוצרים דיגיטליים עם AI",
+  "name": "Focus AI Dev תכנית הכשרה לבניית מוצרים דיגיטליים עם AI",
   "description": "120 שעות, 22 מודולים. מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. בליווי אקדמי של אוניברסיטת חיפה.",
   "url": "https://focusai.co.il/ai-fullstack",
   "provider": { "@type": "Organization", "name": "Focus AI", "url": "https://focusai.co.il" },
@@ -34,8 +34,8 @@ const structuredData = {
   "about": ["Claude Code", "VS Code", "פיתוח Full-Stack", "AI", "הסבת קריירה", "פרויקט גמר"]
 };
 
-const pageTitle = "Focus AI Dev | מאפס לפרודקשן — תכנית הכשרה לבניית מוצרים דיגיטליים עם AI";
-const pageDescription = "Focus AI Dev — 120 שעות, 22 מודולים, מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. בליווי אקדמי של אוניברסיטת חיפה.";
+const pageTitle = "Focus AI Dev | מאפס לפרודקשן | תכנית הכשרה לבניית מוצרים דיגיטליים עם AI";
+const pageDescription = "Focus AI Dev. 120 שעות, 22 מודולים, מאפס לפרודקשן עם Claude Code ו-VS Code. ללא צורך ברקע בתכנות. בליווי אקדמי של אוניברסיטת חיפה.";
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
 const ogImage = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png";
 ---
@@ -124,7 +124,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .nn-node:hover .nn-logo::after{opacity:1}
 .nn-lg .nn-logo{width:110px;height:110px;padding:18px}
 .nn-lg .nn-logo::after{opacity:.75;background:conic-gradient(from var(--ring-angle,0deg),#a855f7,#7c3aed,#c084fc,#e879f9,#a855f7)}
-.nn-label{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);text-align:center;white-space:nowrap;letter-spacing:.05em;text-shadow:0 0 12px rgba(168,85,247,.3)}
+.nn-label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,.5);text-align:center;white-space:nowrap;letter-spacing:.05em;text-shadow:0 0 12px rgba(168,85,247,.3)}
 @property --ring-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 @keyframes nnRingSpin{to{--ring-angle:360deg}}
 .nn-logo::after{animation:nnRingSpin 6s linear infinite}
@@ -152,7 +152,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .cursor-glow{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.07),transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;will-change:transform}@media(hover:hover){.cursor-glow{opacity:1}}
 .breathing-orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:1}.orb-1{width:700px;height:700px;background:radial-gradient(circle,rgba(168,85,247,.12),transparent 70%);top:5%;right:-15%;animation:breathe1 6s ease-in-out infinite}.orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(0,245,255,.08),transparent 70%);top:40%;left:-20%;animation:breathe2 8s ease-in-out infinite}.orb-3{width:450px;height:450px;background:radial-gradient(circle,rgba(255,0,110,.06),transparent 70%);bottom:10%;right:5%;animation:breathe3 7s ease-in-out infinite}
 @keyframes breathe1{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.9;transform:scale(1.15) translate(-30px,20px)}}@keyframes breathe2{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.7;transform:scale(1.1) translate(20px,-15px)}}@keyframes breathe3{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.12) translate(-15px,25px)}}
-.floating-code{position:fixed;font-family:'Space Mono',monospace;font-size:11px;color:rgba(168,85,247,.18);white-space:pre;pointer-events:none;z-index:3;line-height:1.5;will-change:transform}.fc-1{top:12%;left:4%;transform:rotate(-3deg)}.fc-2{top:48%;right:2%;transform:rotate(2deg)}.fc-3{top:78%;left:6%;transform:rotate(-1deg)}
+.floating-code{position:fixed;font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.18);white-space:pre;pointer-events:none;z-index:3;line-height:1.5;will-change:transform}.fc-1{top:12%;left:4%;transform:rotate(-3deg)}.fc-2{top:48%;right:2%;transform:rotate(2deg)}.fc-3{top:78%;left:6%;transform:rotate(-1deg)}
 .container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2}.section{padding:80px 0;position:relative;overflow:hidden}.section.journey-section{overflow:visible}
 .section-divider{height:48px;position:relative;z-index:2;pointer-events:none;display:flex;align-items:center;justify-content:center}.section-divider::before{content:'';position:absolute;left:10%;right:10%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.15) 20%,rgba(168,85,247,.25) 50%,rgba(168,85,247,.15) 80%,transparent)}.section-divider::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:rgba(168,85,247,.3);box-shadow:0 0 12px rgba(168,85,247,.2)}
 .eyebrow{font-family:'Space Mono',monospace;font-size:clamp(14px,1.5vw,17px);color:#a855f7;letter-spacing:.04em;margin-bottom:16px;opacity:1;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.section-title{font-size:clamp(28px,5vw,52px);font-weight:800;line-height:1.25;margin-bottom:24px;color:#fff}.decode-text .char{display:inline-block;opacity:0}
@@ -165,7 +165,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 @keyframes errGlitch1{0%,100%{transform:translateX(0)}20%{transform:translateX(-2px)}40%{transform:translateX(2px)}60%{transform:translateX(-1px)}80%{transform:translateX(1px)}}
 @keyframes errGlitch2{0%,100%{transform:translateX(0)}25%{transform:translateX(2px)}50%{transform:translateX(-2px)}75%{transform:translateX(1px)}}
 .section-watermark{position:absolute;top:-20px;right:0;font-size:clamp(100px,18vw,220px);font-weight:900;color:rgba(255,255,255,.015);line-height:1;pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
-.glass{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden}.glass-header{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);display:flex;align-items:center;gap:10px}.glass-header .pulse-dot{width:6px;height:6px;border-radius:50%;background:#a855f7;animation:pulse 2s ease-in-out infinite}.glass-header span:last-child{font-family:'Space Mono',monospace;font-size:11px;color:rgba(176,176,192,.6)}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.glass{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden}.glass-header{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);display:flex;align-items:center;gap:10px}.glass-header .pulse-dot{width:6px;height:6px;border-radius:50%;background:#a855f7;animation:pulse 2s ease-in-out infinite}.glass-header span:last-child{font-family:'Space Mono',monospace;font-size:12px;color:rgba(176,176,192,.6)}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .tilt-card{transition:transform .4s cubic-bezier(.22,1,.36,1);will-change:transform}.tilt-card .card-glow{position:absolute;inset:0;opacity:0;transition:opacity .4s;border-radius:20px;pointer-events:none}
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 36px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;font-weight:700;font-size:16px;border-radius:12px;transition:box-shadow .3s,background .3s;position:relative;overflow:hidden}.btn-primary:hover{box-shadow:0 0 28px rgba(168,85,247,.5),0 0 60px rgba(168,85,247,.2)}.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}.btn-primary:hover::after{left:100%}
 .btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 36px;background:rgba(255,255,255,.04);color:#e0e0e8;font-weight:600;font-size:16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);transition:border-color .3s,box-shadow .3s,background .3s}.btn-ghost:hover{border-color:rgba(168,85,247,.45);background:rgba(168,85,247,.08);box-shadow:0 0 20px rgba(168,85,247,.15)}
@@ -199,7 +199,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .retro-panel{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 4px;margin-top:8px;position:relative;z-index:2}
 .retro-floppy{width:56px;height:12px;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.06));border-radius:2px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 3px rgba(0,0,0,.15),0 1px 0 rgba(255,255,255,.15)}
 .retro-floppy-slot{width:36px;height:3px;background:rgba(0,0,0,.2);border-radius:1px;box-shadow:inset 0 1px 1px rgba(0,0,0,.2)}
-.retro-brand{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:rgba(80,70,50,.4);letter-spacing:.14em;text-transform:uppercase;text-shadow:0 1px 0 rgba(255,255,255,.2)}
+.retro-brand{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:rgba(80,70,50,.4);letter-spacing:.14em;text-transform:uppercase;text-shadow:0 1px 0 rgba(255,255,255,.2)}
 .retro-led{width:9px;height:9px;border-radius:50%;background:rgba(80,70,50,.25);transition:all .8s;box-shadow:inset 0 1px 2px rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.1)}
 .retro-led.on{background:#39ff14;box-shadow:0 0 12px #39ff14,0 0 24px rgba(57,255,20,.35),inset 0 0 2px rgba(255,255,255,.3)}
 .retro-keyboard{max-width:88%;margin:10px auto 0;background:linear-gradient(178deg,#d6ccae 0%,#c9be9a 30%,#b8ab82 100%);border-radius:6px 6px 14px 14px;padding:14px 16px 16px;box-shadow:0 15px 40px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.05),inset 0 2px 0 rgba(255,255,255,.2),inset 0 -2px 4px rgba(0,0,0,.08);position:relative}
@@ -210,7 +210,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .statement-section{padding:80px 0 20px;position:relative;overflow:hidden}.matrix-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:1}.statement-orb{z-index:0!important}.statement-grid{display:flex;align-items:center;gap:48px;max-width:1100px;margin:0 auto;position:relative;z-index:1}.statement-text{font-size:clamp(28px,4.2vw,50px);font-weight:800;line-height:1.3;color:#fff;text-align:start;flex:1}.statement-text .word{display:inline-block;opacity:.08;margin:0 6px}.statement-img{flex:0 0 320px;position:relative}.statement-img img{width:100%;height:auto;border-radius:16px;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 8%,black 88%,transparent 100%),linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-composite:destination-in;mask-image:linear-gradient(to bottom,transparent 0%,black 8%,black 88%,transparent 100%),linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);mask-composite:intersect}.statement-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%);border-radius:50%;filter:blur(80px);pointer-events:none;animation:breathe2 8s ease-in-out infinite}
 .clip-reveal{clip-path:inset(8% 0 8% 0);opacity:.15;will-change:clip-path,opacity}
 .avatar-pain-grid{margin-top:48px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;max-width:1100px;margin-left:auto;margin-right:auto}
-.avatar-pain-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 14px 24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:20px;opacity:0;transform:translateY(40px);transition:border-color .3s,transform .3s}.avatar-pain-card:hover{border-color:rgba(168,85,247,.25);transform:translateY(-5px)}
+.avatar-pain-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 14px 24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:20px;opacity:0;transform:translateY(40px);transition:border-color .3s,transform .3s}.avatar-pain-card:hover{border-color:rgba(168,85,247,.25)}
 .avatar-pain-img-wrap{position:relative;margin-bottom:16px}
 .avatar-pain-img{width:160px;height:160px;border-radius:50%;overflow:hidden;border:2px solid rgba(168,85,247,.2);box-shadow:0 0 36px rgba(168,85,247,.12),0 4px 24px rgba(0,0,0,.5)}
 .avatar-pain-img img{width:100%;height:100%;object-fit:cover;display:block}
@@ -239,20 +239,20 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .ide-window{position:relative;border-radius:16px;overflow:hidden;background:#0d0d1a;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(168,85,247,.06);height:440px;display:flex;flex-direction:column}
 .ide-titlebar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
 .ide-titlebar-right{display:flex;align-items:center;gap:8px}
-.ide-logo-text{font-family:'Space Mono',monospace;font-size:11px;color:rgba(168,85,247,.8);letter-spacing:.03em}
+.ide-logo-text{font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.8);letter-spacing:.03em}
 .ide-dots{display:flex;gap:6px}
 .ide-dot-r{width:10px;height:10px;border-radius:50%;background:#ff5f57;opacity:.7}
 .ide-dot-y{width:10px;height:10px;border-radius:50%;background:#febc2e;opacity:.7}
 .ide-dot-g{width:10px;height:10px;border-radius:50%;background:#28c840;opacity:.7}
 .ide-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow:hidden}
-.ide-tab{padding:8px 16px;font-family:'Space Mono',monospace;font-size:11px;color:rgba(224,224,232,.35);background:rgba(255,255,255,.01);border-left:1px solid rgba(255,255,255,.04);white-space:nowrap;transition:all .3s}
+.ide-tab{padding:8px 16px;font-family:'Space Mono',monospace;font-size:12px;color:rgba(224,224,232,.35);background:rgba(255,255,255,.01);border-left:1px solid rgba(255,255,255,.04);white-space:nowrap;transition:all .3s}
 .ide-tab:first-child{border-left:none}
 .ide-tab.active{color:rgba(224,224,232,.9);background:rgba(255,255,255,.04);border-bottom:2px solid #a855f7;margin-bottom:-1px}
 .ide-body{flex:1;position:relative;overflow:hidden}
 .ide-screen{position:absolute;inset:0;opacity:0;transition:opacity .5s cubic-bezier(.22,1,.36,1);display:flex;padding:0}
 .ide-screen.active{opacity:1}
 .ide-gutter{width:44px;flex-shrink:0;padding:14px 0;background:rgba(255,255,255,.015);border-left:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;gap:0}
-.ide-line-num{font-family:'Space Mono',monospace;font-size:11px;color:rgba(168,85,247,.2);line-height:22px;height:22px;width:100%;text-align:center;transition:color .3s}
+.ide-line-num{font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.2);line-height:22px;height:22px;width:100%;text-align:center;transition:color .3s}
 .ide-line-num.hl{color:rgba(168,85,247,.5)}
 .ide-content{flex:1;padding:14px 18px;overflow:hidden;position:relative}
 .ide-line{font-family:'Space Mono',monospace;font-size:12.5px;line-height:22px;height:22px;color:rgba(224,224,232,.7);white-space:pre;overflow:hidden;direction:ltr;text-align:left}
@@ -274,7 +274,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .ide-cursor{display:inline-block;width:8px;height:16px;background:#a855f7;vertical-align:text-bottom;animation:cursorBlink 1s step-end infinite;margin-right:2px;border-radius:1px}
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 .ide-statusbar{display:flex;align-items:center;justify-content:space-between;padding:4px 14px;background:rgba(168,85,247,.08);border-top:1px solid rgba(168,85,247,.15);flex-shrink:0}
-.ide-statusbar span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(168,85,247,.7)}
+.ide-statusbar span{font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.7)}
 .ide-progress{position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,#a855f7,#00f5ff);width:0%;transition:width 1.5s cubic-bezier(.22,1,.36,1);z-index:5}
 .typewriter-line{overflow:hidden;white-space:pre;direction:ltr;text-align:left}
 .typewriter-line .tw-text{display:inline;visibility:hidden}
@@ -288,7 +288,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .insight-text{flex:1;min-width:0}
 .insight-visual{flex:0 0 400px;position:relative}
 .insight-visual img{width:100%;border-radius:20px;display:block;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 88%,transparent 100%),linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-composite:destination-in;mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 88%,transparent 100%),linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);mask-composite:intersect}
-.insight-label{font-family:'Space Mono',monospace;font-size:11px;color:rgba(168,85,247,.7);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.insight-label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.7);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .insight-label::before{content:'';width:20px;height:1px;background:rgba(168,85,247,.5);display:inline-block}
 .insight-headline{font-size:clamp(26px,3.2vw,42px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:18px}
 .insight-headline-lg{font-size:clamp(28px,5vw,52px);margin-bottom:24px}
@@ -353,7 +353,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .syl-sf{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:8px 16px;font-family:'Space Mono',monospace;font-size:13px;color:rgba(224,224,232,.4);cursor:default}
 .syl-sf-active{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:8px 16px;font-family:'Space Mono',monospace;font-size:13px;color:#fff;background:#1f2428;border-left:2px solid #a855f7;cursor:default}
 .syl-ico{font-size:14px;opacity:.6}
-.syl-file{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:6px 32px 6px 16px;font-family:'Space Mono',monospace;font-size:11px;color:rgba(224,224,232,.35);cursor:pointer;transition:background .2s,color .2s}
+.syl-file{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:6px 32px 6px 16px;font-family:'Space Mono',monospace;font-size:12px;color:rgba(224,224,232,.35);cursor:pointer;transition:background .2s,color .2s}
 .syl-file:hover{background:#161b22;color:rgba(224,224,232,.6)}
 .syl-file.active{color:#0da6f2;background:rgba(31,36,40,.5)}
 .syl-code{flex:1;padding:28px 32px;font-family:'Space Mono',monospace;font-size:14px;line-height:2;overflow-y:auto;overflow-x:hidden;direction:rtl;text-align:right}
@@ -368,13 +368,13 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .syl-kw{color:#f97583;font-weight:700}.syl-cls{color:#e3b341;font-weight:700;font-size:16px}.syl-str{color:#9ecbff}.syl-cm{color:rgba(224,224,232,.35);font-style:italic}
 .syl-topic{color:#e8e8f0;font-size:15px;font-style:normal;font-weight:500}.syl-topic .syl-check{color:#27c93f;font-style:normal;font-weight:700}
 .syl-fn{color:#b392f0;font-weight:600}.syl-num{color:#79c0ff;font-weight:700}.syl-op{color:rgba(224,224,232,.4)}
-.syl-tag{display:inline-block;padding:1px 8px;border-radius:4px;background:rgba(168,85,247,.1);color:#c084fc;font-size:11px;margin:0 3px;font-weight:500}
+.syl-tag{display:inline-block;padding:1px 8px;border-radius:4px;background:rgba(168,85,247,.1);color:#c084fc;font-size:12px;margin:0 3px;font-weight:500}
 @media(max-width:768px){
 .syl-layout{flex-direction:column;min-height:auto}
 .syl-sidebar{width:100%;border-left:none;border-bottom:1px solid #30363d;flex-direction:column;overflow-x:visible}
 .syl-sb-dots{display:none}.syl-sb-tree{display:grid;grid-template-columns:repeat(3,1fr);padding:10px;gap:6px;flex:none;overflow-x:visible}
 .syl-sf,.syl-sf-active{display:none}
-.syl-file{padding:10px 8px;border-radius:10px;white-space:nowrap;font-size:11px;flex-shrink:0;text-align:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.syl-file{padding:10px 8px;border-radius:10px;white-space:nowrap;font-size:12px;flex-shrink:0;text-align:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
 .syl-file.active{background:rgba(13,166,242,.1);border-color:rgba(13,166,242,.25);color:#0da6f2}
 .syl-code{min-height:380px;font-size:13px;padding:18px 14px;line-height:2}
 .syl-gutter{min-width:28px;font-size:12px;line-height:2}.syl-line{font-size:13px;line-height:2}
@@ -384,13 +384,13 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 }
 .tracks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;align-items:stretch}
 .track-card{padding:0;position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
-.track-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.track-card:hover{box-shadow:0 20px 50px rgba(0,0,0,.4)}
 .track-card.featured{border-color:rgba(168,85,247,.3);box-shadow:0 16px 48px rgba(168,85,247,.12)}
 .track-card.featured::before{content:'';position:absolute;inset:-1px;border-radius:21px;padding:1px;background:linear-gradient(135deg,#a855f7,#c084fc,#a855f7);background-size:200% 200%;animation:gradShift 4s ease infinite;mask:linear-gradient(#fff 0 0)content-box,linear-gradient(#fff 0 0);-webkit-mask:linear-gradient(#fff 0 0)content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask-composite:xor;pointer-events:none;z-index:1}
 .track-card.featured::after{content:'';position:absolute;inset:-2px;border-radius:22px;background:radial-gradient(ellipse at 50% 0%,rgba(168,85,247,.15),transparent 70%);filter:blur(20px);z-index:-1;pointer-events:none}
 @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .track-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0}
-.track-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.track-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
 .track-badge.frontal{background:rgba(168,85,247,.15);color:#c084fc}
 .track-badge.remote{background:rgba(0,245,255,.1);color:#00f5ff}
 .track-icon{width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;position:relative}
@@ -414,7 +414,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .track-card:not(.featured) .track-features li::before{background:#00f5ff}
 .track-cta{display:block;padding:14px;text-align:center;font-size:14px;font-weight:700;border-radius:12px;margin:0 24px 20px;transition:all .3s}
 .track-cta.primary{background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;border:none;box-shadow:0 8px 32px -8px rgba(168,85,247,.5)}
-.track-cta.primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px -8px rgba(168,85,247,.6)}
+.track-cta.primary:hover{box-shadow:0 12px 40px -8px rgba(168,85,247,.6)}
 .track-cta.ghost{background:transparent;color:rgba(224,224,232,.7);border:1px solid rgba(255,255,255,.12)}
 .track-cta.ghost:hover{border-color:rgba(168,85,247,.4);color:#fff;background:rgba(168,85,247,.06)}
 /* Learning Portal — replica of LearningPortal.astro */
@@ -510,7 +510,7 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 .breathing-orb,.floating-code{display:none}.cursor-glow{display:none!important}.scroll-progress{width:2px}.pain-stack{grid-template-columns:1fr}.pain-row{padding:20px 18px;gap:14px}.pain-num{min-width:auto;font-size:32px}.section-watermark{display:none}.ambient-dots{background-size:32px 32px}.fingerprint-bg{background-size:100vw;opacity:.07;z-index:1}.carousel-section{padding:32px 0}.nn-section{padding:32px 0}.logos-section{padding:40px 0}.hl-section{padding:60px 0}.lp-section{padding:60px 0}.pt-section{padding:60px 0}
 /* Journey mobile */
 .journey-intro{grid-template-columns:1fr;gap:20px;text-align:center}.journey-intro-img{max-width:240px}
-.ide-window{height:300px}.ide-gutter{width:32px}.ide-line-num{font-size:10px}.ide-line{font-size:11px}.ide-tab{padding:6px 10px;font-size:10px}.ide-titlebar{padding:6px 12px}.ide-content{padding:10px 12px}.ide-statusbar{padding:3px 10px}.journey-stage h3{font-size:28px}.journey-stage p{font-size:16px}
+.ide-window{height:300px}.ide-gutter{width:32px}.ide-line-num{font-size:12px}.ide-line{font-size:12px}.ide-tab{padding:6px 10px;font-size:12px}.ide-titlebar{padding:6px 12px}.ide-content{padding:10px 12px}.ide-statusbar{padding:3px 10px}.journey-stage h3{font-size:28px}.journey-stage p{font-size:16px}
 .journey-mobile-cards .container{display:flex;flex-direction:column;gap:20px}
 .jm-card{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.3)}
 .jm-card-text{padding:28px 24px 20px}
@@ -530,15 +530,15 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 /* NN section mobile */
 .nn-wrap{padding:0 12px}.tech-subtitle{font-size:clamp(20px,5vw,28px);margin-bottom:24px}
 /* Insight sections mobile enhance */
-.insight-label{font-size:10px;letter-spacing:.1em}.insight-visual img{border-radius:16px}
+.insight-label{font-size:12px;letter-spacing:.1em}.insight-visual img{border-radius:16px}
 /* Bento mobile */
 .bento-hero h3{font-size:clamp(20px,5vw,26px)}.bento-sm{padding:24px 20px}.bento-sm h3{font-size:18px}
 /* Tracks mobile */
-.track-header{padding:16px 20px 0}.track-badge{font-size:10px;padding:4px 10px}
+.track-header{padding:16px 20px 0}.track-badge{font-size:12px;padding:4px 10px}
 }
 @media(max-width:480px){.hero{padding-top:50px}.hero-text h1{font-size:clamp(26px,7.5vw,36px)}.hero-text .subtitle{font-size:14px}.hero-detail{font-size:12px}.hero-rotate{font-size:clamp(13px,3.5vw,16px)}.hero-buttons{max-width:100%}.retro-pc{max-width:240px}.retro-top-vents{padding:0 20px}
 .avatar-pain-grid{grid-template-columns:1fr;max-width:320px;margin-left:auto;margin-right:auto}.avatar-pain-img{width:100px;height:100px}.avatar-pain-card{padding:20px 16px 18px}
-.section-title{font-size:clamp(22px,6vw,32px)}.sec-label{font-size:11px}
+.section-title{font-size:clamp(22px,6vw,32px)}.sec-label{font-size:12px}
 .statement-text{font-size:22px!important}.statement-img{max-width:200px}
 .insight-headline{font-size:clamp(20px,5vw,26px)}.insight-headline-lg{font-size:clamp(22px,6vw,32px)}.insight-body-lg{font-size:clamp(15px,3.5vw,18px)}
 .lp-features{grid-template-columns:1fr}.lp-cards{width:260px;height:185px}
@@ -550,7 +550,7 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 .hero-meta{flex-direction:column;gap:6px;align-items:center}.hero-meta-sep{display:none}
 /* Journey + syllabus extra small */
 .jm-card-text{padding:20px 16px 16px}.jm-card-text h3{font-size:18px}.jm-card-ide{height:180px}
-.syl-code{min-height:300px;font-size:12px;line-height:1.9;padding:14px 10px}.syl-gutter{min-width:22px;font-size:11px;line-height:1.9}.syl-line{font-size:12px;line-height:1.9}.syl-cls{font-size:14px}.syl-topic{font-size:13px}.syl-sb-tree{gap:5px;padding:8px}.syl-file{padding:8px 6px;font-size:10px}
+.syl-code{min-height:300px;font-size:12px;line-height:1.9;padding:14px 10px}.syl-gutter{min-width:22px;font-size:12px;line-height:1.9}.syl-line{font-size:12px;line-height:1.9}.syl-cls{font-size:14px}.syl-topic{font-size:13px}.syl-sb-tree{gap:5px;padding:8px}.syl-file{padding:8px 6px;font-size:12px}
 .hl-text h2{font-size:clamp(22px,6vw,32px)}.hl-text>p{font-size:14px}
 }
 /* Video Intro — fullscreen autoplay cinematic opener */
@@ -580,13 +580,17 @@ body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!im
 .dev-form-row input:focus{outline:none;border-color:rgba(168,85,247,.4);box-shadow:0 0 12px rgba(168,85,247,.1)}
 .dev-form-row input::placeholder{color:rgba(176,176,192,.25)}
 .dev-form-submit{margin-top:16px;width:100%;padding:13px;background:linear-gradient(135deg,#a855f7,#ec4899);border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;font-family:'Heebo',sans-serif;cursor:pointer;transition:all .3s;letter-spacing:.02em}
-.dev-form-submit:hover{transform:translateY(-1px);box-shadow:0 4px 24px rgba(168,85,247,.4)}
+.dev-form-submit:hover{box-shadow:0 4px 24px rgba(168,85,247,.4)}
 .dev-form-submit.loading{opacity:.6;pointer-events:none}
 .dev-form-ok{display:none;text-align:center;padding:24px 16px}
 .dev-form-ok .ok-icon{font-size:36px;color:#39ff14;margin-bottom:10px}
 .dev-form-ok p{color:rgba(224,224,232,.7);font-size:14px;font-family:'Söhne Mono','Space Mono',monospace;line-height:1.8}
 .dev-form-err{color:#ff6b6b;font-size:12px;display:none;margin-top:4px;font-family:'Söhne Mono','Space Mono',monospace}
+.dev-form-headline{text-align:center;margin-bottom:20px}.dev-form-headline h3{font-size:clamp(18px,3vw,22px);font-weight:700;color:#fff;margin-bottom:6px}.dev-form-headline p{font-family:'Söhne Mono','Space Mono',monospace;font-size:12px;color:rgba(168,85,247,.5)}
 @media(max-width:480px){.dev-form-body{padding:20px 16px}.dev-form-row{flex-direction:column;align-items:stretch;gap:4px}.dev-form-row label{min-width:unset;text-align:right;direction:rtl;font-size:12px}.dev-form-cmd{font-size:12px}}
+/* Code particle hover effect */
+@keyframes btnCodeFly{0%{transform:translate(0,0) scale(1);opacity:.8}100%{transform:translate(var(--px),var(--py)) scale(.4);opacity:0}}
+.btn-code-particle{position:fixed;font-family:'Space Mono',monospace;font-size:12px;pointer-events:none;z-index:99999;animation:btnCodeFly .7s ease-out forwards;will-change:transform,opacity}
 </style>
 <div class="ambient-layer ambient-dots"></div><div class="ambient-layer ambient-glow"></div>
 
@@ -650,7 +654,7 @@ const &#123; data &#125; = await supabase
 <!-- Boot flash -->
 <div class="crt-flash" id="crtFlash"></div>
 <!-- Final image (hidden until reveal) -->
-<img class="crt-hero-img" id="crtImg" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1772276815/freepik__-br-br-__21459_qrlg8k.png" alt="Focus AI Builder — תעודה מקצועית בליווי אקדמי" width="600" height="600"/>
+<img class="crt-hero-img" id="crtImg" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1772276815/freepik__-br-br-__21459_qrlg8k.png" alt="Focus AI Builder תעודה מקצועית בליווי אקדמי" width="600" height="600"/>
 <div class="crt-scanlines"></div>
 <div class="crt-vignette"></div>
 </div>
@@ -719,6 +723,7 @@ const &#123; data &#125; = await supabase
 <span class="dev-form-dot"></span>
 <span class="dev-form-label">focusai ~ register</span>
 </div><div class="dev-form-body">
+<div class="dev-form-headline"><h3>מוכנים לבנות את המוצר הראשון?</h3><p>// loading next_developer.exe</p></div>
 <div class="dev-form-cmd"><span class="prompt">focusai ~$</span> <span class="cmd">register --quick</span></div>
 <form class="dev-form-fields" id="devForm1" novalidate>
 <div class="dev-form-row"><label>&gt; name:</label><input type="text" name="name" placeholder="השם שלך" required/></div>
@@ -789,11 +794,11 @@ const &#123; data &#125; = await supabase
 <!-- INSIGHT 2: n8n -->
 <section class="insight-section section" id="insight-n8n">
 <div class="container">
-<div class="sec-label">// AUTOMATION</div>
+<div class="sec-label">// AUTOMATION & AI AGENTS</div>
 <div class="insight-grid insight-stacked">
 <div class="insight-text" style="text-align:center">
 <h2 class="insight-headline insight-headline-lg">n8n זו לא רק פלטפורמה לאוטומציות וסוכנים<br/><span class="n8n-brand">זו שפה ויזואלית</span></h2>
-<p class="insight-body insight-body-lg">יש תהליכים שבקוד בלתי מובנים. אבל כשרואים את זרימת הנתונים ויזואלית, הכל מתחבר. n8n מאפשרת לבנות סוכני AI, לחבר מאות שירותים חיצוניים, ולהבין ארכיטקטורה שתשפר את הקוד שתכתוב. מה שמתחיל ככלי לאוטומציה הופך לחלק מהארכיטקטורה של המוצר שתבנה.</p>
+<p class="insight-body insight-body-lg">יש תהליכים שבקוד בלתי מובנים. אבל כשרואים את זרימת הנתונים ויזואלית, הכל מתחבר. n8n מאפשרת לבנות סוכני AI, לחבר אלפי שירותים חיצוניים, ולהבין ארכיטקטורה שתשפר את הקוד שתכתוב. מה שמתחיל ככלי לאוטומציה הופך לחלק מהארכיטקטורה של המוצר שתבנה.</p>
 </div>
 <div class="insight-visual">
 <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_800/v1772280833/freepik__-br-n8n-br-br-br-br-__28100_nye8ec.png" alt="n8n workflow visual" loading="lazy" style="border-radius:16px"/>
@@ -817,10 +822,10 @@ const &#123; data &#125; = await supabase
 <!-- Text Content -->
 <div class="hl-text">
 <h2>לומדים בינה מלאכותית<span class="hl-grad"> בצורה אנושית</span></h2>
-<p>אצלנו לומדים <strong>פנים מול פנים</strong> - בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.</p>
+<p>אצלנו לומדים <strong>פנים מול פנים</strong> בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.</p>
 <div class="hl-features">
 <div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><span>שיעורים פרונטליים בהרצליה</span></div>
-<div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><span>Zoom Live - מכל מקום</span></div>
+<div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><span>Zoom Live מכל מקום</span></div>
 <div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><span>2-3 מרצים בכל מפגש</span></div>
 <div class="hl-feat"><div class="hl-feat-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div><span>תרגול מעשי בזמן אמת</span></div>
 </div>
@@ -870,10 +875,10 @@ const &#123; data &#125; = await supabase
 <div class="journey-pin" id="journeyPin"><div class="journey-viewport">
 <div class="journey-dots" id="journeyDots"><div class="journey-dot active" data-stage="0"></div><div class="journey-dot" data-stage="1"></div><div class="journey-dot" data-stage="2"></div><div class="journey-dot" data-stage="3"></div></div>
 <div class="journey-grid"><div class="journey-stages" id="journeyStages">
-<div class="journey-stage active" data-index="0"><div class="eyebrow">// STEP 01</div><h3>אתה לומד את היסודות</h3><p>לפני שמדברים עם AI — לומדים לחשוב כמו מפתח. ארכיטקטורה, מבני נתונים, לוגיקה עסקית, ו-prompt engineering מתקדם. כי מי שיודע מה לבקש — מקבל תוצאות טובות פי 10.</p></div>
-<div class="journey-stage" data-index="1"><div class="eyebrow">// STEP 02</div><h3>אתה בונה עם Claude Code</h3><p>אתה מתאר מה אתה רוצה, ו-Claude Code כותב את הקוד. אבל אתה לא רק צופה — אתה מבין כל שורה. למה React? למה API route? איך עובד auth? כי רק מי שמבין — יכול לכוון.</p></div>
-<div class="journey-stage" data-index="2"><div class="eyebrow">// STEP 03</div><h3>אתה מכוון כמו מפתח בכיר</h3><p>Code review, דיבוג, אופטימיזציה. אתה לומד לזהות בעיות, לשפר ביצועים, ולקבל החלטות ארכיטקטוניות. זה ההבדל בין מי שמקליד prompt למי שבונה מוצר.</p></div>
-<div class="journey-stage" data-index="3"><div class="eyebrow">// STEP 04</div><h3>Deploy לפרודקשן</h3><p>דומיין, HTTPS, database, CI/CD — הכל חי באינטרנט. לא תרגיל אקדמי, מוצר אמיתי עם משתמשים אמיתיים. ואתה יודע בדיוק איך הכל עובד מתחת למכסה.</p></div>
+<div class="journey-stage active" data-index="0"><div class="eyebrow">// STEP 01</div><h3>ללמוד את היסודות</h3><p>לפני שמדברים עם AI, לומדים לחשוב כמו מפתח. ארכיטקטורה, מבני נתונים, לוגיקה עסקית ו-Prompt Engineering מתקדם. כי מי שיודע מה לבקש, מקבל תוצאות טובות פי 10.</p></div>
+<div class="journey-stage" data-index="1"><div class="eyebrow">// STEP 02</div><h3>לבנות עם Claude Code</h3><p>לתאר מה רוצים לבנות ו-Claude Code כותב את הקוד. לא רק לצפות, ללמוד לקרוא קוד, לזהות בעיות ולדעת מה לשפר. כי מי שמבין את המוצר שלו, בונה אותו טוב יותר.</p></div>
+<div class="journey-stage" data-index="2"><div class="eyebrow">// STEP 03</div><h3>לשלוט בכל שלב</h3><p>Code review, דיבוג, אופטימיזציה. לזהות בעיות, לשפר ביצועים ולקבל החלטות ארכיטקטוניות. זה ההבדל בין מי שמקליד prompt למי שבונה מוצר.</p></div>
+<div class="journey-stage" data-index="3"><div class="eyebrow">// STEP 04</div><h3>Deploy לפרודקשן</h3><p>דומיין, HTTPS, database, CI/CD. הכל חי באינטרנט. לא תרגיל אקדמי, מוצר אמיתי עם משתמשים אמיתיים. לדעת בדיוק איך הכל עובד מתחת למכסה.</p></div>
 </div>
 
 <!-- IDE Window -->
@@ -986,7 +991,7 @@ const &#123; data &#125; = await supabase
 <div class="container">
 
 <div class="jm-card" data-jm="0">
-<div class="jm-card-text"><div class="eyebrow">// STEP 01</div><h3>אתה לומד את היסודות</h3><p>ארכיטקטורה, מבני נתונים, לוגיקה עסקית, ו-prompt engineering מתקדם. כי מי שיודע מה לבקש — מקבל תוצאות פי 10.</p></div>
+<div class="jm-card-text"><div class="eyebrow">// STEP 01</div><h3>ללמוד את היסודות</h3><p>ארכיטקטורה, מבני נתונים, לוגיקה עסקית ו-Prompt Engineering מתקדם. כי מי שיודע מה לבקש, מקבל תוצאות פי 10.</p></div>
 <div class="jm-card-ide"><div class="ide-window" style="height:100%;border-radius:0;border:none;border-top:1px solid rgba(255,255,255,.06)">
 <div class="ide-tabs"><div class="ide-tab active">prompt.md</div></div>
 <div class="ide-body"><div class="ide-screen active"><div class="ide-gutter"><div class="ide-line-num">1</div><div class="ide-line-num">2</div><div class="ide-line-num">3</div><div class="ide-line-num">4</div><div class="ide-line-num">5</div><div class="ide-line-num">6</div><div class="ide-line-num">7</div><div class="ide-line-num">8</div></div>
@@ -995,7 +1000,7 @@ const &#123; data &#125; = await supabase
 </div>
 
 <div class="jm-card" data-jm="1">
-<div class="jm-card-text"><div class="eyebrow">// STEP 02</div><h3>אתה בונה עם Claude Code</h3><p>Claude Code כותב את הקוד — אבל אתה מבין כל שורה. למה React? למה API route? כי רק מי שמבין — יכול לכוון.</p></div>
+<div class="jm-card-text"><div class="eyebrow">// STEP 02</div><h3>לבנות עם Claude Code</h3><p>Claude Code כותב את הקוד, אבל חשוב ללמוד לקרוא, לזהות בעיות ולדעת מה לשפר. כי מי שמבין את המוצר, בונה אותו טוב יותר.</p></div>
 <div class="jm-card-ide"><div class="ide-window" style="height:100%;border-radius:0;border:none;border-top:1px solid rgba(255,255,255,.06)">
 <div class="ide-tabs"><div class="ide-tab active">terminal</div></div>
 <div class="ide-body"><div class="ide-screen active"><div class="ide-gutter"><div class="ide-line-num">1</div><div class="ide-line-num">2</div><div class="ide-line-num hl">3</div><div class="ide-line-num hl">4</div><div class="ide-line-num hl">5</div><div class="ide-line-num">6</div><div class="ide-line-num">7</div><div class="ide-line-num">8</div></div>
@@ -1004,7 +1009,7 @@ const &#123; data &#125; = await supabase
 </div>
 
 <div class="jm-card" data-jm="2">
-<div class="jm-card-text"><div class="eyebrow">// STEP 03</div><h3>אתה מכוון כמו מפתח בכיר</h3><p>Code review, דיבוג, אופטימיזציה. זה ההבדל בין מי שמקליד prompt למי שבונה מוצר.</p></div>
+<div class="jm-card-text"><div class="eyebrow">// STEP 03</div><h3>לשלוט בכל שלב</h3><p>Code review, דיבוג, אופטימיזציה. זה ההבדל בין מי שמקליד prompt למי שבונה מוצר.</p></div>
 <div class="jm-card-ide"><div class="ide-window" style="height:100%;border-radius:0;border:none;border-top:1px solid rgba(255,255,255,.06)">
 <div class="ide-tabs"><div class="ide-tab active">diff</div></div>
 <div class="ide-body"><div class="ide-screen active"><div class="ide-gutter"><div class="ide-line-num">1</div><div class="ide-line-num hl">2</div><div class="ide-line-num hl">3</div><div class="ide-line-num hl">4</div><div class="ide-line-num hl">5</div><div class="ide-line-num">6</div><div class="ide-line-num">7</div><div class="ide-line-num">8</div></div>
@@ -1013,7 +1018,7 @@ const &#123; data &#125; = await supabase
 </div>
 
 <div class="jm-card" data-jm="3">
-<div class="jm-card-text"><div class="eyebrow">// STEP 04</div><h3>Deploy לפרודקשן</h3><p>מוצר אמיתי — עם דומיין, HTTPS, CI/CD ומשתמשים. ואתה יודע בדיוק איך הכל עובד.</p></div>
+<div class="jm-card-text"><div class="eyebrow">// STEP 04</div><h3>Deploy לפרודקשן</h3><p>מוצר אמיתי עם דומיין, HTTPS, CI/CD ומשתמשים. לדעת בדיוק איך הכל עובד.</p></div>
 <div class="jm-card-ide"><div class="ide-window" style="height:100%;border-radius:0;border:none;border-top:1px solid rgba(255,255,255,.06)">
 <div class="ide-tabs"><div class="ide-tab active">deploy.sh</div></div>
 <div class="ide-body"><div class="ide-screen active"><div class="ide-gutter"><div class="ide-line-num">1</div><div class="ide-line-num">2</div><div class="ide-line-num">3</div><div class="ide-line-num">4</div><div class="ide-line-num">5</div><div class="ide-line-num">6</div><div class="ide-line-num">7</div><div class="ide-line-num">8</div></div>
@@ -1053,6 +1058,7 @@ const &#123; data &#125; = await supabase
 </div>
 <div class="syl-prompt"><span class="syl-blink"></span> <span class="syl-p-blue">ai-builder/~</span> <span class="syl-p-green">→</span></div>
 </div>
+<div style="text-align:center;margin-top:32px"><a href="/ai-dev-syllabus" class="btn-ghost magnetic-btn" style="display:inline-flex;align-items:center;gap:8px">לסילבוס המלא <span style="font-family:'Space Mono',monospace;font-size:12px;opacity:.5">↗</span></a></div>
 </div></section>
 
 <!-- BRAND LOGOS 3D CAROUSEL -->
@@ -1092,11 +1098,11 @@ const &#123; data &#125; = await supabase
 </div>
 <div class="track-body">
 <div class="track-subtitle">[ההכשרה המקצועית]</div>
-<h3>Focus AI Dev Herzliya</h3>
+<h3>Focus AI Dev פרונטלי</h3>
 <div class="track-uni">בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה</div>
 <div class="track-date">
 <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-<div class="track-date-text"><strong>TBD</strong><span>מחזור הבא מתחיל בקרוב</span></div>
+<div class="track-date-text"><strong>29.04.2026</strong><span>המחזור הקרוב</span></div>
 </div>
 <ul class="track-features">
 <li>20 מפגשים פרונטליים (ימי רביעי, 17:00–21:00)</li>
@@ -1127,7 +1133,7 @@ const &#123; data &#125; = await supabase
 <div class="track-uni">בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה</div>
 <div class="track-date">
 <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-<div class="track-date-text"><strong>TBD</strong><span>מחזור הבא מתחיל בקרוב</span></div>
+<div class="track-date-text"><strong>29.04.2026</strong><span>המחזור הקרוב</span></div>
 </div>
 <ul class="track-features">
 <li>20 מפגשים דרך Zoom (יום רביעי, 17:00–21:00)</li>
@@ -1149,6 +1155,7 @@ const &#123; data &#125; = await supabase
 <span class="dev-form-dot"></span>
 <span class="dev-form-label">focusai ~ register</span>
 </div><div class="dev-form-body">
+<div class="dev-form-headline"><h3>בחרתם מסלול? בואו נתחיל</h3><p>// initializing your_journey.sh</p></div>
 <div class="dev-form-cmd"><span class="prompt">focusai ~$</span> <span class="cmd">register --quick</span></div>
 <form class="dev-form-fields" id="devForm2" novalidate>
 <div class="dev-form-row"><label>&gt; name:</label><input type="text" name="name" placeholder="השם שלך" required/></div>
@@ -1237,8 +1244,8 @@ const &#123; data &#125; = await supabase
 <section class="section" id="instructors"><div class="container"><div class="sec-label">// INSTRUCTORS</div><div class="clip-reveal" id="instructorsReveal">
 <div style="text-align:center;margin-bottom:16px"><h2 class="section-title">המרצים שלנו</h2><p style="color:rgba(224,224,232,.5);font-size:17px;margin-bottom:16px">מיישמים AI בשטח. מלמדים מה שעובד.</p></div>
 <div class="instructors-cinema">
-<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="Shahar Dadia" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>שחר דדיה</h3><span class="role">CEO &amp; AI Strategy</span><p class="bio">שחר בנה מערכות AI לחברות ישראליות ומרצה ביחידה ללימודי חוץ של אוניברסיטת חיפה. מה שמלמד בכיתה — הוא עשה לפני כן בשטח.</p><div class="instructor-badges"><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">עורך דין</span><span class="instructor-badge">יזם</span></div></div></div>
-<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="Unil Sahar" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>יוניל סהר</h3><span class="role">COO &amp; Business Dev</span><p class="bio">יוניל הוביל תהליכי AI בסטארטאפים ומרצה בטכניון ובאוניברסיטת חיפה. ליווי מעשי — לא רק הרצאות.</p><div class="instructor-badges"><span class="instructor-badge">טכניון</span><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">AI Ops</span></div></div></div>
+<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="Shahar Dadia" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>שחר דדיה</h3><span class="role">CEO &amp; AI Strategy</span><p class="bio">שחר בנה מערכות AI לחברות ישראליות ומרצה ביחידה ללימודי חוץ של אוניברסיטת חיפה. מה שמלמד בכיתה, הוא עשה לפני כן בשטח.</p><div class="instructor-badges"><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">עורך דין</span><span class="instructor-badge">יזם</span></div></div></div>
+<div class="instructor-cinema"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_800,c_fill,g_face/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="Unil Sahar" loading="lazy"/><div class="instructor-glow-bg"></div><div class="instructor-info"><h3>יוניל סהר</h3><span class="role">COO &amp; Business Dev</span><p class="bio">יוניל הוביל תהליכי AI בסטארטאפים ומרצה בטכניון ובאוניברסיטת חיפה. ליווי מעשי, לא רק הרצאות.</p><div class="instructor-badges"><span class="instructor-badge">טכניון</span><span class="instructor-badge">אוניברסיטת חיפה</span><span class="instructor-badge">AI Ops</span></div></div></div>
 </div></div></div></section>
 
 <div class="section-divider"></div>
@@ -1248,12 +1255,12 @@ const &#123; data &#125; = await supabase
 <div class="sec-label">// FAQ</div>
 <div class="reveal-item" style="text-align:center"><h2 class="section-title">שאלות נפוצות</h2></div>
 <div class="faq-list">
-<div class="faq-item glass reveal-item"><button class="faq-question"><span>האם צריך ידע קודם בתכנות?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">לא. התוכנית בנויה על מתודולוגיית AI-First — אתה לומד לעבוד עם Claude Code שכותב את הקוד בשבילך. אתה לומד לכוון, לבדוק, ולשפר — לא לכתוב קוד מאפס.</div></div></div>
+<div class="faq-item glass reveal-item"><button class="faq-question"><span>האם צריך ידע קודם בתכנות?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">לא. התוכנית בנויה על מתודולוגיית AI-First. אתה לומד לעבוד עם Claude Code שכותב את הקוד בשבילך. אתה לומד לכוון, לבדוק ולשפר, לא לכתוב קוד מאפס.</div></div></div>
 <div class="faq-item glass reveal-item"><button class="faq-question"><span>כמה שעות בשבוע צריך להשקיע?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">כ-6 שעות מפגשים בשבוע + 3-4 שעות תרגול עצמי. בסך הכל כ-10 שעות בשבוע. המטלות מונחות שלב-אחר-שלב בפורטל הלימוד.</div></div></div>
 <div class="faq-item glass reveal-item"><button class="faq-question"><span>מה קורה אם מפספסים מפגש?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">כל המפגשים מוקלטים וזמינים בפורטל הלימוד תוך שעות. בנוסף, יש אפשרות להשלים מפגש בקבוצה מקבילה אם קיימת.</div></div></div>
 <div class="faq-item glass reveal-item"><button class="faq-question"><span>כמה משתתפים בקבוצה?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">מקסימום 16 משתתפים בקבוצה, עם 2 מרצים בכל מפגש. יחס של 1:8 שמבטיח שכל אחד מקבל מענה אישי.</div></div></div>
 <div class="faq-item glass reveal-item"><button class="faq-question"><span>אפשר לשלם בתשלומים?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">בהחלט. אנחנו מציעים עד 12 תשלומים ללא ריבית. פרטים מלאים מתקבלים אחרי שיחת הייעוץ.</div></div></div>
-<div class="faq-item glass reveal-item"><button class="faq-question"><span>מה זה 30 day ROI guarantee?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">אנחנו מתחייבים שתוך 30 יום מסיום התוכנית תוכל להראות תוצאה עסקית מוחשית. אם לא — אנחנו ממשיכים ללוות אותך בחינם עד שזה קורה.</div></div></div>
+<div class="faq-item glass reveal-item"><button class="faq-question"><span>מה זה 30 day ROI guarantee?</span><span class="arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">אנחנו מתחייבים שתוך 30 יום מסיום התוכנית תוכל להראות תוצאה עסקית מוחשית. אם לא, אנחנו ממשיכים ללוות אותך בחינם עד שזה קורה.</div></div></div>
 </div></div></section>
 
 <div class="section-divider"></div>
@@ -1266,7 +1273,7 @@ const &#123; data &#125; = await supabase
 <div class="form-group"><label for="name">שם מלא</label><input type="text" id="name" name="name" class="form-input" placeholder="השם המלא שלך" required/><div class="form-error" id="nameError">נא להזין שם מלא</div></div>
 <div class="form-group"><label for="phone">טלפון</label><input type="tel" id="phone" name="phone" class="form-input" placeholder="050-000-0000" required/><div class="form-error" id="phoneError">נא להזין מספר טלפון תקין</div></div>
 <div class="form-group"><label for="email">אימייל</label><input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" dir="ltr" required/><div class="form-error" id="emailError">נא להזין כתובת אימייל תקינה</div></div>
-<div class="form-group"><label for="track">מסלול מועדף</label><select id="track" name="track" class="form-input" required><option value="">בחר מסלול</option><option value="frontal">פרונטלי — 9,900 ש"ח + מע"מ</option><option value="zoom">זום — 7,900 ש"ח + מע"מ</option></select><div class="form-error" id="trackError">נא לבחור מסלול</div></div>
+<div class="form-group"><label for="track">מסלול מועדף</label><select id="track" name="track" class="form-input" required><option value="">בחר מסלול</option><option value="frontal">פרונטלי, 9,900 ש"ח + מע"מ</option><option value="zoom">זום, 7,900 ש"ח + מע"מ</option></select><div class="form-error" id="trackError">נא לבחור מסלול</div></div>
 <div class="form-group"><label for="background">רקע וציפיות (אופציונלי)</label><textarea id="background" name="background" class="form-input" placeholder="ספר/י קצת על הרקע שלך ומה את/ה מצפה מהתוכנית" rows="3"></textarea></div>
 <div class="checkbox-group"><input type="checkbox" id="privacy" name="privacy" required/><label for="privacy">קראתי ומאשר/ת את <a href="/privacy-policy" target="_blank">מדיניות הפרטיות</a> ואת <a href="/terms" target="_blank">תנאי השימוש</a></label></div>
 <div class="form-error" id="privacyError" style="margin-bottom:12px;margin-top:-6px">נא לאשר את מדיניות הפרטיות</div>
@@ -1301,7 +1308,7 @@ var pp=video.play();if(pp&&pp.catch)pp.catch(function(){setTimeout(endIntro,500)
 setTimeout(function(){if(!done)endIntro()},10000)})();
 var cg=document.getElementById('cursorGlow'),mx=0,my=0,gx=0,gy=0,hh=window.matchMedia('(hover:hover)').matches;if(hh&&cg){document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});(function l(){gx+=(mx-gx)*.1;gy+=(my-gy)*.1;cg.style.transform='translate('+(gx-250)+'px,'+(gy-250)+'px)';requestAnimationFrame(l)})()}
 if(hh)document.querySelectorAll('.tilt-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2;c.style.transform='perspective(800px) rotateX('+((y-cy)/cy*-6)+'deg) rotateY('+((x-cx)/cx*6)+'deg) scale(1.02)';var g=c.querySelector('.card-glow');if(g){g.style.opacity='1';g.style.background='radial-gradient(circle at '+x+'px '+y+'px,rgba(168,85,247,.1),transparent 60%)'}});c.addEventListener('mouseleave',function(){c.style.transform='';var g=c.querySelector('.card-glow');if(g)g.style.opacity='0'})});
-if(hh)document.querySelectorAll('.magnetic-btn').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)'});b.addEventListener('mouseleave',function(){b.style.transform='';b.style.transition='transform .4s cubic-bezier(.22,1,.36,1)';setTimeout(function(){b.style.transition=''},400)})});
+if(hh){var _pc='01{};</>=_#$<>/'.split(''),_colors=['#a855f7','#c084fc','#00f5ff','#e0e0e8'];document.querySelectorAll('.magnetic-btn').forEach(function(b){var _sp=false;b.addEventListener('mouseenter',function(){_sp=true;(function loop(){if(!_sp)return;var r=b.getBoundingClientRect(),p=document.createElement('span');p.className='btn-code-particle';p.textContent=_pc[Math.floor(Math.random()*_pc.length)];p.style.color=_colors[Math.floor(Math.random()*_colors.length)];var x=r.left+Math.random()*r.width,y=r.top+Math.random()*r.height;var angle=Math.random()*Math.PI*2,dist=25+Math.random()*35;p.style.left=x+'px';p.style.top=y+'px';p.style.setProperty('--px',(Math.cos(angle)*dist)+'px');p.style.setProperty('--py',(Math.sin(angle)*dist-15)+'px');document.body.appendChild(p);setTimeout(function(){p.remove()},700);setTimeout(loop,50+Math.random()*70)})()});b.addEventListener('mouseleave',function(){_sp=false})})}
 document.querySelectorAll('.faq-question').forEach(function(btn){btn.addEventListener('click',function(){var it=btn.closest('.faq-item'),a=it.querySelector('.faq-answer'),o=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-answer').style.maxHeight='0'});if(!o){it.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}})});
 var form=document.getElementById('registerForm'),fs=document.getElementById('formSuccess');if(form)form.addEventListener('submit',function(e){e.preventDefault();var v=true;document.querySelectorAll('.form-error').forEach(function(el){el.style.display='none'});var n=document.getElementById('name'),p=document.getElementById('phone'),em=document.getElementById('email'),t=document.getElementById('track'),pr=document.getElementById('privacy'),mk=document.getElementById('marketing'),bg=document.getElementById('background');if(!n.value.trim()){document.getElementById('nameError').style.display='block';v=false}if(!p.value.trim()||p.value.trim().length<9){document.getElementById('phoneError').style.display='block';v=false}if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){document.getElementById('emailError').style.display='block';v=false}if(!t.value){document.getElementById('trackError').style.display='block';v=false}if(!pr.checked){document.getElementById('privacyError').style.display='block';v=false}if(!v)return;var sb=form.querySelector('.btn-submit');sb.classList.add('loading');sb.textContent='שולח...';fetch('https://n8n.focusai.co.il/webhook/ai-fullstack-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n.value.trim(),phone:p.value.trim(),email:em.value.trim(),track:t.value,background:bg.value.trim(),source:'ai-fullstack',marketing_consent:mk.checked})}).then(function(r){if(!r.ok)throw new Error('status '+r.status);form.style.display='none';fs.style.display='block';if(typeof fbq==='function')fbq('track','Lead')}).catch(function(){sb.classList.remove('loading');sb.textContent='שמור מקום עכשיו';alert('אירעה שגיאה בשליחת הטופס. אנא נסו שוב או צרו קשר בטלפון.')}).finally(function(){sb.classList.remove('loading');sb.textContent='שמור מקום עכשיו'})});
 /* DEV Terminal Quick Forms */
