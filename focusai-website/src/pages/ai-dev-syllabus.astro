@@ -741,19 +741,17 @@ body {
   .cover-contact { font-size: 15px; gap: 16px; flex-direction: column; }
   .cover-contact .sep { display: none; }
 
-  /* ---- TECH LOGOS: hide circles, show simple grid ---- */
+  /* ---- TECH LOGOS: compact flex grid on mobile ---- */
   .nn-tech { margin-top: 16px; }
   .nn-mesh { display: none; }
-  .nn-row { flex-wrap: wrap; gap: 16px; justify-content: center; }
-  .nn-row + .nn-row { margin-top: 12px; }
-  .nn-row-sm { gap: 12px; }
-  .nn-item { gap: 4px; }
-  /* Bigger circles on mobile for visibility */
-  .nn-circle { width: 52px; height: 52px; padding: 10px; }
-  .nn-circle.nn-lg { width: 58px; height: 58px; padding: 11px; }
-  .nn-circle.nn-xl { width: 62px; height: 62px; padding: 12px; }
-  .nn-lbl { font-size: 11px; color: #fff; }
-  .nn-title { font-size: 16px; margin-top: 16px; margin-bottom: 8px; }
+  .nn-row, .nn-row-sm { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .nn-row + .nn-row { margin-top: 10px; }
+  .nn-item { gap: 3px; width: 56px; align-items: center; }
+  .nn-circle { width: 42px; height: 42px; padding: 9px; }
+  .nn-circle.nn-lg { width: 42px; height: 42px; padding: 9px; }
+  .nn-circle.nn-xl { width: 42px; height: 42px; padding: 9px; }
+  .nn-lbl { font-size: 9px; color: #fff; white-space: nowrap; }
+  .nn-title { font-size: 14px; margin-top: 12px; margin-bottom: 6px; }
 
   /* ---- ABOUT (page 2) ---- */
   .about-intro { font-size: 16px; gap: 16px; line-height: 1.8; }
@@ -1125,7 +1123,7 @@ body {
     <div class="format-bar glass-card">
       <div class="format-inner">
         <div class="fmt-item"><span class="num">130</span><span class="label">שעות אקדמיות</span></div>
-        <div class="fmt-item"><span class="num">12</span><span class="label">מפגשים</span></div>
+        <div class="fmt-item"><span class="num">20</span><span class="label">מפגשים</span></div>
         <div class="fmt-item"><span class="num">18</span><span class="label">משתתפים מקס׳</span></div>
         <div class="fmt-item"><span class="num">2-3</span><span class="label">מרצים למפגש</span></div>
       </div>
