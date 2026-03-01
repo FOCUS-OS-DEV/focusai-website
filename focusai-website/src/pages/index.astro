@@ -152,7 +152,7 @@ const localBusinessSchema = {
 
         <!-- CTA Button -->
         <a
-          href="/webinar-n8n-agent/"
+          href="/ai-fullstack"
           class="inline-flex items-center gap-2 px-8 py-3 bg-[#a855f7] text-[#0a0a0f] font-bold rounded-full hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:scale-105 transition-all duration-300"
         >
           <span class="w-2 h-2 rounded-full bg-[#0a0a0f] animate-pulse"></span>
@@ -185,12 +185,18 @@ const localBusinessSchema = {
       }, { passive: true });
     }
 
-    // Webinar popup - show after 7 seconds, once per session
+    // Popup - show after 20 seconds + user has scrolled, once per session
     (function() {
       var POPUP_KEY = 'webinar_popup_shown';
       if (sessionStorage.getItem(POPUP_KEY)) return;
 
-      setTimeout(function() {
+      var hasScrolled = false;
+      var timeReached = false;
+      var shown = false;
+
+      function showPopup() {
+        if (shown || !hasScrolled || !timeReached) return;
+        shown = true;
         var popup = document.getElementById('webinar-popup');
         var card = document.getElementById('webinar-popup-card');
         if (!popup) return;
@@ -200,7 +206,19 @@ const localBusinessSchema = {
         if (card) card.style.transform = 'scale(1)';
 
         sessionStorage.setItem(POPUP_KEY, '1');
-      }, 7000);
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!hasScrolled && window.pageYOffset > 100) {
+          hasScrolled = true;
+          showPopup();
+        }
+      }, { passive: true });
+
+      setTimeout(function() {
+        timeReached = true;
+        showPopup();
+      }, 20000);
 
       // Close popup
       document.addEventListener('click', function(e) {
