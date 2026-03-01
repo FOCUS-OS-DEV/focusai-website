@@ -14,6 +14,7 @@ export default [
       '*.config.mjs',
       'generate-*.mjs',
       'src/pages/academy/_drafts/**',
+      'src/pages/ai-dev-syllabus.astro',
     ],
   },
 
