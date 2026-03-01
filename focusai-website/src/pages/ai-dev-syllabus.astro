@@ -137,10 +137,19 @@ body {
 .corners b::before { content:''; position:absolute; bottom:7mm; right:7mm; width:10mm; height:10mm; border-bottom:1px solid rgba(168,85,247,0.15); border-right:1px solid rgba(168,85,247,0.15); }
 .corners b::after { content:''; position:absolute; bottom:7mm; left:7mm; width:10mm; height:10mm; border-bottom:1px solid rgba(168,85,247,0.15); border-left:1px solid rgba(168,85,247,0.15); }
 
-.page-num {
-  position: absolute; bottom: 8mm; left: 50%; transform: translateX(-50%);
-  font-family: 'Rubik', sans-serif; font-size: 12pt; color: var(--text-dim);
-  letter-spacing: 0.25em; z-index: 11; opacity: 0.6;
+.page-num { display: none; }
+.page-footer {
+  margin-top: auto;
+  padding-top: 3mm;
+  border-top: 1px solid rgba(168,85,247,0.1);
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+  font-size: 9pt;
+  color: var(--text-dim);
+  opacity: 0.5;
+  letter-spacing: 0.25em;
+  z-index: 11;
+  flex-shrink: 0;
 }
 
 /* ---- Glow divider ---- */
@@ -453,10 +462,12 @@ body {
   width: 42mm;
 }
 .instructor-img {
-  width: 20mm; height: 20mm; border-radius: 50%;
+  width: 18mm; height: 26mm; border-radius: 4mm;
   object-fit: cover;
-  border: 2px solid rgba(168,85,247,0.35);
+  border: 2px solid rgba(168,85,247,0.3);
   box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 3px rgba(168,85,247,0.08);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 .instructor-name {
   font-size: 12pt; font-weight: 600; color: #fff; text-align: center;
@@ -682,6 +693,7 @@ body {
   .lyr-grid { opacity: 0.2; }
   .lyr-vig { display: none; }
   .page-num { display: none; }
+  .page-footer { display: none; }
 
   /* ---- COVER ---- */
   .cover .page-inner {
@@ -740,7 +752,7 @@ body {
   .instructors { margin-top: 32px; }
   .instructors-title { font-size: 22px; margin-bottom: 20px; }
   .instructors-row { flex-wrap: wrap; gap: 24px; }
-  .instructor-img { width: 80px; height: 80px; }
+  .instructor-img { width: 80px; height: 110px; border-radius: 12px; }
   .instructor-name { font-size: 17px; }
   .instructor-role { font-size: 15px; }
   .guest-badge { font-size: 14px; }
@@ -997,6 +1009,7 @@ body {
         <span>focusai.co.il</span>
       </div>
     </div>
+    <div class="page-footer">01 / 06</div>
   </div>
 </div>
 
@@ -1074,17 +1087,17 @@ body {
       <h3 class="instructors-title">מרצי התכנית</h3>
       <div class="instructors-row">
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_300,c_thumb,g_face,z_1.3/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_430,c_thumb,g_face,z_0.7/v1764519896/WhatsApp_Image_2025-11-30_at_18.24.31_1_osvagi.jpg" alt="שחר דדיה" class="instructor-img">
           <span class="instructor-name">שחר דדיה</span>
           <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
         </div>
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_300,c_thumb,g_face,z_1.3/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_430,c_thumb,g_face,z_0.7/v1770364984/IMG_4898.JPG_uate4o.jpg" alt="אוניל סחר" class="instructor-img">
           <span class="instructor-name">אוניל סחר</span>
           <span class="instructor-role">מייסד ומנכ"ל משותף<br>Focus AI</span>
         </div>
         <div class="instructor">
-          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_300,c_thumb,g_face,z_1.3/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_300,h_430,c_thumb,g_face,z_0.7/v1772365856/%D7%A2%D7%95%D7%AA%D7%A7_%D7%A9%D7%9C_March_Syllabus_Bot_Camp_Herzliya_2026_gh9ybi.jpg" alt="אסף עמירה" class="instructor-img">
           <span class="instructor-name">אסף עמירה</span>
           <span class="instructor-role">מייסד ומנכ"ל<br>FixDigital CRM</span>
           <span class="guest-badge">מרצה אורח</span>
@@ -1100,8 +1113,8 @@ body {
         <div class="fmt-item"><span class="num">2-3</span><span class="label">מרצים למפגש</span></div>
       </div>
     </div>
+    <div class="page-footer">02 / 06</div>
   </div>
-  <span class="page-num">02 / 06</span>
 </div>
 
 
@@ -1180,8 +1193,8 @@ body {
         </div>
       </div>
     </div>
+    <div class="page-footer">03 / 06</div>
   </div>
-  <span class="page-num">03 / 06</span>
 </div>
 
 
@@ -1267,8 +1280,8 @@ body {
         <strong>120 שעות</strong>
       </div>
     </div>
+    <div class="page-footer">04 / 06</div>
   </div>
-  <span class="page-num">04 / 06</span>
 </div>
 
 
@@ -1337,8 +1350,8 @@ body {
       <h4>כל הבונוסים כלולים בתכנית — ללא עלות נוספת</h4>
       <p>גישה מלאה לפורטל הלימוד, סוכן AI אישי ושאר הכלים מרגע ההרשמה ולאורך כל הדרך.</p>
     </div>
+    <div class="page-footer">05 / 06</div>
   </div>
-  <span class="page-num">05 / 06</span>
 </div>
 
 
@@ -1404,8 +1417,8 @@ body {
     </div>
 
     <p class="closing-url">focusai.co.il/ai-dev-syllabus</p>
+    <div class="page-footer">06 / 06</div>
   </div>
-  <span class="page-num">06 / 06</span>
 </div>
 
 </div>
