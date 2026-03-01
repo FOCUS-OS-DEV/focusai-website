@@ -110,11 +110,12 @@ const moreVideos = videoTestimonials.slice(1);
               id="featured-video"
               class="w-full h-full object-cover"
               controls
+              autoplay
+              muted
               playsinline
               webkit-playsinline
-              preload="none"
+              preload="auto"
               controlslist="nodownload"
-              disablepictureinpicture
               oncontextmenu="return false;"
               poster={videoTestimonials[0].poster}
               src={videoTestimonials[0].video}
@@ -177,7 +178,7 @@ const moreVideos = videoTestimonials.slice(1);
     <div class="max-w-sm w-full">
       <div class="rounded-2xl overflow-hidden border-2 border-[#a855f7]/40 shadow-[0_0_80px_rgba(168,85,247,0.4)]">
         <div class="aspect-[9/16]">
-          <video id="lightbox-video" class="w-full h-full object-cover" controls playsinline webkit-playsinline preload="none" controlslist="nodownload" disablepictureinpicture oncontextmenu="return false;"><track kind="captions" default /></video>
+          <video id="lightbox-video" class="w-full h-full object-cover" controls playsinline webkit-playsinline preload="none" controlslist="nodownload" oncontextmenu="return false;"><track kind="captions" default /></video>
         </div>
       </div>
       <div class="text-center mt-4">
@@ -210,12 +211,17 @@ const moreVideos = videoTestimonials.slice(1);
     return url.replace('/upload/q_auto/', '/upload/w_720,q_auto/');
   }
 
-  // Auto-play featured video (with mobile 720p)
+  // Featured video: autoplay muted, unmute on first user interaction
   const featured = document.getElementById('featured-video') as HTMLVideoElement;
-  if (featured && isMobileVideo) {
-    featured.src = mobileVideoUrl(featured.src);
+  if (featured) {
+    if (isMobileVideo) featured.src = mobileVideoUrl(featured.src);
+    // Unmute on first click/tap on the video
+    featured.addEventListener('click', () => {
+      if (featured.muted) {
+        featured.muted = false;
+      }
+    }, { once: true });
   }
-  // User taps play manually — iOS Safari blocks programmatic play()
 
   // Lightbox for more videos
   const lightbox = document.getElementById('videoLightbox');
