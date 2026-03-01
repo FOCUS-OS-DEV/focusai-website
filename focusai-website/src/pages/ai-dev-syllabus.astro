@@ -150,6 +150,7 @@ body {
   letter-spacing: 0.25em;
   z-index: 11;
   flex-shrink: 0;
+  direction: ltr;
 }
 
 /* ---- Glow divider ---- */
@@ -447,23 +448,23 @@ body {
 }
 .about-intro p { margin: 0; }
 
-.format-bar { margin-top: auto; padding: 3mm 5mm; }
+.format-bar { margin-top: auto; padding: 2mm 5mm; }
 .format-inner {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm;
   position: relative; z-index: 2;
 }
 .fmt-item { text-align: center; }
 .fmt-item .num {
-  font-family: 'Rubik', sans-serif; font-size: 18pt; font-weight: 700;
-  color: var(--purple); display: block; line-height: 1.2;
+  font-family: 'Rubik', sans-serif; font-size: 16pt; font-weight: 700;
+  color: var(--purple); display: block; line-height: 1.1;
 }
-.fmt-item .label { font-size: 12pt; color: var(--text-dim); display: block; margin-top: 1mm; }
+.fmt-item .label { font-size: 9pt; color: var(--text-dim); display: block; margin-top: 0.5mm; }
 
 /* ---- Instructors mini-section ---- */
-.instructors { margin-top: 3mm; }
+.instructors { margin-top: 2mm; }
 .instructors-title {
-  font-size: 12pt; font-weight: 700; color: #fff;
-  margin-bottom: 3mm; text-align: center;
+  font-size: 11pt; font-weight: 700; color: #fff;
+  margin-bottom: 2mm; text-align: center;
 }
 .instructors-row {
   display: flex; justify-content: center; gap: 10mm; align-items: flex-start;
