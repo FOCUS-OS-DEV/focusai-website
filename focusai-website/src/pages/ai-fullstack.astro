@@ -212,17 +212,17 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .retro-keyboard::before{content:'';position:absolute;inset:0;border-radius:6px 6px 14px 14px;background:linear-gradient(180deg,rgba(255,255,255,.1) 0%,transparent 40%);pointer-events:none}
 .retro-keys{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
 .retro-keys span{height:13px;background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(0,0,0,.02) 100%);border-radius:2.5px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.25),0 2px 4px rgba(0,0,0,.08)}
-/* Wired Mouse */
-.retro-mouse-area{position:absolute;left:-55px;bottom:-8px;display:flex;align-items:flex-end;gap:0}
-.retro-mouse-cable{width:60px;height:30px;margin-bottom:8px;margin-right:-4px;opacity:.85}
+/* Wired Mouse — right side, cable goes up to monitor */
+.retro-mouse-area{position:absolute;right:-50px;bottom:-8px;display:flex;flex-direction:column;align-items:center;gap:0}
+.retro-mouse-cable{width:40px;height:90px;position:absolute;top:-85px;left:50%;transform:translateX(-50%);opacity:.85}
 .retro-mouse{width:28px;height:42px;background:linear-gradient(178deg,#d6ccae 0%,#c4b896 40%,#b0a37a 100%);border-radius:10px 10px 12px 12px;box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.1);position:relative;flex-shrink:0}
 .retro-mouse::before{content:'';position:absolute;inset:0;border-radius:10px 10px 12px 12px;background:linear-gradient(165deg,rgba(255,255,255,.15) 0%,transparent 50%);pointer-events:none}
 .retro-mouse-btns{display:flex;gap:1.5px;padding:4px 4px 0;justify-content:center}
 .retro-mouse-btns span{flex:1;height:14px;background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(0,0,0,.03) 100%);border-radius:3px 3px 1px 1px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08),0 1px 0 rgba(255,255,255,.15)}
 .retro-mouse-wheel{width:4px;height:6px;background:rgba(0,0,0,.15);border-radius:3px;margin:2px auto 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
 .retro-mouse-body{height:12px}
-@media(max-width:768px){.retro-mouse-area{left:-40px;bottom:-6px}.retro-mouse-cable{width:45px;height:22px}.retro-mouse{width:22px;height:34px;border-radius:8px 8px 10px 10px}.retro-mouse::before{border-radius:8px 8px 10px 10px}.retro-mouse-btns span{height:11px}.retro-mouse-wheel{width:3px;height:5px}}
-@media(max-width:480px){.retro-mouse-area{left:-30px;bottom:-4px}.retro-mouse-cable{width:32px;height:18px}.retro-mouse{width:18px;height:28px;border-radius:6px 6px 8px 8px}.retro-mouse::before{border-radius:6px 6px 8px 8px}.retro-mouse-btns{padding:3px 3px 0}.retro-mouse-btns span{height:9px}.retro-mouse-wheel{width:2.5px;height:4px}.retro-mouse-body{height:8px}}
+@media(max-width:768px){.retro-mouse-area{right:-38px;bottom:-6px}.retro-mouse-cable{width:32px;height:70px;top:-65px}.retro-mouse{width:22px;height:34px;border-radius:8px 8px 10px 10px}.retro-mouse::before{border-radius:8px 8px 10px 10px}.retro-mouse-btns span{height:11px}.retro-mouse-wheel{width:3px;height:5px}}
+@media(max-width:480px){.retro-mouse-area{right:-28px;bottom:-4px}.retro-mouse-cable{width:24px;height:55px;top:-50px}.retro-mouse{width:18px;height:28px;border-radius:6px 6px 8px 8px}.retro-mouse::before{border-radius:6px 6px 8px 8px}.retro-mouse-btns{padding:3px 3px 0}.retro-mouse-btns span{height:9px}.retro-mouse-wheel{width:2.5px;height:4px}.retro-mouse-body{height:8px}}
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 .code-particle{position:absolute;font-family:'Space Mono',monospace;pointer-events:none;z-index:1;will-change:transform,opacity;animation:codeFloat var(--cf-dur,6s) ease-in-out infinite,codeBlink var(--cb-dur,4s) ease-in-out infinite;animation-delay:var(--cf-delay,0s),var(--cb-delay,0s)}
 @keyframes codeFloat{0%,100%{transform:translateY(0) rotate(var(--cf-rot,0deg))}50%{transform:translateY(var(--cf-drift,-18px)) rotate(calc(var(--cf-rot,0deg) + 3deg))}}
@@ -242,7 +242,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .bento-sm{padding:32px 28px}.bento-sm .bento-icon{width:44px;height:44px;border-radius:12px;font-size:15px;margin-bottom:16px}.bento-sm h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}.bento-sm p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.7}.bento-icon{display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-weight:700}.bento-icon.purple{background:rgba(168,85,247,.1);color:#a855f7}.bento-icon.cyan{background:rgba(0,245,255,.08);color:#00f5ff}.bento-icon.pink{background:rgba(255,0,110,.08);color:#ff006e}.bento-icon.green{background:rgba(57,255,20,.08);color:#39ff14}
 .bento-full{grid-column:1/-1;padding:32px 40px;display:flex;align-items:center;gap:28px}.bento-full .bento-icon{flex-shrink:0}.bento-full h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}.bento-full p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.6}
 .journey-section{position:relative}
-.journey-pin{position:relative;height:100vh;display:flex;align-items:center;z-index:10}
+.journey-pin{position:relative;height:100vh;display:none;align-items:center;z-index:10}
 .journey-viewport{position:relative;width:100%}
 .journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
 .journey-stages{position:relative;min-height:280px}
@@ -613,6 +613,9 @@ body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!im
 .dev-form-ok p{color:rgba(224,224,232,.7);font-size:14px;font-family:'Söhne Mono','Space Mono',monospace;line-height:1.8}
 .dev-form-err{color:#ff6b6b;font-size:12px;display:none;margin-top:4px;font-family:'Söhne Mono','Space Mono',monospace}
 .dev-form-headline{text-align:center;margin-bottom:20px}.dev-form-headline h3{font-size:clamp(18px,3vw,22px);font-weight:700;color:#fff;margin-bottom:6px}.dev-form-headline p{font-family:'Rubik',sans-serif;font-size:clamp(16px,2.5vw,20px);font-weight:600;color:rgba(200,180,255,.7);line-height:1.6}
+/* Brand colored names with tech underlines */
+.brand-claude{color:#d97757;position:relative;display:inline-block}.brand-claude::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:110%;height:3px;background:linear-gradient(90deg,transparent,#d97757 20%,#e8956e 50%,#d97757 80%,transparent);border-radius:2px;box-shadow:0 0 8px rgba(217,119,87,.4),0 0 16px rgba(217,119,87,.15)}
+.brand-n8n{color:#ea4b71;position:relative;display:inline-block}.brand-n8n::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:110%;height:3px;background:linear-gradient(90deg,transparent,#ea4b71 20%,#ff6b8a 50%,#ea4b71 80%,transparent);border-radius:2px;box-shadow:0 0 8px rgba(234,75,113,.4),0 0 16px rgba(234,75,113,.15)}
 @media(max-width:480px){.dev-form-body{padding:20px 16px}.dev-form-row{flex-direction:column;align-items:stretch;gap:4px}.dev-form-row label{min-width:unset;text-align:right;direction:rtl;font-size:12px}.dev-form-cmd{font-size:12px}}
 /* Code particle hover effect */
 @keyframes btnCodeFly{0%{transform:translate(0,0) scale(1);opacity:1}50%{opacity:.9}100%{transform:translate(var(--px),var(--py)) scale(.5);opacity:0}}
@@ -698,10 +701,10 @@ const &#123; data &#125; = await supabase
 <div class="retro-keyboard">
 <div class="retro-keys"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 </div>
-<!-- Wired Mouse -->
+<!-- Wired Mouse (right side, cable goes up to monitor) -->
 <div class="retro-mouse-area">
-<svg class="retro-mouse-cable" viewBox="0 0 80 40" fill="none" preserveAspectRatio="none"><path d="M0,20 C20,20 30,5 50,5 C65,5 72,15 80,18" stroke="#8a7d62" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M0,20 C20,20 30,5 50,5 C65,5 72,15 80,18" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
 <div class="retro-mouse"><div class="retro-mouse-btns"><span></span><span></span></div><div class="retro-mouse-wheel"></div><div class="retro-mouse-body"></div></div>
+<svg class="retro-mouse-cable" viewBox="0 0 40 120" fill="none"><path d="M20,0 C20,15 15,25 12,40 C8,60 25,70 20,90 C18,100 20,110 20,120" stroke="#8a7d62" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M20,0 C20,15 15,25 12,40 C8,60 25,70 20,90 C18,100 20,110 20,120" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
 </div>
 </div>
 </div></div></div></section>
@@ -756,7 +759,7 @@ const &#123; data &#125; = await supabase
 <span class="dev-form-dot"></span>
 <span class="dev-form-label">focusai ~ register</span>
 </div><div class="dev-form-body">
-<div class="dev-form-headline"><h3>גם העמוד הזה נבנה ב100% עם<br/>Claude Code & n8n<br/><span style="font-weight:400;font-size:.75em;opacity:.7">(וגם קצת בינה אנושית 😉)</span></h3><p>בהכשרה הזו תלמדו לפתח אתר כזה בעצמכם,<br/>ועוד הרבה, הרבה מעבר.</p></div>
+<div class="dev-form-headline"><h3>גם העמוד הזה נבנה ב100% עם<br/><span class="brand-claude">Claude Code</span> & <span class="brand-n8n">n8n</span><br/><span style="font-weight:400;font-size:.75em;opacity:.7">(וגם קצת בינה אנושית 😉)</span></h3><p>בהכשרה הזו תלמדו לפתח אתר כזה בעצמכם,<br/>ועוד הרבה, הרבה מעבר.</p></div>
 <div class="dev-form-cmd"><span class="prompt">focusai ~$</span> <span class="cmd">register --quick</span></div>
 <form class="dev-form-fields" id="devForm1" novalidate>
 <div class="dev-form-row"><label>&gt; name:</label><input type="text" name="name" placeholder="השם שלך" required/></div>
@@ -1553,40 +1556,9 @@ ScrollTrigger.create({trigger:sylIde,start:'top 80%',once:true,onEnter:function(
 }
 /* Journey — IDE Terminal with typewriter */
 var jp=document.getElementById('journeyPin'),jm=document.getElementById('journeyMobile');
-var statusTexts=['claude@focusai ~ analyzing...','claude@focusai ~ building...','claude@focusai ~ reviewing...','claude@focusai ~ deploying...'];
-var isDesktopWide=window.innerWidth>1024;
-if(jp&&isDesktopWide){
-/* Desktop: pinned scroll — section locks in viewport, stages advance with scroll */
-var jsec=document.getElementById('journey');if(jsec)jsec.style.display='block';if(jm)jm.style.display='none';
-var st=document.querySelectorAll('#journeyStages .journey-stage'),
-    sc=document.querySelectorAll('#ideWindow .ide-screen'),
-    dt=document.querySelectorAll('.journey-dot'),
-    tabs=document.querySelectorAll('#ideTabs .ide-tab'),
-    statusEl=document.getElementById('ideStatus'),
-    prevIdx=-1;
-ScrollTrigger.create({trigger:jp,start:'top top',end:'+=250%',pin:true,
-onUpdate:function(self){var p=self.progress,idx=Math.min(3,Math.floor(p*4));
-if(idx===prevIdx)return;prevIdx=idx;
-st.forEach(function(s,j){s.classList.toggle('active',j===idx)});
-sc.forEach(function(s,j){s.classList.toggle('active',j===idx)});
-dt.forEach(function(d,j){d.classList.toggle('active',j<=idx)});
-tabs.forEach(function(t,j){t.classList.toggle('active',j===idx)});
-if(statusEl)statusEl.textContent=statusTexts[idx]||'claude@focusai ~';
-var pb1=document.getElementById('ideProgress1'),pb3=document.getElementById('ideProgress3');
-if(pb1)pb1.style.width=(idx>=1?'100%':'0%');
-if(pb3)pb3.style.width=(idx>=3?'100%':'0%');
-var activeScreen=sc[idx];if(activeScreen&&!activeScreen.dataset.typed){
-activeScreen.dataset.typed='1';
-var lines=activeScreen.querySelectorAll('.ide-line');
-lines.forEach(function(line,li){
-line.style.opacity='0';line.style.transform='translateY(6px)';
-setTimeout(function(){line.style.transition='opacity .3s ease, transform .3s ease';
-line.style.opacity='1';line.style.transform='translateY(0)';},li*80);
-});}
-}});
-}else{
-/* Tablet + Mobile: hide desktop pin, show stacked cards */
-if(jp)jp.style.display='none';if(jm){jm.style.display='block';
+/* Desktop pin disabled — always show mobile cards layout */
+if(jp)jp.style.display='none';
+{if(jm){jm.style.display='block';
 document.querySelectorAll('.jm-card').forEach(function(card){
 gsap.from(card,{opacity:0,y:50,duration:.8,ease:'power3.out',scrollTrigger:{trigger:card,start:'top 85%',once:true}});
 var lines=card.querySelectorAll('.ide-line');

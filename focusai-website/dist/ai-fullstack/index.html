@@ -251,7 +251,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .bento-sm{padding:32px 28px}.bento-sm .bento-icon{width:44px;height:44px;border-radius:12px;font-size:15px;margin-bottom:16px}.bento-sm h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}.bento-sm p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.7}.bento-icon{display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-weight:700}.bento-icon.purple{background:rgba(168,85,247,.1);color:#a855f7}.bento-icon.cyan{background:rgba(0,245,255,.08);color:#00f5ff}.bento-icon.pink{background:rgba(255,0,110,.08);color:#ff006e}.bento-icon.green{background:rgba(57,255,20,.08);color:#39ff14}
 .bento-full{grid-column:1/-1;padding:32px 40px;display:flex;align-items:center;gap:28px}.bento-full .bento-icon{flex-shrink:0}.bento-full h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}.bento-full p{color:rgba(224,224,232,.5);font-size:14px;line-height:1.6}
 .journey-section{position:relative}
-.journey-pin{position:relative;height:100vh;display:flex;align-items:center;z-index:10}
+.journey-pin{position:relative;height:100vh;display:none;align-items:center;z-index:10}
 .journey-viewport{position:relative;width:100%}
 .journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
 .journey-stages{position:relative;min-height:280px}
@@ -1136,40 +1136,9 @@ ScrollTrigger.create({trigger:sylIde,start:'top 80%',once:true,onEnter:function(
 }
 /* Journey — IDE Terminal with typewriter */
 var jp=document.getElementById('journeyPin'),jm=document.getElementById('journeyMobile');
-var statusTexts=['claude@focusai ~ analyzing...','claude@focusai ~ building...','claude@focusai ~ reviewing...','claude@focusai ~ deploying...'];
-var isDesktopWide=window.innerWidth>1024;
-if(jp&&isDesktopWide){
-/* Desktop: pinned scroll — section locks in viewport, stages advance with scroll */
-var jsec=document.getElementById('journey');if(jsec)jsec.style.display='block';if(jm)jm.style.display='none';
-var st=document.querySelectorAll('#journeyStages .journey-stage'),
-    sc=document.querySelectorAll('#ideWindow .ide-screen'),
-    dt=document.querySelectorAll('.journey-dot'),
-    tabs=document.querySelectorAll('#ideTabs .ide-tab'),
-    statusEl=document.getElementById('ideStatus'),
-    prevIdx=-1;
-ScrollTrigger.create({trigger:jp,start:'top top',end:'+=250%',pin:true,
-onUpdate:function(self){var p=self.progress,idx=Math.min(3,Math.floor(p*4));
-if(idx===prevIdx)return;prevIdx=idx;
-st.forEach(function(s,j){s.classList.toggle('active',j===idx)});
-sc.forEach(function(s,j){s.classList.toggle('active',j===idx)});
-dt.forEach(function(d,j){d.classList.toggle('active',j<=idx)});
-tabs.forEach(function(t,j){t.classList.toggle('active',j===idx)});
-if(statusEl)statusEl.textContent=statusTexts[idx]||'claude@focusai ~';
-var pb1=document.getElementById('ideProgress1'),pb3=document.getElementById('ideProgress3');
-if(pb1)pb1.style.width=(idx>=1?'100%':'0%');
-if(pb3)pb3.style.width=(idx>=3?'100%':'0%');
-var activeScreen=sc[idx];if(activeScreen&&!activeScreen.dataset.typed){
-activeScreen.dataset.typed='1';
-var lines=activeScreen.querySelectorAll('.ide-line');
-lines.forEach(function(line,li){
-line.style.opacity='0';line.style.transform='translateY(6px)';
-setTimeout(function(){line.style.transition='opacity .3s ease, transform .3s ease';
-line.style.opacity='1';line.style.transform='translateY(0)';},li*80);
-});}
-}});
-}else{
-/* Tablet + Mobile: hide desktop pin, show stacked cards */
-if(jp)jp.style.display='none';if(jm){jm.style.display='block';
+/* Desktop pin disabled — always show mobile cards layout */
+if(jp)jp.style.display='none';
+{if(jm){jm.style.display='block';
 document.querySelectorAll('.jm-card').forEach(function(card){
 gsap.from(card,{opacity:0,y:50,duration:.8,ease:'power3.out',scrollTrigger:{trigger:card,start:'top 85%',once:true}});
 var lines=card.querySelectorAll('.ide-line');
