@@ -618,6 +618,37 @@ git push backup main --tags
 - **Branch protection** requires GitHub Pro for private repos (not currently enabled)
 - **No secrets in repo** — `.env` excluded via `.gitignore`
 - Repo is **public** (required for cPanel pull without token — no Terminal access on host)
+- **No Terminal access on cPanel** — if deploy breaks, the only fix is delete & re-clone the repo in cPanel
+- **`.gitattributes`** enforces LF line endings + marks binary files — prevents CRLF→LF dirty worktree on Linux server
+
+### Deployment Safety Rules (CRITICAL — Learned from Incident 2026-03-01)
+
+**What happened:** A 2.87MB PDF was accidentally committed to `dist/`. On the Linux server, git converted line endings on the binary, creating a permanent dirty worktree. cPanel refused to deploy ("The system cannot deploy") because of uncommitted changes. Without Terminal access, the only fix was deleting and re-cloning the repo.
+
+**Rules to prevent this:**
+
+1. **NEVER commit binary files to git** (PDF, images, videos, ZIP)
+   - PDFs → upload to Cloudinary, link via URL
+   - Images → always Cloudinary CDN (`q_auto,f_auto`)
+   - The `.gitignore` blocks `dist/**/*.pdf`, `dist/**/*.mp4`, `*.pdf`
+   - The pre-commit hook only stages `*.html`, `*.css`, `*.js`, `*.xml`, `*.json` from dist/
+
+2. **NEVER use `git add dist/` or `git add .`** — these stage everything blindly
+   - The pre-commit hook uses selective glob patterns instead
+   - If you need to add a specific binary, do it explicitly: `git add path/to/file`
+
+3. **Before every push, verify no large/binary files are staged:**
+   ```bash
+   git diff --cached --stat | grep -E '\.(pdf|png|jpg|mp4|zip)'
+   ```
+
+4. **If cPanel shows "The system cannot deploy":**
+   - Root cause is almost always a dirty working tree on the server
+   - Without Terminal: delete repo in cPanel → re-clone → deploy
+   - Use a new path name if old directory still has files
+   - The live site at `public_html/` is NOT affected by repo deletion
+
+5. **`package-lock.json` changes** can add 1000+ lines — only commit when dependencies actually changed, not as a side effect of other work
 
 ### Security Headers (public/.htaccess)
 - HSTS (1 year)
@@ -633,6 +664,8 @@ git push backup main --tags
 - [ ] No console errors in dev
 - [ ] dist/ included in commit
 - [ ] No sensitive files (.env, credentials)
+- [ ] No binary files accidentally staged (`git diff --cached --stat`)
+- [ ] No `package-lock.json` changes unless dependencies were intentionally modified
 
 ---
 
@@ -781,7 +814,7 @@ Project-level hooks configured in `../.claude/settings.json`:
 
 | Hook | Event | What it does |
 |------|-------|-------------|
-| `pre-commit-build.sh` | PreToolUse (Bash) | Auto-runs `npm run build` + `git add dist/` before any `git commit` |
+| `pre-commit-build.sh` | PreToolUse (Bash) | Auto-runs `npm run build` + selectively stages dist/ (HTML/CSS/JS only, NO binaries) |
 | `pre-push-verify.sh` | PreToolUse (Bash) | Blocks `git push` if dist/ has unstaged changes |
 | `post-edit-validate.sh` | PostToolUse (Edit/Write) | Async `astro check` after editing .astro/.ts/.tsx files |
 | `post-task-save.js` | PostToolUse (Task) | Saves subagent output to `memory/sessions/subagents/` |

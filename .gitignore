@@ -27,3 +27,14 @@ memory/sessions/
 
 # Generated images (output of generate-*.mjs scripts)
 focusai-website/generated-images/
+
+# Binary files in dist/ — NEVER commit (break cPanel deploy via CRLF/LF mismatch)
+# These should be served via Cloudinary CDN, not from dist/
+focusai-website/dist/**/*.pdf
+focusai-website/dist/**/*.zip
+focusai-website/dist/**/*.mp4
+focusai-website/dist/**/*.webm
+
+# Large local-only files
+*.pdf
+!focusai-website/public/.htaccess
