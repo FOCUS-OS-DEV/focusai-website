@@ -614,34 +614,25 @@ body {
 .closing-logos img { height: 9mm; opacity: 0.4; }
 .closing-logos .sep { width: 1px; height: 7mm; background: rgba(255,255,255,0.06); }
 
-.closing-clients { display: flex; flex-direction: column; align-items: center; gap: 4mm; }
+.closing-clients { text-align: center; }
 .closing-clients-title {
   font-family: 'Rubik', sans-serif; font-size: 12pt; font-weight: 600;
-  color: #fff; letter-spacing: 0.04em; margin-bottom: 1mm;
+  color: #fff; letter-spacing: 0.04em; margin-bottom: 3mm;
 }
-.closing-row {
-  display: flex; justify-content: center; align-items: center;
-  gap: 0;
-  background: rgba(255,255,255,0.88);
-  border-radius: 3mm;
-  padding: 1.5mm 2mm;
-}
-.closing-row:nth-child(3) {
-  transform: translateX(8mm);
-}
-.closing-row:nth-child(4) {
-  transform: translateX(-8mm);
+.closing-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 2.5mm;
+  max-width: 170mm; margin: 0 auto;
 }
 .closing-logo-item {
   display: flex; align-items: center; justify-content: center;
-  height: 13mm; padding: 0 3.5mm;
-  border-left: 1px solid rgba(0,0,0,0.08);
+  height: 16mm;
+  background: rgba(255,255,255,0.9);
+  border-radius: 2.5mm;
+  padding: 2mm;
 }
-.closing-logo-item:last-child { border-left: none; }
 .closing-logo-item img {
-  max-width: 20mm; max-height: 10mm;
+  max-width: 90%; max-height: 80%;
   object-fit: contain;
-  opacity: 0.85;
 }
 
 .closing-url {
@@ -823,12 +814,9 @@ body {
   .closing-logos .sep { height: 24px; }
   .closing-clients { gap: 12px; }
   .closing-clients-title { font-size: 16px; }
-  .closing-row { flex-wrap: wrap; gap: 10px; }
-  .closing-row:nth-child(3) { transform: none; }
-  .closing-row { flex-wrap: wrap; padding: 12px 16px; border-radius: 12px; }
-  .closing-row:nth-child(3) { transform: none; }
-  .closing-logo-item { height: 40px; padding: 0 12px; }
-  .closing-logo-item img { max-width: 70px; max-height: 32px; opacity: 0.8; }
+  .closing-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 100%; }
+  .closing-logo-item { height: 40px; padding: 4px 8px; border-radius: 8px; }
+  .closing-logo-item img { max-width: 70px; max-height: 32px; opacity: 0.9; }
   .closing-url { font-size: 16px; }
 }
 
@@ -1428,24 +1416,17 @@ body {
     <!-- Client organizations -->
     <div class="closing-clients">
       <span class="closing-clients-title">כבר חלק מהמשפחה שלנו</span>
-      <!-- Row 1 (5) -->
-      <div class="closing-row">
+      <div class="closing-grid">
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982317/workshop-clients/client-29.png" alt="אוניברסיטת חיפה"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982356/workshop-clients/client-123546321.png" alt="הטכניון"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982344/workshop-clients/client-28.png" alt="ניומארק"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239335/40_xskhce.png" alt="דיקיפר"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/e_background_removal/e_trim/c_scale,w_400/f_auto/q_auto/v1764239334/38_ornkqc.png" alt="ג'ונגל סיטי"></div>
-      </div>
-      <!-- Row 2 — offset right (5) -->
-      <div class="closing-row">
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374432/%D7%94%D7%95%D7%A8%D7%93%D7%94__5_-removebg-preview_ohgatj.png" alt="BB Baby"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981996/workshop-clients/client-34.png" alt="דרכא"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982350/workshop-clients/client-25.png" alt="סאקסס קולג'"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374282/%D7%94%D7%95%D7%A8%D7%93%D7%94__2_-removebg-preview_tziibd.png" alt="רשגד"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982263/workshop-clients/client-36.png" alt="דיקנאט הסטודנטים"></div>
-      </div>
-      <!-- Row 3 — offset left (4) -->
-      <div class="closing-row">
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770981977/workshop-clients/client-32.png" alt="ויצו הדסים"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1770982106/workshop-clients/client-37.png" alt="אגודת הסטודנטים"></div>
         <div class="closing-logo-item"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1772374335/Logo-iJump_k7ahkw.png" alt="iJump"></div>
