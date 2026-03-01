@@ -18,6 +18,8 @@ export default defineConfig({
     '/ai-tools': '/tools',
     '/services/ai-agents': '/ai-agents',
     '/links': '/',
+    '/ai-ready': '/academy',
+    '/ai-first': '/academy',
   },
 
   vite: {
