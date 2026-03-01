@@ -214,15 +214,15 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .retro-keys span{height:13px;background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(0,0,0,.02) 100%);border-radius:2.5px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.25),0 2px 4px rgba(0,0,0,.08)}
 /* Wired Mouse — right side, cable goes up to monitor */
 .retro-mouse-area{position:absolute;right:-50px;bottom:-8px;display:flex;flex-direction:column;align-items:center;gap:0}
-.retro-mouse-cable{width:40px;height:90px;position:absolute;top:-85px;left:50%;transform:translateX(-50%);opacity:.85}
+.retro-mouse-cable{width:40px;height:calc(100% + 320px);position:absolute;bottom:38px;left:50%;transform:translateX(-50%);opacity:.85}
 .retro-mouse{width:28px;height:42px;background:linear-gradient(178deg,#d6ccae 0%,#c4b896 40%,#b0a37a 100%);border-radius:10px 10px 12px 12px;box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.1);position:relative;flex-shrink:0}
 .retro-mouse::before{content:'';position:absolute;inset:0;border-radius:10px 10px 12px 12px;background:linear-gradient(165deg,rgba(255,255,255,.15) 0%,transparent 50%);pointer-events:none}
 .retro-mouse-btns{display:flex;gap:1.5px;padding:4px 4px 0;justify-content:center}
 .retro-mouse-btns span{flex:1;height:14px;background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(0,0,0,.03) 100%);border-radius:3px 3px 1px 1px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08),0 1px 0 rgba(255,255,255,.15)}
 .retro-mouse-wheel{width:4px;height:6px;background:rgba(0,0,0,.15);border-radius:3px;margin:2px auto 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
 .retro-mouse-body{height:12px}
-@media(max-width:768px){.retro-mouse-area{right:-38px;bottom:-6px}.retro-mouse-cable{width:32px;height:70px;top:-65px}.retro-mouse{width:22px;height:34px;border-radius:8px 8px 10px 10px}.retro-mouse::before{border-radius:8px 8px 10px 10px}.retro-mouse-btns span{height:11px}.retro-mouse-wheel{width:3px;height:5px}}
-@media(max-width:480px){.retro-mouse-area{right:-28px;bottom:-4px}.retro-mouse-cable{width:24px;height:55px;top:-50px}.retro-mouse{width:18px;height:28px;border-radius:6px 6px 8px 8px}.retro-mouse::before{border-radius:6px 6px 8px 8px}.retro-mouse-btns{padding:3px 3px 0}.retro-mouse-btns span{height:9px}.retro-mouse-wheel{width:2.5px;height:4px}.retro-mouse-body{height:8px}}
+@media(max-width:768px){.retro-mouse-area{right:-38px;bottom:-6px}.retro-mouse-cable{width:32px;height:calc(100% + 260px);bottom:30px}.retro-mouse{width:22px;height:34px;border-radius:8px 8px 10px 10px}.retro-mouse::before{border-radius:8px 8px 10px 10px}.retro-mouse-btns span{height:11px}.retro-mouse-wheel{width:3px;height:5px}}
+@media(max-width:480px){.retro-mouse-area{right:-28px;bottom:-4px}.retro-mouse-cable{width:24px;height:calc(100% + 200px);bottom:24px}.retro-mouse{width:18px;height:28px;border-radius:6px 6px 8px 8px}.retro-mouse::before{border-radius:6px 6px 8px 8px}.retro-mouse-btns{padding:3px 3px 0}.retro-mouse-btns span{height:9px}.retro-mouse-wheel{width:2.5px;height:4px}.retro-mouse-body{height:8px}}
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 .code-particle{position:absolute;font-family:'Space Mono',monospace;pointer-events:none;z-index:1;will-change:transform,opacity;animation:codeFloat var(--cf-dur,6s) ease-in-out infinite,codeBlink var(--cb-dur,4s) ease-in-out infinite;animation-delay:var(--cf-delay,0s),var(--cb-delay,0s)}
 @keyframes codeFloat{0%,100%{transform:translateY(0) rotate(var(--cf-rot,0deg))}50%{transform:translateY(var(--cf-drift,-18px)) rotate(calc(var(--cf-rot,0deg) + 3deg))}}
@@ -301,7 +301,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .typewriter-line.typing .tw-text{visibility:visible}
 /* Human Learning Section */
 /* Insight sections — conversation-style deep dives */
-.insight-section{padding:80px 0;position:relative;z-index:3;background:#0a0a0f}
+.insight-section{padding:80px 0;position:relative;z-index:3}
 .insight-grid{display:flex;align-items:center;gap:64px;max-width:1100px;margin:0 auto}
 .insight-grid.flip{flex-direction:row-reverse}
 .insight-text{flex:1;min-width:0}
@@ -612,7 +612,7 @@ body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!im
 .dev-form-ok .ok-icon{font-size:36px;color:#39ff14;margin-bottom:10px}
 .dev-form-ok p{color:rgba(224,224,232,.7);font-size:14px;font-family:'Söhne Mono','Space Mono',monospace;line-height:1.8}
 .dev-form-err{color:#ff6b6b;font-size:12px;display:none;margin-top:4px;font-family:'Söhne Mono','Space Mono',monospace}
-.dev-form-headline{text-align:center;margin-bottom:20px}.dev-form-headline h3{font-size:clamp(18px,3vw,22px);font-weight:700;color:#fff;margin-bottom:6px}.dev-form-headline p{font-family:'Rubik',sans-serif;font-size:clamp(16px,2.5vw,20px);font-weight:600;color:rgba(200,180,255,.7);line-height:1.6}
+.dev-form-headline{text-align:center;margin-bottom:20px}.dev-form-headline h3{font-size:clamp(18px,3vw,22px);font-weight:700;color:#fff;margin-bottom:6px}.dev-form-headline p{font-family:'Rubik',sans-serif;font-size:clamp(16px,2.5vw,20px);font-weight:600;color:#fff;line-height:1.6}
 /* Brand colored names with tech underlines */
 .brand-claude{color:#d97757;position:relative;display:inline-block}.brand-claude::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:110%;height:3px;background:linear-gradient(90deg,transparent,#d97757 20%,#e8956e 50%,#d97757 80%,transparent);border-radius:2px;box-shadow:0 0 8px rgba(217,119,87,.4),0 0 16px rgba(217,119,87,.15)}
 .brand-n8n{color:#ea4b71;position:relative;display:inline-block}.brand-n8n::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:110%;height:3px;background:linear-gradient(90deg,transparent,#ea4b71 20%,#ff6b8a 50%,#ea4b71 80%,transparent);border-radius:2px;box-shadow:0 0 8px rgba(234,75,113,.4),0 0 16px rgba(234,75,113,.15)}
@@ -703,8 +703,8 @@ const &#123; data &#125; = await supabase
 </div>
 <!-- Wired Mouse (right side, cable goes up to monitor) -->
 <div class="retro-mouse-area">
+<svg class="retro-mouse-cable" viewBox="0 0 40 500" fill="none" preserveAspectRatio="none"><path d="M20,500 C20,470 26,440 24,400 C20,350 15,300 18,250 C21,200 16,150 20,100 C24,60 18,30 20,0" stroke="#8a7d62" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M20,500 C20,470 26,440 24,400 C20,350 15,300 18,250 C21,200 16,150 20,100 C24,60 18,30 20,0" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
 <div class="retro-mouse"><div class="retro-mouse-btns"><span></span><span></span></div><div class="retro-mouse-wheel"></div><div class="retro-mouse-body"></div></div>
-<svg class="retro-mouse-cable" viewBox="0 0 40 120" fill="none"><path d="M20,0 C20,15 15,25 12,40 C8,60 25,70 20,90 C18,100 20,110 20,120" stroke="#8a7d62" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M20,0 C20,15 15,25 12,40 C8,60 25,70 20,90 C18,100 20,110 20,120" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
 </div>
 </div>
 </div></div></div></section>
@@ -712,7 +712,7 @@ const &#123; data &#125; = await supabase
 <div class="section-divider"></div>
 
 <!-- PROBLEM -->
-<section class="section" id="problem"><div class="container" style="position:relative"><div class="clip-reveal" id="problemReveal" style="text-align:center"><div class="sec-label">// THE PROBLEM</div><h2 class="section-title decode-text"><span class="error-glitch" data-text="זו שגיאה!" style="display:block">זו שגיאה!</span>לראות את העולם משתנה<br/>ולצפות מהצד</h2>
+<section class="section" id="problem"><div class="container" style="position:relative"><div class="clip-reveal" id="problemReveal" style="text-align:center"><div class="sec-label">// THE PROBLEM</div><h2 class="section-title decode-text"><span class="error-glitch" data-text="זו שגיאה!" style="display:block">זו שגיאה!</span>להבין שהעולם משתנה<br/>ולהמשיך לצפות מהצד</h2>
 <div class="avatar-pain-grid" id="painStack">
 <div class="avatar-pain-card">
   <div class="avatar-pain-img-wrap">
