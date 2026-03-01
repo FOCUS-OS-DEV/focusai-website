@@ -610,11 +610,18 @@ body {
 }
 .closing-clients-grid {
   display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-  gap: 3mm 5mm; max-width: 165mm;
+  gap: 2.5mm; max-width: 170mm;
 }
-.closing-clients-grid img {
-  height: 9mm; opacity: 0.6;
-  filter: grayscale(1) brightness(1.8) contrast(1.1);
+.closing-logo-card {
+  display: flex; align-items: center; justify-content: center;
+  width: 26mm; height: 16mm;
+  background: #fff; border-radius: 3mm;
+  padding: 2mm 3mm;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.closing-logo-card img {
+  width: auto; max-width: 100%; max-height: 100%;
+  object-fit: contain; opacity: 0.85;
 }
 
 .closing-url {
@@ -792,8 +799,9 @@ body {
   .closing-logos .sep { height: 24px; }
   .closing-clients { gap: 16px; }
   .closing-clients-title { font-size: 14px; }
-  .closing-clients-grid { gap: 12px 20px; max-width: 100%; }
-  .closing-clients-grid img { height: 28px; opacity: 0.7; filter: grayscale(1) brightness(2) contrast(1.2); }
+  .closing-clients-grid { gap: 10px; max-width: 100%; }
+  .closing-logo-card { width: 100px; height: 60px; border-radius: 12px; padding: 8px 10px; }
+  .closing-logo-card img { opacity: 0.9; }
   .closing-url { font-size: 16px; }
 }
 
@@ -1379,20 +1387,20 @@ body {
     <div class="closing-clients">
       <span class="closing-clients-title">// organizations that trusted us</span>
       <div class="closing-clients-grid">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239338/41_nufstk.png" alt="אוניברסיטת חיפה">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239319/24_fcxmpa.png" alt="הטכניון">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239322/28_wg1jv8.png" alt="NEWMARK">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239335/40_xskhce.png" alt="Decipher">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239334/38_ornkqc.png" alt="Jungle City">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239327/35_gopg6v.png" alt="BB Baby">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239326/34_hfdzkq.png" alt="דרכא">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239324/31_brygr5.png" alt="היסוד הבסיסי">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239320/26_opmxu4.png" alt="Kimama">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239331/37_xm34qd.png" alt="אגודת הסטודנטים">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239325/32_fy3shq.png" alt="ויצו הדסים">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239329/36_ddwaud.png" alt="דיקנאט הסטודנטים">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239323/30_ahmcfn.png" alt="">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_150/e_background_removal/v1764239321/27_gzwe5z.png" alt="">
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239338/41_nufstk.png" alt="אוניברסיטת חיפה"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239319/24_fcxmpa.png" alt="הטכניון"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239322/28_wg1jv8.png" alt="ניו מארק"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239335/40_xskhce.png" alt="דיקיפר"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239334/38_ornkqc.png" alt="ג'ונגל סיטי"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239327/35_gopg6v.png" alt="בי בי בייבי"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239326/34_hfdzkq.png" alt="דרכא"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239324/31_brygr5.png" alt="היסוד הבסיסי"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239320/26_opmxu4.png" alt="Kimama"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239331/37_xm34qd.png" alt="אגודת הסטודנטים"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239325/32_fy3shq.png" alt="ויצו הדסים"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239329/36_ddwaud.png" alt="דיקנאט הסטודנטים"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239334/39_oc5dfg.png" alt="לקוח"></div>
+        <div class="closing-logo-card"><img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/e_background_removal/v1764239320/25_nxubzg.png" alt="לקוח"></div>
       </div>
     </div>
 
