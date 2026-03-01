@@ -286,8 +286,11 @@ Focus AI מכבדת את פרטיותכם ומחויבת להגן על המיד�
     // Dynamic CTA based on current page
     var path = window.location.pathname.replace(/\/$/, '');
     if (path === '/ai-fullstack') {
-      if (ctaLink) ctaLink.href = '#register';
-      if (ctaText) ctaText.textContent = 'להרשמה לתוכנית';
+      if (ctaLink) ctaLink.href = '/ai-fullstack#register';
+      if (ctaText) ctaText.textContent = 'להרשמה לתוכנית AI DEV';
+    } else {
+      if (ctaLink) ctaLink.href = '/academy/';
+      if (ctaText) ctaText.textContent = 'לפרטים על Bot-Camp';
     }
 
     function show() {
