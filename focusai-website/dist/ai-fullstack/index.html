@@ -152,7 +152,7 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 }
 @media(max-width:400px){.nn-grid.nn-orbit-mode{height:340px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.breathing-orb,.floating-code,.scanlines,.film-grain,.cursor-glow,#netBg{display:none!important}}
-.scroll-progress{position:fixed;top:0;right:0;width:3px;height:0%;background:linear-gradient(180deg,#a855f7,#00f5ff,#ff006e);z-index:10000;border-radius:0 0 2px 2px;box-shadow:0 0 12px rgba(168,85,247,0.5)}
+
 .film-grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:512px;animation:grainShift .5s steps(4) infinite}
 @keyframes grainShift{0%{transform:translate(0)}25%{transform:translate(-2px,3px)}50%{transform:translate(3px,-1px)}75%{transform:translate(-1px,-2px)}100%{transform:translate(2px,1px)}}
 .scanlines{position:fixed;inset:0;z-index:9997;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.02) 2px,rgba(0,0,0,.02) 4px)}
@@ -560,8 +560,8 @@ body.no-gsap .jm-card .ide-line{opacity:1!important;transform:none!important}
 .video-intro.exiting{animation:pullIntoScreen 1.4s cubic-bezier(.4,0,.2,1) forwards;transform-origin:50% 45%}
 @keyframes pullIntoScreen{0%{transform:scale(1);filter:brightness(1) blur(0);opacity:1}35%{transform:scale(2.5);filter:brightness(1.8) blur(2px);opacity:1}65%{transform:scale(5);filter:brightness(3) blur(6px);opacity:.7}100%{transform:scale(8);filter:brightness(0) blur(12px);opacity:0}}
 body.intro-playing{overflow:hidden!important}
-body.intro-playing .scroll-progress,body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!important}
-</style> <div class="ambient-layer ambient-dots"></div><div class="ambient-layer ambient-glow"></div> <div class="scroll-progress" id="scrollProgress"></div> <div class="breathing-orb orb-1"></div><div class="breathing-orb orb-2"></div><div class="breathing-orb orb-3"></div> <div class="floating-code fc-1">const ai = await claude.init()
+body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!important}
+</style> <div class="ambient-layer ambient-dots"></div><div class="ambient-layer ambient-glow"></div> <div class="breathing-orb orb-1"></div><div class="breathing-orb orb-2"></div><div class="breathing-orb orb-3"></div> <div class="floating-code fc-1">const ai = await claude.init()
 const result = ai.generate(&#123;
   prompt: userIntent,
   model: 'opus'
@@ -617,7 +617,6 @@ video.addEventListener('ended',endIntro);
 if(skipBtn)skipBtn.addEventListener('click',endIntro);
 var pp=video.play();if(pp&&pp.catch)pp.catch(function(){setTimeout(endIntro,500)});
 setTimeout(function(){if(!done)endIntro()},10000)})();
-var prog=document.getElementById('scrollProgress');if(prog)window.addEventListener('scroll',function(){var h=document.documentElement;prog.style.height=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'},{passive:true});
 var cg=document.getElementById('cursorGlow'),mx=0,my=0,gx=0,gy=0,hh=window.matchMedia('(hover:hover)').matches;if(hh&&cg){document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});(function l(){gx+=(mx-gx)*.1;gy+=(my-gy)*.1;cg.style.transform='translate('+(gx-250)+'px,'+(gy-250)+'px)';requestAnimationFrame(l)})()}
 if(hh)document.querySelectorAll('.tilt-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2;c.style.transform='perspective(800px) rotateX('+((y-cy)/cy*-6)+'deg) rotateY('+((x-cx)/cx*6)+'deg) scale(1.02)';var g=c.querySelector('.card-glow');if(g){g.style.opacity='1';g.style.background='radial-gradient(circle at '+x+'px '+y+'px,rgba(168,85,247,.1),transparent 60%)'}});c.addEventListener('mouseleave',function(){c.style.transform='';var g=c.querySelector('.card-glow');if(g)g.style.opacity='0'})});
 if(hh)document.querySelectorAll('.magnetic-btn').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)'});b.addEventListener('mouseleave',function(){b.style.transform='';b.style.transition='transform .4s cubic-bezier(.22,1,.36,1)';setTimeout(function(){b.style.transition=''},400)})});
