@@ -182,9 +182,9 @@ body {
   justify-content: space-between; padding-top: 12mm; padding-bottom: 10mm;
 }
 
-.cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.cover-logo { width: 55mm; opacity: 0.9; filter: drop-shadow(0 0 20px rgba(168,85,247,0.1)); }
-.cover-uni-logo { height: 44mm; opacity: 0.8; }
+.cover-top { display: flex; justify-content: space-between; align-items: center; }
+.cover-logo { height: 18mm; width: auto; opacity: 0.9; filter: drop-shadow(0 0 20px rgba(168,85,247,0.1)); }
+.cover-uni-logo { height: 18mm; width: auto; opacity: 0.8; }
 
 /* Fingerprint watermark on cover — right side, bleeding off edge */
 .cover-fingerprint {
@@ -203,18 +203,18 @@ body {
 /* Character mascot on cover */
 .cover-character {
   position: absolute;
-  bottom: -8mm;
+  bottom: 5mm;
   left: 50%;
   transform: translateX(-50%);
-  width: 130mm;
-  height: 115mm;
+  width: 140mm;
+  height: 130mm;
   object-fit: cover;
-  object-position: center 10%;
-  opacity: 0.18;
-  z-index: 2;
+  object-position: center 15%;
+  opacity: 0.35;
+  z-index: 3;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 30%, rgba(0,0,0,0.7) 5%, transparent 55%);
-  mask-image: radial-gradient(ellipse 70% 65% at 50% 30%, rgba(0,0,0,0.7) 5%, transparent 55%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 35%, rgba(0,0,0,0.8) 10%, transparent 60%);
+  mask-image: radial-gradient(ellipse 80% 75% at 50% 35%, rgba(0,0,0,0.8) 10%, transparent 60%);
 }
 
 /* ---- Neural Network Tech Logos ---- */
@@ -576,8 +576,8 @@ body {
   gap: 3mm 5mm; max-width: 165mm;
 }
 .closing-clients-grid img {
-  height: 7mm; opacity: 0.3;
-  filter: grayscale(1) brightness(2.5);
+  height: 9mm; opacity: 0.6;
+  filter: grayscale(1) brightness(1.8) contrast(1.1);
 }
 
 .closing-url {
@@ -627,123 +627,128 @@ body {
     box-shadow: none;
     border-bottom: 1px solid rgba(168,85,247,0.08);
   }
-  .page-inner { padding: 28px 20px; height: auto; }
+  .page-inner { padding: 32px 24px; height: auto; }
 
   /* Toolbar */
   .toolbar { padding: 10px 16px; }
-  .toolbar-btn { font-size: 12px; padding: 6px 14px; }
+  .toolbar-btn { font-size: 13px; padding: 8px 16px; }
 
   /* Decorative — simplify for mobile */
   .corners { display: none; }
-  .blob { opacity: 0.5; }
-  .lyr-grid { opacity: 0.3; }
-  .page-num { position: static; transform: none; text-align: center; padding-top: 16px; font-size: 12px; }
+  .blob { display: none; }
+  .lyr-grid { opacity: 0.2; }
+  .lyr-vig { display: none; }
+  .page-num { display: none; }
 
   /* ---- COVER ---- */
   .cover .page-inner {
-    padding: 24px 20px 32px;
-    justify-content: flex-start; gap: 20px;
+    padding: 32px 24px 40px;
+    justify-content: flex-start; gap: 24px;
   }
+  /* Logos — side by side, same height, centered */
   .cover-top {
-    flex-direction: column-reverse; align-items: center; gap: 12px;
+    flex-direction: row; justify-content: center;
+    align-items: center; gap: 24px;
   }
-  .cover-logo { width: 45vw; max-width: 200px; }
-  .cover-uni-logo { height: 15vw; max-height: 70px; }
+  .cover-logo { height: 36px; width: auto; }
+  .cover-uni-logo { height: 36px; width: auto; }
+  /* Hide fingerprint + character on mobile */
   .cover-fingerprint { display: none; }
-  .cover-character {
-    position: relative; bottom: auto; left: auto; transform: none;
-    width: 70vw; height: 50vw; max-width: 300px; max-height: 220px;
-    margin: 0 auto; opacity: 0.25;
-  }
-  .cover-center { gap: 12px; }
+  .cover-character { display: none; }
+  /* Center content */
+  .cover-center { gap: 16px; }
   .cover-pre { font-size: 11px; letter-spacing: 0.2em; margin-bottom: 0; }
-  .cover-title { font-size: clamp(36px, 12vw, 64px); }
-  .cover-line { width: 50vw; margin: 8px auto; }
-  .cover-subtitle { font-size: clamp(18px, 5vw, 24px); margin-bottom: 0; }
-  .cover-academic-sub { font-size: 16px; margin-top: 4px; }
-  .cover-desc { font-size: 16px; max-width: 100%; }
-  .cover-info { margin-top: 16px; }
-  .cover-info-title { font-size: 18px; }
-  .cover-info-details { font-size: 16px; }
-  .cover-bottom { margin-top: 16px; }
-  .cover-contact { font-size: 16px; gap: 16px; }
-  .cover-contact .sep { height: 16px; }
+  .cover-title { font-size: 48px; }
+  .cover-line { width: 60%; margin: 4px auto; }
+  .cover-subtitle { font-size: 22px; margin-bottom: 0; }
+  .cover-academic-sub { font-size: 15px; margin-top: 0; }
+  .cover-desc { font-size: 15px; max-width: 100%; line-height: 1.7; }
+  /* Info strip */
+  .cover-info { margin-top: 12px; }
+  .cover-info-title { font-size: 17px; }
+  .cover-info-details { font-size: 15px; }
+  /* Bottom contact */
+  .cover-bottom { margin-top: 20px; }
+  .cover-contact { font-size: 15px; gap: 16px; flex-direction: column; }
+  .cover-contact .sep { display: none; }
 
-  /* Neural network circles — responsive wrap */
-  .nn-tech { margin-top: 12px; }
+  /* ---- TECH LOGOS: hide circles, show simple grid ---- */
+  .nn-tech { margin-top: 16px; }
   .nn-mesh { display: none; }
-  .nn-row { flex-wrap: wrap; gap: 12px; justify-content: center; }
-  .nn-row + .nn-row { margin-top: 8px; }
-  .nn-row-sm { gap: 8px; }
-  .nn-circle { width: 48px; height: 48px; padding: 8px; }
-  .nn-circle.nn-lg { width: 56px; height: 56px; padding: 10px; }
-  .nn-circle.nn-xl { width: 64px; height: 64px; padding: 12px; }
-  .nn-lbl { font-size: 10px; }
-  .nn-title { font-size: 16px; margin-top: 12px; margin-bottom: 8px; }
+  .nn-row { flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .nn-row + .nn-row { margin-top: 12px; }
+  .nn-row-sm { gap: 12px; }
+  .nn-item { gap: 4px; }
+  /* Bigger circles on mobile for visibility */
+  .nn-circle { width: 52px; height: 52px; padding: 10px; }
+  .nn-circle.nn-lg { width: 58px; height: 58px; padding: 11px; }
+  .nn-circle.nn-xl { width: 62px; height: 62px; padding: 12px; }
+  .nn-lbl { font-size: 11px; color: #fff; }
+  .nn-title { font-size: 16px; margin-top: 16px; margin-bottom: 8px; }
 
   /* ---- ABOUT (page 2) ---- */
   .about-grid { grid-template-columns: 1fr; gap: 16px; }
-  .about-card { padding: 16px; }
-  .about-card h3 { font-size: 18px; }
+  .about-card { padding: 20px; }
+  .about-card h3 { font-size: 20px; }
   .about-card li { font-size: 16px; }
-  .about-icon { width: 36px; height: 36px; }
-  .about-icon svg { width: 18px; height: 18px; }
-  .format-bar { padding: 16px; }
-  .format-inner { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .fmt-item .num { font-size: 28px; }
-  .fmt-item .label { font-size: 16px; }
+  .about-icon { width: 40px; height: 40px; }
+  .about-icon svg { width: 20px; height: 20px; }
+  .format-bar { padding: 20px; }
+  .format-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .fmt-item .num { font-size: 32px; }
+  .fmt-item .label { font-size: 15px; }
 
   /* ---- Page headers ---- */
-  .pg-header { margin-bottom: 16px; }
+  .pg-header { margin-bottom: 20px; }
   .pg-header .glow-line { margin-bottom: 12px; }
   .pg-label { font-size: 12px; }
-  .pg-title { font-size: clamp(22px, 6vw, 32px); }
+  .pg-title { font-size: 28px; }
 
   /* ---- MODULES (pages 3-4) ---- */
-  .mod-grid { gap: 16px; }
-  .mod-card { grid-template-columns: 1fr; padding: 16px; gap: 12px; }
+  .mod-grid { gap: 20px; }
+  .mod-card { grid-template-columns: 1fr; padding: 20px; gap: 12px; }
   .mod-num-col { flex-direction: row; align-items: center; gap: 12px; padding: 0; margin-bottom: 4px; }
   .mod-ring { width: 48px; height: 48px; }
   .mod-ring .n { font-size: 16px; }
   .mod-hrs { font-size: 14px; }
-  .mod-body h3 { font-size: 18px; }
-  .mod-meta { font-size: 14px; margin-bottom: 8px; }
-  .mod-items { grid-template-columns: 1fr; gap: 6px; }
-  .mod-items li { font-size: 16px; padding-right: 16px; }
+  .mod-body h3 { font-size: 20px; }
+  .mod-meta { font-size: 14px; margin-bottom: 10px; }
+  .mod-items { grid-template-columns: 1fr; gap: 8px; }
+  .mod-items li { font-size: 16px; padding-right: 18px; line-height: 1.6; }
   .mod-accent { display: none; }
-  .mod-total { padding: 12px 16px; }
+  .mod-total { padding: 16px 20px; }
   .mod-total span { font-size: 16px; }
-  .mod-total strong { font-size: 20px; }
+  .mod-total strong { font-size: 22px; }
 
   /* ---- BONUSES (page 5) ---- */
   .bonus-grid { grid-template-columns: 1fr; gap: 16px; }
-  .bonus-card { padding: 16px; }
-  .bonus-card h4 { font-size: 18px; }
+  .bonus-card { padding: 20px; }
+  .bonus-card h4 { font-size: 20px; }
   .bonus-card p { font-size: 16px; }
-  .bonus-tag { font-size: 14px; padding: 4px 10px; }
-  .bonus-icon { width: 36px; height: 36px; }
-  .bonus-icon svg { width: 18px; height: 18px; }
-  .bonus-banner { padding: 16px; }
-  .bonus-banner h4 { font-size: 18px; }
+  .bonus-tag { font-size: 14px; padding: 6px 12px; }
+  .bonus-icon { width: 40px; height: 40px; }
+  .bonus-icon svg { width: 20px; height: 20px; }
+  .bonus-banner { padding: 20px; }
+  .bonus-banner h4 { font-size: 20px; }
   .bonus-banner p { font-size: 16px; }
 
   /* ---- CLOSING (page 6) ---- */
-  .closing .page-inner { padding: 40px 20px; gap: 16px; }
+  .closing .page-inner { padding: 48px 24px; gap: 20px; }
   .closing-logo { width: 80px; }
-  .closing-headline { font-size: clamp(24px, 7vw, 36px); }
+  .closing-headline { font-size: 28px; }
   .closing-sub { font-size: 16px; }
-  .closing-cta { font-size: 18px; padding: 14px 32px; border-radius: 12px; }
-  .closing-details { flex-wrap: wrap; justify-content: center; gap: 12px; }
-  .closing-detail { font-size: 16px; }
+  .closing-cta { font-size: 18px; padding: 16px 36px; border-radius: 12px; }
+  .closing-details { flex-direction: column; align-items: center; gap: 10px; }
+  .closing-detail { font-size: 15px; }
   .closing-detail svg { width: 14px; height: 14px; }
-  .closing-sep { width: 60vw; }
-  .closing-logos { gap: 12px; }
-  .closing-logos img { height: 28px; }
-  .closing-logos .sep { height: 20px; }
-  .closing-clients { gap: 12px; }
+  .closing-sep { width: 50%; }
+  .closing-logos { gap: 16px; }
+  .closing-logos img { height: 32px; }
+  .closing-logos .sep { height: 24px; }
+  .closing-clients { gap: 16px; }
   .closing-clients-title { font-size: 14px; }
-  .closing-clients-grid { gap: 10px 16px; }
-  .closing-clients-grid img { height: 24px; }
+  .closing-clients-grid { gap: 12px 20px; max-width: 100%; }
+  .closing-clients-grid img { height: 28px; opacity: 0.7; filter: grayscale(1) brightness(2) contrast(1.2); }
   .closing-url { font-size: 16px; }
 }
 
@@ -808,7 +813,7 @@ body {
         <p class="cover-info-details">המחזור הקרוב מתחיל 29.04.2026 · ימי רביעי · 17:00–21:00</p>
       </div>
 
-      <span class="nn-title">חלק מהמערכות שנלמד לעבוד איתם</span>
+      <span class="nn-title">חלק מהמערכות שנלמד לעבוד איתן</span>
       <!-- Tech Stack: Neural Network -->
       <div class="nn-tech">
         <!-- Neural network mesh background -->
