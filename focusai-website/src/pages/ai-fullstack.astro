@@ -9,6 +9,7 @@ import CookieConsent from '../components/CookieConsent.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import BackToTop from '../components/BackToTop.astro';
 import VideoTestimonials from '../components/VideoTestimonials.astro';
+import VideoPopup from '../components/VideoPopup.astro';
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -729,7 +730,7 @@ const &#123; data &#125; = await supabase
 <span class="dev-form-dot"></span>
 <span class="dev-form-label">focusai ~ register</span>
 </div><div class="dev-form-body">
-<div class="dev-form-headline"><h3>מוכנים לבנות את המוצר הראשון?</h3><p>// loading next_developer.exe</p></div>
+<div class="dev-form-headline"><h3>העמוד הזה? נבנה עם Claude Code ובינה אנושית.</h3><p>בהכשרה תלמדו לבנות את זה — והרבה, הרבה מעבר.</p></div>
 <div class="dev-form-cmd"><span class="prompt">focusai ~$</span> <span class="cmd">register --quick</span></div>
 <form class="dev-form-fields" id="devForm1" novalidate>
 <div class="dev-form-row"><label>&gt; name:</label><input type="text" name="name" placeholder="השם שלך" required/></div>
@@ -1290,6 +1291,7 @@ const &#123; data &#125; = await supabase
 
 </main>
 <Footer />
+<VideoPopup />
 <CookieConsent />
 <BackToTop />
 <WhatsAppFloat />
