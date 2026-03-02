@@ -48,7 +48,7 @@ export const founders: TeamMember[] = [
     title: "COO & Business Development",
     bio: "יזם, מנהל רשתות, בעל ניסיון עשיר בניהול, תפעול וצמיחה עסקית. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון.",
     fullBio: `יזם, מנהל רשתות, בעל ניסיון עשיר בניהול, תפעול וצמיחה עסקית. סמנכ"ל תפעול ושיווק לשעבר ברשתות קמעונאיות מובילות, מביא פרספקטיבה עסקית לפתרונות טכנולוגיים. מפתח מערכות בשילוב AI, פיתוח עסקי ויישום פתרונות AI עם הבנה עמוקה לצרכי הלקוח והארגון. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מחבר בין עולם העסקים לטכנולוגיה.`,
-    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_500,c_fill,g_auto/v1770364984/IMG_4898.JPG_uate4o.jpg",
+    image: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_500,c_fill,g_face/v1772437274/IMG_4890.JPG_cqfjof.jpg",
     credentials: ["אוניברסיטת חיפה", "טכניון", "ניהול תפעול"],
     status: "ONLINE",
     social: {
