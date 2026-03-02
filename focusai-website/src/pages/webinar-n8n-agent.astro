@@ -2219,7 +2219,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         // Validation function
         function validateField(field, pattern) {
             var value = field.value.trim().replace(/[-\s]/g, '');
-            var testValue = (field.id === 'phone') ? value : field.value.trim();
+            var testValue = (field.type === 'tel') ? value : field.value.trim();
             if (!pattern.test(testValue)) {
                 field.style.borderColor = '#ef4444';
                 field.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.2)';
