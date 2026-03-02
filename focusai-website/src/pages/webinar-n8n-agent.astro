@@ -1781,6 +1781,81 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             </div>
         </div>
 
+        <!-- Registration Form (after countdown) -->
+        <div class="form-section" style="margin-top: 20px;">
+            <div class="form-header">
+                <h2 class="form-title">שמרו לכם מקום בוובינר</h2>
+                <p class="form-subtitle">המקומות מוגבלים - הבטיחו את מקומכם עכשיו</p>
+            </div>
+
+            <form id="leadForm2">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName2" class="required">
+                            <i class="fas fa-user"></i>
+                            שם פרטי
+                        </label>
+                        <input type="text" id="firstName2" name="firstName" placeholder="שם פרטי" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם פרטי - אותיות בלבד, 2-30 תווים">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName2" class="required">
+                            <i class="fas fa-user"></i>
+                            שם משפחה
+                        </label>
+                        <input type="text" id="lastName2" name="lastName" placeholder="שם משפחה" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם משפחה - אותיות בלבד, 2-30 תווים">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone2" class="required">
+                        <i class="fas fa-phone"></i>
+                        טלפון
+                    </label>
+                    <input type="tel" id="phone2" name="phone" placeholder="052-0000000" required pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
+                </div>
+
+                <div class="form-group">
+                    <label for="email2" class="required">
+                        <i class="fas fa-envelope"></i>
+                        אימייל
+                    </label>
+                    <input type="email" id="email2" name="email" placeholder="כתובת המייל שלך" required>
+                </div>
+
+                <!-- Privacy Section -->
+                <div class="privacy-section">
+                    <div class="privacy-notice">
+                        <i class="fas fa-shield-alt"></i>
+                        <span><strong>יידוע בהתאם לחוק:</strong> הפרטים שלך יישמרו במאגר מידע רשום ויישמשו לשליחת פרטי הוובינר ותכנים רלוונטיים. ניתן לבקש עיון, תיקון או מחיקה בכל עת.</span>
+                    </div>
+
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="privacyConsent2" name="privacyConsent" required>
+                        <span class="checkbox-label">
+                            קראתי ואני מסכים/ה ל<a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ול<a href="/terms/" target="_blank">תנאי השימוש</a>. *
+                        </span>
+                    </label>
+
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="marketingConsent2" name="marketingConsent" required>
+                        <span class="checkbox-label">
+                            אני מסכים/ה לקבל עדכונים, טיפים ותוכן בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת. *
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn2">
+                    <span class="btn-text">שמרו לי מקום בוובינר <i class="fas fa-arrow-left"></i></span>
+                    <span class="spinner"></span>
+                </button>
+
+                <div class="form-wa-note">
+                    <i class="fab fa-whatsapp"></i>
+                    <span><strong>לינק הזום יישלח דרך קהילת ה-WhatsApp שלנו</strong> &ndash; לאחר ההרשמה תופנו להצטרף לקהילה.</span>
+                </div>
+            </form>
+        </div>
+
         <!-- Story Hook - Why this webinar matters -->
         <div class="story-hook">
             <div class="hook-image-wrap">
@@ -2266,6 +2341,102 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         successOverlay.addEventListener('click', function(e) {
             if (e.target === successOverlay) {
                 successOverlay.classList.remove('show');
+            }
+        });
+
+        // Second form handling (same webhook, same schema)
+        var form2 = document.getElementById('leadForm2');
+        var submitBtn2 = document.getElementById('submitBtn2');
+
+        // Phone formatting for second form
+        var phone2Input = document.getElementById('phone2');
+        phone2Input.addEventListener('input', function() {
+            var val = this.value.replace(/[^\d-]/g, '');
+            if (val.length === 3 && !val.includes('-') && val.startsWith('0')) {
+                val = val + '-';
+            }
+            this.value = val;
+        });
+
+        form2.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            var firstName2 = document.getElementById('firstName2');
+            var lastName2 = document.getElementById('lastName2');
+            var phone2 = document.getElementById('phone2');
+            var email2 = document.getElementById('email2');
+            var privacyConsent2 = document.getElementById('privacyConsent2');
+            var marketingConsent2 = document.getElementById('marketingConsent2');
+
+            var isFirstNameValid = validateField(firstName2, patterns.name);
+            var isLastNameValid = validateField(lastName2, patterns.name);
+            var isPhoneValid = validateField(phone2, patterns.phone);
+            var isEmailValid = validateField(email2, patterns.email);
+
+            if (!isFirstNameValid || !isLastNameValid || !isPhoneValid || !isEmailValid) {
+                alert('נא למלא את כל השדות בצורה תקינה');
+                return;
+            }
+
+            if (!privacyConsent2.checked) {
+                alert('יש לאשר את מדיניות הפרטיות כדי להמשיך');
+                return;
+            }
+
+            if (!marketingConsent2.checked) {
+                alert('יש לאשר קבלת עדכונים כדי להמשיך');
+                return;
+            }
+
+            submitBtn2.classList.add('loading');
+            submitBtn2.disabled = true;
+
+            var formData = {
+                fullName: firstName2.value.trim() + ' ' + lastName2.value.trim(),
+                email: email2.value.trim(),
+                phone: phone2.value.trim().replace(/[-\s]/g, ''),
+            };
+
+            try {
+                var response = await fetch('https://focus2025.app.n8n.cloud/webhook/webinar-n8n-agent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    var errorMessage = 'שגיאת שרת (' + response.status + ')';
+                    try {
+                        var errorData = await response.json();
+                        if (errorData.message) errorMessage = errorData.message;
+                        else if (errorData.error) errorMessage = errorData.error;
+                    } catch (parseErr) {
+                        errorMessage = 'שגיאה: ' + response.status + ' - ' + (response.statusText || 'שגיאה בשרת');
+                    }
+                    throw new Error(errorMessage);
+                }
+
+                window.location.href = '/webinar-n8n-thank-you/';
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                var userMessage = 'אירעה שגיאה. אנא נסו שוב.';
+
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    userMessage = 'שגיאת תקשורת: לא ניתן להתחבר לשרת. בדקו את חיבור האינטרנט ונסו שוב.';
+                } else if (error.message.includes('CORS')) {
+                    userMessage = 'שגיאת הרשאות: הגישה לשרת נחסמה. נסו שוב מאוחר יותר.';
+                } else if (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0) {
+                    userMessage = error.message;
+                } else if (error.message) {
+                    userMessage = 'שגיאה: ' + error.message;
+                }
+
+                alert(userMessage);
+            } finally {
+                submitBtn2.classList.remove('loading');
+                submitBtn2.disabled = false;
             }
         });
     </script>
