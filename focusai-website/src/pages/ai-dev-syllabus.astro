@@ -421,20 +421,20 @@ body {
    ============================================= */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
 
-.about-card { padding: 3.5mm 4mm; display: flex; flex-direction: column; }
+.about-card { padding: 3mm 4mm; display: flex; flex-direction: column; }
 .about-icon {
-  width: 10mm; height: 10mm; border-radius: 8px;
+  width: 8mm; height: 8mm; border-radius: 8px;
   background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(168,85,247,0.05));
   border: 1px solid var(--border-accent);
-  display: flex; align-items: center; justify-content: center; margin-bottom: 3mm;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 2mm;
 }
-.about-icon svg { width: 5mm; height: 5mm; color: var(--purple-light); }
+.about-icon svg { width: 4mm; height: 4mm; color: var(--purple-light); }
 
-.about-card h3 { font-size: 12pt; font-weight: 700; color: #fff; margin-bottom: 1.5mm; }
-.about-card ul { list-style: none; display: flex; flex-direction: column; gap: 1.5mm; }
+.about-card h3 { font-size: 11pt; font-weight: 700; color: #fff; margin-bottom: 1mm; }
+.about-card ul { list-style: none; display: flex; flex-direction: column; gap: 1mm; }
 .about-card li {
-  font-size: 12pt; color: var(--text-mid); padding-right: 4mm;
-  position: relative; line-height: 1.55;
+  font-size: 10.5pt; color: var(--text-mid); padding-right: 4mm;
+  position: relative; line-height: 1.45;
 }
 .about-card li::before {
   content: ''; position: absolute; right: 0; top: 2.2mm;
@@ -443,8 +443,8 @@ body {
 }
 
 .about-intro {
-  font-size: 10pt; color: var(--text-dim); line-height: 1.6;
-  display: flex; flex-direction: column; gap: 2.5mm;
+  font-size: 9pt; color: var(--text-dim); line-height: 1.55;
+  display: flex; flex-direction: column; gap: 2mm;
 }
 .about-intro p { margin: 0; }
 
@@ -474,7 +474,7 @@ body {
   width: 42mm;
 }
 .instructor-img {
-  width: 20mm; height: 28mm; border-radius: 4mm;
+  width: 18mm; height: 22mm; border-radius: 3.5mm;
   object-fit: cover;
   border: 2px solid rgba(168,85,247,0.3);
   box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 3px rgba(168,85,247,0.08);
@@ -496,11 +496,11 @@ body {
 /* =============================================
    PAGES 3-4: MODULES
    ============================================= */
-.mod-grid { display: flex; flex-direction: column; gap: 4mm; flex: 1; }
+.mod-grid { display: flex; flex-direction: column; gap: 3mm; flex: 1; }
 
 .mod-card {
-  padding: 5mm 5mm 5mm 5mm; display: grid;
-  grid-template-columns: auto 1fr; gap: 4mm; flex: 1; align-content: start;
+  padding: 4mm 5mm 4mm 5mm; display: grid;
+  grid-template-columns: auto 1fr; gap: 3mm; flex: 1; align-content: start;
 }
 
 /* Right accent bar */
@@ -532,13 +532,13 @@ body {
 .mod-body { position: relative; z-index: 2; }
 .mod-body h3 { font-size: 12pt; font-weight: 700; color: #fff; margin-bottom: 0.5mm; }
 .mod-meta {
-  font-family: 'Rubik', sans-serif; font-size: 12pt; color: var(--purple);
-  margin-bottom: 3mm; letter-spacing: 0.04em; opacity: 0.8;
+  font-family: 'Rubik', sans-serif; font-size: 10pt; color: var(--purple);
+  margin-bottom: 2mm; letter-spacing: 0.04em; opacity: 0.8;
 }
-.mod-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm 4mm; list-style: none; }
+.mod-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1mm 4mm; list-style: none; }
 .mod-items li {
-  font-size: 12pt; color: var(--text-mid); padding-right: 3.5mm;
-  position: relative; line-height: 1.5;
+  font-size: 10.5pt; color: var(--text-mid); padding-right: 3.5mm;
+  position: relative; line-height: 1.45;
 }
 .mod-items li::before {
   content: '\2713'; position: absolute; right: 0;
@@ -546,7 +546,7 @@ body {
   text-shadow: 0 0 5px rgba(168,85,247,0.35);
 }
 
-.mod-total { margin-top: auto; padding: 3.5mm 5mm; }
+.mod-total { margin-top: auto; padding: 3mm 5mm; }
 .mod-total-inner {
   display: flex; align-items: center; justify-content: space-between;
   position: relative; z-index: 2;
