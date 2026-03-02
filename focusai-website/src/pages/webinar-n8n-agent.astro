@@ -1795,14 +1795,14 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                             <i class="fas fa-user"></i>
                             שם פרטי
                         </label>
-                        <input type="text" id="firstName2" name="firstName" placeholder="שם פרטי" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם פרטי - אותיות בלבד, 2-30 תווים">
+                        <input type="text" id="firstName2" name="firstName" placeholder="שם פרטי" required pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,30}"} title="שם פרטי - אותיות בלבד, 2-30 תווים">
                     </div>
                     <div class="form-group">
                         <label for="lastName2" class="required">
                             <i class="fas fa-user"></i>
                             שם משפחה
                         </label>
-                        <input type="text" id="lastName2" name="lastName" placeholder="שם משפחה" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם משפחה - אותיות בלבד, 2-30 תווים">
+                        <input type="text" id="lastName2" name="lastName" placeholder="שם משפחה" required pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,30}"} title="שם משפחה - אותיות בלבד, 2-30 תווים">
                     </div>
                 </div>
 
@@ -1811,7 +1811,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         <i class="fas fa-phone"></i>
                         טלפון
                     </label>
-                    <input type="tel" id="phone2" name="phone" placeholder="052-0000000" required pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
+                    <input type="tel" id="phone2" name="phone" placeholder="052-0000000" required pattern={"0[2-9][0-9\\-\\s]{7,11}"} title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
                 </div>
 
                 <div class="form-group">
@@ -2019,14 +2019,14 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                                 <i class="fas fa-user"></i>
                                 שם פרטי
                             </label>
-                            <input type="text" id="firstName" name="firstName" placeholder="שם פרטי" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם פרטי - אותיות בלבד, 2-30 תווים">
+                            <input type="text" id="firstName" name="firstName" placeholder="שם פרטי" required pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,30}"} title="שם פרטי - אותיות בלבד, 2-30 תווים">
                         </div>
                         <div class="form-group">
                             <label for="lastName" class="required">
                                 <i class="fas fa-user"></i>
                                 שם משפחה
                             </label>
-                            <input type="text" id="lastName" name="lastName" placeholder="שם משפחה" required pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}" title="שם משפחה - אותיות בלבד, 2-30 תווים">
+                            <input type="text" id="lastName" name="lastName" placeholder="שם משפחה" required pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,30}"} title="שם משפחה - אותיות בלבד, 2-30 תווים">
                         </div>
                     </div>
 
@@ -2035,7 +2035,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                             <i class="fas fa-phone"></i>
                             טלפון
                         </label>
-                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
+                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required pattern={"0[2-9][0-9\\-\\s]{7,11}"} title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
                     </div>
 
                     <div class="form-group">
@@ -2213,7 +2213,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         var patterns = {
             phone: /^0[2-9]\d{7,8}$/,
             email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            name: /^[\u0590-\u05FFa-zA-Z\s]{2,30}$/
+            name: /^[\u0590-\u05FFa-zA-Z\s'\-]{2,30}$/
         };
 
         // Validation function
