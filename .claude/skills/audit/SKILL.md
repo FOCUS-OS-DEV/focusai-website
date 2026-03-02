@@ -1,8 +1,7 @@
 ---
 name: audit
-description: Run a comprehensive Focus AI website audit (SEO, links, performance, compliance)
-user-invocable: true
-allowed-tools: Read, Glob, Grep, Bash, WebFetch
+description: Runs a comprehensive Focus AI website audit covering SEO, broken links, schema.org, images, analytics, and privacy compliance. Use when asked to audit, check, validate, or review the website.
+user-invokable: true
 ---
 
 # Site Audit — Focus AI

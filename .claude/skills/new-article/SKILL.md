@@ -1,8 +1,7 @@
 ---
 name: new-article
-description: Create a new blog article for Focus AI with full frontmatter and standards
-user-invocable: true
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
+description: Creates a new Hebrew blog article (כתבה) for the Focus AI /ai-news/ blog with correct frontmatter, content structure, and CTA. Use when asked to write a new article, news piece, blog post, or כתבה.
+user-invokable: true
 ---
 
 # New Blog Article — Focus AI

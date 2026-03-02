@@ -29,7 +29,12 @@
       "Bash(ls:*)",
       "Bash(sort:*)",
       "Bash(du:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:turborepo.dev)",
+      "Bash(pnpm turbo build --filter=@os/web... --force)",
+      "Bash(openssl s_client -connect focusai.co.il:443 -servername focusai.co.il)",
+      "Bash(openssl x509 -noout -text)",
+      "mcp__cloudinary-assets__transform-asset"
     ]
   }
 }

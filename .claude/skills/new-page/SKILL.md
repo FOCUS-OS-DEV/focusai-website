@@ -1,8 +1,7 @@
 ---
 name: new-page
-description: Create a new page for the Focus AI website with full standards compliance
-user-invocable: true
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+description: Creates a new Focus AI website page (Astro, BaseLayout or standalone) with full SEO, analytics, and design standards compliance. Use when adding any new route, page, or section to the website.
+user-invokable: true
 ---
 
 # New Page — Focus AI
