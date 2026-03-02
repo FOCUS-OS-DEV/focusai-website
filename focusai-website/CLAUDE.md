@@ -23,7 +23,7 @@
 | `social.instagram` | `https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==` |
 | `social.facebook` | `https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/` |
 | `social.tiktok` | `https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh` |
-| `social.whatsappCommunity` | `https://did.li/Focus-community` |
+| `social.whatsappCommunity` | `https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t` |
 
 ### Legal (DO NOT CHANGE)
 | Key | Value |
@@ -708,8 +708,8 @@ Base URL: `https://res.cloudinary.com/dfudxxzlj/image/upload/`
 
 | Name | Role | Background |
 |------|------|------------|
-| **Shahar Dadia** | CEO & AI Strategy | University of Haifa + Technion instructor |
-| **Unil Sahar** | COO & Business Dev | University of Haifa + Technion instructor |
+| **Shahar Dadia (שחר דדיה)** | CEO & Co-Founder | University of Haifa + Technion instructor |
+| **Unil Sahar (אוניל סחר)** | CEO & Co-Founder | University of Haifa + Technion instructor |
 
 ---
 
@@ -830,6 +830,43 @@ npm run lint:fix # ESLint — auto-fix what's possible
 
 ---
 
+## Astro Template Gotchas (CRITICAL)
+
+### Backslash Escapes in HTML Attributes
+
+**Astro processes HTML attribute values as JS strings.** This silently breaks regex patterns and Unicode escapes.
+
+| You write in `.astro` | Astro outputs in HTML | Result |
+|----------------------|----------------------|--------|
+| `pattern="\s"` | `pattern="s"` | BROKEN — `\s` treated as invalid JS escape, backslash stripped |
+| `pattern="\d"` | `pattern="d"` | BROKEN — same issue |
+| `pattern="\u0590"` | `pattern="֐"` | Works but converted to literal char |
+
+**Fix:** Use Astro expression syntax with double-escaped backslashes:
+
+```astro
+<!-- WRONG — Astro strips backslashes -->
+<input pattern="[\u0590-\u05FFa-zA-Z\s]{2,30}">
+
+<!-- CORRECT — expression syntax preserves escapes -->
+<input pattern={"[\\u0590-\\u05FFa-zA-Z\\s]{2,30}"}>
+```
+
+**This applies to ALL HTML attributes** that contain backslashes — not just `pattern`. Applies to `title`, `data-*`, or any attribute with regex/Unicode content.
+
+**JS in `<script>` tags is NOT affected** — only HTML attributes in the template section.
+
+### Verification Rule
+
+After editing any HTML attribute containing backslash sequences, **always check the built output**:
+```bash
+npm run build
+grep -o 'pattern="[^"]*"' dist/PAGE/index.html
+```
+Verify that `\s`, `\d`, `\u` appear correctly (not stripped to `s`, `d`, `u`).
+
+---
+
 ## Hooks (Claude Code)
 
 Project-level hooks configured in `../.claude/settings.json`:
@@ -885,6 +922,12 @@ Specialized subagents for specific tasks:
 ---
 
 ## Recent Changes Log
+
+### 2026-03-02
+- **Fix: Astro regex escaping bug** — `\s` and `\u` in HTML `pattern` attributes were silently stripped by Astro's JS string processing. Fixed by using expression syntax `pattern={"..."}` with double-escaped backslashes. Added "Astro Template Gotchas" section to CLAUDE.md.
+- **Founder data normalized** site-wide — both founders now consistently "CEO & Co-Founder" across all 8 files (team.ts, academy, about, ai-fullstack, webinar, etc.)
+- **Webinar page updates** — second registration form after countdown, WhatsApp link updated on thank-you page
+- **Typewriter text alignment** — constrained to right column (`lg:w-1/2 lg:ml-auto`)
 
 ### 2026-03-01
 - **INCIDENT: CSS Hash Mismatch — Site Styling Broken**

@@ -35,7 +35,7 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/",
     tiktok: "https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh",
     linkedin: "", // TBD - add when available
-    whatsappCommunity: "https://did.li/Focus-community",
+    whatsappCommunity: "https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t",
     youtube: "", // TBD - add when available
   },
 
