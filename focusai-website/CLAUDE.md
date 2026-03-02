@@ -1,7 +1,7 @@
 # Focus AI Website - System Prompt
 
 > This file contains all instructions and context for Claude Code.
-> **Last Updated:** 2026-02-27
+> **Last Updated:** 2026-03-02
 
 ---
 
@@ -753,6 +753,82 @@ Forms exist on:
 - Blog article pages (bottom CTA)
 
 All forms include privacy/terms checkbox. All use the SAME webhook URL.
+
+---
+
+## Legal / Security / GDPR (CRITICAL)
+
+### Forms & Data Collection
+- **ALL forms MUST include** a privacy/terms checkbox with links to `/privacy-policy` and `/terms`
+- **Phone fields MUST validate** Israeli numbers only (050/052/053/054/055/058 formats)
+- **Unsubscribe URL**: `/unsubscribe-any` — the ONLY valid unsubscribe link across ALL email lists and communications
+- **No third-party pixels** without disclosure in `/privacy-policy` — GTM and Clarity are already disclosed
+- **Webhook endpoint is public** — never log PII in webhook responses; N8N handles data retention
+
+### Email Templates
+- Every email MUST have an unsubscribe link pointing to `/unsubscribe-any` (not a mailto, not a form)
+- Marketing emails require explicit consent (checkbox data from form submission)
+- Transactional emails (thank-you, confirmation) don't require unsubscribe but SHOULD include it
+
+### Security Rules
+- **NEVER hardcode API keys** in source files — use `.env` (excluded via `.gitignore`)
+- **Repo is PUBLIC** — assume everything committed is publicly visible
+- **No secrets in commit messages** — webhook URLs, API keys, passwords
+- **HSTS enabled** — 1 year, enforced via `.htaccess`
+- **CSP not currently enforced** — be careful with inline scripts and external sources
+- **Never add `eval()` or `new Function()`** in client-side code
+- **Sanitize all user input** displayed back on-screen (testimonials, form echo, etc.)
+- **N8N webhook** receives form data — only send: name, phone, email, source. Never forward sensitive fields.
+
+### GDPR Compliance (Israeli Privacy Law 5741-1981 + GDPR where applicable)
+- Cookie consent banner is live (`CookieConsent.astro`) — do not remove
+- Analytics (GTM/Clarity) only fire after consent or as analytics exception
+- Data subject rights: erasure requests go to `office@focusai.co.il`
+- Retention policy: defined in `/privacy-policy` — do not make claims that contradict it
+
+---
+
+## Incident Protocol (CRITICAL — When Things Break)
+
+> **Full procedure:** `memory/incident-protocol.md`
+
+### When to activate
+Any time: production breaks, security risk appears, structural failure, bad code pattern discovered, legal/compliance issue found.
+
+### Quick Response (P0/P1 — Production Affected)
+
+1. **Stop current work** — fix the production issue first
+2. **Identify what changed** → `git log --oneline -10` + `git diff HEAD~1 HEAD --stat`
+3. **Fix it** — fastest path: revert if last commit caused it (`git revert HEAD`)
+4. **Verify** → check the specific file/route locally
+5. **Build, commit, push** → tell user to pull from cPanel
+
+### CSS/JS Integrity Check (run before every push)
+```bash
+# Look for hash-renamed files (D = deleted old, ?? = untracked new)
+git status focusai-website/dist/_astro/ --short
+
+# Find HTML files referencing missing assets
+for f in $(grep -roh '_astro/[^"]*\.\(css\|js\)' focusai-website/dist/ 2>/dev/null | sort -u); do
+  [ ! -f "focusai-website/dist/$f" ] && echo "MISSING: dist/$f"
+done
+```
+
+### After Every Incident: Extract → Integrate
+1. Write brief incident file: `memory/incidents/YYYY-MM-DD-{slug}.md`
+2. Extract ONE actionable rule per root cause
+3. Add the rule to the correct section of **this file (CLAUDE.md)**
+4. Add to Pre-Deployment Checklist if it's a deployment error
+5. Log in `memory/incident-protocol.md` → Incident Log table
+6. Update `memory/MEMORY.md` → Current State or Incidents table
+
+### Severity Quick Reference
+| Level | Examples |
+|-------|---------|
+| 🔴 P0 | Site DOWN, data breach, form leaking PII |
+| 🟠 P1 | Page broken on prod, CSS missing, form not submitting |
+| 🟡 P2 | Design regression, SEO error, broken mobile layout |
+| 🟢 P3 | Process error, wrong file staged (non-breaking) |
 
 ---
 
