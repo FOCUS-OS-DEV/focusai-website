@@ -244,11 +244,10 @@ const careerPaths = [
 // Instructors
 const instructors = [
   {
-    name: 'שחר דדיה, עו"ד',
+    name: 'שחר דדיה',
     role: 'מייסד ומנכ"ל משותף',
     bio: 'עורך דין ויזם סדרתי עם רקע ייחודי המשלב משפטים, טכנולוגיה ועסקים. מתמחה באפיון והטמעת סוכני AI לעסקים, עם דגש על ROI מהיר ותוצאות מדידות. מרצה ומפתח תוכניות הכשרה באוניברסיטת חיפה ובטכניון, מביא את הניסיון המעשי לכיתה. מאמין שטכנולוגיה צריכה לשרת את האדם, לא להפך.',
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900,h_500,c_fill,g_face/v1772386471/IMG_1318.JPG_o1lijm.jpg',
-    imgStyle: 'object-position: 30% 20%; transform: scale(1.15)'
+    image: founders[0]?.image || 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_500,c_fill,g_face/v1772386471/IMG_1318.JPG_o1lijm.jpg'
   },
   {
     name: 'אוניל סחר',
@@ -328,8 +327,8 @@ const courseSchema = {
     "@type": "CourseInstance",
     "courseMode": "Blended",
     "instructor": [
-      { "@type": "Person", "name": "שחר דדיה", "jobTitle": "מנכ\"ל ואסטרטג AI" },
-      { "@type": "Person", "name": "אוניל סחר", "jobTitle": "סמנכ\"ל תפעול ופיתוח עסקי" }
+      { "@type": "Person", "name": "שחר דדיה", "jobTitle": "CEO & Co-Founder" },
+      { "@type": "Person", "name": "אוניל סחר", "jobTitle": "CEO & Co-Founder" }
     ],
     "location": [
       { "@type": "Place", "name": "הרצליה פיתוח", "address": { "@type": "PostalAddress", "addressLocality": "הרצליה", "addressCountry": "IL" } },
