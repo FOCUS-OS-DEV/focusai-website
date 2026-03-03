@@ -571,8 +571,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     }
     .download-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,100,60,0.12); }
     .download-card:hover::before { opacity: 1; }
-    .download-card .dl-icon { font-size: 32px; margin-bottom: 10px; }
-    .download-card .dl-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .download-card .dl-icon { width: 40px; height: 40px; margin: 0 auto 12px; color: var(--orange); }
+    .download-card .dl-icon svg { width: 100%; height: 100%; }
+    .download-card .dl-count { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+    .download-card .dl-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
     .download-card .dl-desc { font-size: 12px; color: var(--faint); margin-bottom: 14px; line-height: 1.4; }
     .download-card .dl-btn {
       display: inline-block;
@@ -761,27 +763,30 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       padding: 28px 32px;
       margin-bottom: 32px;
     ">
-      <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; text-align:center;">🎁 מתנה מ-Focus AI</p>
+      <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; text-align:center;">מתנה מ-Focus AI</p>
       <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.3; text-align:center;">50 סקילים מקצועיים, בחינם — בחרו את החבילה שלכם</p>
       <p style="font-size: 14px; color: var(--muted); line-height: 1.6; text-align:center; margin-bottom: 20px;">סקילים (Skills) הם הוראות מובנות שמרחיבות את היכולות של Claude Code. כל חבילה מותאמת לתפקיד שלכם.</p>
       <div class="download-grid">
         <div class="download-card">
-          <div class="dl-icon">💻</div>
+          <div class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="dl-count">50 סקילים</div>
           <div class="dl-title">למפתחים</div>
           <div class="dl-desc">Code review, debugging, testing, git, architecture, security</div>
-          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip" download class="dl-btn">⬇ הורד ZIP</a>
+          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip" download class="dl-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-left:6px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> הורד ZIP</a>
         </div>
         <div class="download-card">
-          <div class="dl-icon">📊</div>
-          <div class="dl-title">למנהלים</div>
+          <div class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="dl-count">50 סקילים</div>
+          <div class="dl-title">למנהלים ויזמים</div>
           <div class="dl-desc">אסטרטגיה, HR, תקציב, מצגות, תקשורת ארגונית</div>
-          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-managers.zip" download class="dl-btn">⬇ הורד ZIP</a>
+          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-managers.zip" download class="dl-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-left:6px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> הורד ZIP</a>
         </div>
         <div class="download-card">
-          <div class="dl-icon">📣</div>
-          <div class="dl-title">לשיווק</div>
+          <div class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4"/><line x1="12" y1="8" x2="12" y2="16"/></svg></div>
+          <div class="dl-count">50 סקילים</div>
+          <div class="dl-title">לשיווק ותוכן</div>
           <div class="dl-desc">קופי, קמפיינים, SEO, מחקר שוק, בניית מותג</div>
-          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-marketing.zip" download class="dl-btn">⬇ הורד ZIP</a>
+          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-marketing.zip" download class="dl-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-left:6px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> הורד ZIP</a>
         </div>
       </div>
     </div>
@@ -826,26 +831,26 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         <p><strong>איך פותחים טרמינל:</strong></p>
 
         <div class="os-tabs" data-group="terminal">
-          <button class="os-tab active" onclick="switchTab(this, 'terminal', 'win')">🪟 Windows</button>
-          <button class="os-tab" onclick="switchTab(this, 'terminal', 'mac')">🍎 Mac</button>
-          <button class="os-tab" onclick="switchTab(this, 'terminal', 'linux')">🐧 Linux</button>
+          <button class="os-tab active" onclick="switchTab(this, 'terminal', 'win')">Windows</button>
+          <button class="os-tab" onclick="switchTab(this, 'terminal', 'mac')">Mac</button>
+          <button class="os-tab" onclick="switchTab(this, 'terminal', 'linux')">Linux</button>
         </div>
         <div class="os-panel active" data-group="terminal" data-os="win">
           <p>חפשו <strong>"PowerShell"</strong> בתפריט Start (או לחצו <span class="ic">Win+X</span> &rarr; Terminal).</p>
           <div class="win-search">
             <div class="win-search-bar">
-              <span class="win-search-icon">🔍</span>
+              <span class="win-search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
               <input type="text" value="PowerShell" readonly tabindex="-1">
             </div>
             <div class="win-search-result highlighted">
-              <div class="sr-icon">⚡</div>
+              <div class="sr-icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
               <div>
                 <div class="sr-text">Windows PowerShell</div>
                 <div class="sr-sub">App &bull; Best match</div>
               </div>
             </div>
             <div class="win-search-result">
-              <div class="sr-icon" style="background:#555;">📁</div>
+              <div class="sr-icon" style="background:#555;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
               <div>
                 <div class="sr-text">Windows PowerShell ISE</div>
                 <div class="sr-sub">App</div>
@@ -867,9 +872,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         <h3>התקנת Git (חובה)</h3>
         <p>Git הוא כלי שעוקב אחרי שינויים בקבצים — כמו "Ctrl+Z מתקדם" לפרויקטים שלמים. <strong>בלי Git, Claude Code לא יתקין — אז זה הדבר הראשון שצריך לטפל בו.</strong></p>
         <div class="os-tabs" data-group="git">
-          <button class="os-tab active" onclick="switchTab(this, 'git', 'win')">🪟 Windows</button>
-          <button class="os-tab" onclick="switchTab(this, 'git', 'mac')">🍎 Mac</button>
-          <button class="os-tab" onclick="switchTab(this, 'git', 'linux')">🐧 Linux</button>
+          <button class="os-tab active" onclick="switchTab(this, 'git', 'win')">Windows</button>
+          <button class="os-tab" onclick="switchTab(this, 'git', 'mac')">Mac</button>
+          <button class="os-tab" onclick="switchTab(this, 'git', 'linux')">Linux</button>
         </div>
         <div class="os-panel active" data-group="git" data-os="win">
           <ol>
@@ -1007,8 +1012,8 @@ sudo dnf install git</code></div>
         <p class="guide-img-caption">התיעוד הרשמי — פקודות ההתקנה לכל מערכת הפעלה</p>
 
         <div class="os-tabs" data-group="install">
-          <button class="os-tab active" onclick="switchTab(this, 'install', 'win')">🪟 Windows (PowerShell)</button>
-          <button class="os-tab" onclick="switchTab(this, 'install', 'mac')">🍎 Mac / Linux</button>
+          <button class="os-tab active" onclick="switchTab(this, 'install', 'win')">Windows (PowerShell)</button>
+          <button class="os-tab" onclick="switchTab(this, 'install', 'mac')">Mac / Linux</button>
         </div>
         <div class="os-panel active" data-group="install" data-os="win">
           <p>פתחו <strong>PowerShell</strong> והריצו:</p>
@@ -1044,8 +1049,8 @@ sudo dnf install git</code></div>
         <p>הכל עבד? תראו מסך פתיחה וסמן <span class="ic">&gt;</span> מהבהב — אפשר להתחיל לעבוד.</p>
 
         <div class="os-tabs" data-group="auth-fix">
-          <button class="os-tab active" onclick="switchTab(this, 'auth-fix', 'win')">🪟 בעיות ב-Windows?</button>
-          <button class="os-tab" onclick="switchTab(this, 'auth-fix', 'mac')">🍎 בעיות ב-Mac?</button>
+          <button class="os-tab active" onclick="switchTab(this, 'auth-fix', 'win')">Windows</button>
+          <button class="os-tab" onclick="switchTab(this, 'auth-fix', 'mac')">Mac</button>
         </div>
         <div class="os-panel active" data-group="auth-fix" data-os="win">
           <p>אם <span class="ic">claude</span> לא מזוהה כפקודה:</p>
@@ -1102,8 +1107,8 @@ sudo dnf install git</code></div>
         </ol>
 
         <div class="os-tabs" data-group="skills">
-          <button class="os-tab active" onclick="switchTab(this, 'skills', 'win')">🪟 Windows (PowerShell)</button>
-          <button class="os-tab" onclick="switchTab(this, 'skills', 'mac')">🍎 Mac / Linux</button>
+          <button class="os-tab active" onclick="switchTab(this, 'skills', 'win')">Windows (PowerShell)</button>
+          <button class="os-tab" onclick="switchTab(this, 'skills', 'mac')">Mac / Linux</button>
         </div>
         <div class="os-panel active" data-group="skills" data-os="win">
           <div class="code-block"><code>.\install.ps1</code></div>
@@ -1112,7 +1117,7 @@ sudo dnf install git</code></div>
           <div class="code-block"><code>bash install.sh</code></div>
         </div>
 
-        <p>תראו רשימת ✅ כשכל הסקילים מותקנים. בואו נוודא שזה עבד:</p>
+        <p>תראו רשימת סימוני V כשכל הסקילים מותקנים. בואו נוודא שזה עבד:</p>
         <div class="code-block"><code><span class="comment"># macOS / Linux</span>
 ls ~/.claude/skills/
 
