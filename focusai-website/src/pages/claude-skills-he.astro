@@ -39,7 +39,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #dddcd4;
+      --bg:      #e8e7de;
       --win-bg:  #ffffff;
       --win-bar: #d4d3cb;
       --text:    #1a1a14;
@@ -827,8 +827,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         });
       } catch (e) { /* silent fail */ }
 
-      wrap.style.display = 'none';
-      successEl.style.display = 'block';
+      window.location.href = '/academy/thank-you/';
     }
 
     document.getElementById('form-submit').addEventListener('click', () => {
