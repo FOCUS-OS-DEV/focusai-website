@@ -1,0 +1,311 @@
+---
+/**
+ * Claude Skills Bundle — Thank You Page
+ * Redirected here after form submission on any skills LP
+ * Primary CTA: Join WhatsApp Community
+ * Route: /claude-skills-thank-you/
+ */
+import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הסקילים בדרך אליך! | Focus AI</title>
+  <meta name="description" content="הסקילים נשלחו למייל שלך. הצטרף לקהילת הוואטסאפ שלנו לטיפים, מדריכים ועדכונים.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <Analytics slot="head" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #dddcd4;
+      --win-bg:  #ffffff;
+      --win-bar: #d4d3cb;
+      --text:    #1a1a14;
+      --muted:   #55554e;
+      --faint:   #888880;
+      --orange:  #c8643c;
+      --orange-h:#b8542c;
+      --border:  #c8c7bf;
+      --card-bg: #f8f8f4;
+      --green:   #25D366;
+      --green-h: #20bd5a;
+      --mono:    'JetBrains Mono', monospace;
+      --body:    'Heebo', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: var(--win-bar);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
+    .topbar a:hover { color: var(--orange); }
+
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .card {
+      background: var(--win-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    }
+
+    .card-bar {
+      background: var(--win-bar);
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #ffbd2e; }
+    .dot.g { background: #28c840; }
+    .card-title { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-right: auto; }
+
+    /* ── Success section ── */
+    .success-section {
+      padding: 36px 40px 28px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .check-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .check-circle svg { width: 32px; height: 32px; color: #fff; }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-section h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+    .success-section .sub { font-size: 15px; color: var(--muted); }
+
+    /* ── Community section ── */
+    .community-section {
+      padding: 32px 40px 40px;
+      text-align: center;
+    }
+
+    .community-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.25);
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .community-badge svg { width: 16px; height: 16px; fill: #25D366; }
+    .community-badge span { font-family: var(--mono); font-size: 11px; font-weight: 700; color: #1a8d45; letter-spacing: 1.5px; text-transform: uppercase; }
+
+    .community-section h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .community-section .desc {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .perks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 28px;
+      text-align: right;
+    }
+    .perk {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .perk-icon { font-size: 16px; flex-shrink: 0; }
+    .perk strong { color: var(--text); font-weight: 700; }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--body);
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+    .btn-whatsapp:hover {
+      background: var(--green-h);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+      animation: none;
+    }
+    .btn-whatsapp svg { width: 24px; height: 24px; }
+
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.3); }
+      50% { box-shadow: 0 4px 32px rgba(37,211,102,0.5); }
+    }
+
+    .members-note {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--faint);
+      margin-top: 12px;
+    }
+
+    .btn-skip {
+      display: block;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--faint);
+      text-decoration: none;
+    }
+    .btn-skip:hover { color: var(--orange); }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    footer a:hover { color: var(--orange); }
+    .footer-copy { font-size: 12px; color: var(--faint); margin-top: 8px; }
+
+    @media (max-width: 520px) {
+      .success-section { padding: 28px 20px 24px; }
+      .community-section { padding: 24px 20px 32px; }
+      .perks { grid-template-columns: 1fr; }
+      .btn-whatsapp { font-size: 16px; padding: 14px 28px; }
+    }
+  </style>
+</head>
+<body>
+  <AnalyticsBody />
+
+  <div class="topbar">
+    <a href="https://focusai.co.il">← חזרה ל-Focus AI</a>
+  </div>
+
+  <div class="main">
+    <div class="card">
+      <div class="card-bar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <span class="card-title">skills-sent.log</span>
+      </div>
+
+      <!-- Success confirmation -->
+      <div class="success-section">
+        <div class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <h1>הסקילים בדרך אליך!</h1>
+        <p class="sub">בדוק את המייל — הקישור להורדה נשלח עכשיו.</p>
+      </div>
+
+      <!-- WhatsApp Community CTA -->
+      <div class="community-section">
+        <div class="community-badge">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>COMMUNITY</span>
+        </div>
+        <h2>הסקילים זה רק ההתחלה</h2>
+        <p class="desc">בקהילת הוואטסאפ שלנו יש שיח יומי על AI — טיפים, מדריכים, שיתוף של תוצרים אמיתיים, ועדכונים על כלים חדשים לפני כולם. זה המקום שבו הסקילים הופכים לתוצאות.</p>
+
+        <div class="perks">
+          <div class="perk"><span class="perk-icon">💡</span> <strong>טיפים יומיים</strong> לעבודה עם AI</div>
+          <div class="perk"><span class="perk-icon">📖</span> <strong>מדריכים בלעדיים</strong> ל-Claude Code</div>
+          <div class="perk"><span class="perk-icon">🔧</span> <strong>כלים חדשים</strong> ועדכונים לפני כולם</div>
+          <div class="perk"><span class="perk-icon">🤝</span> <strong>שיתוף תוצרים</strong> ופתרונות מהקהילה</div>
+          <div class="perk"><span class="perk-icon">🎯</span> <strong>שאלות ותשובות</strong> ישירות מהצוות</div>
+          <div class="perk"><span class="perk-icon">🚀</span> <strong>תוכן בלעדי</strong> שלא מפורסם בשום מקום</div>
+        </div>
+
+        <a href="https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          הצטרפו לקהילה בוואטסאפ
+        </a>
+        <p class="members-note">950+ חברים כבר בפנים</p>
+
+        <a href="https://focusai.co.il" class="btn-skip">אולי אחר כך ←</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
+         alt="Focus AI" height="40" style="display:block;margin:0 auto 12px;">
+    <a href="https://focusai.co.il">focusai.co.il</a> · <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
+    <p class="footer-copy">© 2026 Focus AI</p>
+  </footer>
+
+</body>
+</html>
