@@ -44,9 +44,35 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     body {
       font-family: var(--hebrew);
       background-color: var(--bg);
+      background-image: radial-gradient(circle at 20% 20%, rgba(200,100,60,0.03) 0%, transparent 50%),
+                         radial-gradient(circle at 80% 80%, rgba(200,100,60,0.02) 0%, transparent 50%);
       color: var(--text);
       line-height: 1.7;
       overflow-x: hidden;
+    }
+
+    /* ── Reading progress bar ── */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), #e8a040);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(200,100,60,0.4);
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── Layout ── */
@@ -63,13 +89,26 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     }
     .topbar a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
     .topbar a:hover { color: var(--orange); }
-    .topbar-lang { font-size: 12px; color: var(--faint); }
 
     /* ── Hero ── */
     .hero {
       text-align: center;
       padding: 56px 24px 40px;
+      position: relative;
     }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(200,100,60,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
     .hero-label {
       font-size: 11px;
       font-weight: 700;
@@ -83,6 +122,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       font-weight: 900;
       line-height: 1.15;
       margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero-sub {
       font-size: 16px;
@@ -118,12 +161,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .guide-body {
       background: var(--win-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       margin: 0 24px 40px;
       max-width: 780px;
       margin-left: auto;
       margin-right: auto;
       overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
     }
 
     /* Terminal-style tab bar */
@@ -174,25 +218,45 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: var(--orange);
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--orange), #e8884c);
       color: #fff;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       border-radius: 50%;
-      margin-left: 8px;
+      margin-left: 10px;
       flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(200,100,60,0.3);
+      position: relative;
+    }
+    .step-num::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid rgba(200,100,60,0.15);
     }
 
     /* Code blocks */
     .code-block {
       background: #1e1e2e;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 16px 20px;
       margin: 12px 0 20px;
       direction: ltr;
       overflow-x: auto;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,100,60,0.3), transparent);
     }
     .code-block code {
       font-family: var(--mono);
@@ -204,6 +268,25 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .code-block .comment { color: #6c7086; }
     .code-block .cmd { color: #89dceb; }
     .code-block .string { color: #a6e3a1; }
+
+    /* Copy button */
+    .code-copy {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      color: #888;
+      cursor: pointer;
+      font-family: var(--mono);
+      transition: all 0.2s;
+      z-index: 1;
+    }
+    .code-copy:hover { background: rgba(255,255,255,0.15); color: #ccc; }
+    .code-copy.copied { color: #a6e3a1; border-color: rgba(166,227,161,0.3); }
 
     /* Inline code */
     .ic {
@@ -241,25 +324,27 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
     /* Note/tip boxes */
     .note {
-      background: #fef9f0;
+      background: linear-gradient(135deg, #fef9f0, #fdf5e6);
       border-right: 3px solid #e8a953;
-      padding: 12px 16px;
-      border-radius: 0 6px 6px 0;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
       margin: 16px 0;
       font-size: 14px;
       color: var(--muted);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
     }
     .note strong { color: #b8732c; }
 
     /* Warning box */
     .warning {
-      background: #fef0f0;
+      background: linear-gradient(135deg, #fef0f0, #fde8e8);
       border-right: 3px solid #e85353;
-      padding: 12px 16px;
-      border-radius: 0 6px 6px 0;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
       margin: 16px 0;
       font-size: 14px;
       color: var(--muted);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
     }
     .warning strong { color: #c82c2c; }
 
@@ -356,84 +441,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .win-search-result .sr-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: #999; }
     .win-search-result.highlighted .sr-sub { color: rgba(255,255,255,0.7); }
 
-    /* Git installer mockup */
-    .git-installer {
-      background: #f0f0f0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 16px 0 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      direction: ltr;
-    }
-    .git-installer-title {
-      background: #fff;
-      padding: 8px 12px;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .git-installer-body { padding: 16px; }
-    .git-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 3px 0;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: #333;
-    }
-    .git-checkbox .cb {
-      width: 14px;
-      height: 14px;
-      border: 1px solid #999;
-      border-radius: 2px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .git-checkbox .cb.checked { background: #fff; }
-    .git-checkbox .cb.checked::after { content: '✓'; font-size: 11px; color: #333; }
-    .git-dropdown {
-      background: #fff;
-      border: 1px solid #999;
-      border-radius: 2px;
-      padding: 6px 28px 6px 10px;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: #333;
-      margin: 8px 0;
-      width: 100%;
-      max-width: 400px;
-      position: relative;
-    }
-    .git-dropdown::after {
-      content: '▾';
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #666;
-    }
-    .git-dropdown-option {
-      padding: 5px 10px;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: #333;
-      border-bottom: 1px solid #eee;
-    }
-    .git-dropdown-option.selected {
-      background: #0078d4;
-      color: #fff;
-    }
-
     /* Link card */
     .link-card {
       display: flex;
@@ -441,28 +448,30 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       gap: 14px;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 18px;
+      border-radius: 12px;
+      padding: 16px 20px;
       margin: 16px 0 20px;
       text-decoration: none;
-      transition: all 0.15s;
+      transition: all 0.25s ease;
     }
-    .link-card:hover { border-color: var(--orange); background: #fff; }
+    .link-card:hover { border-color: var(--orange); background: #fff; transform: translateX(-4px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
     .link-card-icon {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       background: var(--orange);
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
       flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     .link-card-text { flex: 1; }
     .link-card-title { font-size: 14px; font-weight: 700; color: var(--text); }
     .link-card-url { font-family: var(--mono); font-size: 11px; color: var(--faint); }
-    .link-card-arrow { font-size: 18px; color: var(--faint); }
+    .link-card-arrow { font-size: 18px; color: var(--faint); transition: transform 0.2s; }
+    .link-card:hover .link-card-arrow { transform: translateX(-4px); color: var(--orange); }
 
     /* OS Tabs */
     .os-tabs {
@@ -504,9 +513,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .skill-item {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
+      border-radius: 8px;
+      padding: 12px 14px;
+      transition: all 0.2s ease;
     }
+    .skill-item:hover { border-color: var(--orange); background: #fff; }
     .skill-cmd {
       font-family: var(--mono);
       font-size: 12px;
@@ -522,7 +533,15 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     }
     @media (max-width: 580px) {
       .skill-table { grid-template-columns: 1fr; }
-      .doc-content { padding: 24px 20px 40px; }
+      .doc-content { padding: 24px 16px 40px; }
+      .hero { padding: 40px 16px 32px; }
+      .hero::before { width: 300px; height: 200px; }
+      .cta-block { padding: 40px 24px; border-radius: 12px; }
+      .wa-block { padding: 28px 20px; }
+      .link-card { padding: 12px 14px; gap: 10px; }
+      .link-card-icon { width: 38px; height: 38px; }
+      .back-to-top { bottom: 16px; left: 16px; width: 40px; height: 40px; }
+      .guide-body { margin: 0 12px 32px; }
     }
 
     /* Download cards */
@@ -535,58 +554,88 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .download-card {
       background: var(--card-bg);
       border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 16px;
+      border-radius: 12px;
+      padding: 24px 16px;
       text-align: center;
-      transition: all 0.15s;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .download-card:hover { border-color: var(--orange); }
-    .download-card .dl-icon { font-size: 28px; margin-bottom: 8px; }
-    .download-card .dl-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .download-card .dl-desc { font-size: 12px; color: var(--faint); margin-bottom: 12px; line-height: 1.4; }
+    .download-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), #e8a040);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .download-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,100,60,0.12); }
+    .download-card:hover::before { opacity: 1; }
+    .download-card .dl-icon { font-size: 32px; margin-bottom: 10px; }
+    .download-card .dl-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .download-card .dl-desc { font-size: 12px; color: var(--faint); margin-bottom: 14px; line-height: 1.4; }
     .download-card .dl-btn {
       display: inline-block;
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--orange), #d4744c);
       color: #fff;
       font-family: var(--hebrew);
       font-size: 13px;
       font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 6px;
+      padding: 9px 18px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background 0.15s;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(200,100,60,0.2);
     }
-    .download-card .dl-btn:hover { background: var(--orange-h); color: #fff; }
+    .download-card .dl-btn:hover { background: linear-gradient(135deg, var(--orange-h), var(--orange)); color: #fff; box-shadow: 0 4px 12px rgba(200,100,60,0.3); }
     @media (max-width: 680px) {
       .download-grid { grid-template-columns: 1fr; }
     }
 
     /* ── CTA block ── */
     .cta-block {
-      background: #1e1e2e;
-      border-radius: 12px;
-      padding: 48px 40px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+      border-radius: 16px;
+      padding: 56px 40px;
       text-align: center;
       margin: 48px 0 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(200,100,60,0.1);
     }
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(200,100,60,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .cta-block > * { position: relative; z-index: 1; }
     .cta-block h2 { color: #fff; font-size: clamp(20px, 4vw, 32px); margin-bottom: 12px; }
     .cta-block p { color: #9090a0; font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
     .btn-cta {
       display: inline-block;
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--orange), #d87040);
       color: #fff !important;
       font-family: var(--hebrew);
       font-size: 16px;
       font-weight: 700;
-      padding: 16px 36px;
-      border-radius: 8px;
+      padding: 16px 40px;
+      border-radius: 10px;
       text-decoration: none;
       text-align: center;
       line-height: 1.4;
-      box-shadow: 0 4px 16px rgba(200,100,60,0.3);
+      box-shadow: 0 4px 20px rgba(200,100,60,0.35);
+      transition: all 0.25s ease;
     }
-    .btn-cta:hover { background: var(--orange-h); color: #fff !important; }
-    .cta-note { font-size: 12px; color: #606070; margin-top: 12px; }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,100,60,0.45); color: #fff !important; }
+    .cta-note { font-size: 12px; color: #606070; margin-top: 14px; }
 
     /* ── Disclaimer ── */
     .disclaimer {
@@ -604,32 +653,72 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
     /* ── WhatsApp Community ── */
     .wa-block {
-      background: #f4f3ee;
-      border: 1.5px solid rgba(37,211,102,0.3);
-      border-radius: 12px;
-      padding: 32px;
+      background: linear-gradient(135deg, #f4f3ee, #eef5ee);
+      border: 1.5px solid rgba(37,211,102,0.25);
+      border-radius: 16px;
+      padding: 36px;
       text-align: center;
       margin: 48px 0 0;
+      position: relative;
+      overflow: hidden;
     }
+    .wa-block::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(37,211,102,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .wa-block > * { position: relative; z-index: 1; }
     .wa-block h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
     .wa-block p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
     .btn-wa {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #25D366;
+      background: linear-gradient(135deg, #25D366, #20bd5a);
       color: #fff;
       font-family: var(--hebrew);
       font-size: 15px;
       font-weight: 700;
-      padding: 12px 28px;
-      border-radius: 8px;
+      padding: 13px 30px;
+      border-radius: 10px;
       text-decoration: none;
-      transition: all 0.15s;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 12px rgba(37,211,102,0.25);
     }
-    .btn-wa:hover { background: #20bd5a; }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
     .btn-wa svg { width: 18px; height: 18px; }
-    .wa-note { font-size: 12px; color: var(--faint); margin-top: 10px; }
+    .wa-note { font-size: 12px; color: var(--faint); margin-top: 12px; }
+
+    /* ── Back to top ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--win-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 999;
+      font-size: 18px;
+      color: var(--muted);
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { border-color: var(--orange); color: var(--orange); box-shadow: 0 4px 16px rgba(200,100,60,0.15); }
 
     /* ── Footer ── */
     footer {
@@ -646,10 +735,15 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 <body>
   <AnalyticsBody />
 
+  <!-- Progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה למעלה">↑</button>
+
   <!-- Topbar -->
   <div class="topbar">
     <a href="https://focusai.co.il">&larr; חזרה לאתר Focus AI</a>
-    <span class="topbar-lang"><a href="/claude-code-guide-en/">English version &rarr;</a></span>
   </div>
 
   <!-- Hero -->
@@ -662,7 +756,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
   </div>
 
   <!-- Download cards -->
-  <div class="wrap" style="margin-bottom: 0;">
+  <div class="wrap reveal" style="margin-bottom: 0;">
     <div style="
       background: var(--win-bg);
       border: 2px solid var(--orange);
@@ -697,7 +791,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
   </div>
 
   <!-- Guide card -->
-  <div class="wrap">
+  <div class="wrap reveal">
     <div class="guide-body">
 
       <div class="doc-bar">
@@ -785,49 +879,16 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             <li>לחצו <strong>"Click here to download"</strong> — יורד קובץ ההתקנה</li>
             <li>הריצו את קובץ ההתקנה</li>
           </ol>
-          <a href="https://git-scm.com/downloads/win" target="_blank" class="link-card" style="text-decoration:none;">
-            <div class="link-card-icon" style="background:#f05032;color:#fff;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.66 2.66a1.838 1.838 0 011.134 3.382 1.843 1.843 0 01-2.544-1.684 1.83 1.83 0 01.543-1.304l-2.48-2.48v6.53a1.84 1.84 0 01.996 1.63 1.843 1.843 0 11-3.685 0 1.838 1.838 0 011.027-1.651V9.124a1.838 1.838 0 01-.998-2.41L7.66 3.96.452 11.17a1.55 1.55 0 000 2.188l10.48 10.477a1.55 1.55 0 002.186 0l10.43-10.43a1.55 1.55 0 000-2.188z"/></svg>
-            </div>
-            <div class="link-card-text">
-              <div class="link-card-title">הורדת Git for Windows</div>
-              <div class="link-card-url">git-scm.com/downloads/win</div>
-            </div>
-            <span class="link-card-arrow">&rarr;</span>
+          <a href="https://git-scm.com/downloads/win" target="_blank" style="display:block;text-decoration:none;">
+            <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/focusai/guides/git-download-page" alt="דף הורדת Git for Windows — git-scm.com" class="guide-img">
           </a>
+          <p class="guide-img-caption">דף ההורדה של Git — לחצו על "Click here to download"</p>
           <p><strong>מסך Select Components:</strong> השאירו את כל ברירות המחדל כמו שהן ולחצו <strong>Next</strong>.</p>
-          <div class="git-installer">
-            <div class="git-installer-title">
-              <img src="https://git-scm.com/favicon.ico" width="16" height="16" alt="" style="border-radius:2px;">
-              Git Setup — Select Components
-            </div>
-            <div class="git-installer-body">
-              <div class="git-checkbox"><div class="cb checked"></div> Windows Explorer integration</div>
-              <div class="git-checkbox" style="padding-right:20px;"><div class="cb checked"></div> Git Bash Here</div>
-              <div class="git-checkbox" style="padding-right:20px;"><div class="cb checked"></div> Git GUI Here</div>
-              <div class="git-checkbox"><div class="cb checked"></div> Git LFS (Large File Support)</div>
-              <div class="git-checkbox"><div class="cb checked"></div> Associate .git* configuration files with default text editor</div>
-              <div class="git-checkbox"><div class="cb checked"></div> Add a Git Bash Profile to Windows Terminal</div>
-              <p style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#666;margin:10px 0 0;">השאירו הכל מסומן כמו שזה &rarr; Next</p>
-            </div>
-          </div>
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/focusai/guides/git-setup-components" alt="Git Setup — Select Components" class="guide-img">
+          <p class="guide-img-caption">השאירו הכל מסומן כמו שזה ולחצו Next</p>
           <p><strong>מסך Choosing the default editor:</strong> מהרשימה הנפתחת, <strong>בחרו "Use Visual Studio Code as Git's default editor"</strong> (אם התקנתם VS Code). זה יאפשר לערוך קבצי Git ב-VS Code במקום בעורך טרמינל מסובך.</p>
-          <div class="git-installer">
-            <div class="git-installer-title">
-              <img src="https://git-scm.com/favicon.ico" width="16" height="16" alt="" style="border-radius:2px;">
-              Git Setup — Choosing the default editor
-            </div>
-            <div class="git-installer-body">
-              <p style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#555;margin:0 0 8px;">Which editor would you like Git to use?</p>
-              <div style="background:#fff;border:1px solid #999;border-radius:2px;max-width:420px;">
-                <div class="git-dropdown-option" style="color:#999;font-size:11px;">Use Vim (the default editor)</div>
-                <div class="git-dropdown-option selected">Use Visual Studio Code as Git's default editor ✓</div>
-                <div class="git-dropdown-option" style="color:#999;font-size:11px;">Use Notepad++ as Git's default editor</div>
-                <div class="git-dropdown-option" style="color:#999;font-size:11px;">Use Sublime Text as Git's default editor</div>
-              </div>
-              <p style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#c82c2c;margin:10px 0 0;font-weight:600;">⬆ בחרו את VS Code מהרשימה &rarr; Next</p>
-            </div>
-          </div>
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/focusai/guides/git-setup-editor" alt="Git Setup — Choosing the default editor" class="guide-img">
+          <p class="guide-img-caption">בחרו "Use Visual Studio Code as Git's default editor" ולחצו Next</p>
           <p>בכל שאר המסכים — לחצו <strong>Next</strong> עם ברירות המחדל &rarr; לבסוף <strong>Install</strong>.</p>
           <p>אחרי ההתקנה, פתחו PowerShell <strong>חדש</strong> ובדקו:</p>
           <div class="code-block"><code>git --version</code></div>
@@ -852,16 +913,10 @@ sudo dnf install git</code></div>
 
         <h3>התקנת VS Code (מומלץ מאוד)</h3>
         <p><a href="https://code.visualstudio.com" target="_blank">VS Code</a> הוא עורך קוד חינמי של Microsoft. גם אם אתם לא מפתחים — זו סביבת העבודה הכי נוחה ל-Claude Code: יש בה טרמינל מובנה, תוסף ייעודי, והכל במקום אחד.</p>
-        <a href="https://code.visualstudio.com" target="_blank" class="link-card" style="text-decoration:none;">
-          <div class="link-card-icon" style="background:#0078d4;color:#fff;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 00-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 00-1.276.057L.327 7.261A1 1 0 00.326 8.74L3.899 12 .326 15.26a1 1 0 00.001 1.479L1.65 17.94a.999.999 0 001.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 001.704.29l4.942-2.377A1.5 1.5 0 0024 20.06V3.939a1.5 1.5 0 00-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/></svg>
-          </div>
-          <div class="link-card-text">
-            <div class="link-card-title">הורדת Visual Studio Code</div>
-            <div class="link-card-url">code.visualstudio.com</div>
-          </div>
-          <span class="link-card-arrow">&rarr;</span>
+        <a href="https://code.visualstudio.com" target="_blank" style="display:block;text-decoration:none;">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/focusai/guides/vscode-homepage" alt="דף הבית של Visual Studio Code — code.visualstudio.com" class="guide-img">
         </a>
+        <p class="guide-img-caption">לחצו "Download for Windows" (או Mac/Linux)</p>
         <ol>
           <li>כנסו ל-<a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></li>
           <li>לחצו <strong>"Download for Windows"</strong> (או Mac/Linux — האתר מזהה אוטומטית)</li>
@@ -948,14 +1003,10 @@ sudo dnf install git</code></div>
 
         <h3>דרך א׳: התקנה רשמית (מומלץ)</h3>
         <p>שיטת ההתקנה הרשמית של Anthropic — מתעדכנת אוטומטית ברקע. (<a href="https://code.claude.com/docs/en/overview" target="_blank">תיעוד רשמי</a>)</p>
-        <a href="https://code.claude.com/docs/en/overview" target="_blank" class="link-card" style="text-decoration:none;">
-          <div class="link-card-icon" style="background:#d97706;color:#fff;">✦</div>
-          <div class="link-card-text">
-            <div class="link-card-title">תיעוד ההתקנה הרשמי של Claude Code</div>
-            <div class="link-card-url">code.claude.com/docs/en/overview</div>
-          </div>
-          <span class="link-card-arrow">&rarr;</span>
+        <a href="https://code.claude.com/docs/en/overview" target="_blank" style="display:block;text-decoration:none;">
+          <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/focusai/guides/claude-code-docs-install" alt="Claude Code Docs — הוראות התקנה רשמיות" class="guide-img">
         </a>
+        <p class="guide-img-caption">התיעוד הרשמי — פקודות ההתקנה לכל מערכת הפעלה</p>
 
         <div class="os-tabs" data-group="install">
           <button class="os-tab active" onclick="switchTab(this, 'install', 'win')">🪟 Windows (PowerShell)</button>
@@ -1204,25 +1255,74 @@ dir $env:USERPROFILE\.claude\skills</code></div>
     <div class="footer-links">
       <a href="https://focusai.co.il">focusai.co.il</a>
       <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
-      <a href="/claude-code-guide-en/">English version</a>
     </div>
     <p class="footer-copy">&copy; 2026 Focus AI</p>
   </footer>
 
   <script>
+    // Tab switching
     function switchTab(btn, group, os) {
-      // Deactivate all tabs in this group
       document.querySelectorAll('.os-tabs[data-group="' + group + '"] .os-tab').forEach(function(t) {
         t.classList.remove('active');
       });
       btn.classList.add('active');
-      // Show the right panel
       document.querySelectorAll('.os-panel[data-group="' + group + '"]').forEach(function(p) {
         p.classList.remove('active');
       });
       var target = document.querySelector('.os-panel[data-group="' + group + '"][data-os="' + os + '"]');
       if (target) target.classList.add('active');
     }
+
+    // Reading progress bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('progressBar').style.width = progress + '%';
+
+      // Back to top visibility
+      var btn = document.getElementById('backToTop');
+      if (scrollTop > 400) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    // Scroll reveal (IntersectionObserver)
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    // Copy buttons for code blocks
+    document.querySelectorAll('.code-block').forEach(function(block) {
+      var code = block.querySelector('code');
+      if (!code) return;
+      var btn = document.createElement('button');
+      btn.className = 'code-copy';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', function() {
+        var text = code.textContent.replace(/^[>#]\s?/gm, '').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      block.appendChild(btn);
+    });
   </script>
 
 </body>
