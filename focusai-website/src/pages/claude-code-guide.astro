@@ -310,7 +310,7 @@ import Analytics from '../components/Analytics.astro';
 
   <!-- Hero -->
   <div class="hero">
-    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_zmbrgf.jpg"
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
     <p class="hero-label">מדריך התחלה מהירה</p>
     <h1>Claude Code — מאפס לפרויקט הראשון</h1>
@@ -478,13 +478,13 @@ cd my-first-project</code></div>
           <div class="skill-item"><span class="skill-cmd">/git-cleanup</span><span class="skill-desc">ניקוי branches ישנים</span></div>
           <div class="skill-item"><span class="skill-cmd">/merge-conflict</span><span class="skill-desc">פתרון שיטתי של merge conflicts</span></div>
           <div class="skill-item"><span class="skill-cmd">/release-notes</span><span class="skill-desc">יצירת release notes למשתמשים</span></div>
-          <div class="skill-item"><span class="skill-cmd">/branch-strategy</span><span class="skill-desc">שמות branches ופטרני gitflow</span></div>
+          <div class="skill-item"><span class="skill-cmd">/branch-strategy</span><span class="skill-desc">אסטרטגיית branching, מוסכמות שמות, גודל PRs</span></div>
         </div>
 
         <h3>ארכיטקטורה</h3>
         <div class="skill-table">
           <div class="skill-item"><span class="skill-cmd">/architecture-review</span><span class="skill-desc">ביקורת מעמיקה עם פלט ADR</span></div>
-          <div class="skill-item"><span class="skill-cmd">/design-patterns</span><span class="skill-desc">פטרני GoF עם דוגמאות TypeScript</span></div>
+          <div class="skill-item"><span class="skill-cmd">/design-patterns</span><span class="skill-desc">מדריך פטרני עיצוב: מתי להשתמש בכל פטרן ואיך</span></div>
           <div class="skill-item"><span class="skill-cmd">/api-design</span><span class="skill-desc">Best practices ל-REST וGraphQL</span></div>
           <div class="skill-item"><span class="skill-cmd">/database-schema</span><span class="skill-desc">עיצוב סכמה ופטרני migration</span></div>
           <div class="skill-item"><span class="skill-cmd">/microservices</span><span class="skill-desc">גבולות שירותים ומערכות מבוזרות</span></div>
@@ -522,13 +522,18 @@ cd my-first-project</code></div>
         <table class="tbl">
           <thead><tr><th>קיצור</th><th>פעולה</th></tr></thead>
           <tbody>
-            <tr><td>Ctrl+C</td><td>ביטול פעולה נוכחית</td></tr>
-            <tr><td>Escape</td><td>יציאה מה-prompt הנוכחי</td></tr>
-            <tr><td>↑ / ↓</td><td>ניווט בהיסטוריית פקודות</td></tr>
-            <tr><td>Ctrl+L</td><td>ניקוי מסך</td></tr>
-            <tr><td>/help</td><td>הצגת פקודות זמינות</td></tr>
+            <tr><td>Ctrl+C</td><td>ביטול פעולה נוכחית / הפסקת יצירה</td></tr>
+            <tr><td>Ctrl+D</td><td>יציאה מ-Claude Code</td></tr>
+            <tr><td>Ctrl+L</td><td>ניקוי מסך (שומר היסטוריה)</td></tr>
+            <tr><td>↑ / ↓</td><td>ניווט בהיסטוריית הפקודות</td></tr>
+            <tr><td>Ctrl+R</td><td>חיפוש אינטראקטיבי בהיסטוריה</td></tr>
+            <tr><td>Escape</td><td>ביטול הקלט הנוכחי / ניקוי שורה</td></tr>
+            <tr><td>Escape Escape</td><td>ניווט לאחור בשיחה (rewind)</td></tr>
+            <tr><td>Ctrl+B</td><td>הרצת פעולה בתהליך רקע</td></tr>
+            <tr><td>Ctrl+O</td><td>הצגת/הסתרת פלט מפורט (verbose)</td></tr>
           </tbody>
         </table>
+        <p style="font-size:13px;color:var(--faint);margin-top:-8px;">פקודות מובנות נוספות: <span class="ic">/help</span> · <span class="ic">/clear</span> · <span class="ic">/cost</span> · <span class="ic">/model</span> · <span class="ic">/compact</span></p>
 
         <h2>פתרון בעיות</h2>
         <p><strong>"claude: command not found"</strong><br>
@@ -553,7 +558,7 @@ cd my-first-project</code></div>
   </div><!-- /wrap -->
 
   <footer>
-    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_zmbrgf.jpg"
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="40" style="display:block;margin:0 auto 12px;">
     <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">
       לכל השירותים, הקורסים ועוד — <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
