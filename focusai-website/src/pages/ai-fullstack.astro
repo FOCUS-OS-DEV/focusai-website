@@ -64,6 +64,7 @@ const ogImage = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto
 <meta name="twitter:description" content={pageDescription} />
 <meta name="twitter:image" content={ogImage} />
 <link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" href="/favicon.png" />
 <link rel="apple-touch-icon" href="/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -342,22 +343,21 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .hl-collage{order:1;position:relative}
 .hl-collage-glow{position:absolute;inset:0;background:linear-gradient(to left,rgba(168,85,247,.2),rgba(236,72,153,.2));filter:blur(48px);border-radius:24px}
 .hl-collage-inner{position:relative}
-.hl-row{display:flex;gap:10px;justify-content:center;align-items:center}
+.hl-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .hl-row.top{margin-bottom:12px}
 .hl-row.bottom{margin-top:12px}
 .hl-thumb{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .3s}
 .hl-thumb:hover{transform:rotate(0deg)!important}
 .hl-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .hl-logo-thumb{background:rgba(255,255,255,.95);border:1px solid rgba(255,255,255,.15)}.hl-logo-thumb img{object-fit:contain!important;padding:14px}
-.hl-thumb.t1{width:96px;height:96px}.hl-thumb.t2{width:104px;height:104px}.hl-thumb.t3{width:88px;height:88px}
-.hl-thumb.b1{width:104px;height:104px}.hl-thumb.b2{width:96px;height:96px}.hl-thumb.b3{width:88px;height:88px}
+.hl-thumb{width:100%;aspect-ratio:1}
 .hl-main{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 48px rgba(0,0,0,.4)}
 .hl-main img{width:100%;height:auto;object-fit:cover;display:block}
 .hl-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.3),transparent 50%);pointer-events:none}
 .hl-live{position:absolute;top:16px;right:16px;display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:999px;z-index:3}
 .hl-live-dot{width:8px;height:8px;border-radius:50%;background:#ef4444;animation:pulse 2s ease-in-out infinite}
 .hl-live span{font-size:14px;color:#fff;font-weight:500}
-@media(min-width:768px){.hl-thumb.t1{width:110px;height:110px}.hl-thumb.t2{width:120px;height:120px}.hl-thumb.t3{width:100px;height:100px}.hl-thumb.b1{width:120px;height:120px}.hl-thumb.b2{width:110px;height:110px}.hl-thumb.b3{width:100px;height:100px}}
+@media(min-width:768px){.hl-row{display:flex;gap:10px;justify-content:center;align-items:center}.hl-thumb{width:auto;aspect-ratio:auto}.hl-thumb.t1{width:110px;height:110px}.hl-thumb.t2{width:120px;height:120px}.hl-thumb.t3{width:100px;height:100px}.hl-thumb.b1{width:120px;height:120px}.hl-thumb.b2{width:110px;height:110px}.hl-thumb.b3{width:100px;height:100px}}
 @media(min-width:1200px){.hl-thumb.t1{width:128px;height:128px}.hl-thumb.t2{width:140px;height:140px}.hl-thumb.t3{width:112px;height:112px}.hl-thumb.b1{width:140px;height:140px}.hl-thumb.b2{width:128px;height:128px}.hl-thumb.b3{width:112px;height:112px}}
 /* Syllabus IDE Code View */
 .syl-heading{text-align:center;font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;margin-bottom:8px}
@@ -1656,6 +1656,143 @@ setTimeout(function(){running=true;getPos();frame()},nnN.length*50+200);
 })();
 });
 });
+</script>
+
+<!-- Ambient Audio — plays on first click, toggle with floating button -->
+<button id="audioToggle" aria-label="השתק/הפעל מוזיקת רקע" style="
+  position:fixed;bottom:90px;left:20px;z-index:9998;width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(168,85,247,.3);background:rgba(10,10,15,.85);backdrop-filter:blur(12px);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);transition:all .3s ease;opacity:0;pointer-events:none;
+">
+  <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+    <path id="audioWave1" d="M15.54 8.46a5 5 0 010 7.07"/>
+    <path id="audioWave2" d="M19.07 4.93a10 10 0 010 14.14"/>
+  </svg>
+</button>
+
+<script>
+(function(){
+  var ctx, started=false, playing=false, masterGain, nodes=[];
+  var btn=document.getElementById('audioToggle');
+  var wave1=document.getElementById('audioWave1');
+  var wave2=document.getElementById('audioWave2');
+
+  function createAmbient(){
+    ctx=new(window.AudioContext||window.webkitAudioContext)();
+    masterGain=ctx.createGain();
+    masterGain.gain.value=0;
+    masterGain.connect(ctx.destination);
+
+    // Deep bass drone
+    var bass=ctx.createOscillator();
+    bass.type='sine';bass.frequency.value=55;
+    var bassGain=ctx.createGain();bassGain.gain.value=0.15;
+    bass.connect(bassGain);bassGain.connect(masterGain);
+    bass.start();nodes.push(bass);
+
+    // Sub-bass LFO modulation
+    var lfo1=ctx.createOscillator();lfo1.type='sine';lfo1.frequency.value=0.08;
+    var lfo1Gain=ctx.createGain();lfo1Gain.gain.value=3;
+    lfo1.connect(lfo1Gain);lfo1Gain.connect(bass.frequency);
+    lfo1.start();nodes.push(lfo1);
+
+    // Pad layer 1 — detuned fifth
+    var pad1=ctx.createOscillator();pad1.type='triangle';pad1.frequency.value=82.4;
+    var pad1f=ctx.createBiquadFilter();pad1f.type='lowpass';pad1f.frequency.value=400;pad1f.Q.value=2;
+    var pad1g=ctx.createGain();pad1g.gain.value=0.06;
+    pad1.connect(pad1f);pad1f.connect(pad1g);pad1g.connect(masterGain);
+    pad1.start();nodes.push(pad1);
+
+    // Pad layer 2 — slightly sharp
+    var pad2=ctx.createOscillator();pad2.type='triangle';pad2.frequency.value=110.5;
+    var pad2f=ctx.createBiquadFilter();pad2f.type='lowpass';pad2f.frequency.value=350;pad2f.Q.value=1.5;
+    var pad2g=ctx.createGain();pad2g.gain.value=0.04;
+    pad2.connect(pad2f);pad2f.connect(pad2g);pad2g.connect(masterGain);
+    pad2.start();nodes.push(pad2);
+
+    // Pad LFO — slow filter sweep
+    var lfo2=ctx.createOscillator();lfo2.type='sine';lfo2.frequency.value=0.03;
+    var lfo2g=ctx.createGain();lfo2g.gain.value=150;
+    lfo2.connect(lfo2g);lfo2g.connect(pad1f.frequency);lfo2g.connect(pad2f.frequency);
+    lfo2.start();nodes.push(lfo2);
+
+    // Filtered noise texture
+    var bufSize=ctx.sampleRate*2;
+    var buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);
+    var data=buf.getChannelData(0);
+    for(var i=0;i<bufSize;i++) data[i]=(Math.random()*2-1)*0.5;
+    var noise=ctx.createBufferSource();noise.buffer=buf;noise.loop=true;
+    var nf=ctx.createBiquadFilter();nf.type='bandpass';nf.frequency.value=200;nf.Q.value=0.5;
+    var ng=ctx.createGain();ng.gain.value=0.025;
+    noise.connect(nf);nf.connect(ng);ng.connect(masterGain);
+    noise.start();nodes.push(noise);
+
+    // High shimmer (subtle)
+    var shim=ctx.createOscillator();shim.type='sine';shim.frequency.value=660;
+    var shimf=ctx.createBiquadFilter();shimf.type='lowpass';shimf.frequency.value=700;shimf.Q.value=3;
+    var shimg=ctx.createGain();shimg.gain.value=0.008;
+    shim.connect(shimf);shimf.connect(shimg);shimg.connect(masterGain);
+    shim.start();nodes.push(shim);
+    var lfo3=ctx.createOscillator();lfo3.type='sine';lfo3.frequency.value=0.05;
+    var lfo3g=ctx.createGain();lfo3g.gain.value=0.006;
+    lfo3.connect(lfo3g);lfo3g.connect(shimg.gain);
+    lfo3.start();nodes.push(lfo3);
+
+    started=true;
+  }
+
+  function fadeIn(){
+    if(!started) createAmbient();
+    if(ctx.state==='suspended') ctx.resume();
+    masterGain.gain.cancelScheduledValues(ctx.currentTime);
+    masterGain.gain.setValueAtTime(masterGain.gain.value,ctx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(1,ctx.currentTime+2);
+    playing=true;updateIcon();
+  }
+
+  function fadeOut(){
+    if(!started||!ctx) return;
+    masterGain.gain.cancelScheduledValues(ctx.currentTime);
+    masterGain.gain.setValueAtTime(masterGain.gain.value,ctx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0,ctx.currentTime+1);
+    playing=false;updateIcon();
+  }
+
+  function updateIcon(){
+    wave1.style.opacity=playing?'1':'0.2';
+    wave2.style.opacity=playing?'1':'0.2';
+    btn.style.borderColor=playing?'rgba(168,85,247,.5)':'rgba(168,85,247,.2)';
+  }
+
+  // Show button + start on first user interaction
+  var firstClick=true;
+  document.addEventListener('click',function(e){
+    if(!firstClick) return;
+    if(e.target.closest('#audioToggle')) return; // don't trigger on toggle itself
+    firstClick=false;
+    btn.style.opacity='1';btn.style.pointerEvents='auto';
+    fadeIn();
+  },{once:false});
+
+  // Also show the button after 2s scroll as hint
+  var scrollShown=false;
+  window.addEventListener('scroll',function(){
+    if(scrollShown) return;
+    scrollShown=true;
+    btn.style.opacity='1';btn.style.pointerEvents='auto';
+  },{passive:true});
+
+  // Toggle on button click
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(firstClick){firstClick=false;fadeIn();return;}
+    if(playing) fadeOut(); else fadeIn();
+  });
+
+  updateIcon();
+})();
 </script>
 </body>
 </html>
