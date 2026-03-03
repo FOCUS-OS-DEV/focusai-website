@@ -354,6 +354,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       animation: cursor-blink 1.1s step-end infinite;
     }
     /* RTL headline cursor via ::after (bypasses bidi reordering) */
+    .orange.headline-cursor { white-space: nowrap; }
     .orange.headline-cursor::after {
       content: '';
       display: inline-block;

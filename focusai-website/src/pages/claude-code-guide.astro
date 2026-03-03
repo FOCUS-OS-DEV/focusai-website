@@ -90,6 +90,7 @@ import Analytics from '../components/Analytics.astro';
     }
 
     /* ── Blinking cursor (RTL-safe: ::after bypasses bidi reordering) ── */
+    .headline-cursor { white-space: nowrap; }
     .headline-cursor::after {
       content: '';
       display: inline-block;
