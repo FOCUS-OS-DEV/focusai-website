@@ -196,6 +196,44 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     }
     .form-success .check { font-size: 32px; margin-bottom: 8px; }
 
+    /* ── Consultant checkbox ── */
+    .consult-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .consult-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      background: var(--win-bg);
+      cursor: pointer;
+      margin-top: 2px;
+      position: relative;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .consult-row input[type="checkbox"]:checked {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .consult-row input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5l3.5 3.5L11 1' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat;
+    }
+    .consult-label { font-size: 13px; color: var(--text); line-height: 1.5; }
+
     /* ── Steps ── */
     .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 32px 24px; text-align: center; }
@@ -288,6 +326,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
           <input type="email" class="form-input" id="email-input" placeholder="האימייל שלך" dir="rtl">
           <button class="form-btn" id="form-submit">קבל את הסקילים →</button>
         </div>
+        <label class="consult-row">
+          <input type="checkbox" id="consultant-1" checked>
+          <span class="consult-label">כן, אשמח שיועץ לימודים יצור איתי קשר ויספר לי על מסלול AI Dev — מאפס ידע לבניית סוכני AI, אוטומציות ופיתוח בפרודקשן.</span>
+        </label>
         <p class="sub-note">שולחים לך את הקישור להורדה מיד · בלי ספאם</p>
       </div>
       <div class="form-success" id="form-success">
@@ -537,6 +579,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
               <input type="email" class="form-input" id="email-input-2" placeholder="האימייל שלך" dir="rtl">
               <button class="form-btn" id="form-submit-2">שלח לי →</button>
             </div>
+            <label class="consult-row">
+              <input type="checkbox" id="consultant-2" checked>
+              <span class="consult-label">כן, אשמח שיועץ לימודים יצור איתי קשר ויספר לי על מסלול AI Dev — מאפס ידע לבניית סוכני AI, אוטומציות ופיתוח בפרודקשן.</span>
+            </label>
             <p class="sub-note">שולחים לך את הקישור מיד · בלי ספאם</p>
           </div>
           <div class="form-success" id="form-success-2">
@@ -564,7 +610,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     // N8N webhook URL — replace with actual endpoint
     const WEBHOOK_URL = 'https://n8n.focusai.co.il/webhook/skills';
 
-    async function submitForm(emailInput, successEl) {
+    async function submitForm(emailInput, successEl, checkboxEl) {
       const email = emailInput.value.trim();
       if (!email || !email.includes('@')) {
         emailInput.style.borderColor = '#c8643c';
@@ -572,33 +618,35 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         return;
       }
 
-      const btn = emailInput.nextElementSibling;
+      const btn = emailInput.closest('.form-row').querySelector('.form-btn');
       btn.textContent = 'שולח...';
       btn.disabled = true;
+
+      const consultant = checkboxEl ? checkboxEl.checked : false;
 
       try {
         await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, source: 'claude-skills-he', timestamp: new Date().toISOString() })
+          body: JSON.stringify({ email, consultant: String(consultant), source: 'claude-skills-he', timestamp: new Date().toISOString() })
         });
       } catch (e) { /* silent fail — show success anyway */ }
 
       emailInput.closest('.form-wrap').style.display = 'none';
-      emailInput.closest('.form-wrap').nextElementSibling.style.display = 'block';
+      successEl.style.display = 'block';
     }
 
     document.getElementById('form-submit').addEventListener('click', () => {
-      submitForm(document.getElementById('email-input'), document.getElementById('form-success'));
+      submitForm(document.getElementById('email-input'), document.getElementById('form-success'), document.getElementById('consultant-1'));
     });
     document.getElementById('email-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') submitForm(document.getElementById('email-input'), document.getElementById('form-success'));
+      if (e.key === 'Enter') submitForm(document.getElementById('email-input'), document.getElementById('form-success'), document.getElementById('consultant-1'));
     });
     document.getElementById('form-submit-2').addEventListener('click', () => {
-      submitForm(document.getElementById('email-input-2'), document.getElementById('form-success-2'));
+      submitForm(document.getElementById('email-input-2'), document.getElementById('form-success-2'), document.getElementById('consultant-2'));
     });
     document.getElementById('email-input-2').addEventListener('keydown', e => {
-      if (e.key === 'Enter') submitForm(document.getElementById('email-input-2'), document.getElementById('form-success-2'));
+      if (e.key === 'Enter') submitForm(document.getElementById('email-input-2'), document.getElementById('form-success-2'), document.getElementById('consultant-2'));
     });
 
     // FAQ
