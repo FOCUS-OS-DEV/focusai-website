@@ -1,0 +1,730 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.fixdigital.co.il/add-lead-webhook",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "projectID",
+              "value": "14288"
+            },
+            {
+              "name": "projectTypeID",
+              "value": "4"
+            },
+            {
+              "name": "clientID",
+              "value": "25784"
+            },
+            {
+              "name": "tenantID",
+              "value": "9495"
+            },
+            {
+              "name": "FORMURL",
+              "value": "https://focusai.co.il/claude-skills-he/"
+            },
+            {
+              "name": "URLREFER",
+              "value": "https://focusai.co.il"
+            },
+            {
+              "name": "name",
+              "value": "={{ $('Webhook1').item.json.body.firstName + ' ' + $('Webhook1').item.json.body.lastName }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $('Webhook1').item.json.body.email }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $('Webhook1').item.json.body.phone }}"
+            },
+            {
+              "name": "תאריך וובינר",
+              "value": "={{ $('Webhook1').item.json.body.consultant === 'true' ? 'מעוניין AI Dev' : 'AI Dev' }}"
+            },
+            {
+              "name": "newsletter",
+              "value": "כן"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        256,
+        16
+      ],
+      "id": "42c403d9-aa8b-414a-9b78-eb70ad03592e",
+      "name": "הוספת ליד לפיקס1",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook1').item.json.body.email }}",
+        "subject": "=הכל מוכן — 50 סקילים ל‑Claude Code 🎯",
+        "message": "=<!DOCTYPE html>\n<html lang=\"he\" dir=\"rtl\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>50 סקילים לClaude Code — Focus AI</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#e8e7de;font-family:Arial,Helvetica,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;\">\n\n<!-- Outer wrapper -->\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#e8e7de;\">\n<tr><td align=\"center\" style=\"padding:32px 16px;\">\n\n<!-- Main card -->\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #c8c7bf;\">\n\n<!-- ───── LOGO BAR ───── -->\n<tr><td style=\"background-color:#f4f3ee;padding:20px 40px;text-align:center;border-bottom:1px solid #c8c7bf;\">\n  <img src=\"https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_44/v1772353512/FOCUS_LOGO-02_hc0h1a.png\" alt=\"Focus AI\" height=\"44\" style=\"display:block;margin:0 auto;\">\n</td></tr>\n\n<!-- ───── HEADLINE + GREETING ───── -->\n<tr><td style=\"padding:36px 40px 24px;\">\n  <h1 style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#1a1a14;line-height:1.3;\">הכל מוכן. בואו נתחיל 🎯</h1>\n  <p style=\"margin:0 0 20px;font-size:13px;color:#888880;\">50 סקילים מקצועיים ל‑Claude Code, במתנה מ‑Focus AI</p>\n  <p style=\"margin:0 0 8px;font-size:15px;color:#1a1a14;line-height:1.7;\">היי {{ $('Webhook1').item.json.body.firstName }},</p>\n  <p style=\"margin:0;font-size:15px;color:#55554e;line-height:1.7;\">חבילת 50 הסקילים ל‑Claude Code שלך מוכנה. הורד, הרץ סקריפט התקנה אחד — ו‑Claude Code עובד אחרת לגמרי.</p>\n</td></tr>\n\n<!-- ───── PRIMARY CTA: DOWNLOAD ───── -->\n<tr><td style=\"padding:0 40px 12px;\" align=\"center\">\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"background-color:#c8643c;border-radius:8px;\">\n      <a href=\"https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip\" style=\"display:inline-block;padding:14px 40px;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">הורד את חבילת הסקילים ⬇️</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── SECONDARY CTA: GUIDE ───── -->\n<tr><td style=\"padding:0 40px 28px;\" align=\"center\">\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"border-radius:8px;border:1.5px solid #c8c7bf;\">\n      <a href=\"https://focusai.co.il/claude-code-guide/\" style=\"display:inline-block;padding:11px 32px;color:#55554e;font-size:14px;font-weight:600;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">📖 מדריך התקנה מלא (עברית)</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── WHAT'S INSIDE ───── -->\n<tr><td style=\"padding:0 40px 28px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:10px;border:1px solid #c8c7bf;\">\n    <tr><td style=\"padding:20px 24px;\">\n      <p style=\"margin:0 0 12px;font-size:12px;font-weight:700;color:#c8643c;text-transform:uppercase;letter-spacing:1px;\">מה יש בחבילה</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ 50 סקילים מקצועיים מחולקים ל‑8 קטגוריות</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ קוד ריוויו · אבטחה · טסטים · ארכיטקטורה · דיבאגינג</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ סקריפט התקנה אוטומטי (Mac / Windows)</p>\n      <p style=\"margin:0;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ מדריך שימוש מלא באתר</p>\n    </td></tr>\n  </table>\n</td></tr>\n\n<!-- ───── QUICK START STEPS ───── -->\n<tr><td style=\"padding:0 40px 28px;\">\n  <p style=\"margin:0 0 14px;font-size:12px;font-weight:700;color:#c8643c;text-transform:uppercase;letter-spacing:1px;\">3 צעדים להתחלה</p>\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n    <tr>\n      <td width=\"33%\" style=\"padding:0 6px 0 0;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">1</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">הורד<br>ופרוס את ה‑ZIP</p>\n          </td></tr>\n        </table>\n      </td>\n      <td width=\"33%\" style=\"padding:0 3px;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">2</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">הרץ את<br>סקריפט ההתקנה</p>\n          </td></tr>\n        </table>\n      </td>\n      <td width=\"33%\" style=\"padding:0 0 0 6px;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">3</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">פתח Claude Code<br>והתחל עם /skill</p>\n          </td></tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── WHATSAPP COMMUNITY ───── -->\n<tr><td style=\"padding:24px 40px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f0faf0;border-radius:10px;border:1px solid rgba(37,211,102,0.25);\">\n    <tr><td style=\"padding:22px 24px;text-align:center;\">\n      <p style=\"margin:0 0 6px;font-size:16px;font-weight:700;color:#1a8d45;\">🟢 הצטרפו לקהילת AI בוואטסאפ</p>\n      <p style=\"margin:0 0 14px;font-size:13px;color:#55554e;line-height:1.6;\">טיפים יומיים, מדריכים בלעדיים ל‑Claude Code, שיתוף תוצרים ועדכונים על כלים חדשים.</p>\n      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin:0 auto;\"><tr>\n        <td align=\"center\" style=\"background-color:#25D366;border-radius:8px;\">\n          <a href=\"https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t\" style=\"display:inline-block;padding:11px 28px;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">הצטרפו לקהילה — חינם</a>\n        </td>\n      </tr></table>\n      <p style=\"margin:8px 0 0;font-size:11px;color:#888880;\">950+ חברים כבר בפנים</p>\n    </td></tr>\n  </table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── ACADEMY TEASER ───── -->\n<tr><td style=\"padding:24px 40px;\">\n  <p style=\"margin:0 0 6px;font-size:16px;font-weight:700;color:#1a1a14;\">רוצה ללמוד יותר?</p>\n  <p style=\"margin:0 0 14px;font-size:14px;color:#55554e;line-height:1.7;\">ב‑Bot‑Camp של Focus AI תבנה סוכני AI, אוטומציות ופייפליינים שרצים לבד — עם ליווי אישי ממרצים אקדמיים.</p>\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"border-radius:8px;border:1.5px solid #c8643c;\">\n      <a href=\"https://focusai.co.il/academy\" style=\"display:inline-block;padding:10px 28px;color:#c8643c;font-size:14px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">לפרטים על Bot-Camp →</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── LINKS ROW ───── -->\n<tr><td style=\"padding:20px 40px;text-align:center;\">\n  <p style=\"margin:0 0 8px;font-size:13px;color:#55554e;\">\n    <a href=\"https://focusai.co.il\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">focusai.co.il</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://focusai.co.il/ai-news/\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">חדשות AI</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://focusai.co.il/academy\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">Bot-Camp</a>\n  </p>\n  <p style=\"margin:0;font-size:12px;color:#888880;\">\n    <a href=\"https://www.instagram.com/focus.creative.ai\" style=\"color:#888880;text-decoration:none;\">Instagram</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/\" style=\"color:#888880;text-decoration:none;\">Facebook</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://www.tiktok.com/@focus.creative.ai\" style=\"color:#888880;text-decoration:none;\">TikTok</a>\n  </p>\n</td></tr>\n\n<!-- ───── FOOTER ───── -->\n<tr><td style=\"background-color:#f4f3ee;padding:16px 40px;text-align:center;border-top:1px solid #c8c7bf;\">\n  <p style=\"margin:0;font-size:11px;color:#888880;line-height:1.6;\">\n    קיבלת מייל זה כי הורדת את חבילת הסקילים מ‑focusai.co.il<br>\n    <a href=\"https://focusai.co.il/unsubscribe-any/?email={{ $('Webhook1').item.json.body.email }}\" style=\"color:#888880;text-decoration:underline;\">הסרה מדיוור</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"mailto:office@focusai.co.il\" style=\"color:#888880;text-decoration:underline;\">office@focusai.co.il</a>\n  </p>\n</td></tr>\n\n</table>\n<!-- /Main card -->\n\n</td></tr>\n</table>\n<!-- /Outer wrapper -->\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Focus AI Academy",
+          "replyTo": "office@focusai.co.il"
+        }
+      },
+      "id": "b26e4d13-980d-4f78-82e8-98c154012446",
+      "name": "Gmail - אישור הרשמה",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        32,
+        16
+      ],
+      "webhookId": "34035cf2-891e-4899-b848-d6aa990245a5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "qA5I3cJkAJo12NQM",
+          "name": "office@focusai.co.il"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "skills-dev",
+        "options": {
+          "allowedOrigins": "https://focusai.co.il"
+        }
+      },
+      "id": "683dfe5c-84d8-4b11-8650-a1204fe2e10d",
+      "name": "Webhook1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        16
+      ],
+      "webhookId": "e0495007-4a32-4dc0-bbb2-343bdf8c0abe"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks",
+          "mode": "list",
+          "cachedResultName": "WEBINAR 04.03",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1707091667,
+          "mode": "list",
+          "cachedResultName": "קלוד קוד",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks/edit#gid=1707091667"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "שם": "={{ $('Webhook1').item.json.body.firstName }}",
+            "שם משפחה": "={{ $('Webhook1').item.json.body.lastName }}",
+            "מייל": "={{ $('Webhook1').item.json.body.email }}",
+            "פלאפון": "={{ $('Webhook1').item.json.body.phone }}",
+            "הגיע מעמוד": "={{ $('Webhook1').item.json.body.source + ($('Webhook1').item.json.body.consultant === 'true' ? ' · מעוניין AI Dev' : '') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם",
+              "displayName": "שם",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "שם משפחה",
+              "displayName": "שם משפחה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "מייל",
+              "displayName": "מייל",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "פלאפון",
+              "displayName": "פלאפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "הגיע מעמוד",
+              "displayName": "הגיע מעמוד",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        528,
+        16
+      ],
+      "id": "535506f7-1f49-40b4-be3f-399a69198aac",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "V3B6TcC1bc4DhKW4",
+          "name": "OFFICE@FOCUSAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.fixdigital.co.il/add-lead-webhook",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "projectID",
+              "value": "14288"
+            },
+            {
+              "name": "projectTypeID",
+              "value": "4"
+            },
+            {
+              "name": "clientID",
+              "value": "25784"
+            },
+            {
+              "name": "tenantID",
+              "value": "9495"
+            },
+            {
+              "name": "FORMURL",
+              "value": "https://focusai.co.il/claude-skills-marketing/"
+            },
+            {
+              "name": "URLREFER",
+              "value": "https://focusai.co.il"
+            },
+            {
+              "name": "name",
+              "value": "={{ $('Webhook').item.json.body.firstName + ' ' + $('Webhook').item.json.body.lastName }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $('Webhook').item.json.body.email }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $('Webhook').item.json.body.phone }}"
+            },
+            {
+              "name": "תאריך וובינר",
+              "value": "={{ $('Webhook').item.json.body.consultant === 'true' ? 'מעוניין AI Dev' : 'AI Dev' }}"
+            },
+            {
+              "name": "newsletter",
+              "value": "כן"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        256,
+        240
+      ],
+      "id": "fb0bbb3c-dd34-412f-ad3e-e6e6ed391831",
+      "name": "הוספת ליד לפיקס",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
+        "subject": "=הכל מוכן — 50 סקילים לשיווק ותוכן 📣",
+        "message": "=<!DOCTYPE html>\n<html lang=\"he\" dir=\"rtl\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>50 סקילים לשיווק ותוכן — Focus AI</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#e8e7de;font-family:Arial,Helvetica,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;\">\n\n<!-- Outer wrapper -->\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#e8e7de;\">\n<tr><td align=\"center\" style=\"padding:32px 16px;\">\n\n<!-- Main card -->\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #c8c7bf;\">\n\n<!-- ───── LOGO BAR ───── -->\n<tr><td style=\"background-color:#f4f3ee;padding:20px 40px;text-align:center;border-bottom:1px solid #c8c7bf;\">\n  <img src=\"https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_44/v1772353512/FOCUS_LOGO-02_hc0h1a.png\" alt=\"Focus AI\" height=\"44\" style=\"display:block;margin:0 auto;\">\n</td></tr>\n\n<!-- ───── HEADLINE + GREETING ───── -->\n<tr><td style=\"padding:36px 40px 24px;\">\n  <h1 style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#1a1a14;line-height:1.3;\">הכל מוכן. בואו נתחיל 📣</h1>\n  <p style=\"margin:0 0 20px;font-size:13px;color:#888880;\">50 סקילים מקצועיים לשיווק ותוכן, במתנה מ‑Focus AI</p>\n  <p style=\"margin:0 0 8px;font-size:15px;color:#1a1a14;line-height:1.7;\">היי {{ $('Webhook').item.json.body.firstName }},</p>\n  <p style=\"margin:0;font-size:15px;color:#55554e;line-height:1.7;\">חבילת 50 הסקילים לשיווק ותוכן שלך מוכנה. הורד, הרץ סקריפט התקנה אחד — ו‑Claude Code הופך לשותף השיווק שלך.</p>\n</td></tr>\n\n<!-- ───── PRIMARY CTA: DOWNLOAD ───── -->\n<tr><td style=\"padding:0 40px 12px;\" align=\"center\">\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"background-color:#c8643c;border-radius:8px;\">\n      <a href=\"https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-marketing.zip\" style=\"display:inline-block;padding:14px 40px;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">הורד את חבילת הסקילים לשיווק ⬇️</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── SECONDARY CTA: GUIDE ───── -->\n<tr><td style=\"padding:0 40px 28px;\" align=\"center\">\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"border-radius:8px;border:1.5px solid #c8c7bf;\">\n      <a href=\"https://focusai.co.il/claude-code-guide/\" style=\"display:inline-block;padding:11px 32px;color:#55554e;font-size:14px;font-weight:600;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">📖 מדריך התקנה מלא (עברית)</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── WHAT'S INSIDE ───── -->\n<tr><td style=\"padding:0 40px 28px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:10px;border:1px solid #c8c7bf;\">\n    <tr><td style=\"padding:20px 24px;\">\n      <p style=\"margin:0 0 12px;font-size:12px;font-weight:700;color:#c8643c;text-transform:uppercase;letter-spacing:1px;\">מה יש בחבילה</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ 50 סקילים מקצועיים לשיווק ותוכן</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ קופי · קמפיינים · SEO · סושיאל · אנליטיקס</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ סקריפט התקנה אוטומטי (Mac / Windows)</p>\n      <p style=\"margin:0;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ מדריך שימוש מלא באתר</p>\n    </td></tr>\n  </table>\n</td></tr>\n\n<!-- ───── QUICK START STEPS ───── -->\n<tr><td style=\"padding:0 40px 28px;\">\n  <p style=\"margin:0 0 14px;font-size:12px;font-weight:700;color:#c8643c;text-transform:uppercase;letter-spacing:1px;\">3 צעדים להתחלה</p>\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n    <tr>\n      <td width=\"33%\" style=\"padding:0 6px 0 0;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">1</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">הורד<br>ופרוס את ה‑ZIP</p>\n          </td></tr>\n        </table>\n      </td>\n      <td width=\"33%\" style=\"padding:0 3px;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">2</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">הרץ את<br>סקריפט ההתקנה</p>\n          </td></tr>\n        </table>\n      </td>\n      <td width=\"33%\" style=\"padding:0 0 0 6px;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">3</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">פתח Claude Code<br>והתחל עם /skill</p>\n          </td></tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── WHATSAPP COMMUNITY ───── -->\n<tr><td style=\"padding:24px 40px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f0faf0;border-radius:10px;border:1px solid rgba(37,211,102,0.25);\">\n    <tr><td style=\"padding:22px 24px;text-align:center;\">\n      <p style=\"margin:0 0 6px;font-size:16px;font-weight:700;color:#1a8d45;\">🟢 הצטרפו לקהילת AI בוואטסאפ</p>\n      <p style=\"margin:0 0 14px;font-size:13px;color:#55554e;line-height:1.6;\">טיפים יומיים, מדריכים בלעדיים ל‑Claude Code, שיתוף תוצרים ועדכונים על כלים חדשים.</p>\n      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin:0 auto;\"><tr>\n        <td align=\"center\" style=\"background-color:#25D366;border-radius:8px;\">\n          <a href=\"https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t\" style=\"display:inline-block;padding:11px 28px;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">הצטרפו לקהילה — חינם</a>\n        </td>\n      </tr></table>\n      <p style=\"margin:8px 0 0;font-size:11px;color:#888880;\">950+ חברים כבר בפנים</p>\n    </td></tr>\n  </table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── ACADEMY TEASER ───── -->\n<tr><td style=\"padding:24px 40px;\">\n  <p style=\"margin:0 0 6px;font-size:16px;font-weight:700;color:#1a1a14;\">רוצה ללמוד יותר?</p>\n  <p style=\"margin:0 0 14px;font-size:14px;color:#55554e;line-height:1.7;\">ב‑Bot‑Camp של Focus AI תבנה סוכני AI, אוטומציות ופייפליינים שרצים לבד — עם ליווי אישי ממרצים אקדמיים.</p>\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"border-radius:8px;border:1.5px solid #c8643c;\">\n      <a href=\"https://focusai.co.il/academy\" style=\"display:inline-block;padding:10px 28px;color:#c8643c;font-size:14px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">לפרטים על Bot-Camp →</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── LINKS ROW ───── -->\n<tr><td style=\"padding:20px 40px;text-align:center;\">\n  <p style=\"margin:0 0 8px;font-size:13px;color:#55554e;\">\n    <a href=\"https://focusai.co.il\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">focusai.co.il</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://focusai.co.il/ai-news/\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">חדשות AI</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://focusai.co.il/academy\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">Bot-Camp</a>\n  </p>\n  <p style=\"margin:0;font-size:12px;color:#888880;\">\n    <a href=\"https://www.instagram.com/focus.creative.ai\" style=\"color:#888880;text-decoration:none;\">Instagram</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/\" style=\"color:#888880;text-decoration:none;\">Facebook</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://www.tiktok.com/@focus.creative.ai\" style=\"color:#888880;text-decoration:none;\">TikTok</a>\n  </p>\n</td></tr>\n\n<!-- ───── FOOTER ───── -->\n<tr><td style=\"background-color:#f4f3ee;padding:16px 40px;text-align:center;border-top:1px solid #c8c7bf;\">\n  <p style=\"margin:0;font-size:11px;color:#888880;line-height:1.6;\">\n    קיבלת מייל זה כי הורדת את חבילת הסקילים מ‑focusai.co.il<br>\n    <a href=\"https://focusai.co.il/unsubscribe-any/?email={{ $('Webhook').item.json.body.email }}\" style=\"color:#888880;text-decoration:underline;\">הסרה מדיוור</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"mailto:office@focusai.co.il\" style=\"color:#888880;text-decoration:underline;\">office@focusai.co.il</a>\n  </p>\n</td></tr>\n\n</table>\n<!-- /Main card -->\n\n</td></tr>\n</table>\n<!-- /Outer wrapper -->\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Focus AI Academy",
+          "replyTo": "office@focusai.co.il"
+        }
+      },
+      "id": "4cc8ede7-ec40-4315-af4d-9915bc452f39",
+      "name": "Gmail - אישור הרשמה1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        32,
+        240
+      ],
+      "webhookId": "34035cf2-891e-4899-b848-d6aa990245a5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "qA5I3cJkAJo12NQM",
+          "name": "office@focusai.co.il"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "skills-marketing",
+        "options": {
+          "allowedOrigins": "https://focusai.co.il"
+        }
+      },
+      "id": "4ee112f4-e298-4d83-9dd1-bdcaa2057099",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        240
+      ],
+      "webhookId": "e0495007-4a32-4dc0-bbb2-343bdf8c0abe"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks",
+          "mode": "list",
+          "cachedResultName": "WEBINAR 04.03",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1707091667,
+          "mode": "list",
+          "cachedResultName": "קלוד קוד",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks/edit#gid=1707091667"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "שם": "={{ $('Webhook').item.json.body.firstName }}",
+            "שם משפחה": "={{ $('Webhook').item.json.body.lastName }}",
+            "מייל": "={{ $('Webhook').item.json.body.email }}",
+            "פלאפון": "={{ $('Webhook').item.json.body.phone }}",
+            "הגיע מעמוד": "={{ $('Webhook').item.json.body.source + ($('Webhook').item.json.body.consultant === 'true' ? ' · מעוניין AI Dev' : '') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם",
+              "displayName": "שם",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "שם משפחה",
+              "displayName": "שם משפחה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "מייל",
+              "displayName": "מייל",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "פלאפון",
+              "displayName": "פלאפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "הגיע מעמוד",
+              "displayName": "הגיע מעמוד",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        528,
+        240
+      ],
+      "id": "c49917c3-f48b-4765-bc42-11d0e614a2b3",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "V3B6TcC1bc4DhKW4",
+          "name": "OFFICE@FOCUSAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.fixdigital.co.il/add-lead-webhook",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "projectID",
+              "value": "14288"
+            },
+            {
+              "name": "projectTypeID",
+              "value": "4"
+            },
+            {
+              "name": "clientID",
+              "value": "25784"
+            },
+            {
+              "name": "tenantID",
+              "value": "9495"
+            },
+            {
+              "name": "FORMURL",
+              "value": "https://focusai.co.il/claude-skills-managers/"
+            },
+            {
+              "name": "URLREFER",
+              "value": "https://focusai.co.il"
+            },
+            {
+              "name": "name",
+              "value": "={{ $('Webhook2').item.json.body.firstName + ' ' + $('Webhook2').item.json.body.lastName }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $('Webhook2').item.json.body.email }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $('Webhook2').item.json.body.phone }}"
+            },
+            {
+              "name": "תאריך וובינר",
+              "value": "={{ $('Webhook2').item.json.body.consultant === 'true' ? 'מעוניין AI Dev' : 'AI Dev' }}"
+            },
+            {
+              "name": "newsletter",
+              "value": "כן"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        256,
+        464
+      ],
+      "id": "873628fe-0456-4da3-b815-a2db2c35f5f6",
+      "name": "הוספת ליד לפיקס2",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook2').item.json.body.email }}",
+        "subject": "=הכל מוכן — 50 סקילים למנהלים ויזמים 💼",
+        "message": "=<!DOCTYPE html>\n<html lang=\"he\" dir=\"rtl\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>50 סקילים למנהלים ויזמים — Focus AI</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#e8e7de;font-family:Arial,Helvetica,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;\">\n\n<!-- Outer wrapper -->\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#e8e7de;\">\n<tr><td align=\"center\" style=\"padding:32px 16px;\">\n\n<!-- Main card -->\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #c8c7bf;\">\n\n<!-- ───── LOGO BAR ───── -->\n<tr><td style=\"background-color:#f4f3ee;padding:20px 40px;text-align:center;border-bottom:1px solid #c8c7bf;\">\n  <img src=\"https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_44/v1772353512/FOCUS_LOGO-02_hc0h1a.png\" alt=\"Focus AI\" height=\"44\" style=\"display:block;margin:0 auto;\">\n</td></tr>\n\n<!-- ───── HEADLINE + GREETING ───── -->\n<tr><td style=\"padding:36px 40px 24px;\">\n  <h1 style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#1a1a14;line-height:1.3;\">הכל מוכן. בואו נתחיל 💼</h1>\n  <p style=\"margin:0 0 20px;font-size:13px;color:#888880;\">50 סקילים מקצועיים למנהלים ויזמים, במתנה מ‑Focus AI</p>\n  <p style=\"margin:0 0 8px;font-size:15px;color:#1a1a14;line-height:1.7;\">היי {{ $('Webhook2').item.json.body.firstName }},</p>\n  <p style=\"margin:0;font-size:15px;color:#55554e;line-height:1.7;\">חבילת 50 הסקילים למנהלים ויזמים שלך מוכנה. הורד, הרץ סקריפט התקנה אחד — ו‑Claude Code עובד בשבילך.</p>\n</td></tr>\n\n<!-- ───── PRIMARY CTA: DOWNLOAD ───── -->\n<tr><td style=\"padding:0 40px 12px;\" align=\"center\">\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"background-color:#c8643c;border-radius:8px;\">\n      <a href=\"https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-managers.zip\" style=\"display:inline-block;padding:14px 40px;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">הורד את חבילת הסקילים למנהלים ⬇️</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── SECONDARY CTA: GUIDE ───── -->\n<tr><td style=\"padding:0 40px 28px;\" align=\"center\">\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"border-radius:8px;border:1.5px solid #c8c7bf;\">\n      <a href=\"https://focusai.co.il/claude-code-guide/\" style=\"display:inline-block;padding:11px 32px;color:#55554e;font-size:14px;font-weight:600;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">📖 מדריך התקנה מלא (עברית)</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── WHAT'S INSIDE ───── -->\n<tr><td style=\"padding:0 40px 28px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:10px;border:1px solid #c8c7bf;\">\n    <tr><td style=\"padding:20px 24px;\">\n      <p style=\"margin:0 0 12px;font-size:12px;font-weight:700;color:#c8643c;text-transform:uppercase;letter-spacing:1px;\">מה יש בחבילה</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ 50 סקילים מקצועיים למנהלים ויזמים</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ אסטרטגיה · ניהול · הצגות · דוחות · שיפור תהליכים</p>\n      <p style=\"margin:0 0 6px;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ סקריפט התקנה אוטומטי (Mac / Windows)</p>\n      <p style=\"margin:0;font-size:14px;color:#1a1a14;line-height:1.7;\">✅ מדריך שימוש מלא באתר</p>\n    </td></tr>\n  </table>\n</td></tr>\n\n<!-- ───── QUICK START STEPS ───── -->\n<tr><td style=\"padding:0 40px 28px;\">\n  <p style=\"margin:0 0 14px;font-size:12px;font-weight:700;color:#c8643c;text-transform:uppercase;letter-spacing:1px;\">3 צעדים להתחלה</p>\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n    <tr>\n      <td width=\"33%\" style=\"padding:0 6px 0 0;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">1</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">הורד<br>ופרוס את ה‑ZIP</p>\n          </td></tr>\n        </table>\n      </td>\n      <td width=\"33%\" style=\"padding:0 3px;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">2</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">הרץ את<br>סקריפט ההתקנה</p>\n          </td></tr>\n        </table>\n      </td>\n      <td width=\"33%\" style=\"padding:0 0 0 6px;vertical-align:top;\">\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f8f8f4;border-radius:8px;border:1px solid #c8c7bf;\">\n          <tr><td style=\"padding:16px 14px;text-align:center;\">\n            <p style=\"margin:0 0 6px;font-size:24px;font-weight:800;color:#c8643c;font-family:monospace;\">3</p>\n            <p style=\"margin:0;font-size:12px;color:#55554e;line-height:1.5;\">פתח Claude Code<br>והתחל עם /skill</p>\n          </td></tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── WHATSAPP COMMUNITY ───── -->\n<tr><td style=\"padding:24px 40px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f0faf0;border-radius:10px;border:1px solid rgba(37,211,102,0.25);\">\n    <tr><td style=\"padding:22px 24px;text-align:center;\">\n      <p style=\"margin:0 0 6px;font-size:16px;font-weight:700;color:#1a8d45;\">🟢 הצטרפו לקהילת AI בוואטסאפ</p>\n      <p style=\"margin:0 0 14px;font-size:13px;color:#55554e;line-height:1.6;\">טיפים יומיים, מדריכים בלעדיים ל‑Claude Code, שיתוף תוצרים ועדכונים על כלים חדשים.</p>\n      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin:0 auto;\"><tr>\n        <td align=\"center\" style=\"background-color:#25D366;border-radius:8px;\">\n          <a href=\"https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t\" style=\"display:inline-block;padding:11px 28px;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">הצטרפו לקהילה — חינם</a>\n        </td>\n      </tr></table>\n      <p style=\"margin:8px 0 0;font-size:11px;color:#888880;\">950+ חברים כבר בפנים</p>\n    </td></tr>\n  </table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── ACADEMY TEASER ───── -->\n<tr><td style=\"padding:24px 40px;\">\n  <p style=\"margin:0 0 6px;font-size:16px;font-weight:700;color:#1a1a14;\">רוצה ללמוד יותר?</p>\n  <p style=\"margin:0 0 14px;font-size:14px;color:#55554e;line-height:1.7;\">ב‑Bot‑Camp של Focus AI תבנה סוכני AI, אוטומציות ופייפליינים שרצים לבד — עם ליווי אישי ממרצים אקדמיים.</p>\n  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n    <td align=\"center\" style=\"border-radius:8px;border:1.5px solid #c8643c;\">\n      <a href=\"https://focusai.co.il/academy\" style=\"display:inline-block;padding:10px 28px;color:#c8643c;font-size:14px;font-weight:700;text-decoration:none;font-family:Arial,Helvetica,sans-serif;\">לפרטים על Bot-Camp →</a>\n    </td>\n  </tr></table>\n</td></tr>\n\n<!-- ───── DIVIDER ───── -->\n<tr><td style=\"padding:0 40px;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"border-top:1px solid #e8e7de;font-size:0;line-height:0;\">&nbsp;</td></tr></table></td></tr>\n\n<!-- ───── LINKS ROW ───── -->\n<tr><td style=\"padding:20px 40px;text-align:center;\">\n  <p style=\"margin:0 0 8px;font-size:13px;color:#55554e;\">\n    <a href=\"https://focusai.co.il\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">focusai.co.il</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://focusai.co.il/ai-news/\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">חדשות AI</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://focusai.co.il/academy\" style=\"color:#c8643c;text-decoration:none;font-weight:600;\">Bot-Camp</a>\n  </p>\n  <p style=\"margin:0;font-size:12px;color:#888880;\">\n    <a href=\"https://www.instagram.com/focus.creative.ai\" style=\"color:#888880;text-decoration:none;\">Instagram</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/\" style=\"color:#888880;text-decoration:none;\">Facebook</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"https://www.tiktok.com/@focus.creative.ai\" style=\"color:#888880;text-decoration:none;\">TikTok</a>\n  </p>\n</td></tr>\n\n<!-- ───── FOOTER ───── -->\n<tr><td style=\"background-color:#f4f3ee;padding:16px 40px;text-align:center;border-top:1px solid #c8c7bf;\">\n  <p style=\"margin:0;font-size:11px;color:#888880;line-height:1.6;\">\n    קיבלת מייל זה כי הורדת את חבילת הסקילים מ‑focusai.co.il<br>\n    <a href=\"https://focusai.co.il/unsubscribe-any/?email={{ $('Webhook2').item.json.body.email }}\" style=\"color:#888880;text-decoration:underline;\">הסרה מדיוור</a>\n    &nbsp;&nbsp;·&nbsp;&nbsp;\n    <a href=\"mailto:office@focusai.co.il\" style=\"color:#888880;text-decoration:underline;\">office@focusai.co.il</a>\n  </p>\n</td></tr>\n\n</table>\n<!-- /Main card -->\n\n</td></tr>\n</table>\n<!-- /Outer wrapper -->\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Focus AI Academy",
+          "replyTo": "office@focusai.co.il"
+        }
+      },
+      "id": "79191fa9-dc79-47f5-bb4f-07e894dd6493",
+      "name": "Gmail - אישור הרשמה2",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        32,
+        464
+      ],
+      "webhookId": "34035cf2-891e-4899-b848-d6aa990245a5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "qA5I3cJkAJo12NQM",
+          "name": "office@focusai.co.il"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "skills-manager",
+        "options": {
+          "allowedOrigins": "https://focusai.co.il"
+        }
+      },
+      "id": "56c9a35c-e8d9-4cb0-816b-33d299ee2c2b",
+      "name": "Webhook2",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        464
+      ],
+      "webhookId": "e0495007-4a32-4dc0-bbb2-343bdf8c0abe"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks",
+          "mode": "list",
+          "cachedResultName": "WEBINAR 04.03",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1707091667,
+          "mode": "list",
+          "cachedResultName": "קלוד קוד",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zPQjxj4h6cSfl_h7mpTiN_Vh75JrO7g7n0oxnROh2ks/edit#gid=1707091667"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "שם": "={{ $('Webhook2').item.json.body.firstName }}",
+            "שם משפחה": "={{ $('Webhook2').item.json.body.lastName }}",
+            "מייל": "={{ $('Webhook2').item.json.body.email }}",
+            "פלאפון": "={{ $('Webhook2').item.json.body.phone }}",
+            "הגיע מעמוד": "={{ $('Webhook2').item.json.body.source + ($('Webhook2').item.json.body.consultant === 'true' ? ' · מעוניין AI Dev' : '') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם",
+              "displayName": "שם",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "שם משפחה",
+              "displayName": "שם משפחה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "מייל",
+              "displayName": "מייל",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "פלאפון",
+              "displayName": "פלאפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "הגיע מעמוד",
+              "displayName": "הגיע מעמוד",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        512,
+        448
+      ],
+      "id": "6f529ed8-f5ae-4830-baca-dfc9cbad4d20",
+      "name": "Append row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "V3B6TcC1bc4DhKW4",
+          "name": "OFFICE@FOCUSAI"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "הוספת ליד לפיקס1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - אישור הרשמה": {
+      "main": [
+        [
+          {
+            "node": "הוספת ליד לפיקס1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Gmail - אישור הרשמה",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "הוספת ליד לפיקס": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - אישור הרשמה1": {
+      "main": [
+        [
+          {
+            "node": "הוספת ליד לפיקס",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gmail - אישור הרשמה1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "הוספת ליד לפיקס2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - אישור הרשמה2": {
+      "main": [
+        [
+          {
+            "node": "הוספת ליד לפיקס2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook2": {
+      "main": [
+        [
+          {
+            "node": "Gmail - אישור הרשמה2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "c9eb55becd519d18dcb424a5e206708d866fcdafa954b6555f9ccf1d2e6f47d5"
+  }
+}

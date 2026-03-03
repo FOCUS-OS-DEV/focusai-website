@@ -710,27 +710,26 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       <div class="doc-content">
 
         <div class="disclaimer">
-          <strong>הערה חשובה:</strong> מדריך זה נועד למטרות לימודיות בלבד. המידע מעודכן לתאריך הפרסום ועשוי להשתנות.
-          לעדכונים האחרונים, בדקו את <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" style="color:var(--orange)">התיעוד הרשמי של Anthropic</a>.
-          השימוש בכלים המוזכרים במדריך הוא באחריות המשתמש/ת בלבד. Focus AI אינה מסונפת ל-Anthropic.
+          <strong>לפני שמתחילים:</strong> המדריך הזה נכתב כדי לעזור לכם להתחיל לעבוד עם Claude Code. המידע מעודכן ליום כתיבתו ועשוי להשתנות — תמיד כדאי לבדוק גם את <a href="https://code.claude.com/docs/en/overview" target="_blank" style="color:var(--orange)">התיעוד הרשמי של Anthropic</a>.
+          Focus AI אינה חברת בת של Anthropic.
         </div>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- SECTION: What is Claude Code?              -->
         <!-- ═══════════════════════════════════════════ -->
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא הכלי הרשמי של Anthropic שמביא את Claude ישירות למחשב שלכם. במקום לעבוד דרך אתר בדפדפן, Claude Code <strong>חי בתוך סביבת העבודה שלכם</strong> — יכול לקרוא קבצים, לכתוב תוכן, להריץ פקודות ולעבוד עם כמה פורמטים במקביל. ממשק שיחה רגיל, כמו לדבר עם Claude באתר — רק שהוא יכול לגעת בקבצים שלכם.</p>
-        <p>תחשבו על זה ככה: יש לכם יועץ מומחה שיושב לצידכם, רואה את הפרויקט שלכם בזמן אמת, ויכול לפעול — לא רק לייעץ.</p>
+        <p>Claude Code הוא הכלי של Anthropic שמביא את Claude ישירות למחשב שלכם. במקום לעבוד דרך אתר, Claude Code <strong>יושב בתוך סביבת העבודה שלכם</strong> — קורא קבצים, כותב תוכן, מריץ פקודות ועובד על כמה דברים במקביל. אותו ממשק שיחה שאתם מכירים מ-claude.ai — רק שפה הוא יכול גם לגעת בקבצים שלכם.</p>
+        <p>בקיצור: יועץ מומחה שיושב לצידכם, רואה את הפרויקט בזמן אמת, ויכול גם לפעול — לא רק לדבר.</p>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- SECTION: Environment Setup                 -->
         <!-- ═══════════════════════════════════════════ -->
         <h2>הכנת סביבת העבודה</h2>
-        <p>לפני שמתחילים, צריך להתקין כמה כלים. אם אתם מתחילים מאפס — אל דאגה, הכל מוסבר כאן צעד אחרי צעד.</p>
+        <p>לפני שקופצים למים — צריך להתקין כמה דברים. אם מעולם לא עשיתם את זה, בסדר גמור. הכל פה, צעד אחרי צעד.</p>
 
         <h3>מה זה טרמינל?</h3>
-        <p>הטרמינל (Terminal) הוא ממשק טקסטואלי למחשב — במקום ללחוץ על כפתורים עם העכבר, כותבים פקודות טקסט. זה נשמע מאיים, אבל זה פשוט מאוד: כותבים פקודה, לוחצים Enter, והמחשב מבצע.</p>
-        <p>Claude Code עובד דרך הטרמינל, אבל יש גם תוסף ל-VS Code עם ממשק גרפי נוח — נגיע לזה בהמשך.</p>
+        <p>הטרמינל הוא חלון טקסט שבו כותבים פקודות למחשב. במקום ללחוץ על כפתורים — כותבים שורה, לוחצים Enter, והמחשב מבצע. זה הרבה פחות מפחיד ממה שזה נשמע.</p>
+        <p>Claude Code עובד דרך הטרמינל, אבל יש גם תוסף ל-VS Code עם ממשק גרפי נוח — עוד רגע נגיע לזה.</p>
 
         <p><strong>איך פותחים טרמינל:</strong></p>
 
@@ -774,7 +773,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         </div>
 
         <h3>התקנת Git (חובה)</h3>
-        <p>Git הוא מערכת לניהול גרסאות — כמו "Ctrl+Z מתקדם" שעוקב אחרי כל שינוי בקבצים. <strong>Claude Code דורש Git כדי לעבוד — חובה להתקין לפני שממשיכים.</strong></p>
+        <p>Git הוא כלי שעוקב אחרי שינויים בקבצים — כמו "Ctrl+Z מתקדם" לפרויקטים שלמים. <strong>בלי Git, Claude Code לא יתקין — אז זה הדבר הראשון שצריך לטפל בו.</strong></p>
         <div class="os-tabs" data-group="git">
           <button class="os-tab active" onclick="switchTab(this, 'git', 'win')">🪟 Windows</button>
           <button class="os-tab" onclick="switchTab(this, 'git', 'mac')">🍎 Mac</button>
@@ -832,8 +831,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
           <p>בכל שאר המסכים — לחצו <strong>Next</strong> עם ברירות המחדל &rarr; לבסוף <strong>Install</strong>.</p>
           <p>אחרי ההתקנה, פתחו PowerShell <strong>חדש</strong> ובדקו:</p>
           <div class="code-block"><code>git --version</code></div>
-          <p>אם רואים מספר גרסה (למשל <span class="ic">git version 2.53.0</span>) — מעולה, Git מותקן.</p>
-          <div class="warning"><strong>ב-Windows, Git הוא חובה.</strong> בלי Git, Claude Code לא יתקין. כך מצוין גם ב<a href="https://code.claude.com/docs/en/overview" target="_blank" style="color:#e85353">תיעוד הרשמי של Anthropic</a>.</div>
+          <p>רואים מספר גרסה (כמו <span class="ic">git version 2.53.0</span>)? מעולה, Git מותקן.</p>
+          <div class="warning"><strong>Git הוא חובה ב-Windows.</strong> בלי Git, ההתקנה של Claude Code תיכשל. זה מצוין גם ב<a href="https://code.claude.com/docs/en/overview" target="_blank" style="color:#e85353">תיעוד הרשמי</a>.</div>
         </div>
         <div class="os-panel" data-group="git" data-os="mac">
           <p>הריצו בטרמינל:</p>
@@ -852,7 +851,7 @@ sudo dnf install git</code></div>
         </div>
 
         <h3>התקנת VS Code (מומלץ מאוד)</h3>
-        <p><a href="https://code.visualstudio.com" target="_blank">VS Code</a> הוא עורך קוד חינמי של Microsoft — סביבת העבודה המומלצת ל-Claude Code. גם אם אתם לא מפתחים, VS Code מספק סביבה נוחה עם טרמינל מובנה ותוסף ייעודי ל-Claude Code.</p>
+        <p><a href="https://code.visualstudio.com" target="_blank">VS Code</a> הוא עורך קוד חינמי של Microsoft. גם אם אתם לא מפתחים — זו סביבת העבודה הכי נוחה ל-Claude Code: יש בה טרמינל מובנה, תוסף ייעודי, והכל במקום אחד.</p>
         <a href="https://code.visualstudio.com" target="_blank" class="link-card" style="text-decoration:none;">
           <div class="link-card-icon" style="background:#0078d4;color:#fff;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 00-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 00-1.276.057L.327 7.261A1 1 0 00.326 8.74L3.899 12 .326 15.26a1 1 0 00.001 1.479L1.65 17.94a.999.999 0 001.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 001.704.29l4.942-2.377A1.5 1.5 0 0024 20.06V3.939a1.5 1.5 0 00-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/></svg>
@@ -870,7 +869,7 @@ sudo dnf install git</code></div>
           <li>פתחו VS Code</li>
           <li>פתחו טרמינל מובנה: <span class="ic">Ctrl+`</span> (או מתפריט Terminal &rarr; New Terminal)</li>
         </ol>
-        <div class="note"><strong>למה VS Code?</strong> כי אפשר לעבוד עם Claude Code ישירות מתוכו — בטרמינל מובנה או דרך תוסף עם ממשק גרפי שתומך בעברית. הכל במקום אחד.</div>
+        <div class="note"><strong>למה VS Code?</strong> כי יש לו תוסף רשמי של Claude Code עם ממשק צ׳אט נוח שתומך גם בעברית. במקום טרמינל שחור מפחיד — מקבלים חוויה דומה ל-Claude באתר, אבל עם גישה לקבצים.</div>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- SECTION: Quick Links                       -->
@@ -913,7 +912,7 @@ sudo dnf install git</code></div>
         <!-- STEP 1: Anthropic Account                  -->
         <!-- ═══════════════════════════════════════════ -->
         <h2><span class="step-num">1</span> פתחו חשבון Anthropic</h2>
-        <p>כדי להשתמש ב-Claude Code, תצטרכו אחת משתי האפשרויות:</p>
+        <p>כדי להשתמש ב-Claude Code צריך חשבון. יש שתי אפשרויות:</p>
         <ul>
           <li><strong>מפתח API:</strong> תשלום לפי שימוש בלבד (ללא מנוי חודשי)</li>
           <li><strong>מנוי Claude Pro / Max:</strong> מנוי חודשי מ-$20 שכולל גם גישה ל-Claude באתר</li>
@@ -945,7 +944,7 @@ sudo dnf install git</code></div>
         <!-- STEP 2: Install Claude Code                -->
         <!-- ═══════════════════════════════════════════ -->
         <h2><span class="step-num">2</span> התקינו את Claude Code</h2>
-        <p>עכשיו מגיע החלק המרכזי. יש <strong>שתי דרכים</strong> להתקין — בחרו את המתאימה לכם:</p>
+        <p>הגענו לרגע האמת. יש <strong>שתי דרכים</strong> להתקין — בחרו מה שמתאים לכם:</p>
 
         <h3>דרך א׳: התקנה רשמית (מומלץ)</h3>
         <p>שיטת ההתקנה הרשמית של Anthropic — מתעדכנת אוטומטית ברקע. (<a href="https://code.claude.com/docs/en/overview" target="_blank">תיעוד רשמי</a>)</p>
@@ -972,28 +971,28 @@ sudo dnf install git</code></div>
           <div class="code-block"><code>curl -fsSL https://claude.ai/install.sh | bash</code></div>
         </div>
 
-        <p>בדקו שהתקנה הצליחה:</p>
+        <p>עכשיו בדקו שזה עבד:</p>
         <div class="code-block"><code>claude --version</code></div>
-        <p>אמורים לראות מספר גרסה. אם כן — מעולה, Claude Code מותקן.</p>
-        <div class="note"><strong>עדכון אוטומטי:</strong> ההתקנה הרשמית מתעדכנת אוטומטית ברקע — תמיד תהיו על הגרסה האחרונה.</div>
+        <p>רואים מספר גרסה? יופי, Claude Code מותקן ומוכן.</p>
+        <div class="note"><strong>עדכון אוטומטי:</strong> ההתקנה הרשמית מתעדכנת ברקע — תמיד תהיו על הגרסה האחרונה בלי שתצטרכו לעשות משהו.</div>
 
         <h3>דרך ב׳: התקנה דרך npm (חלופה)</h3>
         <p>אם כבר יש לכם Node.js 18+ מותקן:</p>
         <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
-        <div class="note">שיטה זו דורשת <a href="https://nodejs.org" target="_blank">Node.js 18+</a>. אם אין לכם Node.js, השתמשו בדרך א׳ למעלה.</div>
+        <div class="note">דורש <a href="https://nodejs.org" target="_blank">Node.js 18+</a> מותקן. אין לכם? לכו על דרך א׳ למעלה.</div>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- STEP 3: Authentication                     -->
         <!-- ═══════════════════════════════════════════ -->
         <h2><span class="step-num">3</span> אימות — הפעלה ראשונה</h2>
-        <p>פתחו טרמינל (או טרמינל מובנה ב-VS Code) והקלידו:</p>
+        <p>פתחו טרמינל (או את הטרמינל בתוך VS Code) וכתבו:</p>
         <div class="code-block"><code>claude</code></div>
-        <p>בפעם הראשונה, Claude Code יבקש אימות. יש שתי אפשרויות:</p>
+        <p>בפעם הראשונה Claude Code ישאל איך להתחבר. יש שתי אפשרויות:</p>
         <ul>
           <li><strong>מפתח API:</strong> הדביקו את המפתח שיצרתם בשלב 1 ולחצו Enter</li>
           <li><strong>חשבון Claude.ai:</strong> בחרו באפשרות "Login with Claude.ai" — ייפתח דפדפן להתחברות עם חשבון Pro/Max</li>
         </ul>
-        <p>אם האימות הצליח, תראו את ברכת הכניסה של Claude וסמן <span class="ic">&gt;</span> מהבהב — מוכנים להתחיל.</p>
+        <p>הכל עבד? תראו מסך פתיחה וסמן <span class="ic">&gt;</span> מהבהב — אפשר להתחיל לעבוד.</p>
 
         <div class="os-tabs" data-group="auth-fix">
           <button class="os-tab active" onclick="switchTab(this, 'auth-fix', 'win')">🪟 בעיות ב-Windows?</button>
@@ -1020,7 +1019,7 @@ sudo dnf install git</code></div>
         <!-- STEP 4: VS Code Extension                  -->
         <!-- ═══════════════════════════════════════════ -->
         <h2><span class="step-num">4</span> תוסף Claude Code ב-VS Code (מומלץ)</h2>
-        <p>בנוסף לעבודה בטרמינל, יש <strong>תוסף רשמי של Anthropic ל-VS Code</strong> שנותן ממשק שיחה גרפי — דומה מאוד לממשק של Claude באתר.</p>
+        <p>מעבר לטרמינל, ל-Claude Code יש <strong>תוסף רשמי ל-VS Code</strong> שנותן ממשק צ׳אט גרפי — דומה לממשק של claude.ai, רק בתוך סביבת העבודה.</p>
         <ol>
           <li>פתחו VS Code</li>
           <li>לחצו <span class="ic">Ctrl+Shift+X</span> (Extensions)</li>
@@ -1028,24 +1027,24 @@ sudo dnf install git</code></div>
           <li>לחצו <strong>Install</strong></li>
           <li>אחרי ההתקנה — יופיע אייקון של Anthropic בסרגל הצד. לחצו עליו לפתיחת ממשק השיחה</li>
         </ol>
-        <div class="note"><strong>למה כדאי?</strong> התוסף מציג את השיחה עם Claude בתוך VS Code, עם תמיכה טובה יותר בעברית (RTL) ועם ממשק נוח יותר מטרמינל גולמי. בצד שמאל רואים את הקבצים, בצד ימין את השיחה עם Claude.</div>
+        <div class="note"><strong>למה כדאי?</strong> במקום לכתוב הכל בטרמינל שחור — מקבלים ממשק צ׳אט נוח עם תמיכה בעברית. בצד אחד הקבצים שלכם, בצד שני השיחה עם Claude.</div>
         <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/focusai/guides/claude-code-accept-mode" alt="Claude Code ב-VS Code — ממשק אישור שינויים" class="guide-img">
         <p class="guide-img-caption">Claude Code בתוך VS Code — ממשק אישור שינויים (Accept Mode)</p>
 
         <h3>הגדרה חשובה: Bypass Permissions</h3>
-        <p>כברירת מחדל, Claude Code מבקש אישור לכל פעולה (יצירת קובץ, הרצת פקודה). כדי שיוכל לעבוד באופן עצמאי:</p>
+        <p>כברירת מחדל, Claude Code מבקש אישור לפני כל פעולה. זה בטוח, אבל מעייף. כדי שיעבוד בצורה חלקה בלי לשאול כל שנייה:</p>
         <ol>
           <li>ב-VS Code, לחצו על גלגל השיניים (⚙) למטה משמאל</li>
           <li>חפשו <strong>"Claude Code"</strong> בהגדרות</li>
           <li>הפעילו <strong>"Allow Bypass Permissions Mode"</strong></li>
         </ol>
-        <div class="note"><strong>מתי להפעיל?</strong> כשאתם רוצים ש-Claude יבצע רצף פעולות בלי לעצור ולשאול אישור בכל שלב. שימושי בעיקר לאוטומציות ולפעולות שחוזרות על עצמן.</div>
+        <div class="note"><strong>מתי להפעיל?</strong> כשאתם רוצים ש-Claude יעבוד ברצף בלי לעצור כל שנייה. מושלם לאוטומציות ולמשימות שחוזרות על עצמן.</div>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- STEP 5: Install Skills                     -->
         <!-- ═══════════════════════════════════════════ -->
         <h2><span class="step-num">5</span> התקינו את הסקילים</h2>
-        <p><strong>סקילים (Skills)</strong> הם הוראות מובנות שמרחיבות את היכולות של Claude Code. במקום לכתוב הנחיות ארוכות כל פעם, סקיל עושה את זה בשבילכם — פקודה אחת ו-Claude יודע בדיוק מה לעשות.</p>
+        <p><strong>סקילים (Skills)</strong> הם כמו "מתכונים" ל-Claude Code. במקום להסביר לו כל פעם מחדש מה אתם רוצים — מפעילים סקיל בפקודה אחת והוא כבר יודע בדיוק מה לעשות.</p>
 
         <ol>
           <li>הורידו את חבילת הסקילים המתאימה (למעלה בעמוד)</li>
@@ -1064,7 +1063,7 @@ sudo dnf install git</code></div>
           <div class="code-block"><code>bash install.sh</code></div>
         </div>
 
-        <p>תראו רשימת ✅ כשכל 50 הסקילים מותקנים. בדקו שזה עבד:</p>
+        <p>תראו רשימת ✅ כשכל הסקילים מותקנים. בואו נוודא שזה עבד:</p>
         <div class="code-block"><code><span class="comment"># macOS / Linux</span>
 ls ~/.claude/skills/
 
@@ -1076,9 +1075,9 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <!-- SECTION: How to use Skills                 -->
         <!-- ═══════════════════════════════════════════ -->
         <h2>איך משתמשים בסקילים</h2>
-        <p>סקילים מופעלים עם קידומת <span class="ic">/</span> בשיחה עם Claude:</p>
-        <div class="code-block"><code>&gt; /שם-הסקיל [הקשר אופציונלי]</code></div>
-        <p>חלק מהסקילים עובדים לבד (למשל <span class="ic">/code-review</span> שסורק את הקוד הפתוח). אחרים צריכים שתתנו הקשר:</p>
+        <p>פשוט כותבים <span class="ic">/</span> ואחריו שם הסקיל:</p>
+        <div class="code-block"><code>&gt; /שם-הסקיל [מה שרוצים]</code></div>
+        <p>חלק מהסקילים עובדים לבד (כמו <span class="ic">/code-review</span> שסורק את הקוד). אחרים צריכים שתתנו הקשר:</p>
         <div class="code-block"><code><span class="comment"># תקן שגיאה ספציפית</span>
 <span class="cmd">&gt; /fix-error</span> TypeError: Cannot read properties of undefined
 
@@ -1088,7 +1087,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
 <span class="comment"># הסבר קוד</span>
 <span class="cmd">&gt; /explain-code</span> [הדביקו את הפונקציה שרוצים להבין]</code></div>
 
-        <div class="note"><strong>טיפ חשוב:</strong> Claude Code בודק אילו סקילים זמינים וטוען רק את הרלוונטיים — כך הוא לא מבזבז "זיכרון" על סקילים שלא צריך כרגע.</div>
+        <div class="note"><strong>טיפ:</strong> Claude Code חכם מספיק לזהות אילו סקילים רלוונטיים ולטעון רק אותם — הוא לא "מבזבז זיכרון" על מה שלא צריך.</div>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- SECTION: Tips                              -->
@@ -1096,7 +1095,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <h2>טיפים לשימוש אפקטיבי</h2>
 
         <h3>1. תמיד צרו קובץ claude.md</h3>
-        <p>קובץ <span class="ic">claude.md</span> בשורש הפרויקט הוא כמו "בריף" ל-Claude — מסביר מה הפרויקט, מה מבנה הקבצים, ומה הכללים. בלי הקובץ הזה, Claude עובד באופן גנרי ולא מותאם. עם הקובץ — הוא הופך למומחה בפרויקט שלכם.</p>
+        <p>הקובץ <span class="ic">claude.md</span> בשורש הפרויקט הוא כמו בריף ל-Claude — מסביר מה הפרויקט, איך הוא בנוי, ומה הכללים. בלי קובץ כזה Claude עובד בצורה גנרית. עם הקובץ — הוא מכיר את הפרויקט כאילו הוא חלק מהצוות.</p>
         <div class="code-block"><code><span class="comment"># דוגמה לתוכן claude.md</span>
 # My Project
 מטרת הפרויקט: אפליקציית ניהול משימות
@@ -1105,11 +1104,11 @@ dir $env:USERPROFILE\.claude\skills</code></div>
 כללים: כתוב בעברית, השתמש ב-TypeScript</code></div>
 
         <h3>2. השתמשו ב-Plan Mode לרעיונות חדשים</h3>
-        <p>כשמתחילים משהו חדש, במקום לכתוב ישר קוד — בקשו מ-Claude <strong>לתכנן קודם</strong>. הוא ישאל שאלות, יחשוב על דברים שלא חשבתם עליהם, ויציע מבנה לפני שמתחיל לעבוד.</p>
+        <p>כשמתחילים משהו חדש — אל תקפצו ישר לעבודה. בקשו מ-Claude <strong>לתכנן קודם</strong>. הוא ישאל שאלות, יעלה נקודות שלא חשבתם עליהן, ויציע מבנה לפני שמתחיל.</p>
         <div class="code-block"><code><span class="cmd">&gt;</span> תתכנן לי אוטומציה שאוספת נתונים מיוטיוב ושולחת סיכום במייל כל יום שני</code></div>
 
         <h3>3. תדביקו שגיאות כמו שהן</h3>
-        <p>לא חייבים להבין שגיאות — פשוט <strong>העתיקו את כל הודעת השגיאה</strong> (כולל ה"ג׳יבריש" הטכני) והדביקו ל-Claude. הוא ינתח ויגיד לכם בדיוק מה שבור ואיך לתקן.</p>
+        <p>לא צריך להבין שגיאות — פשוט <strong>העתיקו את כל הודעת השגיאה</strong> כמו שהיא (כולל ה"ג׳יבריש" הטכני) והדביקו ל-Claude. הוא יגיד לכם מה שבור ואיך לתקן.</p>
 
         <h3>4. שרשרו סקילים לתהליך מלא</h3>
         <p>סקילים עובדים מצוין ברצף — בנו תהליך עבודה מלא:</p>
@@ -1120,13 +1119,13 @@ dir $env:USERPROFILE\.claude\skills</code></div>
 <span class="cmd">&gt; /commit-message</span></code></div>
 
         <h3>5. קראו מה Claude כותב</h3>
-        <p>הדרך הכי טובה ללמוד היא <strong>לקרוא כל שורה שClaude מוציא</strong>. אל תסתפקו בתוצאה — תבינו מה הוא עשה ולמה. ככה לומדים לחשוב כמו שמודלי AI חושבים.</p>
+        <p>הדרך הכי טובה ללמוד — <strong>לקרוא כל שורה שClaude מוציא</strong>. אל תסתפקו בתוצאה, תבינו מה הוא עשה ולמה. ככה מפתחים חשיבה של AI.</p>
 
         <h3>6. נקו שיחה כשהיא מתארכת</h3>
-        <p>כשרואים ש-Claude מתחיל להגיב לאט או ש"ההקשר" מלא — התחילו שיחה חדשה. Claude Code מציג אחוז ניצול הקשר — כשמתקרבים ל-70%+ עדיף לנקות ולהתחיל מחדש.</p>
+        <p>כשClaude מתחיל להגיב לאט או שהתשובות נהיות פחות מדויקות — סימן ש"ההקשר" מלא. פתחו שיחה חדשה. Claude Code מראה כמה הקשר נשאר — מתקרבים ל-70%? עדיף להתחיל מחדש.</p>
 
         <h3>7. הזהרו עם מפתחות API</h3>
-        <div class="warning"><strong>אבטחה:</strong> לעולם אל תשמרו מפתחות API בתוך קבצי קוד! השתמשו בקובצי <span class="ic">.env</span> (שלא עולים ל-Git). תמיד הריצו <span class="ic">/security-review</span> לפני שאתם מפרסמים קוד.</div>
+        <div class="warning"><strong>זה חשוב:</strong> אף פעם אל תשימו מפתחות API בתוך קבצי קוד. שמרו אותם בקובץ <span class="ic">.env</span> (שלא עולה ל-Git). לפני שמפרסמים קוד — הריצו <span class="ic">/security-review</span> לבדיקה.</div>
 
         <!-- ═══════════════════════════════════════════ -->
         <!-- SECTION: Troubleshooting                   -->
@@ -1169,15 +1168,14 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <!-- Bottom disclaimer                          -->
         <!-- ═══════════════════════════════════════════ -->
         <div class="disclaimer" style="margin-top: 40px;">
-          <strong>הערת סיום:</strong> מדריך זה נועד למטרות מידע ולימוד בלבד ואינו מהווה ייעוץ מקצועי.
-          המחירים, התכונות והפקודות עשויים להשתנות — בדקו תמיד את <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" style="color:var(--orange)">התיעוד הרשמי העדכני</a>.
-          Focus AI אינה אחראית לשירותי צד שלישי המוזכרים במדריך. כל הסימנים המסחריים שייכים לבעליהם.
+          <strong>שימו לב:</strong> מחירים, פיצ׳רים ופקודות עשויים להשתנות. תמיד בדקו גם את <a href="https://code.claude.com/docs/en/overview" target="_blank" style="color:var(--orange)">התיעוד הרשמי</a>.
+          Focus AI לא אחראית לשירותי צד שלישי. סימנים מסחריים שייכים לבעליהם.
         </div>
 
         <!-- WhatsApp Community -->
         <div class="wa-block">
           <h2>הצטרפו לקהילת AI בוואטסאפ</h2>
-          <p>טיפים יומיים, מדריכים בלעדיים ל-Claude Code, שיתוף תוצרים ועדכונים על כלים חדשים — ישירות לוואטסאפ.</p>
+          <p>טיפים יומיים, מדריכים ל-Claude Code, שיתוף תוצרים ועדכונים על כלים חדשים.</p>
           <a href="https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t" target="_blank" rel="noopener noreferrer" class="btn-wa">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             הצטרפו לקהילה — חינם
@@ -1188,7 +1186,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <!-- CTA -->
         <div class="cta-block">
           <h2>רוצים להעמיק?</h2>
-          <p>הסקילים זה רק ההתחלה. ב-Bot-Camp של Focus AI תלמדו לבנות אוטומציות, סוכני AI ותהליכי עבודה מלאים — עם ליווי אישי.</p>
+          <p>הסקילים זה רק ההתחלה. ב-Bot-Camp תלמדו לבנות אוטומציות, סוכני AI ותהליכי עבודה שלמים — עם ליווי צמוד.</p>
           <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת Bot-Camp</a>
           <p class="cta-note">Bot-Camp | AI First | ליווי אישי</p>
         </div>
