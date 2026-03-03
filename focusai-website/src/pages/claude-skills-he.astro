@@ -353,6 +353,18 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       border-radius: 1px;
       animation: cursor-blink 1.1s step-end infinite;
     }
+    /* RTL headline cursor via ::after (bypasses bidi reordering) */
+    .orange.headline-cursor::after {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 0.82em;
+      background: currentColor;
+      vertical-align: text-bottom;
+      border-radius: 1px;
+      margin-right: 6px;
+      animation: cursor-blink 1.1s step-end infinite;
+    }
     @keyframes cursor-blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
@@ -382,7 +394,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       <p class="small-label">מבוסס על הפרוטוקולים הרשמיים של Anthropic</p>
       <h1>
         50 סקילים לClaude Code.<br>
-        <span class="orange">במתנה.<span class="cursor" aria-hidden="true"></span></span>
+        <span class="orange headline-cursor">במתנה.</span>
       </h1>
       <p>50 סקילים שמכסים את כל מה שמפתח באמת צריך: קוד ריוויו, אבטחה, טסטים, ארכיטקטורה, דיבאגינג. מכניסים לתיקייה אחת. מהיום Claude Code עובד אחרת.</p>
 
