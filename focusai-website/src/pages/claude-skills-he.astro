@@ -306,10 +306,54 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       .aidev-card { padding: 28px 24px; }
       .form-names { grid-template-columns: 1fr; }
     }
+
+    /* ── Cookie banner ── */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9998;
+      background: var(--win-bar);
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    #cookie-banner.visible { transform: translateY(0); }
+    .cookie-text { font-size: 13px; color: var(--muted); flex: 1; min-width: 200px; }
+    .cookie-text a { color: var(--orange); text-decoration: underline; }
+    .cookie-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .cookie-btn-accept {
+      padding: 8px 20px; background: var(--orange); color: #fff;
+      font-family: var(--hebrew); font-size: 13px; font-weight: 700;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    .cookie-btn-essential {
+      padding: 8px 16px; background: transparent; color: var(--muted);
+      font-family: var(--hebrew); font-size: 13px;
+      border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <AnalyticsBody />
+
+  <!-- ─────────── COOKIE BANNER ─────────── -->
+  <div id="cookie-banner" role="dialog" aria-label="הסכמה לעוגיות">
+    <p class="cookie-text">
+      האתר משתמש בעוגיות אנליטיקס ושיווק בהסכמתך בלבד, בהתאם לחוק הגנת הפרטיות (תיקון 13).
+      <a href="/privacy-policy/">מדיניות פרטיות</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">אישור הכל</button>
+      <button class="cookie-btn-essential" id="cookie-essential">הכרחיות בלבד</button>
+    </div>
+  </div>
 
   <!-- ─────────── HERO ─────────── -->
   <section id="hero">
@@ -337,6 +381,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         <label class="consult-row">
           <input type="checkbox" data-field="consultant" checked>
           <span class="consult-label">כן, אשמח שיועץ לימודים יצור איתי קשר ויספר לי על מסלול AI Dev — מאפס ידע לבניית סוכני AI, אוטומציות ופיתוח בפרודקשן.</span>
+        </label>
+        <label class="consult-row" style="border-color: var(--orange);">
+          <input type="checkbox" data-field="privacy" required>
+          <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a> ולקבלת תוכן שיווקי מ-Focus AI. ניתן לבטל בכל עת.</span>
         </label>
         <button class="form-btn" id="form-submit">קבל את הסקילים →</button>
         <p class="sub-note">שולחים לך את הקישור להורדה מיד · בלי ספאם</p>
@@ -598,6 +646,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
               <input type="checkbox" data-field="consultant" checked>
               <span class="consult-label">כן, אשמח שיועץ לימודים יצור איתי קשר ויספר לי על מסלול AI Dev — מאפס ידע לבניית סוכני AI, אוטומציות ופיתוח בפרודקשן.</span>
             </label>
+            <label class="consult-row" style="border-color: var(--orange);">
+              <input type="checkbox" data-field="privacy" required>
+              <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a> ולקבלת תוכן שיווקי מ-Focus AI. ניתן לבטל בכל עת.</span>
+            </label>
             <button class="form-btn" id="form-submit-2">שלח לי →</button>
             <p class="sub-note">שולחים לך את הקישור מיד · בלי ספאם</p>
           </div>
@@ -623,9 +675,25 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
   </footer>
 
   <script is:inline>
-    // N8N webhook URL — replace with actual endpoint
     const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/skills';
 
+    // ── Cookie consent ──
+    const COOKIE_KEY = 'focusai_cookie_consent_skills';
+    function hideCookieBanner() {
+      const b = document.getElementById('cookie-banner');
+      if (b) b.classList.remove('visible');
+    }
+    function saveConsent(type) {
+      try { localStorage.setItem(COOKIE_KEY, JSON.stringify({ type, ts: Date.now() })); } catch(e) {}
+      hideCookieBanner();
+    }
+    if (!localStorage.getItem(COOKIE_KEY)) {
+      document.getElementById('cookie-banner')?.classList.add('visible');
+    }
+    document.getElementById('cookie-accept')?.addEventListener('click', () => saveConsent('all'));
+    document.getElementById('cookie-essential')?.addEventListener('click', () => saveConsent('essential'));
+
+    // ── Form helpers ──
     function field(wrap, name) { return wrap.querySelector(`[data-field="${name}"]`); }
 
     async function submitForm(wrap, successEl) {
@@ -634,14 +702,31 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       const phoneEl     = field(wrap, 'phone');
       const emailEl     = field(wrap, 'email');
       const consultEl   = field(wrap, 'consultant');
+      const privacyEl   = field(wrap, 'privacy');
 
       // Clear errors
       [firstNameEl, phoneEl, emailEl].forEach(el => el && el.classList.remove('error'));
+      if (privacyEl) privacyEl.closest('.consult-row').style.borderColor = '';
 
       let valid = true;
       if (!firstNameEl.value.trim()) { firstNameEl.classList.add('error'); firstNameEl.focus(); valid = false; }
-      if (!phoneEl.value.trim() || phoneEl.value.trim().replace(/\D/g,'').length < 9) { phoneEl.classList.add('error'); if (valid) phoneEl.focus(); valid = false; }
+
+      // Israeli mobile: 10 digits, starts with 05x–09x
+      const phoneClean = (phoneEl.value || '').replace(/[-\s]/g, '');
+      if (!/^0[5-9]\d{7,8}$/.test(phoneClean)) {
+        phoneEl.classList.add('error');
+        if (valid) phoneEl.focus();
+        valid = false;
+      }
+
       if (!emailEl.value.trim() || !emailEl.value.includes('@')) { emailEl.classList.add('error'); if (valid) emailEl.focus(); valid = false; }
+
+      // Privacy required (תיקון 13)
+      if (privacyEl && !privacyEl.checked) {
+        privacyEl.closest('.consult-row').style.borderColor = '#c8643c';
+        valid = false;
+      }
+
       if (!valid) return;
 
       const btn = wrap.querySelector('.form-btn');
@@ -651,7 +736,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       const payload = {
         firstName:  firstNameEl.value.trim(),
         lastName:   lastNameEl ? lastNameEl.value.trim() : '',
-        phone:      phoneEl.value.trim(),
+        phone:      phoneClean,
         email:      emailEl.value.trim(),
         consultant: String(consultEl ? consultEl.checked : false),
         source:     'claude-skills-he',
