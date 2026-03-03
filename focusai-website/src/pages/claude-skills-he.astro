@@ -301,9 +301,12 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .footer-copy { font-size: 12px; color: var(--faint); }
 
     @media (max-width: 720px) {
-      .term-body { padding: 28px 24px 36px; }
+      section:not(#hero) { padding: 40px 12px; }
+      .wrap { padding: 0; }
+      .term-body { padding: 24px 18px 32px; }
       .steps-grid, .target-grid { grid-template-columns: 1fr; }
-      .aidev-card { padding: 28px 24px; }
+      .step-card { padding: 24px 18px; }
+      .aidev-card { padding: 24px 18px; }
       .form-names { grid-template-columns: 1fr; }
     }
 
