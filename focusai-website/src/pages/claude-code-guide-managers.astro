@@ -89,18 +89,23 @@ import Analytics from '../components/Analytics.astro';
     .headline-cursor::after {
       content: '';
       display: inline-block;
-      width: 10px;
-      height: 0.82em;
+      width: 3px;
+      height: 0.85em;
       background: currentColor;
-      vertical-align: text-bottom;
+      vertical-align: -0.1em;
       border-radius: 1px;
-      margin-right: 6px;
+      margin-inline-start: 4px;
       animation: cursor-blink 1.1s step-end infinite;
     }
     @keyframes cursor-blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: hero-in 0.55s ease-out both; }
 
     .guide-body {
       background: var(--win-bg);
@@ -305,9 +310,9 @@ import Analytics from '../components/Analytics.astro';
   <div class="hero">
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
-    <p class="hero-label">מדריך התחלה מהירה — מנהלים ויזמים</p>
+    <p class="hero-label">מדריך התחלה מהירה · מנהלים ויזמים</p>
     <h1>Claude Code<br><span class="headline-cursor">למנהלים</span></h1>
-    <p class="hero-sub">מהתקנה עד הסקיל הראשון — מדריך מלא. בלי ניסיון בתכנות. 60 שניות עד שהכלי עובד.</p>
+    <p class="hero-sub">מהתקנה עד הסקיל הראשון, מדריך מלא. ללא ניסיון בתכנות. 60 שניות עד שהכלי עובד.</p>
   </div>
 
   <!-- Download card -->
@@ -326,8 +331,8 @@ import Analytics from '../components/Analytics.astro';
       <div style="font-size: 40px; line-height: 1; flex-shrink: 0;">🎁</div>
       <div style="flex: 1; min-width: 240px;">
         <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px;">מתנה מ-Focus AI</p>
-        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">60 סקילים למנהלים ויזמים, בחינם</p>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">אסטרטגיה, תקשורת, HR, אופרציה, צמיחה — כל הסקילים ב-ZIP אחד, מותקנים בפקודה אחת.</p>
+        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 סקילים למנהלים ויזמים, בחינם</p>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">אסטרטגיה, תקשורת, HR, אופרציה וצמיחה. כל הסקילים בקובץ ZIP אחד, מותקנים בפקודה אחת.</p>
       </div>
       <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-managers.zip"
          download
@@ -337,7 +342,7 @@ import Analytics from '../components/Analytics.astro';
            gap: 8px;
            background: var(--orange);
            color: #fff;
-           font-family: var(--mono);
+           font-family: var(--hebrew);
            font-size: 14px;
            font-weight: 700;
            padding: 13px 24px;
@@ -368,8 +373,8 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא כלי ה-CLI הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב מסמכים שלמים ולעבוד עם כמה פורמטים במקביל</strong>. כל ממשק שיחה רגיל.</p>
-        <p>למנהלים ויזמים: זה כמו שיהיה לך יועץ אסטרטגי, מנתח פיננסי ועוזר HR — כולם יחד, זמינים תמיד, בלי לחכות לפגישה.</p>
+        <p>Claude Code הוא כלי הטרמינל הרשמי של Anthropic, עוזר AI שחי בתוך הטרמינל שלך. בניגוד לChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב מסמכים שלמים ולעבוד עם כמה פורמטים במקביל</strong>. ממשק שיחה רגיל.</p>
+        <p>למנהלים ויזמים: זה כמו שיהיה לך יועץ אסטרטגי, מנתח פיננסי ועוזר HR, כולם יחד, זמינים תמיד, בלי לחכות לפגישה.</p>
 
         <h2>דרישות מקדימות</h2>
         <table class="tbl">
@@ -390,7 +395,7 @@ import Analytics from '../components/Analytics.astro';
           <li>הירשם או התחבר</li>
           <li>לחץ <strong>"Get API Keys"</strong> → <strong>"Create Key"</strong></li>
           <li>תן שם (למשל "managers") והעתק את המפתח (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
-          <li>שמור במקום בטוח — לא תוכל לראות אותו שוב</li>
+          <li>שמור במקום בטוח. לא תוכל לראות אותו שוב</li>
         </ol>
         <div class="note">
           <strong>עלות:</strong> חשבונות חדשים מקבלים קרדיטים חינם. לאחר מכן: 8–30 ₪ לחודש לשימוש רגיל.
@@ -405,7 +410,7 @@ import Analytics from '../components/Analytics.astro';
         <h2><span class="step-num">3</span> הפעל לראשונה</h2>
         <div class="code-block"><code>claude</code></div>
         <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק ולחץ Enter.</p>
-        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון PowerShell חדש לאחר ההתקנה.</div>
+        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה? פתח חלון PowerShell חדש לאחר ההתקנה.</div>
 
         <h2><span class="step-num">4</span> התקן את חבילת הסקילים למנהלים</h2>
         <p>פתח את ה-ZIP שהורדת, נווט לתיקייה שלו בטרמינל.</p>
@@ -416,7 +421,7 @@ import Analytics from '../components/Analytics.astro';
         <h3>Windows (PowerShell)</h3>
         <div class="code-block"><code>.\install.ps1</code></div>
 
-        <p>תראה רשימת ✅ — כל 50 הסקילים מותקנים. בדוק:</p>
+        <p>תראה רשימת ✅ כשכל 50 הסקילים מותקנים. בדוק:</p>
         <div class="code-block"><code class="comment"># macOS / Linux</code>
 <code>ls ~/.claude/skills/
 
@@ -436,7 +441,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
 
 <span class="comment"># מסגרת KPI לדשבורד ניהולי</span>
 <span class="cmd">&gt; /metrics-dashboard</span></code></div>
-        <p>Claude ישאל שאלות, תענה — והפלט יצא מוכן לשימוש.</p>
+        <p>Claude ישאל שאלות, תענה, והפלט יצא מוכן לשימוש.</p>
 
         <h2>איך משתמשים בסקילים</h2>
         <p>סקיל מופעל עם <span class="ic">/שם-הסקיל</span>. חלקם עובדים לבד, אחרים רוצים הקשר:</p>
@@ -472,7 +477,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
           <div class="skill-item"><span class="skill-cmd">/announcement-write</span><span class="skill-desc">הודעה רשמית פנימית/חיצונית</span></div>
           <div class="skill-item"><span class="skill-cmd">/meeting-agenda</span><span class="skill-desc">סדר יום עם מטרות ותוצאות רצויות</span></div>
           <div class="skill-item"><span class="skill-cmd">/meeting-summary</span><span class="skill-desc">סיכום פגישה עם משימות ואחראים</span></div>
-          <div class="skill-item"><span class="skill-cmd">/crisis-comms</span><span class="skill-desc">תקשורת משבר — מה לומר ואיך</span></div>
+          <div class="skill-item"><span class="skill-cmd">/crisis-comms</span><span class="skill-desc">תקשורת משבר: מה לומר ואיך</span></div>
           <div class="skill-item"><span class="skill-cmd">/negotiation-prep</span><span class="skill-desc">הכנה למשא ומתן עם BATNA</span></div>
           <div class="skill-item"><span class="skill-cmd">/proposal-write</span><span class="skill-desc">הצעת עסקית שכובשת</span></div>
         </div>
@@ -509,7 +514,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <div class="skill-table">
           <div class="skill-item"><span class="skill-cmd">/growth-strategy</span><span class="skill-desc">ערוצי צמיחה ותעדוף</span></div>
           <div class="skill-item"><span class="skill-cmd">/partnership-plan</span><span class="skill-desc">תוכנית שותפויות אסטרטגיות</span></div>
-          <div class="skill-item"><span class="skill-cmd">/fundraising-prep</span><span class="skill-desc">הכנה לגיוס — מה משקיעים רוצים לשמוע</span></div>
+          <div class="skill-item"><span class="skill-cmd">/fundraising-prep</span><span class="skill-desc">הכנה לגיוס: מה משקיעים רוצים לשמוע</span></div>
           <div class="skill-item"><span class="skill-cmd">/customer-research</span><span class="skill-desc">תוכנית מחקר לקוחות</span></div>
           <div class="skill-item"><span class="skill-cmd">/mvp-design</span><span class="skill-desc">הגדרת MVP מינימלי לוולידציה</span></div>
           <div class="skill-item"><span class="skill-cmd">/go-to-market</span><span class="skill-desc">תוכנית GTM מלאה לשקת מוצר</span></div>
@@ -540,7 +545,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <!-- CTA -->
         <div class="cta-block">
           <h2>רוצה להעמיק?</h2>
-          <p>סקילים חוסכים שעות. אוטומציה שמנהלת בשבילך — זה AI Dev. הכשרת Focus AI נבנתה בדיוק לשם כך.</p>
+          <p>סקילים חוסכים שעות. אוטומציה שמנהלת בשבילך זה כבר AI Dev. הכשרת Focus AI נבנתה בדיוק לשם כך.</p>
           <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת AI</a>
           <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי</p>
         </div>

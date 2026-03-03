@@ -89,18 +89,23 @@ import Analytics from '../components/Analytics.astro';
     .headline-cursor::after {
       content: '';
       display: inline-block;
-      width: 10px;
-      height: 0.82em;
+      width: 3px;
+      height: 0.85em;
       background: currentColor;
-      vertical-align: text-bottom;
+      vertical-align: -0.1em;
       border-radius: 1px;
-      margin-right: 6px;
+      margin-inline-start: 4px;
       animation: cursor-blink 1.1s step-end infinite;
     }
     @keyframes cursor-blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: hero-in 0.55s ease-out both; }
 
     .guide-body {
       background: var(--win-bg);
@@ -337,7 +342,7 @@ import Analytics from '../components/Analytics.astro';
            gap: 8px;
            background: var(--orange);
            color: #fff;
-           font-family: var(--mono);
+           font-family: var(--hebrew);
            font-size: 14px;
            font-weight: 700;
            padding: 13px 24px;
