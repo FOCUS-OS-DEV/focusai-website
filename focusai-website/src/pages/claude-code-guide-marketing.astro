@@ -1,0 +1,567 @@
+---
+/**
+ * Claude Code Getting Started — Marketing Guide (Hebrew)
+ * Accessible via email link + focusai.co.il/claude-code-guide-marketing/
+ * Route: /claude-code-guide-marketing/
+ */
+import Analytics from '../components/Analytics.astro';
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדריך Claude Code לשיווק ותוכן | Focus AI</title>
+  <meta name="description" content="מדריך מלא לשימוש ב-Claude Code לשיווק ותוכן: מהתקנה עד הסקיל הראשון. 50 סקילים מוכנים לאנשי שיווק.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <Analytics slot="head" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #dddcd4;
+      --win-bg:  #ffffff;
+      --win-bar: #d4d3cb;
+      --text:    #1a1a14;
+      --muted:   #55554e;
+      --faint:   #888880;
+      --orange:  #c8643c;
+      --orange-h:#b8542c;
+      --border:  #c8c7bf;
+      --card-bg: #f8f8f4;
+      --mono:    'JetBrains Mono', monospace;
+      --hebrew:  'Heebo', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--hebrew);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    .topbar {
+      background: var(--win-bar);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
+    .topbar a:hover { color: var(--orange); }
+
+    .hero {
+      text-align: center;
+      padding: 56px 24px 40px;
+    }
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .headline-cursor { white-space: nowrap; }
+    .headline-cursor::after {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 0.82em;
+      background: currentColor;
+      vertical-align: text-bottom;
+      border-radius: 1px;
+      margin-right: 6px;
+      animation: cursor-blink 1.1s step-end infinite;
+    }
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .guide-body {
+      background: var(--win-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 0 24px 40px;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+
+    .doc-bar {
+      background: var(--win-bar);
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      direction: ltr;
+    }
+    .doc-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .doc-dot.r { background: #ff5f57; }
+    .doc-dot.y { background: #ffbd2e; }
+    .doc-dot.g { background: #28c840; }
+    .doc-title { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-right: auto; }
+
+    .doc-content { padding: 40px 48px 56px; }
+
+    .doc-content h2 {
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 800;
+      margin: 48px 0 16px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    .doc-content h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+    .doc-content h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 28px 0 10px;
+      color: var(--text);
+    }
+    .doc-content p { font-size: 15px; color: var(--muted); margin-bottom: 16px; line-height: 1.8; }
+    .doc-content strong { color: var(--text); }
+    .doc-content ul { margin: 0 0 16px 0; padding-right: 20px; }
+    .doc-content li { font-size: 15px; color: var(--muted); margin-bottom: 8px; line-height: 1.7; }
+    .doc-content ol { margin: 0 0 16px 0; padding-right: 20px; }
+    .doc-content ol li { font-size: 15px; color: var(--muted); margin-bottom: 8px; }
+    .doc-content a { color: var(--orange); text-decoration: none; }
+    .doc-content a:hover { text-decoration: underline; }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 50%;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+
+    .code-block {
+      background: #1e1e2e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0 20px;
+      direction: ltr;
+      overflow-x: auto;
+    }
+    .code-block code {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #cdd6f4;
+      line-height: 1.7;
+      white-space: pre;
+    }
+    .code-block .comment { color: #6c7086; }
+    .code-block .cmd { color: #89dceb; }
+
+    .ic {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #c8643c;
+    }
+
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 24px;
+      font-size: 14px;
+    }
+    .tbl th {
+      background: var(--card-bg);
+      padding: 10px 14px;
+      text-align: right;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+      color: var(--text);
+    }
+    .tbl td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl td:first-child { font-family: var(--mono); font-size: 12px; color: var(--orange); }
+
+    .note {
+      background: #fef9f0;
+      border-right: 3px solid #e8a953;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .note strong { color: #b8732c; }
+
+    .skill-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0 24px;
+    }
+    .skill-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+    .skill-cmd {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--orange);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .skill-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    @media (max-width: 580px) {
+      .skill-table { grid-template-columns: 1fr; }
+      .doc-content { padding: 24px 20px 40px; }
+    }
+
+    .cta-block {
+      background: #1e1e2e;
+      border-radius: 12px;
+      padding: 48px 40px;
+      text-align: center;
+      margin: 48px 0 0;
+    }
+    .cta-block h2 { color: #fff; font-size: clamp(20px, 4vw, 32px); margin-bottom: 12px; }
+    .cta-block p { color: #9090a0; font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .btn-cta {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--hebrew);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(200,100,60,0.3);
+    }
+    .btn-cta:hover { background: var(--orange-h); }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    footer a:hover { color: var(--orange); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin: 16px 0 8px; flex-wrap: wrap; }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <a href="https://focusai.co.il">← חזרה לאתר Focus AI</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
+         alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
+    <p class="hero-label">מדריך התחלה מהירה — שיווק ותוכן</p>
+    <h1>Claude Code<br><span class="headline-cursor">לאנשי שיווק</span></h1>
+    <p class="hero-sub">מהתקנה עד הסקיל הראשון — מדריך מלא. בלי ניסיון בתכנות. 60 שניות עד שהכלי עובד.</p>
+  </div>
+
+  <!-- Download card -->
+  <div class="wrap" style="margin-bottom: 0;">
+    <div style="
+      background: var(--win-bg);
+      border: 2px solid var(--orange);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    ">
+      <div style="font-size: 40px; line-height: 1; flex-shrink: 0;">🎁</div>
+      <div style="flex: 1; min-width: 240px;">
+        <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px;">מתנה מ-Focus AI</p>
+        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 סקילים לשיווק ותוכן, בחינם</p>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">פוסטים לסושיאל, קמפיינים, SEO, מותג, אסטרטגיה — כל הסקילים ב-ZIP אחד, מותקנים בפקודה אחת.</p>
+      </div>
+      <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-marketing.zip"
+         download
+         style="
+           display: inline-flex;
+           align-items: center;
+           gap: 8px;
+           background: var(--orange);
+           color: #fff;
+           font-family: var(--mono);
+           font-size: 14px;
+           font-weight: 700;
+           padding: 13px 24px;
+           border-radius: 8px;
+           text-decoration: none;
+           white-space: nowrap;
+           flex-shrink: 0;
+           transition: background 0.15s;
+         "
+         onmouseover="this.style.background='var(--orange-h)'"
+         onmouseout="this.style.background='var(--orange)'">
+        ⬇ הורד את הסקילים (ZIP)
+      </a>
+    </div>
+  </div>
+
+  <!-- Guide card -->
+  <div class="wrap">
+    <div class="guide-body">
+
+      <div class="doc-bar">
+        <div class="doc-dot r"></div>
+        <div class="doc-dot y"></div>
+        <div class="doc-dot g"></div>
+        <span class="doc-title">claude-code-marketing-guide-he.md</span>
+      </div>
+
+      <div class="doc-content">
+
+        <h2>מה זה Claude Code?</h2>
+        <p>Claude Code הוא כלי ה-CLI הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב תוכן שלם ולעבוד עם כמה פורמטים במקביל</strong>. כל ממשק שיחה רגיל.</p>
+        <p>לאנשי שיווק: זה כמו שיהיה לך קופירייטר, אסטרטג תוכן ומנתח ביצועים — כולם יחד, זמינים תמיד.</p>
+
+        <h2>דרישות מקדימות</h2>
+        <table class="tbl">
+          <thead><tr><th>דרישה</th><th>למה</th></tr></thead>
+          <tbody>
+            <tr><td>מחשב (Mac / Windows / Linux)</td><td>Claude Code רץ בטרמינל</td></tr>
+            <tr><td>Node.js 18+ מותקן</td><td>Claude Code הוא חבילת Node.js</td></tr>
+            <tr><td>מפתח API של Anthropic</td><td>Claude Code מחובר לאנתרופיק דרך API</td></tr>
+          </tbody>
+        </table>
+        <p>בדוק אם Node.js מותקן:</p>
+        <div class="code-block"><code>node --version</code></div>
+        <p>אם רואה <span class="ic">v18.x.x</span> ומעלה, מעולה. אם לא, הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> (גרסת LTS).</p>
+
+        <h2><span class="step-num">1</span> קבל מפתח API</h2>
+        <ol>
+          <li>כנס ל-<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
+          <li>הירשם או התחבר</li>
+          <li>לחץ <strong>"Get API Keys"</strong> → <strong>"Create Key"</strong></li>
+          <li>תן שם (למשל "marketing") והעתק את המפתח (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
+          <li>שמור במקום בטוח — לא תוכל לראות אותו שוב</li>
+        </ol>
+        <div class="note">
+          <strong>עלות:</strong> חשבונות חדשים מקבלים קרדיטים חינם. לאחר מכן: 8–30 ₪ לחודש לשימוש רגיל.
+        </div>
+
+        <h2><span class="step-num">2</span> התקן את Claude Code</h2>
+        <p>פתח טרמינל (Mac: Terminal / Windows: PowerShell) והרץ:</p>
+        <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
+        <p>בדוק שהצליח:</p>
+        <div class="code-block"><code>claude --version</code></div>
+
+        <h2><span class="step-num">3</span> הפעל לראשונה</h2>
+        <div class="code-block"><code>claude</code></div>
+        <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק ולחץ Enter.</p>
+        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון PowerShell חדש לאחר ההתקנה.</div>
+
+        <h2><span class="step-num">4</span> התקן את חבילת הסקילים לשיווק</h2>
+        <p>פתח את ה-ZIP שהורדת, נווט לתיקייה שלו בטרמינל.</p>
+
+        <h3>macOS / Linux</h3>
+        <div class="code-block"><code>bash install.sh</code></div>
+
+        <h3>Windows (PowerShell)</h3>
+        <div class="code-block"><code>.\install.ps1</code></div>
+
+        <p>תראה רשימת ✅ — כל 50 הסקילים מותקנים. בדוק:</p>
+        <div class="code-block"><code class="comment"># macOS / Linux</code>
+<code>ls ~/.claude/skills/
+
+<span class="comment"># Windows</span>
+dir $env:USERPROFILE\.claude\skills</code></div>
+
+        <h2><span class="step-num">5</span> הסקיל הראשון</h2>
+        <p>פתח תיקייה כלשהי (אפילו Desktop) בטרמינל, הרץ <span class="ic">claude</span>, ואז:</p>
+        <div class="code-block"><code><span class="comment"># 5 פוסטים מבריף אחד</span>
+<span class="cmd">&gt; /social-post</span>
+
+<span class="comment"># קמפיין אימייל שלם</span>
+<span class="cmd">&gt; /email-campaign</span>
+
+<span class="comment"># קופי לעמוד נחיתה</span>
+<span class="cmd">&gt; /landing-copy</span>
+
+<span class="comment"># לוח תוכן חודשי</span>
+<span class="cmd">&gt; /content-calendar</span></code></div>
+        <p>Claude ישאל שאלות, תענה — והפלט יצא מוכן לשימוש.</p>
+
+        <h2>איך משתמשים בסקילים</h2>
+        <p>סקיל מופעל עם <span class="ic">/שם-הסקיל</span>. חלקם עובדים לבד, אחרים רוצים הקשר:</p>
+        <div class="code-block"><code>&gt; /social-post המוצר שלנו הוא אפליקציה לניהול זמן לאמהות עובדות
+
+&gt; /brand-voice [הדבק קופי קיים מהאתר]
+
+&gt; /repurpose [הדבק מאמר בלוג — Claude יהפוך אותו ל-10 פורמטים]</code></div>
+        <div class="note"><strong>טיפ:</strong> אפשר להמשיך את השיחה. אחרי פלט ראשון: "תן לי עוד 3 גרסאות יותר קצרות" — Claude זוכר את ההקשר.</div>
+
+        <h2>50 הסקילים, לפי קטגוריה</h2>
+
+        <h3>✍️ יצירת תוכן</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/social-post</span><span class="skill-desc">5 פוסטים לכל פלטפורמה מבריף אחד</span></div>
+          <div class="skill-item"><span class="skill-cmd">/email-campaign</span><span class="skill-desc">סדרת אימיילים שלמה עם subject lines</span></div>
+          <div class="skill-item"><span class="skill-cmd">/landing-copy</span><span class="skill-desc">קופי לעמוד נחיתה עם headline, sub, CTA</span></div>
+          <div class="skill-item"><span class="skill-cmd">/ad-variants</span><span class="skill-desc">10 גרסאות מודעה לפייסבוק / גוגל</span></div>
+          <div class="skill-item"><span class="skill-cmd">/blog-post</span><span class="skill-desc">פוסט בלוג מלא עם SEO</span></div>
+          <div class="skill-item"><span class="skill-cmd">/newsletter</span><span class="skill-desc">ניוזלטר מלא מרשימת נושאים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/video-script</span><span class="skill-desc">סקריפט וידאו עם הוק + CTA</span></div>
+          <div class="skill-item"><span class="skill-cmd">/repurpose</span><span class="skill-desc">תוכן אחד → 10 פורמטים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/case-study</span><span class="skill-desc">סיפור הצלחה מפרטי לקוח</span></div>
+          <div class="skill-item"><span class="skill-cmd">/thought-leadership</span><span class="skill-desc">מאמר מנהיגות דעה בקול המותג</span></div>
+        </div>
+
+        <h3>🎯 אסטרטגיה ותכנון</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/content-calendar</span><span class="skill-desc">לוח תוכן חודשי מלא</span></div>
+          <div class="skill-item"><span class="skill-cmd">/campaign-brief</span><span class="skill-desc">בריף קריאייטיב ממשפט אחד</span></div>
+          <div class="skill-item"><span class="skill-cmd">/persona-build</span><span class="skill-desc">2 פרסונות קהל יעד מפורטות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/competitive-content</span><span class="skill-desc">ניתוח תוכן מתחרים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/seo-brief</span><span class="skill-desc">בריף תוכן SEO מלא עם keywords</span></div>
+          <div class="skill-item"><span class="skill-cmd">/messaging-framework</span><span class="skill-desc">מסגרת מסרים לכל הצוות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/product-launch</span><span class="skill-desc">תוכנית תוכן לשקת מוצר</span></div>
+          <div class="skill-item"><span class="skill-cmd">/content-audit</span><span class="skill-desc">ביקורת תוכן קיים + המלצות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/funnel-content</span><span class="skill-desc">תוכן לכל שלב בפאנל</span></div>
+          <div class="skill-item"><span class="skill-cmd">/channel-strategy</span><span class="skill-desc">אסטרטגיית ערוצים מותאמת</span></div>
+        </div>
+
+        <h3>🎨 מותג וקול</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/brand-voice</span><span class="skill-desc">בדיקת עמידה בטון המותג + תיקון</span></div>
+          <div class="skill-item"><span class="skill-cmd">/tagline-generate</span><span class="skill-desc">20 אפשרויות לטאגליין עם ניקוד</span></div>
+          <div class="skill-item"><span class="skill-cmd">/brand-story</span><span class="skill-desc">סיפור מותג משכנע</span></div>
+          <div class="skill-item"><span class="skill-cmd">/value-proposition</span><span class="skill-desc">הצעת ערך ברורה לכל סגמנט</span></div>
+          <div class="skill-item"><span class="skill-cmd">/rewrite-localize</span><span class="skill-desc">התאמת תוכן לשוק / שפה אחרת</span></div>
+          <div class="skill-item"><span class="skill-cmd">/simplify-message</span><span class="skill-desc">הפוך מסר טכני לפשוט</span></div>
+          <div class="skill-item"><span class="skill-cmd">/tone-shift</span><span class="skill-desc">שכתוב בטון אחר</span></div>
+          <div class="skill-item"><span class="skill-cmd">/headline-test</span><span class="skill-desc">15 כותרות מדורגות לפי יעילות</span></div>
+        </div>
+
+        <h3>📊 מחקר ואנליטיקס</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/performance-report</span><span class="skill-desc">דוח ביצועי תוכן לקליינט</span></div>
+          <div class="skill-item"><span class="skill-cmd">/market-research</span><span class="skill-desc">מסגרת מחקר שוק מהיר</span></div>
+          <div class="skill-item"><span class="skill-cmd">/competitor-scan</span><span class="skill-desc">ניתוח מתחרים + הזדמנויות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/audience-insights</span><span class="skill-desc">תובנות קהל ממידע קיים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/survey-design</span><span class="skill-desc">שאלון מחקר לקוחות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/trend-report</span><span class="skill-desc">דוח טרנדים בתחום</span></div>
+          <div class="skill-item"><span class="skill-cmd">/campaign-debrief</span><span class="skill-desc">ניתוח פוסט-קמפיין מלא</span></div>
+          <div class="skill-item"><span class="skill-cmd">/keyword-research</span><span class="skill-desc">מחקר מילות מפתח + עדיפויות</span></div>
+        </div>
+
+        <h3>📈 גדילה ו-CRO</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/cta-optimize</span><span class="skill-desc">שיפור כפתורי ה-CTA</span></div>
+          <div class="skill-item"><span class="skill-cmd">/ab-test-design</span><span class="skill-desc">תכנון A/B test מלא</span></div>
+          <div class="skill-item"><span class="skill-cmd">/retention-email</span><span class="skill-desc">אימיילים לשימור לקוחות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/referral-copy</span><span class="skill-desc">קופי לתכנית הפניות</span></div>
+        </div>
+
+        <h3>⚡ פרודוקטיביות</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/task-breakdown</span><span class="skill-desc">פירוק קמפיין למשימות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/sprint-plan</span><span class="skill-desc">תכנון ספרינט שיווקי</span></div>
+          <div class="skill-item"><span class="skill-cmd">/generate-brief</span><span class="skill-desc">יצירת בריף מהיר</span></div>
+          <div class="skill-item"><span class="skill-cmd">/write-wiki</span><span class="skill-desc">כתיבת מסמך תהליך פנימי</span></div>
+          <div class="skill-item"><span class="skill-cmd">/explain-anything</span><span class="skill-desc">הסבר מושג בשפה פשוטה</span></div>
+          <div class="skill-item"><span class="skill-cmd">/refactor-copy</span><span class="skill-desc">שיפור קופי קיים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/content-accessibility</span><span class="skill-desc">בדיקת נגישות ושפה כוללת</span></div>
+          <div class="skill-item"><span class="skill-cmd">/standup</span><span class="skill-desc">הכנת עדכון סטנדאפ יומי</span></div>
+        </div>
+
+        <h2>טיפים למקסם את הכלי</h2>
+        <ul>
+          <li><strong>תן הקשר.</strong> "כתוב פוסט לאינסטגרם" נותן תוצאות גנריות. "כתוב פוסט לאינסטגרם על לאנצ' של פיצ'ר חדש, קהל: מנהלי HR, טון: מקצועי אבל חם" — Claude מייצר תוכן שמוכן לשימוש.</li>
+          <li><strong>שרשר סקילים.</strong> <span class="ic">/persona-build</span> → <span class="ic">/social-post</span> עם הפרסונה → <span class="ic">/repurpose</span> → <span class="ic">/content-calendar</span>. קמפיין שלם בשיחה אחת.</li>
+          <li><strong>שמור פלטות.</strong> Claude Code לא שומר אוטומטית. העתק את הפלט לקובץ או ל-Notion.</li>
+          <li><strong>הזן Brand Guide.</strong> פתח Claude Code בתיקייה עם קובץ <span class="ic">brand-guide.md</span> ואמור "read brand-guide.md" — Claude ישתמש בו בכל הסקילים.</li>
+          <li><strong>בקש עוד.</strong> אחרי פלט ראשון: "עוד 5 גרסאות, יותר קצרות ועם urgency" — השיחה ממשיכה.</li>
+        </ul>
+
+        <h2>פתרון בעיות</h2>
+        <p><strong>"claude: command not found"</strong><br>
+        נסה: <span class="ic">npx @anthropic-ai/claude-code</span> — או פתח טרמינל חדש לאחר ההתקנה.</p>
+        <p><strong>"Invalid API key"</strong><br>
+        חזור ל-console.anthropic.com וצור מפתח חדש.</p>
+        <p><strong>הסקילים לא מופיעים</strong><br>
+        הרץ שוב את <span class="ic">install.sh</span> / <span class="ic">install.ps1</span> ובדוק שהתיקייה <span class="ic">~/.claude/skills/</span> מכילה 50 תיקיות.</p>
+
+        <!-- CTA -->
+        <div class="cta-block">
+          <h2>רוצה להעמיק?</h2>
+          <p>סקילים חוסכים שעות. אוטומציה שמייצרת תוכן, מנתחת ביצועים ומפרסמת בשמך — זה AI Dev. הכשרת Focus AI נבנתה בדיוק לשם כך.</p>
+          <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת AI</a>
+          <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי</p>
+        </div>
+
+      </div><!-- /doc-content -->
+    </div><!-- /guide-body -->
+  </div><!-- /wrap -->
+
+  <footer>
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
+         alt="Focus AI" height="40" style="display:block;margin:0 auto 12px;">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">
+      לכל השירותים, הקורסים ועוד: <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
+    </p>
+    <div class="footer-links">
+      <a href="https://focusai.co.il">focusai.co.il</a>
+      <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
+    </div>
+    <p class="footer-copy">© 2026 Focus AI</p>
+  </footer>
+
+</body>
+</html>
