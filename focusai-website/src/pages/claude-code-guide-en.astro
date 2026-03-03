@@ -5,6 +5,7 @@
  * Route: /claude-code-guide-en/
  */
 import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -280,6 +281,7 @@ import Analytics from '../components/Analytics.astro';
   </style>
 </head>
 <body>
+  <AnalyticsBody />
 
   <div class="topbar">
     <a href="https://focusai.co.il">← Back to Focus AI</a>
@@ -351,8 +353,8 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>What Is Claude Code?</h2>
-        <p>Claude Code is Anthropic's official CLI, an AI assistant that lives inside your terminal. Unlike ChatGPT or Claude.ai in the browser, Claude Code can <strong>read your files, write code, run commands, and edit your project</strong>. All from a conversation.</p>
-        <p>It's the closest thing to having a senior developer sitting next to you.</p>
+        <p>Claude Code is Anthropic's official CLI — an AI assistant that lives inside your terminal. Unlike browser-based tools, Claude Code can <strong>read your files, write code, run commands, and edit your project</strong> directly.</p>
+        <p>Think of it as a senior developer sitting next to you, available 24/7.</p>
 
         <h2>Prerequisites</h2>
         <table class="tbl">
@@ -374,7 +376,7 @@ import Analytics from '../components/Analytics.astro';
           <li>Click <strong>"Get API Keys"</strong> in the left sidebar</li>
           <li>Click <strong>"Create Key"</strong> → name it anything (e.g., "claude-code")</li>
           <li><strong>Copy the key</strong> (starts with <span class="ic">sk-ant-...</span>)</li>
-          <li>Save it somewhere safe, you won't be able to see it again</li>
+          <li>Save it somewhere safe — you won't be able to see it again</li>
         </ol>
         <div class="note">
           <strong>Billing note:</strong> Claude Code uses API credits. New accounts get free credits. After that, usage is pay-as-you-go, typically $2 to $10/month for regular developer use.
@@ -392,7 +394,7 @@ import Analytics from '../components/Analytics.astro';
         <div class="note">On Windows, if <span class="ic">claude</span> isn't recognized, try opening a new terminal window after installation.</div>
 
         <h2><span class="step-num">4</span> Install Your Skills Bundle</h2>
-        <p>Unzip the bundle and navigate to its folder in your terminal.</p>
+        <p>Unzip the bundle and open its folder in a terminal.</p>
 
         <h3>macOS / Linux</h3>
         <div class="code-block"><code>bash install.sh</code></div>
@@ -400,7 +402,7 @@ import Analytics from '../components/Analytics.astro';
         <h3>Windows (PowerShell)</h3>
         <div class="code-block"><code>.\install.ps1</code></div>
 
-        <p>The installer copies all 50 skills to the correct location automatically.</p>
+        <p>The installer places all 50 skills in the correct location.</p>
         <p>Verify installation:</p>
         <div class="code-block"><code class="comment"># macOS / Linux</code>
 <code>ls ~/.claude/skills/
@@ -528,11 +530,11 @@ cd my-first-project</code></div>
 
         <h2>Tips</h2>
         <ul>
-          <li><strong>Be specific.</strong> "Fix the bug" gives Claude nothing. "Fix the bug in <span class="ic">calculateTotal</span>, it returns NaN when the cart is empty." That, Claude can work with.</li>
-          <li><strong>Give Claude context.</strong> Before a code review, describe what the code does. Before debugging, describe what you expected vs. what happened.</li>
+          <li><strong>Be specific.</strong> "Fix the bug" gives Claude nothing to work with. "Fix the bug in <span class="ic">calculateTotal</span> — it returns NaN when the cart is empty" — that works.</li>
+          <li><strong>Give context.</strong> Before a code review, describe what the code does. Before debugging, describe what you expected vs. what happened.</li>
           <li><strong>Use it for learning.</strong> Ask Claude to explain decisions: "Why did you use a closure here?" or "What's the trade-off between these two approaches?"</li>
-          <li><strong>Chain skills.</strong> Write feature → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. Complete professional workflow.</li>
-          <li><strong>Review everything Claude writes.</strong> Claude Code is powerful but not infallible. Read the code before committing. You're the engineer responsible for the outcome.</li>
+          <li><strong>Chain skills.</strong> Write feature → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. A complete professional workflow in minutes.</li>
+          <li><strong>Review everything.</strong> Claude Code is powerful but not infallible. Read the code before committing — you're the engineer responsible for the outcome.</li>
         </ul>
 
         <h2>Keyboard Shortcuts</h2>
@@ -553,20 +555,16 @@ cd my-first-project</code></div>
         <p style="font-size:13px;color:var(--faint);margin-top:-8px;">Built-in slash commands: <span class="ic">/help</span> · <span class="ic">/clear</span> · <span class="ic">/cost</span> · <span class="ic">/model</span> · <span class="ic">/compact</span></p>
 
         <h2>Troubleshooting</h2>
-        <p><strong>"claude: command not found"</strong><br>
-        Node.js global bin isn't in your PATH. Try: <span class="ic">npx @anthropic-ai/claude-code</span> or reinstall Node.js from nodejs.org</p>
-        <p><strong>"Invalid API key"</strong><br>
-        The key may have been copied incorrectly. Go to console.anthropic.com and create a new key.</p>
-        <p><strong>"Rate limit exceeded"</strong><br>
-        You've hit the API rate limit. Wait a minute and try again.</p>
-        <p><strong>Skills not working</strong><br>
-        Check that skills are installed correctly: <span class="ic">~/.claude/skills/code-review/SKILL.md</span> should exist. Run <span class="ic">install.sh</span> again.</p>
+        <p><strong>"claude: command not found"</strong> — Node.js global bin isn't in your PATH. Try <span class="ic">npx @anthropic-ai/claude-code</span>, or reinstall Node.js from nodejs.org.</p>
+        <p><strong>"Invalid API key"</strong> — The key may have been copied incorrectly. Go to console.anthropic.com and create a new one.</p>
+        <p><strong>"Rate limit exceeded"</strong> — You've hit the API rate limit. Wait a minute and try again.</p>
+        <p><strong>Skills not working</strong> — Verify that <span class="ic">~/.claude/skills/code-review/SKILL.md</span> exists. If not, run <span class="ic">install.sh</span> again.</p>
 
         <!-- CTA -->
         <div class="cta-block">
-          <h2>Want to Go Deeper with Claude Code?</h2>
-          <p>In Focus AI's full training program, you'll learn to build AI agents, automations, and work with Claude Code at production level, with personal mentorship from university instructors.</p>
-          <a href="https://focusai.co.il/academy" class="btn-cta">View Full Claude Code Training</a>
+          <h2>Want to Go Deeper?</h2>
+          <p>In Focus AI's training program you'll build AI agents, automations, and use Claude Code at production level — with personal mentorship from university instructors.</p>
+          <a href="https://focusai.co.il/academy" class="btn-cta">Explore the Full Program</a>
           <p style="font-size:12px;color:#606070;margin-top:14px;">Bot-Camp | AI First | Personal Mentorship | Academic Backing</p>
         </div>
 

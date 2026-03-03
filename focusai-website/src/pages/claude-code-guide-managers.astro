@@ -5,6 +5,7 @@
  * Route: /claude-code-guide-managers/
  */
 import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -300,6 +301,7 @@ import Analytics from '../components/Analytics.astro';
   </style>
 </head>
 <body>
+  <AnalyticsBody />
 
   <!-- Topbar -->
   <div class="topbar">
@@ -312,7 +314,7 @@ import Analytics from '../components/Analytics.astro';
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
     <p class="hero-label">מדריך התחלה מהירה · מנהלים ויזמים</p>
     <h1>Claude Code<br><span class="headline-cursor">למנהלים</span></h1>
-    <p class="hero-sub">מהתקנה עד הסקיל הראשון, מדריך מלא. ללא ניסיון בתכנות. 60 שניות עד שהכלי עובד.</p>
+    <p class="hero-sub">מהתקנה עד הסקיל הראשון, מדריך מלא. ללא ניסיון בתכנות. כמה דקות עד שהכלי עובד.</p>
   </div>
 
   <!-- Download card -->
@@ -373,8 +375,8 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא כלי הטרמינל הרשמי של Anthropic, עוזר AI שחי בתוך הטרמינל שלך. בניגוד לChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב מסמכים שלמים ולעבוד עם כמה פורמטים במקביל</strong>. ממשק שיחה רגיל.</p>
-        <p>למנהלים ויזמים: זה כמו שיהיה לך יועץ אסטרטגי, מנתח פיננסי ועוזר HR, כולם יחד, זמינים תמיד, בלי לחכות לפגישה.</p>
+        <p>Claude Code הוא כלי הטרמינל הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב מסמכים שלמים ולעבוד עם כמה פורמטים במקביל</strong>. ממשק שיחה רגיל.</p>
+        <p>למנהלים ויזמים: כמו שיש לך יועץ אסטרטגי, מנתח פיננסי ועוזר HR — כולם יחד, זמינים תמיד, בלי לחכות לפגישה.</p>
 
         <h2>דרישות מקדימות</h2>
         <table class="tbl">
@@ -382,7 +384,7 @@ import Analytics from '../components/Analytics.astro';
           <tbody>
             <tr><td>מחשב (Mac / Windows / Linux)</td><td>Claude Code רץ בטרמינל</td></tr>
             <tr><td>Node.js 18+ מותקן</td><td>Claude Code הוא חבילת Node.js</td></tr>
-            <tr><td>מפתח API של Anthropic</td><td>Claude Code מחובר לאנתרופיק דרך API</td></tr>
+            <tr><td>מפתח API של Anthropic</td><td>Claude Code מתחבר לאנתרופיק דרך API</td></tr>
           </tbody>
         </table>
         <p>בדוק אם Node.js מותקן:</p>
@@ -410,10 +412,10 @@ import Analytics from '../components/Analytics.astro';
         <h2><span class="step-num">3</span> הפעל לראשונה</h2>
         <div class="code-block"><code>claude</code></div>
         <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק ולחץ Enter.</p>
-        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה? פתח חלון PowerShell חדש לאחר ההתקנה.</div>
+        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון PowerShell חדש לאחר ההתקנה.</div>
 
         <h2><span class="step-num">4</span> התקן את חבילת הסקילים למנהלים</h2>
-        <p>פתח את ה-ZIP שהורדת, נווט לתיקייה שלו בטרמינל.</p>
+        <p>פתח את ה-ZIP שהורדת ונווט לתיקייה שלו בטרמינל.</p>
 
         <h3>macOS / Linux</h3>
         <div class="code-block"><code>bash install.sh</code></div>
@@ -488,7 +490,7 @@ dir $env:USERPROFILE\.claude\skills</code></div>
           <div class="skill-item"><span class="skill-cmd">/interview-kit</span><span class="skill-desc">שאלות ראיון וקריטריונים לתפקיד</span></div>
           <div class="skill-item"><span class="skill-cmd">/performance-review</span><span class="skill-desc">ביקורת ביצועים מאוזנת ומועילה</span></div>
           <div class="skill-item"><span class="skill-cmd">/feedback-write</span><span class="skill-desc">פידבק שמשנה התנהגות</span></div>
-          <div class="skill-item"><span class="skill-cmd">/team-survey</span><span class="skill-cmd">/team-survey</span><span class="skill-desc">סקר צוות לזיהוי בעיות מוקדם</span></div>
+          <div class="skill-item"><span class="skill-cmd">/team-survey</span><span class="skill-desc">סקר צוות לזיהוי בעיות מוקדם</span></div>
           <div class="skill-item"><span class="skill-cmd">/onboarding-plan</span><span class="skill-desc">תוכנית קליטה ל-90 הימים הראשונים</span></div>
           <div class="skill-item"><span class="skill-cmd">/difficult-conversation</span><span class="skill-desc">הכנה לשיחה קשה עם עובד</span></div>
           <div class="skill-item"><span class="skill-cmd">/team-structure</span><span class="skill-desc">מבנה צוות אופטימלי לשלב הנוכחי</span></div>
@@ -529,9 +531,9 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         <ul>
           <li><strong>תן הקשר ארגוני.</strong> "כתוב תוכנית שנתית" נותן תוצאות גנריות. "כתוב תוכנית שנתית לחברת SaaS B2B בשלב Series A, 35 עובדים, מגזר HR-Tech" — Claude מייצר מסמך שרלוונטי לך.</li>
           <li><strong>שרשר סקילים.</strong> <span class="ic">/strategic-plan</span> → <span class="ic">/okr-design</span> עם היעדים → <span class="ic">/metrics-dashboard</span> → <span class="ic">/board-update</span>. חבילת ניהול שלמה בשיחה אחת.</li>
-          <li><strong>שמור פלטות.</strong> Claude Code לא שומר אוטומטית. העתק את הפלט לקובץ, Notion, או Google Docs.</li>
+          <li><strong>שמור פלטים.</strong> Claude Code לא שומר אוטומטית. העתק את הפלט לקובץ, Notion או Google Docs.</li>
           <li><strong>הזן מסמכים קיימים.</strong> פתח Claude Code בתיקייה עם קבצי החברה ואמור "read Q3-results.md" — Claude ישתמש בנתונים האמיתיים שלך בכל הסקילים.</li>
-          <li><strong>בקש גרסאות שונות.</strong> אחרי פלט ראשון: "עוד גרסה — קצרה יותר לדירקטוריון עם 3 bullet points בלבד" — השיחה ממשיכה.</li>
+          <li><strong>בקש גרסאות שונות.</strong> אחרי פלט ראשון: "עוד גרסה, קצרה יותר לדירקטוריון עם 3 bullet points בלבד" — השיחה ממשיכה.</li>
         </ul>
 
         <h2>פתרון בעיות</h2>

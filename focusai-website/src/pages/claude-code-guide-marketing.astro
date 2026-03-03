@@ -5,6 +5,7 @@
  * Route: /claude-code-guide-marketing/
  */
 import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -300,6 +301,7 @@ import Analytics from '../components/Analytics.astro';
   </style>
 </head>
 <body>
+  <AnalyticsBody />
 
   <!-- Topbar -->
   <div class="topbar">
@@ -312,7 +314,7 @@ import Analytics from '../components/Analytics.astro';
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
     <p class="hero-label">מדריך התחלה מהירה — שיווק ותוכן</p>
     <h1>Claude Code<br><span class="headline-cursor">לאנשי שיווק</span></h1>
-    <p class="hero-sub">מהתקנה עד הסקיל הראשון — מדריך מלא. בלי ניסיון בתכנות. 60 שניות עד שהכלי עובד.</p>
+    <p class="hero-sub">מהתקנה עד הסקיל הראשון — מדריך מלא. בלי ניסיון בתכנות. כמה דקות עד שהכלי עובד.</p>
   </div>
 
   <!-- Download card -->
@@ -373,8 +375,8 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא כלי ה-CLI הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב תוכן שלם ולעבוד עם כמה פורמטים במקביל</strong>. כל ממשק שיחה רגיל.</p>
-        <p>לאנשי שיווק: זה כמו שיהיה לך קופירייטר, אסטרטג תוכן ומנתח ביצועים — כולם יחד, זמינים תמיד.</p>
+        <p>Claude Code הוא כלי ה-CLI הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב תוכן שלם ולעבוד עם כמה פורמטים במקביל</strong>. ממשק שיחה רגיל.</p>
+        <p>לאנשי שיווק: כמו שיש לך קופירייטר, אסטרטג תוכן ומנתח ביצועים — כולם יחד, זמינים תמיד.</p>
 
         <h2>דרישות מקדימות</h2>
         <table class="tbl">
@@ -382,7 +384,7 @@ import Analytics from '../components/Analytics.astro';
           <tbody>
             <tr><td>מחשב (Mac / Windows / Linux)</td><td>Claude Code רץ בטרמינל</td></tr>
             <tr><td>Node.js 18+ מותקן</td><td>Claude Code הוא חבילת Node.js</td></tr>
-            <tr><td>מפתח API של Anthropic</td><td>Claude Code מחובר לאנתרופיק דרך API</td></tr>
+            <tr><td>מפתח API של Anthropic</td><td>Claude Code מתחבר לאנתרופיק דרך API</td></tr>
           </tbody>
         </table>
         <p>בדוק אם Node.js מותקן:</p>
@@ -413,7 +415,7 @@ import Analytics from '../components/Analytics.astro';
         <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון PowerShell חדש לאחר ההתקנה.</div>
 
         <h2><span class="step-num">4</span> התקן את חבילת הסקילים לשיווק</h2>
-        <p>פתח את ה-ZIP שהורדת, נווט לתיקייה שלו בטרמינל.</p>
+        <p>פתח את ה-ZIP שהורדת ונווט לתיקייה שלו בטרמינל.</p>
 
         <h3>macOS / Linux</h3>
         <div class="code-block"><code>bash install.sh</code></div>
@@ -421,7 +423,7 @@ import Analytics from '../components/Analytics.astro';
         <h3>Windows (PowerShell)</h3>
         <div class="code-block"><code>.\install.ps1</code></div>
 
-        <p>תראה רשימת ✅ — כל 50 הסקילים מותקנים. בדוק:</p>
+        <p>תראה רשימת ✅ כשכל 50 הסקילים מותקנים. בדוק:</p>
         <div class="code-block"><code class="comment"># macOS / Linux</code>
 <code>ls ~/.claude/skills/
 
@@ -528,9 +530,9 @@ dir $env:USERPROFILE\.claude\skills</code></div>
 
         <h2>טיפים למקסם את הכלי</h2>
         <ul>
-          <li><strong>תן הקשר.</strong> "כתוב פוסט לאינסטגרם" נותן תוצאות גנריות. "כתוב פוסט לאינסטגרם על לאנצ' של פיצ'ר חדש, קהל: מנהלי HR, טון: מקצועי אבל חם" — Claude מייצר תוכן שמוכן לשימוש.</li>
+          <li><strong>תן הקשר.</strong> "כתוב פוסט לאינסטגרם" נותן תוצאות גנריות. "כתוב פוסט לאינסטגרם על לאנצ' של פיצ'ר חדש, קהל: מנהלי HR, טון: מקצועי אבל חם" — Claude מייצר תוכן מוכן לשימוש.</li>
           <li><strong>שרשר סקילים.</strong> <span class="ic">/persona-build</span> → <span class="ic">/social-post</span> עם הפרסונה → <span class="ic">/repurpose</span> → <span class="ic">/content-calendar</span>. קמפיין שלם בשיחה אחת.</li>
-          <li><strong>שמור פלטות.</strong> Claude Code לא שומר אוטומטית. העתק את הפלט לקובץ או ל-Notion.</li>
+          <li><strong>שמור פלטים.</strong> Claude Code לא שומר אוטומטית. העתק את הפלט לקובץ או ל-Notion.</li>
           <li><strong>הזן Brand Guide.</strong> פתח Claude Code בתיקייה עם קובץ <span class="ic">brand-guide.md</span> ואמור "read brand-guide.md" — Claude ישתמש בו בכל הסקילים.</li>
           <li><strong>בקש עוד.</strong> אחרי פלט ראשון: "עוד 5 גרסאות, יותר קצרות ועם urgency" — השיחה ממשיכה.</li>
         </ul>

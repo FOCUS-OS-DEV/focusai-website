@@ -5,6 +5,7 @@
  * Route: /claude-code-guide/
  */
 import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -324,6 +325,7 @@ import Analytics from '../components/Analytics.astro';
   </style>
 </head>
 <body>
+  <AnalyticsBody />
 
   <!-- Topbar -->
   <div class="topbar">
@@ -337,7 +339,7 @@ import Analytics from '../components/Analytics.astro';
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
     <p class="hero-label">מדריך התחלה מהירה</p>
     <h1>Claude Code<br><span class="headline-cursor">מאפס לפרויקט הראשון</span></h1>
-    <p class="hero-sub">התקנה, הגדרה, ו-50 הסקילים שמוכנים לעבוד. מדריך מלא למתחילים.</p>
+    <p class="hero-sub">התקנה, הגדרה ו-50 הסקילים שמוכנים לעבוד. מדריך מלא למתחילים.</p>
   </div>
 
   <!-- Gift download card -->
@@ -398,8 +400,8 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא כלי ה-CLI הרשמי של חברת Anthropic, עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT או Claude.ai בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב קוד, להריץ פקודות ולערוך את הפרויקט שלך</strong>. הכל ישירות משיחה.</p>
-        <p>זה הכי קרוב שיש לזה שיהיה לך מפתח בכיר יושב לצידך.</p>
+        <p>Claude Code הוא כלי ה-CLI הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT או Claude.ai בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב קוד, להריץ פקודות ולערוך את הפרויקט שלך</strong> ישירות משיחה.</p>
+        <p>זה הכי קרוב שיש לזה שמפתח בכיר יושב לצידך.</p>
 
         <h2>דרישות מקדימות</h2>
         <p>לפני ההתקנה תצטרך:</p>
@@ -425,23 +427,23 @@ import Analytics from '../components/Analytics.astro';
           <li>שמור אותו במקום בטוח, לא תוכל לראות אותו שוב</li>
         </ol>
         <div class="note">
-          <strong>הערה על חיוב:</strong> Claude Code משתמש בקרדיטים של API. חשבונות חדשים מקבלים קרדיטים חינם. אחר כך התמחור הוא לפי שימוש, בדרך כלל 8 עד 30 ₪ לחודש לשימוש רגיל.
+          <strong>עלות:</strong> Claude Code משתמש בקרדיטים של API. חשבונות חדשים מקבלים קרדיטים חינם. לאחר מכן: 8–30 ₪ לחודש לשימוש רגיל.
         </div>
 
         <h2><span class="step-num">2</span> התקן את Claude Code</h2>
         <p>פתח את הטרמינל והרץ:</p>
         <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
-        <p>בדוק שההתקנה הצליחה:</p>
+        <p>בדוק שהצליח:</p>
         <div class="code-block"><code>claude --version</code></div>
-        <p>אמור לראות מספר גרסה כמו <span class="ic">1.x.x</span>.</p>
+        <p>אמור לראות מספר גרסה.</p>
 
         <h2><span class="step-num">3</span> אימות</h2>
         <div class="code-block"><code>claude</code></div>
-        <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק את המפתח ולחץ Enter.</p>
-        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה, פתח חלון טרמינל חדש לאחר ההתקנה.</div>
+        <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק ולחץ Enter.</p>
+        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון טרמינל חדש לאחר ההתקנה.</div>
 
         <h2><span class="step-num">4</span> התקן את חבילת הסקילים</h2>
-        <p>פתח את ה-ZIP שהורדת וודא שאתה נמצא בתיקייה שלו בטרמינל.</p>
+        <p>פתח את ה-ZIP שהורדת, נווט לתיקייה שלו בטרמינל.</p>
 
         <h3>macOS / Linux</h3>
         <div class="code-block"><code>bash install.sh</code></div>
@@ -449,16 +451,15 @@ import Analytics from '../components/Analytics.astro';
         <h3>Windows (PowerShell)</h3>
         <div class="code-block"><code>.\install.ps1</code></div>
 
-        <p>הסקריפט מתקין את כל 50 הסקילים לתיקייה הנכונה אוטומטית.</p>
-        <p>בדוק שההתקנה עלתה:</p>
+        <p>תראה רשימת ✅ — כל 50 הסקילים מותקנים. בדוק:</p>
         <div class="code-block"><code class="comment"># macOS / Linux</code>
 <code>ls ~/.claude/skills/
 
 <span class="comment"># Windows</span>
 dir $env:USERPROFILE\.claude\skills</code></div>
-        <p>אמור לראות את 50 תיקיות הסקילים ברשימה.</p>
+        <p>אמור לראות 50 תיקיות סקילים.</p>
 
-        <h2><span class="step-num">5</span> הפרויקט הראשון שלך</h2>
+        <h2><span class="step-num">5</span> הפרויקט הראשון</h2>
         <p>בואו נשתמש ב-Claude Code על פרויקט אמיתי.</p>
 
         <h3>5.1 צור תיקיית פרויקט</h3>
@@ -578,7 +579,7 @@ cd my-first-project</code></div>
 
         <h2>טיפים למקסם את Claude Code</h2>
         <ul>
-          <li><strong>היה ספציפי.</strong> "תקן את הבאג" נותן תוצאות גרועות. "תקן את הבאג בפונקציה <span class="ic">calculateTotal</span>, היא מחזירה NaN כשהעגלה ריקה." Claude יכול לפתור.</li>
+          <li><strong>היה ספציפי.</strong> "תקן את הבאג" נותן תוצאות גרועות. "תקן את הבאג בפונקציה <span class="ic">calculateTotal</span>, היא מחזירה NaN כשהעגלה ריקה" — Claude יכול לפתור.</li>
           <li><strong>תן ל-Claude הקשר.</strong> לפני Code Review, ספר מה הקוד אמור לעשות. לפני דיבאגינג, ספר מה ציפית לקבל לעומת מה שקיבלת.</li>
           <li><strong>השתמש בו ללמידה.</strong> בקש מ-Claude להסביר החלטות: "למה השתמשת בקלוז'ר כאן?" או "מה ה-tradeoff בגישה הזו?"</li>
           <li><strong>שרשר סקילים.</strong> כתוב פיצ'ר → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. זרימת עבודה מקצועית מלאה.</li>
@@ -587,20 +588,20 @@ cd my-first-project</code></div>
 
         <h2>פתרון בעיות</h2>
         <p><strong>"claude: command not found"</strong><br>
-        תיקיית bin של Node.js גלובלית לא ב-PATH שלך. נסה: <span class="ic">npx @anthropic-ai/claude-code</span> או התקן מחדש את Node.js מ-nodejs.org</p>
+        נסה: <span class="ic">npx @anthropic-ai/claude-code</span> — או פתח טרמינל חדש לאחר ההתקנה.</p>
         <p><strong>"Invalid API key"</strong><br>
-        המפתח אולי הועתק לא נכון. חזור ל-console.anthropic.com וצור מפתח חדש.</p>
+        חזור ל-console.anthropic.com וצור מפתח חדש.</p>
         <p><strong>"Rate limit exceeded"</strong><br>
         הגעת למגבלת ה-API. המתן דקה ונסה שוב.</p>
-        <p><strong>סקילים לא עובדים</strong><br>
-        בדוק שהסקילים נמצאים במקום הנכון: <span class="ic">~/.claude/skills/code-review/SKILL.md</span> צריך להתקיים. הרץ שוב את <span class="ic">install.sh</span>.</p>
+        <p><strong>הסקילים לא מופיעים</strong><br>
+        הרץ שוב את <span class="ic">install.sh</span> / <span class="ic">install.ps1</span> ובדוק שהתיקייה <span class="ic">~/.claude/skills/</span> מכילה 50 תיקיות.</p>
 
         <!-- CTA -->
         <div class="cta-block">
-          <h2>רוצה להעמיק עם Claude Code?</h2>
-          <p>בהכשרה המלאה של Focus AI תלמד לבנות סוכני AI, אוטומציות, ולעבוד עם Claude Code ברמת פרודקשן. עם ליווי אישי של מרצים מהאוניברסיטה.</p>
-          <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת Claude Code</a>
-          <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי | אקדמיה</p>
+          <h2>רוצה להעמיק?</h2>
+          <p>סקילים חוסכים שעות. אוטומציה שבונה, בודקת ומשגרת בשבילך — זה כבר AI Dev. הכשרת Focus AI נבנתה בדיוק בשביל זה.</p>
+          <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת AI</a>
+          <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי</p>
         </div>
 
       </div><!-- /doc-content -->
