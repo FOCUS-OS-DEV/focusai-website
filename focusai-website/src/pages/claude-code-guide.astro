@@ -1,8 +1,9 @@
 ---
 /**
- * Claude Code Getting Started — Hebrew Guide
+ * Claude Code Installation & Setup Guide — Hebrew (Unified)
  * Accessible via email link + focusai.co.il/claude-code-guide/
  * Route: /claude-code-guide/
+ * Consolidates dev/managers/marketing guides into one comprehensive guide
  */
 import Analytics from '../components/Analytics.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
@@ -12,8 +13,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>מדריך Claude Code למתחילים | Focus AI</title>
-  <meta name="description" content="מדריך מלא לצעד ראשון עם Claude Code: מהתקנה עד הפרויקט הראשון עם 50 הסקילים.">
+  <title>מדריך התקנה והפעלה של Claude Code | Focus AI</title>
+  <meta name="description" content="מדריך מלא בעברית להתקנת Claude Code: סביבת עבודה, התקנה על Windows ו-Mac, הגדרת API, התקנת סקילים וטיפים למתחילים.">
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -183,12 +184,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       margin-left: 8px;
       flex-shrink: 0;
     }
-    .step-title {
-      display: flex;
-      align-items: center;
-      flex-direction: row-reverse;
-      gap: 0;
-    }
 
     /* Code blocks */
     .code-block {
@@ -256,6 +251,249 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     }
     .note strong { color: #b8732c; }
 
+    /* Warning box */
+    .warning {
+      background: #fef0f0;
+      border-right: 3px solid #e85353;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .warning strong { color: #c82c2c; }
+
+    /* Screenshot image */
+    .guide-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin: 16px 0 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .guide-img-caption {
+      font-size: 12px;
+      color: var(--faint);
+      text-align: center;
+      margin: -12px 0 20px;
+    }
+
+    /* UI Mockup boxes */
+    .ui-mockup {
+      background: #f5f5f0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .ui-titlebar {
+      background: #e8e7e0;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      direction: ltr;
+    }
+    .ui-titlebar-icon { font-size: 14px; }
+    .ui-body { padding: 16px; }
+
+    /* Windows search mockup */
+    .win-search {
+      background: #2d2d2d;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      direction: ltr;
+    }
+    .win-search-bar {
+      background: #3c3c3c;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .win-search-bar input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      flex: 1;
+      outline: none;
+    }
+    .win-search-icon { color: #888; font-size: 16px; }
+    .win-search-result {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #383838;
+      border-top: 1px solid #444;
+      cursor: default;
+    }
+    .win-search-result.highlighted {
+      background: #0078d4;
+    }
+    .win-search-result .sr-icon {
+      width: 32px;
+      height: 32px;
+      background: #0078d4;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .win-search-result.highlighted .sr-icon { background: rgba(255,255,255,0.15); }
+    .win-search-result .sr-text { font-family: 'Segoe UI', sans-serif; font-size: 13px; color: #eee; }
+    .win-search-result .sr-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: #999; }
+    .win-search-result.highlighted .sr-sub { color: rgba(255,255,255,0.7); }
+
+    /* Git installer mockup */
+    .git-installer {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 16px 0 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      direction: ltr;
+    }
+    .git-installer-title {
+      background: #fff;
+      padding: 8px 12px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .git-installer-body { padding: 16px; }
+    .git-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 3px 0;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: #333;
+    }
+    .git-checkbox .cb {
+      width: 14px;
+      height: 14px;
+      border: 1px solid #999;
+      border-radius: 2px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .git-checkbox .cb.checked { background: #fff; }
+    .git-checkbox .cb.checked::after { content: '✓'; font-size: 11px; color: #333; }
+    .git-dropdown {
+      background: #fff;
+      border: 1px solid #999;
+      border-radius: 2px;
+      padding: 6px 28px 6px 10px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: #333;
+      margin: 8px 0;
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+    .git-dropdown::after {
+      content: '▾';
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+    .git-dropdown-option {
+      padding: 5px 10px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+    }
+    .git-dropdown-option.selected {
+      background: #0078d4;
+      color: #fff;
+    }
+
+    /* Link card */
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .link-card:hover { border-color: var(--orange); background: #fff; }
+    .link-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .link-card-text { flex: 1; }
+    .link-card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+    .link-card-url { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+    .link-card-arrow { font-size: 18px; color: var(--faint); }
+
+    /* OS Tabs */
+    .os-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border);
+      margin: 20px 0 0;
+    }
+    .os-tab {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--faint);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.15s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: var(--hebrew);
+    }
+    .os-tab.active {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+    .os-tab:hover { color: var(--orange); }
+    .os-panel { display: none; padding: 20px 0 0; }
+    .os-panel.active { display: block; }
+
     /* Skill list */
     .skill-table {
       display: grid;
@@ -285,6 +523,42 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     @media (max-width: 580px) {
       .skill-table { grid-template-columns: 1fr; }
       .doc-content { padding: 24px 20px 40px; }
+    }
+
+    /* Download cards */
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0 24px;
+    }
+    .download-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .download-card:hover { border-color: var(--orange); }
+    .download-card .dl-icon { font-size: 28px; margin-bottom: 8px; }
+    .download-card .dl-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .download-card .dl-desc { font-size: 12px; color: var(--faint); margin-bottom: 12px; line-height: 1.4; }
+    .download-card .dl-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--hebrew);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .download-card .dl-btn:hover { background: var(--orange-h); color: #fff; }
+    @media (max-width: 680px) {
+      .download-grid { grid-template-columns: 1fr; }
     }
 
     /* ── CTA block ── */
@@ -374,20 +648,20 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
   <!-- Topbar -->
   <div class="topbar">
-    <a href="https://focusai.co.il">← חזרה לאתר Focus AI</a>
-    <span class="topbar-lang"><a href="/claude-code-guide-en/">English version →</a></span>
+    <a href="https://focusai.co.il">&larr; חזרה לאתר Focus AI</a>
+    <span class="topbar-lang"><a href="/claude-code-guide-en/">English version &rarr;</a></span>
   </div>
 
   <!-- Hero -->
   <div class="hero">
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
-    <p class="hero-label">מדריך התחלה מהירה</p>
-    <h1>Claude Code<br><span class="headline-cursor">מאפס לפרויקט הראשון</span></h1>
-    <p class="hero-sub">התקנה, הגדרה ו-50 הסקילים שמוכנים לעבוד. מדריך מלא למתחילים.</p>
+    <p class="hero-label">מדריך התקנה והפעלה</p>
+    <h1>Claude Code<br><span class="headline-cursor">מאפס עד שימוש ראשון</span></h1>
+    <p class="hero-sub">מדריך מלא בעברית: התקנת סביבת עבודה, Claude Code על Windows ו-Mac, הגדרת חשבון, התקנת סקילים וטיפים למתחילים.</p>
   </div>
 
-  <!-- Gift download card -->
+  <!-- Download cards -->
   <div class="wrap" style="margin-bottom: 0;">
     <div style="
       background: var(--win-bg);
@@ -395,39 +669,30 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       border-radius: 14px;
       padding: 28px 32px;
       margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
     ">
-      <div style="font-size: 40px; line-height: 1; flex-shrink: 0;">🎁</div>
-      <div style="flex: 1; min-width: 240px;">
-        <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px;">מתנה מ-Focus AI</p>
-        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 סקילים מקצועיים, בחינם</p>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">חבילה מוכנה עם 50 סקילים מקצועיים: code review, security audit, debugging, testing, git workflow ועוד. מותקנים בפקודה אחת.</p>
+      <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; text-align:center;">🎁 מתנה מ-Focus AI</p>
+      <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.3; text-align:center;">50 סקילים מקצועיים, בחינם — בחרו את החבילה שלכם</p>
+      <p style="font-size: 14px; color: var(--muted); line-height: 1.6; text-align:center; margin-bottom: 20px;">סקילים (Skills) הם הוראות מובנות שמרחיבות את היכולות של Claude Code. כל חבילה מותאמת לתפקיד שלכם.</p>
+      <div class="download-grid">
+        <div class="download-card">
+          <div class="dl-icon">💻</div>
+          <div class="dl-title">למפתחים</div>
+          <div class="dl-desc">Code review, debugging, testing, git, architecture, security</div>
+          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip" download class="dl-btn">⬇ הורד ZIP</a>
+        </div>
+        <div class="download-card">
+          <div class="dl-icon">📊</div>
+          <div class="dl-title">למנהלים</div>
+          <div class="dl-desc">אסטרטגיה, HR, תקציב, מצגות, תקשורת ארגונית</div>
+          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-managers.zip" download class="dl-btn">⬇ הורד ZIP</a>
+        </div>
+        <div class="download-card">
+          <div class="dl-icon">📣</div>
+          <div class="dl-title">לשיווק</div>
+          <div class="dl-desc">קופי, קמפיינים, SEO, מחקר שוק, בניית מותג</div>
+          <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-marketing.zip" download class="dl-btn">⬇ הורד ZIP</a>
+        </div>
       </div>
-      <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip"
-         download
-         style="
-           display: inline-flex;
-           align-items: center;
-           gap: 8px;
-           background: var(--orange);
-           color: #fff;
-           font-family: var(--hebrew);
-           font-size: 14px;
-           font-weight: 700;
-           padding: 13px 24px;
-           border-radius: 8px;
-           text-decoration: none;
-           white-space: nowrap;
-           flex-shrink: 0;
-           transition: background 0.15s;
-         "
-         onmouseover="this.style.background='var(--orange-h)'"
-         onmouseout="this.style.background='var(--orange)'">
-        ⬇ הורד את הסקילים (ZIP)
-      </a>
     </div>
   </div>
 
@@ -439,7 +704,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         <div class="doc-dot r"></div>
         <div class="doc-dot y"></div>
         <div class="doc-dot g"></div>
-        <span class="doc-title">claude-code-getting-started-he.md</span>
+        <span class="doc-title">claude-code-setup-guide-he.md</span>
       </div>
 
       <div class="doc-content">
@@ -450,257 +715,459 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
           השימוש בכלים המוזכרים במדריך הוא באחריות המשתמש/ת בלבד. Focus AI אינה מסונפת ל-Anthropic.
         </div>
 
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: What is Claude Code?              -->
+        <!-- ═══════════════════════════════════════════ -->
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא כלי ה-CLI הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT או Claude.ai בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב קוד, להריץ פקודות ולערוך את הפרויקט שלך</strong> ישירות משיחה.</p>
-        <p>זה הכי קרוב שיש לזה שמפתח בכיר יושב לצידך.</p>
+        <p>Claude Code הוא הכלי הרשמי של Anthropic שמביא את Claude ישירות למחשב שלכם. במקום לעבוד דרך אתר בדפדפן, Claude Code <strong>חי בתוך סביבת העבודה שלכם</strong> — יכול לקרוא קבצים, לכתוב תוכן, להריץ פקודות ולעבוד עם כמה פורמטים במקביל. ממשק שיחה רגיל, כמו לדבר עם Claude באתר — רק שהוא יכול לגעת בקבצים שלכם.</p>
+        <p>תחשבו על זה ככה: יש לכם יועץ מומחה שיושב לצידכם, רואה את הפרויקט שלכם בזמן אמת, ויכול לפעול — לא רק לייעץ.</p>
 
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: Environment Setup                 -->
+        <!-- ═══════════════════════════════════════════ -->
         <h2>הכנת סביבת העבודה</h2>
-        <p>לפני שמתחילים, צריך להתקין כמה כלים. אם אתה מתחיל מאפס — אל דאגה, הכל מוסבר כאן צעד אחרי צעד.</p>
+        <p>לפני שמתחילים, צריך להתקין כמה כלים. אם אתם מתחילים מאפס — אל דאגה, הכל מוסבר כאן צעד אחרי צעד.</p>
 
         <h3>מה זה טרמינל?</h3>
-        <p>הטרמינל (Terminal) הוא ממשק טקסטואלי למחשב. במקום ללחוץ על כפתורים, כותבים פקודות טקסט. Claude Code עובד דרך הטרמינל — אבל יש גם תוסף ל-VS Code שנוח יותר (מוסבר בהמשך).</p>
+        <p>הטרמינל (Terminal) הוא ממשק טקסטואלי למחשב — במקום ללחוץ על כפתורים עם העכבר, כותבים פקודות טקסט. זה נשמע מאיים, אבל זה פשוט מאוד: כותבים פקודה, לוחצים Enter, והמחשב מבצע.</p>
+        <p>Claude Code עובד דרך הטרמינל, אבל יש גם תוסף ל-VS Code עם ממשק גרפי נוח — נגיע לזה בהמשך.</p>
+
         <p><strong>איך פותחים טרמינל:</strong></p>
-        <ul>
-          <li><strong>Windows:</strong> חפשו "PowerShell" בתפריט Start (או <span class="ic">Win+X</span> → Terminal)</li>
-          <li><strong>Mac:</strong> פתחו Spotlight (<span class="ic">Cmd+Space</span>) → הקלידו "Terminal"</li>
-          <li><strong>Linux:</strong> <span class="ic">Ctrl+Alt+T</span></li>
-        </ul>
 
-        <h3>התקנת VS Code</h3>
-        <p><a href="https://code.visualstudio.com" target="_blank">VS Code</a> הוא עורך קוד חינמי של Microsoft — סביבת העבודה המומלצת ל-Claude Code, גם אם אתה לא מפתח.</p>
+        <div class="os-tabs" data-group="terminal">
+          <button class="os-tab active" onclick="switchTab(this, 'terminal', 'win')">🪟 Windows</button>
+          <button class="os-tab" onclick="switchTab(this, 'terminal', 'mac')">🍎 Mac</button>
+          <button class="os-tab" onclick="switchTab(this, 'terminal', 'linux')">🐧 Linux</button>
+        </div>
+        <div class="os-panel active" data-group="terminal" data-os="win">
+          <p>חפשו <strong>"PowerShell"</strong> בתפריט Start (או לחצו <span class="ic">Win+X</span> &rarr; Terminal).</p>
+          <div class="win-search">
+            <div class="win-search-bar">
+              <span class="win-search-icon">🔍</span>
+              <input type="text" value="PowerShell" readonly tabindex="-1">
+            </div>
+            <div class="win-search-result highlighted">
+              <div class="sr-icon">⚡</div>
+              <div>
+                <div class="sr-text">Windows PowerShell</div>
+                <div class="sr-sub">App &bull; Best match</div>
+              </div>
+            </div>
+            <div class="win-search-result">
+              <div class="sr-icon" style="background:#555;">📁</div>
+              <div>
+                <div class="sr-text">Windows PowerShell ISE</div>
+                <div class="sr-sub">App</div>
+              </div>
+            </div>
+          </div>
+          <p class="guide-img-caption" style="margin-top:0;">כך זה נראה בחיפוש Windows — לחצו על "Windows PowerShell"</p>
+          <p>יפתח חלון כחול-כהה עם סמן מהבהב — זה הטרמינל שלכם. כל הפקודות במדריך הזה מוזנות כאן.</p>
+          <div class="warning"><strong>חשוב:</strong> ב-Windows חייבים להשתמש ב-<strong>PowerShell</strong> (לא CMD רגיל). PowerShell מותקן כבר — רק צריך לחפש אותו.</div>
+        </div>
+        <div class="os-panel" data-group="terminal" data-os="mac">
+          <p>פתחו Spotlight (<span class="ic">Cmd+Space</span>) &rarr; הקלידו <strong>"Terminal"</strong> &rarr; Enter.</p>
+          <p>יפתח חלון עם טקסט ושורת פקודה — זה הטרמינל. כל הפקודות במדריך מוזנות כאן.</p>
+        </div>
+        <div class="os-panel" data-group="terminal" data-os="linux">
+          <p>לחצו <span class="ic">Ctrl+Alt+T</span> — ברוב ההפצות זה פותח את הטרמינל.</p>
+        </div>
+
+        <h3>התקנת Git (חובה)</h3>
+        <p>Git הוא מערכת לניהול גרסאות — כמו "Ctrl+Z מתקדם" שעוקב אחרי כל שינוי בקבצים. <strong>Claude Code דורש Git כדי לעבוד — חובה להתקין לפני שממשיכים.</strong></p>
+        <div class="os-tabs" data-group="git">
+          <button class="os-tab active" onclick="switchTab(this, 'git', 'win')">🪟 Windows</button>
+          <button class="os-tab" onclick="switchTab(this, 'git', 'mac')">🍎 Mac</button>
+          <button class="os-tab" onclick="switchTab(this, 'git', 'linux')">🐧 Linux</button>
+        </div>
+        <div class="os-panel active" data-group="git" data-os="win">
+          <ol>
+            <li>כנסו ל-<a href="https://git-scm.com/downloads/win" target="_blank">git-scm.com/downloads/win</a></li>
+            <li>לחצו <strong>"Click here to download"</strong> — יורד קובץ ההתקנה</li>
+            <li>הריצו את קובץ ההתקנה</li>
+          </ol>
+          <a href="https://git-scm.com/downloads/win" target="_blank" class="link-card" style="text-decoration:none;">
+            <div class="link-card-icon" style="background:#f05032;color:#fff;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.66 2.66a1.838 1.838 0 011.134 3.382 1.843 1.843 0 01-2.544-1.684 1.83 1.83 0 01.543-1.304l-2.48-2.48v6.53a1.84 1.84 0 01.996 1.63 1.843 1.843 0 11-3.685 0 1.838 1.838 0 011.027-1.651V9.124a1.838 1.838 0 01-.998-2.41L7.66 3.96.452 11.17a1.55 1.55 0 000 2.188l10.48 10.477a1.55 1.55 0 002.186 0l10.43-10.43a1.55 1.55 0 000-2.188z"/></svg>
+            </div>
+            <div class="link-card-text">
+              <div class="link-card-title">הורדת Git for Windows</div>
+              <div class="link-card-url">git-scm.com/downloads/win</div>
+            </div>
+            <span class="link-card-arrow">&rarr;</span>
+          </a>
+          <p><strong>מסך Select Components:</strong> השאירו את כל ברירות המחדל כמו שהן ולחצו <strong>Next</strong>.</p>
+          <div class="git-installer">
+            <div class="git-installer-title">
+              <img src="https://git-scm.com/favicon.ico" width="16" height="16" alt="" style="border-radius:2px;">
+              Git Setup — Select Components
+            </div>
+            <div class="git-installer-body">
+              <div class="git-checkbox"><div class="cb checked"></div> Windows Explorer integration</div>
+              <div class="git-checkbox" style="padding-right:20px;"><div class="cb checked"></div> Git Bash Here</div>
+              <div class="git-checkbox" style="padding-right:20px;"><div class="cb checked"></div> Git GUI Here</div>
+              <div class="git-checkbox"><div class="cb checked"></div> Git LFS (Large File Support)</div>
+              <div class="git-checkbox"><div class="cb checked"></div> Associate .git* configuration files with default text editor</div>
+              <div class="git-checkbox"><div class="cb checked"></div> Add a Git Bash Profile to Windows Terminal</div>
+              <p style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#666;margin:10px 0 0;">השאירו הכל מסומן כמו שזה &rarr; Next</p>
+            </div>
+          </div>
+          <p><strong>מסך Choosing the default editor:</strong> מהרשימה הנפתחת, <strong>בחרו "Use Visual Studio Code as Git's default editor"</strong> (אם התקנתם VS Code). זה יאפשר לערוך קבצי Git ב-VS Code במקום בעורך טרמינל מסובך.</p>
+          <div class="git-installer">
+            <div class="git-installer-title">
+              <img src="https://git-scm.com/favicon.ico" width="16" height="16" alt="" style="border-radius:2px;">
+              Git Setup — Choosing the default editor
+            </div>
+            <div class="git-installer-body">
+              <p style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#555;margin:0 0 8px;">Which editor would you like Git to use?</p>
+              <div style="background:#fff;border:1px solid #999;border-radius:2px;max-width:420px;">
+                <div class="git-dropdown-option" style="color:#999;font-size:11px;">Use Vim (the default editor)</div>
+                <div class="git-dropdown-option selected">Use Visual Studio Code as Git's default editor ✓</div>
+                <div class="git-dropdown-option" style="color:#999;font-size:11px;">Use Notepad++ as Git's default editor</div>
+                <div class="git-dropdown-option" style="color:#999;font-size:11px;">Use Sublime Text as Git's default editor</div>
+              </div>
+              <p style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#c82c2c;margin:10px 0 0;font-weight:600;">⬆ בחרו את VS Code מהרשימה &rarr; Next</p>
+            </div>
+          </div>
+          <p>בכל שאר המסכים — לחצו <strong>Next</strong> עם ברירות המחדל &rarr; לבסוף <strong>Install</strong>.</p>
+          <p>אחרי ההתקנה, פתחו PowerShell <strong>חדש</strong> ובדקו:</p>
+          <div class="code-block"><code>git --version</code></div>
+          <p>אם רואים מספר גרסה (למשל <span class="ic">git version 2.53.0</span>) — מעולה, Git מותקן.</p>
+          <div class="warning"><strong>ב-Windows, Git הוא חובה.</strong> בלי Git, Claude Code לא יתקין. כך מצוין גם ב<a href="https://code.claude.com/docs/en/overview" target="_blank" style="color:#e85353">תיעוד הרשמי של Anthropic</a>.</div>
+        </div>
+        <div class="os-panel" data-group="git" data-os="mac">
+          <p>הריצו בטרמינל:</p>
+          <div class="code-block"><code>git --version</code></div>
+          <p>אם Git לא מותקן, Mac יציע להתקין אוטומטית (Xcode Command Line Tools). לחצו <strong>Install</strong> והמתינו כמה דקות.</p>
+          <p>אחרי ההתקנה, הריצו שוב <span class="ic">git --version</span> לוודא שמופיע מספר גרסה.</p>
+        </div>
+        <div class="os-panel" data-group="git" data-os="linux">
+          <div class="code-block"><code><span class="comment"># Ubuntu / Debian</span>
+sudo apt install git
+
+<span class="comment"># Fedora</span>
+sudo dnf install git</code></div>
+          <p>ודאו:</p>
+          <div class="code-block"><code>git --version</code></div>
+        </div>
+
+        <h3>התקנת VS Code (מומלץ מאוד)</h3>
+        <p><a href="https://code.visualstudio.com" target="_blank">VS Code</a> הוא עורך קוד חינמי של Microsoft — סביבת העבודה המומלצת ל-Claude Code. גם אם אתם לא מפתחים, VS Code מספק סביבה נוחה עם טרמינל מובנה ותוסף ייעודי ל-Claude Code.</p>
+        <a href="https://code.visualstudio.com" target="_blank" class="link-card" style="text-decoration:none;">
+          <div class="link-card-icon" style="background:#0078d4;color:#fff;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 00-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 00-1.276.057L.327 7.261A1 1 0 00.326 8.74L3.899 12 .326 15.26a1 1 0 00.001 1.479L1.65 17.94a.999.999 0 001.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 001.704.29l4.942-2.377A1.5 1.5 0 0024 20.06V3.939a1.5 1.5 0 00-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/></svg>
+          </div>
+          <div class="link-card-text">
+            <div class="link-card-title">הורדת Visual Studio Code</div>
+            <div class="link-card-url">code.visualstudio.com</div>
+          </div>
+          <span class="link-card-arrow">&rarr;</span>
+        </a>
         <ol>
-          <li>הורד מ-<a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></li>
-          <li>התקן ופתח</li>
-          <li>פתח טרמינל מובנה: <span class="ic">Ctrl+`</span> (או מתפריט Terminal → New Terminal)</li>
+          <li>כנסו ל-<a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></li>
+          <li>לחצו <strong>"Download for Windows"</strong> (או Mac/Linux — האתר מזהה אוטומטית)</li>
+          <li>הריצו את קובץ ההתקנה — Next &rarr; Next &rarr; Install</li>
+          <li>פתחו VS Code</li>
+          <li>פתחו טרמינל מובנה: <span class="ic">Ctrl+`</span> (או מתפריט Terminal &rarr; New Terminal)</li>
         </ol>
+        <div class="note"><strong>למה VS Code?</strong> כי אפשר לעבוד עם Claude Code ישירות מתוכו — בטרמינל מובנה או דרך תוסף עם ממשק גרפי שתומך בעברית. הכל במקום אחד.</div>
 
-        <h3>מה זה Git ולמה צריך?</h3>
-        <p>Git הוא מערכת לניהול גרסאות — כמו "Ctrl+Z מתקדם" שעוקב אחרי כל שינוי בקבצים. Claude Code משתמש ב-Git כדי לעקוב אחרי שינויים בפרויקט.</p>
-        <ul>
-          <li><strong>Windows:</strong> הורידו מ-<a href="https://git-scm.com" target="_blank">git-scm.com</a> והתקינו</li>
-          <li><strong>Mac:</strong> הריצו בטרמינל <span class="ic">git --version</span> — אם לא מותקן, Mac יציע להתקין</li>
-          <li><strong>Linux:</strong> <span class="ic">sudo apt install git</span> (Ubuntu) או <span class="ic">sudo dnf install git</span> (Fedora)</li>
-        </ul>
-        <p>ודאו:</p>
-        <div class="code-block"><code>git --version</code></div>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: Quick Links                       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h3>קישורים מהירים להורדה</h3>
+        <table class="tbl">
+          <thead><tr><th>כלי</th><th>Windows</th><th>Mac</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Git</td>
+              <td><a href="https://git-scm.com/downloads/win" target="_blank">git-scm.com/downloads/win</a></td>
+              <td>מובנה (הריצו <span class="ic">git --version</span>)</td>
+            </tr>
+            <tr>
+              <td>VS Code</td>
+              <td colspan="2" style="text-align:center"><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></td>
+            </tr>
+            <tr>
+              <td>Claude Code</td>
+              <td colspan="2" style="text-align:center"><a href="https://code.claude.com/docs/en/overview" target="_blank">code.claude.com/docs</a></td>
+            </tr>
+          </tbody>
+        </table>
 
-        <h3>התקנת Node.js</h3>
-        <p>Node.js נדרש להתקנת Claude Code.</p>
-        <ol>
-          <li>הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> — בחר בגרסת <strong>LTS</strong></li>
-          <li>התקן ופתח טרמינל חדש</li>
-        </ol>
-        <p>ודאו:</p>
-        <div class="code-block"><code>node --version</code></div>
-        <p>אם רואים <span class="ic">v18.x.x</span> ומעלה — מעולה.</p>
-
-        <h3>תוסף Claude Code ב-VS Code (מומלץ למתחילים)</h3>
-        <p>בנוסף ל-Claude Code בטרמינל, יש <strong>תוסף רשמי ל-VS Code</strong> שמספק ממשק שיחה גרפי — דומה לממשק הרגיל של Claude באתר.</p>
-        <ol>
-          <li>פתח VS Code</li>
-          <li>לחץ <span class="ic">Ctrl+Shift+X</span> (Extensions)</li>
-          <li>חפש <strong>"Claude Code"</strong> (של Anthropic)</li>
-          <li>לחץ <strong>Install</strong></li>
-        </ol>
-        <div class="note"><strong>למה כדאי?</strong> התוסף מציג את השיחה עם Claude בתוך VS Code, עם תמיכה טובה יותר בעברית (RTL) ועם ממשק נוח יותר מטרמינל גולמי. מומלץ למתחילים.</div>
-
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: Prerequisites Summary             -->
+        <!-- ═══════════════════════════════════════════ -->
         <h2>דרישות — סיכום</h2>
         <table class="tbl">
           <thead><tr><th>כלי</th><th>סטטוס</th><th>הערות</th></tr></thead>
           <tbody>
-            <tr><td>מחשב (Mac / Windows / Linux)</td><td>חובה</td><td>Claude Code רץ בטרמינל</td></tr>
+            <tr><td>מחשב (Mac / Windows / Linux)</td><td>חובה</td><td>Claude Code רץ על כל מערכת הפעלה</td></tr>
+            <tr><td>Git</td><td>חובה</td><td>נדרש להתקנה ולעבודה עם Claude Code</td></tr>
             <tr><td>VS Code</td><td>מומלץ מאוד</td><td>סביבת עבודה + תוסף Claude Code</td></tr>
-            <tr><td>Git</td><td>מומלץ</td><td>ניהול גרסאות ומעקב שינויים</td></tr>
-            <tr><td>Node.js 18+</td><td>חובה</td><td>נדרש להתקנת Claude Code</td></tr>
-            <tr><td>חשבון Anthropic</td><td>חובה</td><td>מפתח API או מנוי Claude Pro</td></tr>
+            <tr><td>חשבון Anthropic</td><td>חובה</td><td>מפתח API או מנוי Claude Pro/Max</td></tr>
           </tbody>
         </table>
 
-        <h2><span class="step-num">1</span> קבל מפתח API של Anthropic</h2>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- STEP 1: Anthropic Account                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2><span class="step-num">1</span> פתחו חשבון Anthropic</h2>
+        <p>כדי להשתמש ב-Claude Code, תצטרכו אחת משתי האפשרויות:</p>
+        <ul>
+          <li><strong>מפתח API:</strong> תשלום לפי שימוש בלבד (ללא מנוי חודשי)</li>
+          <li><strong>מנוי Claude Pro / Max:</strong> מנוי חודשי מ-$20 שכולל גם גישה ל-Claude באתר</li>
+        </ul>
+        <h3>אפשרות א׳: מפתח API</h3>
         <ol>
-          <li>כנס ל-<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
-          <li>הירשם או התחבר</li>
-          <li>לחץ על <strong>"Get API Keys"</strong> בסרגל השמאלי</li>
-          <li>לחץ <strong>"Create Key"</strong> → תן לו שם כלשהו (למשל "claude-code")</li>
-          <li><strong>העתק את המפתח</strong> (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
-          <li>שמור אותו במקום בטוח — לא תוכל לראות אותו שוב</li>
+          <li>כנסו ל-<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
+          <li>הירשמו או התחברו</li>
+          <li>לחצו על <strong>"Get API Keys"</strong> בסרגל השמאלי</li>
+          <li>לחצו <strong>"Create Key"</strong> &rarr; תנו לו שם (למשל "claude-code")</li>
+          <li><strong>העתיקו את המפתח</strong> (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
+          <li>שמרו אותו במקום בטוח — לא תוכלו לראות אותו שוב</li>
+        </ol>
+        <h3>אפשרות ב׳: מנוי Claude Pro / Max</h3>
+        <ol>
+          <li>כנסו ל-<a href="https://claude.ai" target="_blank">claude.ai</a></li>
+          <li>הירשמו ושדרגו לתוכנית Pro ($20/חודש) או Max ($100/חודש)</li>
+          <li>תתחברו עם החשבון הזה בשלב האימות (שלב 3)</li>
         </ol>
         <div class="note">
-          <strong>עלות:</strong> Claude Code עובד עם מפתח API (תשלום לפי שימוש) או עם מנוי Claude Pro/Max (מ-$20 לחודש).
-          העלות תלויה בהיקף השימוש. לפרטים עדכניים: <a href="https://www.anthropic.com/pricing" target="_blank" style="color:var(--orange)">anthropic.com/pricing</a>
+          <strong>עלות:</strong> API = תשלום לפי שימוש בלבד. Pro/Max = מנוי חודשי קבוע.
+          לפרטים עדכניים: <a href="https://www.anthropic.com/pricing" target="_blank" style="color:var(--orange)">anthropic.com/pricing</a>
+        </div>
+        <div class="note">
+          <strong>טיפ:</strong> אם מתכננים להשתמש הרבה (למשל להריץ אוטומציות), שווה לשקול את תוכנית Max כדי לא להגיע למגבלות שימוש.
         </div>
 
-        <h2><span class="step-num">2</span> התקן את Claude Code</h2>
-        <p>פתח טרמינל (או את הטרמינל המובנה ב-VS Code) והרץ:</p>
-        <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
-        <p>בדוק שהצליח:</p>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- STEP 2: Install Claude Code                -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2><span class="step-num">2</span> התקינו את Claude Code</h2>
+        <p>עכשיו מגיע החלק המרכזי. יש <strong>שתי דרכים</strong> להתקין — בחרו את המתאימה לכם:</p>
+
+        <h3>דרך א׳: התקנה רשמית (מומלץ)</h3>
+        <p>שיטת ההתקנה הרשמית של Anthropic — מתעדכנת אוטומטית ברקע. (<a href="https://code.claude.com/docs/en/overview" target="_blank">תיעוד רשמי</a>)</p>
+        <a href="https://code.claude.com/docs/en/overview" target="_blank" class="link-card" style="text-decoration:none;">
+          <div class="link-card-icon" style="background:#d97706;color:#fff;">✦</div>
+          <div class="link-card-text">
+            <div class="link-card-title">תיעוד ההתקנה הרשמי של Claude Code</div>
+            <div class="link-card-url">code.claude.com/docs/en/overview</div>
+          </div>
+          <span class="link-card-arrow">&rarr;</span>
+        </a>
+
+        <div class="os-tabs" data-group="install">
+          <button class="os-tab active" onclick="switchTab(this, 'install', 'win')">🪟 Windows (PowerShell)</button>
+          <button class="os-tab" onclick="switchTab(this, 'install', 'mac')">🍎 Mac / Linux</button>
+        </div>
+        <div class="os-panel active" data-group="install" data-os="win">
+          <p>פתחו <strong>PowerShell</strong> והריצו:</p>
+          <div class="code-block"><code>irm https://claude.ai/install.ps1 | iex</code></div>
+          <div class="warning"><strong>נדרש:</strong> Git for Windows חייב להיות מותקן <strong>לפני</strong> שמריצים את הפקודה הזו. אם עדיין לא התקנתם — חזרו לשלב ההתקנה של Git למעלה.</div>
+        </div>
+        <div class="os-panel" data-group="install" data-os="mac">
+          <p>פתחו Terminal והריצו:</p>
+          <div class="code-block"><code>curl -fsSL https://claude.ai/install.sh | bash</code></div>
+        </div>
+
+        <p>בדקו שהתקנה הצליחה:</p>
         <div class="code-block"><code>claude --version</code></div>
-        <p>אמור לראות מספר גרסה.</p>
-        <div class="note">אם התקנת את תוסף Claude Code ב-VS Code (שלב קודם), אין חובה להשתמש ב-CLI בטרמינל — אפשר לעבוד ישירות מהתוסף.</div>
+        <p>אמורים לראות מספר גרסה. אם כן — מעולה, Claude Code מותקן.</p>
+        <div class="note"><strong>עדכון אוטומטי:</strong> ההתקנה הרשמית מתעדכנת אוטומטית ברקע — תמיד תהיו על הגרסה האחרונה.</div>
 
-        <h2><span class="step-num">3</span> אימות</h2>
+        <h3>דרך ב׳: התקנה דרך npm (חלופה)</h3>
+        <p>אם כבר יש לכם Node.js 18+ מותקן:</p>
+        <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
+        <div class="note">שיטה זו דורשת <a href="https://nodejs.org" target="_blank">Node.js 18+</a>. אם אין לכם Node.js, השתמשו בדרך א׳ למעלה.</div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- STEP 3: Authentication                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2><span class="step-num">3</span> אימות — הפעלה ראשונה</h2>
+        <p>פתחו טרמינל (או טרמינל מובנה ב-VS Code) והקלידו:</p>
         <div class="code-block"><code>claude</code></div>
-        <p>בפעם הראשונה Claude Code יבקש אימות. יש שתי אפשרויות:</p>
+        <p>בפעם הראשונה, Claude Code יבקש אימות. יש שתי אפשרויות:</p>
         <ul>
-          <li><strong>מפתח API:</strong> הדבק את מפתח ה-API שיצרת ולחץ Enter</li>
-          <li><strong>חשבון Claude.ai:</strong> התחבר עם חשבון Claude Pro/Max דרך הדפדפן</li>
+          <li><strong>מפתח API:</strong> הדביקו את המפתח שיצרתם בשלב 1 ולחצו Enter</li>
+          <li><strong>חשבון Claude.ai:</strong> בחרו באפשרות "Login with Claude.ai" — ייפתח דפדפן להתחברות עם חשבון Pro/Max</li>
         </ul>
-        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון טרמינל חדש לאחר ההתקנה.</div>
+        <p>אם האימות הצליח, תראו את ברכת הכניסה של Claude וסמן <span class="ic">&gt;</span> מהבהב — מוכנים להתחיל.</p>
 
-        <h2><span class="step-num">4</span> התקן את חבילת הסקילים</h2>
-        <p>פתח את ה-ZIP שהורדת, נווט לתיקייה שלו בטרמינל.</p>
+        <div class="os-tabs" data-group="auth-fix">
+          <button class="os-tab active" onclick="switchTab(this, 'auth-fix', 'win')">🪟 בעיות ב-Windows?</button>
+          <button class="os-tab" onclick="switchTab(this, 'auth-fix', 'mac')">🍎 בעיות ב-Mac?</button>
+        </div>
+        <div class="os-panel active" data-group="auth-fix" data-os="win">
+          <p>אם <span class="ic">claude</span> לא מזוהה כפקודה:</p>
+          <ol>
+            <li>סגרו את PowerShell <strong>לגמרי</strong></li>
+            <li>פתחו חלון PowerShell <strong>חדש</strong></li>
+            <li>נסו שוב: <span class="ic">claude</span></li>
+          </ol>
+          <p>עדיין לא עובד? נסו: <span class="ic">npx @anthropic-ai/claude-code</span></p>
+        </div>
+        <div class="os-panel" data-group="auth-fix" data-os="mac">
+          <p>אם <span class="ic">claude</span> לא מזוהה:</p>
+          <ol>
+            <li>סגרו את Terminal ופתחו חדש</li>
+            <li>אם עדיין לא עובד, הריצו: <span class="ic">source ~/.bashrc</span> או <span class="ic">source ~/.zshrc</span></li>
+          </ol>
+        </div>
 
-        <h3>macOS / Linux</h3>
-        <div class="code-block"><code>bash install.sh</code></div>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- STEP 4: VS Code Extension                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2><span class="step-num">4</span> תוסף Claude Code ב-VS Code (מומלץ)</h2>
+        <p>בנוסף לעבודה בטרמינל, יש <strong>תוסף רשמי של Anthropic ל-VS Code</strong> שנותן ממשק שיחה גרפי — דומה מאוד לממשק של Claude באתר.</p>
+        <ol>
+          <li>פתחו VS Code</li>
+          <li>לחצו <span class="ic">Ctrl+Shift+X</span> (Extensions)</li>
+          <li>חפשו <strong>"Claude Code"</strong> (של Anthropic)</li>
+          <li>לחצו <strong>Install</strong></li>
+          <li>אחרי ההתקנה — יופיע אייקון של Anthropic בסרגל הצד. לחצו עליו לפתיחת ממשק השיחה</li>
+        </ol>
+        <div class="note"><strong>למה כדאי?</strong> התוסף מציג את השיחה עם Claude בתוך VS Code, עם תמיכה טובה יותר בעברית (RTL) ועם ממשק נוח יותר מטרמינל גולמי. בצד שמאל רואים את הקבצים, בצד ימין את השיחה עם Claude.</div>
+        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_700/focusai/guides/claude-code-accept-mode" alt="Claude Code ב-VS Code — ממשק אישור שינויים" class="guide-img">
+        <p class="guide-img-caption">Claude Code בתוך VS Code — ממשק אישור שינויים (Accept Mode)</p>
 
-        <h3>Windows (PowerShell)</h3>
-        <div class="code-block"><code>.\install.ps1</code></div>
+        <h3>הגדרה חשובה: Bypass Permissions</h3>
+        <p>כברירת מחדל, Claude Code מבקש אישור לכל פעולה (יצירת קובץ, הרצת פקודה). כדי שיוכל לעבוד באופן עצמאי:</p>
+        <ol>
+          <li>ב-VS Code, לחצו על גלגל השיניים (⚙) למטה משמאל</li>
+          <li>חפשו <strong>"Claude Code"</strong> בהגדרות</li>
+          <li>הפעילו <strong>"Allow Bypass Permissions Mode"</strong></li>
+        </ol>
+        <div class="note"><strong>מתי להפעיל?</strong> כשאתם רוצים ש-Claude יבצע רצף פעולות בלי לעצור ולשאול אישור בכל שלב. שימושי בעיקר לאוטומציות ולפעולות שחוזרות על עצמן.</div>
 
-        <p>תראה רשימת ✅ — כל 50 הסקילים מותקנים. בדוק:</p>
-        <div class="code-block"><code class="comment"># macOS / Linux</code>
-<code>ls ~/.claude/skills/
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- STEP 5: Install Skills                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2><span class="step-num">5</span> התקינו את הסקילים</h2>
+        <p><strong>סקילים (Skills)</strong> הם הוראות מובנות שמרחיבות את היכולות של Claude Code. במקום לכתוב הנחיות ארוכות כל פעם, סקיל עושה את זה בשבילכם — פקודה אחת ו-Claude יודע בדיוק מה לעשות.</p>
+
+        <ol>
+          <li>הורידו את חבילת הסקילים המתאימה (למעלה בעמוד)</li>
+          <li>חלצו (Extract) את ה-ZIP לתיקייה</li>
+          <li>פתחו טרמינל <strong>בתוך תיקיית הסקילים</strong></li>
+        </ol>
+
+        <div class="os-tabs" data-group="skills">
+          <button class="os-tab active" onclick="switchTab(this, 'skills', 'win')">🪟 Windows (PowerShell)</button>
+          <button class="os-tab" onclick="switchTab(this, 'skills', 'mac')">🍎 Mac / Linux</button>
+        </div>
+        <div class="os-panel active" data-group="skills" data-os="win">
+          <div class="code-block"><code>.\install.ps1</code></div>
+        </div>
+        <div class="os-panel" data-group="skills" data-os="mac">
+          <div class="code-block"><code>bash install.sh</code></div>
+        </div>
+
+        <p>תראו רשימת ✅ כשכל 50 הסקילים מותקנים. בדקו שזה עבד:</p>
+        <div class="code-block"><code><span class="comment"># macOS / Linux</span>
+ls ~/.claude/skills/
 
 <span class="comment"># Windows</span>
 dir $env:USERPROFILE\.claude\skills</code></div>
-        <p>אמור לראות 50 תיקיות סקילים.</p>
+        <p>אמורים לראות 50 תיקיות סקילים.</p>
 
-        <h2><span class="step-num">5</span> הפרויקט הראשון</h2>
-        <p>בואו נשתמש ב-Claude Code על פרויקט אמיתי.</p>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: How to use Skills                 -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2>איך משתמשים בסקילים</h2>
+        <p>סקילים מופעלים עם קידומת <span class="ic">/</span> בשיחה עם Claude:</p>
+        <div class="code-block"><code>&gt; /שם-הסקיל [הקשר אופציונלי]</code></div>
+        <p>חלק מהסקילים עובדים לבד (למשל <span class="ic">/code-review</span> שסורק את הקוד הפתוח). אחרים צריכים שתתנו הקשר:</p>
+        <div class="code-block"><code><span class="comment"># תקן שגיאה ספציפית</span>
+<span class="cmd">&gt; /fix-error</span> TypeError: Cannot read properties of undefined
 
-        <h3>5.1 צור תיקיית פרויקט</h3>
-        <div class="code-block"><code>mkdir my-first-project
-cd my-first-project</code></div>
+<span class="comment"># דיבאגינג עם הקשר</span>
+<span class="cmd">&gt; /debug-smart</span> קריאת ה-API מחזירה 200 אבל ה-UI לא מתעדכן
 
-        <h3>5.2 הפעל את Claude Code</h3>
-        <div class="code-block"><code>claude</code></div>
-        <p>תראה את הברכה של Claude וקרסור <span class="ic">&gt;</span>.</p>
+<span class="comment"># הסבר קוד</span>
+<span class="cmd">&gt; /explain-code</span> [הדביקו את הפונקציה שרוצים להבין]</code></div>
 
-        <h3>5.3 נסה את הפקודות הראשונות</h3>
-        <div class="code-block"><code><span class="comment"># חקור קוד-בייס קיים</span>
-<span class="cmd">&gt; /onboard-codebase</span>
+        <div class="note"><strong>טיפ חשוב:</strong> Claude Code בודק אילו סקילים זמינים וטוען רק את הרלוונטיים — כך הוא לא מבזבז "זיכרון" על סקילים שלא צריך כרגע.</div>
 
-<span class="comment"># תכנן פיצ'ר</span>
-<span class="cmd">&gt; /task-breakdown הוספת אותנטיקציית משתמשים עם JWT</span>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: Tips                              -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2>טיפים לשימוש אפקטיבי</h2>
 
-<span class="comment"># Code Review</span>
+        <h3>1. תמיד צרו קובץ claude.md</h3>
+        <p>קובץ <span class="ic">claude.md</span> בשורש הפרויקט הוא כמו "בריף" ל-Claude — מסביר מה הפרויקט, מה מבנה הקבצים, ומה הכללים. בלי הקובץ הזה, Claude עובד באופן גנרי ולא מותאם. עם הקובץ — הוא הופך למומחה בפרויקט שלכם.</p>
+        <div class="code-block"><code><span class="comment"># דוגמה לתוכן claude.md</span>
+# My Project
+מטרת הפרויקט: אפליקציית ניהול משימות
+טכנולוגיות: React, Node.js, PostgreSQL
+מבנה: src/components, src/api, src/db
+כללים: כתוב בעברית, השתמש ב-TypeScript</code></div>
+
+        <h3>2. השתמשו ב-Plan Mode לרעיונות חדשים</h3>
+        <p>כשמתחילים משהו חדש, במקום לכתוב ישר קוד — בקשו מ-Claude <strong>לתכנן קודם</strong>. הוא ישאל שאלות, יחשוב על דברים שלא חשבתם עליהם, ויציע מבנה לפני שמתחיל לעבוד.</p>
+        <div class="code-block"><code><span class="cmd">&gt;</span> תתכנן לי אוטומציה שאוספת נתונים מיוטיוב ושולחת סיכום במייל כל יום שני</code></div>
+
+        <h3>3. תדביקו שגיאות כמו שהן</h3>
+        <p>לא חייבים להבין שגיאות — פשוט <strong>העתיקו את כל הודעת השגיאה</strong> (כולל ה"ג׳יבריש" הטכני) והדביקו ל-Claude. הוא ינתח ויגיד לכם בדיוק מה שבור ואיך לתקן.</p>
+
+        <h3>4. שרשרו סקילים לתהליך מלא</h3>
+        <p>סקילים עובדים מצוין ברצף — בנו תהליך עבודה מלא:</p>
+        <div class="code-block"><code><span class="cmd">&gt; /task-breakdown</span> הוספת מערכת התחברות
 <span class="cmd">&gt; /code-review</span>
-
-<span class="comment"># הודעת קומיט</span>
+<span class="cmd">&gt; /write-tests</span>
+<span class="cmd">&gt; /security-review</span>
 <span class="cmd">&gt; /commit-message</span></code></div>
 
-        <h2>איך משתמשים בסקילים</h2>
-        <p>סקילים מופעלים עם קידומת <span class="ic">/</span>:</p>
-        <div class="code-block"><code>&gt; /שם-הסקיל [ארגומנט אופציונלי]</code></div>
-        <p>חלק מהסקילים עובדים לבד. אחרים צריכים הקשר:</p>
-        <div class="code-block"><code>&gt; /fix-error TypeError: Cannot read properties of undefined (reading 'map')
+        <h3>5. קראו מה Claude כותב</h3>
+        <p>הדרך הכי טובה ללמוד היא <strong>לקרוא כל שורה שClaude מוציא</strong>. אל תסתפקו בתוצאה — תבינו מה הוא עשה ולמה. ככה לומדים לחשוב כמו שמודלי AI חושבים.</p>
 
-&gt; /debug-smart קריאת ה-API מחזירה 200 אבל ה-UI לא מתעדכן
+        <h3>6. נקו שיחה כשהיא מתארכת</h3>
+        <p>כשרואים ש-Claude מתחיל להגיב לאט או ש"ההקשר" מלא — התחילו שיחה חדשה. Claude Code מציג אחוז ניצול הקשר — כשמתקרבים ל-70%+ עדיף לנקות ולהתחיל מחדש.</p>
 
-&gt; /explain-code [הדבק את הפונקציה שרוצה להבין]</code></div>
+        <h3>7. הזהרו עם מפתחות API</h3>
+        <div class="warning"><strong>אבטחה:</strong> לעולם אל תשמרו מפתחות API בתוך קבצי קוד! השתמשו בקובצי <span class="ic">.env</span> (שלא עולים ל-Git). תמיד הריצו <span class="ic">/security-review</span> לפני שאתם מפרסמים קוד.</div>
 
-        <h2>50 הסקילים, לפי קטגוריה</h2>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION: Troubleshooting                   -->
+        <!-- ═══════════════════════════════════════════ -->
+        <h2>פתרון בעיות נפוצות</h2>
 
-        <h3>איכות קוד</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/code-review</span><span class="skill-desc">Code Review שיטתי עם רמות חומרה</span></div>
-          <div class="skill-item"><span class="skill-cmd">/security-review</span><span class="skill-desc">ביקורת אבטחה על בסיס OWASP</span></div>
-          <div class="skill-item"><span class="skill-cmd">/performance-review</span><span class="skill-desc">מצא N+1, זליגות זיכרון, פטרנים איטיים</span></div>
-          <div class="skill-item"><span class="skill-cmd">/refactor</span><span class="skill-desc">זיהוי ותיקון code smells</span></div>
-          <div class="skill-item"><span class="skill-cmd">/clean-code</span><span class="skill-desc">עקרונות שמות, פונקציות, טיפול בשגיאות</span></div>
-          <div class="skill-item"><span class="skill-cmd">/solid-principles</span><span class="skill-desc">עקרונות SOLID עם דוגמאות</span></div>
-          <div class="skill-item"><span class="skill-cmd">/tech-debt</span><span class="skill-desc">קטלוג ותעדוף חוב טכני</span></div>
-          <div class="skill-item"><span class="skill-cmd">/accessibility</span><span class="skill-desc">צ'קליסט WCAG 2.1 AA</span></div>
-        </div>
-
-        <h3>דיבאגינג</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/debug-smart</span><span class="skill-desc">שיטת דיבאגינג מדעית</span></div>
-          <div class="skill-item"><span class="skill-cmd">/fix-error</span><span class="skill-desc">פענוח שגיאות + קריאת stack trace</span></div>
-          <div class="skill-item"><span class="skill-cmd">/trace-bug</span><span class="skill-desc">ניתוח שורש הבעיה עם Five Whys</span></div>
-          <div class="skill-item"><span class="skill-cmd">/memory-leak</span><span class="skill-desc">זיהוי ותיקון זליגות זיכרון</span></div>
-          <div class="skill-item"><span class="skill-cmd">/async-debug</span><span class="skill-desc">אבחון באגים ב-Promise ו-async/await</span></div>
-          <div class="skill-item"><span class="skill-cmd">/typescript-errors</span><span class="skill-desc">פענוח שגיאות TS2345, TS2322 ועוד</span></div>
-          <div class="skill-item"><span class="skill-cmd">/regex-helper</span><span class="skill-desc">מדריך Regex + מלכודות נפוצות</span></div>
-        </div>
-
-        <h3>תיעוד</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/generate-docs</span><span class="skill-desc">כתיבת תיעוד לכל קוד</span></div>
-          <div class="skill-item"><span class="skill-cmd">/jsdoc</span><span class="skill-desc">מדריך תגיות JSDoc/TSDoc</span></div>
-          <div class="skill-item"><span class="skill-cmd">/readme-write</span><span class="skill-desc">כתיבת README מקצועי</span></div>
-          <div class="skill-item"><span class="skill-cmd">/api-docs</span><span class="skill-desc">תיעוד REST APIs</span></div>
-          <div class="skill-item"><span class="skill-cmd">/changelog</span><span class="skill-desc">יצירת changelog מהיסטוריית git</span></div>
-          <div class="skill-item"><span class="skill-cmd">/explain-code</span><span class="skill-desc">הסבר קוד ב-3 רמות קהל</span></div>
-        </div>
-
-        <h3>טסטים</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/write-tests</span><span class="skill-desc">כתיבת unit tests (פטרן AAA)</span></div>
-          <div class="skill-item"><span class="skill-cmd">/edge-cases</span><span class="skill-desc">מצא edge cases שפספסת</span></div>
-          <div class="skill-item"><span class="skill-cmd">/mock-generate</span><span class="skill-desc">יצירת mocks ו-fakes לטסטים</span></div>
-          <div class="skill-item"><span class="skill-cmd">/test-coverage</span><span class="skill-desc">ניתוח פערי coverage</span></div>
-          <div class="skill-item"><span class="skill-cmd">/e2e-tests</span><span class="skill-desc">פטרני Playwright/Cypress</span></div>
-          <div class="skill-item"><span class="skill-cmd">/test-data</span><span class="skill-desc">יצירת test data ריאליסטית</span></div>
-          <div class="skill-item"><span class="skill-cmd">/snapshot-tests</span><span class="skill-desc">מתי ואיך להשתמש ב-snapshots</span></div>
-        </div>
-
-        <h3>Git וזרימת עבודה</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/commit-message</span><span class="skill-desc">כתיבת Conventional Commits מ-staged diff</span></div>
-          <div class="skill-item"><span class="skill-cmd">/pr-description</span><span class="skill-desc">יצירת תיאור PR מ-git log</span></div>
-          <div class="skill-item"><span class="skill-cmd">/git-cleanup</span><span class="skill-desc">ניקוי branches ישנים</span></div>
-          <div class="skill-item"><span class="skill-cmd">/merge-conflict</span><span class="skill-desc">פתרון שיטתי של merge conflicts</span></div>
-          <div class="skill-item"><span class="skill-cmd">/release-notes</span><span class="skill-desc">יצירת release notes למשתמשים</span></div>
-          <div class="skill-item"><span class="skill-cmd">/branch-strategy</span><span class="skill-desc">אסטרטגיית branching, מוסכמות שמות, גודל PRs</span></div>
-        </div>
-
-        <h3>ארכיטקטורה</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/architecture-review</span><span class="skill-desc">ביקורת מעמיקה עם פלט ADR</span></div>
-          <div class="skill-item"><span class="skill-cmd">/design-patterns</span><span class="skill-desc">מדריך פטרני עיצוב: מתי להשתמש בכל פטרן ואיך</span></div>
-          <div class="skill-item"><span class="skill-cmd">/api-design</span><span class="skill-desc">Best practices ל-REST וGraphQL</span></div>
-          <div class="skill-item"><span class="skill-cmd">/database-schema</span><span class="skill-desc">עיצוב סכמה ופטרני migration</span></div>
-          <div class="skill-item"><span class="skill-cmd">/microservices</span><span class="skill-desc">גבולות שירותים ומערכות מבוזרות</span></div>
-          <div class="skill-item"><span class="skill-cmd">/dependency-audit</span><span class="skill-desc">ביקורת אבטחה להיגיינה של packages</span></div>
-          <div class="skill-item"><span class="skill-cmd">/folder-structure</span><span class="skill-desc">ארגון פרויקט לפי פריימוורק</span></div>
-        </div>
-
-        <h3>אבטחה</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/security-audit</span><span class="skill-desc">ביקורת OWASP Top 10 מלאה</span></div>
-          <div class="skill-item"><span class="skill-cmd">/env-security</span><span class="skill-desc">היגיינה של secrets ומשתני סביבה</span></div>
-          <div class="skill-item"><span class="skill-cmd">/sql-injection</span><span class="skill-desc">מדריך מניעת SQL injection</span></div>
-          <div class="skill-item"><span class="skill-cmd">/auth-review</span><span class="skill-desc">פטרני JWT, sessions, RBAC</span></div>
-          <div class="skill-item"><span class="skill-cmd">/csp-setup</span><span class="skill-desc">הגדרת Content Security Policy</span></div>
-        </div>
-
-        <h3>פרודוקטיביות</h3>
-        <div class="skill-table">
-          <div class="skill-item"><span class="skill-cmd">/standup</span><span class="skill-desc">הכנת הודעת standup יומית</span></div>
-          <div class="skill-item"><span class="skill-cmd">/task-breakdown</span><span class="skill-desc">פירוק פיצ'רים למשימות</span></div>
-          <div class="skill-item"><span class="skill-cmd">/onboard-codebase</span><span class="skill-desc">דוח חקירת קוד-בייס מהיר</span></div>
-          <div class="skill-item"><span class="skill-cmd">/sprint-plan</span><span class="skill-desc">תכנון ספרינט עם בדיקת קיבולת</span></div>
-        </div>
-
-        <h2>טיפים למקסם את Claude Code</h2>
+        <p><strong>"claude: command not found"</strong></p>
         <ul>
-          <li><strong>היה ספציפי.</strong> "תקן את הבאג" נותן תוצאות גרועות. "תקן את הבאג בפונקציה <span class="ic">calculateTotal</span>, היא מחזירה NaN כשהעגלה ריקה" — Claude יכול לפתור.</li>
-          <li><strong>תן ל-Claude הקשר.</strong> לפני Code Review, ספר מה הקוד אמור לעשות. לפני דיבאגינג, ספר מה ציפית לקבל לעומת מה שקיבלת.</li>
-          <li><strong>השתמש בו ללמידה.</strong> בקש מ-Claude להסביר החלטות: "למה השתמשת בקלוז'ר כאן?" או "מה ה-tradeoff בגישה הזו?"</li>
-          <li><strong>שרשר סקילים.</strong> כתוב פיצ'ר → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. זרימת עבודה מקצועית מלאה.</li>
-          <li><strong>בדוק כל מה ש-Claude כותב.</strong> Claude Code הוא עוזר עוצמתי אבל לא חסין שגיאות. קרא את הקוד לפני שאתה מקמיט.</li>
+          <li>פתחו חלון טרמינל חדש (סגרו את הישן לגמרי)</li>
+          <li>נסו: <span class="ic">npx @anthropic-ai/claude-code</span></li>
+          <li>ב-Windows — ודאו שאתם ב-PowerShell, לא CMD</li>
         </ul>
 
-        <h2>פתרון בעיות</h2>
-        <p><strong>"claude: command not found"</strong><br>
-        נסה: <span class="ic">npx @anthropic-ai/claude-code</span> — או פתח טרמינל חדש לאחר ההתקנה.</p>
-        <p><strong>"Invalid API key"</strong><br>
-        חזור ל-console.anthropic.com וצור מפתח חדש.</p>
-        <p><strong>"Rate limit exceeded"</strong><br>
-        הגעת למגבלת ה-API. המתן דקה ונסה שוב.</p>
-        <p><strong>הסקילים לא מופיעים</strong><br>
-        הרץ שוב את <span class="ic">install.sh</span> / <span class="ic">install.ps1</span> ובדוק שהתיקייה <span class="ic">~/.claude/skills/</span> מכילה 50 תיקיות.</p>
+        <p><strong>"Invalid API key"</strong></p>
+        <ul>
+          <li>חזרו ל-<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> וצרו מפתח חדש</li>
+          <li>ודאו שהעתקתם את המפתח <strong>המלא</strong> (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
+        </ul>
 
+        <p><strong>"Rate limit exceeded"</strong></p>
+        <ul>
+          <li>הגעתם למגבלת שימוש. המתינו דקה ונסו שוב</li>
+          <li>אם זה קורה הרבה — שקלו לשדרג לתוכנית Max</li>
+        </ul>
+
+        <p><strong>הסקילים לא מופיעים</strong></p>
+        <ul>
+          <li>הריצו שוב את <span class="ic">install.sh</span> / <span class="ic">install.ps1</span></li>
+          <li>בדקו שהתיקייה <span class="ic">~/.claude/skills/</span> מכילה 50 תיקיות</li>
+        </ul>
+
+        <p><strong>Git לא מותקן (Windows)</strong></p>
+        <ul>
+          <li>הורידו והתקינו מ-<a href="https://git-scm.com" target="_blank">git-scm.com</a></li>
+          <li>פתחו PowerShell חדש אחרי ההתקנה</li>
+          <li>הריצו שוב את התקנת Claude Code</li>
+        </ul>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- Bottom disclaimer                          -->
+        <!-- ═══════════════════════════════════════════ -->
         <div class="disclaimer" style="margin-top: 40px;">
           <strong>הערת סיום:</strong> מדריך זה נועד למטרות מידע ולימוד בלבד ואינו מהווה ייעוץ מקצועי.
           המחירים, התכונות והפקודות עשויים להשתנות — בדקו תמיד את <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" style="color:var(--orange)">התיעוד הרשמי העדכני</a>.
@@ -720,10 +1187,10 @@ cd my-first-project</code></div>
 
         <!-- CTA -->
         <div class="cta-block">
-          <h2>רוצה להעמיק?</h2>
-          <p>סקילים חוסכים שעות. אוטומציה שבונה, בודקת ומשגרת בשבילך — זה כבר AI Dev. הכשרת Focus AI נבנתה בדיוק בשביל זה.</p>
-          <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת AI</a>
-          <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי</p>
+          <h2>רוצים להעמיק?</h2>
+          <p>הסקילים זה רק ההתחלה. ב-Bot-Camp של Focus AI תלמדו לבנות אוטומציות, סוכני AI ותהליכי עבודה מלאים — עם ליווי אישי.</p>
+          <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת Bot-Camp</a>
+          <p class="cta-note">Bot-Camp | AI First | ליווי אישי</p>
         </div>
 
       </div><!-- /doc-content -->
@@ -741,8 +1208,24 @@ cd my-first-project</code></div>
       <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
       <a href="/claude-code-guide-en/">English version</a>
     </div>
-    <p class="footer-copy">© 2026 Focus AI</p>
+    <p class="footer-copy">&copy; 2026 Focus AI</p>
   </footer>
+
+  <script>
+    function switchTab(btn, group, os) {
+      // Deactivate all tabs in this group
+      document.querySelectorAll('.os-tabs[data-group="' + group + '"] .os-tab').forEach(function(t) {
+        t.classList.remove('active');
+      });
+      btn.classList.add('active');
+      // Show the right panel
+      document.querySelectorAll('.os-panel[data-group="' + group + '"]').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      var target = document.querySelector('.os-panel[data-group="' + group + '"][data-os="' + os + '"]');
+      if (target) target.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
