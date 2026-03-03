@@ -722,6 +722,15 @@ const stats = [
         form.addEventListener('submit', function(e) {
           e.preventDefault();
 
+          // Validate required checkboxes (terms)
+          var requiredCheckboxes = form.querySelectorAll('input[type="checkbox"][required]');
+          for (var i = 0; i < requiredCheckboxes.length; i++) {
+            if (!requiredCheckboxes[i].checked) {
+              alert('יש לאשר את תנאי השימוש');
+              return;
+            }
+          }
+
           var btn = form.querySelector('button[type="submit"]');
           var statusEl = document.getElementById(statusId);
           var originalText = btn.innerHTML;

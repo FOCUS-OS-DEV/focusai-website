@@ -493,6 +493,12 @@ const ctaFormInterest = "bot-camp";
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // Validate required checkboxes (privacy policy)
+    var privacyCheckbox = form.querySelector('input[type="checkbox"][required]');
+    if (privacyCheckbox && !privacyCheckbox.checked) {
+      alert('יש לאשר את מדיניות הפרטיות');
+      return;
+    }
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn?.textContent || '';
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'שולח...'; }

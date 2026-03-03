@@ -370,6 +370,13 @@ const jobs = [
   form?.addEventListener('submit', async function(e) {
     e.preventDefault();
 
+    // Validate required checkboxes (privacy policy)
+    const privacyCheckbox = form.querySelector('input[type="checkbox"][required]');
+    if (privacyCheckbox && !privacyCheckbox.checked) {
+      alert('יש לאשר את מדיניות הפרטיות');
+      return;
+    }
+
     const submitBtn = form.querySelector('button[type="submit"]');
     const btnText = submitBtn?.querySelector('span:last-child');
     const originalText = btnText?.textContent || '';

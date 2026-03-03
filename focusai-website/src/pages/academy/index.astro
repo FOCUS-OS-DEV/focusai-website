@@ -1237,6 +1237,15 @@ const faqSchema = {
   const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/59315ca5-4434-4995-8e5f-22eecf48c64c';
 
   async function handleFormSubmit(form: HTMLFormElement, source: string) {
+    // Validate required checkboxes (privacy policy)
+    const requiredCheckboxes = form.querySelectorAll('input[type="checkbox"][required]') as NodeListOf<HTMLInputElement>;
+    for (const cb of requiredCheckboxes) {
+      if (!cb.checked) {
+        alert('יש לאשר את מדיניות הפרטיות');
+        return;
+      }
+    }
+
     const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalHTML = submitBtn?.innerHTML || '';
 
@@ -1270,6 +1279,14 @@ const faqSchema = {
   const syllabusForm = document.getElementById('syllabus-form-element') as HTMLFormElement;
   syllabusForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // Validate required checkboxes (privacy policy)
+    const requiredCheckboxes = syllabusForm.querySelectorAll('input[type="checkbox"][required]') as NodeListOf<HTMLInputElement>;
+    for (const cb of requiredCheckboxes) {
+      if (!cb.checked) {
+        alert('יש לאשר את מדיניות הפרטיות');
+        return;
+      }
+    }
     const submitBtn = syllabusForm.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalHTML = submitBtn?.innerHTML || '';
     if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'שולח...'; }

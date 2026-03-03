@@ -689,6 +689,12 @@ const faqSchema = {
   const agentsForm = document.getElementById('agents-form') as HTMLFormElement;
   agentsForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // Validate required checkboxes (privacy policy)
+    const privacyCheckbox = agentsForm.querySelector('input[type="checkbox"][required]') as HTMLInputElement;
+    if (privacyCheckbox && !privacyCheckbox.checked) {
+      alert('יש לאשר את מדיניות הפרטיות');
+      return;
+    }
     const btn = agentsForm.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalHTML = btn?.innerHTML || '';
     if (btn) { btn.disabled = true; btn.innerHTML = '<span class="flex items-center justify-center gap-2">שולח...</span>'; }
