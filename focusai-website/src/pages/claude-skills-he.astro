@@ -855,6 +855,66 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     });
   </script>
 
+  <!-- ── Background Music ── -->
+  <audio id="bgMusic" src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1772506492/audio/move-your-vibe-bg.mp3" loop preload="auto"></audio>
+  <button id="audioToggle" aria-label="השתק/הפעל מוזיקת רקע" style="
+    position:fixed;bottom:90px;left:20px;z-index:9998;width:44px;height:44px;border-radius:50%;
+    border:1px solid rgba(200,100,60,.3);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.12);transition:all .3s ease;
+  ">
+    <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8643c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path id="audioWave1" d="M15.54 8.46a5 5 0 010 7.07"/>
+      <path id="audioWave2" d="M19.07 4.93a10 10 0 010 14.14"/>
+    </svg>
+  </button>
+  <script>
+  (function(){
+    var audio=document.getElementById('bgMusic');
+    var btn=document.getElementById('audioToggle');
+    var wave1=document.getElementById('audioWave1');
+    var wave2=document.getElementById('audioWave2');
+    var playing=false;
+    function fadeIn(){
+      audio.volume=0;
+      audio.play().then(function(){
+        playing=true;updateIcon();
+        var vol=0;
+        var fade=setInterval(function(){
+          vol=Math.min(vol+0.02,0.35);
+          audio.volume=vol;
+          if(vol>=0.35) clearInterval(fade);
+        },50);
+      }).catch(function(){});
+    }
+    function fadeOut(){
+      playing=false;updateIcon();
+      var vol=audio.volume;
+      var fade=setInterval(function(){
+        vol=Math.max(vol-0.03,0);
+        audio.volume=vol;
+        if(vol<=0){clearInterval(fade);audio.pause();}
+      },50);
+    }
+    function updateIcon(){
+      wave1.style.opacity=playing?'1':'0.2';
+      wave2.style.opacity=playing?'1':'0.2';
+      btn.style.borderColor=playing?'rgba(200,100,60,.5)':'rgba(200,100,60,.25)';
+    }
+    fadeIn();
+    document.addEventListener('click',function(e){
+      if(e.target.closest('#audioToggle')) return;
+      if(!playing) fadeIn();
+    },{once:true});
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      if(playing) fadeOut(); else fadeIn();
+    });
+    updateIcon();
+  })();
+  </script>
+
   <!-- ── Typewriter scripts ── -->
   <script>
     // ── Rotating terminal jokes ──
