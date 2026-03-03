@@ -216,14 +216,45 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       margin-top: 12px;
     }
 
-    .btn-skip {
-      display: block;
-      margin-top: 16px;
-      font-size: 13px;
-      color: var(--faint);
-      text-decoration: none;
+    /* ── Countdown redirect ── */
+    .redirect-section {
+      padding: 20px 40px 28px;
+      text-align: center;
+      border-top: 1px solid var(--border);
     }
-    .btn-skip:hover { color: var(--orange); }
+    .redirect-bar-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .redirect-text {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .redirect-text strong { color: var(--orange); font-weight: 800; font-family: var(--mono); }
+    .progress-track {
+      background: var(--border);
+      border-radius: 6px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--orange);
+      border-radius: 6px;
+      transition: width 1s linear;
+    }
+    .redirect-skip {
+      font-size: 13px;
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .redirect-skip:hover { text-decoration: underline; }
 
     footer {
       text-align: center;
@@ -239,6 +270,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       .community-section { padding: 24px 20px 32px; }
       .perks { grid-template-columns: 1fr; }
       .btn-whatsapp { font-size: 16px; padding: 14px 28px; }
+      .redirect-section { padding: 16px 20px 24px; }
     }
   </style>
 </head>
@@ -295,7 +327,17 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         </a>
         <p class="members-note">950+ חברים כבר בפנים</p>
 
-        <a href="https://focusai.co.il" class="btn-skip">אולי אחר כך ←</a>
+      </div>
+
+      <!-- Countdown redirect -->
+      <div class="redirect-section">
+        <div class="redirect-bar-wrap">
+          <p class="redirect-text">ממשיכים למדריך ולהורדת הסקילים בעוד <strong id="countdown">10</strong> שניות...</p>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <a href="/claude-code-guide/" class="redirect-skip">דלג למדריך &larr;</a>
+        </div>
       </div>
     </div>
   </div>
@@ -307,5 +349,26 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     <p class="footer-copy">© 2026 Focus AI</p>
   </footer>
 
+  <script is:inline>
+    (function() {
+      var seconds = 10;
+      var el = document.getElementById('countdown');
+      var fill = document.getElementById('progress-fill');
+      if (!el || !fill) return;
+      fill.style.width = '0%';
+      var timer = setInterval(function() {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(timer);
+          el.textContent = '0';
+          fill.style.width = '100%';
+          window.location.href = '/claude-code-guide/';
+          return;
+        }
+        el.textContent = seconds;
+        fill.style.width = ((10 - seconds) / 10 * 100) + '%';
+      }, 1000);
+    })();
+  </script>
 </body>
 </html>
