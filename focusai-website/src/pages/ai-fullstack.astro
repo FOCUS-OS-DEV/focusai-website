@@ -1659,12 +1659,12 @@ setTimeout(function(){running=true;getPos();frame()},nnN.length*50+200);
 </script>
 
 <!-- Background Music — plays on first click, toggle with floating button -->
-<audio id="bgMusic" src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1772506492/audio/move-your-vibe-bg.mp3" loop preload="none"></audio>
+<audio id="bgMusic" src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1772506492/audio/move-your-vibe-bg.mp3" loop preload="auto" autoplay></audio>
 <button id="audioToggle" aria-label="השתק/הפעל מוזיקת רקע" style="
   position:fixed;bottom:90px;left:20px;z-index:9998;width:44px;height:44px;border-radius:50%;
   border:1px solid rgba(168,85,247,.3);background:rgba(10,10,15,.85);backdrop-filter:blur(12px);
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 20px rgba(0,0,0,.4);transition:all .3s ease;opacity:0;pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);transition:all .3s ease;
 ">
   <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M11 5L6 9H2v6h4l5 4V5z"/>
@@ -1680,8 +1680,6 @@ setTimeout(function(){running=true;getPos();frame()},nnN.length*50+200);
   var wave1=document.getElementById('audioWave1');
   var wave2=document.getElementById('audioWave2');
   var playing=false;
-
-  audio.volume=0.35;
 
   function fadeIn(){
     audio.volume=0;
@@ -1712,28 +1710,18 @@ setTimeout(function(){running=true;getPos();frame()},nnN.length*50+200);
     btn.style.borderColor=playing?'rgba(168,85,247,.5)':'rgba(168,85,247,.2)';
   }
 
-  // Start on first click anywhere
-  var firstClick=true;
-  document.addEventListener('click',function(e){
-    if(!firstClick) return;
-    if(e.target.closest('#audioToggle')) return;
-    firstClick=false;
-    btn.style.opacity='1';btn.style.pointerEvents='auto';
-    fadeIn();
-  },{once:false});
+  // Try autoplay immediately on load
+  fadeIn();
 
-  // Show button on scroll
-  var scrollShown=false;
-  window.addEventListener('scroll',function(){
-    if(scrollShown) return;
-    scrollShown=true;
-    btn.style.opacity='1';btn.style.pointerEvents='auto';
-  },{passive:true});
+  // If browser blocked autoplay, retry on first user interaction
+  document.addEventListener('click',function(e){
+    if(e.target.closest('#audioToggle')) return;
+    if(!playing) fadeIn();
+  },{once:true});
 
   // Toggle
   btn.addEventListener('click',function(e){
     e.stopPropagation();
-    if(firstClick){firstClick=false;fadeIn();return;}
     if(playing) fadeOut(); else fadeIn();
   });
 
