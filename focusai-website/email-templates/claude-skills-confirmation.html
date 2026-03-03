@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light only">
+    <!--[if mso]>
+    <style type="text/css">
+        body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+    </style>
+    <![endif]-->
+    <style>
+        :root { color-scheme: light only; }
+        u + .body, #MessageViewBody, .body {
+            background-color: #f0efe8 !important;
+        }
+        @media only screen and (max-width: 600px) {
+            .email-container { width: 100% !important; }
+            .main-padding { padding: 28px 20px !important; }
+            .header-padding { padding: 32px 24px !important; }
+            .hero-title { font-size: 22px !important; }
+            .cta-btn { padding: 14px 28px !important; font-size: 15px !important; }
+        }
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+<body class="body" style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f0efe8;">
+
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f0efe8" style="background-color: #f0efe8; padding: 40px 20px;">
+    <tr>
+        <td align="center">
+
+            <table width="600" cellpadding="0" cellspacing="0" class="email-container" style="max-width: 600px; width: 100%; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.12);" bgcolor="#ffffff">
+
+                <!-- ── HEADER ── -->
+                <tr>
+                    <td class="header-padding" bgcolor="#1a1a2e" style="background-color: #1a1a2e; padding: 36px 40px 28px; text-align: center;">
+                        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_56/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
+                             alt="Focus AI" width="auto" height="56"
+                             style="height: 56px; width: auto; display: block; margin: 0 auto 20px;">
+                        <p style="margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a78bfa;">מתנה ממנו לך</p>
+                        <h1 class="hero-title" style="margin: 0 0 10px; font-size: 26px; font-weight: 700; color: #ffffff; line-height: 1.3; direction: rtl;">
+                            50 סקילים לClaude Code שלך
+                        </h1>
+                        <p style="margin: 0; font-size: 15px; color: #c4b5fd; line-height: 1.6; direction: rtl;">
+                            כלים מקצועיים שהופכים את Claude Code ל-Senior Developer אישי
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- ── PURPLE STATUS BAR ── -->
+                <tr>
+                    <td bgcolor="#7c3aed" style="background-color: #7c3aed; padding: 11px 20px; text-align: center;">
+                        <p style="margin: 0; color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;">
+                            ✅ &nbsp;הקובץ מוכן להורדה — 50 סקילים, 8 קטגוריות
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- ── BODY ── -->
+                <tr>
+                    <td class="main-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding: 36px 40px; direction: rtl;">
+
+                        <!-- Greeting -->
+                        <p style="font-size: 16px; color: #1a1a2e; line-height: 1.7; margin: 0 0 14px; text-align: right;">
+                            היי <strong>{{ $('Webhook1').item.json.body.firstName }}</strong> 👋
+                        </p>
+                        <p style="font-size: 15px; color: #3f3f46; line-height: 1.8; margin: 0 0 28px; text-align: right;">
+                            הנה 50 הסקילים שביקשת — מוכנים להתקנה ב-60 שניות. בחבילה: code review, security audit, debugging, testing, git workflow, ארכיטקטורה ועוד.
+                        </p>
+
+                        <!-- Download card -->
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f3ff; border-radius: 12px; border: 2px solid #7c3aed; margin: 0 0 24px;" bgcolor="#f5f3ff">
+                            <tr>
+                                <td style="padding: 28px; text-align: center; background-color: #f5f3ff;" bgcolor="#f5f3ff">
+                                    <p style="margin: 0 0 4px; font-size: 32px; line-height: 1;">📦</p>
+                                    <p style="margin: 10px 0 4px; font-size: 18px; font-weight: 700; color: #1a1a2e; direction: rtl;">חבילת הסקילים המקצועיים</p>
+                                    <p style="margin: 0 0 20px; font-size: 13px; color: #6b7280; direction: rtl;">
+                                        50 סקילים · 8 קטגוריות · סקריפט התקנה אוטומטי
+                                    </p>
+                                    <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip"
+                                       class="cta-btn"
+                                       style="display: inline-block; background-color: #7c3aed; color: #ffffff; text-decoration: none; padding: 15px 36px; border-radius: 8px; font-size: 16px; font-weight: 700; letter-spacing: 0.3px;">
+                                        ⬇ &nbsp;הורד את הסקילים (ZIP)
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Guide link -->
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafaf9; border-radius: 10px; border: 1px solid #e5e7eb; margin: 0 0 28px;" bgcolor="#fafaf9">
+                            <tr>
+                                <td style="padding: 20px 24px; direction: rtl; background-color: #fafaf9;" bgcolor="#fafaf9">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="vertical-align: middle; width: 40px; text-align: center;">
+                                                <span style="font-size: 24px;">📖</span>
+                                            </td>
+                                            <td style="padding-right: 14px; vertical-align: middle; direction: rtl; text-align: right;">
+                                                <p style="margin: 0 0 3px; font-size: 14px; font-weight: 700; color: #1a1a2e;">מדריך התחלה מהירה</p>
+                                                <p style="margin: 0 0 8px; font-size: 13px; color: #6b7280; line-height: 1.6;">התקנה צעד אחר צעד, כל הסקילים עם הסבר, קיצורי מקלדת ועצות מהשטח</p>
+                                                <a href="https://focusai.co.il/claude-code-guide/"
+                                                   style="font-size: 13px; font-weight: 700; color: #7c3aed; text-decoration: none;">
+                                                    קרא את המדריך ←
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Install steps summary -->
+                        <p style="margin: 0 0 12px; font-size: 13px; font-weight: 700; color: #6b7280; letter-spacing: 1px; text-align: right; direction: rtl;">
+                            התקנה מהירה:
+                        </p>
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a2e; border-radius: 8px; margin: 0 0 32px;" bgcolor="#1a1a2e">
+                            <tr>
+                                <td style="padding: 18px 20px; background-color: #1a1a2e; font-family: 'Courier New', Courier, monospace;" bgcolor="#1a1a2e">
+                                    <p style="margin: 0 0 6px; font-size: 13px; color: #9ca3af;">מק/לינוקס:</p>
+                                    <p style="margin: 0 0 14px; font-size: 14px; color: #a78bfa; font-weight: 600;">bash install.sh</p>
+                                    <p style="margin: 0 0 6px; font-size: 13px; color: #9ca3af;">ווינדוס (PowerShell):</p>
+                                    <p style="margin: 0; font-size: 14px; color: #a78bfa; font-weight: 600;">.\install.ps1</p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Divider -->
+                        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 0 0 28px;">
+                            <tr><td style="border-top: 1px solid #e5e7eb;"></td></tr>
+                        </table>
+
+                        <!-- Bot-Camp section -->
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb; border-radius: 12px; border: 1px solid #fbbf24; margin: 0 0 20px;" bgcolor="#fffbeb">
+                            <tr>
+                                <td style="padding: 24px 28px; background-color: #fffbeb; direction: rtl;" bgcolor="#fffbeb">
+                                    <p style="margin: 0 0 4px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #d97706;">הכשרה מקצועית</p>
+                                    <p style="margin: 0 0 8px; font-size: 17px; font-weight: 700; color: #1a1a2e; line-height: 1.4; direction: rtl;">
+                                        Bot-Camp — הכשרת AI Developer המקיפה בישראל
+                                    </p>
+                                    <p style="margin: 0 0 16px; font-size: 14px; color: #4b5563; line-height: 1.7; direction: rtl; text-align: right;">
+                                        מ-Prompt Engineering ועד בניית סוכני AI ואוטומציות מלאות. הכשרה של 10 שבועות עם מנחים מהשטח, גיבוי אקדמי וליווי עד לתוצאה.
+                                    </p>
+                                    <a href="https://focusai.co.il/academy"
+                                       style="display: inline-block; background-color: #d97706; color: #ffffff; text-decoration: none; padding: 12px 26px; border-radius: 7px; font-size: 14px; font-weight: 700;">
+                                        למידע על Bot-Camp ←
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- WhatsApp community section -->
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f0fdf4; border-radius: 12px; border: 1px solid #22c55e; margin: 0 0 28px;" bgcolor="#f0fdf4">
+                            <tr>
+                                <td style="padding: 24px 28px; background-color: #f0fdf4; direction: rtl; text-align: center;" bgcolor="#f0fdf4">
+                                    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_96/v1771842480/focusai/icons/focusai/icons/whatsapp-green.png"
+                                         alt="WhatsApp" width="44" height="44"
+                                         style="width: 44px; height: 44px; display: block; margin: 0 auto 10px;" border="0">
+                                    <p style="margin: 0 0 4px; font-size: 17px; font-weight: 700; color: #1a1a2e; direction: rtl;">קהילת ה-AI של Focus AI</p>
+                                    <p style="margin: 0 0 18px; font-size: 14px; color: #4b5563; line-height: 1.6; direction: rtl;">
+                                        כלים חדשים, טיפים שבועיים וקהילה של אנשים שבונים עם AI — בוואצאפ
+                                    </p>
+                                    <a href="https://did.li/Focus-community"
+                                       style="display: inline-block; background-color: #22c55e; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 7px; font-size: 14px; font-weight: 700;">
+                                        הצטרפות לקהילה בחינם
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- To the site -->
+                        <p style="margin: 0; font-size: 14px; color: #6b7280; line-height: 1.7; text-align: center; direction: rtl;">
+                            רוצה לדעת עוד על Focus AI?
+                            <a href="https://focusai.co.il" style="color: #7c3aed; font-weight: 600; text-decoration: none;">בקר באתר שלנו ←</a>
+                        </p>
+
+                    </td>
+                </tr>
+
+                <!-- ── FOOTER ── -->
+                <tr>
+                    <td bgcolor="#f5f5f7" style="background-color: #f5f5f7; padding: 24px 40px; text-align: center; border-top: 1px solid #e5e7eb;" align="center">
+                        <p style="margin: 0 0 8px; font-size: 12px; color: #9ca3af; direction: rtl;">
+                            Focus AI · AI transformation for teams &amp; individuals
+                        </p>
+                        <p style="margin: 0; font-size: 12px; color: #9ca3af; direction: rtl;">
+                            <a href="https://focusai.co.il/unsubscribe-any/" style="color: #9ca3af; text-decoration: underline;">הסרה מרשימת הדיוור</a>
+                            &nbsp;·&nbsp;
+                            <a href="https://focusai.co.il" style="color: #9ca3af; text-decoration: none;">focusai.co.il</a>
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
