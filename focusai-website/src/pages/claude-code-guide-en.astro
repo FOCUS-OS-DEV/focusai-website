@@ -12,7 +12,7 @@ import Analytics from '../components/Analytics.astro';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Claude Code Getting Started Guide | Focus AI</title>
-  <meta name="description" content="Complete beginner's guide to Claude Code — from installation to your first AI-assisted project with 50 professional skills.">
+  <meta name="description" content="Complete beginner's guide to Claude Code: from installation to your first AI-assisted project with 50 professional skills.">
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,6 +83,21 @@ import Analytics from '../components/Analytics.astro';
       color: var(--muted);
       max-width: 540px;
       margin: 0 auto;
+    }
+
+    /* ── Blinking cursor ── */
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 0.82em;
+      background: currentColor;
+      vertical-align: text-bottom;
+      border-radius: 1px;
+      animation: cursor-blink 1.1s step-end infinite;
+    }
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .guide-body {
@@ -275,7 +290,7 @@ import Analytics from '../components/Analytics.astro';
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
     <p class="hero-label">Getting Started Guide</p>
-    <h1>Claude Code — Zero to First Project</h1>
+    <h1>Claude Code<br>Zero to First Project<span class="cursor" aria-hidden="true"></span></h1>
     <p class="hero-sub">Installation, setup, and 50 professional skills ready to use. A complete guide for beginners.</p>
   </div>
 
@@ -295,7 +310,7 @@ import Analytics from '../components/Analytics.astro';
       <div style="font-size: 40px; line-height: 1; flex-shrink: 0;">🎁</div>
       <div style="flex: 1; min-width: 240px;">
         <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px;">Free Gift from Focus AI</p>
-        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 Professional Claude Code Skills — Free</p>
+        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 Professional Claude Code Skills, Free</p>
         <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">A ready-to-install bundle with 50 professional skills: code review, security audit, debugging, testing, git workflow and more. Installed in one command.</p>
       </div>
       <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip"
@@ -336,7 +351,7 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>What Is Claude Code?</h2>
-        <p>Claude Code is Anthropic's official CLI — an AI assistant that lives inside your terminal. Unlike ChatGPT or Claude.ai in the browser, Claude Code can <strong>read your files, write code, run commands, and edit your project</strong> — all from a conversation.</p>
+        <p>Claude Code is Anthropic's official CLI, an AI assistant that lives inside your terminal. Unlike ChatGPT or Claude.ai in the browser, Claude Code can <strong>read your files, write code, run commands, and edit your project</strong>. All from a conversation.</p>
         <p>It's the closest thing to having a senior developer sitting next to you.</p>
 
         <h2>Prerequisites</h2>
@@ -350,7 +365,7 @@ import Analytics from '../components/Analytics.astro';
         </table>
         <p>Check if Node.js is installed:</p>
         <div class="code-block"><code>node --version</code></div>
-        <p>If you see <span class="ic">v18.x.x</span> or higher — you're set. If not, download from <a href="https://nodejs.org" target="_blank">nodejs.org</a> (LTS version).</p>
+        <p>If you see <span class="ic">v18.x.x</span> or higher, you're set. If not, download from <a href="https://nodejs.org" target="_blank">nodejs.org</a> (LTS version).</p>
 
         <h2><span class="step-num">1</span> Get Your Anthropic API Key</h2>
         <ol>
@@ -358,11 +373,11 @@ import Analytics from '../components/Analytics.astro';
           <li>Sign up or log in</li>
           <li>Click <strong>"Get API Keys"</strong> in the left sidebar</li>
           <li>Click <strong>"Create Key"</strong> → name it anything (e.g., "claude-code")</li>
-          <li><strong>Copy the key</strong> — it starts with <span class="ic">sk-ant-...</span></li>
-          <li>Save it somewhere safe — you won't be able to see it again</li>
+          <li><strong>Copy the key</strong> (starts with <span class="ic">sk-ant-...</span>)</li>
+          <li>Save it somewhere safe, you won't be able to see it again</li>
         </ol>
         <div class="note">
-          <strong>Billing note:</strong> Claude Code uses API credits. New accounts get free credits. After that, usage is pay-as-you-go — typically $2–10/month for regular developer use.
+          <strong>Billing note:</strong> Claude Code uses API credits. New accounts get free credits. After that, usage is pay-as-you-go, typically $2 to $10/month for regular developer use.
         </div>
 
         <h2><span class="step-num">2</span> Install Claude Code</h2>
@@ -427,7 +442,7 @@ cd my-first-project</code></div>
 
 &gt; /explain-code [paste the function you want explained]</code></div>
 
-        <h2>All 50 Skills — By Category</h2>
+        <h2>All 50 Skills, By Category</h2>
 
         <h3>Code Quality</h3>
         <div class="skill-table">
@@ -513,7 +528,7 @@ cd my-first-project</code></div>
 
         <h2>Tips</h2>
         <ul>
-          <li><strong>Be specific.</strong> "Fix the bug" has no context. "Fix the bug in <span class="ic">calculateTotal</span> — it returns NaN when the cart is empty" → Claude can help.</li>
+          <li><strong>Be specific.</strong> "Fix the bug" gives Claude nothing. "Fix the bug in <span class="ic">calculateTotal</span>, it returns NaN when the cart is empty." That, Claude can work with.</li>
           <li><strong>Give Claude context.</strong> Before a code review, describe what the code does. Before debugging, describe what you expected vs. what happened.</li>
           <li><strong>Use it for learning.</strong> Ask Claude to explain decisions: "Why did you use a closure here?" or "What's the trade-off between these two approaches?"</li>
           <li><strong>Chain skills.</strong> Write feature → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. Complete professional workflow.</li>
@@ -550,7 +565,7 @@ cd my-first-project</code></div>
         <!-- CTA -->
         <div class="cta-block">
           <h2>Want to Go Deeper with Claude Code?</h2>
-          <p>In Focus AI's full training program, you'll learn to build AI agents, automations, and work with Claude Code at production level — with personal mentorship from university instructors.</p>
+          <p>In Focus AI's full training program, you'll learn to build AI agents, automations, and work with Claude Code at production level, with personal mentorship from university instructors.</p>
           <a href="https://focusai.co.il/academy" class="btn-cta">View Full Claude Code Training</a>
           <p style="font-size:12px;color:#606070;margin-top:14px;">Bot-Camp | AI First | Personal Mentorship | Academic Backing</p>
         </div>
@@ -563,7 +578,7 @@ cd my-first-project</code></div>
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="40" style="display:block;margin:0 auto 12px;">
     <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">
-      All services, courses and more — <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
+      All services, courses and more: <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
     </p>
     <div class="footer-links">
       <a href="https://focusai.co.il">focusai.co.il</a>

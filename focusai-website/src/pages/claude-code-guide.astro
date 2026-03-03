@@ -12,7 +12,7 @@ import Analytics from '../components/Analytics.astro';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>מדריך Claude Code למתחילים | Focus AI</title>
-  <meta name="description" content="מדריך מלא לצעד ראשון עם Claude Code — מהתקנה עד הפרויקט הראשון עם 50 הסקילים.">
+  <meta name="description" content="מדריך מלא לצעד ראשון עם Claude Code: מהתקנה עד הפרויקט הראשון עם 50 הסקילים.">
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,6 +87,21 @@ import Analytics from '../components/Analytics.astro';
       color: var(--muted);
       max-width: 540px;
       margin: 0 auto;
+    }
+
+    /* ── Blinking cursor ── */
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 0.82em;
+      background: currentColor;
+      vertical-align: text-bottom;
+      border-radius: 1px;
+      animation: cursor-blink 1.1s step-end infinite;
+    }
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     /* ── Guide body ── */
@@ -313,7 +328,7 @@ import Analytics from '../components/Analytics.astro';
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
     <p class="hero-label">מדריך התחלה מהירה</p>
-    <h1>Claude Code — מאפס לפרויקט הראשון</h1>
+    <h1>Claude Code<br>מאפס לפרויקט הראשון<span class="cursor" aria-hidden="true"></span></h1>
     <p class="hero-sub">התקנה, הגדרה, ו-50 הסקילים שמוכנים לעבוד. מדריך מלא למתחילים.</p>
   </div>
 
@@ -333,7 +348,7 @@ import Analytics from '../components/Analytics.astro';
       <div style="font-size: 40px; line-height: 1; flex-shrink: 0;">🎁</div>
       <div style="flex: 1; min-width: 240px;">
         <p style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px;">מתנה מ-Focus AI</p>
-        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 הסקילים המקצועיים — בחינם</p>
+        <p style="font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.3;">50 סקילים מקצועיים, בחינם</p>
         <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">חבילה מוכנה עם 50 סקילים מקצועיים: code review, security audit, debugging, testing, git workflow ועוד. מותקנים בפקודה אחת.</p>
       </div>
       <a href="https://res.cloudinary.com/dfudxxzlj/raw/upload/focusai/downloads/claude-code-skills-bundle.zip"
@@ -375,7 +390,7 @@ import Analytics from '../components/Analytics.astro';
       <div class="doc-content">
 
         <h2>מה זה Claude Code?</h2>
-        <p>Claude Code הוא כלי ה-CLI הרשמי של חברת Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT או Claude.ai בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב קוד, להריץ פקודות ולערוך את הפרויקט שלך</strong> — הכל ישירות משיחה.</p>
+        <p>Claude Code הוא כלי ה-CLI הרשמי של חברת Anthropic, עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT או Claude.ai בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב קוד, להריץ פקודות ולערוך את הפרויקט שלך</strong>. הכל ישירות משיחה.</p>
         <p>זה הכי קרוב שיש לזה שיהיה לך מפתח בכיר יושב לצידך.</p>
 
         <h2>דרישות מקדימות</h2>
@@ -390,7 +405,7 @@ import Analytics from '../components/Analytics.astro';
         </table>
         <p>בדוק אם Node.js מותקן:</p>
         <div class="code-block"><code>node --version</code></div>
-        <p>אם רואה <span class="ic">v18.x.x</span> ומעלה — מעולה. אם לא, הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> (בחר גרסת LTS).</p>
+        <p>אם רואה <span class="ic">v18.x.x</span> ומעלה, מעולה. אם לא, הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> (בחר גרסת LTS).</p>
 
         <h2><span class="step-num">1</span> קבל מפתח API של Anthropic</h2>
         <ol>
@@ -398,11 +413,11 @@ import Analytics from '../components/Analytics.astro';
           <li>הירשם או התחבר</li>
           <li>לחץ על <strong>"Get API Keys"</strong> בסרגל השמאלי</li>
           <li>לחץ <strong>"Create Key"</strong> → תן לו שם כלשהו (למשל "claude-code")</li>
-          <li><strong>העתק את המפתח</strong> — הוא מתחיל ב-<span class="ic">sk-ant-...</span></li>
-          <li>שמור אותו במקום בטוח — לא תוכל לראות אותו שוב</li>
+          <li><strong>העתק את המפתח</strong> (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
+          <li>שמור אותו במקום בטוח, לא תוכל לראות אותו שוב</li>
         </ol>
         <div class="note">
-          <strong>הערה על חיוב:</strong> Claude Code משתמש בקרדיטים של API. חשבונות חדשים מקבלים קרדיטים חינם. אחר כך התמחור הוא לפי שימוש — בדרך כלל 8–30 ₪ לחודש לשימוש רגיל.
+          <strong>הערה על חיוב:</strong> Claude Code משתמש בקרדיטים של API. חשבונות חדשים מקבלים קרדיטים חינם. אחר כך התמחור הוא לפי שימוש, בדרך כלל 8 עד 30 ₪ לחודש לשימוש רגיל.
         </div>
 
         <h2><span class="step-num">2</span> התקן את Claude Code</h2>
@@ -469,7 +484,7 @@ cd my-first-project</code></div>
 
 &gt; /explain-code [הדבק את הפונקציה שרוצה להבין]</code></div>
 
-        <h2>50 הסקילים — לפי קטגוריה</h2>
+        <h2>50 הסקילים, לפי קטגוריה</h2>
 
         <h3>איכות קוד</h3>
         <div class="skill-table">
@@ -555,7 +570,7 @@ cd my-first-project</code></div>
 
         <h2>טיפים למקסם את Claude Code</h2>
         <ul>
-          <li><strong>היה ספציפי.</strong> "תקן את הבאג" נותן תוצאות גרועות. "תקן את הבאג בפונקציה <span class="ic">calculateTotal</span> — היא מחזירה NaN כשהעגלה ריקה" — Claude יכול לעזור.</li>
+          <li><strong>היה ספציפי.</strong> "תקן את הבאג" נותן תוצאות גרועות. "תקן את הבאג בפונקציה <span class="ic">calculateTotal</span>, היא מחזירה NaN כשהעגלה ריקה." Claude יכול לפתור.</li>
           <li><strong>תן ל-Claude הקשר.</strong> לפני קוד ריוויו, ספר מה הקוד אמור לעשות. לפני דיבאגינג, ספר מה ציפית לקבל לעומת מה שקיבלת.</li>
           <li><strong>השתמש בו ללמידה.</strong> בקש מ-Claude להסביר החלטות: "למה השתמשת בקלוז'ר כאן?" או "מה ה-tradeoff בגישה הזו?"</li>
           <li><strong>שרשר סקילים.</strong> כתוב פיצ'ר → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. זרימת עבודה מקצועית מלאה.</li>
@@ -592,7 +607,7 @@ cd my-first-project</code></div>
         <!-- CTA -->
         <div class="cta-block">
           <h2>רוצה להעמיק עם Claude Code?</h2>
-          <p>בהכשרה המלאה של Focus AI תלמד לבנות סוכני AI, אוטומציות, ולעבוד עם Claude Code ברמת פרודקשן — עם ליווי אישי של מרצים מהאוניברסיטה.</p>
+          <p>בהכשרה המלאה של Focus AI תלמד לבנות סוכני AI, אוטומציות, ולעבוד עם Claude Code ברמת פרודקשן. עם ליווי אישי של מרצים מהאוניברסיטה.</p>
           <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת Claude Code</a>
           <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי | אקדמיה</p>
         </div>
@@ -605,7 +620,7 @@ cd my-first-project</code></div>
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
          alt="Focus AI" height="40" style="display:block;margin:0 auto 12px;">
     <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">
-      לכל השירותים, הקורסים ועוד — <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
+      לכל השירותים, הקורסים ועוד: <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
     </p>
     <div class="footer-links">
       <a href="https://focusai.co.il">focusai.co.il</a>
