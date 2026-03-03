@@ -364,7 +364,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         50 סקילים לClaude Code.<br>
         <span class="orange">במתנה.</span>
       </h1>
-      <p>קוד ריוויו, אבטחה, טסטים, ארכיטקטורה, דיבאגינג — סקילים מקצועיים שמשנים את האופן שבו Claude Code עובד בפרויקט שלך. מוכנים להתקנה תוך 60 שניות.</p>
+      <p>כתבנו 50 סקילים שמכסים את כל מה שמפתח באמת צריך — קוד ריוויו, אבטחה, טסטים, ארכיטקטורה, דיבאגינג. מכניסים לתיקייה אחת, ומהיום Claude Code עובד אחרת. כ-60 שניות.</p>
 
       <!-- Main form -->
       <div class="form-wrap" id="form-area">
@@ -396,6 +396,34 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     </div>
   </section>
 
+  <!-- ─────────── WHAT ARE SKILLS ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@skills ~ % cat basics.md</span>
+        </div>
+        <div class="term-body">
+          <h2>רגע, מה זה בכלל סקיל?</h2>
+          <p>פרומפט הוא שאלה. סקיל הוא מסגרת עבודה שלמה. אתה כותב <code style="font-family:var(--mono);color:var(--orange);background:rgba(200,100,60,0.08);padding:1px 5px;border-radius:3px;font-size:13px">/שם-הסקיל</code> ו-Claude יודע בדיוק איך לגשת — אילו שאלות לשאול, אילו מסגרות להפעיל, ואיך לעצב את הפלט. לא AI גנרי. פלט שנראה כמו עבודה של מומחה.</p>
+
+          <div class="bq-list" style="margin-top:28px;">
+            <div class="bq-item">
+              <p><strong>&gt; לא פרומפטים.</strong> פרומפט הוא שאלה חד-פעמית. סקיל הוא מערכת שמנחה את Claude דרך תהליך שלם — שואלת את השאלות הנכונות, מיישמת מסגרות מוכחות, ומייצרת פלט מקצועי ומוכן לשימוש.</p>
+            </div>
+            <div class="bq-item">
+              <p><strong>&gt; פורמט רשמי של Anthropic.</strong> הסקילים עומדים בפורמט <span class="hl">SKILL.md</span> הרשמי. כל סקיל הוא תיקייה פשוטה — אין נעילת vendor, אין סביבה מיוחדת, עובד עם כל פרויקט.</p>
+            </div>
+            <div class="bq-item">
+              <p><strong>&gt; מותקן פעם אחת, עובד בכל מקום.</strong> שמור ב-<span class="hl">~/.claude/skills/</span> והסקילים זמינים בכל פרויקט שתפתח. הפעל עם <span class="hl">/שם-סקיל</span> — או שClaude יזהה בעצמו מתי הגיע הזמן.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─────────── INSTALL ─────────── -->
   <section>
     <div class="wrap">
@@ -406,7 +434,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         </div>
         <div class="term-body">
           <h2>מוכן תוך 60 שניות.</h2>
-          <p>50 סקילים מובנים שמטפלים בעבודה האמיתית של מפתחים — מערכות מובנות שמייצרות פלט מקצועי ומוכן לשימוש בכל פעם.</p>
+          <p>לא עוד "תמשיך" ו"תסביר לי שוב". כל סקיל מנחה את Claude דרך תהליך ברור — ויוצא עם פלט שאפשר להשתמש בו ישר.</p>
 
           <div class="steps-grid">
             <div class="step-card">
@@ -504,34 +532,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     </div>
   </section>
 
-  <!-- ─────────── WHAT ARE SKILLS ─────────── -->
-  <section>
-    <div class="wrap">
-      <div class="term">
-        <div class="term-bar">
-          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
-          <span class="term-cmd">claude@skills ~ % cat basics.md</span>
-        </div>
-        <div class="term-body">
-          <h2>מה זה בכלל סקיל ב-Claude Code?</h2>
-          <p>סקילים הם קבצי הוראות מובנים שמרחיבים את מה שClaude Code יכול לעשות. כל סקיל מכיל מסגרות ברמת מומחה, תהליכים שלב-אחר-שלב, ותבניות פלט — כדי שClaude יספק תוצאות מקצועיות במקום פלט AI גנרי.</p>
-
-          <div class="bq-list" style="margin-top:28px;">
-            <div class="bq-item">
-              <p><strong>&gt; לא פרומפטים.</strong> פרומפט הוא שאלה חד-פעמית. סקיל הוא מערכת מובנית שמנחה את Claude דרך תהליך רב-שלבי — שואלת את השאלות הנכונות, מיישמת מסגרות מוכחות, ומעצבת את הפלט בצורה מקצועית.</p>
-            </div>
-            <div class="bq-item">
-              <p><strong>&gt; מבוסס על הסטנדרט הרשמי.</strong> הסקילים עומדים בפורמט הרשמי <span class="hl">SKILL.md</span> של Anthropic. כל סקיל הוא תיקייה פשוטה עם קובץ SKILL.md — אין נעילת vendor, אין הגדרה מורכבת.</p>
-            </div>
-            <div class="bq-item">
-              <p><strong>&gt; עובד בכל פרויקט.</strong> שמור את תיקיית הסקילים ב-<span class="hl">~/.claude/skills/</span> והם זמינים בכל הפרויקטים שלך. הפעל עם <span class="hl">/שם-סקיל</span> או תן לClaude לזהות מתי להשתמש בהם אוטומטית.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ─────────── AI DEV CTA ─────────── -->
   <section>
     <div class="wrap">
@@ -544,7 +544,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
           <div class="aidev-card">
             <p class="aidev-label">המשך הדרך</p>
             <h2>רוצה ללמוד לבנות עם AI ברמה המקצועית?</h2>
-            <p>הסקילים הם ההתחלה. תכנית <strong>AI Dev</strong> של Focus AI מלמדת אותך לבנות כלים, סוכנים ואוטומציות AI מאפס — בליווי מתרגלים אמיתיים מהתעשייה.</p>
+            <p>הסקילים הם נקודת הפתיחה. אם אתה רוצה להבין איך AI באמת עובד מבפנים — לבנות כלים, לכתוב סוכנים, לנהל אוטומציות שחוסכות שעות בשבוע — תכנית <strong>AI Dev</strong> נבנתה בדיוק לשם כך.</p>
             <div class="aidev-features">
               <span class="aidev-feat">Claude Code ברמה מתקדמת</span>
               <span class="aidev-feat">בניית סוכני AI</span>
@@ -666,12 +666,16 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
   <footer>
     <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_36/v1765265415/2_fxdcio.png"
          alt="Focus AI" height="36" style="display:block;margin:0 auto 16px;opacity:0.5;">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">
+      לכל השירותים, הקורסים ועוד ← <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
+    </p>
     <div class="footer-links">
       <a href="https://focusai.co.il">focusai.co.il</a>
-      <a href="mailto:info@focusai.co.il">info@focusai.co.il</a>
+      <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
       <a href="/privacy-policy/">פרטיות</a>
     </div>
     <p class="footer-copy">© 2026 Focus AI</p>
+    <p style="font-size:11px;color:var(--faint);margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7;">הסקילים מסופקים כמות שהם (AS IS). השימוש בהם הוא על אחריות המשתמש בלבד — Focus AI אינה אחראית לתוצאות שימוש, ופלט ה-AI אינו תחליף לשיקול דעת מקצועי.</p>
   </footer>
 
   <script is:inline>
