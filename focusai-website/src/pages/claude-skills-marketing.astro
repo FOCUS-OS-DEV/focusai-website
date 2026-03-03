@@ -1,0 +1,945 @@
+---
+/**
+ * Claude Code Marketing Skills Bundle — Hebrew Landing Page
+ * Free lead magnet for marketers → funnel to AI Dev program
+ * Route: /claude-skills-marketing/
+ */
+import Analytics from '../components/Analytics.astro';
+import AnalyticsBody from '../components/AnalyticsBody.astro';
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 סקילים לשיווק ותוכן, במתנה | Focus AI</title>
+  <meta name="description" content="50 סקילים מקצועיים לClaude Code בחינם. פוסטים, קמפיינים, בריפים, מחקר, אסטרטגיה. מוכנים להתקנה תוך 60 שניות.">
+  <meta name="robots" content="noindex">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://focusai.co.il/claude-skills-marketing/">
+  <meta property="og:title" content="50 סקילים לשיווק ותוכן, במתנה מFocus AI">
+  <meta property="og:description" content="50 סקילים מקצועיים לClaude Code. פוסטים, קמפיינים, בריפים, מחקר שוק, אסטרטגיה. מוכנים תוך 60 שניות.">
+  <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1765302030/focusai-og-image.png">
+  <meta property="og:locale" content="he_IL">
+  <meta property="og:site_name" content="Focus AI">
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <meta name="theme-color" content="#e0dfd7">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <Analytics slot="head" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #e8e7de;
+      --win-bg:  #ffffff;
+      --win-bar: #d4d3cb;
+      --text:    #1a1a14;
+      --muted:   #55554e;
+      --faint:   #888880;
+      --orange:  #c8643c;
+      --orange-h:#b8542c;
+      --border:  #c8c7bf;
+      --card-bg: #f8f8f4;
+      --mono:    'JetBrains Mono', monospace;
+      --hebrew:  'Heebo', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--hebrew);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.012) 2px, rgba(0,0,0,0.012) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Terminal window ── */
+    .term {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+    .term-bar {
+      background: var(--win-bar);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      direction: ltr;
+    }
+    .dots { display: flex; gap: 7px; }
+    .dot { width: 13px; height: 13px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #ffbd2e; }
+    .dot.g { background: #28c840; }
+    .term-cmd { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .term-body { background: var(--win-bg); padding: 40px 48px 48px; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 24px; }
+
+    /* ── Typography ── */
+    h1 { font-size: clamp(34px, 5vw, 60px); font-weight: 900; line-height: 1.15; letter-spacing: -0.5px; }
+    h2 { font-size: clamp(24px, 3.5vw, 38px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+    h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    p  { font-size: 15px; color: var(--muted); line-height: 1.9; }
+    .orange { color: var(--orange); }
+    .mono { font-family: var(--mono); }
+    .small-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+
+    /* ── Button ── */
+    .btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--hebrew);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(200,100,60,0.3);
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn:hover { background: var(--orange-h); transform: translateY(-1px); }
+    .btn-wrap { text-align: center; margin-top: 40px; }
+    .btn-full { display: block; width: 100%; text-align: center; padding: 20px; }
+
+    /* ─────────── HERO ─────────── */
+    #hero { text-align: center; padding: 80px 24px; }
+    #hero h1 { margin-bottom: 20px; }
+    #hero p { max-width: 620px; margin: 0 auto 36px; font-size: 17px; }
+    .sub-note { font-size: 14px; color: var(--faint); margin-top: 14px; }
+
+    /* ── Form ── */
+    .form-wrap { max-width: 520px; margin: 0 auto; }
+    .form-names { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .form-field { margin-bottom: 10px; }
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--win-bg);
+      font-family: var(--hebrew);
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+      box-sizing: border-box;
+    }
+    .form-input:focus { border-color: var(--orange); }
+    .form-input::placeholder { color: var(--faint); }
+    .form-input.error { border-color: #c8643c; }
+    .form-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--hebrew);
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 4px;
+    }
+    .form-btn:hover { background: var(--orange-h); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .form-success .check { font-size: 32px; margin-bottom: 8px; }
+
+    /* ── Consultant checkbox ── */
+    .consult-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .consult-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      background: var(--win-bg);
+      cursor: pointer;
+      margin-top: 2px;
+      position: relative;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .consult-row input[type="checkbox"]:checked {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .consult-row input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5l3.5 3.5L11 1' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat;
+    }
+    .consult-label { font-size: 13px; color: var(--text); line-height: 1.5; }
+
+    /* ── Steps ── */
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 32px 24px; text-align: center; }
+    .step-num { font-family: var(--mono); font-size: 42px; font-weight: 800; color: var(--orange); line-height: 1; margin-bottom: 16px; }
+    .step-card h3 { font-size: 15px; }
+    .step-card p { font-size: 13px; }
+    .step-card code { font-family: var(--mono); color: var(--orange); background: rgba(200,100,60,0.08); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+
+    /* ── Target ── */
+    .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .target-card { background: var(--win-bg); border: 1px solid var(--border); border-right: 3px solid var(--orange); border-radius: 8px; padding: 24px 20px; }
+    .target-icon { font-size: 24px; margin-bottom: 12px; }
+    .target-card h3 { font-size: 14px; }
+    .target-card p { font-size: 13px; }
+
+    /* ── ls listing ── */
+    .ls-list { margin-top: 28px; direction: ltr; }
+    .ls-row { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; font-size: 14px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .ls-row:last-child { border-bottom: none; }
+    .ls-tree { color: var(--faint); flex-shrink: 0; font-family: var(--mono); }
+    .ls-folder { color: var(--orange); font-weight: 700; flex-shrink: 0; font-family: var(--mono); }
+    .ls-files { color: var(--muted); font-size: 13px; font-family: var(--mono); }
+    .ls-ellipsis { color: var(--faint); }
+
+    /* ── Blockquotes ── */
+    .bq-item { border-right: 3px solid var(--orange); border-left: none; padding: 20px 24px 20px 12px; background: var(--card-bg); margin-bottom: 16px; border-radius: 6px 0 0 6px; }
+    .bq-item p { font-size: 14px; line-height: 1.85; color: var(--muted); }
+    .bq-item p strong { color: var(--text); }
+    .bq-item .hl { color: var(--orange); font-family: var(--mono); font-size: 13px; }
+
+    /* ── AI Dev CTA ── */
+    .aidev-card {
+      background: var(--win-bg);
+      border: 2px solid var(--orange);
+      border-radius: 12px;
+      padding: 40px 48px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .aidev-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
+    .aidev-card h2 { font-size: clamp(22px, 3vw, 34px); margin-bottom: 16px; }
+    .aidev-card p { max-width: 520px; margin: 0 auto 32px; font-size: 15px; }
+    .aidev-features { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+    .aidev-feat { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .aidev-feat::before { content: '✓'; color: var(--orange); font-weight: 700; }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 28px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; display: flex; align-items: center; padding: 16px 0; background: none; border: none; cursor: pointer; font-family: var(--hebrew); font-size: 14px; gap: 12px; text-align: right; direction: rtl; }
+    .faq-arrow { color: var(--orange); flex-shrink: 0; font-weight: 700; font-family: var(--mono); }
+    .faq-text { color: var(--orange); flex: 1; text-align: center; }
+    .faq-toggle { color: var(--muted); flex-shrink: 0; font-size: 13px; font-family: var(--mono); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner { padding: 4px 0 20px; font-size: 14px; color: var(--muted); line-height: 1.85; }
+
+    /* ── Footer ── */
+    footer { padding: 40px 24px; text-align: center; border-top: 1px solid var(--border); }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    footer a:hover { color: var(--orange); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+
+    @media (max-width: 720px) {
+      section:not(#hero) { padding: 40px 12px; }
+      .wrap { padding: 0; }
+      .term-body { padding: 24px 18px 32px; }
+      .steps-grid, .target-grid { grid-template-columns: 1fr; }
+      .step-card { padding: 24px 18px; }
+      .aidev-card { padding: 24px 18px; }
+      .form-names { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cookie banner ── */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9998;
+      background: var(--win-bar);
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    #cookie-banner.visible { transform: translateY(0); }
+    .cookie-text { font-size: 13px; color: var(--muted); flex: 1; min-width: 200px; }
+    .cookie-text a { color: var(--orange); text-decoration: underline; }
+    .cookie-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .cookie-btn-accept {
+      padding: 8px 20px; background: var(--orange); color: #fff;
+      font-family: var(--hebrew); font-size: 13px; font-weight: 700;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    .cookie-btn-essential {
+      padding: 8px 16px; background: transparent; color: var(--muted);
+      font-family: var(--hebrew); font-size: 13px;
+      border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+    }
+
+    /* ── Hero terminal typewriter ── */
+    .hero-term {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 auto 26px;
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--muted);
+      direction: ltr;
+      max-width: min(96%, 640px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 580px) { .hero-term { font-size: 12px; } }
+    .hero-term-gt { color: var(--orange); font-weight: 800; flex-shrink: 0; }
+    .hero-tw-blink { color: var(--orange); animation: cursor-blink 1s step-end infinite; flex-shrink: 0; }
+
+    /* H1 typewriter cursor */
+    #h1-l2.done::after {
+      content: '_';
+      color: var(--orange);
+      animation: cursor-blink 1s step-end infinite;
+    }
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Chips */
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--win-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .hero-chip a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <AnalyticsBody />
+
+  <!-- ─────────── COOKIE BANNER ─────────── -->
+  <div id="cookie-banner" role="dialog" aria-label="הסכמה לעוגיות">
+    <p class="cookie-text">
+      האתר משתמש בעוגיות אנליטיקס ושיווק בהסכמתך בלבד, בהתאם לחוק הגנת הפרטיות (תיקון 13).
+      <a href="/privacy-policy/">מדיניות פרטיות</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">אישור הכל</button>
+      <button class="cookie-btn-essential" id="cookie-essential">הכרחיות בלבד</button>
+    </div>
+  </div>
+
+  <!-- ─────────── HERO ─────────── -->
+  <section id="hero">
+    <div style="max-width:720px;margin:0 auto;">
+      <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_90/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
+           alt="Focus AI" height="90" style="display:block;margin:0 auto 20px;">
+      <p class="small-label">בנוי למשווקים, יוצרי תוכן ומנהלי שיווק</p>
+
+      <!-- Terminal rotating typewriter -->
+      <div style="text-align:center;margin-bottom:0;">
+        <div class="hero-term">
+          <span class="hero-term-gt">&gt;</span>
+          <span id="hero-tw" style="flex:1;overflow:hidden;text-overflow:ellipsis;"></span>
+          <span class="hero-tw-blink">_</span>
+        </div>
+      </div>
+
+      <!-- H1 — types out once, cursor stays -->
+      <h1>
+        <span id="h1-l1"></span><span id="h1-br" style="display:none"><br></span><span class="orange" id="h1-l2" style="white-space:nowrap"></span>
+      </h1>
+
+      <p>50 סקילים שמכסים את כל מה שמשווק, יוצר תוכן ומנהל שיווק באמת צריך: פוסטים, קמפיינים, בריפים, מחקר שוק, אסטרטגיה. כותבים פקודה. Claude מספק פלט מוכן לשימוש.</p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:22px 0 28px;">
+        <span class="hero-chip">✅ 50 סקילים שיווקיים (ZIP)</span>
+        <span class="hero-chip">✅ סקריפט התקנה אוטומטי</span>
+        <span class="hero-chip">✅ מדריך התחלה מהירה (ללא ז'רגון)</span>
+      </div>
+
+      <!-- Main form -->
+      <div class="form-wrap" id="form-area">
+        <div class="form-names">
+          <input type="text" class="form-input" data-field="firstName" placeholder="שם פרטי" dir="rtl">
+          <input type="text" class="form-input" data-field="lastName" placeholder="שם משפחה" dir="rtl">
+        </div>
+        <div class="form-field">
+          <input type="tel" class="form-input" data-field="phone" placeholder="טלפון (05x-xxxxxxx)" dir="rtl">
+        </div>
+        <div class="form-field">
+          <input type="email" class="form-input" data-field="email" placeholder="אימייל" dir="rtl">
+        </div>
+        <label class="consult-row">
+          <input type="checkbox" data-field="consultant" checked>
+          <span class="consult-label">כן, אשמח שיועץ לימודים יצור איתי קשר ויספר לי על מסלול AI Dev — בניית סוכני AI, אוטומציות ופיפליינים שרצים לבד.</span>
+        </label>
+        <label class="consult-row" style="border-color: var(--orange);">
+          <input type="checkbox" data-field="privacy" required>
+          <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a> ולקבלת תוכן שיווקי מ-Focus AI. ניתן לבטל בכל עת.</span>
+        </label>
+        <button class="form-btn" id="form-submit">קבל את הסקילים →</button>
+        <p class="sub-note">תוך כמה שניות תקבל את הכל למייל!</p>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="check">✓</div>
+        <strong>נשלח!</strong> בדוק את האימייל שלך. הקישור להורדה בדרך.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── WHAT ARE SKILLS ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % cat what-is-skill.md</span>
+        </div>
+        <div class="term-body">
+          <h2>רגע, מה זה בכלל סקיל?</h2>
+          <p>פרומפט הוא שאלה. סקיל הוא מסגרת עבודה שלמה. אתה כותב <code style="font-family:var(--mono);color:var(--orange);background:rgba(200,100,60,0.08);padding:1px 5px;border-radius:3px;font-size:13px">/שם-הסקיל</code> וClaude יודע בדיוק מה לשאול, איך לעבוד, ואיך להגיש את הפלט — בפורמט מקצועי ומוכן לשימוש.</p>
+
+          <div class="bq-list" style="margin-top:28px;">
+            <div class="bq-item">
+              <p><strong>&gt; לא עוד פרומפטים מאולתרים.</strong> כל סקיל שואל אותך את השאלות הנכונות — מה המוצר, מה הטון, מה המטרה — ואז מייצר תוצרים שלמים: פוסטים, בריפים, קמפיינים. לא עוד "תנסח לי..." שמקבל משהו גנרי.</p>
+            </div>
+            <div class="bq-item">
+              <p><strong>&gt; פורמט רשמי של Anthropic.</strong> הסקילים עומדים בפורמט <span class="hl">SKILL.md</span> הרשמי. כל סקיל מנחה את Claude דרך תהליך מקצועי — כמו שעובד מקצועי מנוסה היה עושה את זה.</p>
+            </div>
+            <div class="bq-item">
+              <p><strong>&gt; מותקן פעם אחת, עובד בכל מקום.</strong> שמור ב-<span class="hl">~/.claude/skills/</span> והסקילים זמינים בכל שיחה. כתוב <span class="hl">/social-post</span> — וקבל 5 פוסטים מותאמים לכל פלטפורמה.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── INSTALL ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % ./install.sh</span>
+        </div>
+        <div class="term-body">
+          <h2>מוכן תוך 60 שניות. ממש.</h2>
+          <p>לא צריך להיות מפתח. לא צריך לדעת לתכנת. פקודה אחת — והכל מוכן.</p>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <h3>הורד והתקן</h3>
+              <p>הורד את ה-ZIP. הרץ <code>bash install.sh</code> (מק/לינוקס) או <code>install.ps1</code> (ווינדוס). הסקריפט שם הכל במקום הנכון.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <h3>פתח Claude Code</h3>
+              <p>הרץ <code>claude</code> בכל תיקייה. בלי קוד, בלי פרויקט ספציפי. הסקילים מוכנים מיד.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <h3>הפעל</h3>
+              <p>כתוב <code>/social-post</code> או <code>/campaign-brief</code>. Claude ישאל, אתה תענה — הפלט יצא מוכן.</p>
+            </div>
+          </div>
+
+          <div class="btn-wrap">
+            <a href="#form-area" class="btn">קבל את הסקילים בחינם</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── TARGET ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % cat target-users.md</span>
+        </div>
+        <div class="term-body">
+          <h2>בנוי לאנשי שיווק שמייצרים תוצאות.</h2>
+          <p>אם אתה כותב תוכן, מנהל קמפיינים, בונה אסטרטגיה — ורוצה AI שבאמת עובד בשבילך, הבאנדל הזה נבנה בשבילך.</p>
+
+          <div class="target-grid">
+            <div class="target-card">
+              <div class="target-icon">✍️</div>
+              <h3>יוצרי תוכן</h3>
+              <p>אתה כותב ומייצר כל יום. הסקילים מכסים כל פורמט — פוסטים, בלוג, ווידאו, ניוזלטר — ומייצרים גרסאות שלמות מבריף אחד קצר.</p>
+            </div>
+            <div class="target-card">
+              <div class="target-icon">📣</div>
+              <h3>משווקים דיגיטליים</h3>
+              <p>קמפיינים, פרסום, אנליטיקס. סקילים לבריפים, לניתוח מתחרים, לאופטימיזציית CTA ולדוחות ביצועים שאפשר לשלוח לקליינט ישירות.</p>
+            </div>
+            <div class="target-card">
+              <div class="target-icon">🎯</div>
+              <h3>מנהלי שיווק</h3>
+              <p>אסטרטגיה, בריפים לצוות, פרסונות, מסגרת מסרים. Claude מייצר מסמכים שמיישרים את כל הצוות — בשניות במקום שעות.</p>
+            </div>
+            <div class="target-card">
+              <div class="target-icon">🚀</div>
+              <h3>בעלי עסקים ויזמים</h3>
+              <p>שיווק עצמאי, בלי תקציב לצוות. הסקילים מחליפים שעות של עבודה — מקופי לאתר ועד אסטרטגיית תוכן לרבעון.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── SKILLS LISTING ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % ls -la skills/</span>
+        </div>
+        <div class="term-body">
+          <h2>50 סקילים. כל מה שצריך בשיווק.</h2>
+          <p>כל סקיל שואל את השאלות הנכונות ומספק פלט מוכן לשימוש. הנה טעימה.</p>
+
+          <div class="ls-list">
+            <div class="ls-row"><span class="ls-tree">├──</span><span>📁</span><span class="ls-folder">copy-creation/</span><span class="ls-files">social-post, email-campaign, landing-copy, ad-variants, blog-post, newsletter, video-script, repurpose <span class="ls-ellipsis">…</span></span></div>
+            <div class="ls-row"><span class="ls-tree">├──</span><span>📁</span><span class="ls-folder">strategy-planning/</span><span class="ls-files">content-calendar, campaign-brief, persona-build, seo-brief, messaging-framework, product-launch <span class="ls-ellipsis">…</span></span></div>
+            <div class="ls-row"><span class="ls-tree">├──</span><span>📁</span><span class="ls-folder">brand-voice/</span><span class="ls-files">brand-voice, tagline-generate, brand-story, value-proposition, tone-shift, headline-test <span class="ls-ellipsis">…</span></span></div>
+            <div class="ls-row"><span class="ls-tree">├──</span><span>📁</span><span class="ls-folder">research-analytics/</span><span class="ls-files">competitor-scan, market-research, performance-report, audience-insights, keyword-research <span class="ls-ellipsis">…</span></span></div>
+            <div class="ls-row"><span class="ls-tree">├──</span><span>📁</span><span class="ls-folder">growth-cro/</span><span class="ls-files">cta-optimize, ab-test-design, retention-email, referral-copy</span></div>
+            <div class="ls-row"><span class="ls-tree">└──</span><span>📁</span><span class="ls-folder">productivity/</span><span class="ls-files">task-breakdown, sprint-plan, explain-anything, refactor-copy, generate-brief, write-wiki <span class="ls-ellipsis">…</span></span></div>
+          </div>
+
+          <div class="btn-wrap">
+            <a href="#form-area" class="btn">קבל את כל 50 הסקילים בחינם</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── AI DEV CTA ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % cat next-level.md</span>
+        </div>
+        <div class="term-body">
+          <div class="aidev-card">
+            <p class="aidev-label">המשך הדרך</p>
+            <h2>סקילים חוסכים 5 שעות בשבוע. אוטומציה חוסכת את כולן.</h2>
+            <p>מי שרוצה לא רק להשתמש ב-AI אלא <strong>לבנות</strong> איתו — pipeline שמחקר, כותב ומפרסם לבד, סוכן שמנתח ביצועים ומציע שיפורים, אוטומציה שמייצרת תוכן מרשימת נושאים — תכנית <strong>AI Dev</strong> נבנתה בדיוק לשם כך.</p>
+            <div class="aidev-features">
+              <span class="aidev-feat">בניית סוכני AI</span>
+              <span class="aidev-feat">אוטומציות תוכן עם n8n</span>
+              <span class="aidev-feat">פייפליינים שרצים לבד</span>
+              <span class="aidev-feat">ליווי של מתרגלים מהתעשייה</span>
+            </div>
+            <a href="/ai-dev-syllabus/" class="btn">לסילבוס תכנית AI Dev ←</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FAQ ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % man claude-skills</span>
+        </div>
+        <div class="term-body">
+          <h2>שאלות?</h2>
+
+          <div class="faq-list">
+            <div class="faq-item open">
+              <button class="faq-q">
+                <span class="faq-toggle">[-]</span>
+                <span class="faq-text">מה זה Claude Code ואיך זה שונה מClaude הרגיל?</span>
+                <span class="faq-arrow">&gt;</span>
+              </button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Claude.ai (בדפדפן) הוא שיחה. Claude Code הוא כלי AI מתקדם שרץ אצלך על המחשב ויכול לעבוד עם קבצים, לשמור תוצרים, ולעבוד בסביבה שלך. הסקילים מוסיפים לו "מוח מקצועי" שיודע בדיוק איך לגשת לכל משימה שיווקית — לשאול את השאלות הנכונות, לעבוד בסדר הנכון, ולהגיש תוצרים מוכנים.</div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q">
+                <span class="faq-toggle">[+]</span>
+                <span class="faq-text">צריך ניסיון בתכנות?</span>
+                <span class="faq-arrow">&gt;</span>
+              </button>
+              <div class="faq-a">
+                <div class="faq-a-inner">בכלל לא. להתקנה צריך רק לפתוח טרמינל (Terminal במק, PowerShell בווינדוס) ולהדביק פקודה אחת. הסקריפט עושה הכל. משם? כותבים /social-post ועונים על שאלות פשוטות. אין קוד, אין JSON, אין הגדרות.</div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q">
+                <span class="faq-toggle">[+]</span>
+                <span class="faq-text">איך זה עובד בפועל? תן דוגמה.</span>
+                <span class="faq-arrow">&gt;</span>
+              </button>
+              <div class="faq-a">
+                <div class="faq-a-inner">כותב <code style="font-family:monospace;color:var(--orange)">/social-post</code>. Claude שואל: "מה המוצר? מה המטרה? מה הטון?" אתה עונה בשתי שורות. הוא מייצר 5 פוסטים — LinkedIn מקצועי, Instagram עם אמוג'י, Twitter קצר, Facebook חם, TikTok עם הוק. כל אחד מותאם לפלטפורמה. מוכן לפרסם.</div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q">
+                <span class="faq-toggle">[+]</span>
+                <span class="faq-text">זה לא פשוט פרומפטים שמורים?</span>
+                <span class="faq-arrow">&gt;</span>
+              </button>
+              <div class="faq-a">
+                <div class="faq-a-inner">ממש לא. כל סקיל הוא מסגרת עבודה מובנית — שיטה שלמה, לא פרומפט. /campaign-brief, לדוגמה, מנחה את Claude לשאול על מטרות, קהל, תקציב, ציר זמן ואילוצים — ואז מייצר בריף קריאייטיב מלא ומפורמט שאפשר לשלוח ישירות לצוות הפקה.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FINAL CTA ─────────── -->
+  <section>
+    <div class="wrap">
+      <div class="term">
+        <div class="term-bar">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="term-cmd">claude@marketing ~ % sudo install -now</span>
+        </div>
+        <div class="term-body" style="text-align:center;">
+          <h2>תתחיל לשווק <span class="orange">ברמה אחרת.</span></h2>
+          <p style="max-width:480px;margin:16px auto 36px;">50 סקילים. כל שלב בעבודת השיווק. פקודה אחת להתקנה. בחינם לגמרי.</p>
+
+          <div class="form-wrap" id="form-area-2" style="text-align:right;">
+            <div class="form-names">
+              <input type="text" class="form-input" data-field="firstName" placeholder="שם פרטי" dir="rtl">
+              <input type="text" class="form-input" data-field="lastName" placeholder="שם משפחה" dir="rtl">
+            </div>
+            <div class="form-field">
+              <input type="tel" class="form-input" data-field="phone" placeholder="טלפון (05x-xxxxxxx)" dir="rtl">
+            </div>
+            <div class="form-field">
+              <input type="email" class="form-input" data-field="email" placeholder="אימייל" dir="rtl">
+            </div>
+            <label class="consult-row">
+              <input type="checkbox" data-field="consultant" checked>
+              <span class="consult-label">כן, אשמח שיועץ לימודים יצור איתי קשר ויספר לי על מסלול AI Dev — בניית סוכני AI, אוטומציות ופייפליינים שרצים לבד.</span>
+            </label>
+            <label class="consult-row" style="border-color: var(--orange);">
+              <input type="checkbox" data-field="privacy" required>
+              <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a> ולקבלת תוכן שיווקי מ-Focus AI. ניתן לבטל בכל עת.</span>
+            </label>
+            <button class="form-btn" id="form-submit-2">שלח לי →</button>
+            <p class="sub-note">תוך כמה שניות תקבל את הכל למייל!</p>
+          </div>
+          <div class="form-success" id="form-success-2">
+            <div class="check">✓</div>
+            <strong>נשלח!</strong> בדוק את האימייל שלך. הקישור להורדה בדרך.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FOOTER ─────────── -->
+  <footer>
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_48/v1772353512/FOCUS_LOGO-02_hc0h1a.png"
+         alt="Focus AI" height="48" style="display:block;margin:0 auto 16px;">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">
+      לכל השירותים, הקורסים ועוד ← <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
+    </p>
+    <div class="footer-links">
+      <a href="https://focusai.co.il">focusai.co.il</a>
+      <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
+      <a href="/privacy-policy/">פרטיות</a>
+    </div>
+    <p class="footer-copy">© 2026 Focus AI</p>
+    <p style="font-size:11px;color:var(--faint);margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7;">הסקילים מסופקים כמות שהם (AS IS). השימוש בהם על אחריות המשתמש בלבד. Focus AI אינה אחראית לתוצאות שימוש, ופלט ה-AI אינו תחליף לשיקול דעת מקצועי.</p>
+  </footer>
+
+  <script is:inline>
+    const WEBHOOK_URL = 'https://focus2025.app.n8n.cloud/webhook/skills-marketing';
+
+    // ── Cookie consent ──
+    const COOKIE_KEY = 'focusai_cookie_consent_skills_mkt';
+    function hideCookieBanner() {
+      const b = document.getElementById('cookie-banner');
+      if (b) b.classList.remove('visible');
+    }
+    function saveConsent(type) {
+      try { localStorage.setItem(COOKIE_KEY, JSON.stringify({ type, ts: Date.now() })); } catch(e) {}
+      hideCookieBanner();
+    }
+    if (!localStorage.getItem(COOKIE_KEY)) {
+      document.getElementById('cookie-banner')?.classList.add('visible');
+    }
+    document.getElementById('cookie-accept')?.addEventListener('click', () => saveConsent('all'));
+    document.getElementById('cookie-essential')?.addEventListener('click', () => saveConsent('essential'));
+
+    // ── Form helpers ──
+    function field(wrap, name) { return wrap.querySelector(`[data-field="${name}"]`); }
+
+    async function submitForm(wrap) {
+      const firstNameEl = field(wrap, 'firstName');
+      const lastNameEl  = field(wrap, 'lastName');
+      const phoneEl     = field(wrap, 'phone');
+      const emailEl     = field(wrap, 'email');
+      const consultEl   = field(wrap, 'consultant');
+      const privacyEl   = field(wrap, 'privacy');
+
+      [firstNameEl, phoneEl, emailEl].forEach(el => el && el.classList.remove('error'));
+      if (privacyEl) privacyEl.closest('.consult-row').style.borderColor = '';
+
+      let valid = true;
+      if (!firstNameEl.value.trim()) { firstNameEl.classList.add('error'); firstNameEl.focus(); valid = false; }
+
+      const phoneClean = (phoneEl.value || '').replace(/[-\s]/g, '');
+      if (!/^0[5-9]\d{7,8}$/.test(phoneClean)) {
+        phoneEl.classList.add('error');
+        if (valid) phoneEl.focus();
+        valid = false;
+      }
+
+      if (!emailEl.value.trim() || !emailEl.value.includes('@')) { emailEl.classList.add('error'); if (valid) emailEl.focus(); valid = false; }
+
+      if (privacyEl && !privacyEl.checked) {
+        privacyEl.closest('.consult-row').style.borderColor = '#c8643c';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      const btn = wrap.querySelector('.form-btn');
+      btn.textContent = 'שולח...';
+      btn.disabled = true;
+
+      const payload = {
+        firstName:  firstNameEl.value.trim(),
+        lastName:   lastNameEl ? lastNameEl.value.trim() : '',
+        phone:      phoneClean,
+        email:      emailEl.value.trim(),
+        consultant: String(consultEl ? consultEl.checked : false),
+        source:     'claude-skills-marketing',
+        timestamp:  new Date().toISOString()
+      };
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) { /* silent fail */ }
+
+      window.location.href = '/academy/thank-you/';
+    }
+
+    document.getElementById('form-submit').addEventListener('click', () => {
+      submitForm(document.getElementById('form-area'));
+    });
+    document.getElementById('form-submit-2').addEventListener('click', () => {
+      submitForm(document.getElementById('form-area-2'));
+    });
+
+    // FAQ
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-toggle').textContent = '[+]';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.querySelector('.faq-toggle').textContent = '[-]';
+        }
+      });
+    });
+  </script>
+
+  <!-- ── Background Music ── -->
+  <audio id="bgMusic" src="https://res.cloudinary.com/dfudxxzlj/video/upload/v1772506492/audio/move-your-vibe-bg.mp3" loop preload="auto"></audio>
+  <button id="audioToggle" aria-label="השתק/הפעל מוזיקת רקע" style="
+    position:fixed;bottom:90px;left:20px;z-index:9998;width:44px;height:44px;border-radius:50%;
+    border:1px solid rgba(200,100,60,.3);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.12);transition:all .3s ease;
+  ">
+    <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8643c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path id="audioWave1" d="M15.54 8.46a5 5 0 010 7.07"/>
+      <path id="audioWave2" d="M19.07 4.93a10 10 0 010 14.14"/>
+    </svg>
+  </button>
+  <script>
+  (function(){
+    var audio=document.getElementById('bgMusic');
+    var btn=document.getElementById('audioToggle');
+    var wave1=document.getElementById('audioWave1');
+    var wave2=document.getElementById('audioWave2');
+    var playing=false;
+    function fadeIn(){
+      audio.volume=0;
+      audio.play().then(function(){
+        playing=true;updateIcon();
+        var vol=0;
+        var fade=setInterval(function(){
+          vol=Math.min(vol+0.02,0.35);
+          audio.volume=vol;
+          if(vol>=0.35) clearInterval(fade);
+        },50);
+      }).catch(function(){});
+    }
+    function fadeOut(){
+      playing=false;updateIcon();
+      var vol=audio.volume;
+      var fade=setInterval(function(){
+        vol=Math.max(vol-0.03,0);
+        audio.volume=vol;
+        if(vol<=0){clearInterval(fade);audio.pause();}
+      },50);
+    }
+    function updateIcon(){
+      wave1.style.opacity=playing?'1':'0.2';
+      wave2.style.opacity=playing?'1':'0.2';
+      btn.style.borderColor=playing?'rgba(200,100,60,.5)':'rgba(200,100,60,.25)';
+    }
+    fadeIn();
+    document.addEventListener('click',function(e){
+      if(e.target.closest('#audioToggle')) return;
+      if(!playing) fadeIn();
+    },{once:true});
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      if(playing) fadeOut(); else fadeIn();
+    });
+    updateIcon();
+  })();
+  </script>
+
+  <!-- ── Typewriter scripts ── -->
+  <script>
+    // ── Rotating terminal jokes — marketing flavor ──
+    const jokes = [
+      "/social-post → 5 פוסטים לכל פלטפורמה. לא, הלינקדאין זה לא אינסטגרם.",
+      "/campaign-brief → ממשפט אחד יצא בריף מלא. הצוות הבין. ראשון.",
+      "/competitor-scan → הם כותבים על היתרונות. מצאתי מה הם מפחדים להגיד.",
+      "/headline-test → 15 כותרות. בחרתי 3. עם הסיבות.",
+      "/repurpose → כתבה אחת → 10 פורמטים. בלי לחדש את הגלגל.",
+      "/brand-voice → בדקתי את כל התוכן שלך. 7 טונים שונים. בחרנו אחד.",
+      "/content-calendar → חודש תוכן מלא. עם תאריכים. כן, כולל ט\"ו בשבט.",
+      "/cta-optimize → הכפתור אמר 'לחץ כאן'. עכשיו הוא אומר משהו שעובד.",
+    ];
+    const twEl = document.getElementById('hero-tw');
+    if (twEl) {
+      let mi = 0, ci = 0, del = false;
+      function twTick() {
+        const msg = jokes[mi];
+        if (!del) {
+          if (ci < msg.length) { ci++; twEl.textContent = msg.slice(0, ci); setTimeout(twTick, 36); }
+          else setTimeout(() => { del = true; twTick(); }, 3200);
+        } else {
+          if (ci > 0) { ci--; twEl.textContent = msg.slice(0, ci); setTimeout(twTick, 16); }
+          else { del = false; mi = (mi + 1) % jokes.length; setTimeout(twTick, 280); }
+        }
+      }
+      twTick();
+    }
+
+    // ── H1 one-shot typewriter ──
+    const l1El = document.getElementById('h1-l1');
+    const brEl = document.getElementById('h1-br');
+    const l2El = document.getElementById('h1-l2');
+    if (l1El && l2El) {
+      const t1 = '50 סקילים לשיווק ותוכן.';
+      const t2 = 'במתנה.';
+      let i = 0;
+      function typeL1() {
+        l1El.textContent = t1.slice(0, ++i);
+        if (i < t1.length) setTimeout(typeL1, 36);
+        else { brEl.style.display = ''; i = 0; setTimeout(typeL2, 180); }
+      }
+      function typeL2() {
+        l2El.textContent = t2.slice(0, ++i);
+        if (i < t2.length) setTimeout(typeL2, 68);
+        else l2El.classList.add('done');
+      }
+      setTimeout(typeL1, 600);
+    }
+  </script>
+</body>
+</html>
