@@ -1,0 +1,570 @@
+---
+/**
+ * Claude Code Getting Started — Hebrew Guide
+ * Accessible via email link + focusai.co.il/claude-code-guide/
+ * Route: /claude-code-guide/
+ */
+import Analytics from '../components/Analytics.astro';
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדריך Claude Code למתחילים | Focus AI</title>
+  <meta name="description" content="מדריך מלא לצעד ראשון עם Claude Code — מהתקנה עד הפרויקט הראשון עם 50 הסקילים.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <Analytics slot="head" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #dddcd4;
+      --win-bg:  #ffffff;
+      --win-bar: #d4d3cb;
+      --text:    #1a1a14;
+      --muted:   #55554e;
+      --faint:   #888880;
+      --orange:  #c8643c;
+      --orange-h:#b8542c;
+      --border:  #c8c7bf;
+      --card-bg: #f8f8f4;
+      --mono:    'JetBrains Mono', monospace;
+      --hebrew:  'Heebo', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--hebrew);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Layout ── */
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Topbar ── */
+    .topbar {
+      background: var(--win-bar);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
+    .topbar a:hover { color: var(--orange); }
+    .topbar-lang { font-size: 12px; color: var(--faint); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 40px;
+    }
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── Guide body ── */
+    .guide-body {
+      background: var(--win-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 0 24px 40px;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+
+    /* Terminal-style tab bar */
+    .doc-bar {
+      background: var(--win-bar);
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      direction: ltr;
+    }
+    .doc-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .doc-dot.r { background: #ff5f57; }
+    .doc-dot.y { background: #ffbd2e; }
+    .doc-dot.g { background: #28c840; }
+    .doc-title { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-right: auto; }
+
+    .doc-content { padding: 40px 48px 56px; }
+
+    /* Typography inside guide */
+    .doc-content h2 {
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 800;
+      margin: 48px 0 16px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    .doc-content h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+    .doc-content h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 28px 0 10px;
+      color: var(--text);
+    }
+    .doc-content p { font-size: 15px; color: var(--muted); margin-bottom: 16px; line-height: 1.8; }
+    .doc-content strong { color: var(--text); }
+    .doc-content ul { margin: 0 0 16px 0; padding-right: 20px; }
+    .doc-content li { font-size: 15px; color: var(--muted); margin-bottom: 8px; line-height: 1.7; }
+    .doc-content ol { margin: 0 0 16px 0; padding-right: 20px; }
+    .doc-content ol li { font-size: 15px; color: var(--muted); margin-bottom: 8px; }
+    .doc-content a { color: var(--orange); text-decoration: none; }
+    .doc-content a:hover { text-decoration: underline; }
+
+    /* Step number */
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 50%;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    .step-title {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      gap: 0;
+    }
+
+    /* Code blocks */
+    .code-block {
+      background: #1e1e2e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0 20px;
+      direction: ltr;
+      overflow-x: auto;
+    }
+    .code-block code {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #cdd6f4;
+      line-height: 1.7;
+      white-space: pre;
+    }
+    .code-block .comment { color: #6c7086; }
+    .code-block .cmd { color: #89dceb; }
+    .code-block .string { color: #a6e3a1; }
+
+    /* Inline code */
+    .ic {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #c8643c;
+    }
+
+    /* Table */
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 24px;
+      font-size: 14px;
+    }
+    .tbl th {
+      background: var(--card-bg);
+      padding: 10px 14px;
+      text-align: right;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+      color: var(--text);
+    }
+    .tbl td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl td:first-child { font-family: var(--mono); font-size: 12px; color: var(--orange); }
+
+    /* Note/tip boxes */
+    .note {
+      background: #fef9f0;
+      border-right: 3px solid #e8a953;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .note strong { color: #b8732c; }
+
+    /* Skill list */
+    .skill-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0 24px;
+    }
+    .skill-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+    .skill-cmd {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--orange);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .skill-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    @media (max-width: 580px) {
+      .skill-table { grid-template-columns: 1fr; }
+      .doc-content { padding: 24px 20px 40px; }
+    }
+
+    /* ── CTA block ── */
+    .cta-block {
+      background: #1e1e2e;
+      border-radius: 12px;
+      padding: 48px 40px;
+      text-align: center;
+      margin: 48px 0 0;
+    }
+    .cta-block h2 { color: #fff; font-size: clamp(20px, 4vw, 32px); margin-bottom: 12px; }
+    .cta-block p { color: #9090a0; font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .btn-cta {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--hebrew);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(200,100,60,0.3);
+    }
+    .btn-cta:hover { background: var(--orange-h); }
+    .cta-note { font-size: 12px; color: #6060708; margin-top: 12px; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    footer a:hover { color: var(--orange); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin: 16px 0 8px; flex-wrap: wrap; }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <a href="https://focusai.co.il">← חזרה לאתר Focus AI</a>
+    <span class="topbar-lang"><a href="/claude-code-guide-en/">English version →</a></span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_zmbrgf.jpg"
+         alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;">
+    <p class="hero-label">מדריך התחלה מהירה</p>
+    <h1>Claude Code — מאפס לפרויקט הראשון</h1>
+    <p class="hero-sub">התקנה, הגדרה, ו-50 הסקילים שמוכנים לעבוד. מדריך מלא למתחילים.</p>
+  </div>
+
+  <!-- Guide card -->
+  <div class="wrap">
+    <div class="guide-body">
+
+      <div class="doc-bar">
+        <div class="doc-dot r"></div>
+        <div class="doc-dot y"></div>
+        <div class="doc-dot g"></div>
+        <span class="doc-title">claude-code-getting-started-he.md</span>
+      </div>
+
+      <div class="doc-content">
+
+        <h2>מה זה Claude Code?</h2>
+        <p>Claude Code הוא כלי ה-CLI הרשמי של חברת Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT או Claude.ai בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב קוד, להריץ פקודות ולערוך את הפרויקט שלך</strong> — הכל ישירות משיחה.</p>
+        <p>זה הכי קרוב שיש לזה שיהיה לך מפתח בכיר יושב לצידך.</p>
+
+        <h2>דרישות מקדימות</h2>
+        <p>לפני ההתקנה תצטרך:</p>
+        <table class="tbl">
+          <thead><tr><th>דרישה</th><th>למה</th></tr></thead>
+          <tbody>
+            <tr><td>מחשב עם macOS / Linux / Windows</td><td>Claude Code רץ בטרמינל</td></tr>
+            <tr><td>Node.js 18+ מותקן</td><td>Claude Code הוא חבילת Node.js</td></tr>
+            <tr><td>מפתח API של Anthropic</td><td>Claude Code משתמש ב-API לשיחה עם Claude</td></tr>
+          </tbody>
+        </table>
+        <p>בדוק אם Node.js מותקן:</p>
+        <div class="code-block"><code>node --version</code></div>
+        <p>אם רואה <span class="ic">v18.x.x</span> ומעלה — מעולה. אם לא, הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> (בחר גרסת LTS).</p>
+
+        <h2><span class="step-num">1</span> קבל מפתח API של Anthropic</h2>
+        <ol>
+          <li>כנס ל-<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
+          <li>הירשם או התחבר</li>
+          <li>לחץ על <strong>"Get API Keys"</strong> בסרגל השמאלי</li>
+          <li>לחץ <strong>"Create Key"</strong> → תן לו שם כלשהו (למשל "claude-code")</li>
+          <li><strong>העתק את המפתח</strong> — הוא מתחיל ב-<span class="ic">sk-ant-...</span></li>
+          <li>שמור אותו במקום בטוח — לא תוכל לראות אותו שוב</li>
+        </ol>
+        <div class="note">
+          <strong>הערה על חיוב:</strong> Claude Code משתמש בקרדיטים של API. חשבונות חדשים מקבלים קרדיטים חינם. אחר כך התמחור הוא לפי שימוש — בדרך כלל 8–30 ₪ לחודש לשימוש רגיל.
+        </div>
+
+        <h2><span class="step-num">2</span> התקן את Claude Code</h2>
+        <p>פתח את הטרמינל והרץ:</p>
+        <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
+        <p>בדוק שההתקנה הצליחה:</p>
+        <div class="code-block"><code>claude --version</code></div>
+        <p>אמור לראות מספר גרסה כמו <span class="ic">1.x.x</span>.</p>
+
+        <h2><span class="step-num">3</span> אימות</h2>
+        <div class="code-block"><code>claude</code></div>
+        <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק את המפתח ולחץ Enter.</p>
+        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה, פתח חלון טרמינל חדש לאחר ההתקנה.</div>
+
+        <h2><span class="step-num">4</span> התקן את חבילת הסקילים</h2>
+        <p>פתח את ה-ZIP שהורדת וודא שאתה נמצא בתיקייה שלו בטרמינל.</p>
+
+        <h3>macOS / Linux</h3>
+        <div class="code-block"><code>bash install.sh</code></div>
+
+        <h3>Windows (PowerShell)</h3>
+        <div class="code-block"><code>.\install.ps1</code></div>
+
+        <p>הסקריפט מתקין את כל 50 הסקילים לתיקייה הנכונה אוטומטית.</p>
+        <p>בדוק שההתקנה עלתה:</p>
+        <div class="code-block"><code class="comment"># macOS / Linux</code>
+<code>ls ~/.claude/skills/
+
+<span class="comment"># Windows</span>
+dir $env:USERPROFILE\.claude\skills</code></div>
+        <p>אמור לראות את 50 תיקיות הסקילים ברשימה.</p>
+
+        <h2><span class="step-num">5</span> הפרויקט הראשון שלך</h2>
+        <p>בואו נשתמש ב-Claude Code על פרויקט אמיתי.</p>
+
+        <h3>5.1 צור תיקיית פרויקט</h3>
+        <div class="code-block"><code>mkdir my-first-project
+cd my-first-project</code></div>
+
+        <h3>5.2 הפעל את Claude Code</h3>
+        <div class="code-block"><code>claude</code></div>
+        <p>תראה את הברכה של Claude וקרסור <span class="ic">&gt;</span>.</p>
+
+        <h3>5.3 נסה את הפקודות הראשונות</h3>
+        <div class="code-block"><code><span class="comment"># חקור קוד-בייס קיים</span>
+<span class="cmd">&gt; /onboard-codebase</span>
+
+<span class="comment"># תכנן פיצ'ר</span>
+<span class="cmd">&gt; /task-breakdown הוספת אותנטיקציית משתמשים עם JWT</span>
+
+<span class="comment"># קוד ריוויו</span>
+<span class="cmd">&gt; /code-review</span>
+
+<span class="comment"># הודעת קומיט</span>
+<span class="cmd">&gt; /commit-message</span></code></div>
+
+        <h2>איך משתמשים בסקילים</h2>
+        <p>סקילים מופעלים עם קידומת <span class="ic">/</span>:</p>
+        <div class="code-block"><code>&gt; /שם-הסקיל [ארגומנט אופציונלי]</code></div>
+        <p>חלק מהסקילים עובדים לבד. אחרים צריכים הקשר:</p>
+        <div class="code-block"><code>&gt; /fix-error TypeError: Cannot read properties of undefined (reading 'map')
+
+&gt; /debug-smart קריאת ה-API מחזירה 200 אבל ה-UI לא מתעדכן
+
+&gt; /explain-code [הדבק את הפונקציה שרוצה להבין]</code></div>
+
+        <h2>50 הסקילים — לפי קטגוריה</h2>
+
+        <h3>איכות קוד</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/code-review</span><span class="skill-desc">ריוויו שיטתי עם רמות חומרה</span></div>
+          <div class="skill-item"><span class="skill-cmd">/security-review</span><span class="skill-desc">ביקורת אבטחה על בסיס OWASP</span></div>
+          <div class="skill-item"><span class="skill-cmd">/performance-review</span><span class="skill-desc">מצא N+1, זליגות זיכרון, פטרנים איטיים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/refactor</span><span class="skill-desc">זיהוי ותיקון code smells</span></div>
+          <div class="skill-item"><span class="skill-cmd">/clean-code</span><span class="skill-desc">עקרונות שמות, פונקציות, טיפול בשגיאות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/solid-principles</span><span class="skill-desc">עקרונות SOLID עם דוגמאות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/tech-debt</span><span class="skill-desc">קטלוג ותעדוף חוב טכני</span></div>
+          <div class="skill-item"><span class="skill-cmd">/accessibility</span><span class="skill-desc">צ'קליסט WCAG 2.1 AA</span></div>
+        </div>
+
+        <h3>דיבאגינג</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/debug-smart</span><span class="skill-desc">שיטת דיבאגינג מדעית</span></div>
+          <div class="skill-item"><span class="skill-cmd">/fix-error</span><span class="skill-desc">פענוח שגיאות + קריאת stack trace</span></div>
+          <div class="skill-item"><span class="skill-cmd">/trace-bug</span><span class="skill-desc">ניתוח שורש הבעיה עם Five Whys</span></div>
+          <div class="skill-item"><span class="skill-cmd">/memory-leak</span><span class="skill-desc">זיהוי ותיקון זליגות זיכרון</span></div>
+          <div class="skill-item"><span class="skill-cmd">/async-debug</span><span class="skill-desc">אבחון באגים ב-Promise ו-async/await</span></div>
+          <div class="skill-item"><span class="skill-cmd">/typescript-errors</span><span class="skill-desc">פענוח שגיאות TS2345, TS2322 ועוד</span></div>
+          <div class="skill-item"><span class="skill-cmd">/regex-helper</span><span class="skill-desc">מדריך Regex + מלכודות נפוצות</span></div>
+        </div>
+
+        <h3>תיעוד</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/generate-docs</span><span class="skill-desc">כתיבת תיעוד לכל קוד</span></div>
+          <div class="skill-item"><span class="skill-cmd">/jsdoc</span><span class="skill-desc">מדריך תגיות JSDoc/TSDoc</span></div>
+          <div class="skill-item"><span class="skill-cmd">/readme-write</span><span class="skill-desc">כתיבת README מקצועי</span></div>
+          <div class="skill-item"><span class="skill-cmd">/api-docs</span><span class="skill-desc">תיעוד REST APIs</span></div>
+          <div class="skill-item"><span class="skill-cmd">/changelog</span><span class="skill-desc">יצירת changelog מהיסטוריית git</span></div>
+          <div class="skill-item"><span class="skill-cmd">/explain-code</span><span class="skill-desc">הסבר קוד ב-3 רמות קהל</span></div>
+        </div>
+
+        <h3>טסטים</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/write-tests</span><span class="skill-desc">כתיבת unit tests (פטרן AAA)</span></div>
+          <div class="skill-item"><span class="skill-cmd">/edge-cases</span><span class="skill-desc">מצא edge cases שפספסת</span></div>
+          <div class="skill-item"><span class="skill-cmd">/mock-generate</span><span class="skill-desc">יצירת mocks ו-fakes לטסטים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/test-coverage</span><span class="skill-desc">ניתוח פערי coverage</span></div>
+          <div class="skill-item"><span class="skill-cmd">/e2e-tests</span><span class="skill-desc">פטרני Playwright/Cypress</span></div>
+          <div class="skill-item"><span class="skill-cmd">/test-data</span><span class="skill-desc">יצירת test data ריאליסטית</span></div>
+          <div class="skill-item"><span class="skill-cmd">/snapshot-tests</span><span class="skill-desc">מתי ואיך להשתמש ב-snapshots</span></div>
+        </div>
+
+        <h3>Git וזרימת עבודה</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/commit-message</span><span class="skill-desc">כתיבת Conventional Commits מ-staged diff</span></div>
+          <div class="skill-item"><span class="skill-cmd">/pr-description</span><span class="skill-desc">יצירת תיאור PR מ-git log</span></div>
+          <div class="skill-item"><span class="skill-cmd">/git-cleanup</span><span class="skill-desc">ניקוי branches ישנים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/merge-conflict</span><span class="skill-desc">פתרון שיטתי של merge conflicts</span></div>
+          <div class="skill-item"><span class="skill-cmd">/release-notes</span><span class="skill-desc">יצירת release notes למשתמשים</span></div>
+          <div class="skill-item"><span class="skill-cmd">/branch-strategy</span><span class="skill-desc">שמות branches ופטרני gitflow</span></div>
+        </div>
+
+        <h3>ארכיטקטורה</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/architecture-review</span><span class="skill-desc">ביקורת מעמיקה עם פלט ADR</span></div>
+          <div class="skill-item"><span class="skill-cmd">/design-patterns</span><span class="skill-desc">פטרני GoF עם דוגמאות TypeScript</span></div>
+          <div class="skill-item"><span class="skill-cmd">/api-design</span><span class="skill-desc">Best practices ל-REST וGraphQL</span></div>
+          <div class="skill-item"><span class="skill-cmd">/database-schema</span><span class="skill-desc">עיצוב סכמה ופטרני migration</span></div>
+          <div class="skill-item"><span class="skill-cmd">/microservices</span><span class="skill-desc">גבולות שירותים ומערכות מבוזרות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/dependency-audit</span><span class="skill-desc">ביקורת אבטחה להיגיינה של packages</span></div>
+          <div class="skill-item"><span class="skill-cmd">/folder-structure</span><span class="skill-desc">ארגון פרויקט לפי פריימוורק</span></div>
+        </div>
+
+        <h3>אבטחה</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/security-audit</span><span class="skill-desc">ביקורת OWASP Top 10 מלאה</span></div>
+          <div class="skill-item"><span class="skill-cmd">/env-security</span><span class="skill-desc">היגיינה של secrets ומשתני סביבה</span></div>
+          <div class="skill-item"><span class="skill-cmd">/sql-injection</span><span class="skill-desc">מדריך מניעת SQL injection</span></div>
+          <div class="skill-item"><span class="skill-cmd">/auth-review</span><span class="skill-desc">פטרני JWT, sessions, RBAC</span></div>
+          <div class="skill-item"><span class="skill-cmd">/csp-setup</span><span class="skill-desc">הגדרת Content Security Policy</span></div>
+        </div>
+
+        <h3>פרודוקטיביות</h3>
+        <div class="skill-table">
+          <div class="skill-item"><span class="skill-cmd">/standup</span><span class="skill-desc">הכנת הודעת standup יומית</span></div>
+          <div class="skill-item"><span class="skill-cmd">/task-breakdown</span><span class="skill-desc">פירוק פיצ'רים למשימות</span></div>
+          <div class="skill-item"><span class="skill-cmd">/onboard-codebase</span><span class="skill-desc">דוח חקירת קוד-בייס מהיר</span></div>
+          <div class="skill-item"><span class="skill-cmd">/sprint-plan</span><span class="skill-desc">תכנון ספרינט עם בדיקת קיבולת</span></div>
+        </div>
+
+        <h2>טיפים למקסם את Claude Code</h2>
+        <ul>
+          <li><strong>היה ספציפי.</strong> "תקן את הבאג" נותן תוצאות גרועות. "תקן את הבאג בפונקציה <span class="ic">calculateTotal</span> — היא מחזירה NaN כשהעגלה ריקה" — Claude יכול לעזור.</li>
+          <li><strong>תן ל-Claude הקשר.</strong> לפני קוד ריוויו, ספר מה הקוד אמור לעשות. לפני דיבאגינג, ספר מה ציפית לקבל לעומת מה שקיבלת.</li>
+          <li><strong>השתמש בו ללמידה.</strong> בקש מ-Claude להסביר החלטות: "למה השתמשת בקלוז'ר כאן?" או "מה ה-tradeoff בגישה הזו?"</li>
+          <li><strong>שרשר סקילים.</strong> כתוב פיצ'ר → <span class="ic">/code-review</span> → <span class="ic">/write-tests</span> → <span class="ic">/commit-message</span> → <span class="ic">/pr-description</span>. זרימת עבודה מקצועית מלאה.</li>
+          <li><strong>בדוק כל מה ש-Claude כותב.</strong> Claude Code הוא עוזר עוצמתי אבל לא חסין שגיאות. קרא את הקוד לפני שאתה מקמיט.</li>
+        </ul>
+
+        <h2>קיצורי מקלדת</h2>
+        <table class="tbl">
+          <thead><tr><th>קיצור</th><th>פעולה</th></tr></thead>
+          <tbody>
+            <tr><td>Ctrl+C</td><td>ביטול פעולה נוכחית</td></tr>
+            <tr><td>Escape</td><td>יציאה מה-prompt הנוכחי</td></tr>
+            <tr><td>↑ / ↓</td><td>ניווט בהיסטוריית פקודות</td></tr>
+            <tr><td>Ctrl+L</td><td>ניקוי מסך</td></tr>
+            <tr><td>/help</td><td>הצגת פקודות זמינות</td></tr>
+          </tbody>
+        </table>
+
+        <h2>פתרון בעיות</h2>
+        <p><strong>"claude: command not found"</strong><br>
+        תיקיית bin של Node.js גלובלית לא ב-PATH שלך. נסה: <span class="ic">npx @anthropic-ai/claude-code</span> או התקן מחדש את Node.js מ-nodejs.org</p>
+        <p><strong>"Invalid API key"</strong><br>
+        המפתח אולי הועתק לא נכון. חזור ל-console.anthropic.com וצור מפתח חדש.</p>
+        <p><strong>"Rate limit exceeded"</strong><br>
+        הגעת למגבלת ה-API. המתן דקה ונסה שוב.</p>
+        <p><strong>סקילים לא עובדים</strong><br>
+        בדוק שהסקילים נמצאים במקום הנכון: <span class="ic">~/.claude/skills/code-review/SKILL.md</span> צריך להתקיים. הרץ שוב את <span class="ic">install.sh</span>.</p>
+
+        <!-- CTA -->
+        <div class="cta-block">
+          <h2>רוצה להעמיק עם Claude Code?</h2>
+          <p>בהכשרה המלאה של Focus AI תלמד לבנות סוכני AI, אוטומציות, ולעבוד עם Claude Code ברמת פרודקשן — עם ליווי אישי של מרצים מהאוניברסיטה.</p>
+          <a href="https://focusai.co.il/academy" class="btn-cta">לפרטים על הכשרת Claude Code</a>
+          <p style="font-size:12px;color:#60607080;margin-top:14px;">Bot-Camp | AI First | ליווי אישי | אקדמיה</p>
+        </div>
+
+      </div><!-- /doc-content -->
+    </div><!-- /guide-body -->
+  </div><!-- /wrap -->
+
+  <footer>
+    <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_zmbrgf.jpg"
+         alt="Focus AI" height="40" style="display:block;margin:0 auto 12px;">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">
+      לכל השירותים, הקורסים ועוד — <a href="https://focusai.co.il" style="color:var(--orange);font-weight:700;">focusai.co.il</a>
+    </p>
+    <div class="footer-links">
+      <a href="https://focusai.co.il">focusai.co.il</a>
+      <a href="mailto:office@focusai.co.il">office@focusai.co.il</a>
+      <a href="/claude-code-guide-en/">English version</a>
+    </div>
+    <p class="footer-copy">© 2026 Focus AI</p>
+  </footer>
+
+</body>
+</html>
