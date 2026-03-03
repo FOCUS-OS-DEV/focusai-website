@@ -278,16 +278,32 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     .btn-cta {
       display: inline-block;
       background: var(--orange);
-      color: #fff;
+      color: #fff !important;
       font-family: var(--hebrew);
       font-size: 16px;
       font-weight: 700;
       padding: 16px 36px;
       border-radius: 8px;
       text-decoration: none;
+      text-align: center;
+      line-height: 1.4;
       box-shadow: 0 4px 16px rgba(200,100,60,0.3);
     }
-    .btn-cta:hover { background: var(--orange-h); }
+    .btn-cta:hover { background: var(--orange-h); color: #fff !important; }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      background: #f4f3ee;
+      border: 1px solid var(--border);
+      border-right: 4px solid var(--faint);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 24px 0;
+    }
+    .disclaimer strong { color: var(--text); }
 
     .wa-block {
       background: #f4f3ee;
@@ -402,45 +418,108 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
       <div class="doc-content">
 
+        <div class="disclaimer">
+          <strong>הערה חשובה:</strong> מדריך זה נועד למטרות לימודיות בלבד. המידע מעודכן לתאריך הפרסום ועשוי להשתנות.
+          לעדכונים האחרונים, בדקו את <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" style="color:var(--orange)">התיעוד הרשמי של Anthropic</a>.
+          השימוש בכלים המוזכרים במדריך הוא באחריות המשתמש/ת בלבד. Focus AI אינה מסונפת ל-Anthropic.
+        </div>
+
         <h2>מה זה Claude Code?</h2>
         <p>Claude Code הוא כלי הטרמינל הרשמי של Anthropic — עוזר AI שחי בתוך הטרמינל שלך. בניגוד ל-ChatGPT בדפדפן, Claude Code יכול <strong>לקרוא קבצים, לכתוב מסמכים שלמים ולעבוד עם כמה פורמטים במקביל</strong>. ממשק שיחה רגיל.</p>
         <p>למנהלים ויזמים: כמו שיש לך יועץ אסטרטגי, מנתח פיננסי ועוזר HR — כולם יחד, זמינים תמיד, בלי לחכות לפגישה.</p>
 
-        <h2>דרישות מקדימות</h2>
+        <h2>הכנת סביבת העבודה</h2>
+        <p>לפני שמתחילים, צריך להתקין כמה כלים. אם אתה מתחיל מאפס — אל דאגה, הכל מוסבר כאן צעד אחרי צעד.</p>
+
+        <h3>מה זה טרמינל?</h3>
+        <p>הטרמינל (Terminal) הוא ממשק טקסטואלי למחשב. במקום ללחוץ על כפתורים, כותבים פקודות טקסט. Claude Code עובד דרך הטרמינל — אבל יש גם תוסף ל-VS Code שנוח יותר (מוסבר בהמשך).</p>
+        <p><strong>איך פותחים טרמינל:</strong></p>
+        <ul>
+          <li><strong>Windows:</strong> חפשו "PowerShell" בתפריט Start (או <span class="ic">Win+X</span> → Terminal)</li>
+          <li><strong>Mac:</strong> פתחו Spotlight (<span class="ic">Cmd+Space</span>) → הקלידו "Terminal"</li>
+          <li><strong>Linux:</strong> <span class="ic">Ctrl+Alt+T</span></li>
+        </ul>
+
+        <h3>התקנת VS Code</h3>
+        <p><a href="https://code.visualstudio.com" target="_blank">VS Code</a> הוא עורך קוד חינמי של Microsoft — סביבת העבודה המומלצת ל-Claude Code, גם אם אתה לא מפתח.</p>
+        <ol>
+          <li>הורד מ-<a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></li>
+          <li>התקן ופתח</li>
+          <li>פתח טרמינל מובנה: <span class="ic">Ctrl+`</span> (או מתפריט Terminal → New Terminal)</li>
+        </ol>
+
+        <h3>מה זה Git ולמה צריך?</h3>
+        <p>Git הוא מערכת לניהול גרסאות — כמו "Ctrl+Z מתקדם" שעוקב אחרי כל שינוי בקבצים. Claude Code משתמש ב-Git כדי לעקוב אחרי שינויים בפרויקט.</p>
+        <ul>
+          <li><strong>Windows:</strong> הורידו מ-<a href="https://git-scm.com" target="_blank">git-scm.com</a> והתקינו</li>
+          <li><strong>Mac:</strong> הריצו בטרמינל <span class="ic">git --version</span> — אם לא מותקן, Mac יציע להתקין</li>
+          <li><strong>Linux:</strong> <span class="ic">sudo apt install git</span> (Ubuntu) או <span class="ic">sudo dnf install git</span> (Fedora)</li>
+        </ul>
+        <p>ודאו:</p>
+        <div class="code-block"><code>git --version</code></div>
+
+        <h3>התקנת Node.js</h3>
+        <p>Node.js נדרש להתקנת Claude Code.</p>
+        <ol>
+          <li>הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> — בחר בגרסת <strong>LTS</strong></li>
+          <li>התקן ופתח טרמינל חדש</li>
+        </ol>
+        <p>ודאו:</p>
+        <div class="code-block"><code>node --version</code></div>
+        <p>אם רואים <span class="ic">v18.x.x</span> ומעלה — מעולה.</p>
+
+        <h3>תוסף Claude Code ב-VS Code (מומלץ למתחילים)</h3>
+        <p>בנוסף ל-Claude Code בטרמינל, יש <strong>תוסף רשמי ל-VS Code</strong> שמספק ממשק שיחה גרפי — דומה לממשק הרגיל של Claude באתר.</p>
+        <ol>
+          <li>פתח VS Code</li>
+          <li>לחץ <span class="ic">Ctrl+Shift+X</span> (Extensions)</li>
+          <li>חפש <strong>"Claude Code"</strong> (של Anthropic)</li>
+          <li>לחץ <strong>Install</strong></li>
+        </ol>
+        <div class="note"><strong>למה כדאי?</strong> התוסף מציג את השיחה עם Claude בתוך VS Code, עם תמיכה טובה יותר בעברית (RTL) ועם ממשק נוח יותר מטרמינל גולמי. מומלץ למתחילים.</div>
+
+        <h2>דרישות — סיכום</h2>
         <table class="tbl">
-          <thead><tr><th>דרישה</th><th>למה</th></tr></thead>
+          <thead><tr><th>כלי</th><th>סטטוס</th><th>הערות</th></tr></thead>
           <tbody>
-            <tr><td>מחשב (Mac / Windows / Linux)</td><td>Claude Code רץ בטרמינל</td></tr>
-            <tr><td>Node.js 18+ מותקן</td><td>Claude Code הוא חבילת Node.js</td></tr>
-            <tr><td>מפתח API של Anthropic</td><td>Claude Code מתחבר לאנתרופיק דרך API</td></tr>
+            <tr><td>מחשב (Mac / Windows / Linux)</td><td>חובה</td><td>Claude Code רץ בטרמינל</td></tr>
+            <tr><td>VS Code</td><td>מומלץ מאוד</td><td>סביבת עבודה + תוסף Claude Code</td></tr>
+            <tr><td>Git</td><td>מומלץ</td><td>ניהול גרסאות ומעקב שינויים</td></tr>
+            <tr><td>Node.js 18+</td><td>חובה</td><td>נדרש להתקנת Claude Code</td></tr>
+            <tr><td>חשבון Anthropic</td><td>חובה</td><td>מפתח API או מנוי Claude Pro</td></tr>
           </tbody>
         </table>
-        <p>בדוק אם Node.js מותקן:</p>
-        <div class="code-block"><code>node --version</code></div>
-        <p>אם רואה <span class="ic">v18.x.x</span> ומעלה, מעולה. אם לא, הורד מ-<a href="https://nodejs.org" target="_blank">nodejs.org</a> (גרסת LTS).</p>
 
-        <h2><span class="step-num">1</span> קבל מפתח API</h2>
+        <h2><span class="step-num">1</span> קבל מפתח API של Anthropic</h2>
         <ol>
           <li>כנס ל-<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
           <li>הירשם או התחבר</li>
-          <li>לחץ <strong>"Get API Keys"</strong> → <strong>"Create Key"</strong></li>
-          <li>תן שם (למשל "managers") והעתק את המפתח (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
-          <li>שמור במקום בטוח. לא תוכל לראות אותו שוב</li>
+          <li>לחץ על <strong>"Get API Keys"</strong> בסרגל השמאלי</li>
+          <li>לחץ <strong>"Create Key"</strong> → תן לו שם כלשהו (למשל "claude-code")</li>
+          <li><strong>העתק את המפתח</strong> (מתחיל ב-<span class="ic">sk-ant-...</span>)</li>
+          <li>שמור אותו במקום בטוח — לא תוכל לראות אותו שוב</li>
         </ol>
         <div class="note">
-          <strong>עלות:</strong> חשבונות חדשים מקבלים קרדיטים חינם. לאחר מכן: 8–30 ₪ לחודש לשימוש רגיל.
+          <strong>עלות:</strong> Claude Code עובד עם מפתח API (תשלום לפי שימוש) או עם מנוי Claude Pro/Max (מ-$20 לחודש).
+          העלות תלויה בהיקף השימוש. לפרטים עדכניים: <a href="https://www.anthropic.com/pricing" target="_blank" style="color:var(--orange)">anthropic.com/pricing</a>
         </div>
 
         <h2><span class="step-num">2</span> התקן את Claude Code</h2>
-        <p>פתח טרמינל (Mac: Terminal / Windows: PowerShell) והרץ:</p>
+        <p>פתח טרמינל (או את הטרמינל המובנה ב-VS Code) והרץ:</p>
         <div class="code-block"><code>npm install -g @anthropic-ai/claude-code</code></div>
         <p>בדוק שהצליח:</p>
         <div class="code-block"><code>claude --version</code></div>
+        <p>אמור לראות מספר גרסה.</p>
+        <div class="note">אם התקנת את תוסף Claude Code ב-VS Code (שלב קודם), אין חובה להשתמש ב-CLI בטרמינל — אפשר לעבוד ישירות מהתוסף.</div>
 
-        <h2><span class="step-num">3</span> הפעל לראשונה</h2>
+        <h2><span class="step-num">3</span> אימות</h2>
         <div class="code-block"><code>claude</code></div>
-        <p>בפעם הראשונה Claude Code יבקש את מפתח ה-API שלך. הדבק ולחץ Enter.</p>
-        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון PowerShell חדש לאחר ההתקנה.</div>
+        <p>בפעם הראשונה Claude Code יבקש אימות. יש שתי אפשרויות:</p>
+        <ul>
+          <li><strong>מפתח API:</strong> הדבק את מפתח ה-API שיצרת ולחץ Enter</li>
+          <li><strong>חשבון Claude.ai:</strong> התחבר עם חשבון Claude Pro/Max דרך הדפדפן</li>
+        </ul>
+        <div class="note">בווינדוס, אם <span class="ic">claude</span> לא מזוהה — פתח חלון טרמינל חדש לאחר ההתקנה.</div>
 
         <h2><span class="step-num">4</span> התקן את חבילת הסקילים למנהלים</h2>
         <p>פתח את ה-ZIP שהורדת ונווט לתיקייה שלו בטרמינל.</p>
@@ -571,6 +650,12 @@ dir $env:USERPROFILE\.claude\skills</code></div>
         חזור ל-console.anthropic.com וצור מפתח חדש.</p>
         <p><strong>הסקילים לא מופיעים</strong><br>
         הרץ שוב את <span class="ic">install.sh</span> / <span class="ic">install.ps1</span> ובדוק שהתיקייה <span class="ic">~/.claude/skills/</span> מכילה 50 תיקיות.</p>
+
+        <div class="disclaimer" style="margin-top: 40px;">
+          <strong>הערת סיום:</strong> מדריך זה נועד למטרות מידע ולימוד בלבד ואינו מהווה ייעוץ מקצועי.
+          המחירים, התכונות והפקודות עשויים להשתנות — בדקו תמיד את <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" style="color:var(--orange)">התיעוד הרשמי העדכני</a>.
+          Focus AI אינה אחראית לשירותי צד שלישי המוזכרים במדריך. כל הסימנים המסחריים שייכים לבעליהם.
+        </div>
 
         <!-- WhatsApp Community -->
         <div class="wa-block">
