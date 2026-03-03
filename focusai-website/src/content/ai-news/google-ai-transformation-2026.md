@@ -5,7 +5,7 @@ pubDate: 2026-02-15
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771156002/blog/google-ai-transformation-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools", "automation"]
-ctaType: "consulting"
+ctaType: "botcamp"
 ---
 
 ## כשמנוע החיפוש הופך לתשתית AI מלאה
@@ -71,12 +71,12 @@ Gemini לא רק צ'אטבוט. זה מודל שנמצא בכל מוצר של ג
 
 עבור ארגונים ישראלים, המסר ברור: אתם כבר עובדים עם Gemini גם אם לא ידעתם. השאלה היא רק אם אתם מנצלים את זה בצורה מקסימלית.
 
-<a href="/services/strategy" class="blog-cta-banner">
-  <span class="cta-badge">ייעוץ אסטרטגי</span>
-  <div class="cta-title">רוצים להבין איך AI משפיע על הארגון שלכם?</div>
-  <div class="cta-desc">בואו נבנה יחד מפת דרכים לשילוב AI בארגון - מהאסטרטגיה ועד להטמעה בפועל. תהליך ממוקד תוצאות עם החזר השקעה מדיד תוך 30 יום.</div>
-  <div class="cta-tags"><span class="cta-tag">Strategy</span><span class="cta-tag">AI Transformation</span><span class="cta-tag">ROI</span><span class="cta-tag">Consulting</span></div>
-  <span class="cta-button">לתיאום שיחת ייעוץ</span>
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים להפסיק לקרוא על AI ולהתחיל לבנות?</div>
+  <div class="cta-desc">ב-Bot-Camp תלמדו לבנות סוכני AI ואוטומציות עם הכלים שגוגל, OpenAI ו-Anthropic בונות עליהם — מאפס ועד ייצור. 12 מפגשים פרונטליים בהרצליה פיתוח.</div>
+  <div class="cta-tags"><span class="cta-tag">AI Agents</span><span class="cta-tag">n8n</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## Waymo - העתיד של AI לא רק בתוכנה
@@ -149,4 +149,4 @@ Waymo כבר ביצעה **20 מיליון נסיעות אוטונומיות**. 4
 
 ב-Focus AI אנחנו עוזרים לעסקים ישראלים לא רק להבין את מירוץ ה-AI, אלא להיות חלק ממנו. לא עוד "שמענו על AI". אלא "אנחנו משתמשים ב-AI ויש לנו תוצאות מדידות".
 
-[בואו נדבר על איך להתחיל](/ai-agents)
+[הצטרפו ל-Bot-Camp — ותתחילו לבנות](/academy)

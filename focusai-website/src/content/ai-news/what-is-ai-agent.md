@@ -5,7 +5,7 @@ pubDate: 2025-01-15
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029391/blog/what-is-agent-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["ai-agents", "automation", "guides"]
-ctaType: "agents"
+ctaType: "botcamp"
 ---
 
 ## מה זה בעצם סוכן AI?
@@ -76,4 +76,4 @@ ctaType: "agents"
 
 ---
 
-**מעוניינים לשמוע עוד?** [צרו קשר](/ai-agents) ונשמח לספר איך סוכן AI יכול לשנות את העסק שלכם.
+**מעוניינים לשמוע עוד?** [הצטרפו ל-Bot-Camp](/academy) ותלמדו לבנות סוכני AI בעצמכם.

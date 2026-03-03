@@ -5,7 +5,7 @@ pubDate: 2026-02-10
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1771029314/blog/agents-revolution-hero-v2.jpg"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "automation"]
-ctaType: "agents"
+ctaType: "botcamp"
 ---
 
 ## הפער שצריך להדאיג את כולם
@@ -102,4 +102,4 @@ Deloitte פרסמה את דוח "State of AI in the Enterprise 2026" - סקר ש
 
 ב-Focus AI אנחנו בונים סוכני AI מותאמים לעסקים ישראלים. לא פתרון מדף - אלא מערכת שנבנית סביב התהליכים, הנתונים והצרכים הספציפיים שלכם. עם governance מהיום הראשון, מדידת ביצועים, ואינטגרציה מלאה למערכות שכבר יש לכם.
 
-[בואו נבנה את הסוכן הראשון שלכם](/ai-agents)
+[בואו תלמדו לבנות סוכנים בעצמכם — ב-Bot-Camp](/academy)

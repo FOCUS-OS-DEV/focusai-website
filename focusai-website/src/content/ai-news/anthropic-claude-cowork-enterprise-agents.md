@@ -5,7 +5,7 @@ pubDate: 2026-02-26
 heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1200/v1772090283/blog/anthropic-cowork-enterprise-hero.png"
 author: "צוות Focus AI"
 tags: ["news", "ai-agents", "tools", "automation"]
-ctaType: "consulting"
+ctaType: "botcamp"
 ---
 
 ## מהצ'אטבוט לעמית עבודה - הצהרת כוונות של Anthropic
@@ -81,12 +81,12 @@ Computer-use agents שוברים את המחסום הזה. כשסוכן יכול
 
 אין פה "ניצח" ו"הפסיד". כל ארגון צריך לבחור לפי ה-stack הטכנולוגי שלו, הצרכים שלו ורמת הבשלות שלו.
 
-<a href="/services/strategy" class="blog-cta-banner">
-  <span class="cta-badge">ייעוץ אסטרטגי</span>
-  <div class="cta-title">לא בטוחים איזו פלטפורמה מתאימה לארגון שלכם?</div>
-  <div class="cta-desc">ב-Focus AI אנחנו מלווים ארגונים ישראליים מהבחירה האסטרטגית ועד לבנייה בפועל. נמפה את הצרכים שלכם, נמליץ על הכלים הנכונים, ונבנה מפת דרכים עם ROI מדיד.</div>
-  <div class="cta-tags"><span class="cta-tag">Strategy</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Enterprise</span><span class="cta-tag">Automation</span></div>
-  <span class="cta-button">לתיאום שיחת ייעוץ</span>
+<a href="/academy" class="blog-cta-banner">
+  <span class="cta-badge">Bot-Camp</span>
+  <div class="cta-title">רוצים לבנות סוכני AI בעצמכם — לא לחכות שמישהו יבנה בשבילכם?</div>
+  <div class="cta-desc">ב-Bot-Camp תלמדו לבנות סוכני AI ואוטומציות עם n8n, Claude ו-ChatGPT. פרויקטים אמיתיים, 12 מפגשים פרונטליים בהרצליה פיתוח.</div>
+  <div class="cta-tags"><span class="cta-tag">AI Agents</span><span class="cta-tag">n8n</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
+  <span class="cta-button">לפרטים והרשמה</span>
 </a>
 
 ## השורה התחתונה - שלושה לקחים מעשיים
@@ -101,4 +101,4 @@ Computer-use agents שוברים את המחסום הזה. כשסוכן יכול
 
 הפעמים שהיה קל לעמוד מהצד ולצפות ב-AI מהמרחק - הסתיימו. ב-24 בפברואר 2026 Anthropic הדגימה שהגל כבר מגיע לקצה המדרגות של כל ארגון. השאלה היא רק אם אתם רוצים לגלוש על הגל או לקבל אותו בפנים.
 
-[דברו איתנו על אסטרטגיית ה-AI שלכם](/ai-agents)
+[הצטרפו ל-Bot-Camp — ותבנו את הסוכנים בעצמכם](/academy)
