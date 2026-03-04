@@ -716,7 +716,7 @@ body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!im
 .dev-form-ok .ok-icon{font-size:36px;color:#39ff14;margin-bottom:10px}
 .dev-form-ok p{color:rgba(224,224,232,.7);font-size:14px;font-family:'Söhne Mono','Space Mono',monospace;line-height:1.8}
 .dev-form-err{color:#ff6b6b;font-size:12px;display:none;margin-top:4px;font-family:'Söhne Mono','Space Mono',monospace}
-.dev-form-name-row{display:flex;gap:8px}.dev-form-name-row .dev-form-row{flex:1}
+.dev-form-name-row{display:flex;flex-direction:column;gap:0}.dev-form-name-row .dev-form-row{flex:1}
 /* Consent checkbox — shared across all forms */
 .form-consent{display:flex;align-items:flex-start;gap:10px;direction:rtl;padding:8px 0}
 .form-consent input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:20px;height:20px;min-width:20px;border:2px solid rgba(168,85,247,.35);border-radius:6px;background:rgba(255,255,255,.04);cursor:pointer;transition:all .3s;position:relative;margin-top:2px}
@@ -731,7 +731,7 @@ body.intro-playing .breathing-orb,body.intro-playing .floating-code{opacity:0!im
 /* Brand colored names with tech underlines */
 .brand-claude{color:#d97757;position:relative;display:inline-block}.brand-claude::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:110%;height:3px;background:linear-gradient(90deg,transparent,#d97757 20%,#e8956e 50%,#d97757 80%,transparent);border-radius:2px;box-shadow:0 0 8px rgba(217,119,87,.4),0 0 16px rgba(217,119,87,.15)}
 .brand-n8n{color:#ea4b71;position:relative;display:inline-block}.brand-n8n::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:110%;height:3px;background:linear-gradient(90deg,transparent,#ea4b71 20%,#ff6b8a 50%,#ea4b71 80%,transparent);border-radius:2px;box-shadow:0 0 8px rgba(234,75,113,.4),0 0 16px rgba(234,75,113,.15)}
-@media(max-width:480px){.dev-form-body{padding:20px 16px}.dev-form-row{flex-direction:column;align-items:stretch;gap:4px}.dev-form-row label{min-width:unset;text-align:right;direction:rtl;font-size:12px}.dev-form-cmd{font-size:12px}.dev-form-name-row{flex-direction:column}}
+@media(max-width:480px){.dev-form-body{padding:20px 16px}.dev-form-row{flex-direction:column;align-items:stretch;gap:4px}.dev-form-row label{min-width:unset;text-align:right;direction:rtl;font-size:12px}.dev-form-cmd{font-size:12px}}
 /* Code particle hover effect */
 @keyframes btnCodeFly{0%{transform:translate(0,0) scale(1);opacity:1}50%{opacity:.9}100%{transform:translate(var(--px),var(--py)) scale(.5);opacity:0}}
 .btn-code-particle{position:fixed;font-family:'Space Mono',monospace;font-size:16px;font-weight:700;pointer-events:none;z-index:99999;animation:btnCodeFly .9s ease-out forwards;will-change:transform,opacity;text-shadow:0 0 8px currentColor,0 0 16px currentColor}
