@@ -61,6 +61,17 @@ const resources = [
     tag: 'SKILLS',
   },
 ];
+
+const highlights = [
+  { label: 'בית', href: '/', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584191/focusai/highlight-home.png' },
+  { label: 'אקדמיה', href: '/academy', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584195/focusai/highlight-academy.png' },
+  { label: 'וובינר', href: '/webinar-n8n-agent', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584199/focusai/highlight-webinar.png', isLive: true },
+  { label: 'סוכני AI', href: '/ai-agents', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584205/focusai/highlight-agents.png' },
+  { label: 'סדנאות', href: '/ai-workshop', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584213/focusai/highlight-workshops.png' },
+  { label: 'חדשות', href: '/ai-news', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584217/focusai/highlight-news.png' },
+  { label: 'כלים', href: '/tools', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584221/focusai/highlight-tools.png' },
+  { label: 'אודות', href: '/about', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584225/focusai/highlight-about.png' },
+];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -83,6 +94,25 @@ const resources = [
           וובינרים, הדרכות מקצועיות וחבילות סקילים ל-Claude Code.
           <span class="text-[#f5f5fa] font-medium">הכל בחינם, הכל במקום אחד.</span>
         </p>
+
+        <!-- Mobile Highlights - Instagram Stories Style -->
+        <div class="md:hidden mt-10 -mx-4">
+          <div class="flex gap-4 overflow-x-auto px-4 pb-2 highlights-scroll">
+            {highlights.map((hl) => (
+              <a href={hl.href} class="flex flex-col items-center gap-2 flex-shrink-0">
+                <div class={`w-16 h-16 rounded-full p-[2px] ${hl.isLive ? 'bg-gradient-to-br from-red-500 via-[#a855f7] to-[#ec4899]' : 'bg-gradient-to-br from-[#a855f7]/60 to-[#c084fc]/40'}`}>
+                  <img
+                    src={hl.image}
+                    alt={hl.label}
+                    class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0f]"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="text-[11px] text-white/70 font-medium whitespace-nowrap">{hl.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
 
@@ -213,5 +243,13 @@ const resources = [
       0 0 0 1px rgba(168, 85, 247, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transform: translateY(-4px);
+  }
+
+  .highlights-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .highlights-scroll::-webkit-scrollbar {
+    display: none;
   }
 </style>
