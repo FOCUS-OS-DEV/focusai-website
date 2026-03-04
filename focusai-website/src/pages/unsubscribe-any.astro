@@ -373,7 +373,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       submitBtn.textContent = 'שולח...';
 
       try {
-        const response = await fetch('https://focusai.app.n8n.cloud/webhook/8422a522-cfc0-4e23-959d-24bd6c7152be', {
+        const response = await fetch('https://focusai.app.n8n.cloud/webhook/unsubscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
