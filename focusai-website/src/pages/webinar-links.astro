@@ -1,0 +1,272 @@
+---
+/**
+ * Webinar Links — 04.03.2026
+ * Hidden page for webinar participants (no menu, noindex)
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="וובינר Live — לינקים למשתתפים | Focus AI" description="לינקים למשתתפי הוובינר של Focus AI">
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+
+  <div class="min-h-screen bg-[#0a0a0f] text-white" dir="rtl">
+
+    <!-- Logo bar -->
+    <div class="pt-8 pb-4 text-center">
+      <a href="/">
+        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png" alt="Focus AI" height="40" class="inline-block" />
+      </a>
+    </div>
+
+    <!-- Hero -->
+    <section class="pt-8 pb-10 text-center px-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 mb-6">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="text-xs font-bold text-red-400 uppercase tracking-wider">LIVE — 04.03.2026</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-black mb-3 leading-tight">
+        וובינר <span class="webinar-gradient">סוכן AI ב-N8N</span>
+      </h1>
+      <p class="text-lg text-[#b0b0c0] max-w-xl mx-auto">
+        כל הלינקים שתצטרכו — במקום אחד
+      </p>
+    </section>
+
+    <!-- Main content -->
+    <div class="max-w-2xl mx-auto px-4 pb-20 space-y-6">
+
+      <!-- ─── N8N Registration ─── -->
+      <a href="https://did.li/FocusAI-n8n" target="_blank" rel="noopener noreferrer" class="link-card group block">
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#ea4b71]/15 border border-[#ea4b71]/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#ea4b71]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7" /></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-bold text-white group-hover:text-[#ea4b71] transition-colors">הרשמה ל-N8N</h3>
+            <p class="text-sm text-[#b0b0c0]/70">שבועיים ניסיון חינם — הפלטפורמה שבה נבנה הכל</p>
+          </div>
+          <svg class="w-5 h-5 text-[#b0b0c0]/40 group-hover:text-[#ea4b71] transition-colors transform rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </div>
+      </a>
+
+      <!-- ─── OpenRouter ─── -->
+      <a href="https://did.li/FocusAI-OpenRouter" target="_blank" rel="noopener noreferrer" class="link-card group block">
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#10b981]/15 border border-[#10b981]/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" /></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-bold text-white group-hover:text-[#10b981] transition-colors">OpenRouter</h3>
+            <p class="text-sm text-[#b0b0c0]/70">חיבור מודל שפה (LLM) אל סוכני AI ב-N8N</p>
+          </div>
+          <svg class="w-5 h-5 text-[#b0b0c0]/40 group-hover:text-[#10b981] transition-colors transform rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </div>
+      </a>
+
+      <!-- ─── Divider ─── -->
+      <div class="flex items-center gap-3 pt-2">
+        <div class="flex-1 h-px bg-white/[0.06]"></div>
+        <span class="text-[10px] font-mono text-[#b0b0c0]/40 uppercase tracking-widest">AI Agents</span>
+        <div class="flex-1 h-px bg-white/[0.06]"></div>
+      </div>
+
+      <!-- ─── Prompt Master V3 (ChatGPT) ─── -->
+      <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" target="_blank" rel="noopener noreferrer" class="link-card group block">
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#74aa9c]/15 border border-[#74aa9c]/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#74aa9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-bold text-white group-hover:text-[#74aa9c] transition-colors">Prompt Master V3</h3>
+            <p class="text-sm text-[#b0b0c0]/70">סוכן AI מבית Focus AI — ב-ChatGPT</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-full bg-[#74aa9c]/15 text-[10px] font-mono text-[#74aa9c] uppercase flex-shrink-0">ChatGPT</span>
+        </div>
+      </a>
+
+      <!-- ─── Prompt Master Gemini ─── -->
+      <a href="https://gemini.google.com/gem/c9c0363a0699?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-card group block">
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#4285f4]/15 border border-[#4285f4]/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#4285f4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-bold text-white group-hover:text-[#4285f4] transition-colors">Prompt Master Gemini</h3>
+            <p class="text-sm text-[#b0b0c0]/70">סוכן AI מבית Focus AI — ב-Gemini</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-full bg-[#4285f4]/15 text-[10px] font-mono text-[#4285f4] uppercase flex-shrink-0">Gemini</span>
+        </div>
+      </a>
+
+      <!-- ─── Divider ─── -->
+      <div class="flex items-center gap-3 pt-2">
+        <div class="flex-1 h-px bg-white/[0.06]"></div>
+        <span class="text-[10px] font-mono text-[#b0b0c0]/40 uppercase tracking-widest">Bot-Camp</span>
+        <div class="flex-1 h-px bg-white/[0.06]"></div>
+      </div>
+
+      <!-- ─── Payment CTA with Timer ─── -->
+      <div class="payment-card relative overflow-hidden rounded-2xl border border-[#a855f7]/30 bg-gradient-to-br from-[#a855f7]/10 via-[#0a0a0f] to-[#ec4899]/5">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#a855f7] via-[#c084fc] to-[#ec4899]"></div>
+        <div class="p-6 sm:p-8">
+          <div class="text-center mb-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#a855f7]/15 border border-[#a855f7]/20 mb-4">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+              <span class="text-[10px] font-mono text-[#a855f7] uppercase tracking-wider">הצעה מיוחדת למשתתפי הוובינר</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black mb-2">שריון מקום ב-Bot-Camp</h3>
+            <p class="text-[#b0b0c0] text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-4">
+              מקדמה של <span class="text-white font-bold text-lg">190 &#8362;</span> בלבד לשריון מקום במחיר מבצע — במסגרת וובינר 04.03.2026
+            </p>
+            <p class="text-[#b0b0c0]/60 text-xs leading-relaxed max-w-sm mx-auto">
+              יש להסדיר את יתרת התשלום עד 24 שעות לאחר מכן. נציג מטעם Focus AI ייצור קשר מחר בשעות הבוקר לביצוע הרישום.
+            </p>
+          </div>
+
+          <!-- Timer -->
+          <div id="timer-container" class="text-center mb-6">
+            <p class="text-xs text-[#b0b0c0]/50 mb-3 font-mono uppercase tracking-wider">הכפתור נפתח בעוד</p>
+            <div class="flex justify-center gap-3" id="countdown">
+              <div class="countdown-unit">
+                <span id="timer-hours" class="text-3xl font-black text-white">00</span>
+                <span class="text-[10px] text-[#b0b0c0]/40 font-mono">שעות</span>
+              </div>
+              <span class="text-2xl text-[#a855f7]/40 font-light self-start mt-1">:</span>
+              <div class="countdown-unit">
+                <span id="timer-minutes" class="text-3xl font-black text-white">00</span>
+                <span class="text-[10px] text-[#b0b0c0]/40 font-mono">דקות</span>
+              </div>
+              <span class="text-2xl text-[#a855f7]/40 font-light self-start mt-1">:</span>
+              <div class="countdown-unit">
+                <span id="timer-seconds" class="text-3xl font-black text-white">00</span>
+                <span class="text-[10px] text-[#b0b0c0]/40 font-mono">שניות</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="text-center">
+            <a
+              id="payment-btn"
+              href="https://mrng.to/Wp1pv95LnI"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="payment-btn inline-flex items-center gap-3 px-10 py-4 rounded-xl text-lg font-bold transition-all pointer-events-none opacity-40 cursor-not-allowed bg-gradient-to-r from-[#a855f7] to-[#9333ea] text-white"
+            >
+              <span>שריון מקום — 190 &#8362;</span>
+              <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </a>
+            <p id="btn-status" class="text-xs text-[#b0b0c0]/40 mt-3 font-mono">נפתח בשעה 21:00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── WhatsApp Community ─── -->
+      <a href="https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t" target="_blank" rel="noopener noreferrer" class="link-card group block !border-[#25D366]/20 hover:!border-[#25D366]/40">
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#25D366]/15 border border-[#25D366]/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#25D366]" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-bold text-white group-hover:text-[#25D366] transition-colors">קהילת AI בוואטסאפ</h3>
+            <p class="text-sm text-[#b0b0c0]/70">טיפים, כלים חדשים ועדכונים — 950+ חברים</p>
+          </div>
+          <svg class="w-5 h-5 text-[#b0b0c0]/40 group-hover:text-[#25D366] transition-colors transform rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </div>
+      </a>
+
+      <!-- Footer -->
+      <div class="text-center pt-8">
+        <p class="text-xs text-[#b0b0c0]/30">Focus AI &copy; 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Target: 04 March 2026, 21:00 Israel Standard Time (UTC+2)
+    const TARGET = new Date('2026-03-04T21:00:00+02:00').getTime();
+
+    const hoursEl = document.getElementById('timer-hours');
+    const minutesEl = document.getElementById('timer-minutes');
+    const secondsEl = document.getElementById('timer-seconds');
+    const btn = document.getElementById('payment-btn');
+    const timerContainer = document.getElementById('timer-container');
+    const btnStatus = document.getElementById('btn-status');
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function tick() {
+      const now = Date.now();
+      const diff = TARGET - now;
+
+      if (diff <= 0) {
+        // Timer expired — activate button
+        timerContainer.style.display = 'none';
+        btn.classList.remove('pointer-events-none', 'opacity-40', 'cursor-not-allowed');
+        btn.classList.add('hover:shadow-[0_0_40px_rgba(168,85,247,0.5)]', 'hover:scale-105', 'active:scale-95');
+        btnStatus.textContent = 'הכפתור פעיל — לחצו לשריון מקום';
+        btnStatus.classList.remove('text-[#b0b0c0]/40');
+        btnStatus.classList.add('text-[#a855f7]');
+        return;
+      }
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      hoursEl.textContent = pad(hours);
+      minutesEl.textContent = pad(minutes);
+      secondsEl.textContent = pad(seconds);
+
+      requestAnimationFrame(() => setTimeout(tick, 250));
+    }
+
+    tick();
+  </script>
+</BaseLayout>
+
+<style>
+  .webinar-gradient {
+    background: linear-gradient(135deg, #a855f7, #c084fc, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .link-card {
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .link-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .payment-card {
+    box-shadow:
+      0 0 60px rgba(168, 85, 247, 0.08),
+      0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 3.5rem;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .payment-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
