@@ -127,7 +127,18 @@ export default function AnalyticsDashboard() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', flexWrap: 'wrap', gap: '12px' }}>
         <h1 style={{ fontSize: '24px', margin: 0 }}>📊 Focus AI Analytics</h1>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button onClick={() => fetchData(password, days)} disabled={loading} style={{
+            padding: '8px 12px',
+            borderRadius: '8px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            background: 'rgba(255,255,255,0.03)',
+            color: loading ? '#666' : '#10b981',
+            cursor: loading ? 'default' : 'pointer',
+            fontSize: '14px',
+          }}>
+            {loading ? '⏳' : '🔄'}
+          </button>
           {[7, 14, 30, 90].map(d => (
             <button key={d} onClick={() => changeDays(d)} style={{
               padding: '8px 16px',
