@@ -37,27 +37,27 @@ const resources = [
     tag: 'GUIDE',
   },
   {
-    title: '50 סקילים למפתחים',
-    description: 'סקילים ל-Claude Code מותאמים למפתחים — debug, refactor, testing ועוד',
+    title: '50 סקילים למפתחים + מדריך התקנה',
+    description: 'סקילים ל-Claude Code למפתחים עם מדריך התקנה ראשונית מלא',
     href: '/claude-skills-he',
     cta: 'להורדה',
-    icon: 'terminal',
+    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1772583498/focusai/skills-developers-card.png',
     tag: 'SKILLS',
   },
   {
-    title: '50 סקילים למנהלים ויזמים',
-    description: 'ניהול פרויקטים, כתיבת מסמכים, תכנון אסטרטגי ועוד',
+    title: '50 סקילים למנהלים + מדריך התקנה',
+    description: 'סקילים לניהול, אסטרטגיה ותכנון עם מדריך התקנה ראשונית',
     href: '/claude-skills-managers',
     cta: 'להורדה',
-    icon: 'briefcase',
+    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1772583505/focusai/skills-managers-card.png',
     tag: 'SKILLS',
   },
   {
-    title: '50 סקילים לשיווק ותוכן',
-    description: 'כתיבת תוכן, קמפיינים, SEO, סושיאל ועוד',
+    title: '50 סקילים לשיווק + מדריך התקנה',
+    description: 'סקילים לתוכן, קמפיינים וסושיאל עם מדריך התקנה ראשונית',
     href: '/claude-skills-marketing',
     cta: 'להורדה',
-    icon: 'megaphone',
+    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1772583511/focusai/skills-marketing-card.png',
     tag: 'SKILLS',
   },
 ];
@@ -80,8 +80,8 @@ const resources = [
         </h1>
 
         <p class="text-lg md:text-xl text-[#b0b0c0] max-w-2xl mx-auto leading-relaxed">
-          כל מה שצריך כדי להתחיל לעבוד עם AI —
-          <span class="text-[#f5f5fa] font-medium">וובינרים, הדרכות וסקילים. בחינם.</span>
+          וובינרים, הדרכות מקצועיות וחבילות סקילים ל-Claude Code.
+          <span class="text-[#f5f5fa] font-medium">הכל בחינם, הכל במקום אחד.</span>
         </p>
       </div>
     </section>
@@ -89,26 +89,19 @@ const resources = [
     <!-- ============================================ -->
     <!-- WEBINARS & GUIDES                             -->
     <!-- ============================================ -->
-    <section class="relative pb-8">
+    <section class="relative pb-6">
       <div class="container mx-auto px-4 max-w-6xl">
-        <div class="flex items-center gap-3 mb-8">
+        <div class="flex items-center gap-3 mb-6">
           <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">WEBINARS & GUIDES</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {resources.filter(r => r.image).map((item) => (
+          {resources.slice(0, 3).map((item) => (
             <a href={item.href} class="focus-card group relative rounded-2xl overflow-hidden">
-              <!-- Image -->
               <div class="relative h-44 overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
+                <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
-                <!-- Tag -->
                 <div class="absolute top-3 right-3 flex items-center gap-2">
                   {item.isLive && (
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/90 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_12px_rgba(239,68,68,0.5)]">
@@ -116,20 +109,15 @@ const resources = [
                       LIVE
                     </span>
                   )}
-                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">
-                    {item.tag}
-                  </span>
+                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
                 </div>
               </div>
-              <!-- Content -->
               <div class="p-5">
                 <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
                 <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
                 <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
                   {item.cta}
-                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </span>
               </div>
             </a>
@@ -141,56 +129,29 @@ const resources = [
     <!-- ============================================ -->
     <!-- CLAUDE CODE SKILLS                            -->
     <!-- ============================================ -->
-    <section class="relative pt-8 pb-20">
+    <section class="relative pt-6 pb-20">
       <div class="container mx-auto px-4 max-w-6xl">
-        <div class="flex items-center gap-3 mb-8">
+        <div class="flex items-center gap-3 mb-6">
           <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">CLAUDE CODE SKILLS</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {resources.filter(r => r.icon).map((item) => (
+          {resources.slice(3).map((item) => (
             <a href={item.href} class="focus-card group relative rounded-2xl overflow-hidden">
-              <!-- Icon Hero Area -->
-              <div class="relative h-44 overflow-hidden flex items-center justify-center bg-gradient-to-br from-[#a855f7]/10 via-[#1a1a2e] to-[#0a0a0f]">
-                <div class="absolute inset-0 opacity-[0.05]" style="background-image: linear-gradient(rgba(168, 85, 247, 0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.8) 1px, transparent 1px); background-size: 20px 20px;"></div>
-                <div class="relative z-10 w-20 h-20 rounded-2xl bg-[#a855f7]/10 border border-[#a855f7]/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#a855f7]/20 transition-all duration-300">
-                  {item.icon === 'terminal' && (
-                    <svg class="w-10 h-10 text-[#a855f7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                      <polyline points="8 12 11 15 8 18"></polyline>
-                      <line x1="14" y1="18" x2="18" y2="18"></line>
-                    </svg>
-                  )}
-                  {item.icon === 'briefcase' && (
-                    <svg class="w-10 h-10 text-[#a855f7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                      <path d="M16 7V5a4 4 0 00-8 0v2"></path>
-                    </svg>
-                  )}
-                  {item.icon === 'megaphone' && (
-                    <svg class="w-10 h-10 text-[#a855f7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M3 11l18-5v12L3 13v-2z"></path>
-                      <path d="M11.6 16.8a3 3 0 11-5.8-1.6"></path>
-                    </svg>
-                  )}
-                </div>
-                <!-- Tag -->
+              <div class="relative h-44 overflow-hidden">
+                <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
                 <div class="absolute top-3 right-3">
-                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">
-                    {item.tag}
-                  </span>
+                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
                 </div>
               </div>
-              <!-- Content -->
               <div class="p-5">
                 <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
                 <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
                 <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
                   {item.cta}
-                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </span>
               </div>
             </a>
