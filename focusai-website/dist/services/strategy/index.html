@@ -78,7 +78,107 @@
       if (hasMarketingConsent()) loadMetaPixel();
       document.addEventListener('marketing-consent-granted', loadMetaPixel);
     })();
-  })();</script><!-- Page-specific head content --><link rel="stylesheet" href="/_astro/about.lQFUwQP5.css">
+  })();</script><!-- Anonymous Tracker - No cookies, no consent needed --><script>
+(function() {
+  var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+
+  function getDeviceType() {
+    var w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function getUTM() {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || null,
+      utm_medium: params.get('utm_medium') || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content: params.get('utm_content') || null,
+      utm_term: params.get('utm_term') || null
+    };
+  }
+
+  function getClickType(href) {
+    if (!href) return null;
+    if (href.startsWith('mailto:')) return 'email';
+    if (href.startsWith('tel:')) return 'phone';
+    if (href.includes('wa.me') || href.includes('whatsapp.com')) return 'whatsapp';
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.hostname === window.location.hostname) return 'internal';
+      return 'external';
+    } catch(e) { return 'external'; }
+  }
+
+  function sendEvent(data) {
+    var payload = Object.assign({
+      page_url: window.location.href,
+      page_path: window.location.pathname,
+      referrer: document.referrer || null,
+      device_type: getDeviceType(),
+      screen_width: window.innerWidth
+    }, getUTM(), data);
+
+    // Remove null values
+    Object.keys(payload).forEach(function(k) {
+      if (payload[k] === null || payload[k] === undefined) delete payload[k];
+    });
+
+    var url = SUPABASE_URL + '/rest/v1/events';
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    }
+    // sendBeacon doesn't support custom headers, use fetch as primary
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
+  }
+
+  // Track pageview
+  if (!window.__fai_tracked) {
+    window.__fai_tracked = true;
+    sendEvent({ event_type: 'pageview' });
+  }
+
+  // Track clicks on links
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    sendEvent({
+      event_type: 'click',
+      click_url: href,
+      click_text: (link.textContent || '').trim().substring(0, 200),
+      click_type: getClickType(href)
+    });
+  });
+
+  // Track form submissions
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    sendEvent({
+      event_type: 'form_submit',
+      click_url: form.action || window.location.href,
+      click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
+    });
+  });
+})();
+</script><!-- Page-specific head content --><link rel="stylesheet" href="/_astro/about.CZaXrXq2.css">
 <link rel="stylesheet" href="/_astro/about.i6MaJk1e.css">
 <style>.tw-blink[data-astro-cid-rmnjdqdi]{animation:twBlink 1s step-end infinite;color:#a855f7}@keyframes twBlink{0%,50%{opacity:1}51%,to{opacity:0}}
 @keyframes float{0%,to{transform:translateY(0)}50%{transform:translateY(-10px)}}.animate-float[data-astro-cid-rl6ukasy]{animation:float 6s ease-in-out infinite}

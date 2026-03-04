@@ -4,6 +4,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
+import Tracker from '../components/Tracker.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
@@ -86,6 +87,7 @@ window.__meta_pixel_loaded = true;
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"/></noscript>
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 <Analytics />
+  <Tracker />
 <meta name="generator" content={Astro.generator} />
 </head>
 <body class="bg-[#0a0a0f] antialiased">

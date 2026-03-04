@@ -78,7 +78,107 @@
       if (hasMarketingConsent()) loadMetaPixel();
       document.addEventListener('marketing-consent-granted', loadMetaPixel);
     })();
-  })();</script><!-- Meta Pixel Code --><script type="module">(function(t,u,c,o,e,a,r){t.fbq||(e=t.fbq=function(){e.callMethod?e.callMethod.apply(e,arguments):e.queue.push(arguments)},t._fbq||(t._fbq=e),e.push=e,e.loaded=!0,e.version="2.0",e.queue=[],a=u.createElement(c),a.async=!0,a.src=o,r=u.getElementsByTagName(c)[0],r.parentNode.insertBefore(a,r))})(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","3118189165055181");fbq("track","PageView");</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3118189165055181&ev=PageView&noscript=1" data-astro-cid-dcqeomi4></noscript><!-- End Meta Pixel Code --><link rel="stylesheet" href="/_astro/claude-code-guide.BxZvscyL.css"></head> <body data-astro-cid-dcqeomi4> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- Progress bar --> <div class="progress-bar" id="progressBar" data-astro-cid-dcqeomi4></div> <!-- Back to top --> <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה למעלה" data-astro-cid-dcqeomi4>↑</button> <!-- Topbar --> <div class="topbar" data-astro-cid-dcqeomi4> <a href="https://focusai.co.il" data-astro-cid-dcqeomi4>&larr; חזרה לאתר Focus AI</a> </div> <!-- Hero --> <div class="hero" data-astro-cid-dcqeomi4> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png" alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;" data-astro-cid-dcqeomi4> <p class="hero-label" data-astro-cid-dcqeomi4>מדריך התקנה והפעלה</p> <h1 data-astro-cid-dcqeomi4>Claude Code<br data-astro-cid-dcqeomi4><span class="headline-cursor" data-astro-cid-dcqeomi4>מאפס עד שימוש ראשון</span></h1> <p class="hero-sub" data-astro-cid-dcqeomi4>מדריך מלא בעברית: התקנת סביבת עבודה, Claude Code על Windows ו-Mac, הגדרת חשבון, התקנת סקילים וטיפים למתחילים.</p> </div> <!-- Download cards --> <div class="wrap reveal" style="margin-bottom: 0;" data-astro-cid-dcqeomi4> <div style="
+  })();</script><script>
+(function() {
+  var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+
+  function getDeviceType() {
+    var w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function getUTM() {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || null,
+      utm_medium: params.get('utm_medium') || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content: params.get('utm_content') || null,
+      utm_term: params.get('utm_term') || null
+    };
+  }
+
+  function getClickType(href) {
+    if (!href) return null;
+    if (href.startsWith('mailto:')) return 'email';
+    if (href.startsWith('tel:')) return 'phone';
+    if (href.includes('wa.me') || href.includes('whatsapp.com')) return 'whatsapp';
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.hostname === window.location.hostname) return 'internal';
+      return 'external';
+    } catch(e) { return 'external'; }
+  }
+
+  function sendEvent(data) {
+    var payload = Object.assign({
+      page_url: window.location.href,
+      page_path: window.location.pathname,
+      referrer: document.referrer || null,
+      device_type: getDeviceType(),
+      screen_width: window.innerWidth
+    }, getUTM(), data);
+
+    // Remove null values
+    Object.keys(payload).forEach(function(k) {
+      if (payload[k] === null || payload[k] === undefined) delete payload[k];
+    });
+
+    var url = SUPABASE_URL + '/rest/v1/events';
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    }
+    // sendBeacon doesn't support custom headers, use fetch as primary
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
+  }
+
+  // Track pageview
+  if (!window.__fai_tracked) {
+    window.__fai_tracked = true;
+    sendEvent({ event_type: 'pageview' });
+  }
+
+  // Track clicks on links
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    sendEvent({
+      event_type: 'click',
+      click_url: href,
+      click_text: (link.textContent || '').trim().substring(0, 200),
+      click_type: getClickType(href)
+    });
+  });
+
+  // Track form submissions
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    sendEvent({
+      event_type: 'form_submit',
+      click_url: form.action || window.location.href,
+      click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
+    });
+  });
+})();
+</script><!-- Meta Pixel Code --><script type="module">(function(t,u,c,o,e,a,r){t.fbq||(e=t.fbq=function(){e.callMethod?e.callMethod.apply(e,arguments):e.queue.push(arguments)},t._fbq||(t._fbq=e),e.push=e,e.loaded=!0,e.version="2.0",e.queue=[],a=u.createElement(c),a.async=!0,a.src=o,r=u.getElementsByTagName(c)[0],r.parentNode.insertBefore(a,r))})(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","3118189165055181");fbq("track","PageView");</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3118189165055181&ev=PageView&noscript=1" data-astro-cid-dcqeomi4></noscript><!-- End Meta Pixel Code --><link rel="stylesheet" href="/_astro/claude-code-guide.BxZvscyL.css"></head> <body data-astro-cid-dcqeomi4> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- Progress bar --> <div class="progress-bar" id="progressBar" data-astro-cid-dcqeomi4></div> <!-- Back to top --> <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה למעלה" data-astro-cid-dcqeomi4>↑</button> <!-- Topbar --> <div class="topbar" data-astro-cid-dcqeomi4> <a href="https://focusai.co.il" data-astro-cid-dcqeomi4>&larr; חזרה לאתר Focus AI</a> </div> <!-- Hero --> <div class="hero" data-astro-cid-dcqeomi4> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_64/v1772353512/FOCUS_LOGO-02_hc0h1a.png" alt="Focus AI" height="64" style="display:block;margin:0 auto 16px;" data-astro-cid-dcqeomi4> <p class="hero-label" data-astro-cid-dcqeomi4>מדריך התקנה והפעלה</p> <h1 data-astro-cid-dcqeomi4>Claude Code<br data-astro-cid-dcqeomi4><span class="headline-cursor" data-astro-cid-dcqeomi4>מאפס עד שימוש ראשון</span></h1> <p class="hero-sub" data-astro-cid-dcqeomi4>מדריך מלא בעברית: התקנת סביבת עבודה, Claude Code על Windows ו-Mac, הגדרת חשבון, התקנת סקילים וטיפים למתחילים.</p> </div> <!-- Download cards --> <div class="wrap reveal" style="margin-bottom: 0;" data-astro-cid-dcqeomi4> <div style="
       background: var(--win-bg);
       border: 2px solid var(--orange);
       border-radius: 14px;

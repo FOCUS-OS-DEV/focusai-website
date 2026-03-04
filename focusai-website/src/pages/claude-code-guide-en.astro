@@ -5,6 +5,7 @@
  * Route: /claude-code-guide-en/
  */
 import Analytics from '../components/Analytics.astro';
+import Tracker from '../components/Tracker.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
@@ -20,6 +21,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <Analytics slot="head" />
+  <Tracker />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

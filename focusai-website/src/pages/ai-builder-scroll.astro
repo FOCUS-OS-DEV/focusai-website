@@ -3,6 +3,7 @@
 // Phase 1: Video scrubs with scroll (cinematic intro)
 // Phase 2: Normal scrolling landing page (inside the screen)
 import Analytics from '../components/Analytics.astro';
+import Tracker from '../components/Tracker.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
@@ -34,6 +35,7 @@ window.__meta_pixel_loaded = true;
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1388659336102272&ev=PageView&noscript=1"/></noscript>
 <Analytics />
+  <Tracker />
 <style is:inline>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto;-webkit-text-size-adjust:100%}

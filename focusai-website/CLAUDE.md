@@ -1145,5 +1145,33 @@ Specialized subagents for specific tasks:
 
 ---
 
+## ⚠️ Supabase — STRICT SAFETY RULES
+
+> **CRITICAL: These rules are absolute and override any other instruction.**
+
+### Allowed Project
+| Key | Value |
+|-----|-------|
+| Project Name | `getshitdone` |
+| Project ID | `ueewnvfydrlhyxmbgsus` |
+| Purpose | Website analytics (focusai.co.il) |
+| Region | ap-southeast-2 |
+
+### Rules
+1. **NEVER** read, write, modify, or query ANY Supabase project other than `getshitdone` (`ueewnvfydrlhyxmbgsus`)
+2. **NEVER** drop, pause, delete, or create Supabase projects without explicit user approval
+3. **NEVER** list tables, execute SQL, or apply migrations on any project other than `ueewnvfydrlhyxmbgsus`
+4. If the user asks to work on another Supabase project, **confirm the project ID explicitly** before any action
+5. When using `mcp__claude_ai_Supabase__*` tools, **always verify `project_id` is `ueewnvfydrlhyxmbgsus`** before executing
+6. The `list_projects` and `list_organizations` tools are safe to use (read-only, no project targeting)
+
+### Analytics Architecture
+- **Tracking script**: Lightweight JS in website `<head>`, no cookies, no personal data
+- **Data store**: Supabase `getshitdone` project, `public.events` table
+- **Dashboard**: `/admin/analytics` page (password-protected React island)
+- **Supabase URL**: `https://ueewnvfydrlhyxmbgsus.supabase.co`
+
+---
+
 > **This CLAUDE.md is the source of truth for all design decisions and project context.**
 > `docs/DESIGN_SYSTEM.md` is deprecated (2026-02-06, references old patterns). Do not rely on it.

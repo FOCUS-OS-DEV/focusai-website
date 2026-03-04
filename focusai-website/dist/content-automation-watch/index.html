@@ -88,7 +88,107 @@
       if (hasMarketingConsent()) loadMetaPixel();
       document.addEventListener('marketing-consent-granted', loadMetaPixel);
     })();
-  })();</script><link rel="stylesheet" href="/_astro/index.CVrdGZoQ.css">
+  })();</script><script>
+(function() {
+  var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+
+  function getDeviceType() {
+    var w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function getUTM() {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || null,
+      utm_medium: params.get('utm_medium') || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content: params.get('utm_content') || null,
+      utm_term: params.get('utm_term') || null
+    };
+  }
+
+  function getClickType(href) {
+    if (!href) return null;
+    if (href.startsWith('mailto:')) return 'email';
+    if (href.startsWith('tel:')) return 'phone';
+    if (href.includes('wa.me') || href.includes('whatsapp.com')) return 'whatsapp';
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.hostname === window.location.hostname) return 'internal';
+      return 'external';
+    } catch(e) { return 'external'; }
+  }
+
+  function sendEvent(data) {
+    var payload = Object.assign({
+      page_url: window.location.href,
+      page_path: window.location.pathname,
+      referrer: document.referrer || null,
+      device_type: getDeviceType(),
+      screen_width: window.innerWidth
+    }, getUTM(), data);
+
+    // Remove null values
+    Object.keys(payload).forEach(function(k) {
+      if (payload[k] === null || payload[k] === undefined) delete payload[k];
+    });
+
+    var url = SUPABASE_URL + '/rest/v1/events';
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    }
+    // sendBeacon doesn't support custom headers, use fetch as primary
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
+  }
+
+  // Track pageview
+  if (!window.__fai_tracked) {
+    window.__fai_tracked = true;
+    sendEvent({ event_type: 'pageview' });
+  }
+
+  // Track clicks on links
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    sendEvent({
+      event_type: 'click',
+      click_url: href,
+      click_text: (link.textContent || '').trim().substring(0, 200),
+      click_type: getClickType(href)
+    });
+  });
+
+  // Track form submissions
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    sendEvent({
+      event_type: 'form_submit',
+      click_url: form.action || window.location.href,
+      click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
+    });
+  });
+})();
+</script><link rel="stylesheet" href="/_astro/index.CVrdGZoQ.css">
 <link rel="stylesheet" href="/_astro/content-automation-watch.CLQ7ycsB.css"></head> <body data-astro-cid-vszj3lyo> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <div class="page" data-astro-cid-vszj3lyo> <a href="/" class="back-link" data-astro-cid-vszj3lyo> <i class="fas fa-home" data-astro-cid-vszj3lyo></i> חזרה לאתר Focus AI
 </a> <header data-astro-cid-vszj3lyo> <a href="/" data-astro-cid-vszj3lyo> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo" data-astro-cid-vszj3lyo> </a> <p class="welcome-text" data-astro-cid-vszj3lyo>צפייה מהנה!</p> <h1 data-astro-cid-vszj3lyo>אוטומציית יצירת תוכן עם AI</h1> <p class="subtitle" data-astro-cid-vszj3lyo>הדרכה מעשית מאת <strong data-astro-cid-vszj3lyo>שחר דדיה</strong> | בניית אוטומציה מאפס ועד פוסט מוכן</p> </header> <!-- ========== VIDEO ========== --> <div class="video-wrapper" data-astro-cid-vszj3lyo> <div class="video-container" data-astro-cid-vszj3lyo> <iframe src="https://player.vimeo.com/video/1166381320?h=2eddaa87b7&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Content Automation - Focus AI" data-astro-cid-vszj3lyo></iframe> </div> </div> <!-- ========== TOOLS LINKS ========== --> <div class="tools-section" data-astro-cid-vszj3lyo> <p class="tools-label" data-astro-cid-vszj3lyo>כלים מהסרטון</p> <h3 data-astro-cid-vszj3lyo>הכלים שהשתמשנו בהם בהדרכה</h3> <div class="tools-grid" data-astro-cid-vszj3lyo> <a href="https://n8n.partnerlinks.io/mqium2i26qiq" target="_blank" rel="noopener noreferrer" class="tool-btn n8n" data-astro-cid-vszj3lyo> <i class="fas fa-download" data-astro-cid-vszj3lyo></i> התקנת n8n
 </a> <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="tool-btn openrouter" data-astro-cid-vszj3lyo> <i class="fas fa-route" data-astro-cid-vszj3lyo></i> OpenRouter

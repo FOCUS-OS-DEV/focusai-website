@@ -87,7 +87,107 @@
       if (hasMarketingConsent()) loadMetaPixel();
       document.addEventListener('marketing-consent-granted', loadMetaPixel);
     })();
-  })();</script><link rel="stylesheet" href="/_astro/webinar-n8n-agent.CP_t1cYz.css"></head> <body data-astro-cid-mwnra3ok> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <div class="bg-animation" data-astro-cid-mwnra3ok></div> <div class="particles" id="particles" data-astro-cid-mwnra3ok></div> <div class="container" data-astro-cid-mwnra3ok> <a href="/" class="back-home" data-astro-cid-mwnra3ok><i class="fas fa-arrow-right" data-astro-cid-mwnra3ok></i> חזרה לאתר Focus AI</a> <header data-astro-cid-mwnra3ok> <a href="/" data-astro-cid-mwnra3ok> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo" data-astro-cid-mwnra3ok> </a> <div class="live-badge" data-astro-cid-mwnra3ok> <span class="live-dot" data-astro-cid-mwnra3ok></span>
+  })();</script><script>
+(function() {
+  var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+
+  function getDeviceType() {
+    var w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function getUTM() {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || null,
+      utm_medium: params.get('utm_medium') || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content: params.get('utm_content') || null,
+      utm_term: params.get('utm_term') || null
+    };
+  }
+
+  function getClickType(href) {
+    if (!href) return null;
+    if (href.startsWith('mailto:')) return 'email';
+    if (href.startsWith('tel:')) return 'phone';
+    if (href.includes('wa.me') || href.includes('whatsapp.com')) return 'whatsapp';
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.hostname === window.location.hostname) return 'internal';
+      return 'external';
+    } catch(e) { return 'external'; }
+  }
+
+  function sendEvent(data) {
+    var payload = Object.assign({
+      page_url: window.location.href,
+      page_path: window.location.pathname,
+      referrer: document.referrer || null,
+      device_type: getDeviceType(),
+      screen_width: window.innerWidth
+    }, getUTM(), data);
+
+    // Remove null values
+    Object.keys(payload).forEach(function(k) {
+      if (payload[k] === null || payload[k] === undefined) delete payload[k];
+    });
+
+    var url = SUPABASE_URL + '/rest/v1/events';
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    }
+    // sendBeacon doesn't support custom headers, use fetch as primary
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
+  }
+
+  // Track pageview
+  if (!window.__fai_tracked) {
+    window.__fai_tracked = true;
+    sendEvent({ event_type: 'pageview' });
+  }
+
+  // Track clicks on links
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    sendEvent({
+      event_type: 'click',
+      click_url: href,
+      click_text: (link.textContent || '').trim().substring(0, 200),
+      click_type: getClickType(href)
+    });
+  });
+
+  // Track form submissions
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    sendEvent({
+      event_type: 'form_submit',
+      click_url: form.action || window.location.href,
+      click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
+    });
+  });
+})();
+</script><link rel="stylesheet" href="/_astro/webinar-n8n-agent.CP_t1cYz.css"></head> <body data-astro-cid-mwnra3ok> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <div class="bg-animation" data-astro-cid-mwnra3ok></div> <div class="particles" id="particles" data-astro-cid-mwnra3ok></div> <div class="container" data-astro-cid-mwnra3ok> <a href="/" class="back-home" data-astro-cid-mwnra3ok><i class="fas fa-arrow-right" data-astro-cid-mwnra3ok></i> חזרה לאתר Focus AI</a> <header data-astro-cid-mwnra3ok> <a href="/" data-astro-cid-mwnra3ok> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo" data-astro-cid-mwnra3ok> </a> <div class="live-badge" data-astro-cid-mwnra3ok> <span class="live-dot" data-astro-cid-mwnra3ok></span>
 LIVE וובינר
 </div> <div class="event-date-badge" data-astro-cid-mwnra3ok> <i class="fas fa-calendar-alt" data-astro-cid-mwnra3ok></i> <span data-astro-cid-mwnra3ok>04.03.2026</span> <span class="separator" data-astro-cid-mwnra3ok></span> <i class="fas fa-clock" data-astro-cid-mwnra3ok></i> <span data-astro-cid-mwnra3ok>19:30</span> <span class="separator" data-astro-cid-mwnra3ok></span> <i class="fas fa-gift" data-astro-cid-mwnra3ok></i> <span data-astro-cid-mwnra3ok>חינם</span> </div> <h1 data-astro-cid-mwnra3ok>בניית סוכן AI ראשון ב-n8n</h1> <div class="hero-character" data-astro-cid-mwnra3ok> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_960/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png" alt="וובינר סוכן AI ב-N8N - Focus AI" data-astro-cid-mwnra3ok> </div> <p class="subtitle" data-astro-cid-mwnra3ok>
 למדו איך לבנות <strong data-astro-cid-mwnra3ok>סוכן AI אמיתי</strong> שעובד בשבילכם 24/7 - בלי קוד, בלי ניסיון טכני.<br data-astro-cid-mwnra3ok> <strong data-astro-cid-mwnra3ok>+ 2 הטבות בלעדיות</strong> למשתתפי הוובינר בלבד!<br data-astro-cid-mwnra3ok> <span class="no-recording-badge" data-astro-cid-mwnra3ok> <i class="fas fa-video-slash" data-astro-cid-mwnra3ok></i> <span class="no-rec-text" data-astro-cid-mwnra3ok>לא תהיה הקלטה!</span> <span class="no-rec-line" data-astro-cid-mwnra3ok></span> </span> </p> </header> <!-- Countdown Timer --> <div class="countdown-section" id="countdownSection" data-astro-cid-mwnra3ok> <div class="countdown-label" data-astro-cid-mwnra3ok>הוובינר מתחיל בעוד:</div> <div class="countdown-timer" id="countdownTimer" data-astro-cid-mwnra3ok> <div class="countdown-unit" data-astro-cid-mwnra3ok> <span class="number" id="cd-days" data-astro-cid-mwnra3ok>--</span> <span class="label" data-astro-cid-mwnra3ok>ימים</span> </div> <div class="countdown-unit" data-astro-cid-mwnra3ok> <span class="number" id="cd-hours" data-astro-cid-mwnra3ok>--</span> <span class="label" data-astro-cid-mwnra3ok>שעות</span> </div> <div class="countdown-unit" data-astro-cid-mwnra3ok> <span class="number" id="cd-minutes" data-astro-cid-mwnra3ok>--</span> <span class="label" data-astro-cid-mwnra3ok>דקות</span> </div> <div class="countdown-unit" data-astro-cid-mwnra3ok> <span class="number" id="cd-seconds" data-astro-cid-mwnra3ok>--</span> <span class="label" data-astro-cid-mwnra3ok>שניות</span> </div> </div> </div> <!-- Registration Form (after countdown) --> <div class="form-section" style="margin-top: 20px;" data-astro-cid-mwnra3ok> <div class="form-header" data-astro-cid-mwnra3ok> <h2 class="form-title" data-astro-cid-mwnra3ok>שמרו לכם מקום בוובינר</h2> <p class="form-subtitle" data-astro-cid-mwnra3ok>המקומות מוגבלים - הבטיחו את מקומכם עכשיו</p> </div> <form id="leadForm2" data-astro-cid-mwnra3ok> <div class="form-row" data-astro-cid-mwnra3ok> <div class="form-group" data-astro-cid-mwnra3ok> <label for="firstName2" class="required" data-astro-cid-mwnra3ok> <i class="fas fa-user" data-astro-cid-mwnra3ok></i>

@@ -3,6 +3,7 @@ import '../styles/global.css';
 import CookieConsent from '../components/CookieConsent.astro';
 import Analytics from '../components/Analytics.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
+import Tracker from '../components/Tracker.astro';
 import BackToTop from '../components/BackToTop.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import VideoPopup from '../components/VideoPopup.astro';
@@ -138,6 +139,9 @@ const websiteSchema = {
 
   <!-- Analytics (GTM, Clarity) - Respects Cookie Consent -->
   <Analytics />
+
+  <!-- Anonymous Tracker - No cookies, no consent needed -->
+  <Tracker />
 
   <!-- Page-specific head content -->
   <slot name="head" />

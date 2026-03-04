@@ -6,6 +6,7 @@
  * Route: /claude-skills-thank-you/
  */
 import Analytics from '../components/Analytics.astro';
+import Tracker from '../components/Tracker.astro';
 import AnalyticsBody from '../components/AnalyticsBody.astro';
 ---
 <!DOCTYPE html>
@@ -21,6 +22,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <Analytics slot="head" />
+  <Tracker />
 
   <!-- Meta Pixel Code — PageView + Lead conversion -->
   <script>
