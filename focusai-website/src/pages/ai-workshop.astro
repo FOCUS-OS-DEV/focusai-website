@@ -144,40 +144,33 @@ const stats = [
         <form id="hero-form" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="hero-name" class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
-              <input type="text" name="name" id="hero-name" required placeholder="השם שלך"
+              <label for="hero-firstName" class="block text-sm text-[#b0b0c0] mb-1.5">שם פרטי *</label>
+              <input type="text" name="firstName" id="hero-firstName" required placeholder="שם פרטי"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
+            <div>
+              <label for="hero-lastName" class="block text-sm text-[#b0b0c0] mb-1.5">שם משפחה *</label>
+              <input type="text" name="lastName" id="hero-lastName" required placeholder="שם משפחה"
+                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="hero-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
               <input type="email" name="email" id="hero-email" required placeholder="email@company.com" dir="ltr"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="hero-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
               <input type="tel" name="phone" id="hero-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="hero-company" class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
               <input type="text" name="company" id="hero-company" placeholder="שם החברה"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label for="hero-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
-              <select name="employees" id="hero-employees"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white/80 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
-                <option value="" class="bg-[#12121a]">בחרו טווח</option>
-                <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
-                <option value="11-50" class="bg-[#12121a]">11-50 עובדים</option>
-                <option value="51-200" class="bg-[#12121a]">51-200 עובדים</option>
-                <option value="201-500" class="bg-[#12121a]">201-500 עובדים</option>
-                <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
-              </select>
             </div>
             <div>
               <label for="hero-role" class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
@@ -186,15 +179,27 @@ const stats = [
             </div>
           </div>
           <div>
+            <label for="hero-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
+            <select name="employees" id="hero-employees"
+              class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white/80 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
+              <option value="" class="bg-[#12121a]">בחרו טווח</option>
+              <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
+              <option value="11-50" class="bg-[#12121a]">11-50 עובדים</option>
+              <option value="51-200" class="bg-[#12121a]">51-200 עובדים</option>
+              <option value="201-500" class="bg-[#12121a]">201-500 עובדים</option>
+              <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
+            </select>
+          </div>
+          <div>
             <label for="hero-message" class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
             <textarea name="message" id="hero-message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
-          <div class="flex items-start gap-2">
-            <input type="checkbox" name="terms" required id="hero-terms"
-              class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] text-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
-            <label for="hero-terms" class="text-xs text-[#b0b0c0]">
-              אני מאשר/ת קבלת מידע מ-Focus AI. ניתן להסיר את ההסכמה בכל עת. <a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות פרטיות</a>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" name="consent" required id="hero-consent"
+              class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
+            <label for="hero-consent" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
           <button type="submit"
@@ -642,29 +647,34 @@ const stats = [
         <form id="contact-form" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="contact-name" class="block text-sm text-[#b0b0c0] mb-1.5">שם מלא *</label>
-              <input type="text" name="name" id="contact-name" required placeholder="השם שלך"
+              <label for="contact-firstName" class="block text-sm text-[#b0b0c0] mb-1.5">שם פרטי *</label>
+              <input type="text" name="firstName" id="contact-firstName" required placeholder="שם פרטי"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
+            <div>
+              <label for="contact-lastName" class="block text-sm text-[#b0b0c0] mb-1.5">שם משפחה *</label>
+              <input type="text" name="lastName" id="contact-lastName" required placeholder="שם משפחה"
+                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="contact-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
               <input type="email" name="email" id="contact-email" required placeholder="email@company.com" dir="ltr"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="contact-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
               <input type="tel" name="phone" id="contact-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="contact-company" class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
               <input type="text" name="company" id="contact-company" placeholder="שם החברה"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="contact-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
               <select name="employees" id="contact-employees"
@@ -677,22 +687,17 @@ const stats = [
                 <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
               </select>
             </div>
-            <div>
-              <label for="contact-role" class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
-              <input type="text" name="role" id="contact-role" placeholder="התפקיד שלך"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
           </div>
           <div>
             <label for="contact-message" class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
             <textarea name="message" id="contact-message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
-          <div class="flex items-start gap-2">
-            <input type="checkbox" name="terms" required id="contact-terms"
-              class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] text-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
-            <label for="contact-terms" class="text-xs text-[#b0b0c0]">
-              אני מאשר/ת קבלת מידע מ-Focus AI. ניתן להסיר את ההסכמה בכל עת. <a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות פרטיות</a>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" name="consent" required id="contact-consent"
+              class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
+            <label for="contact-consent" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
           <button type="submit"
@@ -740,10 +745,16 @@ const stats = [
           btn.innerHTML = '<svg class="animate-spin w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>';
 
           var formData = new FormData(form);
+          var fn = (formData.get('firstName') || '').toString().trim();
+          var ln = (formData.get('lastName') || '').toString().trim();
           var data = {};
           formData.forEach(function(value, key) {
-            if (key !== 'terms') data[key] = value;
+            if (key !== 'terms' && key !== 'consent' && key !== 'firstName' && key !== 'lastName') data[key] = value;
           });
+          data.firstName = fn;
+          data.lastName = ln;
+          data.name = (fn + ' ' + ln).trim();
+          data.marketing_consent = true;
           data.source = 'ai-workshop';
           data.timestamp = new Date().toISOString();
 

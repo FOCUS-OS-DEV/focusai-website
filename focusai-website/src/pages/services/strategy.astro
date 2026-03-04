@@ -439,37 +439,28 @@ const serviceSchema = {
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
+              <label for="firstName" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם פרטי <span class="text-[#a855f7]">*</span></label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="firstName"
+                name="firstName"
                 required
                 class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
               />
             </div>
             <div>
-              <label for="company" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם החברה</label>
+              <label for="lastName" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם משפחה <span class="text-[#a855f7]">*</span></label>
               <input
                 type="text"
-                id="company"
-                name="company"
+                id="lastName"
+                name="lastName"
+                required
                 class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
               />
             </div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label for="email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
-              />
-            </div>
             <div>
               <label for="phone" class="block text-sm font-mono text-[#d0d0e0] mb-2">טלפון <span class="text-[#a855f7]">*</span></label>
               <input
@@ -480,6 +471,26 @@ const serviceSchema = {
                 class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
               />
             </div>
+            <div>
+              <label for="email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="company" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם החברה</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
+            />
           </div>
 
           <div>
@@ -494,15 +505,9 @@ const serviceSchema = {
           </div>
 
           <div class="flex items-start gap-2 text-right">
-            <input type="checkbox" id="strategy-privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
-            <label for="strategy-privacy" class="text-xs text-white/50">
-              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
-            </label>
-          </div>
-          <div class="flex items-start gap-2 text-right">
-            <input type="checkbox" id="strategy-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
-            <label for="strategy-marketing" class="text-xs text-white/50">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+            <input type="checkbox" id="strategy-consent" name="consent" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <label for="strategy-consent" class="text-xs text-white/50 leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -547,10 +552,9 @@ const serviceSchema = {
   const form = document.getElementById('strategy-form') as HTMLFormElement;
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    // Validate required checkboxes (privacy policy)
-    const privacyCheckbox = form.querySelector('input[type="checkbox"][required]') as HTMLInputElement;
-    if (privacyCheckbox && !privacyCheckbox.checked) {
-      alert('יש לאשר את מדיניות הפרטיות');
+    const consentCheckbox = form.querySelector('#strategy-consent') as HTMLInputElement;
+    if (consentCheckbox && !consentCheckbox.checked) {
+      alert('יש לאשר את תנאי השימוש ומדיניות הפרטיות');
       return;
     }
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
@@ -558,10 +562,16 @@ const serviceSchema = {
     if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
 
     const formData = new FormData(form);
+    const firstName = formData.get('firstName')?.toString() || '';
+    const lastName = formData.get('lastName')?.toString() || '';
     const params = new URLSearchParams();
     params.append('source', 'strategy-contact');
+    params.append('firstName', firstName);
+    params.append('lastName', lastName);
+    params.append('name', `${firstName} ${lastName}`.trim());
+    params.append('marketing_consent', 'true');
     formData.forEach((value, key) => {
-      if (key !== 'consent' && key !== 'privacy') {
+      if (!['consent', 'privacy', 'firstName', 'lastName', 'marketing'].includes(key)) {
         params.append(key, value.toString());
       }
     });

@@ -568,46 +568,18 @@ const faqSchema = {
         </h3>
 
         <form class="space-y-4" id="midPageForm">
-          <input
-            type="text"
-            name="name"
-            placeholder="שם מלא"
-            required
-            dir="rtl"
-            aria-label="שם מלא"
-            class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
-          />
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input
-              type="tel"
-              name="phone"
-              placeholder="טלפון"
-              required
-              dir="rtl"
-              aria-label="טלפון"
-              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="אימייל"
-              required
-              dir="rtl"
-              aria-label="אימייל"
-              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
-            />
+            <input type="text" name="firstName" placeholder="שם פרטי" required dir="rtl" aria-label="שם פרטי" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
+            <input type="text" name="lastName" placeholder="שם משפחה" required dir="rtl" aria-label="שם משפחה" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
           </div>
-
-          <div class="flex items-start gap-2">
-            <input type="checkbox" id="mid-privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
-            <label for="mid-privacy" class="text-sm text-[#6a6a8a]">
-              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
-            </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="tel" name="phone" placeholder="טלפון" required dir="rtl" aria-label="טלפון" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
+            <input type="email" name="email" placeholder="אימייל" required dir="rtl" aria-label="אימייל" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
           </div>
-          <div class="flex items-start gap-2">
-            <input type="checkbox" id="mid-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
-            <label for="mid-marketing" class="text-sm text-[#6a6a8a]">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="mid-consent" name="consent" required class="mt-1 w-5 h-5 min-w-[20px] rounded border-[#e0d4f7] accent-[#a855f7] cursor-pointer"/>
+            <label for="mid-consent" class="text-sm text-[#6a6a8a] leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -922,55 +894,18 @@ const faqSchema = {
 
       <div class="max-w-3xl mx-auto" data-animate="scale-up" data-delay="0.1">
         <form id="syllabus-form-element" class="bg-[#f8f4ff] rounded-3xl p-8 shadow-lg">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <input
-              type="text"
-              name="name"
-              placeholder="שם מלא"
-              required
-              dir="rtl"
-              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="טלפון"
-              required
-              dir="rtl"
-              aria-label="טלפון"
-              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="אימייל"
-              dir="rtl"
-              aria-label="אימייל"
-              class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"
-            />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input type="text" name="firstName" placeholder="שם פרטי" required dir="rtl" class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"/>
+            <input type="text" name="lastName" placeholder="שם משפחה" required dir="rtl" class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"/>
           </div>
-
-          <div class="flex items-start gap-3 mb-3 text-sm text-[#6a6a8a]">
-            <input
-              type="checkbox"
-              id="privacy-consent"
-              name="consent"
-              required
-              class="mt-1 w-4 h-4 rounded border-[#e0d4f7] text-[#a855f7] focus:ring-[#a855f7]"
-            />
-            <label for="privacy-consent" class="text-sm text-[#6a6a8a]">
-              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
-            </label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input type="tel" name="phone" placeholder="טלפון" required dir="rtl" aria-label="טלפון" class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"/>
+            <input type="email" name="email" placeholder="אימייל" required dir="rtl" aria-label="אימייל" class="w-full px-6 py-4 bg-white rounded-full border border-[#e0d4f7] text-[#1a1a2e] placeholder-[#9a9aaa] focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/20 transition-all text-right"/>
           </div>
-          <div class="flex items-start gap-3 mb-6 text-sm text-[#6a6a8a]">
-            <input
-              type="checkbox"
-              id="syllabus-marketing"
-              name="marketing"
-              class="mt-1 w-4 h-4 rounded border-[#e0d4f7] text-[#a855f7] focus:ring-[#a855f7]"
-            />
-            <label for="syllabus-marketing" class="text-sm text-[#6a6a8a]">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+          <div class="flex items-start gap-3 mb-6">
+            <input type="checkbox" id="privacy-consent" name="consent" required class="mt-1 w-5 h-5 min-w-[20px] rounded border-[#e0d4f7] accent-[#a855f7] cursor-pointer"/>
+            <label for="privacy-consent" class="text-sm text-[#6a6a8a] leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -1150,51 +1085,19 @@ const faqSchema = {
       </div>
 
       <div class="max-w-xl mx-auto bg-[#f8f4ff] rounded-2xl p-8 border border-[#e0d4f7]">
-        <form
-          class="space-y-4"
-          id="contactForm"
-        >
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="שם מלא"
-              required
-              dir="rtl"
-              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="טלפון"
-              required
-              dir="rtl"
-              aria-label="טלפון"
-              class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
-            />
+        <form class="space-y-4" id="contactForm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="text" name="firstName" placeholder="שם פרטי" required dir="rtl" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
+            <input type="text" name="lastName" placeholder="שם משפחה" required dir="rtl" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
           </div>
-
-          <input
-            type="email"
-            name="email"
-            placeholder="אימייל"
-            required
-            dir="rtl"
-            aria-label="אימייל"
-            class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"
-          />
-
-          <div class="flex items-start gap-2">
-            <input type="checkbox" id="privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
-            <label for="privacy" class="text-sm text-[#6a6a8a]">
-              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
-            </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="tel" name="phone" placeholder="טלפון" required dir="rtl" aria-label="טלפון" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
+            <input type="email" name="email" placeholder="אימייל" required dir="rtl" aria-label="אימייל" class="w-full px-4 py-3 rounded-xl border border-[#e0d4f7] focus:border-[#a855f7] focus:outline-none bg-white text-[#1a1a2e] text-right placeholder:text-[#9a9aaa]"/>
           </div>
-          <div class="flex items-start gap-2">
-            <input type="checkbox" id="contact-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
-            <label for="contact-marketing" class="text-sm text-[#6a6a8a]">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="contact-consent" name="consent" required class="mt-1 w-5 h-5 min-w-[20px] rounded border-[#e0d4f7] accent-[#a855f7] cursor-pointer"/>
+            <label for="contact-consent" class="text-sm text-[#6a6a8a] leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -1253,10 +1156,16 @@ const faqSchema = {
     if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'שולח...'; }
 
     const formData = new FormData(form);
+    const fn = (formData.get('firstName') || '').toString().trim();
+    const ln = (formData.get('lastName') || '').toString().trim();
     const params = new URLSearchParams();
     params.append('source', source);
+    params.append('firstName', fn);
+    params.append('lastName', ln);
+    params.append('name', (fn + ' ' + ln).trim());
+    params.append('marketing_consent', 'true');
     formData.forEach((value, key) => {
-      if (key !== 'consent' && key !== 'privacy') {
+      if (key !== 'consent' && key !== 'privacy' && key !== 'firstName' && key !== 'lastName' && key !== 'marketing') {
         params.append(key, value.toString());
       }
     });
@@ -1292,10 +1201,16 @@ const faqSchema = {
     if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'שולח...'; }
 
     const formData = new FormData(syllabusForm);
+    const fn = (formData.get('firstName') || '').toString().trim();
+    const ln = (formData.get('lastName') || '').toString().trim();
     const params = new URLSearchParams();
     params.append('source', 'bot-camp-syllabus');
+    params.append('firstName', fn);
+    params.append('lastName', ln);
+    params.append('name', (fn + ' ' + ln).trim());
+    params.append('marketing_consent', 'true');
     formData.forEach((value, key) => {
-      if (key !== 'consent' && key !== 'privacy') {
+      if (key !== 'consent' && key !== 'privacy' && key !== 'firstName' && key !== 'lastName' && key !== 'marketing') {
         params.append(key, value.toString());
       }
     });

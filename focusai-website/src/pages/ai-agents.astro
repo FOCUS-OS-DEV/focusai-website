@@ -604,36 +604,23 @@ const faqSchema = {
         <form id="agents-form" class="space-y-6" data-animate="scale-up">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label for="name" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם מלא <span class="text-[#a855f7]">*</span></label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
-              />
+              <label for="agents-firstName" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם פרטי <span class="text-[#a855f7]">*</span></label>
+              <input type="text" id="agents-firstName" name="firstName" required class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
             </div>
             <div>
-              <label for="phone" class="block text-sm font-mono text-[#d0d0e0] mb-2">טלפון <span class="text-[#a855f7]">*</span></label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
-              />
+              <label for="agents-lastName" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם משפחה <span class="text-[#a855f7]">*</span></label>
+              <input type="text" id="agents-lastName" name="lastName" required class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
             </div>
           </div>
-
-          <div>
-            <label for="email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
-            />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="agents-phone" class="block text-sm font-mono text-[#d0d0e0] mb-2">טלפון <span class="text-[#a855f7]">*</span></label>
+              <input type="tel" id="agents-phone" name="phone" required class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
+            </div>
+            <div>
+              <label for="agents-email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
+              <input type="email" id="agents-email" name="email" required class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
+            </div>
           </div>
 
           <div>
@@ -647,16 +634,10 @@ const faqSchema = {
             ></textarea>
           </div>
 
-          <div class="flex items-start gap-2 text-right">
-            <input type="checkbox" id="agents-privacy" name="privacy" required class="mt-1 accent-[#a855f7]"/>
-            <label for="agents-privacy" class="text-xs text-white/50">
-              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
-            </label>
-          </div>
-          <div class="flex items-start gap-2 text-right">
-            <input type="checkbox" id="agents-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
-            <label for="agents-marketing" class="text-xs text-white/50">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+          <div class="flex items-start gap-3 text-right">
+            <input type="checkbox" id="agents-consent" name="consent" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <label for="agents-consent" class="text-xs text-white/50 leading-relaxed cursor-pointer">
+              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -700,10 +681,16 @@ const faqSchema = {
     if (btn) { btn.disabled = true; btn.innerHTML = '<span class="flex items-center justify-center gap-2">שולח...</span>'; }
 
     const formData = new FormData(agentsForm);
+    const fn = (formData.get('firstName') || '').toString().trim();
+    const ln = (formData.get('lastName') || '').toString().trim();
     const params = new URLSearchParams();
     params.append('source', 'ai-agents-contact');
+    params.append('firstName', fn);
+    params.append('lastName', ln);
+    params.append('name', (fn + ' ' + ln).trim());
+    params.append('marketing_consent', 'true');
     formData.forEach((value, key) => {
-      if (key !== 'consent' && key !== 'privacy') {
+      if (!['consent','privacy','firstName','lastName','marketing'].includes(key)) {
         params.append(key, value.toString());
       }
     });
