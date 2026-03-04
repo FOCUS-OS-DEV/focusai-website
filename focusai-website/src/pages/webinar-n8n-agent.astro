@@ -1832,9 +1832,15 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     </div>
 
                     <label class="checkbox-group">
-                        <input type="checkbox" id="privacyConsent2" name="privacyConsent" required>
+                        <input type="checkbox" id="privacyConsent2" name="privacy" required>
                         <span class="checkbox-label">
-                            אני מאשר/ת את <a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ואת <a href="/terms/" target="_blank">תנאי השימוש</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת. *
+                            קראתי ואני מסכים/ה ל<a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ול<a href="/terms/" target="_blank">תנאי השימוש</a>. *
+                        </span>
+                    </label>
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="marketingConsent2" name="marketing">
+                        <span class="checkbox-label">
+                            אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת.
                         </span>
                     </label>
                 </div>
@@ -2049,9 +2055,15 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         </div>
 
                         <label class="checkbox-group">
-                            <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                            <input type="checkbox" id="privacyConsent" name="privacy" required>
                             <span class="checkbox-label">
-                                אני מאשר/ת את <a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ואת <a href="/terms/" target="_blank">תנאי השימוש</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת. *
+                                קראתי ואני מסכים/ה ל<a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> ול<a href="/terms/" target="_blank">תנאי השימוש</a>. *
+                            </span>
+                        </label>
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="marketingConsent" name="marketing">
+                            <span class="checkbox-label">
+                                אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת.
                             </span>
                         </label>
                     </div>
@@ -2265,13 +2277,14 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
+            var marketingEl = document.getElementById('marketingConsent');
             var formData = {
                 firstName: firstName.value.trim(),
                 lastName: lastName.value.trim(),
                 fullName: firstName.value.trim() + ' ' + lastName.value.trim(),
                 email: email.value.trim(),
                 phone: phone.value.trim().replace(/[-\s]/g, ''),
-                marketing_consent: true,
+                marketing_consent: marketingEl && marketingEl.checked ? 'yes' : 'no',
             };
 
             try {
@@ -2371,13 +2384,14 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             submitBtn2.classList.add('loading');
             submitBtn2.disabled = true;
 
+            var marketingEl2 = document.getElementById('marketingConsent2');
             var formData = {
                 firstName: firstName2.value.trim(),
                 lastName: lastName2.value.trim(),
                 fullName: firstName2.value.trim() + ' ' + lastName2.value.trim(),
                 email: email2.value.trim(),
                 phone: phone2.value.trim().replace(/[-\s]/g, ''),
-                marketing_consent: true,
+                marketing_consent: marketingEl2 && marketingEl2.checked ? 'yes' : 'no',
             };
 
             try {

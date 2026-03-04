@@ -160,7 +160,7 @@ const stats = [
             </div>
             <div>
               <label for="hero-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
-              <input type="tel" name="phone" id="hero-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
+              <input type="tel" name="phone" id="hero-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel" pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
           </div>
@@ -194,10 +194,17 @@ const stats = [
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
           <div class="flex items-start gap-3">
-            <input type="checkbox" name="consent" required id="hero-consent"
+            <input type="checkbox" name="privacy" required id="hero-privacy"
               class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
-            <label for="hero-consent" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
-              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
+            <label for="hero-privacy" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a>. *
+            </label>
+          </div>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" name="marketing" id="hero-marketing"
+              class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
+            <label for="hero-marketing" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
+              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
             </label>
           </div>
           <button type="submit"
@@ -661,7 +668,7 @@ const stats = [
             </div>
             <div>
               <label for="contact-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
-              <input type="tel" name="phone" id="contact-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel"
+              <input type="tel" name="phone" id="contact-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel" pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
           </div>
@@ -690,10 +697,17 @@ const stats = [
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
           <div class="flex items-start gap-3">
-            <input type="checkbox" name="consent" required id="contact-consent"
+            <input type="checkbox" name="privacy" required id="ws-contact-privacy"
               class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
-            <label for="contact-consent" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
-              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
+            <label for="ws-contact-privacy" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] hover:underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] hover:underline">מדיניות הפרטיות</a>. *
+            </label>
+          </div>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" name="marketing" id="ws-contact-marketing"
+              class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
+            <label for="ws-contact-marketing" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
+              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
             </label>
           </div>
           <button type="submit"
@@ -745,12 +759,13 @@ const stats = [
           var ln = (formData.get('lastName') || '').toString().trim();
           var data = {};
           formData.forEach(function(value, key) {
-            if (key !== 'terms' && key !== 'consent' && key !== 'firstName' && key !== 'lastName') data[key] = value;
+            if (!['terms','consent','privacy','firstName','lastName','marketing'].includes(key)) data[key] = value;
           });
           data.firstName = fn;
           data.lastName = ln;
           data.name = (fn + ' ' + ln).trim();
-          data.marketing_consent = true;
+          var mktCheckbox = form.querySelector('input[name="marketing"]');
+          data.marketing_consent = mktCheckbox && mktCheckbox.checked ? 'yes' : 'no';
           data.source = 'ai-workshop';
           data.timestamp = new Date().toISOString();
 
@@ -761,6 +776,8 @@ const stats = [
           })
           .then(function(response) {
             if (!response.ok) throw new Error('Network response was not ok');
+            // Fire Meta Pixel Lead event
+            if (typeof fbq === 'function') fbq('track', 'Lead');
             // Success
             statusEl.classList.remove('hidden', 'text-red-400');
             statusEl.classList.add('text-green-400');

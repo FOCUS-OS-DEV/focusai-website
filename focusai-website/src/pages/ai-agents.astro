@@ -613,7 +613,7 @@ const faqSchema = {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="agents-phone" class="block text-sm font-mono text-[#d0d0e0] mb-2">טלפון <span class="text-[#a855f7]">*</span></label>
-              <input type="tel" id="agents-phone" name="phone" required class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
+              <input type="tel" id="agents-phone" name="phone" required pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567" class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
             </div>
             <div>
               <label for="agents-email" class="block text-sm font-mono text-[#d0d0e0] mb-2">אימייל <span class="text-[#a855f7]">*</span></label>
@@ -633,9 +633,15 @@ const faqSchema = {
           </div>
 
           <div class="flex items-start gap-3 text-right">
-            <input type="checkbox" id="agents-consent" name="consent" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
-            <label for="agents-consent" class="text-xs text-white/50 leading-relaxed cursor-pointer">
-              אני מאשר/ת את <a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ואת <a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>, ומסכים/ה לקבל תוכן שיווקי, עדכונים ודיוור מ-Focus AI. ניתן לבטל בכל עת.
+            <input type="checkbox" id="agents-privacy" name="privacy" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <label for="agents-privacy" class="text-xs text-white/50 leading-relaxed cursor-pointer">
+              קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline">תנאי השימוש</a> ול<a href="/privacy-policy" class="text-[#a855f7] underline">מדיניות הפרטיות</a>. *
+            </label>
+          </div>
+          <div class="flex items-start gap-3 text-right">
+            <input type="checkbox" id="agents-marketing" name="marketing" class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <label for="agents-marketing" class="text-xs text-white/50 leading-relaxed cursor-pointer">
+              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -686,7 +692,8 @@ const faqSchema = {
     params.append('firstName', fn);
     params.append('lastName', ln);
     params.append('name', (fn + ' ' + ln).trim());
-    params.append('marketing_consent', 'true');
+    const mktCheckbox = agentsForm.querySelector('input[name="marketing"]') as HTMLInputElement;
+    params.append('marketing_consent', mktCheckbox?.checked ? 'yes' : 'no');
     formData.forEach((value, key) => {
       if (!['consent','privacy','firstName','lastName','marketing'].includes(key)) {
         params.append(key, value.toString());
