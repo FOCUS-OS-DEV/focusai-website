@@ -310,8 +310,8 @@ const id = "tw-dev";
 
     // Dynamic CTA based on current page
     var path = window.location.pathname.replace(/\/$/, '');
-    if (path === '/ai-fullstack') {
-      if (ctaLink) ctaLink.href = '/ai-fullstack#register';
+    if (path === '/ai-dev') {
+      if (ctaLink) ctaLink.href = '/ai-dev#register';
       if (ctaText) ctaText.textContent = 'להרשמה לתוכנית AI DEV';
     } else {
       if (ctaLink) ctaLink.href = '/academy/';
@@ -370,7 +370,7 @@ const id = "tw-dev";
       '/webinar-n8n-agent',
       '/webinar-n8n-thank-you',
       '/academy/thank-you',
-      '/ai-fullstack'
+      '/ai-dev'
     ];
     var isExcluded = false;
     for (var i = 0; i < excluded.length; i++) {
