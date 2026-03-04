@@ -137,10 +137,6 @@
     });
 
     var url = SUPABASE_URL + '/rest/v1/events';
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
-    }
-    // sendBeacon doesn't support custom headers, use fetch as primary
     try {
       fetch(url, {
         method: 'POST',

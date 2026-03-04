@@ -44,7 +44,12 @@ export default function AnalyticsDashboard() {
       setData(result);
       setIsAuthed(true);
     } catch (e: any) {
-      setError(e.message || 'Error');
+      const msg = e.message || 'Error';
+      if (msg === 'Failed to fetch') {
+        setError('שגיאת חיבור — נסה לרענן את הדף או לבדוק חוסם פרסומות');
+      } else {
+        setError(msg);
+      }
       setIsAuthed(false);
     } finally {
       setLoading(false);
