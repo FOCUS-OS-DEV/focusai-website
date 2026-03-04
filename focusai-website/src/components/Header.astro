@@ -21,7 +21,8 @@ const navLinks = [
   { href: '/ai-agents', label: 'סוכני AI', code: 'AGENTS' },
   { href: '/ai-workshop', label: 'סדנאות', code: 'WORKSHOPS' },
   { href: '/ai-news', label: 'חדשות AI', code: 'NEWS' },
-  { href: '#', label: 'וובינרים והדרכות', code: 'WEBINARS', hasDropdown: true, dropdownType: 'webinars' },
+  { href: '/webinar-n8n-agent', label: 'וובינר', code: 'WEBINAR', isLive: true },
+  { href: '/focus-on-me', label: 'הדרכות ללא עלות', code: 'FREE' },
   { href: '/tools', label: 'כלי AI', code: 'TOOLS', hasDropdown: true, dropdownType: 'tools' },
   { href: '/careers', label: 'דרושים', code: 'CAREERS' },
   { href: '/about', label: 'אודות', code: 'ABOUT' },
@@ -141,7 +142,7 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
             ) : (
               <a
                 href={link.href}
-                class={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
+                class={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full flex items-center gap-1.5 ${
                   currentPath === link.href
                     ? 'text-[#a855f7] bg-[#a855f7]/10'
                     : isLight
@@ -151,6 +152,12 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
                 aria-current={currentPath === link.href ? 'page' : undefined}
               >
                 {link.label}
+                {link.isLive && (
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-red-500/90 text-[8px] font-bold uppercase tracking-wider text-white shadow-[0_0_8px_rgba(239,68,68,0.5)]">
+                    <span class="w-1 h-1 rounded-full bg-white live-dot"></span>
+                    LIVE
+                  </span>
+                )}
               </a>
             )
           ))}
@@ -291,7 +298,15 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
               }`}
               style={`--delay: ${i * 0.05}s`}
             >
-              <span>{link.label}</span>
+              <span class="flex items-center gap-2">
+                {link.label}
+                {link.isLive && (
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/90 text-[9px] font-bold uppercase tracking-wider text-white shadow-[0_0_8px_rgba(239,68,68,0.5)]">
+                    <span class="w-1 h-1 rounded-full bg-white live-dot"></span>
+                    LIVE
+                  </span>
+                )}
+              </span>
               <span class="text-xs font-mono text-white/40">[{link.code}]</span>
             </a>
           )
