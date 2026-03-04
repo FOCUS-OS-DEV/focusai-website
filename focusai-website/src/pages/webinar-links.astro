@@ -14,7 +14,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Logo bar -->
     <div class="pt-8 pb-4 text-center">
       <a href="/">
-        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,h_40/v1772353512/FOCUS_LOGO-02_hc0h1a.png" alt="Focus AI" height="40" class="inline-block" />
+        <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1765265416/5_mckdsj.png" alt="Focus AI" height="40" class="inline-block" />
       </a>
     </div>
 
@@ -116,7 +116,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
             <h3 class="text-2xl sm:text-3xl font-black mb-2">שריון מקום ב-Bot-Camp</h3>
             <p class="text-[#b0b0c0] text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-4">
-              מקדמה של <span class="text-white font-bold text-lg">190 &#8362;</span> בלבד לשריון מקום במחיר מבצע — במסגרת וובינר 04.03.2026
+              דמי רישום של <span class="text-white font-bold text-lg">190 &#8362;</span> בלבד לשריון מקום במחיר מבצע — במסגרת וובינר 04.03.2026
             </p>
             <p class="text-[#b0b0c0]/60 text-xs leading-relaxed max-w-sm mx-auto">
               יש להסדיר את יתרת התשלום עד 24 שעות לאחר מכן. נציג מטעם Focus AI ייצור קשר מחר בשעות הבוקר לביצוע הרישום.
@@ -126,7 +126,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <!-- Timer -->
           <div id="timer-container" class="text-center mb-6">
             <p class="text-xs text-[#b0b0c0]/50 mb-3 font-mono uppercase tracking-wider">הכפתור נפתח בעוד</p>
-            <div class="flex justify-center gap-3" id="countdown">
+            <div class="flex justify-center gap-3" dir="ltr" id="countdown">
               <div class="countdown-unit">
                 <span id="timer-hours" class="text-3xl font-black text-white">00</span>
                 <span class="text-[10px] text-[#b0b0c0]/40 font-mono">שעות</span>
@@ -153,10 +153,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               rel="noopener noreferrer"
               class="payment-btn inline-flex items-center gap-3 px-10 py-4 rounded-xl text-lg font-bold transition-all pointer-events-none opacity-40 cursor-not-allowed bg-gradient-to-r from-[#a855f7] to-[#9333ea] text-white"
             >
-              <span>שריון מקום — 190 &#8362;</span>
+              <span>דמי רישום — 190 &#8362;</span>
               <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </a>
-            <p id="btn-status" class="text-xs text-[#b0b0c0]/40 mt-3 font-mono">נפתח בשעה 21:00</p>
+            <p id="btn-status" class="text-xs text-[#b0b0c0]/40 mt-3 font-mono"></p>
           </div>
         </div>
       </div>
