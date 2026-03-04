@@ -1,16 +1,16 @@
 ---
 /**
- * Focus on You - Free Resources Hub
- * All free webinars, guides, and Claude Code skills bundles
+ * מרכז הדרכה - Training Hub
+ * Webinar, AI tools, agents, guides, and Claude Code skills bundles
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const pageTitle = "Focus on You — הדרכות וכלים בחינם | Focus AI";
-const pageDescription = "כל המשאבים החינמיים של Focus AI במקום אחד: וובינרים, הדרכות מקצועיות וחבילות סקילים ל-Claude Code למפתחים, מנהלים ואנשי שיווק.";
+const pageTitle = "מרכז הדרכה — וובינרים, כלים והדרכות AI | Focus AI";
+const pageDescription = "מרכז ההדרכה של Focus AI: הרשמה לוובינרים, כלי AI מומלצים, סוכני AI לעסקים, הדרכות מקצועיות וחבילות סקילים ל-Claude Code — הכל במקום אחד.";
 
-const resources = [
+const featured = [
   {
     title: 'וובינר Live: סוכן AI ב-N8N',
     description: 'בניית סוכן AI ראשון ב-N8N — צעד אחר צעד, בשידור חי',
@@ -20,6 +20,25 @@ const resources = [
     image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png',
     tag: 'WEBINAR',
   },
+  {
+    title: 'מרכז כלי AI',
+    description: 'כלי הבינה המלאכותית המומלצים — סיננו, חפשו והתחילו לעבוד',
+    href: '/tools',
+    cta: 'לכלי AI',
+    tag: 'TOOLS',
+    icon: 'tools',
+  },
+  {
+    title: 'סוכני AI לעסקים',
+    description: 'בוט וואטסאפ, צ\'אטבוט לאתר ואוטומציות — זמין 24/7',
+    href: '/ai-agents',
+    cta: 'למידע נוסף',
+    tag: 'AGENTS',
+    icon: 'agents',
+  },
+];
+
+const resources = [
   {
     title: 'הדרכה: סוכני AI',
     description: 'בניית סוכן AI מאפס — מה זה, למה זה חשוב ואיך מתחילים',
@@ -73,18 +92,74 @@ const resources = [
     <!-- ============================================ -->
     <!-- HERO                                          -->
     <!-- ============================================ -->
-    <section class="relative pt-36 pb-20 overflow-hidden">
+    <section class="relative pt-36 pb-12 overflow-hidden">
       <div class="container mx-auto px-4 relative z-10 max-w-5xl text-center">
         <h1 class="focus-hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[0.95]">
-          <span class="block text-[#f5f5fa]">Focus</span>
-          <span class="block text-[#f5f5fa]">on <span class="focus-gradient-text">You</span></span>
+          <span class="block text-[#f5f5fa]">מרכז</span>
+          <span class="block text-[#f5f5fa]"><span class="focus-gradient-text">הדרכה</span></span>
         </h1>
 
         <p class="text-lg md:text-xl text-[#b0b0c0] max-w-2xl mx-auto leading-relaxed">
-          וובינרים והדרכות מקצועיות לשימוש בכלי AI וכלי Low-Code,
-          <span class="text-[#f5f5fa] font-medium">ללא עלות ובמקום אחד.</span>
+          וובינרים, כלי AI, הדרכות מקצועיות וחבילות סקילים —
+          <span class="text-[#f5f5fa] font-medium">הכל במקום אחד.</span>
         </p>
 
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FEATURED                                      -->
+    <!-- ============================================ -->
+    <section class="relative pb-8">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">FEATURED</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {featured.map((item) => (
+            <a href={item.href} class="featured-card group relative rounded-2xl overflow-hidden">
+              <div class="relative h-44 overflow-hidden">
+                {item.image ? (
+                  <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-[#a855f7]/20 via-[#0a0a0f] to-[#ec4899]/10 flex items-center justify-center">
+                    {item.icon === 'tools' && (
+                      <svg class="w-14 h-14 text-[#a855f7]/60 group-hover:text-[#a855f7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                      </svg>
+                    )}
+                    {item.icon === 'agents' && (
+                      <svg class="w-14 h-14 text-[#a855f7]/60 group-hover:text-[#a855f7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                      </svg>
+                    )}
+                  </div>
+                )}
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
+                <div class="absolute top-3 right-3 flex items-center gap-2">
+                  {item.isLive && (
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/90 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_12px_rgba(239,68,68,0.5)]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                      LIVE
+                    </span>
+                  )}
+                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
+                <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
+                <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
+                  {item.cta}
+                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -98,8 +173,8 @@ const resources = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">WEBINARS & GUIDES</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {resources.slice(0, 3).map((item) => (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl">
+          {resources.slice(0, 2).map((item) => (
             <a href={item.href} class="focus-card group relative rounded-2xl overflow-hidden">
               <div class="relative h-44 overflow-hidden">
                 <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
@@ -139,7 +214,7 @@ const resources = [
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {resources.slice(3).map((item) => (
+          {resources.slice(2).map((item) => (
             <a href={item.href} class="focus-card group relative rounded-2xl overflow-hidden">
               <div class="relative h-44 overflow-hidden">
                 <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
@@ -201,6 +276,7 @@ const resources = [
     letter-spacing: -0.03em;
   }
 
+  .featured-card,
   .focus-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -208,6 +284,11 @@ const resources = [
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .featured-card {
+    border-color: rgba(168, 85, 247, 0.15);
+  }
+
+  .featured-card:hover,
   .focus-card:hover {
     border-color: rgba(168, 85, 247, 0.3);
     box-shadow:

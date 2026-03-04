@@ -21,9 +21,7 @@ const navLinks = [
   { href: '/ai-agents', label: 'סוכני AI', code: 'AGENTS' },
   { href: '/ai-workshop', label: 'סדנאות', code: 'WORKSHOPS' },
   { href: '/ai-news', label: 'חדשות AI', code: 'NEWS' },
-  { href: '/webinar-n8n-agent', label: 'וובינר', code: 'WEBINAR', isLive: true },
-  { href: '/focus-on-me', label: 'הדרכות ללא עלות', code: 'FREE' },
-  { href: '/tools', label: 'כלי AI', code: 'TOOLS', hasDropdown: true, dropdownType: 'tools' },
+  { href: '/focus-on-me', label: 'מרכז הדרכה', code: 'HUB' },
   { href: '/careers', label: 'דרושים', code: 'CAREERS' },
   { href: '/about', label: 'אודות', code: 'ABOUT' },
 ];
@@ -143,7 +141,7 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
               <a
                 href={link.href}
                 class={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full flex items-center gap-1.5 ${
-                  currentPath === link.href
+                  currentPath === link.href || (link.code === 'HUB' && (currentPath === '/tools' || currentPath.startsWith('/webinar')))
                     ? 'text-[#a855f7] bg-[#a855f7]/10'
                     : isLight
                       ? 'text-[#2a2a3a]/80 hover:text-[#2a2a3a] hover:bg-black/5 header-nav-light'
@@ -292,7 +290,7 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
             <a
               href={link.href}
               class={`mobile-nav-link flex items-center justify-between px-5 py-4 rounded-2xl text-lg font-medium transition-all duration-300 ${
-                currentPath === link.href
+                currentPath === link.href || (link.code === 'HUB' && (currentPath === '/tools' || currentPath.startsWith('/webinar')))
                   ? 'text-[#a855f7] bg-[#a855f7]/10'
                   : 'text-white/90 hover:text-white hover:bg-white/5'
               }`}
