@@ -200,9 +200,15 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .crt-blink{animation:crtBlink .8s step-end infinite;color:#a855f7}@keyframes crtBlink{50%{opacity:0}}
 /* Boot flash */
 .crt-flash{position:absolute;inset:0;z-index:5;background:#fff;opacity:0;pointer-events:none;transition:opacity .15s}
-/* Hero image — hidden until reveal */
-.crt-hero-img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;opacity:0;transition:opacity .6s ease .1s}
-.crt-hero-img.visible{opacity:1}
+/* Looping terminal messages */
+.crt-loop{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .6s ease .1s}
+.crt-loop.visible{opacity:1}
+.crt-loop-inner{text-align:center;padding:20px}
+.crt-loop-logo{font-family:'Space Mono',monospace;font-size:clamp(22px,3.5vw,32px);font-weight:700;color:#e0e0e8;letter-spacing:.06em;line-height:1.2}
+.crt-loop-logo span{background:linear-gradient(135deg,#a855f7,#c084fc,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.crt-loop-sep{width:60px;height:2px;background:linear-gradient(90deg,transparent,#a855f7,transparent);margin:16px auto}
+.crt-loop-msg{font-family:'Space Mono',monospace;font-size:clamp(13px,2vw,17px);color:#a855f7;min-height:1.6em;direction:ltr;unicode-bidi:plaintext}
+.crt-loop-cursor{font-family:'Space Mono',monospace;font-size:clamp(13px,2vw,17px);color:#a855f7;animation:crtBlink .8s step-end infinite;display:inline-block;margin-top:4px}
 .crt-scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);z-index:8;pointer-events:none}
 .crt-vignette{position:absolute;inset:0;background:radial-gradient(ellipse,transparent 50%,rgba(0,0,0,.55));z-index:8;pointer-events:none}
 .retro-panel{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 4px;margin-top:8px;position:relative;z-index:2}
@@ -686,8 +692,15 @@ const &#123; data &#125; = await supabase
 </div>
 <!-- Boot flash -->
 <div class="crt-flash" id="crtFlash"></div>
-<!-- Final image (hidden until reveal) -->
-<img class="crt-hero-img" id="crtImg" src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600/v1772276815/freepik__-br-br-__21459_qrlg8k.png" alt="Focus AI Builder תעודה מקצועית" width="600" height="600"/>
+<!-- Looping terminal messages (replaces static image) -->
+<div class="crt-loop" id="crtLoop">
+<div class="crt-loop-inner">
+<div class="crt-loop-logo">FOCUS <span>AI DEV</span></div>
+<div class="crt-loop-sep"></div>
+<div class="crt-loop-msg" id="crtMsg"></div>
+<div class="crt-loop-cursor">_</div>
+</div>
+</div>
 <div class="crt-scanlines"></div>
 <div class="crt-vignette"></div>
 </div>
@@ -1371,16 +1384,13 @@ initCarousel('brandsCarousel');
 (function(){var el=document.getElementById('heroTypewriter');if(!el)return;var msgs=['claude "build me a SaaS"','git commit -m "still alive"','sudo rm -rf impostor_syndrome/','deploy career_upgrade.sh','import { skills } from "ai"','learn(); build(); deploy();','130h → production ready','git push origin dream','npm i focus-ai --save','cat /dev/null > fears.log'];var mi=Math.floor(Math.random()*msgs.length),ci=0,del=false;function tick(){var m=msgs[mi];if(!del){if(ci<m.length){ci++;el.textContent=m.slice(0,ci);setTimeout(tick,55);}else{setTimeout(function(){del=true;tick();},3200);}}else{if(ci>0){ci--;el.textContent=m.slice(0,ci);setTimeout(tick,28);}else{del=false;mi=(mi+1)%msgs.length;setTimeout(tick,180);}}}tick();})();
 /* CRT sequence — triggered by hero timeline after intro video ends */
 window.startCrtSequence=function(){
-var code=document.getElementById('crtCode'),flash=document.getElementById('crtFlash'),img=document.getElementById('crtImg'),led=document.getElementById('crtLed');
+var code=document.getElementById('crtCode'),flash=document.getElementById('crtFlash'),loop=document.getElementById('crtLoop'),led=document.getElementById('crtLed'),msgEl=document.getElementById('crtMsg');
 if(!code)return;
-/* Reset to initial state in case already ran */
 code.style.opacity='1';
-if(img)img.classList.remove('visible');
+if(loop)loop.classList.remove('visible');
 var lines=code.querySelectorAll('.crt-line');
 lines.forEach(function(l){l.classList.remove('typed')});
-/* Type lines one by one */
 for(var i=0;i<lines.length;i++){(function(idx){setTimeout(function(){lines[idx].classList.add('typed')},300+idx*220)})(i)}
-/* Flash + reveal after lines done */
 var doneTime=300+lines.length*220+400;
 setTimeout(function(){if(led)led.classList.add('on')},500);
 setTimeout(function(){
@@ -1388,7 +1398,12 @@ if(flash){flash.style.opacity='1'}
 setTimeout(function(){
 if(code)code.style.opacity='0';
 if(flash){flash.style.transition='opacity .3s';flash.style.opacity='0'}
-if(img)img.classList.add('visible');
+if(loop)loop.classList.add('visible');
+/* Start looping messages */
+if(msgEl&&!window.__crtLoopRunning){window.__crtLoopRunning=true;
+var msgs=['$ claude "build me a SaaS"','130h → production ready','Full-Stack · AI Agents · Automations','learn(); build(); deploy();','from zero to production','no coding background needed','git push origin career','> Building the future with AI...','Your AI Partner'];
+var mi=0;function typeMsg(){var m=msgs[mi],ci=0;(function t(){if(ci<=m.length){msgEl.textContent=m.substring(0,ci);ci++;setTimeout(t,50)}else{setTimeout(eraseMsg,2800)}})()}
+function eraseMsg(){var txt=msgEl.textContent,ci=txt.length;(function t(){if(ci>=0){msgEl.textContent=txt.substring(0,ci);ci--;setTimeout(t,25)}else{mi=(mi+1)%msgs.length;setTimeout(typeMsg,400)}})()}typeMsg()}
 },180);
 },doneTime);
 };
