@@ -70,6 +70,27 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   <!-- Main content -->
   <div class="hero-main relative z-10 container flex items-center px-4 md:px-8 pt-20 md:pt-24">
     <div class="w-full py-12 lg:py-0">
+      <!-- Mobile Highlights - Instagram Stories Style (above hero image) -->
+      <div class="md:hidden hero-animate hero-delay-1 mb-4 relative max-w-6xl mx-auto">
+        <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10 pointer-events-none"></div>
+        <div class="flex gap-5 overflow-x-auto px-6 pb-2 highlights-scroll" data-lenis-prevent>
+          {highlights.map((hl) => (
+            <a href={hl.href} class="flex flex-col items-center gap-2 flex-shrink-0">
+              <div class={`w-[60px] h-[60px] rounded-full p-[2px] ${hl.isLive ? 'bg-gradient-to-br from-red-500 via-[#a855f7] to-[#ec4899]' : 'bg-gradient-to-br from-[#a855f7]/60 to-[#c084fc]/40'}`}>
+                <img
+                  src={hl.image}
+                  alt={hl.label}
+                  class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0f]"
+                  loading="lazy"
+                />
+              </div>
+              <span class="text-[10px] text-white/60 font-medium whitespace-nowrap">{hl.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
 
         <!-- Text Content -->
@@ -153,28 +174,6 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
               style="mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)"
             />
           </div>
-        </div>
-      </div>
-
-      <!-- Mobile Highlights - Instagram Stories Style (below chavobot) -->
-      <div class="md:hidden hero-animate hero-delay-4 mt-4 relative max-w-6xl mx-auto">
-        <!-- Fade masks on edges -->
-        <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10 pointer-events-none"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10 pointer-events-none"></div>
-        <div class="flex gap-5 overflow-x-auto px-6 pb-2 highlights-scroll" data-lenis-prevent>
-          {highlights.map((hl) => (
-            <a href={hl.href} class="flex flex-col items-center gap-2 flex-shrink-0">
-              <div class={`w-[60px] h-[60px] rounded-full p-[2px] ${hl.isLive ? 'bg-gradient-to-br from-red-500 via-[#a855f7] to-[#ec4899]' : 'bg-gradient-to-br from-[#a855f7]/60 to-[#c084fc]/40'}`}>
-                <img
-                  src={hl.image}
-                  alt={hl.label}
-                  class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0f]"
-                  loading="lazy"
-                />
-              </div>
-              <span class="text-[10px] text-white/60 font-medium whitespace-nowrap">{hl.label}</span>
-            </a>
-          ))}
         </div>
       </div>
     </div>
