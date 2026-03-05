@@ -1,8 +1,8 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis,
   CartesianGrid, Tooltip, PieChart, Pie, Cell,
-  BarChart, Bar,
+  BarChart, Bar, Legend,
 } from 'recharts';
 
 /* ─── Constants ─── */
@@ -26,7 +26,11 @@ const T = {
   green: '#10b981',
   greenBg: 'rgba(16,185,129,0.15)',
   red: '#ef4444',
+  redBg: 'rgba(239,68,68,0.15)',
   cyan: '#06b6d4',
+  cyanBg: 'rgba(6,182,212,0.15)',
+  orange: '#f59e0b',
+  orangeBg: 'rgba(245,158,11,0.15)',
   textPrimary: '#f5f5fa',
   textSecondary: '#9090a8',
   textMuted: '#6a6a80',
@@ -39,22 +43,30 @@ const DEVICE_COLORS = [T.purple, T.purpleLight, T.purpleDark];
 const DEVICE_LABELS: Record<string, string> = { desktop: 'מחשב', mobile: 'נייד', tablet: 'טאבלט' };
 const DEVICE_ICONS: Record<string, string> = { desktop: '💻', mobile: '📱', tablet: '📟' };
 
+const CATEGORY_LABELS: Record<string, string> = {
+  homepage: 'דף הבית', academy: 'אקדמיה', services: 'שירותים',
+  blog: 'חדשות AI', campaigns: 'קמפיינים', skills: 'Claude Skills',
+  courses: 'קורסים', other: 'אחר',
+};
+const CATEGORY_COLORS: Record<string, string> = {
+  homepage: T.purple, academy: T.cyan, services: T.green,
+  blog: T.orange, campaigns: T.purpleLight, skills: T.purpleDark,
+  courses: '#ec4899', other: T.textMuted,
+};
+
 const TABS = [
   { id: 'overview', label: 'סקירה כללית', icon: '📊' },
-  { id: 'pages', label: 'דפים', icon: '📄' },
-  { id: 'sources', label: 'מקורות תנועה', icon: '🔗' },
-  { id: 'conversions', label: 'המרות', icon: '✅' },
-  { id: 'clicks', label: 'לחיצות', icon: '👆' },
+  { id: 'content', label: 'תוכן', icon: '📄' },
+  { id: 'sources', label: 'מקורות', icon: '🔗' },
+  { id: 'conversions', label: 'המרות', icon: '🎯' },
+  { id: 'realtime', label: 'בזמן אמת', icon: '⚡' },
+  { id: 'insights', label: 'תובנות', icon: '💡' },
 ] as const;
 
 /* ─── Types ─── */
 interface AnalyticsData {
-  total_pageviews: number;
-  total_clicks: number;
-  total_forms: number;
-  prev_total_pageviews: number;
-  prev_total_clicks: number;
-  prev_total_forms: number;
+  total_pageviews: number; total_clicks: number; total_forms: number;
+  prev_total_pageviews: number; prev_total_clicks: number; prev_total_forms: number;
   top_pages: { page_path: string; views: number }[] | null;
   top_clicks: { click_url: string; click_text: string; click_type: string; clicks: number }[] | null;
   referrers: { referrer: string; visits: number }[] | null;
@@ -65,25 +77,92 @@ interface AnalyticsData {
   form_details: { page_path: string; button_text: string; submissions: number }[] | null;
   source_pages: { source: string; utm_medium: string | null; page_path: string; visits: number }[] | null;
   landing_pages: { page_path: string; external_entries: number; distinct_sources: number; paid_entries: number; organic_entries: number }[] | null;
+  // V2 fields
+  conversion_rate: number; prev_conversion_rate: number;
+  whatsapp_clicks: number; prev_whatsapp_clicks: number;
+  phone_clicks: number; email_clicks: number;
+  daily_clicks: { day: string; clicks: number }[] | null;
+  daily_forms: { day: string; forms: number }[] | null;
+  hourly_distribution: { hour: number; count: number }[] | null;
+  page_categories: { category: string; views: number }[] | null;
+  session_stats: { total_sessions: number; avg_pages_per_session: number; bounce_rate: number } | null;
+  top_content: { page_path: string; views: number; clicks: number; forms: number; conversion_rate: number }[] | null;
+  conversion_funnel: { pageviews: number; clicks: number; contact_clicks: number; whatsapp: number; phone: number; email: number; forms: number } | null;
+  recent_events: { event_type: string; page_path: string; click_type: string | null; click_text: string | null; device_type: string | null; created_at: string }[] | null;
+  utm_campaigns_v2: { utm_source: string; utm_medium: string; utm_campaign: string; visits: number; clicks: number; forms: number; conversion_rate: number }[] | null;
 }
 
 /* ─── Helpers ─── */
 function decodePath(p: string): string {
   try { return decodeURIComponent(p); } catch { return p; }
 }
-
 function calcTrend(current: number, previous: number): { value: number; direction: 'up' | 'down' | 'flat' } {
   if (previous === 0) return { value: 0, direction: current > 0 ? 'up' : 'flat' };
   const pct = Math.round(((current - previous) / previous) * 100);
   return { value: Math.abs(pct), direction: pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat' };
 }
-
 function formatDate(d: string): string {
   try { return new Date(d).toLocaleDateString('he-IL', { day: 'numeric', month: 'short' }); } catch { return d; }
 }
-
 function extractHostname(url: string): string {
   try { return new URL(url).hostname; } catch { return url; }
+}
+function timeAgo(ts: string): string {
+  const diff = Math.floor((Date.now() - new Date(ts).getTime()) / 1000);
+  if (diff < 60) return 'עכשיו';
+  if (diff < 3600) return `לפני ${Math.floor(diff / 60)} דק׳`;
+  if (diff < 86400) return `לפני ${Math.floor(diff / 3600)} שע׳`;
+  return `לפני ${Math.floor(diff / 86400)} ימים`;
+}
+
+function exportCSV(rows: any[], filename: string) {
+  if (!rows?.length) return;
+  const keys = Object.keys(rows[0]);
+  const csv = [keys.join(','), ...rows.map(r => keys.map(k => JSON.stringify(r[k] ?? '')).join(','))].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `${filename}.csv`; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function mergeDaily(views: any[] | null, clicks: any[] | null, forms: any[] | null) {
+  const map: Record<string, { day: string; views: number; clicks: number; forms: number }> = {};
+  (views || []).forEach(d => { map[d.day] = { day: d.day, views: d.views, clicks: 0, forms: 0 }; });
+  (clicks || []).forEach(d => { if (map[d.day]) map[d.day].clicks = d.clicks; else map[d.day] = { day: d.day, views: 0, clicks: d.clicks, forms: 0 }; });
+  (forms || []).forEach(d => { if (map[d.day]) map[d.day].forms = d.forms; else map[d.day] = { day: d.day, views: 0, clicks: 0, forms: d.forms }; });
+  return Object.values(map).sort((a, b) => a.day.localeCompare(b.day));
+}
+
+function getCROSuggestions(data: AnalyticsData): string[] {
+  const s: string[] = [];
+  if (data.page_details) {
+    const highNoConv = data.page_details.filter(p => p.views > 10 && p.forms === 0).slice(0, 3);
+    if (highNoConv.length > 0) s.push(`${highNoConv.length} דפים עם תנועה גבוהה ללא המרות: ${highNoConv.map(p => decodePath(p.page_path)).join(', ')}`);
+  }
+  if (data.session_stats && data.session_stats.bounce_rate > 70)
+    s.push(`שיעור נטישה גבוה (${data.session_stats.bounce_rate}%) — שקול לשפר תוכן דף הנחיתה`);
+  if (data.whatsapp_clicks > 0 && data.total_forms > 0 && data.whatsapp_clicks > data.total_forms * 3)
+    s.push('משתמשים מעדיפים וואטסאפ על טפסים — שקול להדגיש את כפתור הוואטסאפ');
+  if (data.devices) {
+    const mobile = data.devices.find(d => d.device_type === 'mobile');
+    const total = data.devices.reduce((sum, d) => sum + d.count, 0);
+    if (mobile && total > 0 && (mobile.count / total) > 0.6)
+      s.push('רוב התנועה מנייד — ודא שהטפסים וה-CTA אופטימליים למובייל');
+  }
+  if (data.conversion_rate < 1 && data.total_pageviews > 50)
+    s.push(`אחוז המרה נמוך (${data.conversion_rate}%) — בדוק מיקום טפסים ו-CTA בדפים המובילים`);
+  return s;
+}
+
+/* ─── Skeleton Loader ─── */
+function Skeleton({ height = 120 }: { height?: number }) {
+  return (
+    <div style={{
+      background: `linear-gradient(90deg, ${T.cardBg} 25%, rgba(255,255,255,0.06) 50%, ${T.cardBg} 75%)`,
+      backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite',
+      borderRadius: '16px', height: `${height}px`, border: `1px solid ${T.cardBorder}`,
+    }} />
+  );
 }
 
 /* ─── Custom Tooltip ─── */
@@ -97,56 +176,56 @@ function ChartTooltip({ active, payload, label, suffix }: any) {
       <div style={{ fontSize: '12px', color: T.textSecondary, marginBottom: '4px' }}>
         {typeof label === 'string' && label.includes('-') ? formatDate(label) : label}
       </div>
-      <div style={{ fontSize: '16px', fontWeight: 700, color: T.purple }}>
-        {payload[0].value?.toLocaleString('he-IL')} {suffix || ''}
-      </div>
+      {payload.map((p: any, i: number) => (
+        <div key={i} style={{ fontSize: '14px', fontWeight: 700, color: p.color || T.purple, display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: p.color || T.purple }} />
+          {p.value?.toLocaleString('he-IL')} {suffix || p.name || ''}
+        </div>
+      ))}
     </div>
   );
 }
 
-/* ─── Sub-Components ─── */
-function KPI({ label, value, trend, sparkData }: {
-  label: string; value: number;
+/* ─── KPI Card ─── */
+function KPI({ label, value, displayValue, trend, sparkData, sparkKey, color, icon }: {
+  label: string; value?: number; displayValue?: string;
   trend?: { value: number; direction: 'up' | 'down' | 'flat' };
-  sparkData?: { day: string; views: number }[];
+  sparkData?: any[]; sparkKey?: string; color?: string; icon?: string;
 }) {
+  const c = color || T.purple;
   const gradId = `spark-${label.replace(/\s/g, '')}`;
   return (
     <div style={{
       background: T.cardBg, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-      border: `1px solid ${T.cardBorder}`, borderRadius: '16px', padding: '24px',
+      border: `1px solid ${T.cardBorder}`, borderRadius: '16px', padding: '20px',
       boxShadow: T.cardShadow,
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: T.purple, boxShadow: `0 0 6px ${T.purpleGlow}` }} />
-        <span style={{ fontSize: '13px', color: T.textSecondary }}>{label}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: c, boxShadow: `0 0 6px ${c}40` }} />
+        <span style={{ fontSize: '12px', color: T.textSecondary }}>{icon ? `${icon} ` : ''}{label}</span>
       </div>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
-        <span style={{ fontSize: '36px', fontWeight: 700, color: T.purple }}>{value.toLocaleString('he-IL')}</span>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+        <span style={{ fontSize: '32px', fontWeight: 700, color: c }}>
+          {displayValue ?? (value?.toLocaleString('he-IL') ?? '---')}
+        </span>
         {trend && trend.direction !== 'flat' && (
-          <span style={{
-            fontSize: '14px', fontWeight: 600,
-            color: trend.direction === 'up' ? T.green : T.red,
-            display: 'flex', alignItems: 'center', gap: '2px',
-          }}>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: trend.direction === 'up' ? T.green : T.red, display: 'flex', alignItems: 'center', gap: '2px' }}>
             {trend.direction === 'up' ? '↑' : '↓'} {trend.value}%
           </span>
         )}
-        {trend && trend.direction === 'flat' && (
-          <span style={{ fontSize: '14px', color: T.textMuted }}>→</span>
-        )}
+        {trend && trend.direction === 'flat' && <span style={{ fontSize: '13px', color: T.textMuted }}>→</span>}
       </div>
       {sparkData && sparkData.length > 1 && (
-        <div style={{ height: '40px', marginTop: '12px', direction: 'ltr' }}>
+        <div style={{ height: '36px', marginTop: '10px', direction: 'ltr' }}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={sparkData}>
               <defs>
                 <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={T.purple} stopOpacity={0.3} />
-                  <stop offset="100%" stopColor={T.purple} stopOpacity={0} />
+                  <stop offset="0%" stopColor={c} stopOpacity={0.3} />
+                  <stop offset="100%" stopColor={c} stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <Area type="monotone" dataKey="views" stroke={T.purple} fill={`url(#${gradId})`} strokeWidth={1.5} dot={false} />
+              <Area type="monotone" dataKey={sparkKey || 'views'} stroke={c} fill={`url(#${gradId})`} strokeWidth={1.5} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -155,7 +234,11 @@ function KPI({ label, value, trend, sparkData }: {
   );
 }
 
-function Card({ title, children, headerRight }: { title: string; children: React.ReactNode; headerRight?: React.ReactNode }) {
+/* ─── Card Wrapper ─── */
+function Card({ title, children, headerRight, exportData, exportName }: {
+  title: string; children: React.ReactNode; headerRight?: React.ReactNode;
+  exportData?: any[]; exportName?: string;
+}) {
   return (
     <div style={{
       background: T.cardBg, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
@@ -170,16 +253,25 @@ function Card({ title, children, headerRight }: { title: string; children: React
           <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: T.purple, boxShadow: `0 0 6px ${T.purpleGlow}` }} />
           <span style={{ fontSize: '14px', fontWeight: 600, color: T.textPrimary }}>{title}</span>
         </div>
-        {headerRight}
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {exportData && exportData.length > 0 && (
+            <button onClick={() => exportCSV(exportData, exportName || title)} style={{
+              padding: '4px 10px', borderRadius: '6px', border: `1px solid ${T.cardBorder}`,
+              background: 'transparent', color: T.textMuted, cursor: 'pointer', fontSize: '11px',
+            }}>CSV ↓</button>
+          )}
+          {headerRight}
+        </div>
       </div>
       <div style={{ padding: '20px' }}>{children}</div>
     </div>
   );
 }
 
+/* ─── Data Table ─── */
 function DataTable({ rows, columns }: {
   rows: any[];
-  columns: { key: string; label: string; align?: string; render?: (v: any, row: any) => React.ReactNode }[];
+  columns: { key: string; label: string; align?: string; render?: (v: any, row: any) => React.ReactNode; sortable?: boolean }[];
 }) {
   if (!rows || rows.length === 0) return <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center', margin: '12px 0' }}>אין נתונים</p>;
   return (
@@ -216,6 +308,58 @@ function DataTable({ rows, columns }: {
   );
 }
 
+/* ─── Conversion Funnel ─── */
+function Funnel({ data }: { data: { pageviews: number; clicks: number; contact_clicks: number; forms: number } }) {
+  const steps = [
+    { label: 'צפיות', value: data.pageviews, color: T.purple },
+    { label: 'לחיצות', value: data.clicks, color: T.cyan },
+    { label: 'יצירת קשר', value: data.contact_clicks, color: T.orange },
+    { label: 'טפסים', value: data.forms, color: T.green },
+  ];
+  const max = Math.max(data.pageviews, 1);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+      {steps.map((step, i) => {
+        const pct = (step.value / max) * 100;
+        const dropPct = i > 0 ? Math.round((step.value / steps[i - 1].value) * 100) || 0 : 100;
+        return (
+          <div key={step.label}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+              <span style={{ fontSize: '13px', color: T.textSecondary }}>{step.label}</span>
+              <span style={{ fontSize: '13px', color: step.color, fontWeight: 600 }}>
+                {step.value.toLocaleString('he-IL')}
+                {i > 0 && <span style={{ color: T.textMuted, fontWeight: 400, marginRight: '6px' }}>({dropPct}%)</span>}
+              </span>
+            </div>
+            <div style={{ height: '28px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', overflow: 'hidden' }}>
+              <div style={{
+                height: '100%', width: `${Math.max(pct, 2)}%`, background: `linear-gradient(90deg, ${step.color}, ${step.color}80)`,
+                borderRadius: '8px', transition: 'width 0.6s ease',
+              }} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ─── Event Badge ─── */
+function EventBadge({ type }: { type: string }) {
+  const map: Record<string, { bg: string; color: string; label: string }> = {
+    pageview: { bg: T.purpleBg, color: T.purple, label: 'צפייה' },
+    click: { bg: T.cyanBg, color: T.cyan, label: 'לחיצה' },
+    form_submit: { bg: T.greenBg, color: T.green, label: 'טופס' },
+  };
+  const s = map[type] || { bg: 'rgba(255,255,255,0.06)', color: T.textMuted, label: type };
+  return (
+    <span style={{
+      padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
+      background: s.bg, color: s.color,
+    }}>{s.label}</span>
+  );
+}
+
 /* ─── Main Component ─── */
 export default function AnalyticsDashboard() {
   const [password, setPassword] = useState('');
@@ -229,12 +373,16 @@ export default function AnalyticsDashboard() {
   const [sourceFilter, setSourceFilter] = useState<'all' | 'paid' | 'organic'>('all');
   const [pageSort, setPageSort] = useState<{ key: string; dir: 'asc' | 'desc' }>({ key: 'views', dir: 'desc' });
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [showViews, setShowViews] = useState(true);
+  const [showClicks, setShowClicks] = useState(true);
+  const [showForms, setShowForms] = useState(true);
+  const passwordRef = useRef('');
 
   const fetchData = useCallback(async (pw: string, d: number) => {
-    setLoading(true);
-    setError('');
+    setLoading(true); setError('');
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_analytics`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_analytics_v2`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
         body: JSON.stringify({ p_password: pw, p_days: d }),
@@ -244,27 +392,34 @@ export default function AnalyticsDashboard() {
         throw new Error(err.message || 'Unauthorized');
       }
       const result = await res.json();
-      setData(result);
-      setIsAuthed(true);
-      setLastUpdated(new Date());
+      setData(result); setIsAuthed(true); setLastUpdated(new Date());
     } catch (e: any) {
       const msg = e.message || 'Error';
       setError(msg === 'Failed to fetch' ? 'שגיאת חיבור — נסה לרענן את הדף או לבדוק חוסם פרסומות' : msg);
-      setIsAuthed(false);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      if (!data) setIsAuthed(false);
+    } finally { setLoading(false); }
+  }, [data]);
 
-  const handleLogin = (e: React.FormEvent) => { e.preventDefault(); fetchData(password, days); };
-  const changeDays = (d: number) => { setDays(d); fetchData(password, d); };
+  const handleLogin = (e: React.FormEvent) => { e.preventDefault(); passwordRef.current = password; fetchData(password, days); };
+  const changeDays = (d: number) => { setDays(d); fetchData(passwordRef.current, d); };
   const toggleSort = (key: string) => setPageSort(prev => ({ key, dir: prev.key === key && prev.dir === 'desc' ? 'asc' : 'desc' }));
 
-  /* Derived data */
-  const allPages = useMemo(() => {
-    if (!data?.page_details) return [];
-    return data.page_details.map(p => p.page_path).sort();
-  }, [data]);
+  // Auto-refresh
+  useEffect(() => {
+    if (!autoRefresh || !isAuthed) return;
+    const id = setInterval(() => fetchData(passwordRef.current, days), 60000);
+    return () => clearInterval(id);
+  }, [autoRefresh, isAuthed, days, fetchData]);
+
+  // Real-time tab polling (30s)
+  useEffect(() => {
+    if (activeTab !== 'realtime' || !isAuthed) return;
+    const id = setInterval(() => fetchData(passwordRef.current, days), 30000);
+    return () => clearInterval(id);
+  }, [activeTab, isAuthed, days, fetchData]);
+
+  /* ─── Derived Data ─── */
+  const allPages = useMemo(() => data?.page_details?.map(p => p.page_path).sort() || [], [data]);
 
   const filteredPageDetails = useMemo(() => {
     if (!data?.page_details) return [];
@@ -284,35 +439,53 @@ export default function AnalyticsDashboard() {
     return arr;
   }, [data, pageFilter, sourceFilter]);
 
-  const filteredFormDetails = useMemo(() => {
-    if (!data?.form_details) return [];
-    return pageFilter ? data.form_details.filter(r => r.page_path === pageFilter) : data.form_details;
-  }, [data, pageFilter]);
-
-  const filteredLandingPages = useMemo(() => {
-    if (!data?.landing_pages) return [];
-    return pageFilter ? data.landing_pages.filter(r => r.page_path === pageFilter) : data.landing_pages;
-  }, [data, pageFilter]);
-
   const trends = useMemo(() => {
-    if (!data) return { views: undefined, clicks: undefined, forms: undefined };
+    if (!data) return {};
     return {
       views: calcTrend(data.total_pageviews, data.prev_total_pageviews),
       clicks: calcTrend(data.total_clicks, data.prev_total_clicks),
       forms: calcTrend(data.total_forms, data.prev_total_forms),
+      conversion: calcTrend(data.conversion_rate, data.prev_conversion_rate),
+      whatsapp: calcTrend(data.whatsapp_clicks, data.prev_whatsapp_clicks),
     };
   }, [data]);
 
-  /* Top pages for bar chart */
   const topPagesChart = useMemo(() => {
     if (!data?.top_pages) return [];
     return data.top_pages.slice(0, 10).map(p => ({ ...p, name: decodePath(p.page_path) })).reverse();
+  }, [data]);
+
+  const dailyMerged = useMemo(() => mergeDaily(data?.daily_views, data?.daily_clicks, data?.daily_forms), [data]);
+
+  const hourlyFull = useMemo(() => {
+    const map: Record<number, number> = {};
+    for (let i = 0; i < 24; i++) map[i] = 0;
+    (data?.hourly_distribution || []).forEach(h => { map[h.hour] = h.count; });
+    return Object.entries(map).map(([h, c]) => ({ hour: `${h}:00`, count: c, hourNum: +h }));
+  }, [data]);
+
+  const croSuggestions = useMemo(() => data ? getCROSuggestions(data) : [], [data]);
+
+  // Anomaly detection
+  const anomalies = useMemo(() => {
+    if (!data?.daily_views || data.daily_views.length < 5) return [];
+    const vals = data.daily_views.map(d => d.views);
+    const mean = vals.reduce((s, v) => s + v, 0) / vals.length;
+    const std = Math.sqrt(vals.reduce((s, v) => s + (v - mean) ** 2, 0) / vals.length);
+    if (std === 0) return [];
+    return data.daily_views
+      .filter(d => Math.abs(d.views - mean) > 2 * std)
+      .map(d => ({
+        day: d.day, views: d.views, mean: Math.round(mean),
+        type: d.views > mean ? 'spike' as const : 'drop' as const,
+      }));
   }, [data]);
 
   /* ─── Login Screen ─── */
   if (!isAuthed) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.bg }}>
+        <style>{`@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }`}</style>
         <form onSubmit={handleLogin} style={{
           background: T.cardBg, border: `1px solid ${T.cardBorder}`, borderRadius: '16px',
           padding: '40px', backdropFilter: 'blur(20px)', width: '100%', maxWidth: '380px',
@@ -340,35 +513,33 @@ export default function AnalyticsDashboard() {
   /* ─── Dashboard ─── */
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.textPrimary, padding: '24px', fontFamily: 'Heebo, sans-serif' }}>
+      <style>{`@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }`}</style>
+
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <h1 style={{ fontSize: '22px', margin: 0, fontWeight: 700 }}>📊 Focus AI Analytics</h1>
-          {lastUpdated && (
-            <span style={{ fontSize: '11px', color: T.textMuted }}>
-              עדכון: {lastUpdated.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}
-            </span>
-          )}
+          {lastUpdated && <span style={{ fontSize: '11px', color: T.textMuted }}>עדכון: {lastUpdated.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</span>}
         </div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          {/* Page Filter */}
-          <div style={{ position: 'relative' }}>
-            <select value={pageFilter} onChange={e => setPageFilter(e.target.value)} dir="rtl" style={{
-              padding: '8px 12px', borderRadius: '8px', border: `1px solid ${pageFilter ? T.purple : T.cardBorder}`,
-              background: pageFilter ? T.purpleBg : T.cardBg, color: pageFilter ? T.purple : T.textSecondary,
-              fontSize: '13px', cursor: 'pointer', outline: 'none', maxWidth: '200px',
-              fontFamily: 'Heebo, sans-serif',
-            }}>
-              <option value="">כל הדפים</option>
-              {allPages.map(p => <option key={p} value={p}>{decodePath(p)}</option>)}
-            </select>
-          </div>
-          {/* Refresh */}
-          <button onClick={() => fetchData(password, days)} disabled={loading} style={{
+          <select value={pageFilter} onChange={e => setPageFilter(e.target.value)} dir="rtl" style={{
+            padding: '8px 12px', borderRadius: '8px', border: `1px solid ${pageFilter ? T.purple : T.cardBorder}`,
+            background: pageFilter ? T.purpleBg : T.cardBg, color: pageFilter ? T.purple : T.textSecondary,
+            fontSize: '13px', cursor: 'pointer', outline: 'none', maxWidth: '200px', fontFamily: 'Heebo, sans-serif',
+          }}>
+            <option value="">כל הדפים</option>
+            {allPages.map(p => <option key={p} value={p}>{decodePath(p)}</option>)}
+          </select>
+          <button onClick={() => setAutoRefresh(!autoRefresh)} style={{
+            padding: '8px 12px', borderRadius: '8px', border: `1px solid ${autoRefresh ? T.green : T.cardBorder}`,
+            background: autoRefresh ? T.greenBg : T.cardBg, color: autoRefresh ? T.green : T.textMuted,
+            cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
+          }}>{autoRefresh ? '⏸ עצור' : '▶ רענון אוטומטי'}</button>
+          <button onClick={() => fetchData(passwordRef.current, days)} disabled={loading} style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.cardBorder}`,
             background: T.cardBg, color: loading ? T.textMuted : T.green, cursor: loading ? 'default' : 'pointer', fontSize: '14px',
           }}>{loading ? '⏳' : '🔄'}</button>
-          {/* Day Selector */}
           {[7, 14, 30, 90].map(d => (
             <button key={d} onClick={() => changeDays(d)} style={{
               padding: '8px 16px', borderRadius: '8px',
@@ -383,7 +554,7 @@ export default function AnalyticsDashboard() {
       {/* Tab Bar */}
       <div style={{
         display: 'flex', gap: '6px', marginBottom: '24px', overflowX: 'auto', direction: 'rtl',
-        paddingBottom: '4px', msOverflowStyle: 'none', scrollbarWidth: 'none',
+        paddingBottom: '4px', scrollbarWidth: 'none',
       }}>
         {TABS.map(tab => (
           <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
@@ -392,91 +563,107 @@ export default function AnalyticsDashboard() {
             color: activeTab === tab.id ? T.purple : T.textSecondary,
             cursor: 'pointer', fontSize: '14px', fontWeight: activeTab === tab.id ? 600 : 400,
             whiteSpace: 'nowrap', fontFamily: 'Heebo, sans-serif',
-            display: 'flex', alignItems: 'center', gap: '6px',
-            transition: 'all 0.2s',
+            display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s',
           }}>
             <span>{tab.icon}</span> {tab.label}
           </button>
         ))}
       </div>
 
-      {loading && <p style={{ textAlign: 'center', color: T.purple, fontSize: '14px' }}>טוען נתונים...</p>}
+      {loading && !data && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+          {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} height={130} />)}
+        </div>
+      )}
 
       {data && (
         <>
           {/* ═══ OVERVIEW TAB ═══ */}
           {activeTab === 'overview' && (
             <>
-              {/* KPIs */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '24px' }}>
-                <KPI label="צפיות בדפים" value={data.total_pageviews} trend={trends.views} sparkData={data.daily_views || undefined} />
-                <KPI label="לחיצות" value={data.total_clicks} trend={trends.clicks} />
-                <KPI label="טפסים" value={data.total_forms} trend={trends.forms} />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '14px', marginBottom: '24px' }}>
+                <KPI label="צפיות" value={data.total_pageviews} trend={trends.views} sparkData={data.daily_views || undefined} icon="👁" />
+                <KPI label="סשנים" value={data.session_stats?.total_sessions || undefined}
+                  displayValue={data.session_stats?.total_sessions ? data.session_stats.total_sessions.toLocaleString('he-IL') : '---'}
+                  color={T.cyan} icon="👤" />
+                <KPI label="טפסים" value={data.total_forms} trend={trends.forms} sparkData={data.daily_forms || undefined} sparkKey="forms" color={T.green} icon="📝" />
+                <KPI label="אחוז המרה" displayValue={`${data.conversion_rate}%`} trend={trends.conversion} color={T.orange} icon="🎯" />
+                <KPI label="WhatsApp" value={data.whatsapp_clicks} trend={trends.whatsapp} color="#25D366" icon="💬" />
+                <KPI label="נטישה" displayValue={data.session_stats?.bounce_rate ? `${data.session_stats.bounce_rate}%` : '---'} color={T.red} icon="🚪" />
               </div>
 
-              {/* Daily Views Area Chart */}
-              {data.daily_views && data.daily_views.length > 0 && (
-                <Card title="צפיות יומיות">
+              {/* Multi-metric chart */}
+              {dailyMerged.length > 0 && (
+                <Card title="מגמות יומיות">
+                  <div style={{ display: 'flex', gap: '16px', marginBottom: '12px', direction: 'rtl' }}>
+                    {[
+                      { key: 'views', label: 'צפיות', color: T.purple, show: showViews, toggle: setShowViews },
+                      { key: 'clicks', label: 'לחיצות', color: T.cyan, show: showClicks, toggle: setShowClicks },
+                      { key: 'forms', label: 'טפסים', color: T.green, show: showForms, toggle: setShowForms },
+                    ].map(s => (
+                      <button key={s.key} onClick={() => s.toggle(!s.show)} style={{
+                        display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '6px',
+                        border: `1px solid ${s.show ? s.color : T.cardBorder}`, background: s.show ? `${s.color}15` : 'transparent',
+                        color: s.show ? s.color : T.textMuted, cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
+                      }}>
+                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.show ? s.color : T.textMuted }} />
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
                   <div style={{ direction: 'ltr', height: '280px' }}>
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={data.daily_views} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                      <AreaChart data={dailyMerged} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                         <defs>
-                          <linearGradient id="dailyGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor={T.purple} stopOpacity={0.4} />
-                            <stop offset="50%" stopColor={T.purple} stopOpacity={0.1} />
-                            <stop offset="100%" stopColor={T.purple} stopOpacity={0} />
-                          </linearGradient>
+                          <linearGradient id="gViews" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={T.purple} stopOpacity={0.3} /><stop offset="100%" stopColor={T.purple} stopOpacity={0} /></linearGradient>
+                          <linearGradient id="gClicks" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={T.cyan} stopOpacity={0.3} /><stop offset="100%" stopColor={T.cyan} stopOpacity={0} /></linearGradient>
+                          <linearGradient id="gForms" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={T.green} stopOpacity={0.3} /><stop offset="100%" stopColor={T.green} stopOpacity={0} /></linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" stroke={T.grid} vertical={false} />
                         <XAxis dataKey="day" tickFormatter={formatDate} stroke={T.grid} tick={{ fill: T.axisText, fontSize: 12 }} tickLine={false} axisLine={false} />
                         <YAxis stroke={T.grid} tick={{ fill: T.axisText, fontSize: 12 }} tickLine={false} axisLine={false} width={40} />
-                        <Tooltip content={<ChartTooltip suffix="צפיות" />} />
-                        <Area type="monotone" dataKey="views" stroke={T.purple} fill="url(#dailyGrad)" strokeWidth={2} dot={false}
-                          activeDot={{ r: 5, fill: T.purple, stroke: T.bg, strokeWidth: 2 }} />
+                        <Tooltip content={<ChartTooltip />} />
+                        {showViews && <Area type="monotone" dataKey="views" name="צפיות" stroke={T.purple} fill="url(#gViews)" strokeWidth={2} dot={false} />}
+                        {showClicks && <Area type="monotone" dataKey="clicks" name="לחיצות" stroke={T.cyan} fill="url(#gClicks)" strokeWidth={2} dot={false} />}
+                        {showForms && <Area type="monotone" dataKey="forms" name="טפסים" stroke={T.green} fill="url(#gForms)" strokeWidth={2} dot={false} />}
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </Card>
               )}
 
-              {/* Devices Donut + Top Pages Bar */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
                 {/* Devices Donut */}
                 <Card title="מכשירים">
                   {data.devices && data.devices.length > 0 ? (
                     <>
-                      <div style={{ direction: 'ltr', height: '220px' }}>
+                      <div style={{ direction: 'ltr', height: '200px' }}>
                         <ResponsiveContainer width="100%" height="100%">
                           <PieChart>
-                            <Pie data={data.devices} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3}
-                              dataKey="count" nameKey="device_type" stroke="none">
+                            <Pie data={data.devices} cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={3} dataKey="count" nameKey="device_type" stroke="none">
                               {data.devices.map((_, i) => <Cell key={i} fill={DEVICE_COLORS[i % DEVICE_COLORS.length]} />)}
                             </Pie>
                             <Tooltip content={({ active, payload }: any) => {
                               if (!active || !payload?.length) return null;
                               const d = payload[0].payload;
                               const total = data.devices!.reduce((s, x) => s + x.count, 0);
-                              const pct = total > 0 ? Math.round((d.count / total) * 100) : 0;
                               return (
                                 <div style={{ background: T.tooltipBg, border: `1px solid ${T.tooltipBorder}`, borderRadius: '10px', padding: '10px 14px', direction: 'rtl' }}>
-                                  <div style={{ color: T.textSecondary, fontSize: '12px' }}>{DEVICE_ICONS[d.device_type] || ''} {DEVICE_LABELS[d.device_type] || d.device_type}</div>
-                                  <div style={{ color: T.purple, fontWeight: 700, fontSize: '16px' }}>{d.count} ({pct}%)</div>
+                                  <div style={{ color: T.textSecondary, fontSize: '12px' }}>{DEVICE_ICONS[d.device_type]} {DEVICE_LABELS[d.device_type] || d.device_type}</div>
+                                  <div style={{ color: T.purple, fontWeight: 700, fontSize: '16px' }}>{d.count} ({total > 0 ? Math.round((d.count / total) * 100) : 0}%)</div>
                                 </div>
                               );
                             }} />
                           </PieChart>
                         </ResponsiveContainer>
                       </div>
-                      {/* Legend */}
-                      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', direction: 'rtl', marginTop: '8px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', direction: 'rtl' }}>
                         {data.devices.map((d, i) => {
                           const total = data.devices!.reduce((s, x) => s + x.count, 0);
-                          const pct = total > 0 ? Math.round((d.count / total) * 100) : 0;
                           return (
-                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: DEVICE_COLORS[i % DEVICE_COLORS.length] }} />
-                              <span style={{ fontSize: '13px', color: T.textSecondary }}>{DEVICE_ICONS[d.device_type]} {DEVICE_LABELS[d.device_type] || d.device_type}</span>
-                              <span style={{ fontSize: '13px', color: T.textMuted }}>{pct}%</span>
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: T.textSecondary }}>
+                              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: DEVICE_COLORS[i % DEVICE_COLORS.length] }} />
+                              {DEVICE_ICONS[d.device_type]} {DEVICE_LABELS[d.device_type]} {total > 0 ? Math.round((d.count / total) * 100) : 0}%
                             </div>
                           );
                         })}
@@ -485,22 +672,22 @@ export default function AnalyticsDashboard() {
                   ) : <p style={{ color: T.textMuted, textAlign: 'center' }}>אין נתונים</p>}
                 </Card>
 
-                {/* Top Pages Bar Chart */}
-                <Card title="דפים מובילים (Top 10)">
-                  {topPagesChart.length > 0 ? (
-                    <div style={{ direction: 'ltr', height: Math.max(topPagesChart.length * 36, 200) + 'px' }}>
+                {/* Hourly Heatmap */}
+                <Card title="שעות שיא (Israel Time)">
+                  {hourlyFull.length > 0 ? (
+                    <div style={{ direction: 'ltr', height: '200px' }}>
                       <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={topPagesChart} layout="vertical" margin={{ top: 0, right: 20, bottom: 0, left: 10 }}>
+                        <BarChart data={hourlyFull} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke={T.grid} horizontal={false} />
-                          <XAxis type="number" tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} tickLine={false} />
-                          <YAxis type="category" dataKey="name" width={160}
-                            tick={{ fill: '#ccc', fontSize: 11 }} axisLine={false} tickLine={false}
-                            tickFormatter={(v: string) => v.length > 22 ? v.substring(0, 22) + '…' : v} />
+                          <XAxis dataKey="hour" tick={{ fill: T.axisText, fontSize: 10 }} axisLine={false} tickLine={false} interval={2} />
+                          <YAxis tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} tickLine={false} width={30} />
                           <Tooltip content={<ChartTooltip suffix="צפיות" />} />
-                          <Bar dataKey="views" radius={[0, 4, 4, 0]} maxBarSize={24}>
-                            {topPagesChart.map((_, i) => (
-                              <Cell key={i} fill={i === topPagesChart.length - 1 ? T.purple : 'rgba(168,85,247,0.35)'} />
-                            ))}
+                          <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={20}>
+                            {hourlyFull.map((h, i) => {
+                              const max = Math.max(...hourlyFull.map(x => x.count), 1);
+                              const intensity = h.count / max;
+                              return <Cell key={i} fill={`rgba(168,85,247,${0.2 + intensity * 0.8})`} />;
+                            })}
                           </Bar>
                         </BarChart>
                       </ResponsiveContainer>
@@ -508,28 +695,33 @@ export default function AnalyticsDashboard() {
                   ) : <p style={{ color: T.textMuted, textAlign: 'center' }}>אין נתונים</p>}
                 </Card>
               </div>
+
+              {/* Conversion Funnel */}
+              {data.conversion_funnel && (
+                <div style={{ marginTop: '16px' }}>
+                  <Card title="משפך המרה">
+                    <Funnel data={data.conversion_funnel} />
+                  </Card>
+                </div>
+              )}
             </>
           )}
 
-          {/* ═══ PAGES TAB ═══ */}
-          {activeTab === 'pages' && (
+          {/* ═══ CONTENT TAB ═══ */}
+          {activeTab === 'content' && (
             <>
-              {/* Top Pages Bar Chart (larger) */}
-              {topPagesChart.length > 0 && (
-                <Card title="דפים מובילים">
-                  <div style={{ direction: 'ltr', height: Math.max(topPagesChart.length * 40, 250) + 'px' }}>
+              {/* Page Categories */}
+              {data.page_categories && data.page_categories.length > 0 && (
+                <Card title="קטגוריות תוכן" exportData={data.page_categories} exportName="page-categories">
+                  <div style={{ direction: 'ltr', height: Math.max(data.page_categories.length * 40, 200) + 'px' }}>
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={topPagesChart} layout="vertical" margin={{ top: 0, right: 30, bottom: 0, left: 10 }}>
+                      <BarChart data={data.page_categories.map(c => ({ ...c, name: CATEGORY_LABELS[c.category] || c.category }))} layout="vertical" margin={{ top: 0, right: 20, bottom: 0, left: 10 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke={T.grid} horizontal={false} />
                         <XAxis type="number" tick={{ fill: T.axisText, fontSize: 12 }} axisLine={false} tickLine={false} />
-                        <YAxis type="category" dataKey="name" width={200}
-                          tick={{ fill: '#ccc', fontSize: 12 }} axisLine={false} tickLine={false}
-                          tickFormatter={(v: string) => v.length > 30 ? v.substring(0, 30) + '…' : v} />
+                        <YAxis type="category" dataKey="name" width={120} tick={{ fill: '#ccc', fontSize: 12 }} axisLine={false} tickLine={false} />
                         <Tooltip content={<ChartTooltip suffix="צפיות" />} />
                         <Bar dataKey="views" radius={[0, 6, 6, 0]} maxBarSize={28}>
-                          {topPagesChart.map((_, i) => (
-                            <Cell key={i} fill={i === topPagesChart.length - 1 ? T.purple : 'rgba(168,85,247,0.35)'} />
-                          ))}
+                          {data.page_categories.map((c, i) => <Cell key={i} fill={CATEGORY_COLORS[c.category] || T.textMuted} />)}
                         </Bar>
                       </BarChart>
                     </ResponsiveContainer>
@@ -537,52 +729,83 @@ export default function AnalyticsDashboard() {
                 </Card>
               )}
 
-              {/* Page Details Sortable Table */}
-              <Card title="ביצועי דפים">
-                {filteredPageDetails.length === 0 ? (
-                  <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center' }}>אין נתונים</p>
-                ) : (
-                  <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', direction: 'rtl' }}>
-                      <thead>
-                        <tr>
-                          {[
-                            { key: 'page_path', label: 'דף' },
-                            { key: 'views', label: 'צפיות' },
-                            { key: 'clicks', label: 'לחיצות' },
-                            { key: 'forms', label: 'טפסים' },
-                            { key: 'unique_sources', label: 'מקורות' },
-                          ].map(col => (
-                            <th key={col.key} onClick={() => toggleSort(col.key)} style={{
-                              textAlign: col.key === 'page_path' ? 'right' : 'center',
-                              padding: '10px 8px', borderBottom: `1px solid ${T.headerBorder}`,
-                              color: pageSort.key === col.key ? T.purple : T.textSecondary,
-                              fontWeight: 500, cursor: 'pointer', userSelect: 'none', fontSize: '12px',
-                              textTransform: 'uppercase', letterSpacing: '0.5px',
-                            }}>
-                              {col.label} {pageSort.key === col.key ? (pageSort.dir === 'desc' ? '▼' : '▲') : ''}
-                            </th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredPageDetails.map((row, i) => (
-                          <tr key={i}
-                            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')}
-                            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
-                            <td style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                              {decodePath(row.page_path)}
-                            </td>
+              {/* Blog Articles */}
+              {data.top_content && data.top_content.length > 0 && (
+                <Card title="ביצועי כתבות" exportData={data.top_content} exportName="blog-performance">
+                  <DataTable
+                    rows={data.top_content}
+                    columns={[
+                      { key: 'page_path', label: 'כתבה', render: (v: string) => decodePath(v).replace('/ai-news/', '') },
+                      { key: 'views', label: 'צפיות', align: 'center', render: (v: number) => <span style={{ color: T.purple, fontWeight: 600 }}>{v}</span> },
+                      { key: 'clicks', label: 'לחיצות', align: 'center' },
+                      { key: 'forms', label: 'טפסים', align: 'center', render: (v: number) => <span style={{ color: v > 0 ? T.green : T.textMuted, fontWeight: v > 0 ? 600 : 400 }}>{v}</span> },
+                      { key: 'conversion_rate', label: 'המרה %', align: 'center', render: (v: number) => <span style={{ color: v > 0 ? T.green : T.textMuted }}>{v}%</span> },
+                    ]}
+                  />
+                </Card>
+              )}
+
+              {/* All Pages */}
+              <Card title="ביצועי דפים" exportData={filteredPageDetails} exportName="page-details">
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', direction: 'rtl' }}>
+                    <thead>
+                      <tr>
+                        {[
+                          { key: 'page_path', label: 'דף' },
+                          { key: 'views', label: 'צפיות' },
+                          { key: 'clicks', label: 'לחיצות' },
+                          { key: 'forms', label: 'טפסים' },
+                          { key: 'conv', label: 'המרה %' },
+                          { key: 'unique_sources', label: 'מקורות' },
+                        ].map(col => (
+                          <th key={col.key} onClick={() => col.key !== 'conv' && toggleSort(col.key)} style={{
+                            textAlign: col.key === 'page_path' ? 'right' : 'center',
+                            padding: '10px 8px', borderBottom: `1px solid ${T.headerBorder}`,
+                            color: pageSort.key === col.key ? T.purple : T.textSecondary,
+                            fontWeight: 500, cursor: col.key !== 'conv' ? 'pointer' : 'default', fontSize: '12px',
+                          }}>
+                            {col.label} {pageSort.key === col.key ? (pageSort.dir === 'desc' ? '▼' : '▲') : ''}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredPageDetails.map((row, i) => {
+                        const conv = row.views > 0 ? Math.round((row.forms / row.views) * 1000) / 10 : 0;
+                        return (
+                          <tr key={i} onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')} onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                            <td style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc', maxWidth: '250px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{decodePath(row.page_path)}</td>
                             <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.purple, fontWeight: 600 }}>{row.views}</td>
                             <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc' }}>{row.clicks}</td>
                             <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: row.forms > 0 ? T.green : T.textMuted, fontWeight: row.forms > 0 ? 600 : 400 }}>{row.forms}</td>
+                            <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: conv > 0 ? T.green : T.textMuted }}>{conv}%</td>
                             <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc' }}>{row.unique_sources}</td>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+
+              {/* Top Clicks */}
+              <Card title="לחיצות מובילות" exportData={data.top_clicks?.slice(0, 25)} exportName="top-clicks">
+                <DataTable
+                  rows={(data.top_clicks || []).slice(0, 25)}
+                  columns={[
+                    { key: 'click_text', label: 'טקסט', render: (v: string) => (v || '').substring(0, 50) },
+                    { key: 'click_type', label: 'סוג', align: 'center', render: (v: string) => (
+                      <span style={{
+                        padding: '2px 8px', borderRadius: '4px', fontSize: '11px',
+                        background: v === 'external' ? T.cyanBg : v === 'whatsapp' ? T.greenBg : 'rgba(255,255,255,0.06)',
+                        color: v === 'external' ? T.cyan : v === 'whatsapp' ? T.green : T.textSecondary,
+                      }}>{v}</span>
+                    )},
+                    { key: 'click_url', label: 'URL', render: (v: string) => { try { const u = new URL(v); return u.hostname + (u.pathname.length > 1 ? u.pathname.substring(0, 30) : ''); } catch { return (v || '').substring(0, 40); } } },
+                    { key: 'clicks', label: 'לחיצות', align: 'center', render: (v: number) => <span style={{ color: T.purple, fontWeight: 600 }}>{v}</span> },
+                  ]}
+                />
               </Card>
             </>
           )}
@@ -590,7 +813,6 @@ export default function AnalyticsDashboard() {
           {/* ═══ SOURCES TAB ═══ */}
           {activeTab === 'sources' && (
             <>
-              {/* Source Type Filter */}
               <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', direction: 'rtl' }}>
                 {([['all', 'הכל'], ['paid', 'Paid'], ['organic', 'Organic']] as const).map(([val, label]) => (
                   <button key={val} onClick={() => setSourceFilter(val)} style={{
@@ -603,9 +825,8 @@ export default function AnalyticsDashboard() {
                 ))}
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '16px' }}>
-                {/* Referrers */}
-                <Card title="מקורות תנועה">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                <Card title="מקורות תנועה" exportData={data.referrers} exportName="referrers">
                   <DataTable
                     rows={data.referrers || []}
                     columns={[
@@ -615,10 +836,9 @@ export default function AnalyticsDashboard() {
                   />
                 </Card>
 
-                {/* UTM Campaigns */}
-                <Card title="קמפיינים (UTM)">
+                <Card title="קמפיינים (UTM)" exportData={data.utm_campaigns_v2} exportName="utm-campaigns">
                   <DataTable
-                    rows={data.utm_campaigns || []}
+                    rows={data.utm_campaigns_v2 || []}
                     columns={[
                       { key: 'utm_source', label: 'Source' },
                       { key: 'utm_medium', label: 'Medium', align: 'center', render: (v: string) => (
@@ -626,18 +846,20 @@ export default function AnalyticsDashboard() {
                           padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
                           background: v === 'paid' ? T.purpleBg : 'rgba(255,255,255,0.06)',
                           color: v === 'paid' ? T.purple : T.textSecondary,
-                          border: `1px solid ${v === 'paid' ? 'rgba(168,85,247,0.3)' : T.cardBorder}`,
                         }}>{v}</span>
                       )},
                       { key: 'utm_campaign', label: 'Campaign' },
                       { key: 'visits', label: 'ביקורים', align: 'center', render: (v: number) => <span style={{ color: T.purple, fontWeight: 600 }}>{v}</span> },
+                      { key: 'forms', label: 'טפסים', align: 'center', render: (v: number) => <span style={{ color: v > 0 ? T.green : T.textMuted }}>{v}</span> },
+                      { key: 'conversion_rate', label: 'המרה %', align: 'center', render: (v: number) => (
+                        <span style={{ color: v > 3 ? T.green : v > 0 ? T.orange : T.textMuted, fontWeight: 600 }}>{v}%</span>
+                      )},
                     ]}
                   />
                 </Card>
               </div>
 
-              {/* Source → Pages */}
-              <Card title="מקורות → דפים">
+              <Card title="מקורות → דפים" exportData={filteredSourcePages} exportName="source-pages">
                 <DataTable
                   rows={filteredSourcePages}
                   columns={[
@@ -647,7 +869,6 @@ export default function AnalyticsDashboard() {
                         padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
                         background: v === 'paid' ? T.purpleBg : 'rgba(255,255,255,0.06)',
                         color: v === 'paid' ? T.purple : T.textSecondary,
-                        border: `1px solid ${v === 'paid' ? 'rgba(168,85,247,0.3)' : T.cardBorder}`,
                       }}>{v}</span>
                     ) : <span style={{ color: T.textMuted, fontSize: '11px' }}>organic</span> },
                     { key: 'page_path', label: 'דף נחיתה', render: (v: string) => decodePath(v) },
@@ -660,90 +881,186 @@ export default function AnalyticsDashboard() {
 
           {/* ═══ CONVERSIONS TAB ═══ */}
           {activeTab === 'conversions' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '16px' }}>
-              {/* Forms */}
-              <Card title="טפסים">
-                <DataTable
-                  rows={filteredFormDetails}
-                  columns={[
-                    { key: 'page_path', label: 'דף', render: (v: string) => decodePath(v) },
-                    { key: 'button_text', label: 'כפתור' },
-                    { key: 'submissions', label: 'שליחות', align: 'center', render: (v: number) => <span style={{ color: T.green, fontWeight: 600 }}>{v}</span> },
-                  ]}
-                />
-              </Card>
+            <>
+              {data.conversion_funnel && (
+                <Card title="משפך המרה מלא">
+                  <Funnel data={data.conversion_funnel} />
+                </Card>
+              )}
 
-              {/* Landing Pages */}
-              <Card title="דפי נחיתה">
-                {filteredLandingPages.length === 0 ? (
-                  <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center' }}>אין נתונים</p>
-                ) : (
-                  <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', direction: 'rtl' }}>
-                      <thead>
-                        <tr>
-                          {['דף', 'כניסות', 'מקורות', 'Paid', 'Organic'].map(h => (
-                            <th key={h} style={{
-                              textAlign: h === 'דף' ? 'right' : 'center', padding: '10px 8px',
-                              borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary,
-                              fontWeight: 500, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.5px',
-                            }}>{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredLandingPages.map((row, i) => (
-                          <tr key={i}
-                            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')}
-                            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
-                            <td style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                              {decodePath(row.page_path)}
-                            </td>
-                            <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.purple, fontWeight: 600 }}>{row.external_entries}</td>
-                            <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc' }}>{row.distinct_sources}</td>
-                            <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}` }}>
-                              {row.paid_entries > 0 ? (
-                                <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, background: T.purpleBg, color: T.purple }}>{row.paid_entries}</span>
-                              ) : <span style={{ color: T.textMuted }}>0</span>}
-                            </td>
-                            <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}` }}>
-                              {row.organic_entries > 0 ? (
-                                <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, background: T.greenBg, color: T.green }}>{row.organic_entries}</span>
-                              ) : <span style={{ color: T.textMuted }}>0</span>}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                <Card title="טפסים" exportData={pageFilter ? data.form_details?.filter(r => r.page_path === pageFilter) : data.form_details} exportName="form-submissions">
+                  <DataTable
+                    rows={pageFilter ? (data.form_details || []).filter(r => r.page_path === pageFilter) : (data.form_details || [])}
+                    columns={[
+                      { key: 'page_path', label: 'דף', render: (v: string) => decodePath(v) },
+                      { key: 'button_text', label: 'כפתור' },
+                      { key: 'submissions', label: 'שליחות', align: 'center', render: (v: number) => <span style={{ color: T.green, fontWeight: 600 }}>{v}</span> },
+                    ]}
+                  />
+                </Card>
+
+                <Card title="דפי נחיתה" exportData={data.landing_pages} exportName="landing-pages">
+                  <DataTable
+                    rows={pageFilter ? (data.landing_pages || []).filter(r => r.page_path === pageFilter) : (data.landing_pages || [])}
+                    columns={[
+                      { key: 'page_path', label: 'דף', render: (v: string) => decodePath(v) },
+                      { key: 'external_entries', label: 'כניסות', align: 'center', render: (v: number) => <span style={{ color: T.purple, fontWeight: 600 }}>{v}</span> },
+                      { key: 'distinct_sources', label: 'מקורות', align: 'center' },
+                      { key: 'paid_entries', label: 'Paid', align: 'center', render: (v: number) => v > 0 ? <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, background: T.purpleBg, color: T.purple }}>{v}</span> : <span style={{ color: T.textMuted }}>0</span> },
+                      { key: 'organic_entries', label: 'Organic', align: 'center', render: (v: number) => v > 0 ? <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, background: T.greenBg, color: T.green }}>{v}</span> : <span style={{ color: T.textMuted }}>0</span> },
+                    ]}
+                  />
+                </Card>
+              </div>
+
+              {/* CRO Suggestions */}
+              {croSuggestions.length > 0 && (
+                <Card title="המלצות לשיפור (CRO)">
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+                    {croSuggestions.map((s, i) => (
+                      <div key={i} style={{
+                        display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '12px',
+                        background: T.orangeBg, borderRadius: '10px', border: `1px solid rgba(245,158,11,0.2)`,
+                      }}>
+                        <span style={{ fontSize: '18px', flexShrink: 0 }}>💡</span>
+                        <span style={{ fontSize: '13px', color: T.textPrimary, lineHeight: 1.6 }}>{s}</span>
+                      </div>
+                    ))}
                   </div>
-                )}
-              </Card>
-            </div>
+                </Card>
+              )}
+            </>
           )}
 
-          {/* ═══ CLICKS TAB ═══ */}
-          {activeTab === 'clicks' && (
-            <Card title="לחיצות מובילות">
-              <DataTable
-                rows={(data.top_clicks || []).slice(0, 25)}
-                columns={[
-                  { key: 'click_text', label: 'טקסט', render: (v: string) => (v || '').substring(0, 50) },
-                  { key: 'click_type', label: 'סוג', align: 'center', render: (v: string) => (
-                    <span style={{
-                      padding: '2px 8px', borderRadius: '4px', fontSize: '11px',
-                      background: v === 'external' ? 'rgba(6,182,212,0.15)' : v === 'whatsapp' ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.06)',
-                      color: v === 'external' ? T.cyan : v === 'whatsapp' ? T.green : T.textSecondary,
-                      border: `1px solid ${v === 'external' ? 'rgba(6,182,212,0.3)' : v === 'whatsapp' ? 'rgba(16,185,129,0.3)' : T.cardBorder}`,
-                    }}>{v}</span>
-                  )},
-                  { key: 'click_url', label: 'URL', render: (v: string) => {
-                    try { const u = new URL(v); return u.hostname + (u.pathname.length > 1 ? u.pathname.substring(0, 30) : ''); }
-                    catch { return (v || '').substring(0, 40); }
-                  }},
-                  { key: 'clicks', label: 'לחיצות', align: 'center', render: (v: number) => <span style={{ color: T.purple, fontWeight: 600 }}>{v}</span> },
-                ]}
-              />
-            </Card>
+          {/* ═══ REALTIME TAB ═══ */}
+          {activeTab === 'realtime' && (
+            <>
+              <Card title="פעילות אחרונה">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', direction: 'rtl' }}>
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: T.green, animation: 'pulse 2s infinite' }} />
+                  <span style={{ fontSize: '14px', color: T.textSecondary }}>רענון אוטומטי כל 30 שניות</span>
+                  {lastUpdated && <span style={{ fontSize: '12px', color: T.textMuted }}>עדכון אחרון: {lastUpdated.toLocaleTimeString('he-IL')}</span>}
+                </div>
+                {data.recent_events && data.recent_events.length > 0 ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    {data.recent_events.map((ev, i) => (
+                      <div key={i} style={{
+                        display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 14px',
+                        background: 'rgba(255,255,255,0.02)', borderRadius: '10px', direction: 'rtl',
+                        border: `1px solid ${T.rowBorder}`,
+                      }}>
+                        <span style={{ fontSize: '11px', color: T.textMuted, minWidth: '70px' }}>{timeAgo(ev.created_at)}</span>
+                        <EventBadge type={ev.event_type} />
+                        <span style={{ fontSize: '13px', color: '#ccc', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                          {decodePath(ev.page_path)}
+                        </span>
+                        {ev.click_text && <span style={{ fontSize: '11px', color: T.textMuted, maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ev.click_text}</span>}
+                        {ev.device_type && <span style={{ fontSize: '12px' }}>{DEVICE_ICONS[ev.device_type] || ''}</span>}
+                      </div>
+                    ))}
+                  </div>
+                ) : <p style={{ color: T.textMuted, textAlign: 'center' }}>אין אירועים אחרונים</p>}
+              </Card>
+            </>
+          )}
+
+          {/* ═══ INSIGHTS TAB ═══ */}
+          {activeTab === 'insights' && (
+            <>
+              {/* Anomalies */}
+              {anomalies.length > 0 && (
+                <Card title="התראות חריגה">
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+                    {anomalies.map((a, i) => (
+                      <div key={i} style={{
+                        padding: '12px', borderRadius: '10px',
+                        background: a.type === 'spike' ? T.greenBg : T.redBg,
+                        border: `1px solid ${a.type === 'spike' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`,
+                        display: 'flex', alignItems: 'center', gap: '10px',
+                      }}>
+                        <span style={{ fontSize: '20px' }}>{a.type === 'spike' ? '📈' : '📉'}</span>
+                        <div>
+                          <div style={{ fontSize: '13px', color: T.textPrimary, fontWeight: 600 }}>
+                            {a.type === 'spike' ? 'ספייק בתנועה' : 'ירידה חדה'} — {formatDate(a.day)}
+                          </div>
+                          <div style={{ fontSize: '12px', color: T.textSecondary }}>
+                            {a.views} צפיות (ממוצע: {a.mean})
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )}
+
+              {/* CRO Suggestions */}
+              {croSuggestions.length > 0 && (
+                <Card title="המלצות CRO">
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+                    {croSuggestions.map((s, i) => (
+                      <div key={i} style={{
+                        display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '12px',
+                        background: T.orangeBg, borderRadius: '10px', border: `1px solid rgba(245,158,11,0.2)`,
+                      }}>
+                        <span style={{ fontSize: '18px', flexShrink: 0 }}>💡</span>
+                        <span style={{ fontSize: '13px', color: T.textPrimary, lineHeight: 1.6 }}>{s}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )}
+
+              {/* Goal Tracking */}
+              <Card title="מעקב יעדים חודשיים">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', direction: 'rtl' }}>
+                  {[
+                    { label: 'צפיות', current: data.total_pageviews, target: 5000, color: T.purple, icon: '👁' },
+                    { label: 'טפסים', current: data.total_forms, target: 50, color: T.green, icon: '📝' },
+                    { label: 'קליקי WhatsApp', current: data.whatsapp_clicks, target: 100, color: '#25D366', icon: '💬' },
+                  ].map(goal => {
+                    const pct = Math.min(Math.round((goal.current / goal.target) * 100), 100);
+                    return (
+                      <div key={goal.label}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                          <span style={{ fontSize: '13px', color: T.textSecondary }}>{goal.icon} {goal.label}</span>
+                          <span style={{ fontSize: '13px', color: goal.color, fontWeight: 600 }}>
+                            {goal.current.toLocaleString('he-IL')} / {goal.target.toLocaleString('he-IL')} ({pct}%)
+                          </span>
+                        </div>
+                        <div style={{ height: '10px', background: 'rgba(255,255,255,0.05)', borderRadius: '5px', overflow: 'hidden' }}>
+                          <div style={{
+                            height: '100%', width: `${pct}%`, background: goal.color, borderRadius: '5px',
+                            transition: 'width 0.6s ease',
+                          }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <p style={{ fontSize: '11px', color: T.textMuted, marginTop: '4px' }}>* יעדים מבוססים על טווח הימים הנבחר ({days} ימים)</p>
+                </div>
+              </Card>
+
+              {/* Top Pages */}
+              {topPagesChart.length > 0 && (
+                <Card title="דפים מובילים (Top 10)">
+                  <div style={{ direction: 'ltr', height: Math.max(topPagesChart.length * 36, 200) + 'px' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={topPagesChart} layout="vertical" margin={{ top: 0, right: 20, bottom: 0, left: 10 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke={T.grid} horizontal={false} />
+                        <XAxis type="number" tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} tickLine={false} />
+                        <YAxis type="category" dataKey="name" width={160} tick={{ fill: '#ccc', fontSize: 11 }} axisLine={false} tickLine={false}
+                          tickFormatter={(v: string) => v.length > 22 ? v.substring(0, 22) + '…' : v} />
+                        <Tooltip content={<ChartTooltip suffix="צפיות" />} />
+                        <Bar dataKey="views" radius={[0, 4, 4, 0]} maxBarSize={24}>
+                          {topPagesChart.map((_, i) => <Cell key={i} fill={i === topPagesChart.length - 1 ? T.purple : 'rgba(168,85,247,0.35)'} />)}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </Card>
+              )}
+            </>
           )}
         </>
       )}

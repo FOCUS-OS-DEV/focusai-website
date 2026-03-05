@@ -83,6 +83,14 @@
   // Skip tracking for excluded browsers (set via console: localStorage.setItem('fai_notrack','1'))
   if (typeof localStorage !== 'undefined' && localStorage.getItem('fai_notrack') === '1') return;
 
+  // Session ID (tab-scoped, resets when tab closes)
+  var sid;
+  try { sid = sessionStorage.getItem('fai_sid'); if (!sid) { sid = crypto.randomUUID(); sessionStorage.setItem('fai_sid', sid); } } catch(e) { sid = null; }
+
+  // Timezone for geo approximation
+  var tz;
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e) { tz = null; }
+
   var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
 
@@ -122,7 +130,9 @@
       page_path: window.location.pathname,
       referrer: document.referrer || null,
       device_type: getDeviceType(),
-      screen_width: window.innerWidth
+      screen_width: window.innerWidth,
+      session_id: sid,
+      timezone: tz
     }, getUTM(), data);
 
     // Remove null values
@@ -180,4 +190,4 @@
 </script><style>[data-astro-cid-5a6mzon6]{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0f}
 </style></head> <body data-astro-cid-5a6mzon6> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <div id="dashboard" data-astro-cid-5a6mzon6> <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0a0f;color:#fff;font-family:Heebo,sans-serif" data-astro-cid-5a6mzon6>
 Loading...
-</div> </div> <script type="module" src="/_astro/analytics.astro_astro_type_script_index_0_lang.Cx9Nb0l1.js"></script> </body> </html>
+</div> </div> <script type="module" src="/_astro/analytics.astro_astro_type_script_index_0_lang.DxWdoATi.js"></script> </body> </html>

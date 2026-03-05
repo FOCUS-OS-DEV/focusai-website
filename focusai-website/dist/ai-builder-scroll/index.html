@@ -92,6 +92,14 @@ window.__meta_pixel_loaded = true;
   // Skip tracking for excluded browsers (set via console: localStorage.setItem('fai_notrack','1'))
   if (typeof localStorage !== 'undefined' && localStorage.getItem('fai_notrack') === '1') return;
 
+  // Session ID (tab-scoped, resets when tab closes)
+  var sid;
+  try { sid = sessionStorage.getItem('fai_sid'); if (!sid) { sid = crypto.randomUUID(); sessionStorage.setItem('fai_sid', sid); } } catch(e) { sid = null; }
+
+  // Timezone for geo approximation
+  var tz;
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e) { tz = null; }
+
   var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
 
@@ -131,7 +139,9 @@ window.__meta_pixel_loaded = true;
       page_path: window.location.pathname,
       referrer: document.referrer || null,
       device_type: getDeviceType(),
-      screen_width: window.innerWidth
+      screen_width: window.innerWidth,
+      session_id: sid,
+      timezone: tz
     }, getUTM(), data);
 
     // Remove null values
