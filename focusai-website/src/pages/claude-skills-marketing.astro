@@ -491,7 +491,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         </label>
         <label class="consult-row" style="border-color: var(--orange);">
           <input type="checkbox" data-field="privacy" required>
-          <span class="consult-label">מאשר/ת את <a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a> וקבלת תוכן שיווקי מ-Focus AI.</span>
+          <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/terms/" style="color:var(--orange);text-decoration:underline;" target="_blank">תנאי השימוש</a> ול<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a>. *</span>
+        </label>
+        <label class="consult-row" style="border-color: var(--orange);">
+          <input type="checkbox" data-field="marketing" required>
+          <span class="consult-label">אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *</span>
         </label>
         <button class="form-btn" id="form-submit">קבל את הסקילים →</button>
         <p class="sub-note">תוך כמה שניות תקבל את הכל למייל!</p>
@@ -777,7 +781,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             </label>
             <label class="consult-row" style="border-color: var(--orange);">
               <input type="checkbox" data-field="privacy" required>
-              <span class="consult-label">מאשר/ת את <a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a> וקבלת תוכן שיווקי מ-Focus AI.</span>
+              <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/terms/" style="color:var(--orange);text-decoration:underline;" target="_blank">תנאי השימוש</a> ול<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a>. *</span>
+            </label>
+            <label class="consult-row" style="border-color: var(--orange);">
+              <input type="checkbox" data-field="marketing" required>
+              <span class="consult-label">אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *</span>
             </label>
             <button class="form-btn" id="form-submit-2">שלח לי →</button>
             <p class="sub-note">תוך כמה שניות תקבל את הכל למייל!</p>
@@ -843,9 +851,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
       const emailEl     = field(wrap, 'email');
       const consultEl   = field(wrap, 'consultant');
       const privacyEl   = field(wrap, 'privacy');
+      const marketingEl = field(wrap, 'marketing');
 
       [firstNameEl, phoneEl, emailEl].forEach(el => el && el.classList.remove('error'));
       if (privacyEl) privacyEl.closest('.consult-row').style.borderColor = '';
+      if (marketingEl) marketingEl.closest('.consult-row').style.borderColor = '';
 
       let valid = true;
       if (!firstNameEl.value.trim()) { firstNameEl.classList.add('error'); firstNameEl.focus(); valid = false; }
@@ -864,6 +874,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         valid = false;
       }
 
+      if (marketingEl && !marketingEl.checked) {
+        marketingEl.closest('.consult-row').style.borderColor = '#c8643c';
+        valid = false;
+      }
+
       if (!valid) return;
 
       const btn = wrap.querySelector('.form-btn');
@@ -876,6 +891,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         phone:      phoneClean,
         email:      emailEl.value.trim(),
         consultant: String(consultEl ? consultEl.checked : false),
+        marketing_consent: String(marketingEl ? marketingEl.checked : false),
         source:     'claude-skills-marketing',
         timestamp:  new Date().toISOString()
       };
