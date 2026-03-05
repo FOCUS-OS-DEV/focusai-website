@@ -1,7 +1,7 @@
 ---
 /**
- * LIVE Webinar Landing Page - Building first AI Agent in n8n
- * Event Date: 04.03.2026 at 19:30
+ * Free Guide Landing Page - Building first AI Agent in n8n
+ * Originally a LIVE webinar (04.03.2026), now available as free recorded guide
  * Featuring Bot-Camp students: Orian Amoyal & Zohar Yaakov
  */
 import Analytics from '../components/Analytics.astro';
@@ -13,14 +13,14 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>וובינר LIVE | בניית סוכן AI ראשון ב-n8n | Focus AI</title>
-    <meta name="description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 04.03.2026 בשעה 19:30. הרשמו עכשיו!">
+    <title>מדריך חינם | בניית סוכן AI ראשון ב-n8n | Focus AI</title>
+    <meta name="description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות — צעד אחר צעד, בלי קוד.">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://focusai.co.il/webinar-n8n-agent/">
-    <meta property="og:title" content="וובינר LIVE | בניית סוכן AI ראשון ב-n8n">
-    <meta property="og:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 04.03.2026 בשעה 19:30.">
+    <meta property="og:title" content="מדריך חינם | בניית סוכן AI ראשון ב-n8n">
+    <meta property="og:description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות — צעד אחר צעד.">
     <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -29,8 +29,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="וובינר LIVE | בניית סוכן AI ראשון ב-n8n">
-    <meta name="twitter:description" content="וובינר לייב בחינם! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות במערכת n8n. 04.03.2026 בשעה 19:30.">
+    <meta name="twitter:title" content="מדריך חינם | בניית סוכן AI ראשון ב-n8n">
+    <meta name="twitter:description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! צפו בבוגרי Bot-Camp בונים סוכני AI ואוטומציות אמיתיות — צעד אחר צעד.">
     <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
 
     <link rel="canonical" href="https://focusai.co.il/webinar-n8n-agent/">
@@ -1737,67 +1737,28 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo">
             </a>
 
-            <div class="live-badge">
-                <span class="live-dot"></span>
-                LIVE וובינר
-            </div>
-
-            <div class="event-date-badge">
-                <i class="fas fa-calendar-alt"></i>
-                <span>04.03.2026</span>
-                <span class="separator"></span>
-                <i class="fas fa-clock"></i>
-                <span>19:30</span>
-                <span class="separator"></span>
-                <i class="fas fa-gift"></i>
-                <span>חינם</span>
+            <div class="live-badge" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: 0 4px 20px var(--glow-primary); animation: none;">
+                <i class="fas fa-play-circle" style="font-size: 1rem;"></i>
+                מדריך חינם
             </div>
 
             <h1>בניית סוכן AI ראשון ב-n8n</h1>
 
             <div class="hero-character">
-                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_960/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png" alt="וובינר סוכן AI ב-N8N - Focus AI">
+                <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_960/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png" alt="מדריך בניית סוכן AI ב-N8N - Focus AI">
             </div>
 
             <p class="subtitle">
-                למדו איך לבנות <strong>סוכן AI אמיתי</strong> שעובד בשבילכם 24/7 - בלי קוד, בלי ניסיון טכני.<br>
-                <strong>+ 2 הטבות בלעדיות</strong> למשתתפי הוובינר בלבד!<br>
-                <span class="no-recording-badge">
-                    <i class="fas fa-video-slash"></i>
-                    <span class="no-rec-text">לא תהיה הקלטה!</span>
-                    <span class="no-rec-line"></span>
-                </span>
+                צפו בבוגרי Bot-Camp בונים <strong>סוכן AI אמיתי</strong> מאפס — צעד אחר צעד, בלי קוד, בלי ניסיון טכני.<br>
+                השאירו פרטים וקבלו גישה מיידית למדריך המלא.
             </p>
         </header>
 
-        <!-- Countdown Timer -->
-        <div class="countdown-section" id="countdownSection">
-            <div class="countdown-label">הוובינר מתחיל בעוד:</div>
-            <div class="countdown-timer" id="countdownTimer">
-                <div class="countdown-unit">
-                    <span class="number" id="cd-days">--</span>
-                    <span class="label">ימים</span>
-                </div>
-                <div class="countdown-unit">
-                    <span class="number" id="cd-hours">--</span>
-                    <span class="label">שעות</span>
-                </div>
-                <div class="countdown-unit">
-                    <span class="number" id="cd-minutes">--</span>
-                    <span class="label">דקות</span>
-                </div>
-                <div class="countdown-unit">
-                    <span class="number" id="cd-seconds">--</span>
-                    <span class="label">שניות</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Registration Form (after countdown) -->
+        <!-- Registration Form -->
         <div class="form-section" style="margin-top: 20px;">
             <div class="form-header">
-                <h2 class="form-title">שמרו לכם מקום בוובינר</h2>
-                <p class="form-subtitle">המקומות מוגבלים - הבטיחו את מקומכם עכשיו</p>
+                <h2 class="form-title">קבלו גישה למדריך בחינם</h2>
+                <p class="form-subtitle">השאירו פרטים וצפו מיד בסרטון המלא</p>
             </div>
 
             <form id="leadForm2">
@@ -1856,13 +1817,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 </div>
 
                 <button type="submit" class="btn-submit" id="submitBtn2">
-                    <span class="btn-text">שמרו לי מקום בוובינר <i class="fas fa-arrow-left"></i></span>
+                    <span class="btn-text">צפו במדריך בחינם <i class="fas fa-play"></i></span>
                     <span class="spinner"></span>
                 </button>
 
                 <div class="form-wa-note">
-                    <i class="fab fa-whatsapp"></i>
-                    <span><strong>לינק הזום יישלח דרך קהילת ה-WhatsApp שלנו</strong> &ndash; לאחר ההרשמה תופנו להצטרף לקהילה.</span>
+                    <i class="fas fa-lock"></i>
+                    <span><strong>גישה מיידית</strong> &ndash; לאחר השארת הפרטים תועברו ישירות לצפייה בסרטון.</span>
                 </div>
             </form>
         </div>
@@ -1879,9 +1840,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             </div>
             <div class="hook-question">יש הבדל ענק בין לשחק עם ChatGPT<br>לבין לבנות סוכן AI שעובד בשבילך</div>
             <div class="hook-answer">
-                רוב האנשים משתמשים ב-AI בתור צ'אט - שואלים שאלה, מקבלים תשובה, וזהו.<br>
-                אבל מה אם הסוכן שלך יכול <em>לפעול לבד</em>? לקרוא מיילים, לענות ללידים, לנהל משימות - <strong>בלי שתיגעו בו</strong>.<br>
-                זה בדיוק מה שמערכת <strong>n8n</strong> מאפשרת, וזה בדיוק מה שנראה לכם בוובינר הזה - בשידור חי.
+                רוב האנשים משתמשים ב-AI בתור צ'אט — שואלים שאלה, מקבלים תשובה, וזהו.<br>
+                אבל מה אם הסוכן שלך יכול <em>לפעול לבד</em>? לקרוא מיילים, לענות ללידים, לנהל משימות — <strong>בלי שתיגעו בו</strong>.<br>
+                במדריך הזה תצפו בבוגרי Bot-Camp בונים בדיוק את זה — סוכן AI עובד, מאפס, במערכת <strong>n8n</strong>.
             </div>
             <div class="story-stats">
                 <div class="story-stat">
@@ -1889,8 +1850,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     <span class="stat-label">פלטפורמה מובילה</span>
                 </div>
                 <div class="story-stat">
-                    <span class="stat-number">LIVE</span>
-                    <span class="stat-label">בנייה בזמן אמת</span>
+                    <span class="stat-number">90 דק׳</span>
+                    <span class="stat-label">מדריך מלא</span>
                 </div>
                 <div class="story-stat">
                     <span class="stat-number">0 &#8362;</span>
@@ -1979,33 +1940,40 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 </p>
 
                 <p class="journey-text">
-                    אתם שואלים את ChatGPT שאלות, אולי בניתם GPT מותאם אישית, אולי אפילו Gem של גוגל. וזה נחמד. אבל בואו נהיה כנים - <strong>זה לא באמת עובד בשבילכם</strong>. אתם עדיין צריכים לפתוח את הכלי, לכתוב את הפרומפט, להעתיק את התשובה, ולהדביק אותה איפה שצריך.
+                    אתם שואלים את ChatGPT שאלות, אולי בניתם GPT מותאם אישית, אולי אפילו Gem של גוגל. וזה נחמד. אבל בואו נהיה כנים — <strong>זה לא באמת עובד בשבילכם</strong>. אתם עדיין צריכים לפתוח את הכלי, לכתוב את הפרומפט, להעתיק את התשובה, ולהדביק אותה איפה שצריך.
                 </p>
 
                 <div class="journey-pullquote">
                     מה אם הייתם יכולים לבנות משהו שעושה את כל זה <em style="color: var(--primary);">לבד</em>?
                 </div>
 
+                <p class="journey-text">
+                    במדריך הזה תראו איך שני בוגרי Bot-Camp עושים בדיוק את זה — בונים סוכן AI מלא ב-n8n, מאפס ועד מערכת עובדת. <strong>בלי קוד, בלי ניסיון קודם</strong>. רק הכלים הנכונים, והידע איך להשתמש בהם.
+                </p>
 
             </div>
 
-            <!-- Exclusive Benefits -->
+            <!-- What you'll learn -->
             <div class="benefits-section">
                 <div class="benefits-header">
                     <div class="benefits-badge">
-                        <i class="fas fa-star"></i>
-                        בלעדי למשתתפי הוובינר
+                        <i class="fas fa-play-circle"></i>
+                        מה תלמדו במדריך
                     </div>
-                    <div class="benefits-title">2 הטבות למחזור מרץ של Bot-Camp</div>
+                    <div class="benefits-title">90 דקות שישנו את הדרך שבה אתם עובדים עם AI</div>
                 </div>
                 <div class="benefits-list">
                     <div class="benefit-item">
-                        <i class="fas fa-tag"></i>
-                        <span>הנחה מיוחדת על ההרשמה למחזור מרץ - רק למשתתפי הוובינר</span>
+                        <i class="fas fa-robot"></i>
+                        <span>בניית סוכן AI מלא ב-n8n — מאפס ועד מערכת עובדת, צעד אחר צעד</span>
                     </div>
                     <div class="benefit-item">
-                        <i class="fas fa-gift"></i>
-                        <span>בונוס בלעדי שיוענק רק למי שנרשם דרך הוובינר</span>
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>ההבדל בין צ'אטבוט לסוכן AI אמיתי — ולמה זה משנה לעסק שלכם</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-tools"></i>
+                        <span>n8n — הכלי שמשנה את השוק, ואיך להתחיל להשתמש בו עוד היום</span>
                     </div>
                 </div>
             </div>
@@ -2019,8 +1987,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             <!-- Form Section -->
             <div class="form-section">
                 <div class="form-header">
-                    <h2 class="form-title">שמרו לכם מקום בוובינר</h2>
-                    <p class="form-subtitle">המקומות מוגבלים - הבטיחו את מקומכם עכשיו</p>
+                    <h2 class="form-title">צפו במדריך המלא — בחינם</h2>
+                    <p class="form-subtitle">השאירו פרטים וקבלו גישה מיידית לסרטון</p>
                 </div>
 
                 <form id="leadForm">
@@ -2079,13 +2047,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     </div>
 
                     <button type="submit" class="btn-submit" id="submitBtn">
-                        <span class="btn-text">שמרו לי מקום בוובינר <i class="fas fa-arrow-left"></i></span>
+                        <span class="btn-text">צפו במדריך בחינם <i class="fas fa-play"></i></span>
                         <span class="spinner"></span>
                     </button>
 
                     <div class="form-wa-note">
-                        <i class="fab fa-whatsapp"></i>
-                        <span><strong>לינק הזום יישלח דרך קהילת ה-WhatsApp שלנו</strong> &ndash; לאחר ההרשמה תופנו להצטרף לקהילה.</span>
+                        <i class="fas fa-lock"></i>
+                        <span><strong>גישה מיידית</strong> &ndash; לאחר השארת הפרטים תועברו ישירות לצפייה בסרטון.</span>
                     </div>
                 </form>
             </div>
@@ -2108,7 +2076,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 הבהרות משפטיות
             </div>
             <div class="disclaimer-text">
-                התכנים בוובינר הינם למטרות לימודיות בלבד ואינם מהווים הבטחה לתוצאות. המידע האישי נשמר במאגר מידע רשום בהתאם לחוק הגנת הפרטיות ותיקון 13 (התשפ"ד-2024). בלחיצה על "שמרו לי מקום" הינך מאשר/ת את שמירת פרטיך ושליחת תוכן רלוונטי. עומדות לך זכויות עיון, תיקון ומחיקה - פנה אלינו בכל עת.
+                התכנים במדריך הינם למטרות לימודיות בלבד ואינם מהווים הבטחה לתוצאות. המידע האישי נשמר במאגר מידע רשום בהתאם לחוק הגנת הפרטיות ותיקון 13 (התשפ"ד-2024). בהשארת הפרטים הינך מאשר/ת את שמירת פרטיך ושליחת תוכן רלוונטי. עומדות לך זכויות עיון, תיקון ומחיקה — פנה אלינו בכל עת.
             </div>
             <div class="social-links">
                 <a href="https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==" target="_blank" rel="noopener noreferrer" class="social-link">
@@ -2130,35 +2098,17 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         </div>
     </div>
 
-    <!-- Success Overlay -->
+    <!-- Success Overlay (shown briefly before redirect) -->
     <div class="success-overlay" id="successOverlay">
         <div class="success-card">
             <div class="success-icon">
                 <i class="fas fa-check"></i>
             </div>
-            <h2 class="success-title">נרשמת בהצלחה!</h2>
+            <h2 class="success-title">הפרטים התקבלו!</h2>
             <p class="success-message">
-                מקומך בוובינר שמור.<br>
-                <small style="opacity: 0.7;">פרטי ההתחברות יישלחו אלייך למייל ול-WhatsApp</small>
+                מעבירים אתכם לצפייה במדריך...<br>
+                <small style="opacity: 0.7;">שלחנו לכם גם מייל עם הקישור</small>
             </p>
-            <div class="success-details">
-                <div class="detail-row">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>04.03.2026 | יום רביעי</span>
-                </div>
-                <div class="detail-row">
-                    <i class="fas fa-clock"></i>
-                    <span>19:30 שעון ישראל</span>
-                </div>
-                <div class="detail-row">
-                    <i class="fas fa-video"></i>
-                    <span>לינק לזום יישלח למייל</span>
-                </div>
-            </div>
-            <div class="success-note">
-                <i class="fas fa-bell"></i>
-                <span>נשלח לכם תזכורת לפני הוובינר</span>
-            </div>
         </div>
     </div>
 
@@ -2173,40 +2123,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             particle.style.animationDuration = (15 + Math.random() * 10) + 's';
             particlesContainer.appendChild(particle);
         }
-
-        // Countdown Timer
-        var eventDate = new Date('2026-03-04T19:30:00+02:00'); // Israel timezone
-
-        function updateCountdown() {
-            var now = new Date();
-            var diff = eventDate.getTime() - now.getTime();
-
-            if (diff <= 0) {
-                var section = document.getElementById('countdownSection');
-                if (section) {
-                    section.innerHTML = '<div class="countdown-expired"><i class="fas fa-broadcast-tower"></i> הוובינר מתחיל עכשיו!</div>';
-                }
-                return;
-            }
-
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            var daysEl = document.getElementById('cd-days');
-            var hoursEl = document.getElementById('cd-hours');
-            var minutesEl = document.getElementById('cd-minutes');
-            var secondsEl = document.getElementById('cd-seconds');
-
-            if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
-        }
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
 
         // Phone number formatting
         var phoneInput = document.getElementById('phone');
@@ -2371,7 +2287,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     throw new Error(errorMessage);
                 }
 
-                window.location.href = '/webinar-n8n-thank-you/';
+                window.location.href = '/webinar-links/';
 
             } catch (error) {
                 console.error('Error submitting form:', error);
@@ -2529,7 +2445,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     throw new Error(errorMessage);
                 }
 
-                window.location.href = '/webinar-n8n-thank-you/';
+                window.location.href = '/webinar-links/';
 
             } catch (error) {
                 console.error('Error submitting form:', error);
