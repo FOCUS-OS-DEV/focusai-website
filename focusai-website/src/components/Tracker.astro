@@ -8,6 +8,9 @@
 
 <script is:inline>
 (function() {
+  // Skip tracking for excluded browsers (set via console: localStorage.setItem('fai_notrack','1'))
+  if (typeof localStorage !== 'undefined' && localStorage.getItem('fai_notrack') === '1') return;
+
   var SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
 
