@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import DisplayCards from '../components/ui/display-cards';
+import GlowingCardsGrid from '../components/ui/glowing-cards-grid';
 
 const pageTitle = "Focus on ME | מרכז ההדרכה של Focus AI";
 const pageDescription = "הצעד הראשון שלכם לעולם ה-AI והאוטומציות. כלים, סוכנים, מדריכים חינמיים וחבילות סקילים, הכל במקום אחד.";
@@ -131,27 +132,7 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">מדריכים והדרכות</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {guides.map((item) => (
-            <a href={item.href} class="fom-card group relative rounded-2xl overflow-hidden">
-              <div class="relative h-44 overflow-hidden">
-                <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
-                <div class="absolute top-3 right-3">
-                  <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-sm text-[10px] font-mono text-emerald-400 uppercase tracking-wider border border-emerald-500/20">{item.tag}</span>
-                </div>
-              </div>
-              <div class="p-5">
-                <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
-                <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
-                <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
-                  {item.cta}
-                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
+        <GlowingCardsGrid client:load items={guides} />
       </div>
     </section>
 
@@ -165,27 +146,7 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">חבילות סקילים</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {skills.map((item) => (
-            <a href={item.href} class="fom-card group relative rounded-2xl overflow-hidden">
-              <div class="relative h-44 overflow-hidden">
-                <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
-                <div class="absolute top-3 right-3">
-                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
-                </div>
-              </div>
-              <div class="p-5">
-                <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
-                <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
-                <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
-                  {item.cta}
-                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
+        <GlowingCardsGrid client:load items={skills.map(s => ({ ...s, tagColor: 'neutral' as const }))} />
       </div>
     </section>
 
@@ -228,19 +189,4 @@ const skills = [
     letter-spacing: -0.03em;
   }
 
-  /* Standard image cards (guides, skills) */
-  .fom-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(20px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .fom-card:hover {
-    border-color: rgba(168, 85, 247, 0.3);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(168, 85, 247, 0.1) inset;
-    transform: translateY(-4px);
-  }
 </style>
