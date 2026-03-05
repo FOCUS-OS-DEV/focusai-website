@@ -1176,8 +1176,9 @@ const faqSchema = {
     const pr = form.querySelector('[name="privacy"]') as HTMLInputElement;
     const mk = form.querySelector('[name="marketing"]') as HTMLInputElement;
 
-    check(fn, !!fn?.value.trim());
-    check(ln, !!ln?.value.trim());
+    const nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+    check(fn, !!fn?.value.trim() && nameRe.test(fn.value.trim()));
+    check(ln, !!ln?.value.trim() && nameRe.test(ln.value.trim()));
     const phoneClean = (ph?.value || '').replace(/[-\s]/g, '');
     check(ph, /^0[2-9]\d{7,8}$/.test(phoneClean));
     if (em?.value.trim()) {

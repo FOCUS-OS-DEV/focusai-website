@@ -744,8 +744,9 @@ const stats = [
         var firstErrorEl = null;
 
         // firstName
+        var nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
         var firstName = form.querySelector('[name="firstName"]');
-        if (firstName && !firstName.value.trim()) {
+        if (firstName && (!firstName.value.trim() || !nameRe.test(firstName.value.trim()))) {
           firstName.classList.add('error');
           if (!firstErrorEl) firstErrorEl = firstName;
           hasError = true;
@@ -753,7 +754,7 @@ const stats = [
 
         // lastName
         var lastName = form.querySelector('[name="lastName"]');
-        if (lastName && !lastName.value.trim()) {
+        if (lastName && (!lastName.value.trim() || !nameRe.test(lastName.value.trim()))) {
           lastName.classList.add('error');
           if (!firstErrorEl) firstErrorEl = lastName;
           hasError = true;

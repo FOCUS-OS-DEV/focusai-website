@@ -1385,8 +1385,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         var ph = form.querySelector('[name="phone"]');
         var em = form.querySelector('[name="email"]');
         var priv = form.querySelector('[name="consent"]') || form.querySelector('[name="privacy"]') || form.querySelector('[name="privacyConsent"]');
-        check(fn, fn && fn.value.trim());
-        check(ln, ln && ln.value.trim());
+        var nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+        check(fn, fn && fn.value.trim() && nameRe.test(fn.value.trim()));
+        check(ln, ln && ln.value.trim() && nameRe.test(ln.value.trim()));
         var cleanPhone = (ph ? ph.value : '').replace(/[-\s]/g, '');
         check(ph, /^0[2-9]\d{7,8}$/.test(cleanPhone));
         if (em && em.value.trim()) {

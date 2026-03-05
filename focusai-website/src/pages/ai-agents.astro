@@ -692,8 +692,9 @@ const faqSchema = {
     const emEl = agentsForm.querySelector('[name="email"]') as HTMLInputElement;
     const prEl = agentsForm.querySelector('[name="privacy"]') as HTMLInputElement;
 
-    check(fnEl, !!fnEl?.value.trim());
-    check(lnEl, !!lnEl?.value.trim());
+    const nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+    check(fnEl, !!fnEl?.value.trim() && nameRe.test(fnEl.value.trim()));
+    check(lnEl, !!lnEl?.value.trim() && nameRe.test(lnEl.value.trim()));
     const phoneClean = (phEl?.value || '').replace(/[-\s]/g, '');
     check(phEl, /^0[2-9]\d{7,8}$/.test(phoneClean));
     if (emEl?.value.trim()) check(emEl, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emEl.value));

@@ -585,8 +585,9 @@ const serviceSchema = {
     const emailInput = form.querySelector('[name="email"]') as HTMLInputElement;
     const privacyCheckbox = form.querySelector('[name="privacy"]') as HTMLInputElement;
 
-    if (!firstNameInput.value.trim()) { firstNameInput.classList.add('error'); errors.push(firstNameInput); }
-    if (!lastNameInput.value.trim()) { lastNameInput.classList.add('error'); errors.push(lastNameInput); }
+    const nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+    if (!firstNameInput.value.trim() || !nameRe.test(firstNameInput.value.trim())) { firstNameInput.classList.add('error'); errors.push(firstNameInput); }
+    if (!lastNameInput.value.trim() || !nameRe.test(lastNameInput.value.trim())) { lastNameInput.classList.add('error'); errors.push(lastNameInput); }
 
     const phoneClean = phoneInput.value.replace(/[-\s]/g, '');
     if (!/^0[2-9]\d{7,8}$/.test(phoneClean)) { phoneInput.classList.add('error'); errors.push(phoneInput); }

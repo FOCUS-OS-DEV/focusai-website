@@ -355,8 +355,9 @@ const interestOptions = [
       if (!ok && el) { el.classList.add('error'); if (valid) el.focus(); valid = false; }
     }
 
-    check(firstNameEl, !!firstNameEl?.value.trim());
-    check(lastNameEl, !!lastNameEl?.value.trim());
+    const nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+    check(firstNameEl, !!firstNameEl?.value.trim() && nameRe.test(firstNameEl.value.trim()));
+    check(lastNameEl, !!lastNameEl?.value.trim() && nameRe.test(lastNameEl.value.trim()));
     const phoneClean = (phoneEl?.value || '').replace(/[-\s]/g, '');
     check(phoneEl, /^0[2-9]\d{7,8}$/.test(phoneClean));
     if (emailEl?.value.trim()) {

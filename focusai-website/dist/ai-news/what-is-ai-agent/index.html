@@ -598,12 +598,12 @@ const ctaFormInterest = "bot-camp";
     var emailInput = form.querySelector('[name="email"]');
     var privacyCheckbox = form.querySelector('[name="privacy"]');
 
-    // Validate firstName
-    if (!firstNameInput || !firstNameInput.value.trim()) {
+    // Validate firstName + lastName (Hebrew/English letters only)
+    const nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+    if (!firstNameInput || !firstNameInput.value.trim() || !nameRe.test(firstNameInput.value.trim())) {
       if (firstNameInput) { firstNameInput.classList.add('error'); errors.push(firstNameInput); }
     }
-    // Validate lastName
-    if (!lastNameInput || !lastNameInput.value.trim()) {
+    if (!lastNameInput || !lastNameInput.value.trim() || !nameRe.test(lastNameInput.value.trim())) {
       if (lastNameInput) { lastNameInput.classList.add('error'); errors.push(lastNameInput); }
     }
     // Validate phone — strip dashes/spaces, test Israeli format

@@ -218,7 +218,8 @@
       if (marketingEl) marketingEl.closest('.consult-row').style.borderColor = '';
 
       let valid = true;
-      if (!firstNameEl.value.trim()) { firstNameEl.classList.add('error'); firstNameEl.focus(); valid = false; }
+      var nameRe = /^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;
+      if (!firstNameEl.value.trim() || !nameRe.test(firstNameEl.value.trim())) { firstNameEl.classList.add('error'); firstNameEl.focus(); valid = false; }
 
       // Israeli mobile: 10 digits, starts with 05x–09x
       const phoneClean = (phoneEl.value || '').replace(/[-\s]/g, '');
