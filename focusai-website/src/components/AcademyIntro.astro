@@ -3,7 +3,15 @@
  * Academy Intro Section
  * Storytelling section that introduces the Academy before course cards
  * Human-centered AI learning narrative
+ * Supports dark (default for homepage) and light (academy page) themes
  */
+
+interface Props {
+  theme?: 'dark' | 'light';
+}
+
+const { theme = 'dark' } = Astro.props;
+const isDark = theme === 'dark';
 
 const classroomImage = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_900,e_sharpen:150/v1770386851/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9B%D7%99%D7%AA%D7%94-e1762357672410-1024x438_fpwarm.png";
 
@@ -14,9 +22,22 @@ const formatFeatures = [
   { icon: "teacher", text: "2-3 מרצים בכל מפגש" },
   { icon: "practice", text: "תרגול מעשי בזמן אמת" }
 ];
+
+// Theme-dependent classes
+const sectionBg = isDark ? 'bg-[#0a0a0f]' : 'bg-[#f8f4ff]';
+const badgeBg = isDark ? 'bg-white/[0.03] border-white/[0.08]' : 'bg-[#a855f7]/10 border-[#a855f7]/20';
+const headlineColor = isDark ? 'text-white' : 'text-[#1a1a2e]';
+const descColor = isDark ? 'text-[#b0b0c0]' : 'text-[#4a4a6a]';
+const descHighlight = isDark ? 'text-white font-semibold' : 'text-[#1a1a2e] font-semibold';
+const cardBg = isDark ? 'bg-white/[0.03] backdrop-blur-sm border border-white/[0.08]' : 'bg-white backdrop-blur-sm border border-[#e0d4f7]';
+const cardHover = isDark ? 'hover:border-white/[0.15]' : 'hover:border-[#a855f7]/40';
+const cardText = isDark ? 'text-[#b0b0c0]' : 'text-[#4a4a6a]';
+const imgBorder = isDark ? 'border-white/[0.08]' : 'border-[#e0d4f7]';
+const liveBadgeBg = isDark ? 'bg-black/60 backdrop-blur-sm border-white/[0.08]' : 'bg-white/80 backdrop-blur-sm border-[#e0d4f7]';
+const liveBadgeText = isDark ? 'text-white' : 'text-[#1a1a2e]';
 ---
 
-<section class="py-12 md:py-16 relative z-[1] overflow-hidden bg-[#f8f4ff]">
+<section class={`py-12 md:py-16 relative z-[1] overflow-hidden ${sectionBg}`}>
   <!-- Background -->
   <div class="absolute inset-0">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#a855f7]/8 rounded-full blur-[150px]"></div>
@@ -25,7 +46,7 @@ const formatFeatures = [
   <div class="container relative z-10">
     <!-- Section Badge - Centered -->
     <div class="flex justify-center mb-12" data-animate="fade-up">
-      <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#a855f7]/10 backdrop-blur-sm border border-[#a855f7]/20 rounded-full">
+      <div class={`inline-flex items-center gap-3 px-4 py-2 ${badgeBg} rounded-full`}>
         <span class="font-mono text-sm text-[#a855f7]">[FOCUS_AI_ACADEMY]</span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
       </div>
@@ -38,20 +59,20 @@ const formatFeatures = [
       <div class="order-2 lg:order-1 text-center lg:text-start">
         <!-- Headline -->
         <h2 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight" data-animate="fade-up" data-delay="0.1">
-          <span class="text-[#1a1a2e]">לומדים בינה מלאכותית</span>
+          <span class={headlineColor}>לומדים בינה מלאכותית</span>
           <span class="block mt-2 bg-gradient-to-r from-[#a855f7] via-[#c084fc] to-[#e879f9] bg-clip-text text-transparent">בצורה אנושית</span>
         </h2>
 
         <!-- Description -->
-        <p class="text-xl text-[#4a4a6a] mb-8 leading-relaxed" data-animate="fade-up" data-delay="0.2">
+        <p class={`text-xl ${descColor} mb-8 leading-relaxed`} data-animate="fade-up" data-delay="0.2">
           אצלנו לומדים
-          <span class="text-[#1a1a2e] font-semibold">פנים מול פנים</span> - בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.
+          <span class={descHighlight}>פנים מול פנים</span> - בכיתות פרונטליות ובשידור חי בזום, עם מרצים שעונים על שאלות ומלווים אתכם עד הסוף.
         </p>
 
         <!-- Format Features -->
         <div class="grid grid-cols-2 gap-4 mb-10" data-animate="fade-up" data-delay="0.3">
           {formatFeatures.map((feature) => (
-            <div class="flex items-center gap-3 p-4 bg-white backdrop-blur-sm border border-[#e0d4f7] rounded-xl hover:border-[#a855f7]/40 transition-colors shadow-sm">
+            <div class={`flex items-center gap-3 p-4 ${cardBg} rounded-xl ${cardHover} transition-colors shadow-sm`}>
               <div class="w-10 h-10 rounded-lg bg-[#a855f7]/10 flex items-center justify-center">
                 {feature.icon === "users" && (
                   <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +95,7 @@ const formatFeatures = [
                   </svg>
                 )}
               </div>
-              <span class="text-sm text-[#4a4a6a] font-medium">{feature.text}</span>
+              <span class={`text-sm ${cardText} font-medium`}>{feature.text}</span>
             </div>
           ))}
         </div>
@@ -88,7 +109,7 @@ const formatFeatures = [
         <div class="relative">
           <!-- Top row - 4 images (RTL: right to left) -->
           <div class="grid grid-cols-4 gap-2 sm:gap-3 mb-3">
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764629960/gg2wr5be9du0rvwjjyvz.png"
                 alt="תלמידים לומדים AI"
@@ -98,7 +119,7 @@ const formatFeatures = [
                 height="200"
               />
             </div>
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764513069/WhatsApp_Image_2025-11-30_at_16.29.03_1_ttrimh.jpg"
                 alt="הרצאה בכיתה"
@@ -108,7 +129,7 @@ const formatFeatures = [
                 height="200"
               />
             </div>
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[4deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[4deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764513071/WhatsApp_Image_2025-11-30_at_16.29.04_1_qfl4j2.jpg"
                 alt="סדנת AI"
@@ -118,7 +139,7 @@ const formatFeatures = [
                 height="200"
               />
             </div>
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/v1772389697/%D7%9C%D7%95%D7%92%D7%95_3_dnruu5.png"
                 alt="לוגו שותף"
@@ -132,7 +153,7 @@ const formatFeatures = [
           </div>
 
           <!-- Main classroom image -->
-          <div class="relative rounded-3xl overflow-hidden border border-[#e0d4f7] shadow-2xl">
+          <div class={`relative rounded-3xl overflow-hidden border ${imgBorder} shadow-2xl`}>
             <img
               src={classroomImage}
               alt="כיתת הלימוד של Focus AI Academy - לימוד בינה מלאכותית בצורה אנושית"
@@ -146,15 +167,15 @@ const formatFeatures = [
             <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
             <!-- Live badge -->
-            <div class="absolute top-4 right-4 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-[#e0d4f7] rounded-full shadow-sm">
+            <div class={`absolute top-4 right-4 flex items-center gap-2 px-4 py-2 ${liveBadgeBg} border rounded-full shadow-sm`}>
               <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              <span class="text-sm text-[#1a1a2e] font-medium">שידור חי</span>
+              <span class={`text-sm ${liveBadgeText} font-medium`}>שידור חי</span>
             </div>
           </div>
 
           <!-- Bottom row - 4 images (RTL: right to left) -->
           <div class="grid grid-cols-4 gap-2 sm:gap-3 mt-3">
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[3deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[3deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_250/v1770982356/workshop-clients/client-123546321.png"
                 alt="הטכניון"
@@ -165,7 +186,7 @@ const formatFeatures = [
                 height="200"
               />
             </div>
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764513071/WhatsApp_Image_2025-11-30_at_16.29.04_1_qfl4j2.jpg"
                 alt="סדנת AI"
@@ -175,7 +196,7 @@ const formatFeatures = [
                 height="200"
               />
             </div>
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200/v1764519897/WhatsApp_Image_2025-11-30_at_18.24.31_apalzp.jpg"
                 alt="מפגש לימודי"
@@ -185,7 +206,7 @@ const formatFeatures = [
                 height="200"
               />
             </div>
-            <div class="aspect-square rounded-2xl overflow-hidden border border-[#e0d4f7] shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300">
+            <div class={`aspect-square rounded-2xl overflow-hidden border ${imgBorder} shadow-lg transform rotate-[2deg] hover:rotate-0 transition-transform duration-300`}>
               <img
                 src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_200,h_200,c_fill,g_north/v1764514114/WhatsApp_Image_2025-11-30_at_16.48.20_da8cf5.jpg"
                 alt="הרצאת Focus AI"
