@@ -209,7 +209,7 @@ const jobs = [
                 </label>
                 <input
                   type="text"
-                  name="first_name"
+                  name="firstName"
                   required
                   placeholder="שם פרטי_"
                   class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
@@ -221,7 +221,7 @@ const jobs = [
                 </label>
                 <input
                   type="text"
-                  name="last_name"
+                  name="lastName"
                   required
                   placeholder="שם משפחה_"
                   class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
@@ -239,7 +239,22 @@ const jobs = [
                 name="phone"
                 inputmode="tel"
                 required
+                pattern="0[2-9][0-9\-\s]{7,11}"
+                title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567"
                 placeholder="050-0000000_"
+                class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label class="block text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2 font-mono">
+                <span class="text-[#b0b0c0]">[OPT]</span> אימייל
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="email@example.com_"
                 class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#2a2a3a] text-[#f5f5fa] text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
               />
             </div>
@@ -296,13 +311,19 @@ const jobs = [
               </div>
             </div>
 
-            <!-- Privacy Consent -->
+            <!-- Privacy & Marketing Consent -->
             <div class="space-y-3 pt-2">
               <div class="flex items-start gap-2 text-right">
-                <input type="checkbox" id="privacy" name="privacy" required class="mt-1 accent-[#a855f7]" />
-                <label for="privacy" class="text-xs text-white/50">
+                <input type="checkbox" id="careers-privacy" name="privacy" required class="mt-1 accent-[#a855f7]" />
+                <label for="careers-privacy" class="text-xs text-white/50">
                   קראתי ואני מסכים/ה ל<a href="/terms" class="text-[#a855f7] underline hover:text-[#a855f7]/80">תנאי השימוש</a>
                   ול<a href="/privacy-policy" class="text-[#a855f7] underline hover:text-[#a855f7]/80">מדיניות הפרטיות</a>. *
+                </label>
+              </div>
+              <div class="flex items-start gap-2 text-right">
+                <input type="checkbox" id="careers-marketing" name="marketing" class="mt-1 accent-[#a855f7]" />
+                <label for="careers-marketing" class="text-xs text-white/50">
+                  אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
                 </label>
               </div>
             </div>
@@ -367,15 +388,40 @@ const jobs = [
   const form = document.getElementById('careers-form');
   const formSuccess = document.getElementById('form-success');
 
+  // Clear errors on focus
+  form?.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('focus', () => el.classList.remove('error'));
+  });
+
   form?.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // Validate required checkboxes (privacy policy)
-    const privacyCheckbox = form.querySelector('input[type="checkbox"][required]');
-    if (privacyCheckbox && !privacyCheckbox.checked) {
-      alert('יש לאשר את מדיניות הפרטיות');
-      return;
+    // --- JS Validation ---
+    const firstNameEl = form.querySelector('[name="firstName"]');
+    const lastNameEl = form.querySelector('[name="lastName"]');
+    const phoneEl = form.querySelector('[name="phone"]');
+    const emailEl = form.querySelector('[name="email"]');
+    const privacyEl = form.querySelector('[name="privacy"]');
+    const fileInput = document.getElementById('cv-input');
+
+    form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+
+    let valid = true;
+    function check(el, ok) {
+      if (!ok && el) { el.classList.add('error'); if (valid) el.focus(); valid = false; }
     }
+
+    check(firstNameEl, firstNameEl?.value.trim());
+    check(lastNameEl, lastNameEl?.value.trim());
+    const phoneClean = (phoneEl?.value || '').replace(/[-\s]/g, '');
+    check(phoneEl, /^0[2-9]\d{7,8}$/.test(phoneClean));
+    if (emailEl?.value.trim()) {
+      check(emailEl, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value));
+    }
+    check(fileInput, fileInput?.files?.length > 0);
+    check(privacyEl, privacyEl?.checked);
+
+    if (!valid) return;
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const btnText = submitBtn?.querySelector('span:last-child');
@@ -386,8 +432,6 @@ const jobs = [
     if (btnText) btnText.textContent = 'שולח...';
 
     try {
-      const formData = new FormData(form);
-      const fileInput = document.getElementById('cv-input');
       const file = fileInput?.files?.[0];
 
       // Read file as base64
@@ -402,7 +446,6 @@ const jobs = [
           const reader = new FileReader();
           reader.onload = () => {
             const result = reader.result;
-            // Remove data URL prefix to get pure base64
             const base64 = result.split(',')[1] || result;
             resolve(base64);
           };
@@ -411,13 +454,17 @@ const jobs = [
         });
       }
 
+      const marketingEl = form.querySelector('[name="marketing"]');
+
       // Build payload
       const payload = {
         source: 'careers-application',
-        first_name: formData.get('first_name'),
-        last_name: formData.get('last_name'),
-        phone: formData.get('phone'),
-        position: formData.get('position'),
+        firstName: firstNameEl.value.trim(),
+        lastName: lastNameEl.value.trim(),
+        phone: phoneClean,
+        email: emailEl?.value.trim() || '',
+        position: form.querySelector('[name="position"]')?.value || '',
+        marketing_consent: marketingEl?.checked ? 'yes' : 'no',
         cv_file: fileBase64,
         cv_filename: fileName,
         cv_filetype: fileType,
@@ -443,3 +490,17 @@ const jobs = [
     }
   });
 </script>
+
+<style>
+  input.error, select.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
+  input[type="checkbox"].error {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+  }
+  .cv-upload-area.error {
+    border-color: #ef4444 !important;
+  }
+</style>

@@ -1711,6 +1711,16 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Validation error styles */
+        input.error, select.error, textarea.error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+        input[type="checkbox"].error {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
     </style>
     <Analytics />
   <Tracker />
@@ -1813,7 +1823,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         <i class="fas fa-phone"></i>
                         טלפון
                     </label>
-                    <input type="tel" id="phone2" name="phone" placeholder="052-0000000" required pattern={"0[2-9][0-9\\-\\s]{7,11}"} title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
+                    <input type="tel" id="phone2" name="phone" inputmode="tel" placeholder="052-0000000" required pattern={"0[2-9][0-9\\-\\s]{7,11}"} title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
                 </div>
 
                 <div class="form-group">
@@ -2036,7 +2046,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                             <i class="fas fa-phone"></i>
                             טלפון
                         </label>
-                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required pattern={"0[2-9][0-9\\-\\s]{7,11}"} title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
+                        <input type="tel" id="phone" name="phone" inputmode="tel" placeholder="052-0000000" required pattern={"0[2-9][0-9\\-\\s]{7,11}"} title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567">
                     </div>
 
                     <div class="form-group">
@@ -2212,22 +2222,28 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         // Validation patterns
         var patterns = {
             phone: /^0[2-9]\d{7,8}$/,
-            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             name: /^[\u0590-\u05FFa-zA-Z\s'\-]{2,30}$/
         };
 
-        // Validation function
+        // Validation function using .error class
         function validateField(field, pattern) {
             var value = field.value.trim().replace(/[-\s]/g, '');
             var testValue = (field.type === 'tel') ? value : field.value.trim();
             if (!pattern.test(testValue)) {
-                field.style.borderColor = '#ef4444';
-                field.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.2)';
+                field.classList.add('error');
                 return false;
             }
-            field.style.borderColor = '';
-            field.style.boxShadow = '';
+            field.classList.remove('error');
             return true;
+        }
+
+        // Clear errors on focus for all form inputs
+        var allFormInputs = document.querySelectorAll('#leadForm input, #leadForm2 input');
+        for (var i = 0; i < allFormInputs.length; i++) {
+            allFormInputs[i].addEventListener('focus', function() {
+                this.classList.remove('error');
+            });
         }
 
         // Real-time validation
@@ -2252,6 +2268,12 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            // Clear all errors first
+            var formErrors = form.querySelectorAll('.error');
+            for (var i = 0; i < formErrors.length; i++) {
+                formErrors[i].classList.remove('error');
+            }
+
             var firstName = document.getElementById('firstName');
             var lastName = document.getElementById('lastName');
             var phone = document.getElementById('phone');
@@ -2259,18 +2281,48 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             var privacyConsent = document.getElementById('privacyConsent');
 
             // Validate all fields
-            var isFirstNameValid = validateField(firstName, patterns.name);
-            var isLastNameValid = validateField(lastName, patterns.name);
-            var isPhoneValid = validateField(phone, patterns.phone);
-            var isEmailValid = validateField(email, patterns.email);
+            var hasError = false;
+            var firstErrorField = null;
 
-            if (!isFirstNameValid || !isLastNameValid || !isPhoneValid || !isEmailValid) {
-                alert('נא למלא את כל השדות בצורה תקינה');
-                return;
+            if (!firstName.value.trim()) {
+                firstName.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = firstName;
+            } else if (!validateField(firstName, patterns.name)) {
+                hasError = true;
+                if (!firstErrorField) firstErrorField = firstName;
+            }
+
+            if (!lastName.value.trim()) {
+                lastName.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = lastName;
+            } else if (!validateField(lastName, patterns.name)) {
+                hasError = true;
+                if (!firstErrorField) firstErrorField = lastName;
+            }
+
+            var phoneClean = phone.value.trim().replace(/[-\s]/g, '');
+            if (!patterns.phone.test(phoneClean)) {
+                phone.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = phone;
+            }
+
+            if (email.value.trim() && !patterns.email.test(email.value.trim())) {
+                email.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = email;
             }
 
             if (!privacyConsent.checked) {
-                alert('יש לאשר את מדיניות הפרטיות כדי להמשיך');
+                privacyConsent.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = privacyConsent;
+            }
+
+            if (hasError) {
+                if (firstErrorField) firstErrorField.focus();
                 return;
             }
 
@@ -2356,8 +2408,28 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             this.value = val;
         });
 
+        // Real-time validation for second form
+        document.getElementById('firstName2').addEventListener('blur', function() {
+            validateField(this, patterns.name);
+        });
+        document.getElementById('lastName2').addEventListener('blur', function() {
+            validateField(this, patterns.name);
+        });
+        document.getElementById('email2').addEventListener('blur', function() {
+            validateField(this, patterns.email);
+        });
+        document.getElementById('phone2').addEventListener('blur', function() {
+            validateField(this, patterns.phone);
+        });
+
         form2.addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Clear all errors first
+            var form2Errors = form2.querySelectorAll('.error');
+            for (var i = 0; i < form2Errors.length; i++) {
+                form2Errors[i].classList.remove('error');
+            }
 
             var firstName2 = document.getElementById('firstName2');
             var lastName2 = document.getElementById('lastName2');
@@ -2365,19 +2437,48 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             var email2 = document.getElementById('email2');
             var privacyConsent2 = document.getElementById('privacyConsent2');
 
+            var hasError = false;
+            var firstErrorField = null;
 
-            var isFirstNameValid = validateField(firstName2, patterns.name);
-            var isLastNameValid = validateField(lastName2, patterns.name);
-            var isPhoneValid = validateField(phone2, patterns.phone);
-            var isEmailValid = validateField(email2, patterns.email);
+            if (!firstName2.value.trim()) {
+                firstName2.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = firstName2;
+            } else if (!validateField(firstName2, patterns.name)) {
+                hasError = true;
+                if (!firstErrorField) firstErrorField = firstName2;
+            }
 
-            if (!isFirstNameValid || !isLastNameValid || !isPhoneValid || !isEmailValid) {
-                alert('נא למלא את כל השדות בצורה תקינה');
-                return;
+            if (!lastName2.value.trim()) {
+                lastName2.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = lastName2;
+            } else if (!validateField(lastName2, patterns.name)) {
+                hasError = true;
+                if (!firstErrorField) firstErrorField = lastName2;
+            }
+
+            var phone2Clean = phone2.value.trim().replace(/[-\s]/g, '');
+            if (!patterns.phone.test(phone2Clean)) {
+                phone2.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = phone2;
+            }
+
+            if (email2.value.trim() && !patterns.email.test(email2.value.trim())) {
+                email2.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = email2;
             }
 
             if (!privacyConsent2.checked) {
-                alert('יש לאשר את מדיניות הפרטיות כדי להמשיך');
+                privacyConsent2.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = privacyConsent2;
+            }
+
+            if (hasError) {
+                if (firstErrorField) firstErrorField.focus();
                 return;
             }
 

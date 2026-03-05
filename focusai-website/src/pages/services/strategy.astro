@@ -466,6 +466,7 @@ const serviceSchema = {
                 id="phone"
                 name="phone"
                 required
+                inputmode="tel"
                 pattern="0[2-9][0-9\-\s]{7,11}"
                 title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567"
                 class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"
@@ -550,19 +551,55 @@ const serviceSchema = {
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
+
+  input.error, select.error, textarea.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
+  input[type="checkbox"].error {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+  }
 </style>
 
 <script>
   const WEBHOOK_URL = 'https://focusai.app.n8n.cloud/webhook/contact-form';
 
   const form = document.getElementById('strategy-form') as HTMLFormElement;
+
+  // Clear error on focus
+  form?.querySelectorAll('input, select, textarea').forEach((el) => {
+    el.addEventListener('focus', () => el.classList.remove('error'));
+  });
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const consentCheckbox = form.querySelector('#strategy-consent') as HTMLInputElement;
-    if (consentCheckbox && !consentCheckbox.checked) {
-      alert('יש לאשר את תנאי השימוש ומדיניות הפרטיות');
-      return;
+
+    // --- Validation ---
+    form.querySelectorAll('.error').forEach((el) => el.classList.remove('error'));
+    const errors: HTMLElement[] = [];
+
+    const firstNameInput = form.querySelector('[name="firstName"]') as HTMLInputElement;
+    const lastNameInput = form.querySelector('[name="lastName"]') as HTMLInputElement;
+    const phoneInput = form.querySelector('[name="phone"]') as HTMLInputElement;
+    const emailInput = form.querySelector('[name="email"]') as HTMLInputElement;
+    const privacyCheckbox = form.querySelector('[name="privacy"]') as HTMLInputElement;
+
+    if (!firstNameInput.value.trim()) { firstNameInput.classList.add('error'); errors.push(firstNameInput); }
+    if (!lastNameInput.value.trim()) { lastNameInput.classList.add('error'); errors.push(lastNameInput); }
+
+    const phoneClean = phoneInput.value.replace(/[-\s]/g, '');
+    if (!/^0[2-9]\d{7,8}$/.test(phoneClean)) { phoneInput.classList.add('error'); errors.push(phoneInput); }
+
+    if (emailInput.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+      emailInput.classList.add('error'); errors.push(emailInput);
     }
+
+    if (!privacyCheckbox.checked) { privacyCheckbox.classList.add('error'); errors.push(privacyCheckbox); }
+
+    if (errors.length > 0) { errors[0].focus(); return; }
+    // --- End Validation ---
+
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = btn?.textContent || '';
     if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }

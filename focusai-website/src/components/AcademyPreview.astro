@@ -191,6 +191,7 @@ const courses = [
               <input
                 type="tel"
                 name="phone"
+                inputmode="tel"
                 placeholder="מספר טלפון"
                 required
                 pattern="0[2-9][0-9\-\s]{7,11}"
@@ -590,6 +591,16 @@ const courses = [
     background: rgba(37, 211, 102, 0.2);
   }
 
+  /* Validation error styles */
+  input.error, select.error, textarea.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
+  input[type="checkbox"].error {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+  }
+
   /* Mobile adjustments */
   @media (max-width: 640px) {
     .glass-content {
@@ -610,8 +621,53 @@ const courses = [
   const WEBHOOK_URL = 'https://focusai.app.n8n.cloud/webhook/contact-form';
 
   const academyForm = document.getElementById('academy-consult-form') as HTMLFormElement;
+
+  // Clear error class on focus for all form inputs
+  academyForm?.querySelectorAll('input, select, textarea').forEach((input) => {
+    input.addEventListener('focus', () => input.classList.remove('error'));
+  });
+
   academyForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // --- Validation ---
+    const nameInput = academyForm.querySelector('input[name="name"]') as HTMLInputElement;
+    const phoneInput = academyForm.querySelector('input[name="phone"]') as HTMLInputElement;
+    const privacyCheckbox = academyForm.querySelector('input[name="privacy"]') as HTMLInputElement;
+
+    // Clear all previous errors
+    academyForm.querySelectorAll('.error').forEach((el) => el.classList.remove('error'));
+
+    const errors: HTMLElement[] = [];
+
+    // Name: non-empty
+    if (!nameInput?.value.trim()) {
+      nameInput?.classList.add('error');
+      errors.push(nameInput);
+    }
+
+    // Phone: strip dashes/spaces, validate Israeli format
+    if (phoneInput) {
+      const cleanPhone = phoneInput.value.replace(/[-\s]/g, '');
+      if (!/^0[2-9]\d{7,8}$/.test(cleanPhone)) {
+        phoneInput.classList.add('error');
+        errors.push(phoneInput);
+      }
+    }
+
+    // Privacy checkbox must be checked
+    if (!privacyCheckbox?.checked) {
+      privacyCheckbox?.classList.add('error');
+      errors.push(privacyCheckbox);
+    }
+
+    // If validation failed, focus first error and stop
+    if (errors.length > 0) {
+      errors[0]?.focus();
+      return;
+    }
+    // --- End Validation ---
+
     const btn = academyForm.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = btn?.textContent || '';
     if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }

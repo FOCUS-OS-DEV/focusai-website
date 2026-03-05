@@ -733,18 +733,82 @@ const stats = [
       // ========================
       var WEBHOOK_URL = 'https://focusai.app.n8n.cloud/webhook/contact-form';
 
+      function validateForm(form) {
+        // Clear all previous errors
+        var errorEls = form.querySelectorAll('.error');
+        for (var i = 0; i < errorEls.length; i++) {
+          errorEls[i].classList.remove('error');
+        }
+
+        var hasError = false;
+        var firstErrorEl = null;
+
+        // firstName
+        var firstName = form.querySelector('[name="firstName"]');
+        if (firstName && !firstName.value.trim()) {
+          firstName.classList.add('error');
+          if (!firstErrorEl) firstErrorEl = firstName;
+          hasError = true;
+        }
+
+        // lastName
+        var lastName = form.querySelector('[name="lastName"]');
+        if (lastName && !lastName.value.trim()) {
+          lastName.classList.add('error');
+          if (!firstErrorEl) firstErrorEl = lastName;
+          hasError = true;
+        }
+
+        // phone
+        var phone = form.querySelector('[name="phone"]');
+        if (phone) {
+          var phoneVal = phone.value.replace(/[\-\s]/g, '');
+          if (!(/^0[2-9]\d{7,8}$/).test(phoneVal)) {
+            phone.classList.add('error');
+            if (!firstErrorEl) firstErrorEl = phone;
+            hasError = true;
+          }
+        }
+
+        // email (validate only if filled)
+        var email = form.querySelector('[name="email"]');
+        if (email && email.value.trim()) {
+          if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email.value.trim())) {
+            email.classList.add('error');
+            if (!firstErrorEl) firstErrorEl = email;
+            hasError = true;
+          }
+        }
+
+        // privacy checkbox
+        var privacy = form.querySelector('[name="privacy"]');
+        if (privacy && !privacy.checked) {
+          privacy.classList.add('error');
+          if (!firstErrorEl) firstErrorEl = privacy;
+          hasError = true;
+        }
+
+        if (hasError && firstErrorEl) {
+          firstErrorEl.focus();
+          return false;
+        }
+        return true;
+      }
+
       function handleFormSubmit(form, statusId) {
+        // Clear error on focus for all inputs
+        var inputs = form.querySelectorAll('input, select, textarea');
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].addEventListener('focus', function() {
+            this.classList.remove('error');
+          });
+        }
+
         form.addEventListener('submit', function(e) {
           e.preventDefault();
 
-          // Validate required checkboxes (terms)
-          var requiredCheckboxes = form.querySelectorAll('input[type="checkbox"][required]');
-          for (var i = 0; i < requiredCheckboxes.length; i++) {
-            if (!requiredCheckboxes[i].checked) {
-              alert('יש לאשר את תנאי השימוש');
-              return;
-            }
-          }
+          // Validate form fields
+          if (!validateForm(form)) return;
 
           var btn = form.querySelector('button[type="submit"]');
           var statusEl = document.getElementById(statusId);
@@ -813,6 +877,18 @@ const stats = [
 </BaseLayout>
 
 <style>
+  /* ======================== */
+  /* Form validation errors   */
+  /* ======================== */
+  input.error, select.error, textarea.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
+  input[type="checkbox"].error {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+  }
+
   /* ======================== */
   /* Select dropdown styling  */
   /* ======================== */
