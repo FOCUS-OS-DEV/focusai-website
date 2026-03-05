@@ -73,7 +73,6 @@ const ogImage = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&subset=hebrew,latin&display=swap" rel="stylesheet"/>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script is:inline type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
 <!-- SplitType inlined to avoid CDN failures -->
 <script is:inline>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -185,8 +184,8 @@ html{zoom:1!important;scroll-behavior:smooth;overflow-x:hidden}body{background:#
 .hero-meta-icon{width:14px;height:14px;color:rgba(168,85,247,.6);flex-shrink:0}
 .hero-meta-sep{color:rgba(168,85,247,.2);user-select:none}
 /* Spline 3D Hero */
-.spline-hero{max-width:560px;width:100%;margin:0 auto;align-self:start;margin-top:20px;aspect-ratio:1/1;position:relative;filter:drop-shadow(0 20px 60px rgba(0,0,0,.4)) drop-shadow(0 0 80px rgba(168,85,247,.12))}
-.spline-hero spline-viewer{width:100%;height:100%;border-radius:20px;--spline-viewer-background:transparent}
+.spline-hero{max-width:560px;width:100%;margin:0 auto;align-self:start;margin-top:20px;aspect-ratio:1/1;position:relative;border-radius:20px;overflow:hidden}
+.spline-hero iframe{width:100%;height:100%;display:block;pointer-events:auto}
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 .code-particle{position:absolute;font-family:'Space Mono',monospace;pointer-events:none;z-index:1;will-change:transform,opacity;animation:codeFloat var(--cf-dur,6s) ease-in-out infinite,codeBlink var(--cb-dur,4s) ease-in-out infinite;animation-delay:var(--cf-delay,0s),var(--cb-delay,0s)}
 @keyframes codeFloat{0%,100%{transform:translateY(0) rotate(var(--cf-rot,0deg))}50%{transform:translateY(var(--cf-drift,-18px)) rotate(calc(var(--cf-rot,0deg) + 3deg))}}
@@ -644,7 +643,7 @@ const &#123; data &#125; = await supabase
 <div class="hero-buttons" id="heroBtns"><a href="#register" class="btn-primary btn-shimmer magnetic-btn">אני רוצה ללמוד לפתח עם AI</a><a href="/ai-dev-syllabus" target="_blank" rel="noopener noreferrer" class="btn-ghost magnetic-btn">לסילבוס המלא</a></div>
 </div>
 <div class="spline-hero" id="heroEditor">
-<spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" loading-anim-type="spinner-small-dark"></spline-viewer>
+<iframe src="https://my.spline.design/kZDDjO5HuC9GJUM2/" frameborder="0" width="100%" height="100%" loading="lazy" allow="autoplay" style="border:none;background:transparent"></iframe>
 </div>
 </div></div></div></section>
 
