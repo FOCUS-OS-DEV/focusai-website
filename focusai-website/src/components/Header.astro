@@ -28,6 +28,7 @@ const navLinks = [
 
 const academyLinks = [
   { href: '/academy', label: 'Bot-Camp', code: 'BOT_CMP', description: 'מפתחי אוטומציות וסוכני AI' },
+  { href: '/ai-dev', label: 'AI Dev', code: 'AI_DEV', description: 'פיתוח Full-Stack עם AI' },
 ];
 
 const webinarsLinks = [
@@ -83,7 +84,7 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
                 <a
                   href={link.href}
                   class={`nav-link-glass flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
-                    (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
+                    (link.dropdownType === 'academy' && (currentPath.startsWith('/academy') || currentPath.startsWith('/ai-dev'))) ||
                     (link.dropdownType === 'tools' && currentPath === '/tools') ||
                     (link.dropdownType === 'webinars' && (currentPath.startsWith('/webinar') || currentPath.startsWith('/content-automation')))
                       ? 'text-[#a855f7] bg-[#a855f7]/10'
@@ -239,7 +240,7 @@ const dropdownLinksMap: Record<string, typeof toolsLinks> = {
             <div class="mobile-nav-link" style={`--delay: ${i * 0.05}s`}>
               <div
                 class={`flex items-center justify-between px-5 py-4 rounded-2xl transition-all duration-300 ${
-                  (link.dropdownType === 'academy' && currentPath.startsWith('/academy')) ||
+                  (link.dropdownType === 'academy' && (currentPath.startsWith('/academy') || currentPath.startsWith('/ai-dev'))) ||
                   (link.dropdownType === 'tools' && currentPath === '/tools') ||
                   (link.dropdownType === 'webinars' && (currentPath.startsWith('/webinar') || currentPath.startsWith('/content-automation')))
                     ? 'text-[#a855f7] bg-[#a855f7]/10'
