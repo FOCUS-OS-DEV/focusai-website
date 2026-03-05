@@ -405,6 +405,14 @@ a{color:inherit;text-decoration:none}
 .form-success{display:none;text-align:center;padding:24px}
 .form-success.show{display:block}
 .form-success h3{color:#a855f7;font-size:1.5rem;margin-bottom:8px}
+input.error, select.error, textarea.error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+input[type="checkbox"].error {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
 
 /* Section reveal animations */
 .reveal{
@@ -542,8 +550,9 @@ a{color:inherit;text-decoration:none}
   <div class="section section-cta reveal">
     <h2>מוכנים להתחיל?</h2>
     <form class="cta-form" id="ctaForm">
-      <input type="text" name="name" placeholder="שם מלא" required autocomplete="name"/>
-      <input type="tel" name="phone" placeholder="טלפון" required autocomplete="tel" dir="ltr"/>
+      <input type="text" name="firstName" placeholder="שם פרטי" required autocomplete="given-name"/>
+      <input type="text" name="lastName" placeholder="שם משפחה" required autocomplete="family-name"/>
+      <input type="tel" name="phone" placeholder="טלפון" required autocomplete="tel" inputmode="tel" dir="ltr"/>
       <input type="email" name="email" placeholder="אימייל" autocomplete="email" dir="ltr"/>
       <select name="track" required>
         <option value="" disabled selected>מסלול מועדף</option>
@@ -551,6 +560,7 @@ a{color:inherit;text-decoration:none}
         <option value="zoom">מסלול Zoom (מרחוק)</option>
       </select>
       <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(224,224,232,.6)"><input type="checkbox" name="privacy" required style="accent-color:#a855f7;width:16px;height:16px;flex-shrink:0"/>מאשר/ת את <a href="/privacy-policy" target="_blank" style="color:#a855f7;text-decoration:underline">מדיניות הפרטיות</a></label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(224,224,232,.6)"><input type="checkbox" name="marketing" style="accent-color:#a855f7;width:16px;height:16px;flex-shrink:0"/>אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.</label>
       <button type="submit" class="cta-btn" id="ctaBtn">שלחו לי פרטים</button>
     </form>
     <div class="form-success" id="formSuccess">
@@ -674,22 +684,44 @@ document.addEventListener('DOMContentLoaded', function() {
   var success = document.getElementById('formSuccess');
   if (!form) return;
 
+  form.querySelectorAll('input,select,textarea').forEach(function(el) {
+    el.addEventListener('focus', function() { el.classList.remove('error'); });
+  });
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    // Validate required checkboxes (privacy policy)
-    var privacyCheckbox = form.querySelector('input[name="privacy"]');
-    if (privacyCheckbox && !privacyCheckbox.checked) {
-      alert('יש לאשר את מדיניות הפרטיות');
-      return;
+
+    // Clear previous errors
+    form.querySelectorAll('.error').forEach(function(el) { el.classList.remove('error'); });
+    var valid = true;
+    function check(el, ok) {
+      if (!ok && el) { el.classList.add('error'); if (valid) el.focus(); valid = false; }
     }
+    var fn = form.querySelector('[name="firstName"]');
+    var ln = form.querySelector('[name="lastName"]');
+    var ph = form.querySelector('[name="phone"]');
+    var em = form.querySelector('[name="email"]');
+    var priv = form.querySelector('[name="privacy"]');
+    check(fn, fn && fn.value.trim());
+    check(ln, ln && ln.value.trim());
+    var cleanPhone = (ph ? ph.value : '').replace(/[-\s]/g, '');
+    check(ph, /^0[2-9]\d{7,8}$/.test(cleanPhone));
+    if (em && em.value.trim()) {
+      check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
+    }
+    check(priv, priv && priv.checked);
+    if (!valid) return;
+
     btn.disabled = true;
     btn.textContent = 'שולח...';
 
     var data = {
-      name: form.name.value,
+      firstName: fn.value.trim(),
+      lastName: ln.value.trim(),
       phone: form.phone.value,
       email: form.email.value || '',
       track: form.track.value,
+      marketing_consent: form.querySelector('[name="marketing"]').checked,
       source: 'ai-builder-scroll',
       timestamp: new Date().toISOString()
     };

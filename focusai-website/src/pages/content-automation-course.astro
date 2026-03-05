@@ -1007,6 +1007,14 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             .who-photo { width: 200px; }
             .who-photo img { height: 200px; }
         }
+        input.error, select.error, textarea.error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+        input[type="checkbox"].error {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
     </style>
     <Analytics />
   <Tracker />
@@ -1188,8 +1196,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
         <form id="leadForm-form">
             <div class="form-group">
-                <label for="fullName" class="req"><i class="fas fa-user"></i> שם מלא</label>
-                <input type="text" id="fullName" name="fullName" placeholder="איך קוראים לך?" required>
+                <label for="firstName" class="req"><i class="fas fa-user"></i> שם פרטי</label>
+                <input type="text" id="firstName" name="firstName" placeholder="שם פרטי" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName" class="req"><i class="fas fa-user"></i> שם משפחה</label>
+                <input type="text" id="lastName" name="lastName" placeholder="שם משפחה" required>
             </div>
 
             <div class="form-group">
@@ -1348,26 +1361,42 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         return true;
     }
 
-    document.getElementById('fullName').addEventListener('blur', function() { validate(this, patterns.name); });
+    document.getElementById('firstName').addEventListener('blur', function() { validate(this, patterns.name); });
+    document.getElementById('lastName').addEventListener('blur', function() { validate(this, patterns.name); });
     document.getElementById('email').addEventListener('blur', function() { validate(this, patterns.email); });
     phoneInput.addEventListener('blur', function() { validate(this, patterns.phone); });
 
+    // Clear error on focus
+    form.querySelectorAll('input,select,textarea').forEach(function(el) {
+        el.addEventListener('focus', function() { el.classList.remove('error'); });
+    });
+
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        var fn = document.getElementById('fullName');
-        var ph = document.getElementById('phone');
-        var em = document.getElementById('email');
+
+        // Clear previous errors
+        form.querySelectorAll('.error').forEach(function(el) { el.classList.remove('error'); });
+        var valid = true;
+        function check(el, ok) {
+            if (!ok && el) { el.classList.add('error'); if (valid) el.focus(); valid = false; }
+        }
+        var fn = form.querySelector('[name="firstName"]');
+        var ln = form.querySelector('[name="lastName"]');
+        var ph = form.querySelector('[name="phone"]');
+        var em = form.querySelector('[name="email"]');
+        var priv = form.querySelector('[name="consent"]') || form.querySelector('[name="privacy"]') || form.querySelector('[name="privacyConsent"]');
+        check(fn, fn && fn.value.trim());
+        check(ln, ln && ln.value.trim());
+        var cleanPhone = (ph ? ph.value : '').replace(/[-\s]/g, '');
+        check(ph, /^0[2-9]\d{7,8}$/.test(cleanPhone));
+        if (em && em.value.trim()) {
+            check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
+        }
+        check(priv, priv && priv.checked);
+        if (!valid) return;
+
         var consent = document.getElementById('consent');
         var marketingConsent = document.getElementById('marketing-consent');
-
-        if (!validate(fn, patterns.name) || !validate(ph, patterns.phone) || !validate(em, patterns.email)) {
-            alert('נא למלא את כל השדות בצורה תקינה');
-            return;
-        }
-        if (!consent.checked || !marketingConsent.checked) {
-            alert('יש לאשר את שני התנאים כדי להמשיך');
-            return;
-        }
 
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
@@ -1378,7 +1407,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 headers: { 'Content-Type': 'application/json' },
                 mode: 'cors',
                 body: JSON.stringify({
-                    fullName: fn.value.trim(),
+                    firstName: fn.value.trim(),
+                    lastName: ln.value.trim(),
                     phone: ph.value.trim().replace(/[-\s]/g, ''),
                     email: em.value.trim(),
                     consent: true,

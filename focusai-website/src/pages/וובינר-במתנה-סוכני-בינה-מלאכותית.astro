@@ -1070,6 +1070,15 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        input.error, select.error, textarea.error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+        input[type="checkbox"].error {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
     </style>
     <Analytics />
   <Tracker />
@@ -1178,11 +1187,19 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
                 <form id="leadForm">
                     <div class="form-group">
-                        <label for="fullName" class="required">
+                        <label for="firstName" class="required">
                             <i class="fas fa-user"></i>
-                            שם
+                            שם פרטי
                         </label>
-                        <input type="text" id="fullName" name="fullName" placeholder="השם שלך" required>
+                        <input type="text" id="firstName" name="firstName" placeholder="שם פרטי" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="required">
+                            <i class="fas fa-user"></i>
+                            שם משפחה
+                        </label>
+                        <input type="text" id="lastName" name="lastName" placeholder="שם משפחה" required>
                     </div>
 
                     <div class="form-group">
@@ -1190,7 +1207,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                             <i class="fas fa-phone"></i>
                             טלפון
                         </label>
-                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" required>
+                        <input type="tel" id="phone" name="phone" placeholder="052-0000000" inputmode="tel" required>
                     </div>
 
                     <div class="form-group">
@@ -1365,7 +1382,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         }
 
         // Real-time validation
-        document.getElementById('fullName').addEventListener('blur', function() {
+        document.getElementById('firstName').addEventListener('blur', function() {
+            validateField(this, patterns.name);
+        });
+        document.getElementById('lastName').addEventListener('blur', function() {
             validateField(this, patterns.name);
         });
         document.getElementById('email').addEventListener('blur', function() {
@@ -1375,29 +1395,35 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             validateField(this, patterns.phone);
         });
 
+        // Clear error on focus
+        form.querySelectorAll('input,select,textarea').forEach(function(el) {
+            el.addEventListener('focus', function() { el.classList.remove('error'); });
+        });
+
         // Form submission
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            var fullName = document.getElementById('fullName');
-            var phone = document.getElementById('phone');
-            var email = document.getElementById('email');
-            var privacyConsent = document.getElementById('privacyConsent');
-
-            // Validate all fields
-            var isNameValid = validateField(fullName, patterns.name);
-            var isPhoneValid = validateField(phone, patterns.phone);
-            var isEmailValid = validateField(email, patterns.email);
-
-            if (!isNameValid || !isPhoneValid || !isEmailValid) {
-                alert('נא למלא את כל השדות בצורה תקינה');
-                return;
+            // Clear previous errors
+            form.querySelectorAll('.error').forEach(function(el) { el.classList.remove('error'); });
+            var valid = true;
+            function check(el, ok) {
+                if (!ok && el) { el.classList.add('error'); if (valid) el.focus(); valid = false; }
             }
-
-            if (!privacyConsent.checked) {
-                alert('יש לאשר את מדיניות הפרטיות כדי להמשיך');
-                return;
+            var fn = form.querySelector('[name="firstName"]');
+            var ln = form.querySelector('[name="lastName"]');
+            var ph = form.querySelector('[name="phone"]');
+            var em = form.querySelector('[name="email"]');
+            var priv = form.querySelector('[name="privacyConsent"]') || form.querySelector('[name="consent"]') || form.querySelector('[name="privacy"]');
+            check(fn, fn && fn.value.trim());
+            check(ln, ln && ln.value.trim());
+            var cleanPhone = (ph ? ph.value : '').replace(/[-\s]/g, '');
+            check(ph, /^0[2-9]\d{7,8}$/.test(cleanPhone));
+            if (em && em.value.trim()) {
+                check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
             }
+            check(priv, priv && priv.checked);
+            if (!valid) return;
 
             var marketingConsent = document.getElementById('marketingConsent');
             if (!marketingConsent.checked) {
@@ -1409,10 +1435,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             submitBtn.disabled = true;
 
             var formData = {
-                fullName: fullName.value.trim(),
-                phone: phone.value.trim(),
-                email: email.value.trim(),
-                privacyConsent: privacyConsent.checked,
+                firstName: fn.value.trim(),
+                lastName: ln.value.trim(),
+                phone: ph.value.trim(),
+                email: em.value.trim(),
+                privacyConsent: priv.checked,
                 marketingConsent: marketingConsent.checked,
                 timestamp: new Date().toISOString(),
                 source: 'ai workshop'
