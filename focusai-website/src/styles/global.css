@@ -131,14 +131,7 @@ html {
   }
 }
 
-/* Ultra-wide: constrain content width */
-@media (min-width: 1920px) {
-  main {
-    max-width: 1600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
+/* Ultra-wide: no main constraint needed — individual containers handle max-width */
 
 /* Lenis smooth scroll */
 html.lenis, html.lenis body {
