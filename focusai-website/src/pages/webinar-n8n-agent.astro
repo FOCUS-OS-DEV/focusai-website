@@ -14,13 +14,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מדריך חינם | בניית סוכן AI ראשון ב-n8n | Focus AI</title>
-    <meta name="description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! בוגרי Bot-Camp משתפים תוצרים אמיתיים — הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n, צעד אחר צעד, בלי קוד.">
+    <meta name="description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! בוגרי Bot-Camp משתפים תוצרים אמיתיים. הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n, צעד אחר צעד, בלי קוד.">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://focusai.co.il/webinar-n8n-agent/">
     <meta property="og:title" content="מדריך חינם | בניית סוכן AI ראשון ב-n8n">
-    <meta property="og:description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! בוגרי Bot-Camp משתפים תוצרים אמיתיים — הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n, צעד אחר צעד.">
+    <meta property="og:description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! בוגרי Bot-Camp משתפים תוצרים אמיתיים. הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n, צעד אחר צעד.">
     <meta property="og:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -30,7 +30,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="מדריך חינם | בניית סוכן AI ראשון ב-n8n">
-    <meta name="twitter:description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! בוגרי Bot-Camp משתפים תוצרים אמיתיים — הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n, צעד אחר צעד.">
+    <meta name="twitter:description" content="מדריך חינם לבניית סוכן AI ראשון ב-n8n! בוגרי Bot-Camp משתפים תוצרים אמיתיים. הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n, צעד אחר צעד.">
     <meta name="twitter:image" content="https://res.cloudinary.com/dfudxxzlj/image/upload/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg">
 
     <link rel="canonical" href="https://focusai.co.il/webinar-n8n-agent/">
@@ -1080,6 +1080,80 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             font-weight: 600;
         }
 
+        /* WhatsApp Community Invite (after first form) */
+        .wa-community-invite {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0 32px;
+            padding: 16px 20px;
+            background: rgba(37, 211, 102, 0.06);
+            border: 1px solid rgba(37, 211, 102, 0.15);
+            border-radius: 16px;
+            direction: rtl;
+        }
+        .wa-invite-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(37, 211, 102, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+            color: #25d366;
+        }
+        .wa-invite-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .wa-invite-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #e8e4f0;
+            margin-bottom: 2px;
+        }
+        .wa-invite-text {
+            font-size: 0.8rem;
+            color: #9590b0;
+            line-height: 1.4;
+        }
+        .wa-invite-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: #25d366;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s, transform 0.15s;
+            flex-shrink: 0;
+        }
+        .wa-invite-btn:hover {
+            background: #1fb855;
+            transform: translateY(-1px);
+        }
+        .wa-invite-btn i {
+            font-size: 0.7rem;
+        }
+        @media (max-width: 600px) {
+            .wa-community-invite {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+                padding: 16px;
+            }
+            .wa-invite-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         /* Community Section */
         .community-section {
             margin-top: 25px;
@@ -1749,7 +1823,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             </div>
 
             <p class="subtitle">
-                בוגרי Bot-Camp משתפים תוצרים אמיתיים מההכשרה — <strong>הנדסת פרומפטים</strong> ובניית <strong>סוכן AI ראשון ב-n8n</strong>, צעד אחר צעד.<br>
+                בוגרי Bot-Camp משתפים תוצרים אמיתיים מההכשרה. <strong>הנדסת פרומפטים</strong> ובניית <strong>סוכן AI ראשון ב-n8n</strong>, צעד אחר צעד.<br>
                 השאירו פרטים וקבלו גישה מיידית למדריך המלא.
             </p>
         </header>
@@ -1823,9 +1897,21 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
                 <div class="form-wa-note">
                     <i class="fas fa-lock"></i>
-                    <span><strong>גישה מיידית</strong> &ndash; לאחר השארת הפרטים תועברו ישירות לצפייה בסרטון.</span>
+                    <span><strong>גישה מיידית</strong> לאחר השארת הפרטים תועברו ישירות לצפייה בסרטון.</span>
                 </div>
             </form>
+        </div>
+
+        <!-- WhatsApp Community Invite -->
+        <div class="wa-community-invite">
+            <div class="wa-invite-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="wa-invite-content">
+                <div class="wa-invite-title">הצטרפו לקהילת AI של Focus AI</div>
+                <div class="wa-invite-text">טיפים, מדריכים ועדכונים בלעדיים על עולם ה-AI והאוטומציות</div>
+            </div>
+            <a href="https://chat.whatsapp.com/KQlQy2zlUUQ5mFUoApeTzL?mode=gi_t" class="wa-invite-btn" target="_blank" rel="noopener noreferrer">
+                הצטרפו לקהילה <i class="fas fa-arrow-left"></i>
+            </a>
         </div>
 
         <!-- Story Hook - Why this webinar matters -->
@@ -1840,9 +1926,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             </div>
             <div class="hook-question">יש הבדל ענק בין לשחק עם ChatGPT<br>לבין לבנות סוכן AI שעובד בשבילך</div>
             <div class="hook-answer">
-                רוב האנשים משתמשים ב-AI בתור צ'אט — שואלים שאלה, מקבלים תשובה, וזהו.<br>
-                אבל מה אם הסוכן שלך יכול <em>לפעול לבד</em>? לקרוא מיילים, לענות ללידים, לנהל משימות — <strong>בלי שתיגעו בו</strong>.<br>
-                במדריך הזה בוגרי Bot-Camp משתפים איך עשו בדיוק את זה — ומלמדים הנדסת פרומפטים ובניית סוכן AI ראשון ב-<strong>n8n</strong>, צעד אחר צעד.
+                רוב האנשים משתמשים ב-AI בתור צ׳אט. שואלים שאלה, מקבלים תשובה, וזהו.<br>
+                אבל מה אם הסוכן שלכם יכול <em>לפעול לבד</em>? לקרוא מיילים, לענות ללידים, לנהל משימות <strong>בלי שתיגעו בו</strong>.<br>
+                במדריך הזה בוגרי Bot-Camp משתפים איך עשו בדיוק את זה. הנדסת פרומפטים ובניית סוכן AI ראשון ב-<strong>n8n</strong>, צעד אחר צעד.
             </div>
             <div class="story-stats">
                 <div class="story-stat">
@@ -1869,7 +1955,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 </div>
 
                 <!-- Hosts -->
-                <div class="speakers-sublabel">מנחים - Focus AI</div>
+                <div class="speakers-sublabel">מנחים | Focus AI</div>
                 <div class="speakers-grid" style="margin-bottom: 16px;">
                     <div class="speaker-card">
                         <div class="speaker-avatar">
@@ -1896,7 +1982,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 </div>
 
                 <!-- Presenters -->
-                <div class="speakers-sublabel">מציגים - סטודנטים בתכנית Bot-Camp</div>
+                <div class="speakers-sublabel">מציגים | סטודנטים בתכנית Bot-Camp</div>
                 <div class="speakers-grid">
                     <div class="speaker-card">
                         <div class="speaker-avatar">
@@ -1935,20 +2021,20 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             <div class="journey-section">
 
                 <p class="journey-opener">
-                    <strong>סוכן AI</strong> זה לא עוד צ'אטבוט...<br>
-                    זה מערכת שעובדת בשבילכם, 24/7.
+                    <strong>סוכן AI</strong> זה לא עוד צ׳אטבוט...<br>
+                    זו מערכת שעובדת בשבילכם, 24/7.
                 </p>
 
                 <p class="journey-text">
-                    אתם שואלים את ChatGPT שאלות, אולי בניתם GPT מותאם אישית, אולי אפילו Gem של גוגל. וזה נחמד. אבל בואו נהיה כנים — <strong>זה לא באמת עובד בשבילכם</strong>. אתם עדיין צריכים לפתוח את הכלי, לכתוב את הפרומפט, להעתיק את התשובה, ולהדביק אותה איפה שצריך.
+                    אתם שואלים את ChatGPT שאלות, אולי בניתם GPT מותאם אישית, אולי אפילו Gem של גוגל. וזה נחמד. אבל בואו נהיה כנים, <strong>זה לא באמת עובד בשבילכם</strong>. אתם עדיין צריכים לפתוח את הכלי, לכתוב את הפרומפט, להעתיק את התשובה, ולהדביק אותה איפה שצריך.
                 </p>
 
                 <div class="journey-pullquote">
-                    מה אם הייתם יכולים לבנות משהו שעושה את כל זה <em style="color: var(--primary);">לבד</em>?
+                    מה אם הייתם יכולים לבנות סוכן שמתנהל בעצמו ללא מעורבות שלכם?
                 </div>
 
                 <p class="journey-text">
-                    במדריך הזה תראו איך שני בוגרי Bot-Camp עושים בדיוק את זה — בונים סוכן AI מלא ב-n8n, מאפס ועד מערכת עובדת. <strong>בלי קוד, בלי ניסיון קודם</strong>. רק הכלים הנכונים, והידע איך להשתמש בהם.
+                    במדריך הזה תראו איך שני בוגרי Bot-Camp עושים בדיוק את זה. בונים סוכן AI מלא ב-n8n, מאפס ועד מערכת עובדת. <strong>בלי קוד, בלי ניסיון קודם</strong>. רק הכלים הנכונים, והידע איך להשתמש בהם.
                 </p>
 
             </div>
@@ -1965,15 +2051,15 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 <div class="benefits-list">
                     <div class="benefit-item">
                         <i class="fas fa-robot"></i>
-                        <span>בניית סוכן AI מלא ב-n8n — מאפס ועד מערכת עובדת, צעד אחר צעד</span>
+                        <span>בניית סוכן AI מלא ב-n8n. מאפס ועד מערכת עובדת, צעד אחר צעד</span>
                     </div>
                     <div class="benefit-item">
                         <i class="fas fa-exchange-alt"></i>
-                        <span>ההבדל בין צ'אטבוט לסוכן AI אמיתי — ולמה זה משנה לעסק שלכם</span>
+                        <span>ההבדל בין סוכן GPTs או Gems לבין סוכן AI אמיתי שרץ לבד</span>
                     </div>
                     <div class="benefit-item">
                         <i class="fas fa-tools"></i>
-                        <span>n8n — הכלי שמשנה את השוק, ואיך להתחיל להשתמש בו עוד היום</span>
+                        <span>n8n. הכלי שמשנה את השוק, ואיך להתחיל להשתמש בו עוד היום</span>
                     </div>
                 </div>
             </div>
@@ -1981,7 +2067,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             <!-- Target Audience Note -->
             <div class="audience-note">
                 <i class="fas fa-user-check"></i>
-                <p><strong>מתאים לכולם.</strong> בעלי עסקים, משווקים, יזמים, מנהלים, עצמאיים, סקרנים טכנולוגיים - כל מי שרוצה לראות איך בונים סוכן AI אמיתי ומתחילים להשתמש ב-AI באופן מעשי.</p>
+                <p><strong>מתאים לכולם.</strong> בעלי עסקים, משווקים, יזמים, מנהלים, עצמאיים, סקרנים טכנולוגיים. כל מי שרוצה לראות איך בונים סוכן AI אמיתי ומתחילים להשתמש ב-AI באופן מעשי.</p>
             </div>
 
             <!-- Form Section -->
@@ -2053,7 +2139,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
                     <div class="form-wa-note">
                         <i class="fas fa-lock"></i>
-                        <span><strong>גישה מיידית</strong> &ndash; לאחר השארת הפרטים תועברו ישירות לצפייה בסרטון.</span>
+                        <span><strong>גישה מיידית</strong> לאחר השארת הפרטים תועברו ישירות לצפייה בסרטון.</span>
                     </div>
                 </form>
             </div>
