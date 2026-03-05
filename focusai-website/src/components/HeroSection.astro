@@ -12,7 +12,7 @@ const n8nBadge = "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_aut
 
 // Mobile highlights - Instagram Stories style (order: אקדמיה, וובינר, הדרכות ללא עלות, חדשות AI, then rest)
 const highlights = [
-  { label: 'אקדמיה', href: '/academy', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584195/focusai/highlight-academy.png' },
+  { label: 'אקדמיה', href: '#', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584195/focusai/highlight-academy.png', isExpander: true },
   { label: 'וובינר', href: '/webinar-n8n-agent', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584199/focusai/highlight-webinar.png', isLive: true },
   { label: 'הדרכות חינם', href: '/focus-on-me', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772585937/focusai/highlight-free-guides.png' },
   { label: 'חדשות AI', href: '/ai-news', image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_120,h_120,c_fill,r_max/v1772584217/focusai/highlight-news.png' },
@@ -76,17 +76,52 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
         <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10 pointer-events-none"></div>
         <div class="flex gap-5 overflow-x-auto px-6 pb-2 highlights-scroll" data-lenis-prevent>
           {highlights.map((hl) => (
-            <a href={hl.href} class="flex flex-col items-center gap-2 flex-shrink-0">
-              <div class={`w-[60px] h-[60px] rounded-full p-[2px] ${hl.isLive ? 'bg-gradient-to-br from-red-500 via-[#a855f7] to-[#ec4899]' : 'bg-gradient-to-br from-[#a855f7]/60 to-[#c084fc]/40'}`}>
-                <img
-                  src={hl.image}
-                  alt={hl.label}
-                  class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0f]"
-                  loading="lazy"
-                />
+            hl.isExpander ? (
+              <div class="flex flex-col items-center gap-2 flex-shrink-0 relative" id="academy-highlight">
+                <button type="button" class="highlight-glow-ring w-[60px] h-[60px] rounded-full p-[2px]" aria-label="פתח תפריט אקדמיה">
+                  <img
+                    src={hl.image}
+                    alt={hl.label}
+                    class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0f]"
+                    loading="lazy"
+                  />
+                </button>
+                <span class="text-[10px] text-white/60 font-medium whitespace-nowrap">{hl.label}</span>
+                {/* Dropdown cards */}
+                <div id="academy-dropdown" class="absolute top-[72px] right-1/2 translate-x-1/2 z-50 hidden">
+                  <div class="flex gap-3 p-3 bg-[#12121a]/95 backdrop-blur-xl border border-white/[0.1] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
+                    <a href="/academy" class="highlight-card group flex flex-col items-center gap-2 p-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-xl transition-all w-[100px]">
+                      <div class="w-10 h-10 rounded-full bg-[#a855f7]/20 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
+                        </svg>
+                      </div>
+                      <span class="text-[11px] font-semibold text-white/80 group-hover:text-[#a855f7] transition-colors">Bot-Camp</span>
+                    </a>
+                    <a href="/ai-dev" class="highlight-card group flex flex-col items-center gap-2 p-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-xl transition-all w-[100px]">
+                      <div class="w-10 h-10 rounded-full bg-[#c084fc]/20 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#c084fc]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                      </div>
+                      <span class="text-[11px] font-semibold text-white/80 group-hover:text-[#c084fc] transition-colors">AI Dev</span>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <span class="text-[10px] text-white/60 font-medium whitespace-nowrap">{hl.label}</span>
-            </a>
+            ) : (
+              <a href={hl.href} class="flex flex-col items-center gap-2 flex-shrink-0">
+                <div class={`w-[60px] h-[60px] rounded-full p-[2px] ${hl.isLive ? 'bg-gradient-to-br from-red-500 via-[#a855f7] to-[#ec4899]' : 'bg-gradient-to-br from-[#a855f7]/60 to-[#c084fc]/40'}`}>
+                  <img
+                    src={hl.image}
+                    alt={hl.label}
+                    class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0f]"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="text-[10px] text-white/60 font-medium whitespace-nowrap">{hl.label}</span>
+              </a>
+            )
           ))}
         </div>
       </div>
@@ -282,6 +317,20 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   .highlights-scroll::-webkit-scrollbar {
     display: none;
   }
+
+  /* Academy highlight - spinning glow ring (like unseen Instagram story) */
+  .highlight-glow-ring {
+    background: conic-gradient(from var(--glow-angle, 0deg), #a855f7, #c084fc, #e879f9, #a855f7);
+    animation: glowSpin 3s linear infinite;
+  }
+  @keyframes glowSpin {
+    to { --glow-angle: 360deg; }
+  }
+  @property --glow-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
 </style>
 
 <script>
@@ -339,4 +388,20 @@ const particles = Array.from({ length: 12 }, (_, i) => ({
   }
 
   // Scroll parallax fade - disabled (hero stays fully visible)
+
+  // Academy highlight dropdown toggle
+  const academyBtn = document.querySelector('#academy-highlight button');
+  const academyDropdown = document.getElementById('academy-dropdown');
+  if (academyBtn && academyDropdown) {
+    academyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      academyDropdown.classList.toggle('hidden');
+    });
+    document.addEventListener('click', () => {
+      academyDropdown.classList.add('hidden');
+    });
+    academyDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
 </script>
