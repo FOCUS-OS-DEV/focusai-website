@@ -124,53 +124,61 @@ const skills = [
     </section>
 
     <!-- ============================================ -->
-    <!-- TOOLS & AGENTS (icon-based, wider cards)      -->
+    <!-- TOOLS & AGENTS (open layout, no cards)        -->
     <!-- ============================================ -->
     <section class="relative pb-10">
       <div class="container mx-auto px-4 max-w-5xl">
-        <div class="flex items-center gap-3 mb-6">
+        <div class="flex items-center gap-3 mb-8">
           <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">כלים וסוכנים</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {tools.map((item) => item.links ? (
-            <div class="fom-tool-card group relative rounded-2xl overflow-hidden p-6">
-              <div class="flex items-start gap-4 mb-5">
-                <div class="fom-tool-icon" style={`--icon-color: ${item.color}`}>
-                  <i class={item.icon}></i>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">{item.title}</h3>
-                  <p class="text-sm text-[#b0b0c0]/80 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-2">
-                {item.links.map((link) => (
-                  <a href={link.href} target="_blank" rel="noopener noreferrer" class="fom-agent-link inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:border-[#06b6d4]/40 hover:bg-[#06b6d4]/5 transition-all">
-                    <span class="text-sm font-medium text-white">{link.label}</span>
-                    <span class="px-2 py-0.5 rounded-full bg-[#06b6d4]/15 text-[10px] font-mono text-[#06b6d4] uppercase">{link.platform}</span>
-                  </a>
-                ))}
+        <div class="flex flex-col gap-6">
+          <!-- AI Tools Hub -->
+          <a href="/tools" class="fom-tool-row group">
+            <div class="fom-icon-bubble fom-icon-purple">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-bold text-white group-hover:text-[#c084fc] transition-colors">מרכז כלי AI</h3>
+              <p class="text-sm text-[#b0b0c0]/70">כלי ה-AI המומלצים שלנו. סיננו, חיפשו ובחרו את הכלי המתאים לכם</p>
+            </div>
+            <span class="fom-row-arrow">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </span>
+          </a>
+
+          <!-- AI Agents -->
+          <div class="fom-tool-row">
+            <div class="fom-icon-bubble fom-icon-cyan">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2"/>
+                <circle cx="12" cy="5" r="3"/>
+                <circle cx="9" cy="16" r="1" fill="currentColor"/>
+                <circle cx="15" cy="16" r="1" fill="currentColor"/>
+                <path d="M10 19h4"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-bold text-white mb-2">סוכני AI חכמים</h3>
+              <div class="flex flex-wrap gap-2">
+                <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" target="_blank" rel="noopener noreferrer" class="fom-agent-pill group/pill">
+                  <span class="fom-pill-dot" style="background: #10a37f;"></span>
+                  <span class="text-sm text-white/90 group-hover/pill:text-white">Prompt Master V3</span>
+                  <span class="fom-pill-tag">ChatGPT</span>
+                </a>
+                <a href="https://gemini.google.com/gem/c9c0363a0699?usp=sharing" target="_blank" rel="noopener noreferrer" class="fom-agent-pill group/pill">
+                  <span class="fom-pill-dot" style="background: #4285f4;"></span>
+                  <span class="text-sm text-white/90 group-hover/pill:text-white">Prompt Master Gemini</span>
+                  <span class="fom-pill-tag">Gemini</span>
+                </a>
               </div>
             </div>
-          ) : (
-            <a href={item.href} class="fom-tool-card group relative rounded-2xl overflow-hidden p-6">
-              <div class="flex items-start gap-4 mb-5">
-                <div class="fom-tool-icon" style={`--icon-color: ${item.color}`}>
-                  <i class={item.icon}></i>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
-                  <p class="text-sm text-[#b0b0c0]/80 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-              <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
-                {item.cta}
-                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </span>
-            </a>
-          ))}
+          </div>
         </div>
       </div>
     </section>
@@ -282,44 +290,110 @@ const skills = [
     letter-spacing: -0.03em;
   }
 
-  /* Tool/Agent cards — icon-based, no image */
-  .fom-tool-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(168, 85, 247, 0.15);
-    backdrop-filter: blur(20px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Tool rows — open layout, no card borders */
+  .fom-tool-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.3s ease;
+    text-decoration: none;
   }
 
-  .fom-tool-card:hover {
-    border-color: rgba(168, 85, 247, 0.35);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(168, 85, 247, 0.1) inset;
-    transform: translateY(-3px);
+  a.fom-tool-row:hover {
+    background: rgba(168, 85, 247, 0.04);
   }
 
-  .fom-tool-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: color-mix(in srgb, var(--icon-color) 12%, transparent);
-    border: 1px solid color-mix(in srgb, var(--icon-color) 20%, transparent);
+  .fom-icon-bubble {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 1.2rem;
-    color: var(--icon-color);
     transition: all 0.3s;
   }
 
-  .fom-tool-card:hover .fom-tool-icon {
-    background: color-mix(in srgb, var(--icon-color) 18%, transparent);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--icon-color) 25%, transparent);
+  .fom-icon-purple {
+    background: rgba(168, 85, 247, 0.12);
+    color: #c084fc;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
   }
 
-  .fom-agent-link:hover {
-    box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
+  .fom-icon-cyan {
+    background: rgba(6, 182, 212, 0.12);
+    color: #22d3ee;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+  }
+
+  a.fom-tool-row:hover .fom-icon-bubble {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
+    transform: scale(1.05);
+  }
+
+  .fom-row-arrow {
+    color: rgba(168, 85, 247, 0.4);
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  a.fom-tool-row:hover .fom-row-arrow {
+    color: #a855f7;
+    transform: translateX(-4px);
+  }
+
+  /* Agent pills — inline clickable tags */
+  .fom-agent-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .fom-agent-pill:hover {
+    border-color: rgba(168, 85, 247, 0.3);
+    background: rgba(168, 85, 247, 0.06);
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .fom-pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .fom-pill-tag {
+    font-size: 10px;
+    font-family: ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(168, 85, 247, 0.7);
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgba(168, 85, 247, 0.08);
+  }
+
+  @media (max-width: 640px) {
+    .fom-tool-row {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: right;
+      gap: 12px;
+      padding: 16px;
+    }
+    .fom-row-arrow { display: none; }
+    .fom-agent-pill { width: 100%; }
   }
 
   /* Standard image cards (guides, skills) */
