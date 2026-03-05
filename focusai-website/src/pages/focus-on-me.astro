@@ -1,38 +1,29 @@
 ---
 /**
- * מרכז הדרכה - Training Hub
- * Webinar, AI tools, agents, guides, and Claude Code skills bundles
+ * Focus on ME — מרכז ההדרכה של Focus AI
+ * Fun, approachable hub for tools, agents, guides, and skills
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const pageTitle = "מרכז הדרכה — וובינרים, כלים והדרכות AI | Focus AI";
-const pageDescription = "מרכז ההדרכה של Focus AI: הרשמה לוובינרים, כלי AI מומלצים, סוכני AI לעסקים, הדרכות מקצועיות וחבילות סקילים ל-Claude Code — הכל במקום אחד.";
+const pageTitle = "Focus on ME | מרכז ההדרכה של Focus AI";
+const pageDescription = "הצעד הראשון שלכם לעולם ה-AI והאוטומציות. כלים, סוכנים, מדריכים חינמיים וחבילות סקילים, הכל במקום אחד.";
 
-const featured = [
-  {
-    title: 'וובינר Live: סוכן AI ב-N8N',
-    description: 'בניית סוכן AI ראשון ב-N8N — צעד אחר צעד, בשידור חי',
-    href: '/webinar-n8n-agent',
-    cta: 'להרשמה',
-    isLive: true,
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png',
-    tag: 'WEBINAR',
-  },
+const tools = [
   {
     title: 'מרכז כלי AI',
-    description: 'כלי הבינה המלאכותית המומלצים — סיננו, חפשו והתחילו לעבוד',
+    description: 'כלי ה-AI המומלצים שלנו. סיננו, חיפשו ובחרו את הכלי המתאים לכם',
     href: '/tools',
     cta: 'לכלי AI',
-    tag: 'TOOLS',
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1771028284/blog/top-10-ai-tools-hero.png',
+    icon: 'fas fa-wand-magic-sparkles',
+    color: '#a855f7',
   },
   {
-    title: 'סוכני AI',
-    description: 'סוכני AI חכמים מבית Focus AI — בחרו פלטפורמה והתחילו',
-    tag: 'AGENTS',
-    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1771028277/blog/ai-agents-revolution-hero.png',
+    title: 'סוכני AI חכמים',
+    description: 'סוכני AI מבית Focus AI, בחרו פלטפורמה והתחילו לעבוד',
+    icon: 'fas fa-robot',
+    color: '#06b6d4',
     links: [
       { label: 'Prompt Master V3', platform: 'ChatGPT', href: 'https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3' },
       { label: 'Prompt Master Gemini', platform: 'Gemini', href: 'https://gemini.google.com/gem/c9c0363a0699?usp=sharing' },
@@ -40,23 +31,34 @@ const featured = [
   },
 ];
 
-const resources = [
+const guides = [
+  {
+    title: 'מדריך חינם: סוכן AI ב-N8N',
+    description: 'בוגרי Bot-Camp משתפים תוצרים אמיתיים. הנדסת פרומפטים ובניית סוכן AI ראשון ב-n8n',
+    href: '/webinar-n8n-agent',
+    cta: 'לצפייה',
+    image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1771759834/ef5cf54c-d1cf-4937-8f7a-b398d5839a17_gnx5ey.png',
+    tag: 'FREE',
+  },
   {
     title: 'הדרכה: סוכני AI',
-    description: 'בניית סוכן AI מאפס — מה זה, למה זה חשוב ואיך מתחילים',
+    description: 'בניית סוכן AI מאפס. מה זה, למה זה חשוב ואיך מתחילים',
     href: '/%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8-%D7%91%D7%9E%D7%AA%D7%A0%D7%94-%D7%A1%D7%95%D7%9B%D7%A0%D7%99-%D7%91%D7%99%D7%A0%D7%94-%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA/',
     cta: 'לצפייה',
     image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1769624611/Generated_Image_January_28_2026_-_8_23PM_as7psy.jpg',
-    tag: 'GUIDE',
+    tag: 'FREE',
   },
   {
     title: 'הדרכה: אוטומציית תוכן',
-    description: 'יצירת תוכן עם AI — מאפס ועד פוסט מוכן לפרסום',
+    description: 'יצירת תוכן עם AI. מאפס ועד פוסט מוכן לפרסום',
     href: '/content-automation-course',
     cta: 'לצפייה',
     image: 'https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_600,h_340,c_fill/v1771764387/66f2db89-c663-40aa-8932-7cde61c5f22b_pskwxj.png',
-    tag: 'GUIDE',
+    tag: 'FREE',
   },
+];
+
+const skills = [
   {
     title: '50 סקילים למפתחים + מדריך התקנה',
     description: 'סקילים ל-Claude Code למפתחים עם מדריך התקנה ראשונית מלא',
@@ -88,85 +90,85 @@ const resources = [
 <BaseLayout title={pageTitle} description={pageDescription}>
   <Header slot="header" currentPath="/focus-on-me" />
 
-  <!-- Full-page seamless wrapper -->
   <div class="relative">
 
     <!-- ============================================ -->
-    <!-- HERO                                          -->
+    <!-- HERO with background image                    -->
     <!-- ============================================ -->
-    <section class="relative pt-36 pb-12 overflow-hidden">
+    <section class="relative pt-32 pb-16 overflow-hidden">
+      <!-- Background image -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_1600/v1772716345/focusai/focus-on-me-hero.jpg"
+          alt=""
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/60 via-[#0a0a0f]/70 to-[#0a0a0f]"></div>
+      </div>
+
       <div class="container mx-auto px-4 relative z-10 max-w-5xl text-center">
-        <h1 class="focus-hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[0.95]">
-          <span class="block text-[#f5f5fa]">מרכז</span>
-          <span class="block text-[#f5f5fa]"><span class="focus-gradient-text">הדרכה</span></span>
+        <h1 class="fom-hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[0.95]">
+          <span class="block text-[#f5f5fa]">Focus on</span>
+          <span class="block fom-gradient-text">ME</span>
         </h1>
 
-        <p class="text-lg md:text-xl text-[#b0b0c0] max-w-2xl mx-auto leading-relaxed">
-          וובינרים, כלי AI, הדרכות מקצועיות וחבילות סקילים —
-          <span class="text-[#f5f5fa] font-medium">הכל במקום אחד.</span>
+        <p class="text-lg md:text-xl text-[#d0d0e0] max-w-2xl mx-auto leading-relaxed mb-2">
+          מרכז ההדרכה של Focus AI
         </p>
-
+        <p class="text-base text-[#b0b0c0]/80 max-w-xl mx-auto leading-relaxed">
+          הצעד הראשון שלכם לעולם הבינה המלאכותית והאוטומציות.
+          <span class="text-[#c084fc]">בקצב שלכם, בדרך שלכם.</span>
+        </p>
       </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- FEATURED                                      -->
+    <!-- TOOLS & AGENTS (icon-based, wider cards)      -->
     <!-- ============================================ -->
-    <section class="relative pb-8">
-      <div class="container mx-auto px-4 max-w-6xl">
+    <section class="relative pb-10">
+      <div class="container mx-auto px-4 max-w-5xl">
         <div class="flex items-center gap-3 mb-6">
           <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">FEATURED</span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">כלים וסוכנים</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {featured.map((item) => item.links ? (
-            <div class="featured-card group relative rounded-2xl overflow-hidden">
-              <div class="relative h-44 overflow-hidden">
-                <img src={item.image} alt={item.title} class="w-full h-full object-cover" loading="lazy" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
-                <div class="absolute top-3 right-3">
-                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {tools.map((item) => item.links ? (
+            <div class="fom-tool-card group relative rounded-2xl overflow-hidden p-6">
+              <div class="flex items-start gap-4 mb-5">
+                <div class="fom-tool-icon" style={`--icon-color: ${item.color}`}>
+                  <i class={item.icon}></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">{item.title}</h3>
+                  <p class="text-sm text-[#b0b0c0]/80 leading-relaxed">{item.description}</p>
                 </div>
               </div>
-              <div class="p-5">
-                <h3 class="text-base font-bold text-white mb-1.5">{item.title}</h3>
-                <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
-                <div class="flex flex-col gap-2">
-                  {item.links.map((link) => (
-                    <a href={link.href} target="_blank" rel="noopener noreferrer" class="agent-link inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:border-[#a855f7]/40 hover:bg-[#a855f7]/5 transition-all">
-                      <span class="flex items-center gap-2">
-                        <span class="text-sm font-medium text-white">{link.label}</span>
-                      </span>
-                      <span class="px-2 py-0.5 rounded-full bg-[#a855f7]/15 text-[10px] font-mono text-[#a855f7] uppercase">{link.platform}</span>
-                    </a>
-                  ))}
-                </div>
+              <div class="flex flex-col gap-2">
+                {item.links.map((link) => (
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" class="fom-agent-link inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:border-[#06b6d4]/40 hover:bg-[#06b6d4]/5 transition-all">
+                    <span class="text-sm font-medium text-white">{link.label}</span>
+                    <span class="px-2 py-0.5 rounded-full bg-[#06b6d4]/15 text-[10px] font-mono text-[#06b6d4] uppercase">{link.platform}</span>
+                  </a>
+                ))}
               </div>
             </div>
           ) : (
-            <a href={item.href} class="featured-card group relative rounded-2xl overflow-hidden">
-              <div class="relative h-44 overflow-hidden">
-                <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
-                <div class="absolute top-3 right-3 flex items-center gap-2">
-                  {item.isLive && (
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/90 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_12px_rgba(239,68,68,0.5)]">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      LIVE
-                    </span>
-                  )}
-                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
+            <a href={item.href} class="fom-tool-card group relative rounded-2xl overflow-hidden p-6">
+              <div class="flex items-start gap-4 mb-5">
+                <div class="fom-tool-icon" style={`--icon-color: ${item.color}`}>
+                  <i class={item.icon}></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
+                  <p class="text-sm text-[#b0b0c0]/80 leading-relaxed">{item.description}</p>
                 </div>
               </div>
-              <div class="p-5">
-                <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</h3>
-                <p class="text-sm text-[#b0b0c0]/80 leading-relaxed mb-4">{item.description}</p>
-                <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
-                  {item.cta}
-                  <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </span>
-              </div>
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-[#a855f7] group-hover:gap-3 transition-all">
+                {item.cta}
+                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </span>
             </a>
           ))}
         </div>
@@ -174,29 +176,23 @@ const resources = [
     </section>
 
     <!-- ============================================ -->
-    <!-- WEBINARS & GUIDES                             -->
+    <!-- GUIDES & WEBINARS (image cards)               -->
     <!-- ============================================ -->
-    <section class="relative pb-6">
-      <div class="container mx-auto px-4 max-w-6xl">
+    <section class="relative pb-10">
+      <div class="container mx-auto px-4 max-w-5xl">
         <div class="flex items-center gap-3 mb-6">
           <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">WEBINARS & GUIDES</span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">מדריכים והדרכות</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl">
-          {resources.slice(0, 2).map((item) => (
-            <a href={item.href} class="focus-card group relative rounded-2xl overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {guides.map((item) => (
+            <a href={item.href} class="fom-card group relative rounded-2xl overflow-hidden">
               <div class="relative h-44 overflow-hidden">
                 <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
-                <div class="absolute top-3 right-3 flex items-center gap-2">
-                  {item.isLive && (
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/90 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_12px_rgba(239,68,68,0.5)]">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      LIVE
-                    </span>
-                  )}
-                  <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-[10px] font-mono text-white/70 uppercase tracking-wider">{item.tag}</span>
+                <div class="absolute top-3 right-3">
+                  <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-sm text-[10px] font-mono text-emerald-400 uppercase tracking-wider border border-emerald-500/20">{item.tag}</span>
                 </div>
               </div>
               <div class="p-5">
@@ -216,16 +212,16 @@ const resources = [
     <!-- ============================================ -->
     <!-- CLAUDE CODE SKILLS                            -->
     <!-- ============================================ -->
-    <section class="relative pt-6 pb-20">
-      <div class="container mx-auto px-4 max-w-6xl">
+    <section class="relative pt-4 pb-20">
+      <div class="container mx-auto px-4 max-w-5xl">
         <div class="flex items-center gap-3 mb-6">
           <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
-          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">CLAUDE CODE SKILLS</span>
+          <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">חבילות סקילים</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {resources.slice(2).map((item) => (
-            <a href={item.href} class="focus-card group relative rounded-2xl overflow-hidden">
+          {skills.map((item) => (
+            <a href={item.href} class="fom-card group relative rounded-2xl overflow-hidden">
               <div class="relative h-44 overflow-hidden">
                 <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent"></div>
@@ -255,7 +251,7 @@ const resources = [
         <div class="text-center">
           <h2 class="text-2xl md:text-3xl font-black mb-4">רוצים ללמוד לעומק?</h2>
           <p class="text-[#d0d0e0] text-lg mb-8 max-w-2xl mx-auto">
-            הצטרפו להכשרת Bot-Camp — תוכנית מקצועית למפתחי סוכני AI ואוטומציות עסקיות,
+            הצטרפו להכשרת Bot-Camp, תוכנית מקצועית למפתחי סוכני AI ואוטומציות עסקיות,
             בליווי אקדמי של היחידה ללימודי חוץ באוניברסיטת חיפה.
           </p>
           <a
@@ -274,42 +270,71 @@ const resources = [
 </BaseLayout>
 
 <style>
-  .focus-gradient-text {
+  .fom-gradient-text {
     background: linear-gradient(135deg, #a855f7, #c084fc, #e879f9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.4));
+    filter: drop-shadow(0 0 60px rgba(168, 85, 247, 0.5));
   }
 
-  .focus-hero-title {
+  .fom-hero-title {
     letter-spacing: -0.03em;
   }
 
-  .featured-card,
-  .focus-card {
+  /* Tool/Agent cards — icon-based, no image */
+  .fom-tool-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fom-tool-card:hover {
+    border-color: rgba(168, 85, 247, 0.35);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(168, 85, 247, 0.1) inset;
+    transform: translateY(-3px);
+  }
+
+  .fom-tool-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--icon-color) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--icon-color) 20%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    color: var(--icon-color);
+    transition: all 0.3s;
+  }
+
+  .fom-tool-card:hover .fom-tool-icon {
+    background: color-mix(in srgb, var(--icon-color) 18%, transparent);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--icon-color) 25%, transparent);
+  }
+
+  .fom-agent-link:hover {
+    box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
+  }
+
+  /* Standard image cards (guides, skills) */
+  .fom-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(20px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .featured-card {
-    border-color: rgba(168, 85, 247, 0.15);
-  }
-
-  .agent-link:hover {
-    box-shadow: 0 0 16px rgba(168, 85, 247, 0.15);
-  }
-
-  .featured-card:hover,
-  .focus-card:hover {
+  .fom-card:hover {
     border-color: rgba(168, 85, 247, 0.3);
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(168, 85, 247, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      0 0 0 1px rgba(168, 85, 247, 0.1) inset;
     transform: translateY(-4px);
   }
-
 </style>
