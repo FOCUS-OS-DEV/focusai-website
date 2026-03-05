@@ -144,54 +144,25 @@ const stats = [
         <form id="hero-form" class="space-y-4">
           <div>
             <label for="hero-firstName" class="block text-sm text-[#b0b0c0] mb-1.5">שם פרטי *</label>
-            <input type="text" name="firstName" id="hero-firstName" required placeholder="שם פרטי"
+            <input type="text" name="firstName" id="hero-firstName" required placeholder="שם פרטי" pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"} title="שם פרטי - אותיות בלבד, 2-50 תווים"
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
           </div>
           <div>
             <label for="hero-lastName" class="block text-sm text-[#b0b0c0] mb-1.5">שם משפחה *</label>
-            <input type="text" name="lastName" id="hero-lastName" required placeholder="שם משפחה"
+            <input type="text" name="lastName" id="hero-lastName" required placeholder="שם משפחה" pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"} title="שם משפחה - אותיות בלבד, 2-50 תווים"
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label for="hero-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
-              <input type="email" name="email" id="hero-email" required placeholder="email@company.com" dir="ltr"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
             <div>
               <label for="hero-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
               <input type="tel" name="phone" id="hero-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel" pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="hero-company" class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
-              <input type="text" name="company" id="hero-company" placeholder="שם החברה"
+              <label for="hero-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
+              <input type="email" name="email" id="hero-email" required placeholder="email@company.com" dir="ltr"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-            <div>
-              <label for="hero-role" class="block text-sm text-[#b0b0c0] mb-1.5">תפקיד</label>
-              <input type="text" name="role" id="hero-role" placeholder="התפקיד שלך"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
-          </div>
-          <div>
-            <label for="hero-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
-            <select name="employees" id="hero-employees"
-              class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white/80 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
-              <option value="" class="bg-[#12121a]">בחרו טווח</option>
-              <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
-              <option value="11-50" class="bg-[#12121a]">11-50 עובדים</option>
-              <option value="51-200" class="bg-[#12121a]">51-200 עובדים</option>
-              <option value="201-500" class="bg-[#12121a]">201-500 עובדים</option>
-              <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
-            </select>
-          </div>
-          <div>
-            <label for="hero-message" class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
-            <textarea name="message" id="hero-message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
-              class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
           <div class="flex items-start gap-3">
             <input type="checkbox" name="privacy" required id="hero-privacy"
@@ -652,49 +623,25 @@ const stats = [
         <form id="contact-form" class="space-y-4">
           <div>
             <label for="contact-firstName" class="block text-sm text-[#b0b0c0] mb-1.5">שם פרטי *</label>
-            <input type="text" name="firstName" id="contact-firstName" required placeholder="שם פרטי"
+            <input type="text" name="firstName" id="contact-firstName" required placeholder="שם פרטי" pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"} title="שם פרטי - אותיות בלבד, 2-50 תווים"
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
           </div>
           <div>
             <label for="contact-lastName" class="block text-sm text-[#b0b0c0] mb-1.5">שם משפחה *</label>
-            <input type="text" name="lastName" id="contact-lastName" required placeholder="שם משפחה"
+            <input type="text" name="lastName" id="contact-lastName" required placeholder="שם משפחה" pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"} title="שם משפחה - אותיות בלבד, 2-50 תווים"
               class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label for="contact-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
-              <input type="email" name="email" id="contact-email" required placeholder="email@company.com" dir="ltr"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
-            </div>
             <div>
               <label for="contact-phone" class="block text-sm text-[#b0b0c0] mb-1.5">טלפון *</label>
               <input type="tel" name="phone" id="contact-phone" required placeholder="05X-XXX-XXXX" dir="ltr" inputmode="tel" pattern="0[2-9][0-9\-\s]{7,11}" title="מספר טלפון ישראלי תקין, לדוגמה: 052-1234567"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="contact-company" class="block text-sm text-[#b0b0c0] mb-1.5">חברה / ארגון</label>
-              <input type="text" name="company" id="contact-company" placeholder="שם החברה"
+              <label for="contact-email" class="block text-sm text-[#b0b0c0] mb-1.5">אימייל *</label>
+              <input type="email" name="email" id="contact-email" required placeholder="email@company.com" dir="ltr"
                 class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all" />
             </div>
-            <div>
-              <label for="contact-employees" class="block text-sm text-[#b0b0c0] mb-1.5">מספר עובדים</label>
-              <select name="employees" id="contact-employees"
-                class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white/80 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all appearance-none workshop-select">
-                <option value="" class="bg-[#12121a]">בחרו טווח</option>
-                <option value="1-10" class="bg-[#12121a]">1-10 עובדים</option>
-                <option value="11-50" class="bg-[#12121a]">11-50 עובדים</option>
-                <option value="51-200" class="bg-[#12121a]">51-200 עובדים</option>
-                <option value="201-500" class="bg-[#12121a]">201-500 עובדים</option>
-                <option value="500+" class="bg-[#12121a]">500+ עובדים</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label for="contact-message" class="block text-sm text-[#b0b0c0] mb-1.5">הודעה</label>
-            <textarea name="message" id="contact-message" rows="3" placeholder="ספרו לנו קצת על הארגון והצרכים שלכם..."
-              class="w-full min-h-[48px] px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white placeholder-white/50 focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/30 outline-none transition-all resize-none"></textarea>
           </div>
           <div class="flex items-start gap-3">
             <input type="checkbox" name="privacy" required id="ws-contact-privacy"
@@ -771,14 +718,12 @@ const stats = [
           }
         }
 
-        // email (validate only if filled)
+        // email (required)
         var email = form.querySelector('[name="email"]');
-        if (email && email.value.trim()) {
-          if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email.value.trim())) {
-            email.classList.add('error');
-            if (!firstErrorEl) firstErrorEl = email;
-            hasError = true;
-          }
+        if (email && (!email.value.trim() || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email.value.trim()))) {
+          email.classList.add('error');
+          if (!firstErrorEl) firstErrorEl = email;
+          hasError = true;
         }
 
         // privacy checkbox
@@ -830,17 +775,17 @@ const stats = [
           var formData = new FormData(form);
           var fn = (formData.get('firstName') || '').toString().trim();
           var ln = (formData.get('lastName') || '').toString().trim();
-          var data = {};
-          formData.forEach(function(value, key) {
-            if (!['terms','consent','privacy','firstName','lastName','marketing'].includes(key)) data[key] = value;
-          });
-          data.firstName = fn;
-          data.lastName = ln;
-          data.name = (fn + ' ' + ln).trim();
           var mktCheckbox = form.querySelector('input[name="marketing"]');
-          data.marketing_consent = mktCheckbox && mktCheckbox.checked ? 'yes' : 'no';
-          data.source = 'ai-workshop';
-          data.timestamp = new Date().toISOString();
+          var data = {
+            firstName: fn,
+            lastName: ln,
+            name: (fn + ' ' + ln).trim(),
+            phone: (formData.get('phone') || '').toString().trim().replace(/[-\s]/g, ''),
+            email: (formData.get('email') || '').toString().trim(),
+            marketing_consent: mktCheckbox && mktCheckbox.checked ? 'yes' : 'no',
+            source: 'ai-workshop',
+            timestamp: new Date().toISOString()
+          };
 
           fetch(WEBHOOK_URL, {
             method: 'POST',

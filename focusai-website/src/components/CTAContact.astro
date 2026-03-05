@@ -40,13 +40,6 @@ const quickStats = [
   { code: "SECURE", text: "פרטיות מובטחת" },
 ];
 
-const interestOptions = [
-  { value: "ai-agent", label: "נציג AI לעסק", code: "AI_AGENT" },
-  { value: "bot-camp", label: "Bot-Camp - הכשרה מקצועית", code: "BOT_CAMP" },
-  { value: "ai-first", label: "AI First", code: "AI_FIRST" },
-  { value: "workshop", label: "סדנה לארגון", code: "WORKSHOP" },
-  { value: "other", label: "משהו אחר", code: "OTHER" },
-];
 ---
 
 <section id="contact" class="py-12 md:py-16 relative overflow-hidden bg-[#0a0a0f]" data-section>
@@ -117,6 +110,8 @@ const interestOptions = [
                     id="cta-firstName"
                     name="firstName"
                     required
+                    pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"}
+                    title="שם פרטי - אותיות בלבד, 2-50 תווים"
                     class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#a855f7]/15 text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
                     placeholder="שם פרטי_"
                   />
@@ -134,6 +129,8 @@ const interestOptions = [
                     id="cta-lastName"
                     name="lastName"
                     required
+                    pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"}
+                    title="שם משפחה - אותיות בלבד, 2-50 תווים"
                     class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#a855f7]/15 text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
                     placeholder="שם משפחה_"
                   />
@@ -164,7 +161,7 @@ const interestOptions = [
 
               <div class="form-group">
                 <label for="cta-email" class="block font-mono text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2">
-                  <span class="text-[#b0b0c0]">[OPT]</span> אימייל
+                  <span class="text-[#b0b0c0]">[REQ]</span> אימייל
                 </label>
                 <div class="relative">
                   <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#a855f7] font-mono">&gt;</span>
@@ -172,48 +169,11 @@ const interestOptions = [
                     type="email"
                     id="cta-email"
                     name="email"
+                    required
                     class="w-full pl-10 pr-4 py-3.5 bg-[#0a0a0f] border border-[#a855f7]/15 text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 rounded-xl"
                     placeholder="email@example.com_"
                   />
                 </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="interest" class="block font-mono text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2">
-                <span class="text-[#b0b0c0]">[SEL]</span> מה מעניין אתכם?
-              </label>
-              <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#a855f7] font-mono">&gt;</span>
-                <select
-                  id="interest"
-                  name="interest"
-                  class="w-full pl-10 pr-10 py-3.5 bg-[#0a0a0f] border border-[#a855f7]/15 text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 appearance-none cursor-pointer rounded-xl"
-                >
-                  {interestOptions.map((opt) => (
-                    <option value={opt.value}>[{opt.code}] {opt.label}</option>
-                  ))}
-                </select>
-                <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <svg class="w-4 h-4 text-[#b0b0c0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="message" class="block font-mono text-sm font-medium text-[#a855f7] uppercase tracking-wider mb-2">
-                <span class="text-[#b0b0c0]">[OPT]</span> הודעה
-              </label>
-              <div class="relative">
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  class="w-full px-4 py-3.5 bg-[#0a0a0f] border border-[#a855f7]/15 text-[#f5f5fa] font-mono text-base focus:outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 resize-none rounded-xl"
-                  placeholder="// ספרו לנו על מה שאתם מחפשים..."
-                ></textarea>
               </div>
             </div>
 
@@ -360,9 +320,7 @@ const interestOptions = [
     check(lastNameEl, !!lastNameEl?.value.trim() && nameRe.test(lastNameEl.value.trim()));
     const phoneClean = (phoneEl?.value || '').replace(/[-\s]/g, '');
     check(phoneEl, /^0[2-9]\d{7,8}$/.test(phoneClean));
-    if (emailEl?.value.trim()) {
-      check(emailEl, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value));
-    }
+    check(emailEl, !!emailEl?.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim()));
     check(privacyEl, !!privacyEl?.checked);
     const marketingEl = form.querySelector('[name="marketing"]') as HTMLInputElement;
     check(marketingEl, !!marketingEl?.checked);
@@ -379,14 +337,13 @@ const interestOptions = [
 
     const formData = new FormData(form);
     const params = new URLSearchParams();
+    params.append('firstName', (formData.get('firstName') || '').toString().trim());
+    params.append('lastName', (formData.get('lastName') || '').toString().trim());
+    params.append('phone', (formData.get('phone') || '').toString().trim().replace(/[-\s]/g, ''));
+    params.append('email', (formData.get('email') || '').toString().trim());
     params.append('source', form.dataset.source || 'homepage-contact');
     const marketingCheckbox = form.querySelector('input[name="marketing"]') as HTMLInputElement;
     params.append('marketing_consent', marketingCheckbox?.checked ? 'yes' : 'no');
-    formData.forEach((value, key) => {
-      if (key !== 'consent' && key !== 'privacy' && key !== 'marketing') {
-        params.append(key, value.toString());
-      }
-    });
 
     try {
       const controller = new AbortController();
