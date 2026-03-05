@@ -16,7 +16,7 @@ const formatFeatures = [
 ];
 ---
 
-<section class="py-12 md:py-16 relative z-[1] overflow-hidden bg-gradient-to-b from-[#f8f4ff] to-white">
+<section class="py-12 md:py-16 relative z-[1] overflow-hidden bg-[#f8f4ff]">
   <!-- Background -->
   <div class="absolute inset-0">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#a855f7]/8 rounded-full blur-[150px]"></div>
@@ -51,7 +51,7 @@ const formatFeatures = [
         <!-- Format Features -->
         <div class="grid grid-cols-2 gap-4 mb-10" data-animate="fade-up" data-delay="0.3">
           {formatFeatures.map((feature) => (
-            <div class="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm border border-[#e0d4f7] rounded-xl hover:border-[#a855f7]/40 transition-colors shadow-sm">
+            <div class="flex items-center gap-3 p-4 bg-white backdrop-blur-sm border border-[#e0d4f7] rounded-xl hover:border-[#a855f7]/40 transition-colors shadow-sm">
               <div class="w-10 h-10 rounded-lg bg-[#a855f7]/10 flex items-center justify-center">
                 {feature.icon === "users" && (
                   <svg class="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
