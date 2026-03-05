@@ -218,7 +218,7 @@ focusai-website/
 ### Standalone Pages (own HTML, no BaseLayout)
 | Route | Description |
 |-------|-------------|
-| `/ai-fullstack` | AI Fullstack Builder course landing page |
+| `/ai-dev` | AI Dev course landing page (130 hours, Claude Code + VS Code) |
 | `/webinar-n8n-agent` | Webinar: Build first AI agent with N8N |
 | `/content-automation-course` | Free course: Content automation with AI |
 | `/content-automation-watch` | Watch content automation webinar |
@@ -240,6 +240,7 @@ focusai-website/
 ### Draft Pages (not routed)
 | Route | Description |
 |-------|-------------|
+| `_drafts/ai-builder-scroll` | AI Builder scroll page (old `/ai-fullstack`, redirects to `/ai-dev`) |
 | `/academy/_drafts/ai-ready` | AI Ready course (REMOVED from site) |
 | `/academy/_drafts/ai-first` | AI First course |
 
@@ -248,7 +249,7 @@ focusai-website/
 - **Blog path is `/ai-news/`** (NOT `/blog/`) — collection folder is `content/ai-news/`
 - **Standalone pages** MUST include Analytics + AnalyticsBody components
 - **AI First card** is hidden on mobile in homepage (`hidden lg:block`)
-- **Redirects** configured in astro.config.mjs: `/ai-tools` → `/tools`, `/services/ai-agents` → `/ai-agents`
+- **Redirects** configured in astro.config.mjs: `/ai-tools` → `/tools`, `/services/ai-agents` → `/ai-agents`, `/ai-fullstack` → `/ai-dev`
 
 ---
 
@@ -580,42 +581,99 @@ Full guide: `.claude/skills/copywriting/SKILL.md` — invoke with `/copywriting`
 
 ### PRIMARY: cPanel (Apache)
 
+cPanel runs Apache with `.htaccess` for security headers. No Node.js on server — static files only.
+Vercel also auto-deploys but is NOT the primary target.
+
+### Git Workflow (MANDATORY)
+
+#### Branch-Based Development
+**NEVER work directly on main.** Every task gets its own branch:
+
 ```
-1. npm run build          ← MANDATORY! cPanel doesn't build!
-2. git add src/ dist/     ← ALWAYS include dist/!
-3. git commit + push
-4. User pulls from Git in cPanel
-5. Site live at focusai.co.il
+feature/<name>    — new page or feature
+fix/<name>        — bug fix
+content/<name>    — new blog article
+copy/<name>       — text/copy changes
 ```
 
-**CRITICAL:**
-- `dist/` MUST be included in every commit
-- cPanel runs Apache with `.htaccess` for security headers
-- No Node.js on server - static files only
-- Vercel also auto-deploys but is NOT the primary target
+#### Working on a Branch
+```bash
+git checkout main && git pull origin main
+git checkout -b feature/<name>
+# ... work ...
+git add src/pages/my-page.astro
+git commit -m "feat: add my page"       # conventional commit format enforced!
+```
+- Pre-commit hook **skips build** on feature branches (ESLint only)
+- **NEVER commit dist/ on feature branches**
+
+#### Merging & Deploying
+```bash
+git checkout main
+git pull origin main
+git merge feature/<name> --no-ff
+npm run build
+git add dist/ src/
+git commit -m "build: merge feature/<name>"
+git push origin main
+git push backup main                    # always sync backup
+git branch -d feature/<name>
+git push origin --delete feature/<name>
+```
+If push fails (another session pushed first): `git pull origin main` → rebuild → push again.
+
+#### Deploy Script (multiple branches)
+```bash
+./scripts/deploy.sh feature/page-a feature/page-b
+```
+Merges all branches, builds, pushes to origin + backup, cleans up.
+
+#### Conventional Commits (enforced by commit-msg hook)
+```
+feat: new feature or page
+fix: bug fix
+build: build/deploy changes
+content: new blog article
+copy: text/copy changes
+refactor: code restructuring
+style: visual/CSS changes
+docs: documentation
+test: testing
+chore: maintenance
+```
+Format: `type: description` or `type(scope): description`
 
 ### Git Remotes & Backup
 
 | Remote | URL | Purpose |
 |--------|-----|---------|
 | `origin` | `github.com/FOCUS-OS-DEV/focusai-website.git` | Primary (cPanel pulls from here) |
-| `backup` | `github.com/FOCUS-OS-DEV/focusai-backup.git` | Mirror backup (private) |
+| `backup` | `github.com/FOCUS-OS-DEV/focusai-backup.git` | Mirror backup |
 
-**After important pushes**, sync backup:
+**Always push to backup after pushing to origin:**
 ```bash
 git push backup main --tags
 ```
 
 ### Version Tags
 
-- `v1.0-stable` — Production snapshot (2026-03-01)
-- Create new tags after major milestones: `git tag -a v1.x-description -m "message"`
-- Push tags: `git push origin --tags && git push backup --tags`
+| Tag | Description |
+|-----|-------------|
+| `v1.0-stable` | Production snapshot (2026-03-01) |
+| `v1.1` | Git workflow + parallel dev support (2026-03-05) |
+
+After significant deploys:
+```bash
+git tag -a v1.X -m "Description"
+git push origin v1.X && git push backup v1.X
+```
+Convention: `v1.X` = feature additions, `v1.X.Y` = bug fixes
 
 ### Git Safety
 
-- **Force push blocked** by local pre-push hook (`.claude/hooks/pre-push-verify.sh`)
-- **Branch protection** requires GitHub Pro for private repos (not currently enabled)
+- **GitHub branch protection active** — main cannot be force-pushed or deleted (ruleset `protect-main`)
+- **Commit message validation** — commit-msg hook enforces conventional commit format
+- **Pre-commit hook** — ESLint on all branches, build only on main
 - **No secrets in repo** — `.env` excluded via `.gitignore`
 - Repo is **public** (required for cPanel pull without token — no Terminal access on host)
 - **No Terminal access on cPanel** — if deploy breaks, the only fix is delete & re-clone the repo in cPanel
