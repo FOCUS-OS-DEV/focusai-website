@@ -735,9 +735,9 @@ const serviceSchema = {
             </label>
           </div>
           <div class="flex items-start gap-2 text-right">
-            <input type="checkbox" id="svc-agents-marketing" name="marketing" class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <input type="checkbox" id="svc-agents-marketing" name="marketing" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
             <label for="svc-agents-marketing" class="text-xs text-white/50">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
             </label>
           </div>
 
@@ -814,6 +814,9 @@ const serviceSchema = {
     }
 
     if (!privacyCheckbox.checked) { privacyCheckbox.classList.add('error'); errors.push(privacyCheckbox); }
+
+    const marketingCheckbox = form.querySelector('[name="marketing"]') as HTMLInputElement;
+    if (!marketingCheckbox.checked) { marketingCheckbox.classList.add('error'); errors.push(marketingCheckbox); }
 
     if (errors.length > 0) { errors[0].focus(); return; }
     // --- End Validation ---

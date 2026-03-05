@@ -639,9 +639,9 @@ const faqSchema = {
             </label>
           </div>
           <div class="flex items-start gap-3 text-right">
-            <input type="checkbox" id="agents-marketing" name="marketing" class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <input type="checkbox" id="agents-marketing" name="marketing" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
             <label for="agents-marketing" class="text-xs text-white/50 leading-relaxed cursor-pointer">
-              אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
             </label>
           </div>
 
@@ -698,6 +698,8 @@ const faqSchema = {
     check(phEl, /^0[2-9]\d{7,8}$/.test(phoneClean));
     if (emEl?.value.trim()) check(emEl, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emEl.value));
     check(prEl, !!prEl?.checked);
+    const mkEl = agentsForm.querySelector('[name="marketing"]') as HTMLInputElement;
+    check(mkEl, !!mkEl?.checked);
     if (!valid) return;
 
     const btn = agentsForm.querySelector('button[type="submit"]') as HTMLButtonElement;

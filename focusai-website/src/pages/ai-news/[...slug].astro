@@ -346,9 +346,9 @@ const ctaConfig = {
                 </label>
               </div>
               <div class="flex items-start gap-3 text-right">
-                <input type="checkbox" id="article-marketing" name="marketing" class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+                <input type="checkbox" id="article-marketing" name="marketing" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
                 <label for="article-marketing" class="text-xs text-white/50 leading-relaxed cursor-pointer">
-                  אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+                  אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
                 </label>
               </div>
 
@@ -614,6 +614,11 @@ const ctaConfig = {
     // Validate privacy checkbox
     if (!privacyCheckbox || !privacyCheckbox.checked) {
       if (privacyCheckbox) { privacyCheckbox.classList.add('error'); errors.push(privacyCheckbox); }
+    }
+    // Validate marketing checkbox
+    var marketingCheckbox = form.querySelector('[name="marketing"]');
+    if (!marketingCheckbox || !marketingCheckbox.checked) {
+      if (marketingCheckbox) { marketingCheckbox.classList.add('error'); errors.push(marketingCheckbox); }
     }
 
     if (errors.length > 0) {

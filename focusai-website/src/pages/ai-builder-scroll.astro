@@ -560,7 +560,7 @@ input[type="checkbox"].error {
         <option value="zoom">מסלול Zoom (מרחוק)</option>
       </select>
       <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(224,224,232,.6)"><input type="checkbox" name="privacy" required style="accent-color:#a855f7;width:16px;height:16px;flex-shrink:0"/>מאשר/ת את <a href="/privacy-policy" target="_blank" style="color:#a855f7;text-decoration:underline">מדיניות הפרטיות</a></label>
-      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(224,224,232,.6)"><input type="checkbox" name="marketing" style="accent-color:#a855f7;width:16px;height:16px;flex-shrink:0"/>אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.</label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(224,224,232,.6)"><input type="checkbox" name="marketing" required style="accent-color:#a855f7;width:16px;height:16px;flex-shrink:0"/>אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *</label>
       <button type="submit" class="cta-btn" id="ctaBtn">שלחו לי פרטים</button>
     </form>
     <div class="form-success" id="formSuccess">
@@ -710,6 +710,8 @@ document.addEventListener('DOMContentLoaded', function() {
       check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
     }
     check(priv, priv && priv.checked);
+    var mkt = form.querySelector('[name="marketing"]');
+    check(mkt, mkt && mkt.checked);
     if (!valid) return;
 
     btn.disabled = true;

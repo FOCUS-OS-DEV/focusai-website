@@ -222,9 +222,9 @@ const courses = [
               </label>
             </div>
             <div class="flex items-start gap-2 text-right">
-              <input type="checkbox" id="academy-consult-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
+              <input type="checkbox" id="academy-consult-marketing" name="marketing" required class="mt-1 accent-[#a855f7]"/>
               <label for="academy-consult-marketing" class="text-xs text-white/50">
-                אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI. ניתן לבטל בכל עת.
+                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
               </label>
             </div>
 
@@ -674,6 +674,9 @@ const courses = [
 
     // Privacy checkbox must be checked
     check(privacyCheckbox, !!privacyCheckbox?.checked);
+    // Marketing checkbox must be checked
+    const marketingCheckbox = academyForm.querySelector('input[name="marketing"]') as HTMLInputElement;
+    check(marketingCheckbox, !!marketingCheckbox?.checked);
 
     if (!valid) return;
     // --- End Validation ---
@@ -685,7 +688,6 @@ const courses = [
     const formData = new FormData(academyForm);
     const params = new URLSearchParams();
     params.append('source', 'homepage-academy-consult');
-    const marketingCheckbox = academyForm.querySelector('input[name="marketing"]') as HTMLInputElement;
     params.append('marketing_consent', marketingCheckbox?.checked ? 'yes' : 'no');
     formData.forEach((value, key) => {
       if (key !== 'consent' && key !== 'privacy' && key !== 'marketing') {

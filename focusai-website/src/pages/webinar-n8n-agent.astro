@@ -1848,9 +1848,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         </span>
                     </label>
                     <label class="checkbox-group">
-                        <input type="checkbox" id="marketingConsent2" name="marketing">
+                        <input type="checkbox" id="marketingConsent2" name="marketing" required>
                         <span class="checkbox-label">
-                            אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת.
+                            אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
                         </span>
                     </label>
                 </div>
@@ -2071,9 +2071,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                             </span>
                         </label>
                         <label class="checkbox-group">
-                            <input type="checkbox" id="marketingConsent" name="marketing">
+                            <input type="checkbox" id="marketingConsent" name="marketing" required>
                             <span class="checkbox-label">
-                                אני מסכים/ה לקבל עדכונים ותוכן שיווקי בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת.
+                                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
                             </span>
                         </label>
                     </div>
@@ -2321,6 +2321,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 if (!firstErrorField) firstErrorField = privacyConsent;
             }
 
+            var marketingConsentEl = document.getElementById('marketingConsent');
+            if (marketingConsentEl && !marketingConsentEl.checked) {
+                marketingConsentEl.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = marketingConsentEl;
+            }
+
             if (hasError) {
                 if (firstErrorField) firstErrorField.focus();
                 return;
@@ -2475,6 +2482,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 privacyConsent2.classList.add('error');
                 hasError = true;
                 if (!firstErrorField) firstErrorField = privacyConsent2;
+            }
+
+            var marketingConsentEl2 = document.getElementById('marketingConsent2');
+            if (marketingConsentEl2 && !marketingConsentEl2.checked) {
+                marketingConsentEl2.classList.add('error');
+                hasError = true;
+                if (!firstErrorField) firstErrorField = marketingConsentEl2;
             }
 
             if (hasError) {

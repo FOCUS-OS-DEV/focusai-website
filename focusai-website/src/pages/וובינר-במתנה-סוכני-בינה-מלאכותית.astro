@@ -1235,7 +1235,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         <label class="checkbox-group">
                             <input type="checkbox" id="marketingConsent" name="marketingConsent" required>
                             <span class="checkbox-label">
-                                אני מסכים/ה לקבל עדכונים, טיפים ותוכן בנושאי AI באימייל, SMS ו/או WhatsApp. ניתן לבטל בכל עת. *
+                                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
                             </span>
                         </label>
                     </div>
@@ -1423,13 +1423,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
             }
             check(priv, priv && priv.checked);
+            var mkt = document.getElementById('marketingConsent');
+            check(mkt, mkt && mkt.checked);
             if (!valid) return;
-
-            var marketingConsent = document.getElementById('marketingConsent');
-            if (!marketingConsent.checked) {
-                alert('יש לאשר קבלת עדכונים כדי להמשיך');
-                return;
-            }
 
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
