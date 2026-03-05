@@ -6,7 +6,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import DisplayCards from '../components/ui/display-cards';
+import GlowingToolsGrid from '../components/ui/glowing-tools-grid';
 import GlowingCardsGrid from '../components/ui/glowing-cards-grid';
 
 const pageTitle = "Focus on ME | מרכז ההדרכה של Focus AI";
@@ -114,11 +114,7 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">כלים וסוכנים</span>
         </div>
 
-        <div class="flex min-h-[320px] w-full items-center justify-center py-8">
-          <div class="w-full max-w-3xl">
-            <DisplayCards client:load />
-          </div>
-        </div>
+        <GlowingToolsGrid client:load />
       </div>
     </section>
 
