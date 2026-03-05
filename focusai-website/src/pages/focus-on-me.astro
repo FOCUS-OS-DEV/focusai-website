@@ -6,30 +6,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import DisplayCards from '../components/ui/display-cards';
 
 const pageTitle = "Focus on ME | מרכז ההדרכה של Focus AI";
 const pageDescription = "הצעד הראשון שלכם לעולם ה-AI והאוטומציות. כלים, סוכנים, מדריכים חינמיים וחבילות סקילים, הכל במקום אחד.";
-
-const tools = [
-  {
-    title: 'מרכז כלי AI',
-    description: 'כלי ה-AI המומלצים שלנו. סיננו, חיפשו ובחרו את הכלי המתאים לכם',
-    href: '/tools',
-    cta: 'לכלי AI',
-    icon: 'fas fa-wand-magic-sparkles',
-    color: '#a855f7',
-  },
-  {
-    title: 'סוכני AI חכמים',
-    description: 'סוכני AI מבית Focus AI, בחרו פלטפורמה והתחילו לעבוד',
-    icon: 'fas fa-robot',
-    color: '#06b6d4',
-    links: [
-      { label: 'Prompt Master V3', platform: 'ChatGPT', href: 'https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3' },
-      { label: 'Prompt Master Gemini', platform: 'Gemini', href: 'https://gemini.google.com/gem/c9c0363a0699?usp=sharing' },
-    ],
-  },
-];
 
 const guides = [
   {
@@ -124,7 +104,7 @@ const skills = [
     </section>
 
     <!-- ============================================ -->
-    <!-- TOOLS & AGENTS (open layout, no cards)        -->
+    <!-- TOOLS & AGENTS (stacked display cards)        -->
     <!-- ============================================ -->
     <section class="relative pb-10">
       <div class="container mx-auto px-4 max-w-5xl">
@@ -133,51 +113,9 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">כלים וסוכנים</span>
         </div>
 
-        <div class="flex flex-col gap-6">
-          <!-- AI Tools Hub -->
-          <a href="/tools" class="fom-tool-row group">
-            <div class="fom-icon-bubble fom-icon-purple">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-bold text-white group-hover:text-[#c084fc] transition-colors">מרכז כלי AI</h3>
-              <p class="text-sm text-[#b0b0c0]/70">כלי ה-AI המומלצים שלנו. סיננו, חיפשו ובחרו את הכלי המתאים לכם</p>
-            </div>
-            <span class="fom-row-arrow">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-            </span>
-          </a>
-
-          <!-- AI Agents -->
-          <div class="fom-tool-row">
-            <div class="fom-icon-bubble fom-icon-cyan">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="10" rx="2"/>
-                <circle cx="12" cy="5" r="3"/>
-                <circle cx="9" cy="16" r="1" fill="currentColor"/>
-                <circle cx="15" cy="16" r="1" fill="currentColor"/>
-                <path d="M10 19h4"/>
-              </svg>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-bold text-white mb-2">סוכני AI חכמים</h3>
-              <div class="flex flex-wrap gap-2">
-                <a href="https://chatgpt.com/g/g-68c7d685d6e081918de17b06b52e8a5e-focus-ai-prompt-master-v3" target="_blank" rel="noopener noreferrer" class="fom-agent-pill group/pill">
-                  <span class="fom-pill-dot" style="background: #10a37f;"></span>
-                  <span class="text-sm text-white/90 group-hover/pill:text-white">Prompt Master V3</span>
-                  <span class="fom-pill-tag">ChatGPT</span>
-                </a>
-                <a href="https://gemini.google.com/gem/c9c0363a0699?usp=sharing" target="_blank" rel="noopener noreferrer" class="fom-agent-pill group/pill">
-                  <span class="fom-pill-dot" style="background: #4285f4;"></span>
-                  <span class="text-sm text-white/90 group-hover/pill:text-white">Prompt Master Gemini</span>
-                  <span class="fom-pill-tag">Gemini</span>
-                </a>
-              </div>
-            </div>
+        <div class="flex min-h-[320px] w-full items-center justify-center py-8">
+          <div class="w-full max-w-3xl">
+            <DisplayCards client:load />
           </div>
         </div>
       </div>
@@ -288,112 +226,6 @@ const skills = [
 
   .fom-hero-title {
     letter-spacing: -0.03em;
-  }
-
-  /* Tool rows — open layout, no card borders */
-  .fom-tool-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 24px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  a.fom-tool-row:hover {
-    background: rgba(168, 85, 247, 0.04);
-  }
-
-  .fom-icon-bubble {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.3s;
-  }
-
-  .fom-icon-purple {
-    background: rgba(168, 85, 247, 0.12);
-    color: #c084fc;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
-  }
-
-  .fom-icon-cyan {
-    background: rgba(6, 182, 212, 0.12);
-    color: #22d3ee;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
-  }
-
-  a.fom-tool-row:hover .fom-icon-bubble {
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
-    transform: scale(1.05);
-  }
-
-  .fom-row-arrow {
-    color: rgba(168, 85, 247, 0.4);
-    transition: all 0.3s;
-    flex-shrink: 0;
-  }
-
-  a.fom-tool-row:hover .fom-row-arrow {
-    color: #a855f7;
-    transform: translateX(-4px);
-  }
-
-  /* Agent pills — inline clickable tags */
-  .fom-agent-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    text-decoration: none;
-    transition: all 0.25s ease;
-  }
-
-  .fom-agent-pill:hover {
-    border-color: rgba(168, 85, 247, 0.3);
-    background: rgba(168, 85, 247, 0.06);
-    box-shadow: 0 0 16px rgba(168, 85, 247, 0.1);
-    transform: translateY(-1px);
-  }
-
-  .fom-pill-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .fom-pill-tag {
-    font-size: 10px;
-    font-family: ui-monospace, monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: rgba(168, 85, 247, 0.7);
-    padding: 2px 6px;
-    border-radius: 6px;
-    background: rgba(168, 85, 247, 0.08);
-  }
-
-  @media (max-width: 640px) {
-    .fom-tool-row {
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: right;
-      gap: 12px;
-      padding: 16px;
-    }
-    .fom-row-arrow { display: none; }
-    .fom-agent-pill { width: 100%; }
   }
 
   /* Standard image cards (guides, skills) */
