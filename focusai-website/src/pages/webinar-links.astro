@@ -6,7 +6,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="וובינר Live — לינקים למשתתפים | Focus AI" description="לינקים למשתתפי הוובינר של Focus AI">
+<BaseLayout title="וובינר לבניית סוכן AI ב-N8N | Focus AI" description="צפו בהקלטת הוובינר — בניית סוכן AI ב-N8N + כל הלינקים למשתתפים">
   <meta slot="head" name="robots" content="noindex, nofollow" />
 
   <div class="min-h-screen bg-[#0a0a0f] text-white" dir="rtl">
@@ -19,18 +19,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <!-- Hero -->
-    <section class="pt-8 pb-10 text-center px-4">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 mb-6">
-        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-        <span class="text-xs font-bold text-red-400 uppercase tracking-wider">LIVE — 04.03.2026</span>
+    <section class="pt-8 pb-6 text-center px-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#a855f7]/15 border border-[#a855f7]/30 mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse"></span>
+        <span class="text-xs font-bold text-[#a855f7] uppercase tracking-wider">הקלטת וובינר</span>
       </div>
       <h1 class="text-4xl sm:text-5xl font-black mb-3 leading-tight">
-        וובינר <span class="webinar-gradient">סוכן AI ב-N8N</span>
+        וובינר <span class="webinar-gradient">בניית סוכן AI ב-N8N</span>
       </h1>
-      <p class="text-lg text-[#b0b0c0] max-w-xl mx-auto">
-        כל הלינקים שתצטרכו — במקום אחד
+      <p class="text-lg text-[#b0b0c0] max-w-xl mx-auto mb-8">
+        הוובינר המלא + כל הלינקים שתצטרכו — במקום אחד
       </p>
+
+      <!-- Vimeo Video -->
+      <div class="max-w-3xl mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/1170459350?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="וובינר: בונים סוכן AI בלייב"></iframe>
+        </div>
+      </div>
     </section>
+    <script is:inline src="https://player.vimeo.com/api/player.js"></script>
 
     <!-- Main content -->
     <div class="max-w-2xl mx-auto px-4 pb-20 space-y-6">
@@ -185,19 +193,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </a>
             <p id="btn-status" class="text-xs text-[#b0b0c0]/40 mt-3 font-mono"></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─── Recording note ─── -->
-      <div class="link-card !border-[#f59e0b]/20 relative">
-        <div class="flex items-center gap-4">
-          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#f59e0b]/15 border border-[#f59e0b]/20 flex items-center justify-center">
-            <svg class="w-6 h-6 text-[#f59e0b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" /></svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h3 class="text-base font-bold text-[#f59e0b]">הקלטת הוובינר</h3>
-            <p class="text-sm text-[#b0b0c0]/70">ההקלטה של סוכן ה-AI תעלה לכאן בקרוב — שמרו את העמוד הזה</p>
           </div>
         </div>
       </div>
