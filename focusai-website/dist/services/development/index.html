@@ -101,14 +101,76 @@
     return 'desktop';
   }
 
-  function getUTM() {
+  // --- Ad tracking: persist UTMs + click IDs in sessionStorage ---
+  var TRACKING_KEY = 'fai_tracking';
+
+  function getURLParams() {
     var params = new URLSearchParams(window.location.search);
     return {
       utm_source: params.get('utm_source') || null,
       utm_medium: params.get('utm_medium') || null,
       utm_campaign: params.get('utm_campaign') || null,
       utm_content: params.get('utm_content') || null,
-      utm_term: params.get('utm_term') || null
+      utm_term: params.get('utm_term') || null,
+      fbclid: params.get('fbclid') || null,
+      gclid: params.get('gclid') || null
+    };
+  }
+
+  function buildFbc(fbclid) {
+    // Meta fbc format: fb.1.{timestamp_ms}.{fbclid}
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function persistTracking() {
+    try {
+      var urlParams = getURLParams();
+      var hasNewParams = Object.keys(urlParams).some(function(k) { return urlParams[k] !== null; });
+
+      // Load existing tracking data
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+      // If URL has new ad params, overwrite (last-touch attribution)
+      if (hasNewParams) {
+        Object.keys(urlParams).forEach(function(k) {
+          if (urlParams[k] !== null) stored[k] = urlParams[k];
+        });
+
+        // Build fbc from fbclid if we got a new one
+        if (urlParams.fbclid) {
+          stored.fbc = buildFbc(urlParams.fbclid);
+        }
+      }
+
+      // Read _fbp cookie (set by Meta Pixel) — update each page load
+      var fbp = getCookie('_fbp');
+      if (fbp) stored.fbp = fbp;
+
+      // Read _fbc cookie (set by Meta Pixel from fbclid) — fallback
+      var fbc = getCookie('_fbc');
+      if (fbc && !stored.fbc) stored.fbc = fbc;
+
+      sessionStorage.setItem(TRACKING_KEY, JSON.stringify(stored));
+      return stored;
+    } catch(e) { return {}; }
+  }
+
+  // Run on every page load — persist params before they're lost on navigation
+  var trackingData = persistTracking();
+
+  function getUTM() {
+    return {
+      utm_source: trackingData.utm_source || null,
+      utm_medium: trackingData.utm_medium || null,
+      utm_campaign: trackingData.utm_campaign || null,
+      utm_content: trackingData.utm_content || null,
+      utm_term: trackingData.utm_term || null
     };
   }
 
@@ -186,6 +248,35 @@
       click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
     });
   });
+
+  // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
+  // Usage: var data = window.__fai_getTracking();
+  window.__fai_getTracking = function() {
+    // Re-read from sessionStorage (may have been updated by Meta Pixel since page load)
+    var fresh = {};
+    try { fresh = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+    // Update fbp from cookie (Pixel may have set it after our initial read)
+    var fbp = getCookie('_fbp');
+    if (fbp) fresh.fbp = fbp;
+
+    return {
+      utm_source: fresh.utm_source || null,
+      utm_medium: fresh.utm_medium || null,
+      utm_campaign: fresh.utm_campaign || null,
+      utm_content: fresh.utm_content || null,
+      utm_term: fresh.utm_term || null,
+      fbclid: fresh.fbclid || null,
+      gclid: fresh.gclid || null,
+      fbc: fresh.fbc || null,
+      fbp: fresh.fbp || null,
+      session_id: sid,
+      device_type: getDeviceType(),
+      referrer: document.referrer || null,
+      page_url: window.location.href,
+      user_agent: navigator.userAgent
+    };
+  };
 })();
 </script><!-- Page-specific head content --><link rel="stylesheet" href="/_astro/about.B4fLOYSv.css">
 <link rel="stylesheet" href="/_astro/about.i6MaJk1e.css">
@@ -545,4 +636,4 @@ const id = "tw-dev";
         });
       });
     });
-  </script> <!-- Scripts slot for page-specific scripts -->  </body></html>  <script type="module">const g="https://focusai.app.n8n.cloud/webhook/contact-form",e=document.getElementById("dev-form");e?.querySelectorAll("input, select, textarea").forEach(s=>{s.addEventListener("focus",()=>s.classList.remove("error"))});e?.addEventListener("submit",async s=>{s.preventDefault(),e.querySelectorAll(".error").forEach(i=>i.classList.remove("error"));const t=[],n=e.querySelector('[name="firstName"]'),o=e.querySelector('[name="lastName"]'),l=e.querySelector('[name="phone"]'),c=e.querySelector('[name="email"]'),m=e.querySelector('[name="privacy"]'),p=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;(!n.value.trim()||!p.test(n.value.trim()))&&(n.classList.add("error"),t.push(n)),(!o.value.trim()||!p.test(o.value.trim()))&&(o.classList.add("error"),t.push(o));const v=l.value.replace(/[-\s]/g,"");/^0[2-9]\d{7,8}$/.test(v)||(l.classList.add("error"),t.push(l)),c.value.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.value.trim())&&(c.classList.add("error"),t.push(c)),m.checked||(m.classList.add("error"),t.push(m));const u=e.querySelector('[name="marketing"]');if(u.checked||(u.classList.add("error"),t.push(u)),t.length>0){t[0].focus();return}const r=e.querySelector('button[type="submit"]'),k=r?.textContent||"";r&&(r.disabled=!0,r.textContent="שולח...");const d=new FormData(e),f=d.get("firstName")?.toString()||"",h=d.get("lastName")?.toString()||"",a=new URLSearchParams;a.append("source","development-contact"),a.append("firstName",f),a.append("lastName",h),a.append("name",`${f} ${h}`.trim());const S=e.querySelector('input[name="marketing"]');a.append("marketing_consent",S?.checked?"yes":"no"),d.forEach((i,y)=>{["consent","privacy","firstName","lastName","marketing"].includes(y)||a.append(y,i.toString())});try{if(!(await fetch(g,{method:"POST",body:a})).ok)throw new Error("failed")}catch{alert("אירעה שגיאה בשליחת הטופס. אנא נסו שנית."),r&&(r.disabled=!1,r.textContent=k);return}typeof fbq=="function"&&fbq("track","Lead"),window.location.href="/academy/thank-you"});</script>
+  </script> <!-- Scripts slot for page-specific scripts -->  </body></html>  <script type="module" src="/_astro/development.astro_astro_type_script_index_0_lang.DQn7q-dK.js"></script>

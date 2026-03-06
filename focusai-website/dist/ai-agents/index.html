@@ -101,14 +101,76 @@
     return 'desktop';
   }
 
-  function getUTM() {
+  // --- Ad tracking: persist UTMs + click IDs in sessionStorage ---
+  var TRACKING_KEY = 'fai_tracking';
+
+  function getURLParams() {
     var params = new URLSearchParams(window.location.search);
     return {
       utm_source: params.get('utm_source') || null,
       utm_medium: params.get('utm_medium') || null,
       utm_campaign: params.get('utm_campaign') || null,
       utm_content: params.get('utm_content') || null,
-      utm_term: params.get('utm_term') || null
+      utm_term: params.get('utm_term') || null,
+      fbclid: params.get('fbclid') || null,
+      gclid: params.get('gclid') || null
+    };
+  }
+
+  function buildFbc(fbclid) {
+    // Meta fbc format: fb.1.{timestamp_ms}.{fbclid}
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function persistTracking() {
+    try {
+      var urlParams = getURLParams();
+      var hasNewParams = Object.keys(urlParams).some(function(k) { return urlParams[k] !== null; });
+
+      // Load existing tracking data
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+      // If URL has new ad params, overwrite (last-touch attribution)
+      if (hasNewParams) {
+        Object.keys(urlParams).forEach(function(k) {
+          if (urlParams[k] !== null) stored[k] = urlParams[k];
+        });
+
+        // Build fbc from fbclid if we got a new one
+        if (urlParams.fbclid) {
+          stored.fbc = buildFbc(urlParams.fbclid);
+        }
+      }
+
+      // Read _fbp cookie (set by Meta Pixel) — update each page load
+      var fbp = getCookie('_fbp');
+      if (fbp) stored.fbp = fbp;
+
+      // Read _fbc cookie (set by Meta Pixel from fbclid) — fallback
+      var fbc = getCookie('_fbc');
+      if (fbc && !stored.fbc) stored.fbc = fbc;
+
+      sessionStorage.setItem(TRACKING_KEY, JSON.stringify(stored));
+      return stored;
+    } catch(e) { return {}; }
+  }
+
+  // Run on every page load — persist params before they're lost on navigation
+  var trackingData = persistTracking();
+
+  function getUTM() {
+    return {
+      utm_source: trackingData.utm_source || null,
+      utm_medium: trackingData.utm_medium || null,
+      utm_campaign: trackingData.utm_campaign || null,
+      utm_content: trackingData.utm_content || null,
+      utm_term: trackingData.utm_term || null
     };
   }
 
@@ -186,6 +248,35 @@
       click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
     });
   });
+
+  // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
+  // Usage: var data = window.__fai_getTracking();
+  window.__fai_getTracking = function() {
+    // Re-read from sessionStorage (may have been updated by Meta Pixel since page load)
+    var fresh = {};
+    try { fresh = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+    // Update fbp from cookie (Pixel may have set it after our initial read)
+    var fbp = getCookie('_fbp');
+    if (fbp) fresh.fbp = fbp;
+
+    return {
+      utm_source: fresh.utm_source || null,
+      utm_medium: fresh.utm_medium || null,
+      utm_campaign: fresh.utm_campaign || null,
+      utm_content: fresh.utm_content || null,
+      utm_term: fresh.utm_term || null,
+      fbclid: fresh.fbclid || null,
+      gclid: fresh.gclid || null,
+      fbc: fresh.fbc || null,
+      fbp: fresh.fbp || null,
+      session_id: sid,
+      device_type: getDeviceType(),
+      referrer: document.referrer || null,
+      page_url: window.location.href,
+      user_agent: navigator.userAgent
+    };
+  };
 })();
 </script><!-- Page-specific head content --><link rel="stylesheet" href="/_astro/about.B4fLOYSv.css">
 <link rel="stylesheet" href="/_astro/about.i6MaJk1e.css">
@@ -557,4 +648,4 @@ const id = "tw-agents";
         });
       });
     });
-  </script> <!-- Scripts slot for page-specific scripts -->  </body></html> <script type="module">const E="https://focusai.app.n8n.cloud/webhook/contact-form",e=document.getElementById("agents-form");e?.querySelectorAll("input, select, textarea").forEach(s=>{s.addEventListener("focus",()=>s.classList.remove("error"))});e?.addEventListener("submit",async s=>{s.preventDefault(),e.querySelectorAll(".error").forEach(t=>t.classList.remove("error"));let c=!0;function r(t,o){!o&&t&&(t.classList.add("error"),c&&t.focus(),c=!1)}const i=e.querySelector('[name="firstName"]'),l=e.querySelector('[name="lastName"]'),f=e.querySelector('[name="phone"]'),m=e.querySelector('[name="email"]'),d=e.querySelector('[name="privacy"]'),p=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;r(i,!!i?.value.trim()&&p.test(i.value.trim())),r(l,!!l?.value.trim()&&p.test(l.value.trim()));const v=(f?.value||"").replace(/[-\s]/g,"");r(f,/^0[2-9]\d{7,8}$/.test(v)),m?.value.trim()&&r(m,/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.value)),r(d,!!d?.checked);const y=e.querySelector('[name="marketing"]');if(r(y,!!y?.checked),!c)return;const a=e.querySelector('button[type="submit"]'),S=a?.innerHTML||"";a&&(a.disabled=!0,a.innerHTML='<span class="flex items-center justify-center gap-2">שולח...</span>');const u=new FormData(e),h=(u.get("firstName")||"").toString().trim(),g=(u.get("lastName")||"").toString().trim(),n=new URLSearchParams;n.append("source","ai-agents-contact"),n.append("firstName",h),n.append("lastName",g),n.append("name",(h+" "+g).trim());const k=e.querySelector('input[name="marketing"]');n.append("marketing_consent",k?.checked?"yes":"no"),u.forEach((t,o)=>{["consent","privacy","firstName","lastName","marketing"].includes(o)||n.append(o,t.toString())});try{if(!(await fetch(E,{method:"POST",body:n})).ok)throw new Error("failed")}catch{alert("אירעה שגיאה בשליחת הטופס. אנא נסו שנית."),a&&(a.disabled=!1,a.innerHTML=S);return}typeof fbq=="function"&&fbq("track","Lead"),window.location.href="/academy/thank-you"});</script> 
+  </script> <!-- Scripts slot for page-specific scripts -->  </body></html> <script type="module">const L="https://focusai.app.n8n.cloud/webhook/contact-form",q="https://ueewnvfydrlhyxmbgsus.supabase.co",I="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ",h={version:"v1.0",privacy:"קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.",marketing:"אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת."};function w(i,o){fetch(q+"/rest/v1/"+i,{method:"POST",headers:{"Content-Type":"application/json",apikey:I,Authorization:"Bearer "+I,Prefer:"return=minimal"},body:JSON.stringify(o),keepalive:!0}).catch(()=>{})}const n=document.getElementById("agents-form");n?.querySelectorAll("input, select, textarea").forEach(i=>{i.addEventListener("focus",()=>i.classList.remove("error"))});n?.addEventListener("submit",async i=>{i.preventDefault(),n.querySelectorAll(".error").forEach(a=>a.classList.remove("error"));let o=!0;function c(a,m){!m&&a&&(a.classList.add("error"),o&&a.focus(),o=!1)}const u=n.querySelector('[name="firstName"]'),l=n.querySelector('[name="lastName"]'),y=n.querySelector('[name="phone"]'),p=n.querySelector('[name="email"]'),b=n.querySelector('[name="privacy"]'),v=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;c(u,!!u?.value.trim()&&v.test(u.value.trim())),c(l,!!l?.value.trim()&&v.test(l.value.trim()));const N=(y?.value||"").replace(/[-\s]/g,"");c(y,/^0[2-9]\d{7,8}$/.test(N)),p?.value.trim()&&c(p,/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.value)),c(b,!!b?.checked);const k=n.querySelector('[name="marketing"]');if(c(k,!!k?.checked),!o)return;const r=n.querySelector('button[type="submit"]'),A=r?.innerHTML||"";r&&(r.disabled=!0,r.innerHTML='<span class="flex items-center justify-center gap-2">שולח...</span>');const s=new FormData(n),f=(s.get("firstName")||"").toString().trim(),d=(s.get("lastName")||"").toString().trim(),S=(s.get("email")||"").toString().trim(),E=(s.get("phone")||"").toString().trim(),_=n.querySelector('input[name="marketing"]')?.checked||!1,e=typeof window.__fai_getTracking=="function"?window.__fai_getTracking():{},g=crypto.randomUUID(),t=new URLSearchParams;t.append("source","ai-agents-contact"),t.append("firstName",f),t.append("lastName",d),t.append("name",(f+" "+d).trim()),t.append("marketing_consent",_?"yes":"no"),s.forEach((a,m)=>{["consent","privacy","firstName","lastName","marketing"].includes(m)||t.append(m,a.toString())}),e.utm_source&&t.append("utm_source",e.utm_source),e.utm_medium&&t.append("utm_medium",e.utm_medium),e.utm_campaign&&t.append("utm_campaign",e.utm_campaign),e.utm_content&&t.append("utm_content",e.utm_content),e.utm_term&&t.append("utm_term",e.utm_term),e.fbclid&&t.append("fbclid",e.fbclid),e.gclid&&t.append("gclid",e.gclid),e.fbc&&t.append("fbc",e.fbc),e.fbp&&t.append("fbp",e.fbp),t.append("event_id",g),w("consent_log",{email:S,phone:E||null,consent_privacy:!0,consent_marketing:_,consent_text_version:h.version,consent_privacy_text:h.privacy,consent_marketing_text:h.marketing,form_source:"ai-agents-contact",page_url:window.location.href,user_agent:navigator.userAgent}),w("form_submissions",{first_name:f,last_name:d,email:S,phone:E||null,form_source:"ai-agents-contact",page_url:window.location.href,utm_source:e.utm_source||null,utm_medium:e.utm_medium||null,utm_campaign:e.utm_campaign||null,utm_content:e.utm_content||null,utm_term:e.utm_term||null,fbclid:e.fbclid||null,fbc:e.fbc||null,fbp:e.fbp||null,gclid:e.gclid||null,event_id:g,consent_privacy:!0,consent_marketing:_,user_agent:navigator.userAgent,referrer:e.referrer||null,device_type:e.device_type||null,session_id:e.session_id||null});try{if(!(await fetch(L,{method:"POST",body:t})).ok)throw new Error("failed")}catch{alert("אירעה שגיאה בשליחת הטופס. אנא נסו שנית."),r&&(r.disabled=!1,r.innerHTML=A);return}typeof fbq=="function"&&fbq("track","Lead",{},{eventID:g}),window.location.href="/academy/thank-you"});</script> 

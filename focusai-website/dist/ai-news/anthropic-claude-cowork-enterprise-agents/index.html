@@ -101,14 +101,76 @@
     return 'desktop';
   }
 
-  function getUTM() {
+  // --- Ad tracking: persist UTMs + click IDs in sessionStorage ---
+  var TRACKING_KEY = 'fai_tracking';
+
+  function getURLParams() {
     var params = new URLSearchParams(window.location.search);
     return {
       utm_source: params.get('utm_source') || null,
       utm_medium: params.get('utm_medium') || null,
       utm_campaign: params.get('utm_campaign') || null,
       utm_content: params.get('utm_content') || null,
-      utm_term: params.get('utm_term') || null
+      utm_term: params.get('utm_term') || null,
+      fbclid: params.get('fbclid') || null,
+      gclid: params.get('gclid') || null
+    };
+  }
+
+  function buildFbc(fbclid) {
+    // Meta fbc format: fb.1.{timestamp_ms}.{fbclid}
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function persistTracking() {
+    try {
+      var urlParams = getURLParams();
+      var hasNewParams = Object.keys(urlParams).some(function(k) { return urlParams[k] !== null; });
+
+      // Load existing tracking data
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+      // If URL has new ad params, overwrite (last-touch attribution)
+      if (hasNewParams) {
+        Object.keys(urlParams).forEach(function(k) {
+          if (urlParams[k] !== null) stored[k] = urlParams[k];
+        });
+
+        // Build fbc from fbclid if we got a new one
+        if (urlParams.fbclid) {
+          stored.fbc = buildFbc(urlParams.fbclid);
+        }
+      }
+
+      // Read _fbp cookie (set by Meta Pixel) — update each page load
+      var fbp = getCookie('_fbp');
+      if (fbp) stored.fbp = fbp;
+
+      // Read _fbc cookie (set by Meta Pixel from fbclid) — fallback
+      var fbc = getCookie('_fbc');
+      if (fbc && !stored.fbc) stored.fbc = fbc;
+
+      sessionStorage.setItem(TRACKING_KEY, JSON.stringify(stored));
+      return stored;
+    } catch(e) { return {}; }
+  }
+
+  // Run on every page load — persist params before they're lost on navigation
+  var trackingData = persistTracking();
+
+  function getUTM() {
+    return {
+      utm_source: trackingData.utm_source || null,
+      utm_medium: trackingData.utm_medium || null,
+      utm_campaign: trackingData.utm_campaign || null,
+      utm_content: trackingData.utm_content || null,
+      utm_term: trackingData.utm_term || null
     };
   }
 
@@ -186,6 +248,35 @@
       click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
     });
   });
+
+  // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
+  // Usage: var data = window.__fai_getTracking();
+  window.__fai_getTracking = function() {
+    // Re-read from sessionStorage (may have been updated by Meta Pixel since page load)
+    var fresh = {};
+    try { fresh = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+    // Update fbp from cookie (Pixel may have set it after our initial read)
+    var fbp = getCookie('_fbp');
+    if (fbp) fresh.fbp = fbp;
+
+    return {
+      utm_source: fresh.utm_source || null,
+      utm_medium: fresh.utm_medium || null,
+      utm_campaign: fresh.utm_campaign || null,
+      utm_content: fresh.utm_content || null,
+      utm_term: fresh.utm_term || null,
+      fbclid: fresh.fbclid || null,
+      gclid: fresh.gclid || null,
+      fbc: fresh.fbc || null,
+      fbp: fresh.fbp || null,
+      session_id: sid,
+      device_type: getDeviceType(),
+      referrer: document.referrer || null,
+      page_url: window.location.href,
+      user_agent: navigator.userAgent
+    };
+  };
 })();
 </script><!-- Page-specific head content --><link rel="stylesheet" href="/_astro/about.B4fLOYSv.css">
 <link rel="stylesheet" href="/_astro/about.i6MaJk1e.css">
@@ -602,6 +693,13 @@ const pageUrl = "https://focusai.co.il/ai-news/anthropic-claude-cowork-enterpris
 const ctaFormSource = "blog-article-botcamp";
 const ctaFormInterest = "bot-camp";
 
+  var SB_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+  var C_TEXTS = { version: 'v1.0', privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.', marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.' };
+  function sbInsert(table, data) {
+    fetch(SB_URL + '/rest/v1/' + table, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Prefer': 'return=minimal' }, body: JSON.stringify(data), keepalive: true }).catch(function() {});
+  }
+
   // Contact form handler
   const form = document.getElementById('article-contact-form');
   const successMsg = document.getElementById('article-form-success');
@@ -667,6 +765,13 @@ const ctaFormInterest = "bot-camp";
     const formData = new FormData(form);
     const fn = (formData.get('firstName') || '').toString().trim();
     const ln = (formData.get('lastName') || '').toString().trim();
+    var emailVal = (formData.get('email') || '').toString().trim();
+    var phoneVal = (formData.get('phone') || '').toString().trim();
+    const mktCheckbox = form.querySelector('input[name="marketing"]');
+    var mktConsent = mktCheckbox && mktCheckbox.checked ? true : false;
+    var tracking = typeof window.__fai_getTracking === 'function' ? window.__fai_getTracking() : {};
+    var eventId = crypto.randomUUID();
+
     const params = new URLSearchParams();
     params.append('source', ctaFormSource);
     params.append('article_url', pageUrl);
@@ -674,17 +779,47 @@ const ctaFormInterest = "bot-camp";
     params.append('firstName', fn);
     params.append('lastName', ln);
     params.append('name', (fn + ' ' + ln).trim());
-    const mktCheckbox = form.querySelector('input[name="marketing"]');
-    params.append('marketing_consent', mktCheckbox?.checked ? 'yes' : 'no');
+    params.append('marketing_consent', mktConsent ? 'yes' : 'no');
     formData.forEach((value, key) => {
       if (!['consent','privacy','firstName','lastName','marketing'].includes(key)) {
         params.append(key, value.toString());
       }
     });
+    if (tracking.utm_source) params.append('utm_source', tracking.utm_source);
+    if (tracking.utm_medium) params.append('utm_medium', tracking.utm_medium);
+    if (tracking.utm_campaign) params.append('utm_campaign', tracking.utm_campaign);
+    if (tracking.utm_content) params.append('utm_content', tracking.utm_content);
+    if (tracking.utm_term) params.append('utm_term', tracking.utm_term);
+    if (tracking.fbclid) params.append('fbclid', tracking.fbclid);
+    if (tracking.gclid) params.append('gclid', tracking.gclid);
+    if (tracking.fbc) params.append('fbc', tracking.fbc);
+    if (tracking.fbp) params.append('fbp', tracking.fbp);
+    params.append('event_id', eventId);
+
+    sbInsert('consent_log', {
+      email: emailVal, phone: phoneVal || null,
+      consent_privacy: true, consent_marketing: mktConsent,
+      consent_text_version: C_TEXTS.version,
+      consent_privacy_text: C_TEXTS.privacy,
+      consent_marketing_text: C_TEXTS.marketing,
+      form_source: ctaFormSource, page_url: window.location.href, user_agent: navigator.userAgent
+    });
+    sbInsert('form_submissions', {
+      first_name: fn, last_name: ln, email: emailVal, phone: phoneVal || null,
+      form_source: ctaFormSource, page_url: window.location.href,
+      utm_source: tracking.utm_source || null, utm_medium: tracking.utm_medium || null,
+      utm_campaign: tracking.utm_campaign || null, utm_content: tracking.utm_content || null,
+      utm_term: tracking.utm_term || null,
+      fbclid: tracking.fbclid || null, fbc: tracking.fbc || null, fbp: tracking.fbp || null,
+      gclid: tracking.gclid || null, event_id: eventId,
+      consent_privacy: true, consent_marketing: mktConsent,
+      user_agent: navigator.userAgent, referrer: tracking.referrer || null,
+      device_type: tracking.device_type || null, session_id: tracking.session_id || null
+    });
 
     try {
       await fetch(webhookUrl, { method: 'POST', body: params });
-      if (typeof fbq === 'function') fbq('track', 'Lead');
+      if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
       form.style.display = 'none';
       if (successMsg) successMsg.classList.remove('hidden');
     } catch {

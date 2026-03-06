@@ -110,14 +110,76 @@ window.__meta_pixel_loaded = true;
     return 'desktop';
   }
 
-  function getUTM() {
+  // --- Ad tracking: persist UTMs + click IDs in sessionStorage ---
+  var TRACKING_KEY = 'fai_tracking';
+
+  function getURLParams() {
     var params = new URLSearchParams(window.location.search);
     return {
       utm_source: params.get('utm_source') || null,
       utm_medium: params.get('utm_medium') || null,
       utm_campaign: params.get('utm_campaign') || null,
       utm_content: params.get('utm_content') || null,
-      utm_term: params.get('utm_term') || null
+      utm_term: params.get('utm_term') || null,
+      fbclid: params.get('fbclid') || null,
+      gclid: params.get('gclid') || null
+    };
+  }
+
+  function buildFbc(fbclid) {
+    // Meta fbc format: fb.1.{timestamp_ms}.{fbclid}
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function persistTracking() {
+    try {
+      var urlParams = getURLParams();
+      var hasNewParams = Object.keys(urlParams).some(function(k) { return urlParams[k] !== null; });
+
+      // Load existing tracking data
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+      // If URL has new ad params, overwrite (last-touch attribution)
+      if (hasNewParams) {
+        Object.keys(urlParams).forEach(function(k) {
+          if (urlParams[k] !== null) stored[k] = urlParams[k];
+        });
+
+        // Build fbc from fbclid if we got a new one
+        if (urlParams.fbclid) {
+          stored.fbc = buildFbc(urlParams.fbclid);
+        }
+      }
+
+      // Read _fbp cookie (set by Meta Pixel) — update each page load
+      var fbp = getCookie('_fbp');
+      if (fbp) stored.fbp = fbp;
+
+      // Read _fbc cookie (set by Meta Pixel from fbclid) — fallback
+      var fbc = getCookie('_fbc');
+      if (fbc && !stored.fbc) stored.fbc = fbc;
+
+      sessionStorage.setItem(TRACKING_KEY, JSON.stringify(stored));
+      return stored;
+    } catch(e) { return {}; }
+  }
+
+  // Run on every page load — persist params before they're lost on navigation
+  var trackingData = persistTracking();
+
+  function getUTM() {
+    return {
+      utm_source: trackingData.utm_source || null,
+      utm_medium: trackingData.utm_medium || null,
+      utm_campaign: trackingData.utm_campaign || null,
+      utm_content: trackingData.utm_content || null,
+      utm_term: trackingData.utm_term || null
     };
   }
 
@@ -195,6 +257,35 @@ window.__meta_pixel_loaded = true;
       click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
     });
   });
+
+  // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
+  // Usage: var data = window.__fai_getTracking();
+  window.__fai_getTracking = function() {
+    // Re-read from sessionStorage (may have been updated by Meta Pixel since page load)
+    var fresh = {};
+    try { fresh = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+    // Update fbp from cookie (Pixel may have set it after our initial read)
+    var fbp = getCookie('_fbp');
+    if (fbp) fresh.fbp = fbp;
+
+    return {
+      utm_source: fresh.utm_source || null,
+      utm_medium: fresh.utm_medium || null,
+      utm_campaign: fresh.utm_campaign || null,
+      utm_content: fresh.utm_content || null,
+      utm_term: fresh.utm_term || null,
+      fbclid: fresh.fbclid || null,
+      gclid: fresh.gclid || null,
+      fbc: fresh.fbc || null,
+      fbp: fresh.fbp || null,
+      session_id: sid,
+      device_type: getDeviceType(),
+      referrer: document.referrer || null,
+      page_url: window.location.href,
+      user_agent: navigator.userAgent
+    };
+  };
 })();
 </script><meta name="generator" content="Astro v5.17.1"><link rel="stylesheet" href="/_astro/about.B4fLOYSv.css">
 <link rel="stylesheet" href="/_astro/about.i6MaJk1e.css">
@@ -1018,9 +1109,10 @@ var cg=document.getElementById('cursorGlow'),mx=0,my=0,gx=0,gy=0,hh=window.match
 if(hh)document.querySelectorAll('.tilt-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2;c.style.transform='perspective(800px) rotateX('+((y-cy)/cy*-6)+'deg) rotateY('+((x-cx)/cx*6)+'deg) scale(1.02)';var g=c.querySelector('.card-glow');if(g){g.style.opacity='1';g.style.background='radial-gradient(circle at '+x+'px '+y+'px,rgba(168,85,247,.1),transparent 60%)'}});c.addEventListener('mouseleave',function(){c.style.transform='';var g=c.querySelector('.card-glow');if(g)g.style.opacity='0'})});
 if(hh){var _pc=['0','1'],_colors=['#c084fc','#e9d5ff','#a855f7','#ffffff','#d8b4fe','#f0abfc'];document.querySelectorAll('.magnetic-btn').forEach(function(b){var _sp=false;b.addEventListener('mouseenter',function(){_sp=true;(function loop(){if(!_sp)return;var r=b.getBoundingClientRect(),p=document.createElement('span');p.className='btn-code-particle';p.textContent=_pc[Math.floor(Math.random()*_pc.length)];p.style.color=_colors[Math.floor(Math.random()*_colors.length)];var x=r.left+Math.random()*r.width,y=r.top+Math.random()*r.height;var angle=Math.random()*Math.PI*2,dist=35+Math.random()*55;p.style.left=x+'px';p.style.top=y+'px';p.style.setProperty('--px',(Math.cos(angle)*dist)+'px');p.style.setProperty('--py',(Math.sin(angle)*dist-20)+'px');document.body.appendChild(p);setTimeout(function(){p.remove()},900);setTimeout(loop,35+Math.random()*50)})()});b.addEventListener('mouseleave',function(){_sp=false})})}
 
-var form=document.getElementById('registerForm'),fs=document.getElementById('formSuccess');if(form)form.addEventListener('submit',function(e){e.preventDefault();var v=true;form.querySelectorAll('.form-error').forEach(function(el){el.style.display='none'});form.querySelectorAll('.form-consent-err').forEach(function(el){el.classList.remove('form-consent-err')});var fn=document.getElementById('regFirstName'),ln=document.getElementById('regLastName'),p=document.getElementById('regPhone'),em=document.getElementById('regEmail'),cc=document.getElementById('regPrivacy');var nameRe=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;if(!fn.value.trim()||!nameRe.test(fn.value.trim())){document.getElementById('firstNameError').style.display='block';v=false}if(!ln.value.trim()||!nameRe.test(ln.value.trim())){document.getElementById('lastNameError').style.display='block';v=false}if(!p.value.trim()||!/^0[2-9]\d{7,8}$/.test(p.value.trim().replace(/[\s\-]/g,''))){document.getElementById('phoneError').style.display='block';v=false}if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){document.getElementById('emailError').style.display='block';v=false}if(!cc.checked){document.getElementById('consentError').style.display='block';cc.classList.add('form-consent-err');v=false}var regMkt=document.getElementById('regMarketing');if(regMkt&&!regMkt.checked){regMkt.classList.add('form-consent-err');v=false}if(!v)return;var sb=form.querySelector('.btn-submit');sb.classList.add('loading');sb.textContent='שולח...';fetch('https://focusai.app.n8n.cloud/webhook/ai-dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:fn.value.trim(),lastName:ln.value.trim(),name:fn.value.trim()+' '+ln.value.trim(),phone:p.value.trim(),email:em.value.trim(),source:'ai-dev',marketing_consent:(document.getElementById('regMarketing')&&document.getElementById('regMarketing').checked)?'yes':'no'})}).then(function(r){if(!r.ok)throw new Error('status '+r.status);if(typeof fbq==='function')fbq('track','Lead');window.location.href='/academy/thank-you'}).catch(function(){sb.classList.remove('loading');sb.textContent='רוצה לשמוע עוד';alert('אירעה שגיאה בשליחת הטופס. אנא נסו שוב או צרו קשר בטלפון.')})});
+var _SB='https://ueewnvfydrlhyxmbgsus.supabase.co',_SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ',_CT={v:'v1.0',p:'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.',m:'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.'};function _si(t,d){fetch(_SB+'/rest/v1/'+t,{method:'POST',headers:{'Content-Type':'application/json','apikey':_SK,'Authorization':'Bearer '+_SK,'Prefer':'return=minimal'},body:JSON.stringify(d),keepalive:true}).catch(function(){});}
+var form=document.getElementById('registerForm'),fs=document.getElementById('formSuccess');if(form)form.addEventListener('submit',function(e){e.preventDefault();var v=true;form.querySelectorAll('.form-error').forEach(function(el){el.style.display='none'});form.querySelectorAll('.form-consent-err').forEach(function(el){el.classList.remove('form-consent-err')});var fn=document.getElementById('regFirstName'),ln=document.getElementById('regLastName'),p=document.getElementById('regPhone'),em=document.getElementById('regEmail'),cc=document.getElementById('regPrivacy');var nameRe=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;if(!fn.value.trim()||!nameRe.test(fn.value.trim())){document.getElementById('firstNameError').style.display='block';v=false}if(!ln.value.trim()||!nameRe.test(ln.value.trim())){document.getElementById('lastNameError').style.display='block';v=false}if(!p.value.trim()||!/^0[2-9]\d{7,8}$/.test(p.value.trim().replace(/[\s\-]/g,''))){document.getElementById('phoneError').style.display='block';v=false}if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){document.getElementById('emailError').style.display='block';v=false}if(!cc.checked){document.getElementById('consentError').style.display='block';cc.classList.add('form-consent-err');v=false}var regMkt=document.getElementById('regMarketing');if(regMkt&&!regMkt.checked){regMkt.classList.add('form-consent-err');v=false}if(!v)return;var sb=form.querySelector('.btn-submit');sb.classList.add('loading');sb.textContent='שולח...';var _tr=typeof window.__fai_getTracking==='function'?window.__fai_getTracking():{};var _eid=crypto.randomUUID();var _em=em.value.trim(),_ph=p.value.trim(),_mc=regMkt&&regMkt.checked;_si('consent_log',{email:_em,phone:_ph||null,consent_privacy:true,consent_marketing:_mc,consent_text_version:_CT.v,consent_privacy_text:_CT.p,consent_marketing_text:_CT.m,form_source:'ai-dev',page_url:window.location.href,user_agent:navigator.userAgent});_si('form_submissions',{first_name:fn.value.trim(),last_name:ln.value.trim(),email:_em,phone:_ph||null,form_source:'ai-dev',page_url:window.location.href,utm_source:_tr.utm_source||null,utm_medium:_tr.utm_medium||null,utm_campaign:_tr.utm_campaign||null,utm_content:_tr.utm_content||null,utm_term:_tr.utm_term||null,fbclid:_tr.fbclid||null,fbc:_tr.fbc||null,fbp:_tr.fbp||null,gclid:_tr.gclid||null,event_id:_eid,consent_privacy:true,consent_marketing:_mc,user_agent:navigator.userAgent,referrer:_tr.referrer||null,device_type:_tr.device_type||null,session_id:_tr.session_id||null});fetch('https://focusai.app.n8n.cloud/webhook/ai-dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:fn.value.trim(),lastName:ln.value.trim(),name:fn.value.trim()+' '+ln.value.trim(),phone:_ph,email:_em,source:'ai-dev',marketing_consent:_mc?'yes':'no',utm_source:_tr.utm_source||'',utm_medium:_tr.utm_medium||'',utm_campaign:_tr.utm_campaign||'',event_id:_eid})}).then(function(r){if(!r.ok)throw new Error('status '+r.status);if(typeof fbq==='function')fbq('track','Lead',{},{eventID:_eid});window.location.href='/academy/thank-you'}).catch(function(){sb.classList.remove('loading');sb.textContent='רוצה לשמוע עוד';alert('אירעה שגיאה בשליחת הטופס. אנא נסו שוב או צרו קשר בטלפון.')})});
 /* DEV Terminal Quick Forms */
-document.querySelectorAll('form[id^="devForm"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var fn=f.querySelector('[name="firstName"]'),ln=f.querySelector('[name="lastName"]'),p=f.querySelector('[name="phone"]'),em=f.querySelector('[name="email"]'),cc=f.querySelector('[name="privacy"]'),err=f.parentElement.querySelector('.dev-form-err');f.querySelectorAll('.form-consent-err').forEach(function(el){el.classList.remove('form-consent-err')});var nameRe=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;if(!fn.value.trim()||!nameRe.test(fn.value.trim())||!ln.value.trim()||!nameRe.test(ln.value.trim())||!p.value.trim()||!/^0[2-9]\d{7,8}$/.test(p.value.trim().replace(/[\s\-]/g,''))||!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){err.style.display='block';return}if(!cc.checked){err.style.display='block';err.textContent='// error: נא לאשר את מדיניות הפרטיות';cc.classList.add('form-consent-err');return}var mkt=f.querySelector('[name="marketing"]');if(mkt&&!mkt.checked){err.style.display='block';err.textContent='// error: נא לאשר קבלת דיוור';mkt.classList.add('form-consent-err');return}err.style.display='none';var btn=f.querySelector('.dev-form-submit');btn.classList.add('loading');btn.textContent='$ sending...';fetch('https://focusai.app.n8n.cloud/webhook/ai-dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:fn.value.trim(),lastName:ln.value.trim(),name:fn.value.trim()+' '+ln.value.trim(),phone:p.value.trim(),email:em.value.trim(),source:'ai-dev-quick',marketing_consent:(f.querySelector('[name="marketing"]')&&f.querySelector('[name="marketing"]').checked)?'yes':'no'})}).then(function(r){if(!r.ok)throw new Error('err');if(typeof fbq==='function')fbq('track','Lead');window.location.href='/academy/thank-you'}).catch(function(){btn.classList.remove('loading');btn.textContent='$ submit --save-my-spot';alert('שגיאה בשליחה. נסו שוב.')})})});
+document.querySelectorAll('form[id^="devForm"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var fn=f.querySelector('[name="firstName"]'),ln=f.querySelector('[name="lastName"]'),p=f.querySelector('[name="phone"]'),em=f.querySelector('[name="email"]'),cc=f.querySelector('[name="privacy"]'),err=f.parentElement.querySelector('.dev-form-err');f.querySelectorAll('.form-consent-err').forEach(function(el){el.classList.remove('form-consent-err')});var nameRe=/^[\u0590-\u05FFa-zA-Z\s'\-]{2,50}$/;if(!fn.value.trim()||!nameRe.test(fn.value.trim())||!ln.value.trim()||!nameRe.test(ln.value.trim())||!p.value.trim()||!/^0[2-9]\d{7,8}$/.test(p.value.trim().replace(/[\s\-]/g,''))||!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){err.style.display='block';return}if(!cc.checked){err.style.display='block';err.textContent='// error: נא לאשר את מדיניות הפרטיות';cc.classList.add('form-consent-err');return}var mkt=f.querySelector('[name="marketing"]');if(mkt&&!mkt.checked){err.style.display='block';err.textContent='// error: נא לאשר קבלת דיוור';mkt.classList.add('form-consent-err');return}err.style.display='none';var btn=f.querySelector('.dev-form-submit');btn.classList.add('loading');btn.textContent='$ sending...';var _tr2=typeof window.__fai_getTracking==='function'?window.__fai_getTracking():{};var _eid2=crypto.randomUUID();var _em2=em.value.trim(),_ph2=p.value.trim(),_mc2=mkt&&mkt.checked;_si('consent_log',{email:_em2,phone:_ph2||null,consent_privacy:true,consent_marketing:_mc2,consent_text_version:_CT.v,consent_privacy_text:_CT.p,consent_marketing_text:_CT.m,form_source:'ai-dev-quick',page_url:window.location.href,user_agent:navigator.userAgent});_si('form_submissions',{first_name:fn.value.trim(),last_name:ln.value.trim(),email:_em2,phone:_ph2||null,form_source:'ai-dev-quick',page_url:window.location.href,utm_source:_tr2.utm_source||null,utm_medium:_tr2.utm_medium||null,utm_campaign:_tr2.utm_campaign||null,utm_content:_tr2.utm_content||null,utm_term:_tr2.utm_term||null,fbclid:_tr2.fbclid||null,fbc:_tr2.fbc||null,fbp:_tr2.fbp||null,gclid:_tr2.gclid||null,event_id:_eid2,consent_privacy:true,consent_marketing:_mc2,user_agent:navigator.userAgent,referrer:_tr2.referrer||null,device_type:_tr2.device_type||null,session_id:_tr2.session_id||null});fetch('https://focusai.app.n8n.cloud/webhook/ai-dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:fn.value.trim(),lastName:ln.value.trim(),name:fn.value.trim()+' '+ln.value.trim(),phone:_ph2,email:_em2,source:'ai-dev-quick',marketing_consent:_mc2?'yes':'no',utm_source:_tr2.utm_source||'',utm_medium:_tr2.utm_medium||'',utm_campaign:_tr2.utm_campaign||'',event_id:_eid2})}).then(function(r){if(!r.ok)throw new Error('err');if(typeof fbq==='function')fbq('track','Lead',{},{eventID:_eid2});window.location.href='/academy/thank-you'}).catch(function(){btn.classList.remove('loading');btn.textContent='$ submit --save-my-spot';alert('שגיאה בשליחה. נסו שוב.')})})});
 /* Hero floating code particles */
 (function(){
 var hero=document.getElementById('heroSection');if(!hero)return;

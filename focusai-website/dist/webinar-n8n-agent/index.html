@@ -110,14 +110,76 @@
     return 'desktop';
   }
 
-  function getUTM() {
+  // --- Ad tracking: persist UTMs + click IDs in sessionStorage ---
+  var TRACKING_KEY = 'fai_tracking';
+
+  function getURLParams() {
     var params = new URLSearchParams(window.location.search);
     return {
       utm_source: params.get('utm_source') || null,
       utm_medium: params.get('utm_medium') || null,
       utm_campaign: params.get('utm_campaign') || null,
       utm_content: params.get('utm_content') || null,
-      utm_term: params.get('utm_term') || null
+      utm_term: params.get('utm_term') || null,
+      fbclid: params.get('fbclid') || null,
+      gclid: params.get('gclid') || null
+    };
+  }
+
+  function buildFbc(fbclid) {
+    // Meta fbc format: fb.1.{timestamp_ms}.{fbclid}
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function persistTracking() {
+    try {
+      var urlParams = getURLParams();
+      var hasNewParams = Object.keys(urlParams).some(function(k) { return urlParams[k] !== null; });
+
+      // Load existing tracking data
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+      // If URL has new ad params, overwrite (last-touch attribution)
+      if (hasNewParams) {
+        Object.keys(urlParams).forEach(function(k) {
+          if (urlParams[k] !== null) stored[k] = urlParams[k];
+        });
+
+        // Build fbc from fbclid if we got a new one
+        if (urlParams.fbclid) {
+          stored.fbc = buildFbc(urlParams.fbclid);
+        }
+      }
+
+      // Read _fbp cookie (set by Meta Pixel) — update each page load
+      var fbp = getCookie('_fbp');
+      if (fbp) stored.fbp = fbp;
+
+      // Read _fbc cookie (set by Meta Pixel from fbclid) — fallback
+      var fbc = getCookie('_fbc');
+      if (fbc && !stored.fbc) stored.fbc = fbc;
+
+      sessionStorage.setItem(TRACKING_KEY, JSON.stringify(stored));
+      return stored;
+    } catch(e) { return {}; }
+  }
+
+  // Run on every page load — persist params before they're lost on navigation
+  var trackingData = persistTracking();
+
+  function getUTM() {
+    return {
+      utm_source: trackingData.utm_source || null,
+      utm_medium: trackingData.utm_medium || null,
+      utm_campaign: trackingData.utm_campaign || null,
+      utm_content: trackingData.utm_content || null,
+      utm_term: trackingData.utm_term || null
     };
   }
 
@@ -195,6 +257,35 @@
       click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
     });
   });
+
+  // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
+  // Usage: var data = window.__fai_getTracking();
+  window.__fai_getTracking = function() {
+    // Re-read from sessionStorage (may have been updated by Meta Pixel since page load)
+    var fresh = {};
+    try { fresh = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+    // Update fbp from cookie (Pixel may have set it after our initial read)
+    var fbp = getCookie('_fbp');
+    if (fbp) fresh.fbp = fbp;
+
+    return {
+      utm_source: fresh.utm_source || null,
+      utm_medium: fresh.utm_medium || null,
+      utm_campaign: fresh.utm_campaign || null,
+      utm_content: fresh.utm_content || null,
+      utm_term: fresh.utm_term || null,
+      fbclid: fresh.fbclid || null,
+      gclid: fresh.gclid || null,
+      fbc: fresh.fbc || null,
+      fbp: fresh.fbp || null,
+      session_id: sid,
+      device_type: getDeviceType(),
+      referrer: document.referrer || null,
+      page_url: window.location.href,
+      user_agent: navigator.userAgent
+    };
+  };
 })();
 </script><link rel="stylesheet" href="/_astro/webinar-n8n-agent.CD0B5OSH.css"></head> <body data-astro-cid-mwnra3ok> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <div class="bg-animation" data-astro-cid-mwnra3ok></div> <div class="particles" id="particles" data-astro-cid-mwnra3ok></div> <div class="container" data-astro-cid-mwnra3ok> <a href="/" class="back-home" data-astro-cid-mwnra3ok><i class="fas fa-arrow-right" data-astro-cid-mwnra3ok></i> חזרה לאתר Focus AI</a> <header data-astro-cid-mwnra3ok> <a href="/" data-astro-cid-mwnra3ok> <img src="https://res.cloudinary.com/dfudxxzlj/image/upload/v1765265415/2_fxdcio.png" alt="Focus AI" class="logo" data-astro-cid-mwnra3ok> </a> <div class="live-badge" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: 0 4px 20px var(--glow-primary); animation: none;" data-astro-cid-mwnra3ok> <i class="fas fa-play-circle" style="font-size: 1rem;" data-astro-cid-mwnra3ok></i>
 מדריך חינם
@@ -261,4 +352,4 @@ Focus AI
 </div> <div class="disclaimer-text" data-astro-cid-mwnra3ok>
 התכנים במדריך הינם למטרות לימודיות בלבד ואינם מהווים הבטחה לתוצאות. המידע האישי נשמר במאגר מידע רשום בהתאם לחוק הגנת הפרטיות ותיקון 13 (התשפ"ד-2024). בהשארת הפרטים הינך מאשר/ת את שמירת פרטיך ושליחת תוכן רלוונטי. עומדות לך זכויות עיון, תיקון ומחיקה — פנה אלינו בכל עת.
 </div> <div class="social-links" data-astro-cid-mwnra3ok> <a href="https://www.instagram.com/focus.creative.ai?igsh=MTNocXhlZ2wxNzVocQ==" target="_blank" rel="noopener noreferrer" class="social-link" data-astro-cid-mwnra3ok> <i class="fab fa-instagram" data-astro-cid-mwnra3ok></i> </a> <a href="https://www.facebook.com/people/Focus-AI-%D7%9E%D7%97%D7%91%D7%A8%D7%99%D7%9D-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%95%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94/61577639435714/" target="_blank" rel="noopener noreferrer" class="social-link" data-astro-cid-mwnra3ok> <i class="fab fa-facebook-f" data-astro-cid-mwnra3ok></i> </a> <a href="https://www.tiktok.com/@focus.creative.ai?_r=1&_t=ZS-91pOOO3WDdh" target="_blank" rel="noopener noreferrer" class="social-link" data-astro-cid-mwnra3ok> <i class="fab fa-tiktok" data-astro-cid-mwnra3ok></i> </a> </div> <div class="footer-links" data-astro-cid-mwnra3ok> <a href="/privacy-policy/" target="_blank" data-astro-cid-mwnra3ok><i class="fas fa-lock" data-astro-cid-mwnra3ok></i> מדיניות פרטיות</a> <a href="/terms/" target="_blank" data-astro-cid-mwnra3ok><i class="fas fa-file-contract" data-astro-cid-mwnra3ok></i> תנאי שימוש</a> <a href="https://wa.me/972539466408" target="_blank" rel="noopener noreferrer" data-astro-cid-mwnra3ok><i class="fab fa-whatsapp" data-astro-cid-mwnra3ok></i> צור קשר</a> <a href="mailto:office@focusai.co.il" data-astro-cid-mwnra3ok><i class="fas fa-envelope" data-astro-cid-mwnra3ok></i> office@focusai.co.il</a> </div> </div> </div> <!-- Success Overlay (shown briefly before redirect) --> <div class="success-overlay" id="successOverlay" data-astro-cid-mwnra3ok> <div class="success-card" data-astro-cid-mwnra3ok> <div class="success-icon" data-astro-cid-mwnra3ok> <i class="fas fa-check" data-astro-cid-mwnra3ok></i> </div> <h2 class="success-title" data-astro-cid-mwnra3ok>הפרטים התקבלו!</h2> <p class="success-message" data-astro-cid-mwnra3ok>
-מעבירים אתכם לצפייה במדריך...<br data-astro-cid-mwnra3ok> <small style="opacity: 0.7;" data-astro-cid-mwnra3ok>שלחנו לכם גם מייל עם הקישור</small> </p> </div> </div> <script type="module" src="/_astro/webinar-n8n-agent.astro_astro_type_script_index_0_lang.Uc0ijcvW.js"></script> </body> </html>
+מעבירים אתכם לצפייה במדריך...<br data-astro-cid-mwnra3ok> <small style="opacity: 0.7;" data-astro-cid-mwnra3ok>שלחנו לכם גם מייל עם הקישור</small> </p> </div> </div> <script type="module" src="/_astro/webinar-n8n-agent.astro_astro_type_script_index_0_lang.Ck9ZOI-3.js"></script> </body> </html>

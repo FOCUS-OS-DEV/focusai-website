@@ -679,6 +679,12 @@ const stats = [
       // Form Submission
       // ========================
       var WEBHOOK_URL = 'https://focusai.app.n8n.cloud/webhook/contact-form';
+      var SB_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+      var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+      var CONSENT_TEXTS = { version: 'v1.0', privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.', marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.' };
+      function sbInsert(table, data) {
+        fetch(SB_URL + '/rest/v1/' + table, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Prefer': 'return=minimal' }, body: JSON.stringify(data), keepalive: true }).catch(function() {});
+      }
 
       function validateForm(form) {
         // Clear all previous errors
@@ -775,17 +781,54 @@ const stats = [
           var formData = new FormData(form);
           var fn = (formData.get('firstName') || '').toString().trim();
           var ln = (formData.get('lastName') || '').toString().trim();
+          var emailVal = (formData.get('email') || '').toString().trim();
+          var phoneVal = (formData.get('phone') || '').toString().trim().replace(/[-\s]/g, '');
           var mktCheckbox = form.querySelector('input[name="marketing"]');
+          var mktConsent = mktCheckbox && mktCheckbox.checked ? true : false;
+          var tracking = typeof window.__fai_getTracking === 'function' ? window.__fai_getTracking() : {};
+          var eventId = crypto.randomUUID();
+
           var data = {
             firstName: fn,
             lastName: ln,
             name: (fn + ' ' + ln).trim(),
-            phone: (formData.get('phone') || '').toString().trim().replace(/[-\s]/g, ''),
-            email: (formData.get('email') || '').toString().trim(),
-            marketing_consent: mktCheckbox && mktCheckbox.checked ? 'yes' : 'no',
+            phone: phoneVal,
+            email: emailVal,
+            marketing_consent: mktConsent ? 'yes' : 'no',
             source: 'ai-workshop',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            utm_source: tracking.utm_source || '',
+            utm_medium: tracking.utm_medium || '',
+            utm_campaign: tracking.utm_campaign || '',
+            utm_content: tracking.utm_content || '',
+            utm_term: tracking.utm_term || '',
+            fbclid: tracking.fbclid || '',
+            gclid: tracking.gclid || '',
+            fbc: tracking.fbc || '',
+            fbp: tracking.fbp || '',
+            event_id: eventId
           };
+
+          sbInsert('consent_log', {
+            email: emailVal, phone: phoneVal || null,
+            consent_privacy: true, consent_marketing: mktConsent,
+            consent_text_version: CONSENT_TEXTS.version,
+            consent_privacy_text: CONSENT_TEXTS.privacy,
+            consent_marketing_text: CONSENT_TEXTS.marketing,
+            form_source: 'ai-workshop', page_url: window.location.href, user_agent: navigator.userAgent
+          });
+          sbInsert('form_submissions', {
+            first_name: fn, last_name: ln, email: emailVal, phone: phoneVal || null,
+            form_source: 'ai-workshop', page_url: window.location.href,
+            utm_source: tracking.utm_source || null, utm_medium: tracking.utm_medium || null,
+            utm_campaign: tracking.utm_campaign || null, utm_content: tracking.utm_content || null,
+            utm_term: tracking.utm_term || null,
+            fbclid: tracking.fbclid || null, fbc: tracking.fbc || null, fbp: tracking.fbp || null,
+            gclid: tracking.gclid || null, event_id: eventId,
+            consent_privacy: true, consent_marketing: mktConsent,
+            user_agent: navigator.userAgent, referrer: tracking.referrer || null,
+            device_type: tracking.device_type || null, session_id: tracking.session_id || null
+          });
 
           fetch(WEBHOOK_URL, {
             method: 'POST',
@@ -795,7 +838,7 @@ const stats = [
           .then(function(response) {
             if (!response.ok) throw new Error('Network response was not ok');
             // Fire Meta Pixel Lead event
-            if (typeof fbq === 'function') fbq('track', 'Lead');
+            if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
             // Success
             statusEl.classList.remove('hidden', 'text-red-400');
             statusEl.classList.add('text-green-400');

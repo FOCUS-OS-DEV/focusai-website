@@ -2228,6 +2228,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             name: /^[\u0590-\u05FFa-zA-Z\s'\-]{2,30}$/
         };
 
+        var SB_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+        var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+        var C_TEXTS = { version: 'v1.0', privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.', marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.' };
+        function sbInsert(table, data) {
+            fetch(SB_URL + '/rest/v1/' + table, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Prefer': 'return=minimal' }, body: JSON.stringify(data), keepalive: true }).catch(function() {});
+        }
+
         // Validation function using .error class
         function validateField(field, pattern) {
             var value = field.value.trim().replace(/[-\s]/g, '');
@@ -2339,14 +2346,46 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             submitBtn.disabled = true;
 
             var marketingEl = document.getElementById('marketingConsent');
+            var mktConsent = marketingEl && marketingEl.checked ? true : false;
+            var tracking = typeof window.__fai_getTracking === 'function' ? window.__fai_getTracking() : {};
+            var eventId = crypto.randomUUID();
+            var emailVal = email.value.trim();
+            var phoneVal = phone.value.trim().replace(/[-\s]/g, '');
+
             var formData = {
                 firstName: firstName.value.trim(),
                 lastName: lastName.value.trim(),
                 fullName: firstName.value.trim() + ' ' + lastName.value.trim(),
-                email: email.value.trim(),
-                phone: phone.value.trim().replace(/[-\s]/g, ''),
-                marketing_consent: marketingEl && marketingEl.checked ? 'yes' : 'no',
+                email: emailVal,
+                phone: phoneVal,
+                marketing_consent: mktConsent ? 'yes' : 'no',
+                utm_source: tracking.utm_source || '',
+                utm_medium: tracking.utm_medium || '',
+                utm_campaign: tracking.utm_campaign || '',
+                event_id: eventId
             };
+
+            sbInsert('consent_log', {
+                email: emailVal, phone: phoneVal || null,
+                consent_privacy: true, consent_marketing: mktConsent,
+                consent_text_version: C_TEXTS.version,
+                consent_privacy_text: C_TEXTS.privacy,
+                consent_marketing_text: C_TEXTS.marketing,
+                form_source: 'webinar-n8n-agent', page_url: window.location.href, user_agent: navigator.userAgent
+            });
+            sbInsert('form_submissions', {
+                first_name: firstName.value.trim(), last_name: lastName.value.trim(),
+                email: emailVal, phone: phoneVal || null,
+                form_source: 'webinar-n8n-agent', page_url: window.location.href,
+                utm_source: tracking.utm_source || null, utm_medium: tracking.utm_medium || null,
+                utm_campaign: tracking.utm_campaign || null, utm_content: tracking.utm_content || null,
+                utm_term: tracking.utm_term || null,
+                fbclid: tracking.fbclid || null, fbc: tracking.fbc || null, fbp: tracking.fbp || null,
+                gclid: tracking.gclid || null, event_id: eventId,
+                consent_privacy: true, consent_marketing: mktConsent,
+                user_agent: navigator.userAgent, referrer: tracking.referrer || null,
+                device_type: tracking.device_type || null, session_id: tracking.session_id || null
+            });
 
             try {
                 var response = await fetch('https://focusai.app.n8n.cloud/webhook/webinar-n8n-agent', {
@@ -2373,6 +2412,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     throw new Error(errorMessage);
                 }
 
+                if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
                 window.location.href = '/webinar-links/';
 
             } catch (error) {
@@ -2502,14 +2542,46 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             submitBtn2.disabled = true;
 
             var marketingEl2 = document.getElementById('marketingConsent2');
+            var mktConsent2 = marketingEl2 && marketingEl2.checked ? true : false;
+            var tracking2 = typeof window.__fai_getTracking === 'function' ? window.__fai_getTracking() : {};
+            var eventId2 = crypto.randomUUID();
+            var emailVal2 = email2.value.trim();
+            var phoneVal2 = phone2.value.trim().replace(/[-\s]/g, '');
+
             var formData = {
                 firstName: firstName2.value.trim(),
                 lastName: lastName2.value.trim(),
                 fullName: firstName2.value.trim() + ' ' + lastName2.value.trim(),
-                email: email2.value.trim(),
-                phone: phone2.value.trim().replace(/[-\s]/g, ''),
-                marketing_consent: marketingEl2 && marketingEl2.checked ? 'yes' : 'no',
+                email: emailVal2,
+                phone: phoneVal2,
+                marketing_consent: mktConsent2 ? 'yes' : 'no',
+                utm_source: tracking2.utm_source || '',
+                utm_medium: tracking2.utm_medium || '',
+                utm_campaign: tracking2.utm_campaign || '',
+                event_id: eventId2
             };
+
+            sbInsert('consent_log', {
+                email: emailVal2, phone: phoneVal2 || null,
+                consent_privacy: true, consent_marketing: mktConsent2,
+                consent_text_version: C_TEXTS.version,
+                consent_privacy_text: C_TEXTS.privacy,
+                consent_marketing_text: C_TEXTS.marketing,
+                form_source: 'webinar-n8n-agent', page_url: window.location.href, user_agent: navigator.userAgent
+            });
+            sbInsert('form_submissions', {
+                first_name: firstName2.value.trim(), last_name: lastName2.value.trim(),
+                email: emailVal2, phone: phoneVal2 || null,
+                form_source: 'webinar-n8n-agent', page_url: window.location.href,
+                utm_source: tracking2.utm_source || null, utm_medium: tracking2.utm_medium || null,
+                utm_campaign: tracking2.utm_campaign || null, utm_content: tracking2.utm_content || null,
+                utm_term: tracking2.utm_term || null,
+                fbclid: tracking2.fbclid || null, fbc: tracking2.fbc || null, fbp: tracking2.fbp || null,
+                gclid: tracking2.gclid || null, event_id: eventId2,
+                consent_privacy: true, consent_marketing: mktConsent2,
+                user_agent: navigator.userAgent, referrer: tracking2.referrer || null,
+                device_type: tracking2.device_type || null, session_id: tracking2.session_id || null
+            });
 
             try {
                 var response = await fetch('https://focusai.app.n8n.cloud/webhook/webinar-n8n-agent', {
@@ -2531,6 +2603,7 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     throw new Error(errorMessage);
                 }
 
+                if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId2 });
                 window.location.href = '/webinar-links/';
 
             } catch (error) {

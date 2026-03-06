@@ -101,14 +101,76 @@
     return 'desktop';
   }
 
-  function getUTM() {
+  // --- Ad tracking: persist UTMs + click IDs in sessionStorage ---
+  var TRACKING_KEY = 'fai_tracking';
+
+  function getURLParams() {
     var params = new URLSearchParams(window.location.search);
     return {
       utm_source: params.get('utm_source') || null,
       utm_medium: params.get('utm_medium') || null,
       utm_campaign: params.get('utm_campaign') || null,
       utm_content: params.get('utm_content') || null,
-      utm_term: params.get('utm_term') || null
+      utm_term: params.get('utm_term') || null,
+      fbclid: params.get('fbclid') || null,
+      gclid: params.get('gclid') || null
+    };
+  }
+
+  function buildFbc(fbclid) {
+    // Meta fbc format: fb.1.{timestamp_ms}.{fbclid}
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function persistTracking() {
+    try {
+      var urlParams = getURLParams();
+      var hasNewParams = Object.keys(urlParams).some(function(k) { return urlParams[k] !== null; });
+
+      // Load existing tracking data
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+      // If URL has new ad params, overwrite (last-touch attribution)
+      if (hasNewParams) {
+        Object.keys(urlParams).forEach(function(k) {
+          if (urlParams[k] !== null) stored[k] = urlParams[k];
+        });
+
+        // Build fbc from fbclid if we got a new one
+        if (urlParams.fbclid) {
+          stored.fbc = buildFbc(urlParams.fbclid);
+        }
+      }
+
+      // Read _fbp cookie (set by Meta Pixel) — update each page load
+      var fbp = getCookie('_fbp');
+      if (fbp) stored.fbp = fbp;
+
+      // Read _fbc cookie (set by Meta Pixel from fbclid) — fallback
+      var fbc = getCookie('_fbc');
+      if (fbc && !stored.fbc) stored.fbc = fbc;
+
+      sessionStorage.setItem(TRACKING_KEY, JSON.stringify(stored));
+      return stored;
+    } catch(e) { return {}; }
+  }
+
+  // Run on every page load — persist params before they're lost on navigation
+  var trackingData = persistTracking();
+
+  function getUTM() {
+    return {
+      utm_source: trackingData.utm_source || null,
+      utm_medium: trackingData.utm_medium || null,
+      utm_campaign: trackingData.utm_campaign || null,
+      utm_content: trackingData.utm_content || null,
+      utm_term: trackingData.utm_term || null
     };
   }
 
@@ -186,6 +248,35 @@
       click_text: (form.querySelector('button[type="submit"]') || {}).textContent || 'submit'
     });
   });
+
+  // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
+  // Usage: var data = window.__fai_getTracking();
+  window.__fai_getTracking = function() {
+    // Re-read from sessionStorage (may have been updated by Meta Pixel since page load)
+    var fresh = {};
+    try { fresh = JSON.parse(sessionStorage.getItem(TRACKING_KEY)) || {}; } catch(e) {}
+
+    // Update fbp from cookie (Pixel may have set it after our initial read)
+    var fbp = getCookie('_fbp');
+    if (fbp) fresh.fbp = fbp;
+
+    return {
+      utm_source: fresh.utm_source || null,
+      utm_medium: fresh.utm_medium || null,
+      utm_campaign: fresh.utm_campaign || null,
+      utm_content: fresh.utm_content || null,
+      utm_term: fresh.utm_term || null,
+      fbclid: fresh.fbclid || null,
+      gclid: fresh.gclid || null,
+      fbc: fresh.fbc || null,
+      fbp: fresh.fbp || null,
+      session_id: sid,
+      device_type: getDeviceType(),
+      referrer: document.referrer || null,
+      page_url: window.location.href,
+      user_agent: navigator.userAgent
+    };
+  };
 })();
 </script><!-- Meta Pixel Code --><script type="module">const c=["/strategic-plan → תוכנית שנתית מלאה עם יעדים, יוזמות ו-KPIs.","/investor-pitch → מצגת משקיעים ב-12 שקפים. עם תשובות לשאלות הקשות.","/performance-review → ביקורת ביצועים שמדברת על אנשים, לא על מספרים.","/okr-design → OKRs שהצוות מאמין בהם. לא רק מכיר אותם.","/meeting-summary → מהפגישה לסיכום עם משימות בשניות. לא ימים.","/business-case → תיק עסקי שמשכנע דירקטוריון. עם מספרים.","/decision-framework → מסגרת לקבלת החלטות קשות. בהירה ומתועדת.","/metrics-dashboard → דשבורד KPI שמספר סיפור. לא רק מציג נתונים."],l=document.getElementById("hero-tw");if(l){let s=function(){const t=c[n];i?e>0?(e--,l.textContent=t.slice(0,e),setTimeout(s,16)):(i=!1,n=(n+1)%c.length,setTimeout(s,280)):e<t.length?(e++,l.textContent=t.slice(0,e),setTimeout(s,36)):setTimeout(()=>{i=!0,s()},3200)},n=0,e=0,i=!1;s()}const m=document.getElementById("h1-l1"),u=document.getElementById("h1-br"),o=document.getElementById("h1-l2");if(m&&o){let s=function(){m.textContent=e.slice(0,++t),t<e.length?setTimeout(s,36):(u.style.display="",t=0,setTimeout(n,180))},n=function(){o.textContent=i.slice(0,++t),t<i.length?setTimeout(n,68):o.classList.add("done")};const e="50 סקילים למנהלים.",i="במתנה.";let t=0;setTimeout(s,600)}</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4310526912524722&ev=PageView&noscript=1" data-astro-cid-2a46v2k4></noscript><!-- End Meta Pixel Code --><link rel="stylesheet" href="/_astro/claude-skills-managers.DA78RhEK.css"></head> <body data-astro-cid-2a46v2k4> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M33PM5WV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- ─────────── COOKIE BANNER ─────────── --> <div id="cookie-banner" role="dialog" aria-label="הסכמה לעוגיות" data-astro-cid-2a46v2k4> <p class="cookie-text" data-astro-cid-2a46v2k4>
 האתר משתמש בעוגיות אנליטיקס ושיווק בהסכמתך בלבד, בהתאם לחוק הגנת הפרטיות (תיקון 13).
@@ -258,16 +349,52 @@
       btn.textContent = 'שולח...';
       btn.disabled = true;
 
+      const tracking = typeof window.__fai_getTracking === 'function' ? window.__fai_getTracking() : {};
+      const eventId = crypto.randomUUID();
+      const emailVal = emailEl.value.trim();
+      const mktConsent = marketingEl ? marketingEl.checked : false;
+
       const payload = {
         firstName:  firstNameEl.value.trim(),
         lastName:   lastNameEl ? lastNameEl.value.trim() : '',
         phone:      phoneClean,
-        email:      emailEl.value.trim(),
+        email:      emailVal,
         consultant: String(consultEl ? consultEl.checked : false),
-        marketing_consent: String(marketingEl ? marketingEl.checked : false),
+        marketing_consent: String(mktConsent),
         source:     'claude-skills-managers',
-        timestamp:  new Date().toISOString()
+        timestamp:  new Date().toISOString(),
+        utm_source: tracking.utm_source || '',
+        utm_medium: tracking.utm_medium || '',
+        utm_campaign: tracking.utm_campaign || '',
+        event_id: eventId
       };
+
+      var SB_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
+      var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+      var C_TEXTS = { version: 'v1.0', privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.', marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.' };
+      function sbIns(t, d) { fetch(SB_URL+'/rest/v1/'+t,{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'},body:JSON.stringify(d),keepalive:true}).catch(function(){}); }
+
+      sbIns('consent_log', {
+        email: emailVal, phone: phoneClean || null,
+        consent_privacy: true, consent_marketing: mktConsent,
+        consent_text_version: C_TEXTS.version,
+        consent_privacy_text: C_TEXTS.privacy,
+        consent_marketing_text: C_TEXTS.marketing,
+        form_source: 'claude-skills-managers', page_url: window.location.href, user_agent: navigator.userAgent
+      });
+      sbIns('form_submissions', {
+        first_name: firstNameEl.value.trim(), last_name: lastNameEl ? lastNameEl.value.trim() : '',
+        email: emailVal, phone: phoneClean || null,
+        form_source: 'claude-skills-managers', page_url: window.location.href,
+        utm_source: tracking.utm_source || null, utm_medium: tracking.utm_medium || null,
+        utm_campaign: tracking.utm_campaign || null, utm_content: tracking.utm_content || null,
+        utm_term: tracking.utm_term || null,
+        fbclid: tracking.fbclid || null, fbc: tracking.fbc || null, fbp: tracking.fbp || null,
+        gclid: tracking.gclid || null, event_id: eventId,
+        consent_privacy: true, consent_marketing: mktConsent,
+        user_agent: navigator.userAgent, referrer: tracking.referrer || null,
+        device_type: tracking.device_type || null, session_id: tracking.session_id || null
+      });
 
       try {
         await fetch(WEBHOOK_URL, {
