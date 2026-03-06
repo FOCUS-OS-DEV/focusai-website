@@ -11,6 +11,7 @@
   RewriteRule ^blog/?$ /ai-news/ [R=301,L]
   RewriteRule ^blog/(.+)$ /ai-news/$1 [R=301,L]
   RewriteRule ^privacy/?$ /privacy-policy/ [R=301,L]
+  RewriteRule ^webinar/?$ /webinar-n8n-agent/ [R=301,L]
 </IfModule>
 
 # Security Headers
