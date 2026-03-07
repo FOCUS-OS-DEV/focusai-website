@@ -201,6 +201,10 @@ const jobs = [
         <!-- Form Content -->
         <div class="p-8 lg:p-10">
           <form id="careers-form" class="space-y-6">
+            <!-- Honeypot anti-bot field -->
+            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </div>
             <!-- Name Fields Row -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -395,6 +399,10 @@ const jobs = [
 
   form?.addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Honeypot check — silently drop bot submissions
+    const honeypot = form.querySelector('[name="website"]');
+    if (honeypot && honeypot.value) return;
 
     // --- JS Validation ---
     const firstNameEl = form.querySelector('[name="firstName"]');

@@ -602,6 +602,10 @@ const faqSchema = {
         </header>
 
         <form id="agents-form" class="space-y-6" data-animate="scale-up">
+          <!-- Honeypot anti-bot field -->
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <div>
             <label for="agents-firstName" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם פרטי <span class="text-[#a855f7]">*</span></label>
             <input type="text" id="agents-firstName" name="firstName" required class="w-full min-h-[48px] px-4 py-3 bg-[#0a0a0f] border border-[#2a2a3a] rounded-lg text-white focus:border-[#a855f7] focus:ring-2 focus:ring-[#a855f7]/25 focus:outline-none transition-colors"/>
@@ -685,6 +689,10 @@ const faqSchema = {
 
   agentsForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Honeypot check — silently drop bot submissions
+    const honeypot = agentsForm.querySelector('[name="website"]') as HTMLInputElement;
+    if (honeypot?.value) return;
 
     // --- Validation ---
     agentsForm.querySelectorAll('.error').forEach(el => el.classList.remove('error'));

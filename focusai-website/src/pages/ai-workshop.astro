@@ -142,6 +142,10 @@ const stats = [
         </div>
 
         <form id="hero-form" class="space-y-4">
+          <!-- Honeypot anti-bot field -->
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <div>
             <label for="hero-firstName" class="block text-sm text-[#b0b0c0] mb-1.5">שם פרטי *</label>
             <input type="text" name="firstName" id="hero-firstName" required placeholder="שם פרטי" pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"} title="שם פרטי - אותיות בלבד, 2-50 תווים"
@@ -621,6 +625,10 @@ const stats = [
         </div>
 
         <form id="contact-form" class="space-y-4">
+          <!-- Honeypot anti-bot field -->
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <div>
             <label for="contact-firstName" class="block text-sm text-[#b0b0c0] mb-1.5">שם פרטי *</label>
             <input type="text" name="firstName" id="contact-firstName" required placeholder="שם פרטי" pattern={"[\\u0590-\\u05FFa-zA-Z\\s'\\-]{2,50}"} title="שם פרטי - אותיות בלבד, 2-50 תווים"
@@ -766,6 +774,10 @@ const stats = [
 
         form.addEventListener('submit', function(e) {
           e.preventDefault();
+
+          // Honeypot check — silently drop bot submissions
+          var honeypot = form.querySelector('[name="website"]');
+          if (honeypot && honeypot.value) return;
 
           // Validate form fields
           if (!validateForm(form)) return;

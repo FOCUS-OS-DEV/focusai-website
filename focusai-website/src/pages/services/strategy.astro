@@ -436,6 +436,10 @@ const serviceSchema = {
         </header>
 
         <form class="space-y-6" data-animate="scale-up" id="strategy-form">
+          <!-- Honeypot anti-bot field -->
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
 
           <div>
             <label for="firstName" class="block text-sm font-mono text-[#d0d0e0] mb-2">שם פרטי <span class="text-[#a855f7]">*</span></label>
@@ -580,6 +584,10 @@ const serviceSchema = {
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Honeypot check — silently drop bot submissions
+    const honeypot = form.querySelector('[name="website"]') as HTMLInputElement;
+    if (honeypot?.value) return;
 
     // --- Validation ---
     form.querySelectorAll('.error').forEach((el) => el.classList.remove('error'));

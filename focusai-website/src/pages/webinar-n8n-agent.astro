@@ -1836,6 +1836,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             </div>
 
             <form id="leadForm2">
+                <!-- Honeypot anti-bot field -->
+                <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName2" class="required">
@@ -2078,6 +2082,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 </div>
 
                 <form id="leadForm">
+                    <!-- Honeypot anti-bot field -->
+                    <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+                      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                    </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName" class="required">
@@ -2277,6 +2285,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            // Honeypot check — silently drop bot submissions
+            var honeypot = form.querySelector('[name="website"]');
+            if (honeypot && honeypot.value) return;
+
             // Clear all errors first
             var formErrors = form.querySelectorAll('.error');
             for (var i = 0; i < formErrors.length; i++) {
@@ -2473,6 +2485,10 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
         form2.addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Honeypot check — silently drop bot submissions
+            var honeypot2 = form2.querySelector('[name="website"]');
+            if (honeypot2 && honeypot2.value) return;
 
             // Clear all errors first
             var form2Errors = form2.querySelectorAll('.error');
