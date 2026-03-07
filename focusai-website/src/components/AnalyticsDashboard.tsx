@@ -842,18 +842,17 @@ export default function AnalyticsDashboard() {
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.cardBorder}`,
             background: T.cardBg, color: loading ? T.textMuted : T.green, cursor: loading ? 'default' : 'pointer', fontSize: '14px',
           }}>{loading ? '⏳' : '🔄'}</button>
-          {[7, 14, 30, 90].map(d => (
+          {[1, 3, 7, 14, 30, 90].map(d => (
             <button key={d} onClick={() => changeDays(d)} style={{
               padding: '8px 16px', borderRadius: '8px',
               border: days === d && !customStart ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
               background: days === d && !customStart ? T.purpleBg : T.cardBg,
               color: days === d && !customStart ? T.purple : T.textSecondary, cursor: 'pointer', fontSize: '14px', fontWeight: days === d && !customStart ? 600 : 400,
-            }}>{d} ימים</button>
+            }}>{d === 1 ? 'היום' : d === 3 ? '3 ימים' : `${d} ימים`}</button>
           ))}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 8px', borderRadius: '8px',
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 10px', borderRadius: '8px',
             border: customStart ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
             background: customStart ? T.purpleBg : T.cardBg }}>
-            <span style={{ fontSize: '12px', color: T.textMuted }}>📅</span>
             <input type="date" value={customStart} onChange={e => {
               const v = e.target.value;
               setCustomStart(v);
@@ -861,8 +860,9 @@ export default function AnalyticsDashboard() {
             }} style={{
               background: 'transparent', border: 'none', color: customStart ? T.purple : T.textSecondary,
               fontSize: '13px', outline: 'none', cursor: 'pointer', fontFamily: 'monospace',
+              colorScheme: 'dark', width: '130px',
             }} />
-            <span style={{ color: T.textMuted, fontSize: '12px' }}>—</span>
+            <span style={{ color: T.textMuted, fontSize: '12px' }}>→</span>
             <input type="date" value={customEnd} onChange={e => {
               const v = e.target.value;
               setCustomEnd(v);
@@ -870,6 +870,7 @@ export default function AnalyticsDashboard() {
             }} style={{
               background: 'transparent', border: 'none', color: customEnd ? T.purple : T.textSecondary,
               fontSize: '13px', outline: 'none', cursor: 'pointer', fontFamily: 'monospace',
+              colorScheme: 'dark', width: '130px',
             }} />
             {customStart && (
               <button onClick={() => { setCustomStart(''); setCustomEnd(''); changeDays(30); }} style={{
