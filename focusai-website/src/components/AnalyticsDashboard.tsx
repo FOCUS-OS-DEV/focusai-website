@@ -470,7 +470,7 @@ export default function AnalyticsDashboard() {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_leads_analytics`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
-        body: JSON.stringify({ p_password: pw, p_days: d }),
+        body: JSON.stringify({ p_password: null, p_days: d }),
       });
       if (!res.ok) {
         const err = await res.text().catch(() => '');
