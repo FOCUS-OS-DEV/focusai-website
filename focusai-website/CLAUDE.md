@@ -1238,6 +1238,33 @@ Specialized subagents for specific tasks:
 - **Dashboard**: `/admin/analytics` page (password-protected React island)
 - **Supabase URL**: `https://ueewnvfydrlhyxmbgsus.supabase.co`
 
+### Changelog (MANDATORY)
+
+Every significant commit MUST also be logged to the `public.changelog` table in Supabase. This feeds the "שינויים" tab in the analytics dashboard.
+
+**When to log:** Every `feat`, `fix`, `refactor`, `content`, `style` commit that changes user-facing behavior, adds/removes pages, fixes bugs, or restructures code. Skip: pure `docs`, `chore`, or build-only commits with no functional change.
+
+**How to log:**
+```sql
+INSERT INTO public.changelog (created_at, change_type, title, description, pages_affected, commit_hash, author, severity)
+VALUES (
+  NOW(),
+  'feat',                          -- feat / fix / refactor / content / style
+  'כותרת בעברית',                   -- short Hebrew title
+  'תיאור מפורט של מה השתנה',        -- Hebrew description (optional)
+  ARRAY['/affected/page'],          -- array of affected routes
+  'abc12345',                       -- first 8 chars of commit hash
+  'Claude Code',                    -- author
+  'minor'                           -- minor / major
+);
+```
+
+**Severity guide:**
+- `major` — new feature, new page, breaking change, architecture change
+- `minor` — bug fix, small improvement, refactor, content update
+
+**This is not optional.** If you committed and pushed without logging to changelog, add the entry retroactively.
+
 ---
 
 > **This CLAUDE.md is the source of truth for all design decisions and project context.**
