@@ -2537,10 +2537,70 @@ export default function AnalyticsDashboard() {
               )}
 
               {changelogData && changelogData.length > 0 ? (
-                <Card title={`לוג שינויים (${changelogData.length} רשומות)`}>
+                <Card title={`לוג שינויים`} headerRight={
+                  <span style={{ fontSize: '12px', color: T.textMuted }}>{changelogData.length} רשומות</span>
+                }>
                   <div style={{ direction: 'rtl' }}>
+                    {/* Changelog Filters */}
+                    {(() => {
+                      const allPages = Array.from(new Set(changelogData.flatMap((e: any) => e.pages_affected || []))).sort();
+                      const allTypes = Array.from(new Set(changelogData.map((e: any) => e.change_type))).sort();
+                      return (
+                        <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+                          <select
+                            value={(window as any).__cl_page || ''}
+                            onChange={(e) => { (window as any).__cl_page = e.target.value; setChangelogData([...changelogData]); }}
+                            style={{ padding: '6px 10px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: `1px solid rgba(255,255,255,0.1)`, color: T.textSecondary, fontSize: '12px', direction: 'ltr' }}
+                          >
+                            <option value="">כל הדפים</option>
+                            {allPages.map((p: string) => <option key={p} value={p}>{p}</option>)}
+                          </select>
+                          <select
+                            value={(window as any).__cl_type || ''}
+                            onChange={(e) => { (window as any).__cl_type = e.target.value; setChangelogData([...changelogData]); }}
+                            style={{ padding: '6px 10px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: `1px solid rgba(255,255,255,0.1)`, color: T.textSecondary, fontSize: '12px' }}
+                          >
+                            <option value="">כל הסוגים</option>
+                            {allTypes.map((t: string) => <option key={t} value={t}>{t}</option>)}
+                          </select>
+                          <select
+                            value={(window as any).__cl_severity || ''}
+                            onChange={(e) => { (window as any).__cl_severity = e.target.value; setChangelogData([...changelogData]); }}
+                            style={{ padding: '6px 10px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: `1px solid rgba(255,255,255,0.1)`, color: T.textSecondary, fontSize: '12px' }}
+                          >
+                            <option value="">כל החומרות</option>
+                            <option value="major">major</option>
+                            <option value="minor">minor</option>
+                            <option value="patch">patch</option>
+                          </select>
+                          {((window as any).__cl_page || (window as any).__cl_type || (window as any).__cl_severity) && (
+                            <button
+                              onClick={() => { (window as any).__cl_page = ''; (window as any).__cl_type = ''; (window as any).__cl_severity = ''; setChangelogData([...changelogData]); }}
+                              style={{ padding: '6px 10px', borderRadius: '8px', background: 'rgba(168,85,247,0.15)', border: 'none', color: T.purple, fontSize: '12px', cursor: 'pointer' }}
+                            >נקה פילטרים</button>
+                          )}
+                        </div>
+                      );
+                    })()}
+                    {(() => {
+                      const pf = (window as any).__cl_page || '';
+                      const tf = (window as any).__cl_type || '';
+                      const sf = (window as any).__cl_severity || '';
+                      const filtered = changelogData.filter((entry: any) => {
+                        if (pf && !(entry.pages_affected || []).includes(pf)) return false;
+                        if (tf && entry.change_type !== tf) return false;
+                        if (sf && entry.severity !== sf) return false;
+                        return true;
+                      });
+                      if (filtered.length === 0) return (
+                        <div style={{ textAlign: 'center', padding: '30px 20px' }}>
+                          <p style={{ fontSize: '14px', color: T.textMuted }}>אין שינויים תואמים לפילטרים שנבחרו</p>
+                        </div>
+                      );
+                      return (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                      {changelogData.map((entry: any, i: number) => {
+                      {(pf || tf || sf) && <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '8px' }}>מציג {filtered.length} מתוך {changelogData.length}</p>}
+                      {filtered.map((entry: any, i: number) => {
                         const typeColors: Record<string, { bg: string; color: string; icon: string }> = {
                           feat: { bg: T.greenBg, color: T.green, icon: '✨' },
                           fix: { bg: T.redBg, color: T.red, icon: '🐛' },
@@ -2555,7 +2615,7 @@ export default function AnalyticsDashboard() {
                         return (
                           <div key={entry.id || i} style={{
                             display: 'flex', gap: '12px', padding: '14px 0',
-                            borderBottom: i < changelogData.length - 1 ? `1px solid ${T.rowBorder}` : 'none',
+                            borderBottom: i < filtered.length - 1 ? `1px solid ${T.rowBorder}` : 'none',
                           }}>
                             {/* Timeline dot */}
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '24px', paddingTop: '2px' }}>
@@ -2583,6 +2643,8 @@ export default function AnalyticsDashboard() {
                         );
                       })}
                     </div>
+                      );
+                    })()}
                   </div>
                 </Card>
               ) : !changelogLoading ? (
@@ -2591,8 +2653,8 @@ export default function AnalyticsDashboard() {
                     <p style={{ fontSize: '40px', marginBottom: '12px' }}>📝</p>
                     <p style={{ fontSize: '16px', color: T.textPrimary, marginBottom: '8px' }}>עדיין אין שינויים מתועדים</p>
                     <p style={{ fontSize: '13px', color: T.textMuted, lineHeight: '1.6' }}>
-                      שינויים באתר יתועדו כאן אוטומטית אחרי כל deploy.
-                      <br />השותף שלך יוכל לראות בדיוק מה השתנה, מתי ולמה.
+                      שינויים באתר מתועדים כאן אוטומטית אחרי כל deploy.
+                      <br />כל שינוי כולל תאריך, סוג, תיאור והדפים שהושפעו.
                     </p>
                   </div>
                 </Card>
