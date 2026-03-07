@@ -56,6 +56,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 const TABS = [
   { id: 'overview', label: 'סקירה כללית', icon: '📊' },
+  { id: 'leads', label: 'לידים', icon: '📋' },
   { id: 'content', label: 'תוכן', icon: '📄' },
   { id: 'sources', label: 'מקורות', icon: '🔗' },
   { id: 'conversions', label: 'המרות', icon: '🎯' },
@@ -63,7 +64,66 @@ const TABS = [
   { id: 'insights', label: 'תובנות', icon: '💡' },
 ] as const;
 
+/* ─── UTM Medium Hebrew Legend ─── */
+const UTM_MEDIUM_LABELS: Record<string, { label: string; desc: string; color: string }> = {
+  'paid': { label: 'ממומן', desc: 'מודעות בתשלום (פייסבוק, אינסטגרם, גוגל)', color: '#a855f7' },
+  'cpc': { label: 'לחיצה בתשלום', desc: 'עלות לקליק (גוגל אדס, בינג)', color: '#7c3aed' },
+  'social': { label: 'רשתות חברתיות', desc: 'פוסטים אורגניים (ללא תשלום)', color: '#06b6d4' },
+  'email': { label: 'דוא"ל', desc: 'קמפיינים, ניוזלטרים', color: '#f59e0b' },
+  'referral': { label: 'הפניה', desc: 'קישור מאתר אחר', color: '#10b981' },
+  'organic': { label: 'אורגני', desc: 'חיפוש טבעי בגוגל', color: '#22c55e' },
+  'direct': { label: 'ישיר', desc: 'כניסה ישירה לאתר', color: '#6a6a80' },
+  'none': { label: 'לא מוגדר', desc: 'ללא UTM medium', color: '#6a6a80' },
+};
+
+const FORM_SOURCE_LABELS: Record<string, string> = {
+  'bot-camp-syllabus': 'סילבוס Bot-Camp',
+  'bot-camp-mid-page': 'Bot-Camp (אמצע דף)',
+  'bot-camp-contact': 'Bot-Camp (צור קשר)',
+  'homepage-academy-consult': 'דף הבית (ייעוץ)',
+  'homepage-contact': 'דף הבית (צור קשר)',
+  'ai-agents-contact': 'סוכני AI',
+  'strategy-contact': 'ייעוץ אסטרטגי',
+  'agents-service-contact': 'שירות סוכנים',
+  'development-contact': 'פיתוח',
+  'ai-workshop': 'סדנת AI',
+  'webinar-n8n-agent': 'וובינר N8N',
+  'content-automation-course': 'קורס אוטומציה',
+  'free-webinar-onboard': 'וובינר חינמי',
+  'ai-dev': 'AI Dev',
+  'ai-dev-quick': 'AI Dev (מהיר)',
+  'blog-newsletter': 'ניוזלטר בלוג',
+  'blog-article-botcamp': 'כתבה (Bot-Camp)',
+  'blog-article-agents': 'כתבה (סוכנים)',
+  'blog-article-consulting': 'כתבה (ייעוץ)',
+  'claude-skills-he': 'Claude Skills (עברית)',
+  'claude-skills-managers': 'Claude Skills (מנהלים)',
+  'claude-skills-marketing': 'Claude Skills (שיווק)',
+};
+
+const DOW_LABELS: Record<number, string> = {
+  0: 'ראשון', 1: 'שני', 2: 'שלישי', 3: 'רביעי', 4: 'חמישי', 5: 'שישי', 6: 'שבת',
+};
+
 /* ─── Types ─── */
+interface LeadsData {
+  total_leads: number;
+  prev_total_leads: number;
+  leads_by_source: { form_source: string; count: number }[];
+  leads_by_utm_source: { utm_source: string; count: number }[];
+  leads_by_utm_medium: { utm_medium: string; count: number }[];
+  leads_by_campaign: { utm_source: string; utm_medium: string; utm_campaign: string; utm_content: string; count: number }[];
+  daily_leads: { day: string; count: number }[];
+  hourly_leads: { hour: number; count: number }[];
+  dow_leads: { dow: number; count: number }[];
+  leads_by_device: { device_type: string; count: number }[];
+  consent_marketing_rate: number;
+  recent_leads: { first_name: string; email_masked: string; form_source: string; utm_source: string; utm_medium: string; utm_campaign: string; device_type: string; created_at: string }[];
+  capi_sent_count: number;
+  capi_total: number;
+  leads_by_page: { page_url: string; count: number }[];
+}
+
 interface AnalyticsData {
   total_pageviews: number; total_clicks: number; total_forms: number;
   prev_total_pageviews: number; prev_total_clicks: number; prev_total_forms: number;
@@ -365,6 +425,10 @@ export default function AnalyticsDashboard() {
   const [password, setPassword] = useState('');
   const [isAuthed, setIsAuthed] = useState(false);
   const [data, setData] = useState<AnalyticsData | null>(null);
+  const [leadsData, setLeadsData] = useState<LeadsData | null>(null);
+  const [leadsLoading, setLeadsLoading] = useState(false);
+  const [aiInsights, setAiInsights] = useState<{ title: string; body: string; action: string; priority: string; category: string }[] | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [days, setDays] = useState(30);
@@ -400,8 +464,39 @@ export default function AnalyticsDashboard() {
     } finally { setLoading(false); }
   }, [data]);
 
+  const fetchLeadsData = useCallback(async (pw: string, d: number) => {
+    setLeadsLoading(true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_leads_analytics`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+        body: JSON.stringify({ p_password: pw, p_days: d }),
+      });
+      if (!res.ok) return; // silently fail — main analytics still works
+      const result = await res.json();
+      setLeadsData(result);
+    } catch { /* ignore */ }
+    finally { setLeadsLoading(false); }
+  }, []);
+
+  const fetchAiInsights = useCallback(async (pw: string) => {
+    if (!data) return;
+    setAiLoading(true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/ai-insights`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+        body: JSON.stringify({ password: pw, analytics: data, leads: leadsData }),
+      });
+      if (!res.ok) return;
+      const result = await res.json();
+      if (result.insights) setAiInsights(result.insights);
+    } catch { /* ignore */ }
+    finally { setAiLoading(false); }
+  }, [data, leadsData]);
+
   const handleLogin = (e: React.FormEvent) => { e.preventDefault(); passwordRef.current = password; fetchData(password, days); };
-  const changeDays = (d: number) => { setDays(d); fetchData(passwordRef.current, d); };
+  const changeDays = (d: number) => { setDays(d); fetchData(passwordRef.current, d); setLeadsData(null); };
   const toggleSort = (key: string) => setPageSort(prev => ({ key, dir: prev.key === key && prev.dir === 'desc' ? 'asc' : 'desc' }));
 
   // Auto-refresh
@@ -410,6 +505,12 @@ export default function AnalyticsDashboard() {
     const id = setInterval(() => fetchData(passwordRef.current, days), 60000);
     return () => clearInterval(id);
   }, [autoRefresh, isAuthed, days, fetchData]);
+
+  // Fetch leads data when tab switches to leads
+  useEffect(() => {
+    if (activeTab !== 'leads' || !isAuthed || leadsData) return;
+    fetchLeadsData(passwordRef.current, days);
+  }, [activeTab, isAuthed, days, leadsData, fetchLeadsData]);
 
   // Real-time tab polling (30s)
   useEffect(() => {
@@ -702,6 +803,257 @@ export default function AnalyticsDashboard() {
                   <Card title="משפך המרה">
                     <Funnel data={data.conversion_funnel} />
                   </Card>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* ═══ LEADS TAB ═══ */}
+          {activeTab === 'leads' && (
+            <>
+              {leadsLoading && !leadsData && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+                  {[1, 2, 3, 4].map(i => <Skeleton key={i} height={130} />)}
+                </div>
+              )}
+
+              {leadsData && (
+                <>
+                  {/* KPIs */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '14px', marginBottom: '24px' }}>
+                    <KPI label="סה״כ לידים" value={leadsData.total_leads}
+                      trend={calcTrend(leadsData.total_leads, leadsData.prev_total_leads)}
+                      sparkData={leadsData.daily_leads?.map(d => ({ ...d, views: d.count }))}
+                      color={T.green} icon="📋" />
+                    <KPI label="הסכמה שיווקית" displayValue={`${leadsData.consent_marketing_rate}%`} color={T.orange} icon="✉" />
+                    <KPI label="CAPI נשלח" displayValue={`${leadsData.capi_sent_count}/${leadsData.capi_total}`}
+                      color={leadsData.capi_sent_count === leadsData.capi_total ? T.green : T.orange} icon="📡" />
+                    <KPI label="מקורות שונים" value={leadsData.leads_by_utm_source?.length || 0} color={T.cyan} icon="🔗" />
+                  </div>
+
+                  {/* Daily leads chart */}
+                  {leadsData.daily_leads && leadsData.daily_leads.length > 0 && (
+                    <Card title="לידים לפי יום">
+                      <div style={{ direction: 'ltr', height: '240px' }}>
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={leadsData.daily_leads} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                            <defs>
+                              <linearGradient id="gLeads" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor={T.green} stopOpacity={0.3} />
+                                <stop offset="100%" stopColor={T.green} stopOpacity={0} />
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke={T.grid} vertical={false} />
+                            <XAxis dataKey="day" tickFormatter={formatDate} stroke={T.grid} tick={{ fill: T.axisText, fontSize: 12 }} tickLine={false} axisLine={false} />
+                            <YAxis stroke={T.grid} tick={{ fill: T.axisText, fontSize: 12 }} tickLine={false} axisLine={false} width={30} allowDecimals={false} />
+                            <Tooltip content={<ChartTooltip suffix="לידים" />} />
+                            <Area type="monotone" dataKey="count" name="לידים" stroke={T.green} fill="url(#gLeads)" strokeWidth={2} dot={{ r: 3, fill: T.green }} />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </Card>
+                  )}
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                    {/* Leads by form source */}
+                    <Card title="לפי טופס" exportData={leadsData.leads_by_source} exportName="leads-by-source">
+                      <DataTable
+                        rows={leadsData.leads_by_source || []}
+                        columns={[
+                          { key: 'form_source', label: 'טופס', render: (v: string) => FORM_SOURCE_LABELS[v] || v },
+                          { key: 'count', label: 'לידים', align: 'center', render: (v: number) => <span style={{ color: T.green, fontWeight: 600 }}>{v}</span> },
+                        ]}
+                      />
+                    </Card>
+
+                    {/* Leads by UTM source */}
+                    <Card title="לפי מקור תנועה (UTM Source)" exportData={leadsData.leads_by_utm_source} exportName="leads-by-utm-source">
+                      {leadsData.leads_by_utm_source && leadsData.leads_by_utm_source.length > 0 ? (
+                        <>
+                          <div style={{ direction: 'ltr', height: Math.max(leadsData.leads_by_utm_source.length * 36, 120) + 'px' }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                              <BarChart data={leadsData.leads_by_utm_source} layout="vertical" margin={{ top: 0, right: 20, bottom: 0, left: 10 }}>
+                                <CartesianGrid strokeDasharray="3 3" stroke={T.grid} horizontal={false} />
+                                <XAxis type="number" tick={{ fill: T.axisText, fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                                <YAxis type="category" dataKey="utm_source" width={120} tick={{ fill: '#ccc', fontSize: 12 }} axisLine={false} tickLine={false} />
+                                <Tooltip content={<ChartTooltip suffix="לידים" />} />
+                                <Bar dataKey="count" radius={[0, 6, 6, 0]} maxBarSize={24} fill={T.green} />
+                              </BarChart>
+                            </ResponsiveContainer>
+                          </div>
+                        </>
+                      ) : <p style={{ color: T.textMuted, textAlign: 'center' }}>אין נתונים</p>}
+                    </Card>
+                  </div>
+
+                  {/* UTM Medium Legend + Breakdown */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px', marginTop: '16px' }}>
+                    <Card title="מקרא UTM Medium">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', direction: 'rtl' }}>
+                        {Object.entries(UTM_MEDIUM_LABELS).map(([key, info]) => {
+                          const leadCount = leadsData.leads_by_utm_medium?.find(m => m.utm_medium === key)?.count || 0;
+                          return (
+                            <div key={key} style={{
+                              display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px',
+                              background: leadCount > 0 ? `${info.color}10` : 'transparent',
+                              borderRadius: '8px', border: `1px solid ${leadCount > 0 ? `${info.color}30` : T.rowBorder}`,
+                            }}>
+                              <span style={{
+                                padding: '2px 10px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
+                                background: `${info.color}20`, color: info.color, minWidth: '60px', textAlign: 'center',
+                              }}>{key}</span>
+                              <div style={{ flex: 1 }}>
+                                <div style={{ fontSize: '13px', color: T.textPrimary, fontWeight: 500 }}>{info.label}</div>
+                                <div style={{ fontSize: '11px', color: T.textMuted }}>{info.desc}</div>
+                              </div>
+                              {leadCount > 0 && (
+                                <span style={{ fontSize: '14px', fontWeight: 700, color: info.color }}>{leadCount}</span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </Card>
+
+                    {/* Campaigns breakdown */}
+                    <Card title="קמפיינים (UTM מלא)" exportData={leadsData.leads_by_campaign} exportName="leads-by-campaign">
+                      <DataTable
+                        rows={(leadsData.leads_by_campaign || []).filter(c => c.utm_source !== 'direct')}
+                        columns={[
+                          { key: 'utm_source', label: 'Source' },
+                          { key: 'utm_medium', label: 'Medium', align: 'center', render: (v: string) => {
+                            const info = UTM_MEDIUM_LABELS[v];
+                            return (
+                              <span style={{
+                                padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
+                                background: info ? `${info.color}20` : 'rgba(255,255,255,0.06)',
+                                color: info?.color || T.textSecondary,
+                              }}>{info?.label || v}</span>
+                            );
+                          }},
+                          { key: 'utm_campaign', label: 'Campaign', render: (v: string) => v || '-' },
+                          { key: 'count', label: 'לידים', align: 'center', render: (v: number) => <span style={{ color: T.green, fontWeight: 600 }}>{v}</span> },
+                        ]}
+                      />
+                    </Card>
+                  </div>
+
+                  {/* Hourly + Day of Week */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px', marginTop: '16px' }}>
+                    {/* Hourly distribution */}
+                    <Card title="לידים לפי שעה">
+                      {leadsData.hourly_leads && leadsData.hourly_leads.length > 0 ? (
+                        <div style={{ direction: 'ltr', height: '200px' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={(() => {
+                              const map: Record<number, number> = {};
+                              for (let i = 0; i < 24; i++) map[i] = 0;
+                              leadsData.hourly_leads.forEach(h => { map[h.hour] = h.count; });
+                              return Object.entries(map).map(([h, c]) => ({ hour: `${h}:00`, count: c }));
+                            })()} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} horizontal={false} />
+                              <XAxis dataKey="hour" tick={{ fill: T.axisText, fontSize: 10 }} axisLine={false} tickLine={false} interval={2} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} tickLine={false} width={25} allowDecimals={false} />
+                              <Tooltip content={<ChartTooltip suffix="לידים" />} />
+                              <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={18} fill={T.green} />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      ) : <p style={{ color: T.textMuted, textAlign: 'center' }}>אין נתונים</p>}
+                    </Card>
+
+                    {/* Day of week */}
+                    <Card title="לידים לפי יום בשבוע">
+                      {leadsData.dow_leads && leadsData.dow_leads.length > 0 ? (
+                        <div style={{ direction: 'ltr', height: '200px' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={(() => {
+                              const map: Record<number, number> = {};
+                              for (let i = 0; i < 7; i++) map[i] = 0;
+                              leadsData.dow_leads.forEach(d => { map[d.dow] = d.count; });
+                              return Object.entries(map).map(([d, c]) => ({ day: DOW_LABELS[+d] || d, count: c }));
+                            })()} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} horizontal={false} />
+                              <XAxis dataKey="day" tick={{ fill: T.axisText, fontSize: 12 }} axisLine={false} tickLine={false} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} tickLine={false} width={25} allowDecimals={false} />
+                              <Tooltip content={<ChartTooltip suffix="לידים" />} />
+                              <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={32}>
+                                {[0, 1, 2, 3, 4, 5, 6].map(i => (
+                                  <Cell key={i} fill={i === 5 || i === 6 ? 'rgba(16,185,129,0.3)' : T.green} />
+                                ))}
+                              </Bar>
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      ) : <p style={{ color: T.textMuted, textAlign: 'center' }}>אין נתונים</p>}
+                    </Card>
+                  </div>
+
+                  {/* Recent Leads */}
+                  <div style={{ marginTop: '16px' }}>
+                    <Card title="לידים אחרונים" exportData={leadsData.recent_leads} exportName="recent-leads">
+                      <DataTable
+                        rows={leadsData.recent_leads || []}
+                        columns={[
+                          { key: 'created_at', label: 'זמן', render: (v: string) => timeAgo(v) },
+                          { key: 'first_name', label: 'שם', render: (v: string) => v || '-' },
+                          { key: 'email_masked', label: 'מייל' },
+                          { key: 'form_source', label: 'טופס', render: (v: string) => (
+                            <span style={{ fontSize: '11px' }}>{FORM_SOURCE_LABELS[v] || v}</span>
+                          )},
+                          { key: 'utm_source', label: 'Source', render: (v: string) => v || <span style={{ color: T.textMuted }}>direct</span> },
+                          { key: 'utm_medium', label: 'Medium', align: 'center', render: (v: string) => {
+                            if (!v) return <span style={{ color: T.textMuted, fontSize: '11px' }}>-</span>;
+                            const info = UTM_MEDIUM_LABELS[v];
+                            return (
+                              <span style={{
+                                padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
+                                background: info ? `${info.color}20` : 'rgba(255,255,255,0.06)',
+                                color: info?.color || T.textSecondary,
+                              }}>{info?.label || v}</span>
+                            );
+                          }},
+                          { key: 'device_type', label: 'מכשיר', align: 'center', render: (v: string) => DEVICE_ICONS[v] || v || '-' },
+                        ]}
+                      />
+                    </Card>
+                  </div>
+
+                  {/* Device breakdown */}
+                  {leadsData.leads_by_device && leadsData.leads_by_device.length > 0 && (
+                    <div style={{ marginTop: '16px' }}>
+                      <Card title="לידים לפי מכשיר">
+                        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', direction: 'rtl', flexWrap: 'wrap' }}>
+                          {leadsData.leads_by_device.map((d, i) => {
+                            const total = leadsData.leads_by_device.reduce((s, x) => s + x.count, 0);
+                            const pct = total > 0 ? Math.round((d.count / total) * 100) : 0;
+                            return (
+                              <div key={i} style={{
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+                                padding: '16px 24px', background: T.cardBg, border: `1px solid ${T.cardBorder}`,
+                                borderRadius: '12px', minWidth: '120px',
+                              }}>
+                                <span style={{ fontSize: '28px' }}>{DEVICE_ICONS[d.device_type] || '📱'}</span>
+                                <span style={{ fontSize: '12px', color: T.textSecondary }}>{DEVICE_LABELS[d.device_type] || d.device_type}</span>
+                                <span style={{ fontSize: '24px', fontWeight: 700, color: T.green }}>{d.count}</span>
+                                <span style={{ fontSize: '12px', color: T.textMuted }}>{pct}%</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </Card>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {!leadsLoading && !leadsData && (
+                <div style={{ textAlign: 'center', padding: '60px 20px', color: T.textMuted }}>
+                  <p style={{ fontSize: '16px' }}>טוען נתוני לידים...</p>
+                  <button onClick={() => fetchLeadsData(passwordRef.current, days)} style={{
+                    marginTop: '12px', padding: '8px 20px', borderRadius: '8px', border: `1px solid ${T.purple}`,
+                    background: T.purpleBg, color: T.purple, cursor: 'pointer', fontSize: '14px', fontFamily: 'Heebo, sans-serif',
+                  }}>נסה שוב</button>
                 </div>
               )}
             </>
@@ -1038,6 +1390,92 @@ export default function AnalyticsDashboard() {
                     );
                   })}
                   <p style={{ fontSize: '11px', color: T.textMuted, marginTop: '4px' }}>* יעדים מבוססים על טווח הימים הנבחר ({days} ימים)</p>
+                </div>
+              </Card>
+
+              {/* AI Insights (Gemini) */}
+              <Card title="תובנות AI (Gemini)">
+                <div style={{ direction: 'rtl' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <p style={{ fontSize: '13px', color: T.textSecondary, margin: 0 }}>
+                      ניתוח אוטומטי של הנתונים באמצעות AI — קמפיינים, המרות, טרנדים והזדמנויות
+                    </p>
+                    <button
+                      onClick={() => fetchAiInsights(passwordRef.current)}
+                      disabled={aiLoading}
+                      style={{
+                        padding: '8px 20px', borderRadius: '8px', border: 'none', cursor: aiLoading ? 'not-allowed' : 'pointer',
+                        background: aiLoading ? 'rgba(168,85,247,0.3)' : T.purple, color: '#fff', fontSize: '13px', fontWeight: 600,
+                        flexShrink: 0, marginRight: '12px', opacity: aiLoading ? 0.7 : 1,
+                      }}
+                    >
+                      {aiLoading ? 'מנתח...' : aiInsights ? 'נתח מחדש' : 'נתח עם AI'}
+                    </button>
+                  </div>
+
+                  {aiLoading && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {[1, 2, 3].map(i => (
+                        <div key={i} style={{
+                          padding: '16px', borderRadius: '12px', background: 'rgba(255,255,255,0.03)',
+                          border: '1px solid rgba(255,255,255,0.06)', animation: 'pulse 1.5s ease-in-out infinite',
+                        }}>
+                          <div style={{ height: '14px', width: '40%', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', marginBottom: '10px' }} />
+                          <div style={{ height: '12px', width: '90%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', marginBottom: '6px' }} />
+                          <div style={{ height: '12px', width: '70%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px' }} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {aiInsights && !aiLoading && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {aiInsights.map((insight, i) => {
+                        const priorityColors: Record<string, { bg: string; border: string; badge: string }> = {
+                          high: { bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.2)', badge: '#ef4444' },
+                          medium: { bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.2)', badge: '#f59e0b' },
+                          low: { bg: 'rgba(16,185,129,0.08)', border: 'rgba(16,185,129,0.2)', badge: '#10b981' },
+                        };
+                        const categoryIcons: Record<string, string> = {
+                          campaigns: '📢', conversion: '🎯', timing: '⏰', technical: '⚙️', opportunity: '💎',
+                        };
+                        const pc = priorityColors[insight.priority] || priorityColors.medium;
+                        return (
+                          <div key={i} style={{
+                            padding: '16px', borderRadius: '12px', background: pc.bg,
+                            border: `1px solid ${pc.border}`,
+                          }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                              <span style={{ fontSize: '18px' }}>{categoryIcons[insight.category] || '📊'}</span>
+                              <span style={{ fontSize: '14px', fontWeight: 700, color: T.textPrimary, flex: 1 }}>{insight.title}</span>
+                              <span style={{
+                                fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '9999px',
+                                background: pc.badge, color: '#fff', textTransform: 'uppercase',
+                              }}>
+                                {insight.priority === 'high' ? 'גבוה' : insight.priority === 'medium' ? 'בינוני' : 'נמוך'}
+                              </span>
+                            </div>
+                            <p style={{ fontSize: '13px', color: T.textSecondary, lineHeight: 1.7, margin: '0 0 10px 0' }}>
+                              {insight.body}
+                            </p>
+                            <div style={{
+                              display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px',
+                              background: 'rgba(168,85,247,0.1)', borderRadius: '8px', border: '1px solid rgba(168,85,247,0.15)',
+                            }}>
+                              <span style={{ fontSize: '13px' }}>💡</span>
+                              <span style={{ fontSize: '12px', color: '#c084fc', fontWeight: 500 }}>{insight.action}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {!aiInsights && !aiLoading && (
+                    <p style={{ fontSize: '13px', color: T.textMuted, textAlign: 'center', padding: '20px 0' }}>
+                      לחץ על "נתח עם AI" לקבלת תובנות שיווקיות מבוססות נתונים
+                    </p>
+                  )}
                 </div>
               </Card>
 
