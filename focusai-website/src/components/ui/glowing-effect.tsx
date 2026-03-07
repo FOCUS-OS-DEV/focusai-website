@@ -1,8 +1,28 @@
 "use client";
 
 import { memo, useCallback, useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
-import { animate } from "motion/react";
+
+function classNames(...args: (string | false | null | undefined)[]): string {
+  return args.filter(Boolean).join(" ");
+}
+
+function animateValue(
+  from: number,
+  to: number,
+  duration: number,
+  onUpdate: (v: number) => void
+) {
+  const start = performance.now();
+  const ms = duration * 1000;
+  function tick(now: number) {
+    const t = Math.min((now - start) / ms, 1);
+    // cubic-bezier(0.16, 1, 0.3, 1) approximation
+    const ease = 1 - Math.pow(1 - t, 4);
+    onUpdate(from + (to - from) * ease);
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
 
 interface GlowingEffectProps {
   blur?: number;
@@ -85,12 +105,8 @@ const GlowingEffect = memo(
           const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
           const newAngle = currentAngle + angleDiff;
 
-          animate(currentAngle, newAngle, {
-            duration: movementDuration,
-            ease: [0.16, 1, 0.3, 1],
-            onUpdate: (value) => {
-              element.style.setProperty("--start", String(value));
-            },
+          animateValue(currentAngle, newAngle, movementDuration, (value) => {
+            element.style.setProperty("--start", String(value));
           });
         });
       },
@@ -120,7 +136,7 @@ const GlowingEffect = memo(
     return (
       <>
         <div
-          className={cn(
+          className={classNames(
             "pointer-events-none absolute -inset-px hidden rounded-[inherit] border opacity-0 transition-opacity",
             glow && "opacity-100",
             variant === "white" && "border-white",
@@ -158,7 +174,7 @@ const GlowingEffect = memo(
                 )`,
             } as React.CSSProperties
           }
-          className={cn(
+          className={classNames(
             "pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity",
             glow && "opacity-100",
             blur > 0 && "blur-[var(--blur)] ",
@@ -167,7 +183,7 @@ const GlowingEffect = memo(
           )}
         >
           <div
-            className={cn(
+            className={classNames(
               "glow",
               "rounded-[inherit]",
               'after:content-[""] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))]',

@@ -22,7 +22,7 @@ paths:
 - Standalone pages: MUST import `Analytics.astro` + `AnalyticsBody.astro`
 
 ## Forms — Israeli Privacy Law (Section 30A)
-- TWO separate consent checkboxes: privacy (required) + marketing (optional, NOT required)
+- TWO separate consent checkboxes: privacy (required) + marketing (required — temporarily, pending CRM update)
 - Webhook MUST include `marketing_consent` field
 - Unsubscribe links → /unsubscribe-any
 

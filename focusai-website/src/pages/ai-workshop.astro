@@ -59,9 +59,35 @@ const stats = [
   { value: "98%", label: "שביעות רצון" },
   { value: "100+", label: "סדנאות" },
 ];
+
+const workshopSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "סדנאות AI לארגונים",
+  "description": "סדנאות AI מעשיות לארגונים וחברות. הכשרת עובדים בבינה מלאכותית, מותאם אישית לצוות שלכם.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Focus AI",
+    "url": "https://focusai.co.il"
+  },
+  "serviceType": "AI Training Workshop",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Israel"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "סדנאות AI",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "סדנת AI למנהלים ו-C-Level" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "סדנת AI לצוותי שיווק ותוכן" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "סדנת AI לאנשי טכנולוגיה" } }
+    ]
+  }
+};
 ---
 
-<BaseLayout title="הכשרת עובדים בינה מלאכותית | סדנאות AI לארגונים | Focus AI" description="סדנאות AI מעשיות לארגונים וחברות. הכשרת עובדים בבינה מלאכותית - ChatGPT, Claude, כלי AI ואוטומציות. מותאם אישית לצוות שלכם. תל אביב, הרצליה וכל הארץ.">
+<BaseLayout title="הכשרת עובדים בינה מלאכותית | סדנאות AI לארגונים | Focus AI" description="סדנאות AI מעשיות לארגונים וחברות. הכשרת עובדים בבינה מלאכותית - ChatGPT, Claude, כלי AI ואוטומציות. מותאם אישית לצוות שלכם. תל אביב, הרצליה וכל הארץ." structuredData={workshopSchema}>
   <Header slot="header" currentPath="/ai-workshop" />
 
   <!-- ============================================ -->

@@ -44,9 +44,41 @@ const integrationPillar = {
   ]
 };
 
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Focus AI",
+    "url": "https://focusai.co.il",
+    "description": pageDescription,
+    "founder": [
+      {
+        "@type": "Person",
+        "name": "שחר דדיה",
+        "jobTitle": "CEO & Co-Founder",
+        "affiliation": [
+          { "@type": "Organization", "name": "אוניברסיטת חיפה" },
+          { "@type": "Organization", "name": "הטכניון" }
+        ]
+      },
+      {
+        "@type": "Person",
+        "name": "אוניל סחר",
+        "jobTitle": "CEO & Co-Founder",
+        "affiliation": [
+          { "@type": "Organization", "name": "אוניברסיטת חיפה" },
+          { "@type": "Organization", "name": "הטכניון" }
+        ]
+      }
+    ],
+    "knowsAbout": ["Artificial Intelligence", "AI Agents", "AI Training", "Business Automation"]
+  }
+};
+
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} structuredData={aboutSchema}>
   <Header slot="header" currentPath="/about" />
 
   <!-- ============================================ -->
