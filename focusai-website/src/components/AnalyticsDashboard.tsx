@@ -670,8 +670,8 @@ export default function AnalyticsDashboard() {
       if (!res.ok) { console.error('Changelog RPC error:', res.status); return; }
       const result = await res.json();
       setChangelogTotal(result.total || 0);
-      if (append && changelogData) {
-        setChangelogData([...changelogData, ...(result.entries || [])]);
+      if (append) {
+        setChangelogData(prev => [...(prev || []), ...(result.entries || [])]);
       } else {
         setChangelogData(result.entries || []);
       }
