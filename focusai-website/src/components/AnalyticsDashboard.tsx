@@ -66,22 +66,19 @@ const TABS = [
 ] as const;
 
 /* ─── Customer Journey Definitions ─── */
-type JourneyStep = { label: string; path: string; metric: 'views' | 'forms'; shared?: boolean };
+type JourneyStep = { label: string; path: string; metric: 'views' | 'forms' };
 type Journey = { id: string; name: string; color: string; steps: JourneyStep[] };
 const JOURNEYS: Journey[] = [
   { id: 'skills-he', name: 'Claude Skills (מפתחים)', color: '#7c3aed', steps: [
     { label: 'דף נחיתה', path: '/claude-skills-he/', metric: 'views' },
-    { label: 'שליחת טופס (תודה)', path: '/claude-skills-thank-you/', metric: 'views', shared: true },
     { label: 'צפייה במדריך', path: '/claude-code-guide/', metric: 'views' },
   ]},
   { id: 'skills-managers', name: 'Claude Skills (מנהלים)', color: '#0891b2', steps: [
     { label: 'דף נחיתה', path: '/claude-skills-managers/', metric: 'views' },
-    { label: 'שליחת טופס (תודה)', path: '/claude-skills-thank-you/', metric: 'views', shared: true },
     { label: 'צפייה במדריך', path: '/claude-code-guide-managers/', metric: 'views' },
   ]},
   { id: 'skills-marketing', name: 'Claude Skills (שיווק)', color: '#059669', steps: [
     { label: 'דף נחיתה', path: '/claude-skills-marketing/', metric: 'views' },
-    { label: 'שליחת טופס (תודה)', path: '/claude-skills-thank-you/', metric: 'views', shared: true },
     { label: 'צפייה במדריך', path: '/claude-code-guide-marketing/', metric: 'views' },
   ]},
   { id: 'botcamp', name: 'Bot-Camp', color: '#d97706', steps: [
@@ -248,6 +245,8 @@ interface AnalyticsData {
   conversion_funnel: { pageviews: number; clicks: number; contact_clicks: number; whatsapp: number; phone: number; email: number; forms: number } | null;
   recent_events: { event_type: string; page_path: string; click_type: string | null; click_text: string | null; device_type: string | null; created_at: string }[] | null;
   utm_campaigns_v2: { utm_source: string; utm_medium: string; utm_campaign: string; visits: number; clicks: number; forms: number; conversion_rate: number }[] | null;
+  whatsapp_by_page: { page_path: string; clicks: number; unique_sessions: number }[] | null;
+  whatsapp_daily: { day: string; clicks: number }[] | null;
 }
 
 interface AdvancedData {
@@ -1763,7 +1762,6 @@ export default function AnalyticsDashboard() {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                   <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: journey.color, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700 }}>{i + 1}</span>
                                   <span style={{ fontSize: '14px', color: T.textPrimary, fontWeight: 500 }}>{step.label}</span>
-                                  {step.shared && <span style={{ fontSize: '12px', color: T.textMuted, fontStyle: 'italic' }}>(משותף)</span>}
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                   <span style={{ fontSize: '16px', color: journey.color, fontWeight: 700 }}>{value.toLocaleString('he-IL')}</span>
@@ -2003,6 +2001,54 @@ export default function AnalyticsDashboard() {
                   </div>
                 );
               })()}
+
+              {/* WhatsApp Analytics */}
+              {data.whatsapp_by_page && data.whatsapp_by_page.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px', marginBottom: '16px' }}>
+                  <Card title="💬 לחיצות WhatsApp לפי דף" exportData={data.whatsapp_by_page} exportName="whatsapp-by-page">
+                    <DataTable
+                      rows={data.whatsapp_by_page}
+                      columns={[
+                        { key: 'page_path', label: 'דף', render: (v: string) => decodePath(v) },
+                        { key: 'clicks', label: 'לחיצות', align: 'center', render: (v: number) => <span style={{ color: '#25D366', fontWeight: 600 }}>{v}</span> },
+                        { key: 'unique_sessions', label: 'סשנים', align: 'center', render: (v: number) => <span style={{ color: T.textSecondary }}>{v}</span> },
+                      ]}
+                    />
+                    <div style={{ marginTop: '12px', padding: '10px 14px', borderRadius: '10px', background: 'rgba(37,211,102,0.06)', border: '1px solid rgba(37,211,102,0.15)' }}>
+                      <div style={{ fontSize: '13px', color: T.textSecondary, direction: 'rtl' }}>
+                        סה"כ: <span style={{ color: '#25D366', fontWeight: 700, fontSize: '16px' }}>{data.whatsapp_clicks}</span> לחיצות וואטסאפ בתקופה
+                        {data.prev_whatsapp_clicks > 0 && (
+                          <span style={{ marginRight: '8px', fontSize: '12px', color: data.whatsapp_clicks >= data.prev_whatsapp_clicks ? T.green : T.red }}>
+                            ({data.whatsapp_clicks >= data.prev_whatsapp_clicks ? '↑' : '↓'}{Math.abs(Math.round(((data.whatsapp_clicks - data.prev_whatsapp_clicks) / data.prev_whatsapp_clicks) * 100))}% מהתקופה הקודמת)
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+
+                  {data.whatsapp_daily && data.whatsapp_daily.length > 1 && (
+                    <Card title="💬 מגמת WhatsApp יומית">
+                      <div style={{ direction: 'ltr', height: '200px' }}>
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={data.whatsapp_daily} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
+                            <defs>
+                              <linearGradient id="whatsappGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#25D366" stopOpacity={0.3} />
+                                <stop offset="95%" stopColor="#25D366" stopOpacity={0.02} />
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke={T.grid} />
+                            <XAxis dataKey="day" tick={{ fill: T.axisText, fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={v => new Date(v).toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' })} />
+                            <YAxis allowDecimals={false} tick={{ fill: T.axisText, fontSize: 12 }} axisLine={false} tickLine={false} width={30} />
+                            <Tooltip content={<ChartTooltip suffix="לחיצות" />} />
+                            <Area type="monotone" dataKey="clicks" stroke="#25D366" strokeWidth={2} fill="url(#whatsappGrad)" dot={{ r: 3, fill: '#25D366', strokeWidth: 0 }} />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </Card>
+                  )}
+                </div>
+              )}
 
               {/* Page Categories Chart */}
               {data.page_categories && data.page_categories.length > 0 && (
