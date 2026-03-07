@@ -2597,47 +2597,62 @@ export default function AnalyticsDashboard() {
                           <p style={{ fontSize: '14px', color: T.textMuted }}>אין שינויים תואמים לפילטרים שנבחרו</p>
                         </div>
                       );
+                      const typeColors: Record<string, { bg: string; color: string; label: string }> = {
+                        feat: { bg: T.greenBg, color: T.green, label: 'פיצ׳ר' },
+                        fix: { bg: T.redBg, color: T.red, label: 'תיקון' },
+                        content: { bg: T.cyanBg, color: T.cyan, label: 'תוכן' },
+                        style: { bg: T.purpleBg, color: T.purple, label: 'עיצוב' },
+                        copy: { bg: T.orangeBg, color: T.orange, label: 'קופי' },
+                        refactor: { bg: 'rgba(255,255,255,0.06)', color: T.textSecondary, label: 'ריפקטור' },
+                        build: { bg: 'rgba(255,255,255,0.06)', color: T.textMuted, label: 'build' },
+                      };
+                      // Group by date
+                      let lastDateStr = '';
                       return (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                      {(pf || tf || sf) && <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '8px' }}>מציג {filtered.length} מתוך {changelogData.length}</p>}
+                      {(pf || tf || sf) && <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '12px' }}>מציג {filtered.length} מתוך {changelogData.length}</p>}
                       {filtered.map((entry: any, i: number) => {
-                        const typeColors: Record<string, { bg: string; color: string; icon: string }> = {
-                          feat: { bg: T.greenBg, color: T.green, icon: '✨' },
-                          fix: { bg: T.redBg, color: T.red, icon: '🐛' },
-                          content: { bg: T.cyanBg, color: T.cyan, icon: '📝' },
-                          style: { bg: T.purpleBg, color: T.purple, icon: '🎨' },
-                          copy: { bg: T.orangeBg, color: T.orange, icon: '✏️' },
-                          refactor: { bg: 'rgba(255,255,255,0.06)', color: T.textSecondary, icon: '♻️' },
-                          build: { bg: 'rgba(255,255,255,0.06)', color: T.textMuted, icon: '📦' },
-                        };
                         const tc = typeColors[entry.change_type] || typeColors.build;
                         const date = new Date(entry.created_at);
+                        const dateStr = date.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                        const showDateHeader = dateStr !== lastDateStr;
+                        lastDateStr = dateStr;
                         return (
-                          <div key={entry.id || i} style={{
-                            display: 'flex', gap: '12px', padding: '14px 0',
-                            borderBottom: i < filtered.length - 1 ? `1px solid ${T.rowBorder}` : 'none',
-                          }}>
-                            {/* Timeline dot */}
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '24px', paddingTop: '2px' }}>
-                              <span style={{ fontSize: '16px' }}>{tc.icon}</span>
-                            </div>
-                            {/* Content */}
-                            <div style={{ flex: 1 }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
-                                <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600, background: tc.bg, color: tc.color }}>{entry.change_type}</span>
-                                {entry.severity === 'major' && <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600, background: T.orangeBg, color: T.orange }}>major</span>}
-                                <span style={{ fontSize: '11px', color: T.textMuted }}>{date.toLocaleDateString('he-IL')} {date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</span>
-                                {entry.commit_hash && <span style={{ fontSize: '10px', color: T.textMuted, fontFamily: 'monospace' }}>{entry.commit_hash.substring(0, 8)}</span>}
+                          <div key={entry.id || i}>
+                            {showDateHeader && (
+                              <div style={{ padding: '12px 16px 8px', marginTop: i > 0 ? '8px' : '0', borderTop: i > 0 ? `1px solid ${T.rowBorder}` : 'none' }}>
+                                <span style={{ fontSize: '13px', fontWeight: 600, color: T.purple }}>{dateStr}</span>
                               </div>
-                              <p style={{ margin: '0 0 4px', fontSize: '14px', color: T.textPrimary, fontWeight: 500 }}>{entry.title}</p>
-                              {entry.description && <p style={{ margin: 0, fontSize: '13px', color: T.textSecondary, lineHeight: '1.5' }}>{entry.description}</p>}
-                              {entry.pages_affected && entry.pages_affected.length > 0 && (
-                                <div style={{ display: 'flex', gap: '4px', marginTop: '6px', flexWrap: 'wrap' }}>
-                                  {entry.pages_affected.map((p: string, j: number) => (
-                                    <span key={j} style={{ padding: '1px 8px', borderRadius: '4px', fontSize: '11px', background: 'rgba(255,255,255,0.04)', color: T.textMuted }}>{p}</span>
-                                  ))}
+                            )}
+                            <div style={{
+                              display: 'flex', alignItems: 'flex-start', gap: '14px', padding: '12px 16px',
+                              background: i % 2 === 0 ? 'rgba(255,255,255,0.015)' : 'transparent',
+                              borderRadius: '8px',
+                            }}>
+                              {/* Type badge */}
+                              <div style={{ minWidth: '60px', paddingTop: '2px' }}>
+                                <span style={{ display: 'inline-block', padding: '3px 8px', borderRadius: '6px', fontSize: '11px', fontWeight: 600, background: tc.bg, color: tc.color, textAlign: 'center', width: '100%' }}>{tc.label}</span>
+                              </div>
+                              {/* Content */}
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
+                                  <span style={{ fontSize: '14px', color: T.textPrimary, fontWeight: 500 }}>{entry.title}</span>
+                                  {entry.severity === 'major' && <span style={{ padding: '1px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: 600, background: T.orangeBg, color: T.orange }}>major</span>}
                                 </div>
-                              )}
+                                {entry.description && <p style={{ margin: '2px 0 0', fontSize: '13px', color: T.textSecondary, lineHeight: '1.5' }}>{entry.description}</p>}
+                                {entry.pages_affected && entry.pages_affected.length > 0 && (
+                                  <div style={{ display: 'flex', gap: '4px', marginTop: '6px', flexWrap: 'wrap' }}>
+                                    {entry.pages_affected.map((p: string, j: number) => (
+                                      <span key={j} style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '10px', background: 'rgba(255,255,255,0.04)', color: T.textMuted, border: `1px solid ${T.rowBorder}` }}>{p}</span>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                              {/* Time + commit */}
+                              <div style={{ minWidth: '70px', textAlign: 'left', paddingTop: '2px' }}>
+                                <span style={{ fontSize: '11px', color: T.textMuted }}>{date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</span>
+                                {entry.commit_hash && <div style={{ fontSize: '10px', color: T.textMuted, fontFamily: 'monospace', marginTop: '2px' }}>{entry.commit_hash.substring(0, 8)}</div>}
+                              </div>
                             </div>
                           </div>
                         );
