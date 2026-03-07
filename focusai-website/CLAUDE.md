@@ -1061,6 +1061,12 @@ Specialized subagents for specific tasks:
 | `content-from-url` | Creates blog articles from source URLs |
 | `architecture-guard` | Cross-page integrity validation (links, nav, sitemap, schema) |
 | `seo-auditor` | SEO audit (meta tags, OG, canonical, structured data) |
+| `copy-reviewer` | Brand voice review — banned words, CTAs, passive voice, hedging |
+| `performance-auditor` | Bundle size, images, React islands, third-party scripts, caching |
+| `security-scanner` | OWASP Top 10, secrets, Supabase RPCs, HTTP headers, dependencies |
+| `code-reviewer` | Code quality — readability, patterns, conventions, Astro/React best practices |
+| `tech-debt-scanner` | Technical debt inventory with prioritization scoring |
+| `full-site-auditor` | Comprehensive audit — SEO, links, schema, images, analytics, privacy, a11y |
 
 ---
 
