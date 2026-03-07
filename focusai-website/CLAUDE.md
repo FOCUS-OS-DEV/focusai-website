@@ -1,7 +1,7 @@
 # Focus AI Website - System Prompt
 
 > This file contains all instructions and context for Claude Code.
-> **Last Updated:** 2026-03-02
+> **Last Updated:** 2026-03-07
 
 ---
 
@@ -183,6 +183,8 @@ focusai-website/
 │   │   ├── clients.ts                   # Client logos data
 │   │   ├── team.ts                      # Founders data
 │   │   └── index.ts
+│   ├── utils/
+│   │   └── form-helpers.ts              # Shared form utilities (supabaseInsert, consent texts, tracking)
 │   ├── layouts/
 │   │   └── BaseLayout.astro             # Base HTML layout + SEO + Schema.org + noindex support
 │   ├── pages/                           # Routes (see Page Routes below)
@@ -1071,6 +1073,25 @@ Specialized subagents for specific tasks:
 ---
 
 ## Recent Changes Log
+
+### 2026-03-07
+- **Comprehensive audit (Phase 1-4)** — 16 findings fixed across legal, security, architecture, cleanup:
+  - C1: Marketing consent `required` removed (Israeli Privacy Law 30A) across 20+ forms
+  - C4: AbortController retry bug fixed in CTAContact
+  - C5: Supabase URL/key centralized in `config.ts` + new `form-helpers.ts` utility
+  - H1: Services pages added to sitemap
+  - H5: Analytics added to ai-dev-syllabus
+  - H12: Meta Pixel gated behind cookie consent on ai-dev
+  - H13: Firefox scrollbar `*` → `html` selector
+  - H14/H15: Analytics dashboard bugs (p_password:null, stale closure)
+  - M13: console.error removed from 5 production pages
+  - M30/H16: Stale webinar popup removed from homepage
+  - Webhook URLs centralized in siteConfig, 9 files migrated to shared imports
+- **Performance: async Google Fonts** — Render-blocking fonts converted to preload pattern across 18 standalone pages + BaseLayout
+- **Security: API key rotation** — Gemini API key removed from 11 generate-*.mjs scripts, .gitignore updated, key rotated
+- **Performance: hero preload** — LCP image preloaded on homepage
+- **Honeypot anti-bot protection** — Hidden honeypot field (`name="website"`) added to ALL 20+ forms across 14 files
+- **Audit report** saved at `focusai-website/AUDIT-REPORT-2026-03-07.md`
 
 ### 2026-03-02
 - **Fix: Astro regex escaping bug** — `\s` and `\u` in HTML `pattern` attributes were silently stripped by Astro's JS string processing. Fixed by using expression syntax `pattern={"..."}` with double-escaped backslashes. Added "Astro Template Gotchas" section to CLAUDE.md.
