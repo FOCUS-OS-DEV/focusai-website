@@ -489,6 +489,8 @@ export default function AnalyticsDashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [days, setDays] = useState(30);
+  const [customStart, setCustomStart] = useState('');
+  const [customEnd, setCustomEnd] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
   const [pageFilter, setPageFilter] = useState('');
   const [deviceFilter, setDeviceFilter] = useState('');
@@ -505,13 +507,14 @@ export default function AnalyticsDashboard() {
   const [showForms, setShowForms] = useState(true);
   const passwordRef = useRef('');
 
-  const fetchData = useCallback(async (pw: string, d: number, device?: string, utm?: string, page?: string) => {
+  const fetchData = useCallback(async (pw: string, d: number, device?: string, utm?: string, page?: string, startDate?: string, endDate?: string) => {
     setLoading(true); setError('');
     try {
       const body: Record<string, unknown> = { p_password: pw, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
       if (page) body.p_page_filter = page;
+      if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_analytics_v2`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
@@ -530,13 +533,15 @@ export default function AnalyticsDashboard() {
     } finally { setLoading(false); }
   }, [data]);
 
-  const fetchLeadsData = useCallback(async (pw: string, d: number) => {
+  const fetchLeadsData = useCallback(async (pw: string, d: number, startDate?: string, endDate?: string) => {
     setLeadsLoading(true);
     try {
+      const body: Record<string, unknown> = { p_password: null, p_days: d };
+      if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_leads_analytics`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
-        body: JSON.stringify({ p_password: null, p_days: d }),
+        body: JSON.stringify(body),
       });
       if (!res.ok) {
         const err = await res.text().catch(() => '');
@@ -565,13 +570,14 @@ export default function AnalyticsDashboard() {
     finally { setAiLoading(false); }
   }, [data, leadsData]);
 
-  const fetchAdvancedData = useCallback(async (d: number, device?: string, utm?: string, page?: string) => {
+  const fetchAdvancedData = useCallback(async (d: number, device?: string, utm?: string, page?: string, startDate?: string, endDate?: string) => {
     setAdvancedLoading(true);
     try {
       const body: Record<string, unknown> = { p_password: null, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
       if (page) body.p_page_filter = page;
+      if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_advanced_analytics`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
@@ -584,13 +590,14 @@ export default function AnalyticsDashboard() {
     finally { setAdvancedLoading(false); }
   }, []);
 
-  const fetchCroData = useCallback(async (d: number, device?: string, utm?: string, page?: string) => {
+  const fetchCroData = useCallback(async (d: number, device?: string, utm?: string, page?: string, startDate?: string, endDate?: string) => {
     setCroLoading(true);
     try {
       const body: Record<string, unknown> = { p_password: passwordRef.current, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
       if (page) body.p_page_filter = page;
+      if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_cro_data`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
@@ -618,42 +625,52 @@ export default function AnalyticsDashboard() {
     finally { setChangelogLoading(false); }
   }, []);
 
+  const getDateParams = (): [string | undefined, string | undefined] => customStart && customEnd ? [customStart, customEnd] : [undefined, undefined];
   const handleLogin = (e: React.FormEvent) => { e.preventDefault(); passwordRef.current = password; fetchData(password, days); };
   const changeDays = (d: number) => {
-    setDays(d); setLeadsData(null); setAdvancedData(null); setCroData(null);
+    setDays(d); setCustomStart(''); setCustomEnd(''); setLeadsData(null); setAdvancedData(null); setCroData(null);
     fetchData(passwordRef.current, d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
+  };
+  const applyCustomRange = (start: string, end: string) => {
+    setCustomStart(start); setCustomEnd(end); setDays(0); setLeadsData(null); setAdvancedData(null); setCroData(null);
+    fetchData(passwordRef.current, 30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
   };
   const applyFilters = (device: string, utm: string) => {
     setDeviceFilter(device); setUtmSourceFilter(utm);
     setLeadsData(null); setAdvancedData(null); setCroData(null);
-    fetchData(passwordRef.current, days, device || undefined, utm || undefined, pageFilter || undefined);
+    const [sd, ed] = getDateParams();
+    fetchData(passwordRef.current, days, device || undefined, utm || undefined, pageFilter || undefined, sd, ed);
   };
   const toggleSort = (key: string) => setPageSort(prev => ({ key, dir: prev.key === key && prev.dir === 'desc' ? 'asc' : 'desc' }));
 
   // Auto-refresh
   useEffect(() => {
     if (!autoRefresh || !isAuthed) return;
-    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined), 60000);
+    const [sd, ed] = getDateParams();
+    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed), 60000);
     return () => clearInterval(id);
-  }, [autoRefresh, isAuthed, days, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
+  }, [autoRefresh, isAuthed, days, customStart, customEnd, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 
   // Fetch leads data when tab switches to leads
   useEffect(() => {
     if (activeTab !== 'leads' || !isAuthed || leadsData) return;
-    fetchLeadsData(passwordRef.current, days);
-  }, [activeTab, isAuthed, days, leadsData, fetchLeadsData]);
+    const [sd, ed] = getDateParams();
+    fetchLeadsData(passwordRef.current, days, sd, ed);
+  }, [activeTab, isAuthed, days, customStart, customEnd, leadsData, fetchLeadsData]);
 
   // Fetch advanced data when behavior tab opens
   useEffect(() => {
     if (activeTab !== 'behavior' || !isAuthed || advancedData) return;
-    fetchAdvancedData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
-  }, [activeTab, isAuthed, days, advancedData, deviceFilter, utmSourceFilter, pageFilter, fetchAdvancedData]);
+    const [sd, ed] = getDateParams();
+    fetchAdvancedData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed);
+  }, [activeTab, isAuthed, days, customStart, customEnd, advancedData, deviceFilter, utmSourceFilter, pageFilter, fetchAdvancedData]);
 
   // Fetch CRO data when CRO tab opens
   useEffect(() => {
     if (activeTab !== 'cro' || !isAuthed || croData) return;
-    fetchCroData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
-  }, [activeTab, isAuthed, days, croData, deviceFilter, utmSourceFilter, pageFilter, fetchCroData]);
+    const [sd, ed] = getDateParams();
+    fetchCroData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed);
+  }, [activeTab, isAuthed, days, customStart, customEnd, croData, deviceFilter, utmSourceFilter, pageFilter, fetchCroData]);
 
   // Fetch changelog when changelog tab opens
   useEffect(() => {
@@ -664,9 +681,10 @@ export default function AnalyticsDashboard() {
   // Real-time tab polling (30s)
   useEffect(() => {
     if (activeTab !== 'realtime' || !isAuthed) return;
-    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined), 30000);
+    const [sd, ed] = getDateParams();
+    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed), 30000);
     return () => clearInterval(id);
-  }, [activeTab, isAuthed, days, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
+  }, [activeTab, isAuthed, days, customStart, customEnd, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 
   /* ─── Derived Data ─── */
   const allPages = useMemo(() => data?.page_details?.map(p => p.page_path).sort() || [], [data]);
@@ -801,7 +819,7 @@ export default function AnalyticsDashboard() {
             <option value="">כל המקורות</option>
             {utmSources.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
-          <select value={pageFilter} onChange={e => { setPageFilter(e.target.value); setLeadsData(null); setAdvancedData(null); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, e.target.value || undefined); }} dir="rtl" style={{
+          <select value={pageFilter} onChange={e => { setPageFilter(e.target.value); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, e.target.value || undefined, sd, ed); }} dir="rtl" style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${pageFilter ? T.purple : T.cardBorder}`,
             background: pageFilter ? T.purpleBg : T.cardBg, color: pageFilter ? T.purple : T.textSecondary,
             fontSize: '13px', cursor: 'pointer', outline: 'none', maxWidth: '200px', fontFamily: 'Heebo, sans-serif',
@@ -810,7 +828,7 @@ export default function AnalyticsDashboard() {
             {allPages.map(p => <option key={p} value={p}>{decodePath(p)}</option>)}
           </select>
           {(deviceFilter || utmSourceFilter || pageFilter) && (
-            <button onClick={() => { setDeviceFilter(''); setUtmSourceFilter(''); setPageFilter(''); setLeadsData(null); setAdvancedData(null); fetchData(passwordRef.current, days); }} style={{
+            <button onClick={() => { setDeviceFilter(''); setUtmSourceFilter(''); setPageFilter(''); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, undefined, undefined, undefined, sd, ed); }} style={{
               padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.red}`,
               background: T.redBg, color: T.red, cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
             }}>✕ נקה פילטרים</button>
@@ -820,18 +838,45 @@ export default function AnalyticsDashboard() {
             background: autoRefresh ? T.greenBg : T.cardBg, color: autoRefresh ? T.green : T.textMuted,
             cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
           }}>{autoRefresh ? '⏸ עצור' : '▶ רענון אוטומטי'}</button>
-          <button onClick={() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined)} disabled={loading} style={{
+          <button onClick={() => { const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed); }} disabled={loading} style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.cardBorder}`,
             background: T.cardBg, color: loading ? T.textMuted : T.green, cursor: loading ? 'default' : 'pointer', fontSize: '14px',
           }}>{loading ? '⏳' : '🔄'}</button>
           {[7, 14, 30, 90].map(d => (
             <button key={d} onClick={() => changeDays(d)} style={{
               padding: '8px 16px', borderRadius: '8px',
-              border: days === d ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
-              background: days === d ? T.purpleBg : T.cardBg,
-              color: days === d ? T.purple : T.textSecondary, cursor: 'pointer', fontSize: '14px', fontWeight: days === d ? 600 : 400,
+              border: days === d && !customStart ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
+              background: days === d && !customStart ? T.purpleBg : T.cardBg,
+              color: days === d && !customStart ? T.purple : T.textSecondary, cursor: 'pointer', fontSize: '14px', fontWeight: days === d && !customStart ? 600 : 400,
             }}>{d} ימים</button>
           ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 8px', borderRadius: '8px',
+            border: customStart ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
+            background: customStart ? T.purpleBg : T.cardBg }}>
+            <span style={{ fontSize: '12px', color: T.textMuted }}>📅</span>
+            <input type="date" value={customStart} onChange={e => {
+              const v = e.target.value;
+              setCustomStart(v);
+              if (v && customEnd && v <= customEnd) applyCustomRange(v, customEnd);
+            }} style={{
+              background: 'transparent', border: 'none', color: customStart ? T.purple : T.textSecondary,
+              fontSize: '13px', outline: 'none', cursor: 'pointer', fontFamily: 'monospace',
+            }} />
+            <span style={{ color: T.textMuted, fontSize: '12px' }}>—</span>
+            <input type="date" value={customEnd} onChange={e => {
+              const v = e.target.value;
+              setCustomEnd(v);
+              if (customStart && v && customStart <= v) applyCustomRange(customStart, v);
+            }} style={{
+              background: 'transparent', border: 'none', color: customEnd ? T.purple : T.textSecondary,
+              fontSize: '13px', outline: 'none', cursor: 'pointer', fontFamily: 'monospace',
+            }} />
+            {customStart && (
+              <button onClick={() => { setCustomStart(''); setCustomEnd(''); changeDays(30); }} style={{
+                background: 'none', border: 'none', color: T.red, cursor: 'pointer', fontSize: '12px', padding: '0 4px',
+              }}>✕</button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -1258,7 +1303,7 @@ export default function AnalyticsDashboard() {
                 <div style={{ textAlign: 'center', padding: '60px 20px', color: T.textMuted }}>
                   <p style={{ fontSize: '16px' }}>לא ניתן לטעון נתוני לידים</p>
                   <p style={{ fontSize: '13px', marginTop: '4px' }}>בדוק ב-Console לפרטי השגיאה</p>
-                  <button onClick={() => fetchLeadsData(passwordRef.current, days)} style={{
+                  <button onClick={() => { const [sd, ed] = getDateParams(); fetchLeadsData(passwordRef.current, days, sd, ed); }} style={{
                     marginTop: '12px', padding: '8px 20px', borderRadius: '8px', border: `1px solid ${T.purple}`,
                     background: T.purpleBg, color: T.purple, cursor: 'pointer', fontSize: '14px', fontFamily: 'Heebo, sans-serif',
                   }}>נסה שוב</button>
@@ -2781,7 +2826,7 @@ export default function AnalyticsDashboard() {
                       </div>
                     );
                   })}
-                  <p style={{ fontSize: '11px', color: T.textMuted, marginTop: '4px' }}>* יעדים מבוססים על טווח הימים הנבחר ({days} ימים)</p>
+                  <p style={{ fontSize: '11px', color: T.textMuted, marginTop: '4px' }}>* יעדים מבוססים על טווח הימים הנבחר ({customStart ? `${customStart} — ${customEnd}` : `${days} ימים`})</p>
                 </div>
               </Card>
 
