@@ -24,3 +24,7 @@ pnpm-debug.log*
 .idea/
 
 .vercel
+
+# Local utility scripts with API keys
+generate-*.mjs
+_*.mjs
