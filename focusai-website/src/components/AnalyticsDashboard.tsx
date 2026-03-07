@@ -1890,11 +1890,25 @@ export default function AnalyticsDashboard() {
                     : null;
 
                   return (
-                    <div key={asset.id} onClick={() => { if (asset.paths[0]) { setPageFilter(asset.paths[0]); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, asset.paths[0], sd, ed); } }} style={{
-                      background: T.cardBg, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-                      border: `1px solid ${pageFilter && asset.paths.includes(pageFilter) ? T.purple : T.cardBorder}`,
+                    <div key={asset.id} onClick={() => {
+                      if (!asset.paths[0]) return;
+                      // Toggle: click same asset again to deselect
+                      if (pageFilter === asset.paths[0]) {
+                        setPageFilter(''); setLeadsData(null); setAdvancedData(null);
+                        const [sd, ed] = getDateParams();
+                        fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, undefined, sd, ed);
+                      } else {
+                        setPageFilter(asset.paths[0]); setLeadsData(null); setAdvancedData(null);
+                        const [sd, ed] = getDateParams();
+                        fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, asset.paths[0], sd, ed);
+                      }
+                    }} style={{
+                      background: pageFilter && asset.paths.includes(pageFilter) ? 'rgba(124,58,237,0.06)' : T.cardBg,
+                      backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+                      border: `2px solid ${pageFilter && asset.paths.includes(pageFilter) ? T.purple : T.cardBorder}`,
                       borderRadius: '16px', padding: '20px', cursor: asset.paths[0] ? 'pointer' : 'default',
-                      boxShadow: T.cardShadow, transition: 'all 0.2s',
+                      boxShadow: pageFilter && asset.paths.includes(pageFilter) ? `0 4px 20px rgba(124,58,237,0.15)` : T.cardShadow,
+                      transition: 'all 0.2s', transform: pageFilter && asset.paths.includes(pageFilter) ? 'scale(1.02)' : 'scale(1)',
                     }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                         <span style={{ fontSize: '24px' }}>{asset.icon}</span>
@@ -1921,6 +1935,74 @@ export default function AnalyticsDashboard() {
                   );
                 })}
               </div>
+
+              {/* Selected Asset Drill-Down */}
+              {pageFilter && (() => {
+                const selectedAsset = ASSETS.find(a => a.paths.includes(pageFilter));
+                if (!selectedAsset) return null;
+                const assetSources = (data.source_pages || []).filter(sp => selectedAsset.paths.includes(sp.page_path)).sort((a, b) => b.visits - a.visits);
+                const assetForms = (data.form_details || []).filter(f => selectedAsset.paths.includes(f.page_path));
+                const assetLandings = (data.landing_pages || []).filter(l => selectedAsset.paths.includes(l.page_path));
+                const totalPaid = assetLandings.reduce((s, l) => s + l.paid_entries, 0);
+                const totalOrganic = assetLandings.reduce((s, l) => s + l.organic_entries, 0);
+                return (
+                  <div style={{
+                    padding: '20px', borderRadius: '16px', marginBottom: '20px', direction: 'rtl',
+                    background: 'rgba(124,58,237,0.04)', border: `1px solid ${T.purple}20`,
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span style={{ fontSize: '24px' }}>{selectedAsset.icon}</span>
+                        <span style={{ fontSize: '18px', fontWeight: 700, color: T.textPrimary }}>{selectedAsset.name}</span>
+                        <span style={{ fontSize: '13px', color: T.textMuted, fontFamily: 'monospace' }}>{pageFilter}</span>
+                      </div>
+                      <button onClick={() => { setPageFilter(''); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, undefined, sd, ed); }} style={{
+                        padding: '6px 14px', borderRadius: '8px', border: `1px solid ${T.purple}30`, background: T.purpleBg,
+                        color: T.purple, cursor: 'pointer', fontSize: '13px', fontWeight: 600, fontFamily: 'Heebo, sans-serif',
+                      }}>✕ סגור</button>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px' }}>
+                      {totalPaid + totalOrganic > 0 && (
+                        <div style={{ padding: '14px', borderRadius: '12px', background: T.cardBg, border: `1px solid ${T.cardBorder}`, textAlign: 'center' }}>
+                          <div style={{ fontSize: '12px', color: T.textMuted, marginBottom: '6px' }}>ממומן / אורגני</div>
+                          <div style={{ fontSize: '16px', fontWeight: 700 }}>
+                            <span style={{ color: T.purple }}>{totalPaid}</span>
+                            <span style={{ color: T.textMuted }}> / </span>
+                            <span style={{ color: T.green }}>{totalOrganic}</span>
+                          </div>
+                        </div>
+                      )}
+                      {assetSources.length > 0 && (
+                        <div style={{ padding: '14px', borderRadius: '12px', background: T.cardBg, border: `1px solid ${T.cardBorder}`, textAlign: 'center' }}>
+                          <div style={{ fontSize: '12px', color: T.textMuted, marginBottom: '6px' }}>מקורות תנועה</div>
+                          <div style={{ fontSize: '14px', fontWeight: 600, color: T.textPrimary }}>{assetSources.length} מקורות</div>
+                          <div style={{ fontSize: '12px', color: T.textSecondary, marginTop: '4px' }}>מוביל: {assetSources[0].source}</div>
+                        </div>
+                      )}
+                      {assetForms.length > 0 && (
+                        <div style={{ padding: '14px', borderRadius: '12px', background: T.cardBg, border: `1px solid ${T.cardBorder}`, textAlign: 'center' }}>
+                          <div style={{ fontSize: '12px', color: T.textMuted, marginBottom: '6px' }}>טפסים</div>
+                          <div style={{ fontSize: '16px', fontWeight: 700, color: T.green }}>{assetForms.reduce((s, f) => s + f.submissions, 0)}</div>
+                          <div style={{ fontSize: '12px', color: T.textSecondary, marginTop: '4px' }}>{assetForms.map(f => f.button_text).filter(Boolean).join(', ') || 'שליחות'}</div>
+                        </div>
+                      )}
+                      {assetSources.length > 0 && (
+                        <div style={{ padding: '14px', borderRadius: '12px', background: T.cardBg, border: `1px solid ${T.cardBorder}`, textAlign: 'center' }}>
+                          <div style={{ fontSize: '12px', color: T.textMuted, marginBottom: '6px' }}>Top 3 מקורות</div>
+                          {assetSources.slice(0, 3).map((s, i) => (
+                            <div key={i} style={{ fontSize: '12px', color: i === 0 ? T.purple : T.textSecondary, fontWeight: i === 0 ? 600 : 400 }}>
+                              {s.source} ({s.visits})
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <p style={{ fontSize: '12px', color: T.textMuted, marginTop: '12px', marginBottom: 0 }}>
+                      הטבלאות למטה מסוננות לנכס הנבחר. לחץ על הנכס שוב או על "סגור" כדי לחזור לתצוגה הכללית.
+                    </p>
+                  </div>
+                );
+              })()}
 
               {/* Page Categories Chart */}
               {data.page_categories && data.page_categories.length > 0 && (
