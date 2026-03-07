@@ -66,49 +66,97 @@ const TABS = [
 ] as const;
 
 /* ─── Customer Journey Definitions ─── */
-const JOURNEYS = [
-  { id: 'skills-he', name: 'Claude Skills (עברית)', landingPath: '/claude-skills-he', formSource: 'claude-skills-he', thankYouPath: '/claude-skills-thank-you', guidePath: '/claude-code-guide', color: '#7c3aed' },
-  { id: 'skills-managers', name: 'Claude Skills (מנהלים)', landingPath: '/claude-skills-managers', formSource: 'claude-skills-managers', thankYouPath: '/claude-skills-thank-you', guidePath: '/claude-code-guide-managers', color: '#0891b2' },
-  { id: 'skills-marketing', name: 'Claude Skills (שיווק)', landingPath: '/claude-skills-marketing', formSource: 'claude-skills-marketing', thankYouPath: '/claude-skills-thank-you', guidePath: '/claude-code-guide-marketing', color: '#059669' },
-  { id: 'botcamp', name: 'Bot-Camp', landingPath: '/academy', formSource: 'bot-camp-syllabus', thankYouPath: '/academy/thank-you', guidePath: '/bot-camp-syllabus', color: '#d97706' },
-] as const;
+type JourneyStep = { label: string; path: string; metric: 'views' | 'forms'; shared?: boolean };
+type Journey = { id: string; name: string; color: string; steps: JourneyStep[] };
+const JOURNEYS: Journey[] = [
+  { id: 'skills-he', name: 'Claude Skills (מפתחים)', color: '#7c3aed', steps: [
+    { label: 'דף נחיתה', path: '/claude-skills-he/', metric: 'views' },
+    { label: 'שליחת טופס (תודה)', path: '/claude-skills-thank-you/', metric: 'views', shared: true },
+    { label: 'צפייה במדריך', path: '/claude-code-guide/', metric: 'views' },
+  ]},
+  { id: 'skills-managers', name: 'Claude Skills (מנהלים)', color: '#0891b2', steps: [
+    { label: 'דף נחיתה', path: '/claude-skills-managers/', metric: 'views' },
+    { label: 'שליחת טופס (תודה)', path: '/claude-skills-thank-you/', metric: 'views', shared: true },
+    { label: 'צפייה במדריך', path: '/claude-code-guide-managers/', metric: 'views' },
+  ]},
+  { id: 'skills-marketing', name: 'Claude Skills (שיווק)', color: '#059669', steps: [
+    { label: 'דף נחיתה', path: '/claude-skills-marketing/', metric: 'views' },
+    { label: 'שליחת טופס (תודה)', path: '/claude-skills-thank-you/', metric: 'views', shared: true },
+    { label: 'צפייה במדריך', path: '/claude-code-guide-marketing/', metric: 'views' },
+  ]},
+  { id: 'botcamp', name: 'Bot-Camp', color: '#d97706', steps: [
+    { label: 'דף נחיתה', path: '/academy/', metric: 'views' },
+    { label: 'שליחת טופס', path: '/academy/', metric: 'forms' },
+    { label: 'דף תודה', path: '/academy/thank-you/', metric: 'views' },
+    { label: 'צפייה בסילבוס', path: '/bot-camp-syllabus/', metric: 'views' },
+  ]},
+  { id: 'webinar-n8n', name: 'וובינר N8N', color: '#8b5cf6', steps: [
+    { label: 'דף נחיתה', path: '/webinar-n8n-agent/', metric: 'views' },
+    { label: 'שליחת טופס', path: '/webinar-n8n-agent/', metric: 'forms' },
+    { label: 'דף תודה', path: '/webinar-n8n-thank-you/', metric: 'views' },
+  ]},
+  { id: 'content-automation', name: 'אוטומציית תוכן', color: '#ec4899', steps: [
+    { label: 'דף נחיתה', path: '/content-automation-course/', metric: 'views' },
+    { label: 'שליחת טופס', path: '/content-automation-course/', metric: 'forms' },
+    { label: 'צפייה בהדרכה', path: '/content-automation-watch/', metric: 'views' },
+  ]},
+  { id: 'ai-dev', name: 'AI Dev', color: '#06b6d4', steps: [
+    { label: 'דף נחיתה', path: '/ai-dev/', metric: 'views' },
+    { label: 'שליחת טופס', path: '/ai-dev/', metric: 'forms' },
+  ]},
+  { id: 'ai-agents', name: 'סוכני AI', color: '#f59e0b', steps: [
+    { label: 'דף נחיתה', path: '/ai-agents/', metric: 'views' },
+    { label: 'שליחת טופס', path: '/ai-agents/', metric: 'forms' },
+  ]},
+  { id: 'ai-workshop', name: 'סדנאות AI', color: '#10b981', steps: [
+    { label: 'דף נחיתה', path: '/ai-workshop/', metric: 'views' },
+    { label: 'שליחת טופס', path: '/ai-workshop/', metric: 'forms' },
+  ]},
+];
 
 /* ─── Digital Asset Definitions ─── */
 const ASSETS = [
   { id: 'homepage', name: 'דף הבית', paths: ['/'], icon: '🏠' },
-  { id: 'academy', name: 'Bot-Camp', paths: ['/academy'], icon: '🎓' },
-  { id: 'ai-dev', name: 'AI Dev', paths: ['/ai-dev'], icon: '💻' },
-  { id: 'skills-he', name: 'Claude Skills (עברית)', paths: ['/claude-skills-he', '/claude-code-guide'], icon: '🛠' },
-  { id: 'skills-mgr', name: 'Claude Skills (מנהלים)', paths: ['/claude-skills-managers', '/claude-code-guide-managers'], icon: '📊' },
-  { id: 'skills-mkt', name: 'Claude Skills (שיווק)', paths: ['/claude-skills-marketing', '/claude-code-guide-marketing'], icon: '📢' },
-  { id: 'ai-agents', name: 'סוכני AI', paths: ['/ai-agents'], icon: '🤖' },
-  { id: 'blog', name: 'חדשות AI', paths: ['/ai-news'], icon: '📰' },
-  { id: 'whatsapp', name: 'WhatsApp Group', paths: [], icon: '💬' },
+  { id: 'academy', name: 'Bot-Camp', paths: ['/academy/'], icon: '🎓' },
+  { id: 'ai-dev', name: 'AI Dev', paths: ['/ai-dev/'], icon: '💻' },
+  { id: 'skills-he', name: 'Claude Skills (מפתחים)', paths: ['/claude-skills-he/', '/claude-code-guide/'], icon: '🛠' },
+  { id: 'skills-mgr', name: 'Claude Skills (מנהלים)', paths: ['/claude-skills-managers/', '/claude-code-guide-managers/'], icon: '📊' },
+  { id: 'skills-mkt', name: 'Claude Skills (שיווק)', paths: ['/claude-skills-marketing/', '/claude-code-guide-marketing/'], icon: '📢' },
+  { id: 'ai-agents', name: 'סוכני AI', paths: ['/ai-agents/'], icon: '🤖' },
+  { id: 'blog', name: 'חדשות AI', paths: ['/ai-news/'], icon: '📰' },
+  { id: 'webinar', name: 'וובינר N8N', paths: ['/webinar-n8n-agent/'], icon: '🎥' },
+  { id: 'content-auto', name: 'אוטומציית תוכן', paths: ['/content-automation-course/'], icon: '📝' },
+  { id: 'workshop', name: 'סדנאות AI', paths: ['/ai-workshop/'], icon: '🎓' },
+  { id: 'whatsapp', name: 'WhatsApp', paths: [], icon: '💬' },
 ] as const;
 
 /* ─── Friendly page names ─── */
 const PAGE_NAMES: Record<string, string> = {
   '/': 'דף הבית',
-  '/academy': 'Bot-Camp (אקדמיה)',
-  '/ai-agents': 'סוכני AI',
-  '/ai-news': 'חדשות AI',
+  '/academy/': 'Bot-Camp (אקדמיה)',
+  '/ai-agents/': 'סוכני AI',
   '/ai-news/': 'חדשות AI',
-  '/ai-dev': 'AI Dev',
-  '/ai-workshop': 'סדנאות AI',
-  '/about': 'אודות',
-  '/tools': 'כלי AI',
-  '/careers': 'דרושים',
-  '/claude-skills-he': 'Claude Skills (עברית)',
-  '/claude-skills-managers': 'Claude Skills (מנהלים)',
-  '/claude-skills-marketing': 'Claude Skills (שיווק)',
-  '/claude-code-guide': 'מדריך Claude Code',
-  '/claude-code-guide-managers': 'מדריך Claude Code (מנהלים)',
-  '/claude-code-guide-marketing': 'מדריך Claude Code (שיווק)',
-  '/bot-camp-syllabus': 'סילבוס Bot-Camp',
-  '/academy/thank-you': 'תודה (אקדמיה)',
-  '/claude-skills-thank-you': 'תודה (Skills)',
-  '/webinar-n8n-agent': 'וובינר N8N',
-  '/content-automation-course': 'קורס אוטומציה',
+  '/ai-dev/': 'AI Dev',
+  '/ai-workshop/': 'סדנאות AI',
+  '/about/': 'אודות',
+  '/tools/': 'כלי AI',
+  '/careers/': 'דרושים',
+  '/claude-skills-he/': 'Claude Skills (מפתחים)',
+  '/claude-skills-managers/': 'Claude Skills (מנהלים)',
+  '/claude-skills-marketing/': 'Claude Skills (שיווק)',
+  '/claude-code-guide/': 'מדריך Claude Code',
+  '/claude-code-guide-managers/': 'מדריך Claude Code (מנהלים)',
+  '/claude-code-guide-marketing/': 'מדריך Claude Code (שיווק)',
+  '/bot-camp-syllabus/': 'סילבוס Bot-Camp',
+  '/academy/thank-you/': 'תודה (אקדמיה)',
+  '/claude-skills-thank-you/': 'תודה (Skills)',
+  '/webinar-n8n-agent/': 'וובינר N8N',
+  '/webinar-n8n-thank-you/': 'תודה (וובינר)',
+  '/content-automation-course/': 'קורס אוטומציה',
+  '/content-automation-watch/': 'צפייה (אוטומציה)',
+  '/links/': 'קישורים',
+  '/privacy-policy/': 'מדיניות פרטיות',
+  '/terms/': 'תנאי שימוש',
 };
 
 /* ─── UTM Medium Hebrew Legend ─── */
@@ -223,8 +271,9 @@ interface AdvancedData {
 function decodePath(p: string): string {
   try {
     const decoded = decodeURIComponent(p);
-    const clean = decoded.endsWith('/') && decoded.length > 1 ? decoded.slice(0, -1) : decoded;
-    return PAGE_NAMES[clean] || PAGE_NAMES[decoded] || decoded;
+    const withSlash = decoded.endsWith('/') || decoded === '/' ? decoded : decoded + '/';
+    const withoutSlash = decoded.endsWith('/') && decoded.length > 1 ? decoded.slice(0, -1) : decoded;
+    return PAGE_NAMES[decoded] || PAGE_NAMES[withSlash] || PAGE_NAMES[withoutSlash] || decoded;
   } catch { return p; }
 }
 function calcTrend(current: number, previous: number): { value: number; direction: 'up' | 'down' | 'flat' } {
@@ -292,25 +341,304 @@ function aggregateByGranularity(data: { day: string; views: number; clicks: numb
   return Object.values(map).sort((a, b) => a.day.localeCompare(b.day));
 }
 
-function getCROSuggestions(data: AnalyticsData): string[] {
-  const s: string[] = [];
+type MarketingInsight = {
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  category: 'conversion' | 'campaigns' | 'content' | 'technical' | 'timing' | 'opportunity' | 'journeys';
+  title: string;
+  body: string;
+  action: string;
+  metric?: string;
+};
+
+function generateMarketingInsights(data: AnalyticsData, advancedData: AdvancedData | null, leadsData: LeadsData | null): MarketingInsight[] {
+  const insights: MarketingInsight[] = [];
+
+  // ─── 1. Landing Page Health ───
   if (data.page_details) {
-    const highNoConv = data.page_details.filter(p => p.views > 10 && p.forms === 0).slice(0, 3);
-    if (highNoConv.length > 0) s.push(`${highNoConv.length} דפים עם תנועה גבוהה ללא המרות: ${highNoConv.map(p => decodePath(p.page_path)).join(', ')}`);
+    // Pages with high traffic but zero conversions
+    const highTrafficNoConv = data.page_details
+      .filter(p => p.views > 20 && p.forms === 0 && !p.page_path.includes('thank-you') && !p.page_path.includes('privacy') && !p.page_path.includes('terms'))
+      .sort((a, b) => b.views - a.views);
+    if (highTrafficNoConv.length > 0) {
+      const top3 = highTrafficNoConv.slice(0, 3);
+      const totalWasted = top3.reduce((s, p) => s + p.views, 0);
+      insights.push({
+        priority: totalWasted > 100 ? 'critical' : 'high',
+        category: 'conversion',
+        title: 'דפים עם תנועה ללא המרה',
+        body: `${highTrafficNoConv.length} דפים מקבלים תנועה (${totalWasted} צפיות בסה"כ) אבל אף אחד לא ממלא טופס. הדפים הבולטים: ${top3.map(p => `${decodePath(p.page_path)} (${p.views})`).join(', ')}`,
+        action: 'הוסף טופס או CTA ברור בדפים הללו. אם יש טופס, בדוק שהוא מעל ה-fold (חלק העליון של הדף) ושה-CTA ברור וספציפי',
+        metric: `${totalWasted} צפיות מבוזבזות`,
+      });
+    }
+
+    // Pages with good conversion rate - what's working
+    const goodConverters = data.page_details
+      .filter(p => p.views > 10 && p.forms > 0)
+      .map(p => ({ ...p, conv: (p.forms / p.views) * 100 }))
+      .sort((a, b) => b.conv - a.conv);
+    if (goodConverters.length > 0) {
+      const best = goodConverters[0];
+      insights.push({
+        priority: 'low',
+        category: 'opportunity',
+        title: 'הדף הכי ממיר שלך',
+        body: `${decodePath(best.page_path)} ממיר ${best.conv.toFixed(1)}% (${best.forms} טפסים מתוך ${best.views} צפיות). זה הנכס הכי חזק שלך.`,
+        action: 'שקול להפנות יותר תנועה ממומנת לדף הזה. בדוק מה עובד בו (מבנה, כותרת, CTA) והעתק את הנוסחה לדפים אחרים',
+        metric: `${best.conv.toFixed(1)}% המרה`,
+      });
+    }
   }
-  if (data.session_stats && data.session_stats.bounce_rate > 70)
-    s.push(`שיעור נטישה גבוה (${data.session_stats.bounce_rate}%) — שקול לשפר תוכן דף הנחיתה`);
-  if (data.whatsapp_clicks > 0 && data.total_forms > 0 && data.whatsapp_clicks > data.total_forms * 3)
-    s.push('משתמשים מעדיפים וואטסאפ על טפסים — שקול להדגיש את כפתור הוואטסאפ');
-  if (data.devices) {
-    const mobile = data.devices.find(d => d.device_type === 'mobile');
-    const total = data.devices.reduce((sum, d) => sum + d.count, 0);
-    if (mobile && total > 0 && (mobile.count / total) > 0.6)
-      s.push('רוב התנועה מנייד — ודא שהטפסים וה-CTA אופטימליים למובייל');
+
+  // ─── 2. Campaign ROI Analysis ───
+  if (data.utm_campaigns_v2 && data.utm_campaigns_v2.length > 0) {
+    const campaigns = data.utm_campaigns_v2;
+    // Campaigns with traffic but no conversions
+    const wastedCampaigns = campaigns.filter(c => c.visits > 5 && c.forms === 0);
+    const convertingCampaigns = campaigns.filter(c => c.forms > 0).sort((a, b) => b.conversion_rate - a.conversion_rate);
+
+    if (wastedCampaigns.length > 0 && convertingCampaigns.length > 0) {
+      const totalWastedVisits = wastedCampaigns.reduce((s, c) => s + c.visits, 0);
+      const bestCampaign = convertingCampaigns[0];
+      insights.push({
+        priority: 'high',
+        category: 'campaigns',
+        title: 'תקציב ממומן לא ממיר',
+        body: `${wastedCampaigns.length} קמפיינים מביאים ${totalWastedVisits} ביקורים בלי אף המרה. לעומת זאת, קמפיין "${bestCampaign.utm_campaign || bestCampaign.utm_source}" ממיר ${bestCampaign.conversion_rate}% (${bestCampaign.forms} טפסים מ-${bestCampaign.visits} ביקורים).`,
+        action: `העבר תקציב מהקמפיינים שלא ממירים ל-"${bestCampaign.utm_campaign || bestCampaign.utm_source}". בדוק האם הבעיה בקהל, בקריאייטיב, או בדף הנחיתה`,
+        metric: `${totalWastedVisits} ביקורים מבוזבזים`,
+      });
+    }
+
+    // Paid vs organic performance
+    const paidCampaigns = campaigns.filter(c => c.utm_medium === 'paid' || c.utm_medium === 'cpc');
+    const organicCampaigns = campaigns.filter(c => c.utm_medium !== 'paid' && c.utm_medium !== 'cpc');
+    if (paidCampaigns.length > 0 && organicCampaigns.length > 0) {
+      const paidForms = paidCampaigns.reduce((s, c) => s + c.forms, 0);
+      const paidVisits = paidCampaigns.reduce((s, c) => s + c.visits, 0);
+      const organicForms = organicCampaigns.reduce((s, c) => s + c.forms, 0);
+      const organicVisits = organicCampaigns.reduce((s, c) => s + c.visits, 0);
+      const paidRate = paidVisits > 0 ? (paidForms / paidVisits) * 100 : 0;
+      const organicRate = organicVisits > 0 ? (organicForms / organicVisits) * 100 : 0;
+      if (paidRate > 0 || organicRate > 0) {
+        insights.push({
+          priority: 'medium',
+          category: 'campaigns',
+          title: 'ממומן מול אורגני',
+          body: `ממומן: ${paidVisits} ביקורים, ${paidForms} טפסים (${paidRate.toFixed(1)}%). אורגני: ${organicVisits} ביקורים, ${organicForms} טפסים (${organicRate.toFixed(1)}%).`,
+          action: paidRate > organicRate
+            ? 'הממומן ממיר טוב יותר. הגדל תקציב בהדרגה ועקוב אחרי CPA'
+            : 'האורגני ממיר טוב יותר. השקע בתוכן ו-SEO, צמצם ממומן לא ממיר',
+          metric: `ממומן ${paidRate.toFixed(1)}% | אורגני ${organicRate.toFixed(1)}%`,
+        });
+      }
+    }
   }
-  if (data.conversion_rate < 1 && data.total_pageviews > 50)
-    s.push(`אחוז המרה נמוך (${data.conversion_rate}%) — בדוק מיקום טפסים ו-CTA בדפים המובילים`);
-  return s;
+
+  // ─── 3. Journey Funnel Analysis ───
+  for (const journey of JOURNEYS) {
+    const stepValues = journey.steps.map(step => {
+      if (step.metric === 'forms') {
+        return (data.form_details || []).filter(f => f.page_path === step.path).reduce((s, f) => s + f.submissions, 0);
+      }
+      return data.page_details?.find(p => p.page_path === step.path)?.views || 0;
+    });
+
+    if (stepValues[0] === 0) continue;
+
+    // Find the biggest drop-off
+    let biggestDrop = 0, dropIdx = -1;
+    for (let i = 1; i < stepValues.length; i++) {
+      if (stepValues[i - 1] > 0) {
+        const dropRate = 1 - (stepValues[i] / stepValues[i - 1]);
+        if (dropRate > biggestDrop) { biggestDrop = dropRate; dropIdx = i; }
+      }
+    }
+
+    if (dropIdx > 0 && biggestDrop > 0.7 && stepValues[0] > 10) {
+      const droppedCount = stepValues[dropIdx - 1] - stepValues[dropIdx];
+      insights.push({
+        priority: biggestDrop > 0.9 ? 'critical' : 'high',
+        category: 'journeys',
+        title: `צוואר בקבוק: ${journey.name}`,
+        body: `${Math.round(biggestDrop * 100)}% נשירה בין "${journey.steps[dropIdx - 1].label}" (${stepValues[dropIdx - 1]}) ל-"${journey.steps[dropIdx].label}" (${stepValues[dropIdx]}). ${droppedCount} אנשים נפלו בשלב הזה.`,
+        action: dropIdx === 1 && journey.steps[dropIdx].metric === 'forms'
+          ? 'בדוק את הטופס: מיקום, כמות שדות, נוסח CTA. הטופס צריך להיות מעל ה-fold עם מינימום שדות'
+          : `בדוק למה אנשים לא ממשיכים מ-"${journey.steps[dropIdx - 1].label}" ל-"${journey.steps[dropIdx].label}". שפר את ה-CTA והניווט`,
+        metric: `${droppedCount} נפלו (${Math.round(biggestDrop * 100)}%)`,
+      });
+    }
+
+    // Overall journey conversion
+    const overallConv = stepValues[0] > 0 ? (stepValues[stepValues.length - 1] / stepValues[0]) * 100 : 0;
+    if (overallConv > 0 && overallConv < 5 && stepValues[0] > 20) {
+      insights.push({
+        priority: 'medium',
+        category: 'journeys',
+        title: `המרה נמוכה: ${journey.name}`,
+        body: `רק ${overallConv.toFixed(1)}% משלימים את כל המסע (${stepValues[stepValues.length - 1]} מתוך ${stepValues[0]}). המסע כולל ${journey.steps.length} שלבים.`,
+        action: 'קצר את המסע: צמצם שלבים, הסר חיכוך מיותר, ודא שכל שלב מוביל בצורה ברורה לשלב הבא',
+        metric: `${overallConv.toFixed(1)}% המרה כוללת`,
+      });
+    }
+  }
+
+  // ─── 4. Device Performance Gap ───
+  if (advancedData?.device_breakdown && advancedData.device_breakdown.length >= 2) {
+    const mobile = advancedData.device_breakdown.find(d => d.device_type === 'mobile');
+    const desktop = advancedData.device_breakdown.find(d => d.device_type === 'desktop');
+    if (mobile && desktop && mobile.sessions > 10 && desktop.sessions > 10) {
+      const gap = desktop.conversion_rate - mobile.conversion_rate;
+      if (gap > 2) {
+        insights.push({
+          priority: gap > 5 ? 'high' : 'medium',
+          category: 'technical',
+          title: 'פער המרה מובייל מול דסקטופ',
+          body: `דסקטופ ממיר ${desktop.conversion_rate.toFixed(1)}% (${desktop.forms} טפסים מ-${desktop.sessions} sessions). מובייל ממיר ${mobile.conversion_rate.toFixed(1)}% (${mobile.forms} טפסים מ-${mobile.sessions} sessions). פער של ${gap.toFixed(1)} נקודות.`,
+          action: 'בדוק את חווית המובייל: גודל כפתורים (מינימום 44px), מהירות טעינה, מיקום הטופס. האם הטופס נראה טוב במסך קטן?',
+          metric: `פער ${gap.toFixed(1)}pp`,
+        });
+      }
+    }
+  }
+
+  // ─── 5. Bounce Rate Analysis ───
+  if (data.session_stats && data.session_stats.bounce_rate > 60 && data.session_stats.total_sessions > 20) {
+    insights.push({
+      priority: data.session_stats.bounce_rate > 80 ? 'critical' : 'high',
+      category: 'content',
+      title: 'שיעור נטישה גבוה',
+      body: `${data.session_stats.bounce_rate}% מהגולשים עוזבים אחרי דף אחד בלבד (ממוצע ${data.session_stats.avg_pages_per_session.toFixed(1)} דפים ל-session).`,
+      action: 'בדוק: זמן טעינה מהיר? תוכן רלוונטי לקהל? CTA ברור בחלק העליון? קישורים פנימיים לדפים נוספים?',
+      metric: `${data.session_stats.bounce_rate}% bounce rate`,
+    });
+  }
+
+  // ─── 6. Timing Optimization ───
+  if (data.hourly_distribution && data.hourly_distribution.length > 0) {
+    const sorted = [...data.hourly_distribution].sort((a, b) => b.count - a.count);
+    const peakHours = sorted.slice(0, 3).map(h => h.hour);
+    const deadHours = sorted.filter(h => h.count < sorted[0].count * 0.1).map(h => h.hour);
+    if (peakHours.length > 0) {
+      insights.push({
+        priority: 'medium',
+        category: 'timing',
+        title: 'שעות פעילות שיא',
+        body: `שעות השיא: ${peakHours.map(h => `${h}:00`).join(', ')}. ${deadHours.length > 0 ? `שעות מתות (כמעט ללא תנועה): ${deadHours.slice(0, 3).map(h => `${h}:00`).join(', ')}` : ''}`,
+        action: 'פרסם קמפיינים ותוכן ברשתות בשעות השיא. תזמן מודעות ממומנות 30 דקות לפני שעת השיא',
+        metric: `שיא: ${peakHours[0]}:00`,
+      });
+    }
+  }
+
+  if (advancedData?.dow_weekly && advancedData.dow_weekly.length > 0) {
+    const bestDay = [...advancedData.dow_weekly].sort((a, b) => b.forms - a.forms)[0];
+    const worstDay = [...advancedData.dow_weekly].sort((a, b) => a.forms - b.forms)[0];
+    if (bestDay.forms > 0) {
+      insights.push({
+        priority: 'low',
+        category: 'timing',
+        title: 'היום הכי ממיר בשבוע',
+        body: `יום ${DOW_LABELS[bestDay.dow]} הכי ממיר: ${bestDay.forms} טפסים (${bestDay.conversion_rate.toFixed(1)}% המרה). יום ${DOW_LABELS[worstDay.dow]} הכי חלש: ${worstDay.forms} טפסים.`,
+        action: `הגדל תקציב ממומן ביום ${DOW_LABELS[bestDay.dow]} וצמצם ביום ${DOW_LABELS[worstDay.dow]}`,
+        metric: `${DOW_LABELS[bestDay.dow]} = ${bestDay.forms} טפסים`,
+      });
+    }
+  }
+
+  // ─── 7. WhatsApp vs Forms ───
+  if (data.whatsapp_clicks > 0 && data.total_forms > 0) {
+    const ratio = data.whatsapp_clicks / data.total_forms;
+    if (ratio > 2) {
+      insights.push({
+        priority: 'medium',
+        category: 'opportunity',
+        title: 'גולשים מעדיפים וואטסאפ על טפסים',
+        body: `${data.whatsapp_clicks} לחיצות וואטסאפ מול ${data.total_forms} שליחות טופס (יחס ${ratio.toFixed(1)}:1). הגולשים בוחרים בערוץ המיידי.`,
+        action: 'הדגש את כפתור הוואטסאפ בכל דף נחיתה. שקול להחליף את ה-CTA הראשי מ-"מלא טופס" ל-"שלח וואטסאפ"',
+        metric: `${ratio.toFixed(1)}x וואטסאפ מול טפסים`,
+      });
+    }
+  }
+
+  // ─── 8. Traffic Sources Quality ───
+  if (data.referrers && data.referrers.length > 0 && data.landing_pages && data.landing_pages.length > 0) {
+    const totalPaid = data.landing_pages.reduce((s, p) => s + p.paid_entries, 0);
+    const totalOrganic = data.landing_pages.reduce((s, p) => s + p.organic_entries, 0);
+    const topReferrer = data.referrers[0];
+    if (totalPaid > 0 || totalOrganic > 0) {
+      insights.push({
+        priority: 'low',
+        category: 'campaigns',
+        title: 'מפת מקורות תנועה',
+        body: `ממומן: ${totalPaid} כניסות | אורגני: ${totalOrganic} כניסות. מקור מוביל: ${topReferrer.source === 'direct' ? 'ישיר (direct)' : topReferrer.source} (${topReferrer.visits} ביקורים).`,
+        action: totalPaid > totalOrganic
+          ? 'השקע בתוכן ו-SEO כדי לגוון מקורות ולהפחית תלות בממומן'
+          : 'תנועה אורגנית חזקה. הוסף רימרקטינג לקהל שביקר אבל לא המיר',
+        metric: `${totalPaid} paid | ${totalOrganic} organic`,
+      });
+    }
+  }
+
+  // ─── 9. Entry/Exit Page Analysis ───
+  if (advancedData?.entry_pages && advancedData?.exit_pages) {
+    const topEntry = advancedData.entry_pages[0];
+    const topExit = advancedData.exit_pages[0];
+    if (topEntry && topExit && topEntry.page_path === topExit.page_path) {
+      insights.push({
+        priority: 'high',
+        category: 'content',
+        title: 'דף כניסה = דף יציאה',
+        body: `${decodePath(topEntry.page_path)} הוא גם דף הכניסה וגם דף היציאה הנפוץ ביותר (${topEntry.entries} כניסות, ${topExit.exits} יציאות). גולשים נכנסים ועוזבים בלי לעבור לדף אחר.`,
+        action: 'הוסף קישורים פנימיים ברורים, CTA שמוביל לדף הבא, או תוכן שגורם לגלילה. ודא שהמסר ברור ב-3 השניות הראשונות',
+        metric: `${topExit.exits} יציאות`,
+      });
+    }
+  }
+
+  // ─── 10. Engagement Segments ───
+  if (advancedData?.engagement_segments) {
+    const seg = advancedData.engagement_segments;
+    const total = seg.one_page_sessions + seg.two_page_sessions + seg.three_plus_sessions;
+    if (total > 10) {
+      const singlePct = Math.round((seg.one_page_sessions / total) * 100);
+      const deepPct = Math.round((seg.three_plus_sessions / total) * 100);
+      const convertedPct = total > 0 ? Math.round((seg.converted_sessions / total) * 100) : 0;
+      if (singlePct > 70) {
+        insights.push({
+          priority: 'high',
+          category: 'content',
+          title: 'רוב הגולשים רואים דף אחד בלבד',
+          body: `${singlePct}% צפו בדף אחד (${seg.one_page_sessions} sessions). רק ${deepPct}% הגיעו ל-3+ דפים. ${convertedPct}% המירו.`,
+          action: 'צור "נתיב מומלץ" עם קישורים פנימיים ברורים. הוסף "מומלץ לקרוא גם" בסוף כל דף',
+          metric: `${singlePct}% single-page`,
+        });
+      }
+    }
+  }
+
+  // ─── 11. Conversion Rate Trend ───
+  if (data.conversion_rate !== undefined && data.prev_conversion_rate !== undefined) {
+    const change = data.conversion_rate - data.prev_conversion_rate;
+    if (Math.abs(change) > 1 && data.total_pageviews > 50) {
+      insights.push({
+        priority: change < -2 ? 'high' : 'low',
+        category: 'conversion',
+        title: change > 0 ? 'אחוז המרה עולה' : 'אחוז המרה יורד',
+        body: `המרה עכשיו: ${data.conversion_rate.toFixed(1)}% (קודם: ${data.prev_conversion_rate.toFixed(1)}%). ${change > 0 ? 'עלייה' : 'ירידה'} של ${Math.abs(change).toFixed(1)} נקודות.`,
+        action: change > 0
+          ? 'מה השתנה? זהה מה עובד (דף חדש? קמפיין? שינוי CTA?) והגבר אותו'
+          : 'בדוק מה השתנה: קמפיין חדש עם קהל לא רלוונטי? שינוי בדף? בעיה טכנית בטופס?',
+        metric: `${change > 0 ? '+' : ''}${change.toFixed(1)}pp`,
+      });
+    }
+  }
+
+  // Sort: critical first, then high, medium, low
+  const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+  insights.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+
+  return insights;
 }
 
 /* ─── Skeleton Loader ─── */
@@ -720,16 +1048,16 @@ export default function AnalyticsDashboard() {
     fetchLeadsData(passwordRef.current, days, sd, ed);
   }, [activeTab, isAuthed, days, customStart, customEnd, leadsData, fetchLeadsData]);
 
-  // Fetch advanced data when behavior tab opens
+  // Fetch advanced data when behavior or insights tab opens
   useEffect(() => {
-    if (activeTab !== 'behavior' || !isAuthed || advancedData) return;
+    if ((activeTab !== 'behavior' && activeTab !== 'insights') || !isAuthed || advancedData) return;
     const [sd, ed] = getDateParams();
     fetchAdvancedData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed);
   }, [activeTab, isAuthed, days, customStart, customEnd, advancedData, deviceFilter, utmSourceFilter, pageFilter, fetchAdvancedData]);
 
-  // Fetch CRO data when CRO or Journeys tab opens
+  // Fetch CRO data when CRO tab opens
   useEffect(() => {
-    if ((activeTab !== 'cro' && activeTab !== 'journeys') || !isAuthed || croData) return;
+    if (activeTab !== 'cro' || !isAuthed || croData) return;
     const [sd, ed] = getDateParams();
     fetchCroData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed);
   }, [activeTab, isAuthed, days, customStart, customEnd, croData, deviceFilter, utmSourceFilter, pageFilter, fetchCroData]);
@@ -804,7 +1132,7 @@ export default function AnalyticsDashboard() {
     return Object.entries(map).map(([h, c]) => ({ hour: `${h}:00`, count: c, hourNum: +h }));
   }, [data]);
 
-  const croSuggestions = useMemo(() => data ? getCROSuggestions(data) : [], [data]);
+  const marketingInsights = useMemo(() => data ? generateMarketingInsights(data, advancedData, leadsData) : [], [data, advancedData, leadsData]);
 
   // Anomaly detection
   const anomalies = useMemo(() => {
@@ -1409,58 +1737,57 @@ export default function AnalyticsDashboard() {
 
               {/* Journey Funnels */}
               {JOURNEYS.map(journey => {
-                const landingVisits = data.page_details?.find(p => p.page_path === journey.landingPath)?.views || 0;
-                const formSubmissions = data.form_details?.filter(f => f.page_path === journey.landingPath).reduce((s, f) => s + f.submissions, 0) || 0;
-                const guideVisits = journey.guidePath ? (data.page_details?.find(p => p.page_path === journey.guidePath)?.views || 0) : 0;
-                const thankYouVisits = data.page_details?.find(p => p.page_path === journey.thankYouPath)?.views || 0;
-                const formEngagement = croData?.form_engagement?.find((f: any) => f.form_id === journey.formSource);
-                const formStarts = formEngagement?.starts || 0;
-                const formAbandons = formEngagement?.abandons || 0;
-                const guideTime = croData?.time_on_page?.find((t: any) => t.page_path === journey.guidePath);
+                const stepValues = journey.steps.map(step => {
+                  if (step.metric === 'forms') {
+                    return (data.form_details || []).filter(f => f.page_path === step.path).reduce((s, f) => s + f.submissions, 0);
+                  }
+                  return data.page_details?.find(p => p.page_path === step.path)?.views || 0;
+                });
+                const maxStep = Math.max(stepValues[0], 1);
+                const hasData = stepValues.some(v => v > 0);
 
-                const steps = [
-                  { label: 'כניסה לדף', value: landingVisits, color: journey.color },
-                  { label: 'התחלת טופס', value: formStarts || Math.round(landingVisits * 0.3), color: journey.color },
-                  { label: 'שליחת טופס', value: formSubmissions || thankYouVisits, color: journey.color },
-                  ...(journey.guidePath ? [{ label: 'צפייה במדריך', value: guideVisits, color: journey.color }] : []),
-                ];
-                const maxStep = Math.max(steps[0].value, 1);
+                if (!hasData) return null;
 
                 return (
                   <Card key={journey.id} title={journey.name}>
                     <div style={{ direction: 'rtl' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        {steps.map((step, i) => {
-                          const pct = (step.value / maxStep) * 100;
-                          const dropPct = i > 0 && steps[i - 1].value > 0 ? Math.round((step.value / steps[i - 1].value) * 100) : 100;
+                        {journey.steps.map((step, i) => {
+                          const value = stepValues[i];
+                          const pct = (value / maxStep) * 100;
+                          const dropPct = i > 0 && stepValues[i - 1] > 0 ? Math.round((value / stepValues[i - 1]) * 100) : 100;
+                          const dropped = i > 0 && stepValues[i - 1] > 0 ? stepValues[i - 1] - value : 0;
                           return (
-                            <div key={step.label}>
+                            <div key={step.label + step.path}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', alignItems: 'center' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                  <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: step.color, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700 }}>{i + 1}</span>
+                                  <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: journey.color, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700 }}>{i + 1}</span>
                                   <span style={{ fontSize: '14px', color: T.textPrimary, fontWeight: 500 }}>{step.label}</span>
+                                  {step.shared && <span style={{ fontSize: '12px', color: T.textMuted, fontStyle: 'italic' }}>(משותף)</span>}
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                  <span style={{ fontSize: '16px', color: step.color, fontWeight: 700 }}>{step.value.toLocaleString('he-IL')}</span>
+                                  <span style={{ fontSize: '16px', color: journey.color, fontWeight: 700 }}>{value.toLocaleString('he-IL')}</span>
                                   {i > 0 && <span style={{ fontSize: '12px', color: dropPct > 50 ? T.green : dropPct > 20 ? T.orange : T.red, fontWeight: 600, padding: '2px 8px', borderRadius: '6px', background: dropPct > 50 ? T.greenBg : dropPct > 20 ? T.orangeBg : T.redBg }}>{dropPct}%</span>}
                                 </div>
                               </div>
                               <div style={{ height: '10px', background: 'rgba(0,0,0,0.03)', borderRadius: '5px', overflow: 'hidden' }}>
-                                <div style={{ height: '100%', width: `${Math.max(pct, 2)}%`, background: `linear-gradient(90deg, ${step.color}, ${step.color}90)`, borderRadius: '5px', transition: 'width 0.6s ease' }} />
+                                <div style={{ height: '100%', width: `${Math.max(pct, 2)}%`, background: `linear-gradient(90deg, ${journey.color}, ${journey.color}90)`, borderRadius: '5px', transition: 'width 0.6s ease' }} />
                               </div>
-                              {i > 0 && formAbandons > 0 && i === 2 && (
+                              {i > 0 && dropped > 0 && (
                                 <div style={{ fontSize: '12px', color: T.red, marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                  <span>↓</span> {formAbandons} נטשו טופס ({formEngagement?.abandon_rate || 0}%)
+                                  <span>↓</span> {dropped.toLocaleString('he-IL')} נשרו ({100 - dropPct}%)
                                 </div>
                               )}
                             </div>
                           );
                         })}
                       </div>
-                      {guideTime && (
-                        <div style={{ marginTop: '16px', padding: '12px 16px', borderRadius: '10px', background: T.purpleBg, border: `1px solid ${T.purple}15` }}>
-                          <span style={{ fontSize: '13px', color: T.textSecondary }}>זמן ממוצע במדריך: </span>
-                          <span style={{ fontSize: '14px', color: T.purple, fontWeight: 600 }}>{formatDuration(guideTime.avg_time || 0)}</span>
+                      {/* Overall conversion */}
+                      {stepValues[0] > 0 && stepValues.length > 1 && (
+                        <div style={{ marginTop: '16px', padding: '12px 16px', borderRadius: '10px', background: T.purpleBg, border: `1px solid ${journey.color}15` }}>
+                          <span style={{ fontSize: '13px', color: T.textSecondary }}>המרה כוללת (שלב 1 → {journey.steps.length}): </span>
+                          <span style={{ fontSize: '14px', color: journey.color, fontWeight: 600 }}>{Math.round((stepValues[stepValues.length - 1] / stepValues[0]) * 100)}%</span>
+                          <span style={{ fontSize: '12px', color: T.textMuted, marginRight: '8px' }}>({stepValues[stepValues.length - 1].toLocaleString('he-IL')} / {stepValues[0].toLocaleString('he-IL')})</span>
                         </div>
                       )}
                     </div>
@@ -1474,29 +1801,34 @@ export default function AnalyticsDashboard() {
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', direction: 'rtl' }}>
                     <thead>
                       <tr>
-                        {['מסע', 'כניסות', 'טפסים', 'המרה %', 'צפייה במדריך'].map(h => (
+                        {['מסע', 'כניסות', 'המרות (אחרון)', 'המרה %', 'שלבים'].map(h => (
                           <th key={h} style={{ padding: '12px 8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontWeight: 500, fontSize: '12px', textAlign: h === 'מסע' ? 'right' : 'center' }}>{h}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
                       {JOURNEYS.map(j => {
-                        const visits = data.page_details?.find(p => p.page_path === j.landingPath)?.views || 0;
-                        const forms = data.form_details?.filter(f => f.page_path === j.landingPath).reduce((s, f) => s + f.submissions, 0) || 0;
-                        const thankYou = data.page_details?.find(p => p.page_path === j.thankYouPath)?.views || 0;
-                        const conv = visits > 0 ? Math.round(((forms || thankYou) / visits) * 100) : 0;
-                        const guide = j.guidePath ? (data.page_details?.find(p => p.page_path === j.guidePath)?.views || 0) : 0;
+                        const firstStep = j.steps[0];
+                        const lastStep = j.steps[j.steps.length - 1];
+                        const firstVal = firstStep.metric === 'forms'
+                          ? (data.form_details || []).filter(f => f.page_path === firstStep.path).reduce((s, f) => s + f.submissions, 0)
+                          : data.page_details?.find(p => p.page_path === firstStep.path)?.views || 0;
+                        const lastVal = lastStep.metric === 'forms'
+                          ? (data.form_details || []).filter(f => f.page_path === lastStep.path).reduce((s, f) => s + f.submissions, 0)
+                          : data.page_details?.find(p => p.page_path === lastStep.path)?.views || 0;
+                        const conv = firstVal > 0 ? Math.round((lastVal / firstVal) * 100) : 0;
+                        if (firstVal === 0) return null;
                         return (
                           <tr key={j.id} onMouseEnter={e => (e.currentTarget.style.background = 'rgba(124,58,237,0.04)')} onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
                             <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, fontWeight: 600 }}>
                               <span style={{ color: j.color }}>●</span> {j.name}
                             </td>
-                            <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.purple, fontWeight: 600 }}>{visits.toLocaleString('he-IL')}</td>
-                            <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.green, fontWeight: 600 }}>{(forms || thankYou).toLocaleString('he-IL')}</td>
+                            <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.purple, fontWeight: 600 }}>{firstVal.toLocaleString('he-IL')}</td>
+                            <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.green, fontWeight: 600 }}>{lastVal.toLocaleString('he-IL')}</td>
                             <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center' }}>
                               <span style={{ padding: '2px 8px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, background: conv > 5 ? T.greenBg : conv > 0 ? T.orangeBg : T.redBg, color: conv > 5 ? T.green : conv > 0 ? T.orange : T.red }}>{conv}%</span>
                             </td>
-                            <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.textSecondary }}>{guide > 0 ? guide.toLocaleString('he-IL') : '—'}</td>
+                            <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.textSecondary }}>{j.steps.length}</td>
                           </tr>
                         );
                       })}
@@ -2639,19 +2971,69 @@ export default function AnalyticsDashboard() {
                 </Card>
               )}
 
-              {/* CRO Suggestions */}
-              {croSuggestions.length > 0 && (
-                <Card title="המלצות CRO">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
-                    {croSuggestions.map((s, i) => (
-                      <div key={i} style={{
-                        display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '12px',
-                        background: T.orangeBg, borderRadius: '10px', border: `1px solid rgba(245,158,11,0.2)`,
-                      }}>
-                        <span style={{ fontSize: '18px', flexShrink: 0 }}>💡</span>
-                        <span style={{ fontSize: '13px', color: T.textPrimary, lineHeight: 1.6 }}>{s}</span>
-                      </div>
-                    ))}
+              {/* Marketing Insights Engine */}
+              {marketingInsights.length > 0 && (
+                <Card title={`המלצות שיווק (${marketingInsights.length})`} headerRight={
+                  <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                    {(['critical', 'high', 'medium', 'low'] as const).map(p => {
+                      const count = marketingInsights.filter(i => i.priority === p).length;
+                      if (count === 0) return null;
+                      const colors = { critical: '#ef4444', high: '#f59e0b', medium: '#3b82f6', low: '#10b981' };
+                      const labels = { critical: 'קריטי', high: 'גבוה', medium: 'בינוני', low: 'נמוך' };
+                      return <span key={p} style={{ fontSize: '12px', padding: '2px 8px', borderRadius: '9999px', background: `${colors[p]}18`, color: colors[p], fontWeight: 600 }}>{count} {labels[p]}</span>;
+                    })}
+                  </div>
+                }>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', direction: 'rtl' }}>
+                    {marketingInsights.map((insight, i) => {
+                      const priorityConfig = {
+                        critical: { bg: 'rgba(239,68,68,0.06)', border: 'rgba(239,68,68,0.15)', badge: '#ef4444', badgeLabel: 'קריטי' },
+                        high: { bg: 'rgba(245,158,11,0.06)', border: 'rgba(245,158,11,0.15)', badge: '#f59e0b', badgeLabel: 'גבוה' },
+                        medium: { bg: 'rgba(59,130,246,0.06)', border: 'rgba(59,130,246,0.15)', badge: '#3b82f6', badgeLabel: 'בינוני' },
+                        low: { bg: 'rgba(16,185,129,0.06)', border: 'rgba(16,185,129,0.15)', badge: '#10b981', badgeLabel: 'נמוך' },
+                      };
+                      const categoryIcons: Record<string, string> = {
+                        conversion: '🎯', campaigns: '📢', content: '📄', technical: '⚙️', timing: '⏰', opportunity: '💎', journeys: '🛤️',
+                      };
+                      const pc = priorityConfig[insight.priority];
+                      return (
+                        <div key={i} style={{
+                          padding: '18px', borderRadius: '14px', background: pc.bg,
+                          border: `1px solid ${pc.border}`,
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '20px' }}>{categoryIcons[insight.category] || '📊'}</span>
+                            <span style={{ fontSize: '15px', fontWeight: 700, color: T.textPrimary, flex: 1 }}>{insight.title}</span>
+                            {insight.metric && (
+                              <span style={{ fontSize: '12px', padding: '3px 10px', borderRadius: '8px', background: 'rgba(0,0,0,0.04)', color: T.textSecondary, fontWeight: 600, fontFamily: 'monospace' }}>{insight.metric}</span>
+                            )}
+                            <span style={{
+                              fontSize: '12px', fontWeight: 700, padding: '3px 10px', borderRadius: '9999px',
+                              background: pc.badge, color: '#fff',
+                            }}>{pc.badgeLabel}</span>
+                          </div>
+                          <p style={{ fontSize: '13px', color: T.textSecondary, lineHeight: 1.8, margin: '0 0 12px 0' }}>
+                            {insight.body}
+                          </p>
+                          <div style={{
+                            display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '10px 14px',
+                            background: 'rgba(124,58,237,0.08)', borderRadius: '10px', border: '1px solid rgba(124,58,237,0.12)',
+                          }}>
+                            <span style={{ fontSize: '14px', flexShrink: 0, marginTop: '1px' }}>💡</span>
+                            <span style={{ fontSize: '13px', color: T.purple, fontWeight: 500, lineHeight: 1.6 }}>{insight.action}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Card>
+              )}
+              {marketingInsights.length === 0 && data && (
+                <Card title="המלצות שיווק">
+                  <div style={{ textAlign: 'center', padding: '30px 0', direction: 'rtl' }}>
+                    <span style={{ fontSize: '40px', display: 'block', marginBottom: '12px' }}>✅</span>
+                    <p style={{ fontSize: '14px', color: T.textSecondary }}>אין ממצאים מיוחדים כרגע. הכל נראה תקין.</p>
+                    <p style={{ fontSize: '12px', color: T.textMuted, marginTop: '8px' }}>נסה טווח ימים ארוך יותר לקבלת המלצות מבוססות דאטה</p>
                   </div>
                 </Card>
               )}
