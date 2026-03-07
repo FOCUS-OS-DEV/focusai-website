@@ -176,10 +176,10 @@ const stats = [
             </label>
           </div>
           <div class="flex items-start gap-3">
-            <input type="checkbox" name="marketing" id="hero-marketing" required
+            <input type="checkbox" name="marketing" id="hero-marketing"
               class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
             <label for="hero-marketing" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
-              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
           <button type="submit"
@@ -659,10 +659,10 @@ const stats = [
             </label>
           </div>
           <div class="flex items-start gap-3">
-            <input type="checkbox" name="marketing" id="ws-contact-marketing" required
+            <input type="checkbox" name="marketing" id="ws-contact-marketing"
               class="mt-0.5 w-5 h-5 min-w-[20px] rounded border-white/20 bg-white/[0.05] accent-[#a855f7] focus:ring-[#a855f7]/30 cursor-pointer" />
             <label for="ws-contact-marketing" class="text-xs text-[#b0b0c0] leading-relaxed cursor-pointer">
-              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
           <button type="submit"
@@ -745,14 +745,6 @@ const stats = [
         if (privacy && !privacy.checked) {
           privacy.classList.add('error');
           if (!firstErrorEl) firstErrorEl = privacy;
-          hasError = true;
-        }
-
-        // marketing checkbox
-        var marketing = form.querySelector('[name="marketing"]');
-        if (marketing && !marketing.checked) {
-          marketing.classList.add('error');
-          if (!firstErrorEl) firstErrorEl = marketing;
           hasError = true;
         }
 
@@ -864,7 +856,6 @@ const stats = [
             }, 5000);
           })
           .catch(function(error) {
-            console.error('Form error:', error);
             statusEl.classList.remove('hidden', 'text-green-400');
             statusEl.classList.add('text-red-400');
             statusEl.textContent = 'שגיאה בשליחה. נסו שוב או פנו אלינו בוואטסאפ.';

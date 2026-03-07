@@ -92,7 +92,7 @@ export default function AnalyticsDashboard() {
   const fetchLeadsData = useCallback(async (pw: string, d: number, startDate?: string, endDate?: string) => {
     setLeadsLoading(true);
     try {
-      const body: Record<string, unknown> = { p_password: null, p_days: d };
+      const body: Record<string, unknown> = { p_password: pw, p_days: d };
       if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_leads_analytics`, {
         method: 'POST',
@@ -129,7 +129,7 @@ export default function AnalyticsDashboard() {
   const fetchAdvancedData = useCallback(async (d: number, device?: string, utm?: string, page?: string[], startDate?: string, endDate?: string) => {
     setAdvancedLoading(true);
     try {
-      const body: Record<string, unknown> = { p_password: null, p_days: d };
+      const body: Record<string, unknown> = { p_password: passwordRef.current, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
       if (page && page.length > 0) body.p_page_filter = page[0];
@@ -215,8 +215,7 @@ export default function AnalyticsDashboard() {
   // Auto-refresh
   useEffect(() => {
     if (!autoRefresh || !isAuthed) return;
-    const [sd, ed] = getDateParams();
-    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed), 60000);
+    const id = setInterval(() => { const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed); }, 60000);
     return () => clearInterval(id);
   }, [autoRefresh, isAuthed, days, customStart, customEnd, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 

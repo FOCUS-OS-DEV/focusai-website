@@ -50,7 +50,9 @@ const latestPosts = allPosts
 const sidebarPosts = relatedPosts.length >= 2 ? relatedPosts : latestPosts;
 
 // Webhook URL for contact form
-const webhookUrl = 'https://focusai.app.n8n.cloud/webhook/contact-form';
+const webhookUrl = siteConfig.webhooks.contactForm;
+const sbUrl = siteConfig.supabase.url;
+const sbKey = siteConfig.supabase.anonKey;
 
 // Social links
 const socialFollowLinks = [
@@ -346,9 +348,9 @@ const ctaConfig = {
                 </label>
               </div>
               <div class="flex items-start gap-3 text-right">
-                <input type="checkbox" id="article-marketing" name="marketing" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+                <input type="checkbox" id="article-marketing" name="marketing" class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
                 <label for="article-marketing" class="text-xs text-white/50 leading-relaxed cursor-pointer">
-                  אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                  אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
                 </label>
               </div>
 
@@ -572,9 +574,9 @@ const ctaConfig = {
   <Footer slot="footer" />
 </BaseLayout>
 
-<script define:vars={{ webhookUrl, pageUrl, ctaFormSource: ctaConfig.formSource, ctaFormInterest: ctaConfig.formInterest }}>
-  var SB_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+<script define:vars={{ webhookUrl, pageUrl, ctaFormSource: ctaConfig.formSource, ctaFormInterest: ctaConfig.formInterest, sbUrl, sbKey }}>
+  var SB_URL = sbUrl;
+  var SB_KEY = sbKey;
   var C_TEXTS = { version: 'v1.0', privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.', marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.' };
   function sbInsert(table, data) {
     fetch(SB_URL + '/rest/v1/' + table, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Prefer': 'return=minimal' }, body: JSON.stringify(data), keepalive: true }).catch(function() {});
@@ -631,12 +633,6 @@ const ctaConfig = {
     if (!privacyCheckbox || !privacyCheckbox.checked) {
       if (privacyCheckbox) { privacyCheckbox.classList.add('error'); errors.push(privacyCheckbox); }
     }
-    // Validate marketing checkbox
-    var marketingCheckbox = form.querySelector('[name="marketing"]');
-    if (!marketingCheckbox || !marketingCheckbox.checked) {
-      if (marketingCheckbox) { marketingCheckbox.classList.add('error'); errors.push(marketingCheckbox); }
-    }
-
     if (errors.length > 0) {
       errors[0].focus();
       return;

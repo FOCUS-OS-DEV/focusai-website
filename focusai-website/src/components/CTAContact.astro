@@ -182,9 +182,9 @@ const quickStats = [
               </label>
             </div>
             <div class="flex items-start gap-2 text-right">
-              <input type="checkbox" id="cta-marketing" name="marketing" required class="mt-1 accent-[#a855f7]"/>
+              <input type="checkbox" id="cta-marketing" name="marketing" class="mt-1 accent-[#a855f7]"/>
               <label for="cta-marketing" class="text-xs text-white/50">
-                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
               </label>
             </div>
 
@@ -269,30 +269,9 @@ const quickStats = [
 </section>
 
 <script>
-  const WEBHOOK_URL = 'https://focusai.app.n8n.cloud/webhook/contact-form';
-  const SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
-
-  const CONSENT_TEXTS = {
-    version: 'v1.0',
-    privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.',
-    marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.'
-  };
-
-  function supabaseInsert(table: string, data: Record<string, unknown>) {
-    // Fire-and-forget — don't block form redirect on Supabase
-    fetch(SUPABASE_URL + '/rest/v1/' + table, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(data),
-      keepalive: true
-    }).catch(() => {});
-  }
+  import { supabaseInsert, CONSENT_TEXTS } from '@/utils/form-helpers';
+  import { siteConfig } from '@/data/config';
+  const WEBHOOK_URL = siteConfig.webhooks.contactForm;
 
   const form = document.getElementById('contact-form') as HTMLFormElement;
 
@@ -329,8 +308,6 @@ const quickStats = [
     check(phoneEl, /^0[2-9]\d{7,8}$/.test(phoneClean));
     check(emailEl, !!emailEl?.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim()));
     check(privacyEl, !!privacyEl?.checked);
-    const marketingEl = form.querySelector('[name="marketing"]') as HTMLInputElement;
-    check(marketingEl, !!marketingEl?.checked);
 
     if (!valid) return;
 
@@ -423,10 +400,10 @@ const quickStats = [
 
     // --- 4. Send to N8N with retry ---
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 15000);
       let lastError;
       for (let attempt = 0; attempt < 3; attempt++) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000);
         try {
           await fetch(WEBHOOK_URL, { method: 'POST', body: params, signal: controller.signal });
           clearTimeout(timeout);

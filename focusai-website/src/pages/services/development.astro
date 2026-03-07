@@ -590,9 +590,9 @@ const serviceSchema = {
             </label>
           </div>
           <div class="flex items-start gap-2 text-right">
-            <input type="checkbox" id="dev-marketing" name="marketing" required class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
+            <input type="checkbox" id="dev-marketing" name="marketing" class="mt-1 w-5 h-5 min-w-[20px] rounded accent-[#a855f7] cursor-pointer"/>
             <label for="dev-marketing" class="text-xs text-white/50 leading-relaxed cursor-pointer">
-              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+              אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
             </label>
           </div>
 
@@ -632,13 +632,9 @@ const serviceSchema = {
 </style>
 
 <script>
-  const WEBHOOK_URL = 'https://focusai.app.n8n.cloud/webhook/contact-form';
-  const SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
-  const CONSENT_TEXTS = { version: 'v1.0', privacy: 'קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות.', marketing: 'אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.' };
-  function supabaseInsert(table: string, data: Record<string, unknown>) {
-    fetch(SUPABASE_URL + '/rest/v1/' + table, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' }, body: JSON.stringify(data), keepalive: true }).catch(() => {});
-  }
+  import { supabaseInsert, CONSENT_TEXTS } from '@/utils/form-helpers';
+  import { siteConfig } from '@/data/config';
+  const WEBHOOK_URL = siteConfig.webhooks.contactForm;
 
   const form = document.getElementById('dev-form') as HTMLFormElement;
 
@@ -676,9 +672,6 @@ const serviceSchema = {
     }
 
     if (!privacyCheckbox.checked) { privacyCheckbox.classList.add('error'); errors.push(privacyCheckbox); }
-
-    const marketingCheckbox = form.querySelector('[name="marketing"]') as HTMLInputElement;
-    if (!marketingCheckbox.checked) { marketingCheckbox.classList.add('error'); errors.push(marketingCheckbox); }
 
     if (errors.length > 0) { errors[0].focus(); return; }
     // --- End Validation ---

@@ -291,7 +291,7 @@ body::after {
 }
 
 /* Firefox */
-* {
+html {
   scrollbar-width: thin;
   scrollbar-color: var(--color-neon-green) var(--color-bg-void);
 }

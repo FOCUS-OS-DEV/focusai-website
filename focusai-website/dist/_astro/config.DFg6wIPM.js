@@ -1,0 +1,1 @@
+const s={supabase:{url:"https://ueewnvfydrlhyxmbgsus.supabase.co",anonKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ"},webhooks:{contactForm:"https://focusai.app.n8n.cloud/webhook/contact-form"}};export{s};

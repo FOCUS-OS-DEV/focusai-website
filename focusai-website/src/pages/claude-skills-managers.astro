@@ -495,8 +495,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
           <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/terms/" style="color:var(--orange);text-decoration:underline;" target="_blank">תנאי השימוש</a> ול<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a>. *</span>
         </label>
         <label class="consult-row" style="border-color: var(--orange);">
-          <input type="checkbox" data-field="marketing" required>
-          <span class="consult-label">אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *</span>
+          <input type="checkbox" data-field="marketing">
+          <span class="consult-label">אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.</span>
         </label>
         <button class="form-btn" id="form-submit">קבל את הסקילים →</button>
         <p class="sub-note">תוך כמה שניות תקבל את הכל למייל!</p>
@@ -785,8 +785,8 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
               <span class="consult-label">קראתי ואני מסכים/ה ל<a href="/terms/" style="color:var(--orange);text-decoration:underline;" target="_blank">תנאי השימוש</a> ול<a href="/privacy-policy/" style="color:var(--orange);text-decoration:underline;" target="_blank">מדיניות הפרטיות</a>. *</span>
             </label>
             <label class="consult-row" style="border-color: var(--orange);">
-              <input type="checkbox" data-field="marketing" required>
-              <span class="consult-label">אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *</span>
+              <input type="checkbox" data-field="marketing">
+              <span class="consult-label">אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.</span>
             </label>
             <button class="form-btn" id="form-submit-2">שלח לי →</button>
             <p class="sub-note">תוך כמה שניות תקבל את הכל למייל!</p>
@@ -873,11 +873,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
 
       if (privacyEl && !privacyEl.checked) {
         privacyEl.closest('.consult-row').style.borderColor = '#c8643c';
-        valid = false;
-      }
-
-      if (marketingEl && !marketingEl.checked) {
-        marketingEl.closest('.consult-row').style.borderColor = '#c8643c';
         valid = false;
       }
 

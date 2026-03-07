@@ -1227,9 +1227,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                     </span>
                 </label>
                 <label class="consent-check" style="margin-top: 8px;">
-                    <input type="checkbox" id="marketing-consent" name="marketing" required>
+                    <input type="checkbox" id="marketing-consent" name="marketing">
                     <span>
-                        אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                        אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
                     </span>
                 </label>
             </div>
@@ -1408,8 +1408,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
         }
         check(priv, priv && priv.checked);
-        var mkt = document.getElementById('marketing-consent');
-        check(mkt, mkt && mkt.checked);
         if (!valid) return;
 
         var consent = document.getElementById('consent');
@@ -1475,7 +1473,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
             form.reset();
             startCountdown();
         } catch (err) {
-            console.error(err);
             var msg = 'אירעה שגיאה. אנא נסו שוב.';
             if (err.message && err.message.includes('fetch')) msg = 'שגיאת תקשורת. בדקו את חיבור האינטרנט.';
             alert(msg);

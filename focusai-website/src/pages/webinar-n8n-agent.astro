@@ -1887,9 +1887,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         </span>
                     </label>
                     <label class="checkbox-group">
-                        <input type="checkbox" id="marketingConsent2" name="marketing" required>
+                        <input type="checkbox" id="marketingConsent2" name="marketing">
                         <span class="checkbox-label">
-                            אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                            אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
                         </span>
                     </label>
                 </div>
@@ -2133,9 +2133,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                             </span>
                         </label>
                         <label class="checkbox-group">
-                            <input type="checkbox" id="marketingConsent" name="marketing" required>
+                            <input type="checkbox" id="marketingConsent" name="marketing">
                             <span class="checkbox-label">
-                                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
                             </span>
                         </label>
                     </div>
@@ -2342,13 +2342,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 if (!firstErrorField) firstErrorField = privacyConsent;
             }
 
-            var marketingConsentEl = document.getElementById('marketingConsent');
-            if (marketingConsentEl && !marketingConsentEl.checked) {
-                marketingConsentEl.classList.add('error');
-                hasError = true;
-                if (!firstErrorField) firstErrorField = marketingConsentEl;
-            }
-
             if (hasError) {
                 if (firstErrorField) firstErrorField.focus();
                 return;
@@ -2428,12 +2421,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 window.location.href = '/webinar-links/';
 
             } catch (error) {
-                console.error('Error submitting form:', error);
                 var userMessage = 'אירעה שגיאה. אנא נסו שוב.';
 
-                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                if (error.message && error.message.includes('Failed to fetch') || error.message && error.message.includes('NetworkError')) {
                     userMessage = 'שגיאת תקשורת: לא ניתן להתחבר לשרת. בדקו את חיבור האינטרנט ונסו שוב.';
-                } else if (error.message.includes('CORS')) {
+                } else if (error.message && error.message.includes('CORS')) {
                     userMessage = 'שגיאת הרשאות: הגישה לשרת נחסמה. נסו שוב מאוחר יותר.';
                 } else if (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0) {
                     userMessage = error.message;
@@ -2542,13 +2534,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 if (!firstErrorField) firstErrorField = privacyConsent2;
             }
 
-            var marketingConsentEl2 = document.getElementById('marketingConsent2');
-            if (marketingConsentEl2 && !marketingConsentEl2.checked) {
-                marketingConsentEl2.classList.add('error');
-                hasError = true;
-                if (!firstErrorField) firstErrorField = marketingConsentEl2;
-            }
-
             if (hasError) {
                 if (firstErrorField) firstErrorField.focus();
                 return;
@@ -2623,12 +2608,11 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 window.location.href = '/webinar-links/';
 
             } catch (error) {
-                console.error('Error submitting form:', error);
                 var userMessage = 'אירעה שגיאה. אנא נסו שוב.';
 
-                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                if (error.message && error.message.includes('Failed to fetch') || error.message && error.message.includes('NetworkError')) {
                     userMessage = 'שגיאת תקשורת: לא ניתן להתחבר לשרת. בדקו את חיבור האינטרנט ונסו שוב.';
-                } else if (error.message.includes('CORS')) {
+                } else if (error.message && error.message.includes('CORS')) {
                     userMessage = 'שגיאת הרשאות: הגישה לשרת נחסמה. נסו שוב מאוחר יותר.';
                 } else if (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0) {
                     userMessage = error.message;

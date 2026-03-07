@@ -1,7 +1,9 @@
 /* ─── Analytics Dashboard — Types & Constants ─── */
 
-export const SUPABASE_URL = 'https://ueewnvfydrlhyxmbgsus.supabase.co';
-export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ';
+import { siteConfig } from '@/data/config';
+
+export const SUPABASE_URL = siteConfig.supabase.url;
+export const SUPABASE_ANON_KEY = siteConfig.supabase.anonKey;
 
 export const T = {
   bg: '#f5f5f7',

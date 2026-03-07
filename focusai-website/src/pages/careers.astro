@@ -325,9 +325,9 @@ const jobs = [
                 </label>
               </div>
               <div class="flex items-start gap-2 text-right">
-                <input type="checkbox" id="careers-marketing" name="marketing" required class="mt-1 accent-[#a855f7]" />
+                <input type="checkbox" id="careers-marketing" name="marketing" class="mt-1 accent-[#a855f7]" />
                 <label for="careers-marketing" class="text-xs text-white/50">
-                  אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                  אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
                 </label>
               </div>
             </div>
@@ -429,8 +429,6 @@ const jobs = [
     }
     check(fileInput, fileInput?.files?.length > 0);
     check(privacyEl, privacyEl?.checked);
-    const marketingEl = form.querySelector('[name="marketing"]');
-    check(marketingEl, marketingEl?.checked);
 
     if (!valid) return;
 

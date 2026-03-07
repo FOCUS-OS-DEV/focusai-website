@@ -1237,9 +1237,9 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                         </label>
 
                         <label class="checkbox-group">
-                            <input type="checkbox" id="marketingConsent" name="marketingConsent" required>
+                            <input type="checkbox" id="marketingConsent" name="marketingConsent">
                             <span class="checkbox-label">
-                                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת. *
+                                אני מסכים/ה לקבל דיוור מ-Focus AI. ניתן לבטל בכל עת.
                             </span>
                         </label>
                     </div>
@@ -1439,8 +1439,6 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 check(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value));
             }
             check(priv, priv && priv.checked);
-            var mkt = document.getElementById('marketingConsent');
-            check(mkt, mkt && mkt.checked);
             if (!valid) return;
 
             submitBtn.classList.add('loading');
@@ -1522,14 +1520,13 @@ import AnalyticsBody from '../components/AnalyticsBody.astro';
                 startCountdownAndRedirect();
 
             } catch (error) {
-                console.error('Error submitting form:', error);
                 var userMessage = 'אירעה שגיאה. אנא נסה שוב.';
 
-                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                if (error.message && error.message.includes('Failed to fetch') || error.message && error.message.includes('NetworkError')) {
                     userMessage = 'שגיאת תקשורת: לא ניתן להתחבר לשרת. בדקו את חיבור האינטרנט ונסו שוב.';
-                } else if (error.message.includes('CORS')) {
+                } else if (error.message && error.message.includes('CORS')) {
                     userMessage = 'שגיאת הרשאות: הגישה לשרת נחסמה. נסו שוב מאוחר יותר.';
-                } else if (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0) {
+                } else if (error.message && (error.message.indexOf('שגיאה') === 0 || error.message.indexOf('שגיאת') === 0)) {
                     userMessage = error.message;
                 } else if (error.message) {
                     userMessage = 'שגיאה: ' + error.message;

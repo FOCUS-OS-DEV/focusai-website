@@ -82,6 +82,26 @@ export const siteConfig = {
     metaPixelId: "1388659336102272",
     metaPixelIdAcademy: "801192442681278",
   },
+
+  // Supabase (analytics tracking + form logging)
+  supabase: {
+    url: "https://ueewnvfydrlhyxmbgsus.supabase.co",
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlZXdudmZ5ZHJsaHl4bWJnc3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDI4ODcsImV4cCI6MjA4NjQxODg4N30.4EjvZekhleRdufJPxBEgXRkUbhGbG5cjjjBFUa20mjQ",
+  },
+
+  // N8N Webhooks — all form endpoints
+  webhooks: {
+    contactForm: "https://focusai.app.n8n.cloud/webhook/contact-form",
+    careers: "https://focusai.app.n8n.cloud/webhook/careers-application",
+    skillsDev: "https://focusai.app.n8n.cloud/webhook/skills-dev",
+    skillsManagers: "https://focusai.app.n8n.cloud/webhook/skills-managers",
+    skillsMarketing: "https://focusai.app.n8n.cloud/webhook/skills-marketing",
+    aiDev: "https://focusai.app.n8n.cloud/webhook/ai-dev",
+    webinarN8n: "https://focusai.app.n8n.cloud/webhook/webinar-n8n-agent",
+    freeWebinar: "https://focusai.app.n8n.cloud/webhook/free-webinar-onboard",
+    contentAutomation: "https://focusai.app.n8n.cloud/webhook/content-automation-course",
+    unsubscribe: "https://focusai.app.n8n.cloud/webhook/unsubscribe",
+  },
 } as const;
 
 // Helper functions for common patterns
