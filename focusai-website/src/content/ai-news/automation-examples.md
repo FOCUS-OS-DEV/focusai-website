@@ -125,7 +125,7 @@ CRM/Google Analytics → Zapier → סיכום שבועי למייל
   <div class="cta-title">רוצים ללמוד לבנות אוטומציות בעצמכם?</div>
   <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תלמדו לחבר כלים, לבנות תהליכים אוטומטיים ולחסוך לעסק שלכם שעות של עבודה ידנית כל יום.</div>
   <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">Make</span><span class="cta-tag">Zapier</span><span class="cta-tag">Automation</span><span class="cta-tag">API</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ---

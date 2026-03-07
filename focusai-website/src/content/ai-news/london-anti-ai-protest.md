@@ -51,7 +51,7 @@ heroImage: "https://res.cloudinary.com/dfudxxzlj/image/upload/q_auto,f_auto,w_12
   <div class="cta-title">AI לא עוצר. השאלה היא אם אתם בפנים או בחוץ.</div>
   <div class="cta-desc">במקום לפחד מ-AI, תלמדו להשתמש בו. ב-Bot-Camp תבנו סוכני AI ואוטומציות מאפס — עם כלים אמיתיים ופרויקטים אמיתיים. 12 מפגשים בהרצליה פיתוח.</div>
   <div class="cta-tags"><span class="cta-tag">AI Agents</span><span class="cta-tag">n8n</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## מה הממשלה הבריטית עושה (ולא עושה)

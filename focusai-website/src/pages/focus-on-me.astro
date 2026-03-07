@@ -114,7 +114,7 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">כלים וסוכנים</span>
         </div>
 
-        <GlowingToolsGrid client:load />
+        <GlowingToolsGrid client:visible />
       </div>
     </section>
 
@@ -128,7 +128,7 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">מדריכים והדרכות</span>
         </div>
 
-        <GlowingCardsGrid client:load items={guides} />
+        <GlowingCardsGrid client:visible items={guides} />
       </div>
     </section>
 
@@ -142,7 +142,7 @@ const skills = [
           <span class="font-mono text-xs text-[#b0b0c0]/60 uppercase tracking-wider">חבילות סקילים</span>
         </div>
 
-        <GlowingCardsGrid client:load items={skills.map(s => ({ ...s, tagColor: 'neutral' as const }))} />
+        <GlowingCardsGrid client:visible items={skills.map(s => ({ ...s, tagColor: 'neutral' as const }))} />
       </div>
     </section>
 

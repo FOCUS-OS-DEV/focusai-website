@@ -89,7 +89,7 @@ ctaType: "botcamp"
   <div class="cta-title">רוצים לדעת להשתמש בכלים האלה באמת?</div>
   <div class="cta-desc">בתוכנית Bot-Camp תלמדו לעבוד עם כלי AI ביום-יום. לא תיאוריה - תרגול מעשי שמשנה את שגרת העבודה.</div>
   <div class="cta-tags"><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span><span class="cta-tag">Gemini</span><span class="cta-tag">Prompt Engineering</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ---

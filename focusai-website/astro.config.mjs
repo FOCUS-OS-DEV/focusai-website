@@ -39,7 +39,14 @@ export default defineConfig({
         !page.includes('thank-you') &&
         !page.includes('unsubscribe') &&
         !page.includes('content-automation-watch') &&
-        !page.includes('/services/'),
+        !page.includes('/services/') &&
+        !page.includes('/privacy-policy') &&
+        !page.includes('/terms') &&
+        !page.includes('/admin/') &&
+        !page.includes('/bot-camp-syllabus') &&
+        !page.includes('/ai-dev-syllabus') &&
+        !page.includes('/claude-code-guide') &&
+        !page.includes('/webinar-links'),
     }),
   ],
 

@@ -76,7 +76,7 @@ Gemini לא רק צ'אטבוט. זה מודל שנמצא בכל מוצר של ג
   <div class="cta-title">רוצים להפסיק לקרוא על AI ולהתחיל לבנות?</div>
   <div class="cta-desc">ב-Bot-Camp תלמדו לבנות סוכני AI ואוטומציות עם הכלים שגוגל, OpenAI ו-Anthropic בונות עליהם — מאפס ועד ייצור. 12 מפגשים פרונטליים בהרצליה פיתוח.</div>
   <div class="cta-tags"><span class="cta-tag">AI Agents</span><span class="cta-tag">n8n</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## Waymo - העתיד של AI לא רק בתוכנה

@@ -131,7 +131,7 @@ AI לא יכול לדעת מידע עדכני, לקרוא קבצים שלא שי
   <div class="cta-title">רוצים לקחת את ה-Prompt Engineering שלכם לשלב הבא?</div>
   <div class="cta-desc">בתוכנית Bot-Camp תלמדו טכניקות מתקדמות שחוסכות שעות עבודה כל יום. תרגול מעשי, לא תיאוריה.</div>
   <div class="cta-tags"><span class="cta-tag">Prompt Engineering</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span><span class="cta-tag">Gemini</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ---

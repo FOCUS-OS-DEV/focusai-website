@@ -66,7 +66,7 @@ Anthropic לא ניסתה לקבוע מדיניות ביטחונית. היא נ�
     <span class="cta-tag">n8n</span>
     <span class="cta-tag">Automation</span>
   </div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## הלקח הכי חשוב: אל תהיו תלויים בשום דבר

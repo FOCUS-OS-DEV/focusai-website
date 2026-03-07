@@ -62,7 +62,7 @@ Nvidia פרסמה השבוע תוצאות רבעוניות שגורמות לכל
     <span class="cta-tag">ChatGPT</span>
     <span class="cta-tag">Claude</span>
   </div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## השורה התחתונה

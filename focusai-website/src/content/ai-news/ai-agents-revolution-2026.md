@@ -79,7 +79,7 @@ Deloitte פרסמה את דוח "State of AI in the Enterprise 2026" - סקר ש
   <div class="cta-title">רוצים להיות בצד של ה-21% המוכנים?</div>
   <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. 12 מפגשים פרונטליים בהרצליה פיתוח, קבוצה קטנה ואינטימית, ופרויקטים אמיתיים שתיקחו איתכם הביתה.</div>
   <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## הפער שהופך להזדמנות

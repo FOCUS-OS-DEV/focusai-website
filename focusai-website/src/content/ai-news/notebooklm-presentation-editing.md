@@ -60,7 +60,7 @@ NotebookLM עם העדכון הזה מאפשר לדחוס את שלושת השל
   <div class="cta-title">רוצים לדעת איך להפיק מקסימום מכלי AI כמו NotebookLM?</div>
   <div class="cta-desc">בתוכנית Bot-Camp של Focus AI לומדים לשלב כלי AI מעשיים בעבודה היומיומית - מצגות, ניתוח נתונים, כתיבה מקצועית ועוד. הכשרה מקצועית עם תעודה בליווי אקדמי.</div>
   <div class="cta-tags"><span class="cta-tag">Bot-Camp</span><span class="cta-tag">כלי AI מעשיים</span><span class="cta-tag">אוטומציות</span><span class="cta-tag">Google AI</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## NotebookLM במבט רחב - הכלי שמתגבש

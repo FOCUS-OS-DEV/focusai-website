@@ -50,7 +50,7 @@ Block שילשה את מספר העובדים שלה בין 2019 ל-2022, מ-3,8
   <div class="cta-title">AI לא יחליף אתכם. מי שיודע להשתמש בו — כן.</div>
   <div class="cta-desc">ב-Bot-Camp תלמדו לבנות סוכני AI ואוטומציות שהופכים אתכם לבלתי ניתנים להחלפה. 12 מפגשים פרונטליים בהרצליה פיתוח, פרויקטים אמיתיים.</div>
   <div class="cta-tags"><span class="cta-tag">AI Agents</span><span class="cta-tag">n8n</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## הלקח הישראלי: AI זה לא איום, זה סקיל שחובה לרכוש

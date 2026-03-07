@@ -111,10 +111,11 @@ const websiteSchema = {
   <link rel="icon" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
 
-  <!-- Fonts - Optimized Loading (Hebrew subset, critical weights only) -->
+  <!-- Fonts - Non-blocking Loading (Hebrew subset, critical weights only) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&subset=hebrew,latin&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&subset=hebrew,latin&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&subset=hebrew,latin&display=swap"></noscript>
 
   <!-- Cloudinary CDN - Preconnect for faster asset loading -->
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>

@@ -132,7 +132,7 @@ ctaType: "botcamp"
   <div class="cta-title">רוצים להפסיק לבזבז זמן על מצגות ולהתחיל לייצר תוצאות עם AI?</div>
   <div class="cta-desc">בתוכנית Bot-Camp של Focus AI לומדים לעבוד נכון עם כלים כמו Copilot, ChatGPT ו-Gemini - לא לנסות אותם, אלא לשלב אותם בתהליכי עבודה אמיתיים. הכשרה מקצועית עם תעודה בליווי אקדמי.</div>
   <div class="cta-tags"><span class="cta-tag">Bot-Camp</span><span class="cta-tag">Microsoft Copilot</span><span class="cta-tag">מצגות מקצועיות</span><span class="cta-tag">פרומפט אנג'ינירינג</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## איפה להתחיל

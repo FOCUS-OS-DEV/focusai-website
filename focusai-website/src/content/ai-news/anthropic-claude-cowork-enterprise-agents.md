@@ -86,7 +86,7 @@ Computer-use agents שוברים את המחסום הזה. כשסוכן יכול
   <div class="cta-title">רוצים לבנות סוכני AI בעצמכם — לא לחכות שמישהו יבנה בשבילכם?</div>
   <div class="cta-desc">ב-Bot-Camp תלמדו לבנות סוכני AI ואוטומציות עם n8n, Claude ו-ChatGPT. פרויקטים אמיתיים, 12 מפגשים פרונטליים בהרצליה פיתוח.</div>
   <div class="cta-tags"><span class="cta-tag">AI Agents</span><span class="cta-tag">n8n</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## השורה התחתונה - שלושה לקחים מעשיים

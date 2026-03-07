@@ -69,7 +69,7 @@ ctaType: "botcamp"
   <div class="cta-title">רוצים ללמוד לבנות אוטומציות עם n8n?</div>
   <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תבנו אוטומציות אמיתיות מאפס, תחברו מערכות, ותגלו איך לחסוך שעות עבודה כל שבוע.</div>
   <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## חמישה צעדים שאפשר לעשות כבר היום

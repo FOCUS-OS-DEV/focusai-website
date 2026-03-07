@@ -71,7 +71,7 @@ ctaType: "botcamp"
   <div class="cta-title">רוצים לבנות סוכני AI בעצמכם?</div>
   <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תלמדו לבנות סוכני AI ואוטומציות מאפס, תתרגלו על פרויקטים אמיתיים, ותצאו עם כלים שמייצרים ערך מהיום הראשון.</div>
   <div class="cta-tags"><span class="cta-tag">n8n</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">ChatGPT</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ---

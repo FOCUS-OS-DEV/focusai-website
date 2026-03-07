@@ -59,7 +59,7 @@ Microsoft, השותפה הוותיקה של OpenAI, כבר שילבה יכולו
   <div class="cta-title">רוצים להבין איך AI משנה את כללי המשחק?</div>
   <div class="cta-desc">המחזור הבא מתחיל ממש בקרוב. תלמדו לבנות סוכני AI ואוטומציות מאפס, תבינו את התשתיות שמאחורי הכותרות, ותצאו עם כלים שמייצרים ערך מהיום הראשון.</div>
   <div class="cta-tags"><span class="cta-tag">OpenAI</span><span class="cta-tag">AI Agents</span><span class="cta-tag">Automation</span><span class="cta-tag">n8n</span><span class="cta-tag">Claude</span></div>
-  <span class="cta-button">לפרטים והרשמה</span>
+  <span class="cta-button">שמרו לי מקום</span>
 </a>
 
 ## השורה התחתונה
