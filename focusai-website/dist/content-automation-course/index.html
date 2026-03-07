@@ -258,6 +258,121 @@
     });
   });
 
+  // ─── Scroll Depth Tracking ───
+  // Fires at 25%, 50%, 75%, 100% milestones (once per milestone per page)
+  (function() {
+    var milestones = [25, 50, 75, 100];
+    var fired = {};
+    var ticking = false;
+
+    function checkScroll() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight
+      );
+      var winHeight = window.innerHeight;
+      var scrollable = docHeight - winHeight;
+      if (scrollable <= 0) return;
+      var pct = Math.round((scrollTop / scrollable) * 100);
+
+      for (var i = 0; i < milestones.length; i++) {
+        var m = milestones[i];
+        if (pct >= m && !fired[m]) {
+          fired[m] = true;
+          sendEvent({ event_type: 'scroll_depth', click_text: m + '%' });
+        }
+      }
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(function() { checkScroll(); ticking = false; });
+      }
+    }, { passive: true });
+
+    // Check initial position (page might load scrolled)
+    setTimeout(checkScroll, 1000);
+  })();
+
+  // ─── Time on Page Tracking ───
+  // Sends time spent (seconds) when user leaves page
+  (function() {
+    var startTime = Date.now();
+    var totalVisible = 0;
+    var lastVisible = startTime;
+    var isVisible = !document.hidden;
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        if (isVisible) totalVisible += Date.now() - lastVisible;
+        isVisible = false;
+      } else {
+        lastVisible = Date.now();
+        isVisible = true;
+      }
+    });
+
+    function sendTimeOnPage() {
+      if (isVisible) totalVisible += Date.now() - lastVisible;
+      var seconds = Math.round(totalVisible / 1000);
+      if (seconds < 2) return; // Skip bounces under 2s
+      sendEvent({ event_type: 'time_on_page', click_text: String(seconds) });
+    }
+
+    // Use pagehide (works on iOS) with visibilitychange as fallback
+    window.addEventListener('pagehide', sendTimeOnPage);
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) sendTimeOnPage();
+    });
+  })();
+
+  // ─── Form Engagement Tracking ───
+  // Tracks form_start (first field focus) and form_abandon (started but not submitted)
+  (function() {
+    var startedForms = {}; // track which forms user started filling
+    var submittedForms = {};
+
+    // Detect form field focus (first interaction = form_start)
+    document.addEventListener('focusin', function(e) {
+      var el = e.target;
+      if (!el || !el.tagName) return;
+      var tag = el.tagName.toLowerCase();
+      if (tag !== 'input' && tag !== 'textarea' && tag !== 'select') return;
+      var form = el.closest('form');
+      if (!form) return;
+      var formId = form.dataset.source || form.id || form.action || 'unknown';
+      if (startedForms[formId]) return; // Already tracked
+      startedForms[formId] = Date.now();
+      sendEvent({ event_type: 'form_start', click_text: formId });
+    });
+
+    // Track submitted forms
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      var formId = form.dataset.source || form.id || form.action || 'unknown';
+      submittedForms[formId] = true;
+    });
+
+    // On page leave, check for abandoned forms
+    function checkAbandoned() {
+      var ids = Object.keys(startedForms);
+      for (var i = 0; i < ids.length; i++) {
+        if (!submittedForms[ids[i]]) {
+          var duration = Math.round((Date.now() - startedForms[ids[i]]) / 1000);
+          sendEvent({
+            event_type: 'form_abandon',
+            click_text: ids[i],
+            click_url: String(duration) // seconds spent before abandoning
+          });
+        }
+      }
+    }
+
+    window.addEventListener('pagehide', checkAbandoned);
+  })();
+
   // Expose tracking data for form handlers (CTAContact, standalone pages, etc.)
   // Usage: var data = window.__fai_getTracking();
   window.__fai_getTracking = function() {

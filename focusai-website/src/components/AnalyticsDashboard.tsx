@@ -61,6 +61,8 @@ const TABS = [
   { id: 'sources', label: 'מקורות', icon: '🔗' },
   { id: 'conversions', label: 'המרות', icon: '🎯' },
   { id: 'behavior', label: 'התנהגות', icon: '🔬' },
+  { id: 'cro', label: 'CRO', icon: '🧪' },
+  { id: 'changelog', label: 'שינויים', icon: '📝' },
   { id: 'realtime', label: 'בזמן אמת', icon: '⚡' },
   { id: 'insights', label: 'תובנות', icon: '💡' },
 ] as const;
@@ -188,6 +190,12 @@ function formatDate(d: string): string {
 function extractHostname(url: string): string {
   try { return new URL(url).hostname; } catch { return url; }
 }
+function formatDuration(seconds: number): string {
+  if (seconds < 60) return `${Math.round(seconds)}s`;
+  const min = Math.floor(seconds / 60);
+  const sec = Math.round(seconds % 60);
+  return sec > 0 ? `${min}m ${sec}s` : `${min}m`;
+}
 function timeAgo(ts: string): string {
   const diff = Math.floor((Date.now() - new Date(ts).getTime()) / 1000);
   if (diff < 60) return 'עכשיו';
@@ -211,6 +219,28 @@ function mergeDaily(views: any[] | null, clicks: any[] | null, forms: any[] | nu
   (views || []).forEach(d => { map[d.day] = { day: d.day, views: d.views, clicks: 0, forms: 0 }; });
   (clicks || []).forEach(d => { if (map[d.day]) map[d.day].clicks = d.clicks; else map[d.day] = { day: d.day, views: 0, clicks: d.clicks, forms: 0 }; });
   (forms || []).forEach(d => { if (map[d.day]) map[d.day].forms = d.forms; else map[d.day] = { day: d.day, views: 0, clicks: 0, forms: d.forms }; });
+  return Object.values(map).sort((a, b) => a.day.localeCompare(b.day));
+}
+
+function aggregateByGranularity(data: { day: string; views: number; clicks: number; forms: number }[], granularity: 'day' | 'week' | 'month') {
+  if (granularity === 'day') return data;
+  const map: Record<string, { day: string; views: number; clicks: number; forms: number }> = {};
+  data.forEach(d => {
+    const date = new Date(d.day);
+    let key: string;
+    if (granularity === 'week') {
+      const dayOfWeek = date.getDay();
+      const weekStart = new Date(date);
+      weekStart.setDate(date.getDate() - dayOfWeek);
+      key = weekStart.toISOString().slice(0, 10);
+    } else {
+      key = d.day.slice(0, 7) + '-01';
+    }
+    if (!map[key]) map[key] = { day: key, views: 0, clicks: 0, forms: 0 };
+    map[key].views += d.views;
+    map[key].clicks += d.clicks;
+    map[key].forms += d.forms;
+  });
   return Object.values(map).sort((a, b) => a.day.localeCompare(b.day));
 }
 
@@ -452,27 +482,40 @@ export default function AnalyticsDashboard() {
   const [aiLoading, setAiLoading] = useState(false);
   const [advancedData, setAdvancedData] = useState<AdvancedData | null>(null);
   const [advancedLoading, setAdvancedLoading] = useState(false);
+  const [croData, setCroData] = useState<any>(null);
+  const [croLoading, setCroLoading] = useState(false);
+  const [changelogData, setChangelogData] = useState<any[] | null>(null);
+  const [changelogLoading, setChangelogLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [days, setDays] = useState(30);
   const [activeTab, setActiveTab] = useState('overview');
   const [pageFilter, setPageFilter] = useState('');
+  const [deviceFilter, setDeviceFilter] = useState('');
+  const [utmSourceFilter, setUtmSourceFilter] = useState('');
   const [sourceFilter, setSourceFilter] = useState<'all' | 'paid' | 'organic'>('all');
   const [pageSort, setPageSort] = useState<{ key: string; dir: 'asc' | 'desc' }>({ key: 'views', dir: 'desc' });
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [autoRefresh, setAutoRefresh] = useState(false);
+  const [tableSearch, setTableSearch] = useState('');
+  const [granularity, setGranularity] = useState<'day' | 'week' | 'month'>('day');
+  const [heatmapMetric, setHeatmapMetric] = useState<'count' | 'pageviews' | 'clicks' | 'forms'>('count');
   const [showViews, setShowViews] = useState(true);
   const [showClicks, setShowClicks] = useState(true);
   const [showForms, setShowForms] = useState(true);
   const passwordRef = useRef('');
 
-  const fetchData = useCallback(async (pw: string, d: number) => {
+  const fetchData = useCallback(async (pw: string, d: number, device?: string, utm?: string, page?: string) => {
     setLoading(true); setError('');
     try {
+      const body: Record<string, unknown> = { p_password: pw, p_days: d };
+      if (device) body.p_device_type = device;
+      if (utm) body.p_utm_source = utm;
+      if (page) body.p_page_filter = page;
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_analytics_v2`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
-        body: JSON.stringify({ p_password: pw, p_days: d }),
+        body: JSON.stringify(body),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -522,13 +565,17 @@ export default function AnalyticsDashboard() {
     finally { setAiLoading(false); }
   }, [data, leadsData]);
 
-  const fetchAdvancedData = useCallback(async (d: number) => {
+  const fetchAdvancedData = useCallback(async (d: number, device?: string, utm?: string, page?: string) => {
     setAdvancedLoading(true);
     try {
+      const body: Record<string, unknown> = { p_password: null, p_days: d };
+      if (device) body.p_device_type = device;
+      if (utm) body.p_utm_source = utm;
+      if (page) body.p_page_filter = page;
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_advanced_analytics`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
-        body: JSON.stringify({ p_password: null, p_days: d }),
+        body: JSON.stringify(body),
       });
       if (!res.ok) { console.error('Advanced RPC error:', res.status); return; }
       const result = await res.json();
@@ -537,16 +584,58 @@ export default function AnalyticsDashboard() {
     finally { setAdvancedLoading(false); }
   }, []);
 
+  const fetchCroData = useCallback(async (d: number, device?: string, utm?: string, page?: string) => {
+    setCroLoading(true);
+    try {
+      const body: Record<string, unknown> = { p_password: passwordRef.current, p_days: d };
+      if (device) body.p_device_type = device;
+      if (utm) body.p_utm_source = utm;
+      if (page) body.p_page_filter = page;
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_cro_data`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) { console.error('CRO RPC error:', res.status); return; }
+      const result = await res.json();
+      setCroData(result);
+    } catch (e) { console.error('CRO fetch error:', e); }
+    finally { setCroLoading(false); }
+  }, []);
+
+  const fetchChangelog = useCallback(async () => {
+    setChangelogLoading(true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_changelog`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+        body: JSON.stringify({ p_password: passwordRef.current, p_limit: 50 }),
+      });
+      if (!res.ok) { console.error('Changelog RPC error:', res.status); return; }
+      const result = await res.json();
+      setChangelogData(result);
+    } catch (e) { console.error('Changelog fetch error:', e); }
+    finally { setChangelogLoading(false); }
+  }, []);
+
   const handleLogin = (e: React.FormEvent) => { e.preventDefault(); passwordRef.current = password; fetchData(password, days); };
-  const changeDays = (d: number) => { setDays(d); fetchData(passwordRef.current, d); setLeadsData(null); setAdvancedData(null); };
+  const changeDays = (d: number) => {
+    setDays(d); setLeadsData(null); setAdvancedData(null); setCroData(null);
+    fetchData(passwordRef.current, d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
+  };
+  const applyFilters = (device: string, utm: string) => {
+    setDeviceFilter(device); setUtmSourceFilter(utm);
+    setLeadsData(null); setAdvancedData(null); setCroData(null);
+    fetchData(passwordRef.current, days, device || undefined, utm || undefined, pageFilter || undefined);
+  };
   const toggleSort = (key: string) => setPageSort(prev => ({ key, dir: prev.key === key && prev.dir === 'desc' ? 'asc' : 'desc' }));
 
   // Auto-refresh
   useEffect(() => {
     if (!autoRefresh || !isAuthed) return;
-    const id = setInterval(() => fetchData(passwordRef.current, days), 60000);
+    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined), 60000);
     return () => clearInterval(id);
-  }, [autoRefresh, isAuthed, days, fetchData]);
+  }, [autoRefresh, isAuthed, days, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 
   // Fetch leads data when tab switches to leads
   useEffect(() => {
@@ -557,28 +646,49 @@ export default function AnalyticsDashboard() {
   // Fetch advanced data when behavior tab opens
   useEffect(() => {
     if (activeTab !== 'behavior' || !isAuthed || advancedData) return;
-    fetchAdvancedData(days);
-  }, [activeTab, isAuthed, days, advancedData, fetchAdvancedData]);
+    fetchAdvancedData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
+  }, [activeTab, isAuthed, days, advancedData, deviceFilter, utmSourceFilter, pageFilter, fetchAdvancedData]);
+
+  // Fetch CRO data when CRO tab opens
+  useEffect(() => {
+    if (activeTab !== 'cro' || !isAuthed || croData) return;
+    fetchCroData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
+  }, [activeTab, isAuthed, days, croData, deviceFilter, utmSourceFilter, pageFilter, fetchCroData]);
+
+  // Fetch changelog when changelog tab opens
+  useEffect(() => {
+    if (activeTab !== 'changelog' || !isAuthed || changelogData) return;
+    fetchChangelog();
+  }, [activeTab, isAuthed, changelogData, fetchChangelog]);
 
   // Real-time tab polling (30s)
   useEffect(() => {
     if (activeTab !== 'realtime' || !isAuthed) return;
-    const id = setInterval(() => fetchData(passwordRef.current, days), 30000);
+    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined), 30000);
     return () => clearInterval(id);
-  }, [activeTab, isAuthed, days, fetchData]);
+  }, [activeTab, isAuthed, days, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 
   /* ─── Derived Data ─── */
   const allPages = useMemo(() => data?.page_details?.map(p => p.page_path).sort() || [], [data]);
+  const utmSources = useMemo(() => {
+    if (!data?.utm_campaigns_v2) return [];
+    const sources = new Set(data.utm_campaigns_v2.map((c: any) => c.utm_source).filter(Boolean));
+    return Array.from(sources).sort() as string[];
+  }, [data]);
 
   const filteredPageDetails = useMemo(() => {
     if (!data?.page_details) return [];
-    const arr = pageFilter ? data.page_details.filter(r => r.page_path === pageFilter) : data.page_details;
+    let arr = pageFilter ? data.page_details.filter(r => r.page_path === pageFilter) : data.page_details;
+    if (tableSearch) {
+      const q = tableSearch.toLowerCase();
+      arr = arr.filter(r => decodePath(r.page_path).toLowerCase().includes(q));
+    }
     return [...arr].sort((a: any, b: any) => {
       const av = a[pageSort.key], bv = b[pageSort.key];
       const cmp = typeof av === 'number' ? av - bv : String(av).localeCompare(String(bv));
       return pageSort.dir === 'desc' ? -cmp : cmp;
     });
-  }, [data, pageFilter, pageSort]);
+  }, [data, pageFilter, pageSort, tableSearch]);
 
   const filteredSourcePages = useMemo(() => {
     if (!data?.source_pages) return [];
@@ -604,7 +714,8 @@ export default function AnalyticsDashboard() {
     return data.top_pages.slice(0, 10).map(p => ({ ...p, name: decodePath(p.page_path) })).reverse();
   }, [data]);
 
-  const dailyMerged = useMemo(() => mergeDaily(data?.daily_views, data?.daily_clicks, data?.daily_forms), [data]);
+  const dailyMerged = useMemo(() => mergeDaily(data?.daily_views ?? null, data?.daily_clicks ?? null, data?.daily_forms ?? null), [data]);
+  const chartData = useMemo(() => aggregateByGranularity(dailyMerged, granularity), [dailyMerged, granularity]);
 
   const hourlyFull = useMemo(() => {
     const map: Record<number, number> = {};
@@ -672,7 +783,25 @@ export default function AnalyticsDashboard() {
           {lastUpdated && <span style={{ fontSize: '11px', color: T.textMuted }}>עדכון: {lastUpdated.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</span>}
         </div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <select value={pageFilter} onChange={e => setPageFilter(e.target.value)} dir="rtl" style={{
+          <select value={deviceFilter} onChange={e => applyFilters(e.target.value, utmSourceFilter)} dir="rtl" style={{
+            padding: '8px 12px', borderRadius: '8px', border: `1px solid ${deviceFilter ? T.purple : T.cardBorder}`,
+            background: deviceFilter ? T.purpleBg : T.cardBg, color: deviceFilter ? T.purple : T.textSecondary,
+            fontSize: '13px', cursor: 'pointer', outline: 'none', fontFamily: 'Heebo, sans-serif',
+          }}>
+            <option value="">כל המכשירים</option>
+            <option value="desktop">💻 מחשב</option>
+            <option value="mobile">📱 נייד</option>
+            <option value="tablet">📟 טאבלט</option>
+          </select>
+          <select value={utmSourceFilter} onChange={e => applyFilters(deviceFilter, e.target.value)} dir="rtl" style={{
+            padding: '8px 12px', borderRadius: '8px', border: `1px solid ${utmSourceFilter ? T.purple : T.cardBorder}`,
+            background: utmSourceFilter ? T.purpleBg : T.cardBg, color: utmSourceFilter ? T.purple : T.textSecondary,
+            fontSize: '13px', cursor: 'pointer', outline: 'none', fontFamily: 'Heebo, sans-serif',
+          }}>
+            <option value="">כל המקורות</option>
+            {utmSources.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+          <select value={pageFilter} onChange={e => { setPageFilter(e.target.value); setLeadsData(null); setAdvancedData(null); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, e.target.value || undefined); }} dir="rtl" style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${pageFilter ? T.purple : T.cardBorder}`,
             background: pageFilter ? T.purpleBg : T.cardBg, color: pageFilter ? T.purple : T.textSecondary,
             fontSize: '13px', cursor: 'pointer', outline: 'none', maxWidth: '200px', fontFamily: 'Heebo, sans-serif',
@@ -680,12 +809,18 @@ export default function AnalyticsDashboard() {
             <option value="">כל הדפים</option>
             {allPages.map(p => <option key={p} value={p}>{decodePath(p)}</option>)}
           </select>
+          {(deviceFilter || utmSourceFilter || pageFilter) && (
+            <button onClick={() => { setDeviceFilter(''); setUtmSourceFilter(''); setPageFilter(''); setLeadsData(null); setAdvancedData(null); fetchData(passwordRef.current, days); }} style={{
+              padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.red}`,
+              background: T.redBg, color: T.red, cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
+            }}>✕ נקה פילטרים</button>
+          )}
           <button onClick={() => setAutoRefresh(!autoRefresh)} style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${autoRefresh ? T.green : T.cardBorder}`,
             background: autoRefresh ? T.greenBg : T.cardBg, color: autoRefresh ? T.green : T.textMuted,
             cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
           }}>{autoRefresh ? '⏸ עצור' : '▶ רענון אוטומטי'}</button>
-          <button onClick={() => fetchData(passwordRef.current, days)} disabled={loading} style={{
+          <button onClick={() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined)} disabled={loading} style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.cardBorder}`,
             background: T.cardBg, color: loading ? T.textMuted : T.green, cursor: loading ? 'default' : 'pointer', fontSize: '14px',
           }}>{loading ? '⏳' : '🔄'}</button>
@@ -719,6 +854,19 @@ export default function AnalyticsDashboard() {
         ))}
       </div>
 
+      {/* Active Filters Indicator */}
+      {(deviceFilter || utmSourceFilter || pageFilter) && (
+        <div style={{
+          display: 'flex', gap: '8px', marginBottom: '16px', direction: 'rtl', alignItems: 'center',
+          padding: '8px 16px', borderRadius: '10px', background: T.purpleBg, border: `1px solid ${T.purple}30`,
+        }}>
+          <span style={{ fontSize: '12px', color: T.purple, fontWeight: 600 }}>🔍 פילטרים פעילים:</span>
+          {deviceFilter && <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(255,255,255,0.06)' }}>{DEVICE_LABELS[deviceFilter] || deviceFilter}</span>}
+          {utmSourceFilter && <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(255,255,255,0.06)' }}>{utmSourceFilter}</span>}
+          {pageFilter && <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(255,255,255,0.06)' }}>{decodePath(pageFilter)}</span>}
+        </div>
+      )}
+
       {loading && !data && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '24px' }}>
           {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} height={130} />)}
@@ -742,27 +890,38 @@ export default function AnalyticsDashboard() {
               </div>
 
               {/* Multi-metric chart */}
-              {dailyMerged.length > 0 && (
-                <Card title="מגמות יומיות">
-                  <div style={{ display: 'flex', gap: '16px', marginBottom: '12px', direction: 'rtl' }}>
-                    {[
-                      { key: 'views', label: 'צפיות', color: T.purple, show: showViews, toggle: setShowViews },
-                      { key: 'clicks', label: 'לחיצות', color: T.cyan, show: showClicks, toggle: setShowClicks },
-                      { key: 'forms', label: 'טפסים', color: T.green, show: showForms, toggle: setShowForms },
-                    ].map(s => (
-                      <button key={s.key} onClick={() => s.toggle(!s.show)} style={{
-                        display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '6px',
-                        border: `1px solid ${s.show ? s.color : T.cardBorder}`, background: s.show ? `${s.color}15` : 'transparent',
-                        color: s.show ? s.color : T.textMuted, cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
-                      }}>
-                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.show ? s.color : T.textMuted }} />
-                        {s.label}
-                      </button>
-                    ))}
+              {chartData.length > 0 && (
+                <Card title={granularity === 'day' ? 'מגמות יומיות' : granularity === 'week' ? 'מגמות שבועיות' : 'מגמות חודשיות'}>
+                  <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', direction: 'rtl', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      {[
+                        { key: 'views', label: 'צפיות', color: T.purple, show: showViews, toggle: setShowViews },
+                        { key: 'clicks', label: 'לחיצות', color: T.cyan, show: showClicks, toggle: setShowClicks },
+                        { key: 'forms', label: 'טפסים', color: T.green, show: showForms, toggle: setShowForms },
+                      ].map(s => (
+                        <button key={s.key} onClick={() => s.toggle(!s.show)} style={{
+                          display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '6px',
+                          border: `1px solid ${s.show ? s.color : T.cardBorder}`, background: s.show ? `${s.color}15` : 'transparent',
+                          color: s.show ? s.color : T.textMuted, cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
+                        }}>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.show ? s.color : T.textMuted }} />
+                          {s.label}
+                        </button>
+                      ))}
+                    </div>
+                    <div style={{ display: 'flex', gap: '4px', background: T.cardBg, borderRadius: '8px', padding: '2px', border: `1px solid ${T.cardBorder}` }}>
+                      {([['day', 'יום'], ['week', 'שבוע'], ['month', 'חודש']] as const).map(([g, label]) => (
+                        <button key={g} onClick={() => setGranularity(g)} style={{
+                          padding: '4px 12px', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', fontFamily: 'Heebo, sans-serif',
+                          border: 'none', background: granularity === g ? T.purpleBg : 'transparent',
+                          color: granularity === g ? T.purple : T.textMuted, fontWeight: granularity === g ? 600 : 400,
+                        }}>{label}</button>
+                      ))}
+                    </div>
                   </div>
                   <div style={{ direction: 'ltr', height: '280px' }}>
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={dailyMerged} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                      <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                         <defs>
                           <linearGradient id="gViews" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={T.purple} stopOpacity={0.3} /><stop offset="100%" stopColor={T.purple} stopOpacity={0} /></linearGradient>
                           <linearGradient id="gClicks" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={T.cyan} stopOpacity={0.3} /><stop offset="100%" stopColor={T.cyan} stopOpacity={0} /></linearGradient>
@@ -1147,7 +1306,12 @@ export default function AnalyticsDashboard() {
               )}
 
               {/* All Pages */}
-              <Card title="ביצועי דפים" exportData={filteredPageDetails} exportName="page-details">
+              <Card title="ביצועי דפים" exportData={filteredPageDetails} exportName="page-details" headerRight={
+                <input value={tableSearch} onChange={e => setTableSearch(e.target.value)} placeholder="🔍 חיפוש דף..." dir="rtl" style={{
+                  padding: '6px 12px', borderRadius: '6px', border: `1px solid ${tableSearch ? T.purple : T.cardBorder}`,
+                  background: T.cardBg, color: T.textPrimary, fontSize: '12px', outline: 'none', width: '160px', fontFamily: 'Heebo, sans-serif',
+                }} />
+              }>
                 <div style={{ overflowX: 'auto' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', direction: 'rtl' }}>
                     <thead>
@@ -1227,7 +1391,7 @@ export default function AnalyticsDashboard() {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
-                <Card title="מקורות תנועה" exportData={data.referrers} exportName="referrers">
+                <Card title="מקורות תנועה" exportData={data.referrers ?? undefined} exportName="referrers">
                   <DataTable
                     rows={data.referrers || []}
                     columns={[
@@ -1237,7 +1401,7 @@ export default function AnalyticsDashboard() {
                   />
                 </Card>
 
-                <Card title="קמפיינים (UTM)" exportData={data.utm_campaigns_v2} exportName="utm-campaigns">
+                <Card title="קמפיינים (UTM)" exportData={data.utm_campaigns_v2 ?? undefined} exportName="utm-campaigns">
                   <DataTable
                     rows={data.utm_campaigns_v2 || []}
                     columns={[
@@ -1290,7 +1454,7 @@ export default function AnalyticsDashboard() {
               )}
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
-                <Card title="טפסים" exportData={pageFilter ? data.form_details?.filter(r => r.page_path === pageFilter) : data.form_details} exportName="form-submissions">
+                <Card title="טפסים" exportData={(pageFilter ? data.form_details?.filter(r => r.page_path === pageFilter) : data.form_details) ?? undefined} exportName="form-submissions">
                   <DataTable
                     rows={pageFilter ? (data.form_details || []).filter(r => r.page_path === pageFilter) : (data.form_details || [])}
                     columns={[
@@ -1301,7 +1465,7 @@ export default function AnalyticsDashboard() {
                   />
                 </Card>
 
-                <Card title="דפי נחיתה" exportData={data.landing_pages} exportName="landing-pages">
+                <Card title="דפי נחיתה" exportData={data.landing_pages ?? undefined} exportName="landing-pages">
                   <DataTable
                     rows={pageFilter ? (data.landing_pages || []).filter(r => r.page_path === pageFilter) : (data.landing_pages || [])}
                     columns={[
@@ -1367,7 +1531,17 @@ export default function AnalyticsDashboard() {
                   })()}
 
                   {/* ── Heatmap: DOW × Hour ── */}
-                  <Card title="מפת חום — יום ושעה">
+                  <Card title="מפת חום — יום ושעה" headerRight={
+                    <div style={{ display: 'flex', gap: '4px', background: T.cardBg, borderRadius: '6px', padding: '2px', border: `1px solid ${T.cardBorder}` }}>
+                      {([['count', 'הכל'], ['pageviews', 'צפיות'], ['clicks', 'לחיצות'], ['forms', 'טפסים']] as const).map(([m, label]) => (
+                        <button key={m} onClick={() => setHeatmapMetric(m)} style={{
+                          padding: '3px 10px', borderRadius: '5px', fontSize: '11px', cursor: 'pointer', fontFamily: 'Heebo, sans-serif',
+                          border: 'none', background: heatmapMetric === m ? T.purpleBg : 'transparent',
+                          color: heatmapMetric === m ? T.purple : T.textMuted, fontWeight: heatmapMetric === m ? 600 : 400,
+                        }}>{label}</button>
+                      ))}
+                    </div>
+                  }>
                     <div style={{ direction: 'rtl' }}>
                       <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '16px' }}>
                         מתי הגולשים הכי פעילים? צבע כהה = פעילות גבוהה
@@ -1377,8 +1551,9 @@ export default function AnalyticsDashboard() {
                         let maxCount = 1;
                         (advancedData.heatmap || []).forEach(h => {
                           const key = `${h.dow}-${h.hour}`;
-                          matrix[key] = h.count;
-                          if (h.count > maxCount) maxCount = h.count;
+                          const val = h[heatmapMetric] ?? h.count;
+                          matrix[key] = val;
+                          if (val > maxCount) maxCount = val;
                         });
                         const hours = Array.from({ length: 24 }, (_, i) => i);
                         const days = [0, 1, 2, 3, 4, 5, 6];
@@ -2109,6 +2284,319 @@ export default function AnalyticsDashboard() {
                   </>
                 );
               })()}
+            </>
+          )}
+
+          {/* ═══ CRO TAB ═══ */}
+          {activeTab === 'cro' && (
+            <>
+              {croLoading && !croData && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                  {[1, 2, 3, 4].map(i => <Skeleton key={i} height={200} />)}
+                </div>
+              )}
+
+              {croData && (
+                <>
+                  {/* Scroll Depth Summary */}
+                  <Card title="עומק גלילה — כמה מהתוכן באמת נצפה">
+                    <div style={{ direction: 'rtl' }}>
+                      {croData.scroll_summary && croData.scroll_summary.length > 0 ? (
+                        <>
+                          <div style={{ display: 'flex', gap: '16px', marginBottom: '20px', flexWrap: 'wrap' }}>
+                            {['25%', '50%', '75%', '100%'].map(depth => {
+                              const item = (croData.scroll_summary || []).find((s: any) => s.depth === depth);
+                              const count = item?.count || 0;
+                              const total = (croData.scroll_summary || []).reduce((sum: number, s: any) => s.depth === '25%' ? s.count : sum, 0) || 1;
+                              const pct = depth === '25%' ? 100 : Math.round((count / total) * 100);
+                              const colors: Record<string, string> = { '25%': T.purple, '50%': T.cyan, '75%': T.orange, '100%': T.green };
+                              return (
+                                <div key={depth} style={{ flex: '1', minWidth: '120px', padding: '16px', borderRadius: '12px', background: T.cardBg, border: `1px solid ${T.cardBorder}`, textAlign: 'center' }}>
+                                  <div style={{ fontSize: '28px', fontWeight: 700, color: colors[depth] }}>{pct}%</div>
+                                  <div style={{ fontSize: '12px', color: T.textMuted, marginTop: '4px' }}>הגיעו ל-{depth}</div>
+                                  <div style={{ fontSize: '11px', color: T.textMuted }}>({count} סשנים)</div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <p style={{ fontSize: '12px', color: T.textMuted }}>
+                            אם פחות מ-50% מגיעים ל-75%, שקול לקצר תוכן או להעלות CTA למעלה
+                          </p>
+                        </>
+                      ) : (
+                        <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center', padding: '30px 0' }}>
+                          אין עדיין נתוני גלילה. הנתונים יתחילו להגיע אחרי פריסה לפרודקשן.
+                        </p>
+                      )}
+                    </div>
+                  </Card>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                    {/* Time on Page */}
+                    <Card title="זמן שהייה בדף">
+                      <div style={{ direction: 'rtl' }}>
+                        {croData.time_on_page && croData.time_on_page.length > 0 ? (
+                          <div style={{ overflowX: 'auto' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                              <thead>
+                                <tr>
+                                  <th style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>דף</th>
+                                  <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>ממוצע</th>
+                                  <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>חציון</th>
+                                  <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>סשנים</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {croData.time_on_page.slice(0, 15).map((row: any, i: number) => (
+                                  <tr key={i} onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')} onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                                    <td style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{decodePath(row.page_path)}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.purple, fontWeight: 600 }}>{formatDuration(row.avg_seconds)}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.textSecondary }}>{formatDuration(row.median_seconds)}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.textMuted }}>{row.sessions}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        ) : (
+                          <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center', padding: '30px 0' }}>אין נתונים עדיין</p>
+                        )}
+                      </div>
+                    </Card>
+
+                    {/* Time Distribution */}
+                    <Card title="התפלגות זמן שהייה">
+                      <div style={{ direction: 'rtl' }}>
+                        {croData.time_buckets && croData.time_buckets.length > 0 ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            {croData.time_buckets.map((b: any, i: number) => {
+                              const maxCount = Math.max(...croData.time_buckets.map((x: any) => x.count));
+                              const pct = (b.count / maxCount) * 100;
+                              return (
+                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                  <span style={{ fontSize: '12px', color: T.textSecondary, minWidth: '60px', textAlign: 'left' }}>{b.bucket}</span>
+                                  <div style={{ flex: 1, height: '24px', background: T.cardBg, borderRadius: '6px', overflow: 'hidden' }}>
+                                    <div style={{ height: '100%', width: `${pct}%`, background: `linear-gradient(90deg, ${T.purpleDark}, ${T.purple})`, borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '8px' }}>
+                                      <span style={{ fontSize: '11px', color: '#fff', fontWeight: 600 }}>{b.count}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center', padding: '30px 0' }}>אין נתונים עדיין</p>
+                        )}
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* Form Engagement */}
+                  <Card title="מעורבות טפסים — התחלה, שליחה, נטישה">
+                    <div style={{ direction: 'rtl' }}>
+                      {croData.form_engagement && croData.form_engagement.length > 0 ? (
+                        <div style={{ overflowX: 'auto' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                            <thead>
+                              <tr>
+                                <th style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>טופס</th>
+                                <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>התחלות</th>
+                                <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>שליחות</th>
+                                <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>נטישות</th>
+                                <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>% נטישה</th>
+                                <th style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>זמן לפני נטישה</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {croData.form_engagement.map((row: any, i: number) => {
+                                const formLabel = FORM_SOURCE_LABELS[row.form_id] || row.form_id;
+                                return (
+                                  <tr key={i} onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')} onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                                    <td style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc' }}>{formLabel}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.purple, fontWeight: 600 }}>{row.starts}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.green, fontWeight: 600 }}>{row.submits}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: row.abandons > 0 ? T.red : T.textMuted }}>{row.abandons}</td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}` }}>
+                                      <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, background: row.abandon_rate > 50 ? T.redBg : row.abandon_rate > 20 ? T.orangeBg : T.greenBg, color: row.abandon_rate > 50 ? T.red : row.abandon_rate > 20 ? T.orange : T.green }}>
+                                        {row.abandon_rate}%
+                                      </span>
+                                    </td>
+                                    <td style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: T.textMuted }}>{row.avg_time_before_abandon > 0 ? `${row.avg_time_before_abandon}s` : '—'}</td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      ) : (
+                        <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center', padding: '30px 0' }}>אין נתונים עדיין. נתוני מעורבות טפסים יתחילו להגיע אחרי פריסה.</p>
+                      )}
+                    </div>
+                  </Card>
+
+                  {/* Page Flows */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                    <Card title="זרימת ניווט — מאיפה לאיפה">
+                      <div style={{ direction: 'rtl' }}>
+                        {croData.page_flows && croData.page_flows.length > 0 ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            {croData.page_flows.slice(0, 15).map((flow: any, i: number) => (
+                              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', borderRadius: '8px', background: i < 3 ? T.purpleBg : 'transparent' }}>
+                                <span style={{ fontSize: '12px', color: '#ccc', flex: 1, textAlign: 'right', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{decodePath(flow.from_page)}</span>
+                                <span style={{ fontSize: '14px', color: T.purple }}>→</span>
+                                <span style={{ fontSize: '12px', color: '#ccc', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{decodePath(flow.to_page)}</span>
+                                <span style={{ fontSize: '12px', color: T.purple, fontWeight: 600, minWidth: '30px', textAlign: 'center' }}>{flow.transitions}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p style={{ color: T.textMuted, fontSize: '14px', textAlign: 'center', padding: '30px 0' }}>אין נתונים עדיין</p>
+                        )}
+                      </div>
+                    </Card>
+
+                    {/* Entry + Exit Pages */}
+                    <Card title="דפי כניסה ויציאה">
+                      <div style={{ direction: 'rtl' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                          <div>
+                            <h4 style={{ fontSize: '13px', color: T.green, marginBottom: '8px', fontWeight: 600 }}>🚪 כניסה</h4>
+                            {(croData.entry_pages || []).slice(0, 8).map((p: any, i: number) => (
+                              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', borderBottom: `1px solid ${T.rowBorder}` }}>
+                                <span style={{ fontSize: '12px', color: '#ccc', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '150px' }}>{decodePath(p.page_path)}</span>
+                                <span style={{ fontSize: '12px', color: T.green, fontWeight: 600 }}>{p.entries}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div>
+                            <h4 style={{ fontSize: '13px', color: T.red, marginBottom: '8px', fontWeight: 600 }}>🚶 יציאה</h4>
+                            {(croData.exit_pages || []).slice(0, 8).map((p: any, i: number) => (
+                              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', borderBottom: `1px solid ${T.rowBorder}` }}>
+                                <span style={{ fontSize: '12px', color: '#ccc', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '150px' }}>{decodePath(p.page_path)}</span>
+                                <span style={{ fontSize: '12px', color: T.red, fontWeight: 600 }}>{p.exits}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* Scroll Depth per Page */}
+                  {croData.scroll_depth && croData.scroll_depth.length > 0 && (
+                    <Card title="עומק גלילה לפי דף">
+                      <div style={{ direction: 'rtl', overflowX: 'auto' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                          <thead>
+                            <tr>
+                              <th style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>דף</th>
+                              {['25%', '50%', '75%', '100%'].map(d => (
+                                <th key={d} style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontSize: '12px' }}>{d}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {(() => {
+                              const pages: Record<string, Record<string, number>> = {};
+                              (croData.scroll_depth || []).forEach((r: any) => {
+                                if (!pages[r.page_path]) pages[r.page_path] = {};
+                                pages[r.page_path][r.depth] = r.count;
+                              });
+                              return Object.entries(pages).sort((a, b) => ((b[1]['25%'] || 0) - (a[1]['25%'] || 0))).slice(0, 15).map(([path, depths], i) => (
+                                <tr key={i} onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')} onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                                  <td style={{ textAlign: 'right', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: '#ccc', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{decodePath(path)}</td>
+                                  {['25%', '50%', '75%', '100%'].map(d => (
+                                    <td key={d} style={{ textAlign: 'center', padding: '8px', borderBottom: `1px solid ${T.rowBorder}`, color: depths[d] ? T.purple : T.textMuted, fontWeight: depths[d] ? 600 : 400 }}>{depths[d] || 0}</td>
+                                  ))}
+                                </tr>
+                              ));
+                            })()}
+                          </tbody>
+                        </table>
+                      </div>
+                    </Card>
+                  )}
+                </>
+              )}
+
+              {!croLoading && !croData && (
+                <div style={{ textAlign: 'center', padding: '60px 20px', color: T.textMuted }}>
+                  <p style={{ fontSize: '16px', marginBottom: '8px' }}>טוען נתוני CRO...</p>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* ═══ CHANGELOG TAB ═══ */}
+          {activeTab === 'changelog' && (
+            <>
+              {changelogLoading && !changelogData && (
+                <div style={{ display: 'grid', gap: '12px' }}>
+                  {[1, 2, 3, 4, 5].map(i => <Skeleton key={i} height={80} />)}
+                </div>
+              )}
+
+              {changelogData && changelogData.length > 0 ? (
+                <Card title={`לוג שינויים (${changelogData.length} רשומות)`}>
+                  <div style={{ direction: 'rtl' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                      {changelogData.map((entry: any, i: number) => {
+                        const typeColors: Record<string, { bg: string; color: string; icon: string }> = {
+                          feat: { bg: T.greenBg, color: T.green, icon: '✨' },
+                          fix: { bg: T.redBg, color: T.red, icon: '🐛' },
+                          content: { bg: T.cyanBg, color: T.cyan, icon: '📝' },
+                          style: { bg: T.purpleBg, color: T.purple, icon: '🎨' },
+                          copy: { bg: T.orangeBg, color: T.orange, icon: '✏️' },
+                          refactor: { bg: 'rgba(255,255,255,0.06)', color: T.textSecondary, icon: '♻️' },
+                          build: { bg: 'rgba(255,255,255,0.06)', color: T.textMuted, icon: '📦' },
+                        };
+                        const tc = typeColors[entry.change_type] || typeColors.build;
+                        const date = new Date(entry.created_at);
+                        return (
+                          <div key={entry.id || i} style={{
+                            display: 'flex', gap: '12px', padding: '14px 0',
+                            borderBottom: i < changelogData.length - 1 ? `1px solid ${T.rowBorder}` : 'none',
+                          }}>
+                            {/* Timeline dot */}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '24px', paddingTop: '2px' }}>
+                              <span style={{ fontSize: '16px' }}>{tc.icon}</span>
+                            </div>
+                            {/* Content */}
+                            <div style={{ flex: 1 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
+                                <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600, background: tc.bg, color: tc.color }}>{entry.change_type}</span>
+                                {entry.severity === 'major' && <span style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600, background: T.orangeBg, color: T.orange }}>major</span>}
+                                <span style={{ fontSize: '11px', color: T.textMuted }}>{date.toLocaleDateString('he-IL')} {date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</span>
+                                {entry.commit_hash && <span style={{ fontSize: '10px', color: T.textMuted, fontFamily: 'monospace' }}>{entry.commit_hash.substring(0, 8)}</span>}
+                              </div>
+                              <p style={{ margin: '0 0 4px', fontSize: '14px', color: T.textPrimary, fontWeight: 500 }}>{entry.title}</p>
+                              {entry.description && <p style={{ margin: 0, fontSize: '13px', color: T.textSecondary, lineHeight: '1.5' }}>{entry.description}</p>}
+                              {entry.pages_affected && entry.pages_affected.length > 0 && (
+                                <div style={{ display: 'flex', gap: '4px', marginTop: '6px', flexWrap: 'wrap' }}>
+                                  {entry.pages_affected.map((p: string, j: number) => (
+                                    <span key={j} style={{ padding: '1px 8px', borderRadius: '4px', fontSize: '11px', background: 'rgba(255,255,255,0.04)', color: T.textMuted }}>{p}</span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Card>
+              ) : !changelogLoading ? (
+                <Card title="לוג שינויים">
+                  <div style={{ textAlign: 'center', padding: '40px 20px', direction: 'rtl' }}>
+                    <p style={{ fontSize: '40px', marginBottom: '12px' }}>📝</p>
+                    <p style={{ fontSize: '16px', color: T.textPrimary, marginBottom: '8px' }}>עדיין אין שינויים מתועדים</p>
+                    <p style={{ fontSize: '13px', color: T.textMuted, lineHeight: '1.6' }}>
+                      שינויים באתר יתועדו כאן אוטומטית אחרי כל deploy.
+                      <br />השותף שלך יוכל לראות בדיוק מה השתנה, מתי ולמה.
+                    </p>
+                  </div>
+                </Card>
+              ) : null}
             </>
           )}
 
