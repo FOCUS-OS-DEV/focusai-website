@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis,
   CartesianGrid, Tooltip, PieChart, Pie, Cell,
@@ -60,6 +60,7 @@ const TABS = [
   { id: 'content', label: 'תוכן', icon: '📄' },
   { id: 'sources', label: 'מקורות', icon: '🔗' },
   { id: 'conversions', label: 'המרות', icon: '🎯' },
+  { id: 'behavior', label: 'התנהגות', icon: '🔬' },
   { id: 'realtime', label: 'בזמן אמת', icon: '⚡' },
   { id: 'insights', label: 'תובנות', icon: '💡' },
 ] as const;
@@ -103,6 +104,9 @@ const FORM_SOURCE_LABELS: Record<string, string> = {
 
 const DOW_LABELS: Record<number, string> = {
   0: 'ראשון', 1: 'שני', 2: 'שלישי', 3: 'רביעי', 4: 'חמישי', 5: 'שישי', 6: 'שבת',
+};
+const DOW_SHORT: Record<number, string> = {
+  0: 'א׳', 1: 'ב׳', 2: 'ג׳', 3: 'ד׳', 4: 'ה׳', 5: 'ו׳', 6: 'ש׳',
 };
 
 /* ─── Types ─── */
@@ -150,6 +154,23 @@ interface AnalyticsData {
   conversion_funnel: { pageviews: number; clicks: number; contact_clicks: number; whatsapp: number; phone: number; email: number; forms: number } | null;
   recent_events: { event_type: string; page_path: string; click_type: string | null; click_text: string | null; device_type: string | null; created_at: string }[] | null;
   utm_campaigns_v2: { utm_source: string; utm_medium: string; utm_campaign: string; visits: number; clicks: number; forms: number; conversion_rate: number }[] | null;
+}
+
+interface AdvancedData {
+  heatmap: { dow: number; hour: number; count: number; pageviews: number; clicks: number; forms: number }[];
+  session_depth: { depth: number; sessions: number }[];
+  session_depth_stats: { avg_depth: number; max_depth: number; single_page_pct: number; deep_sessions_pct: number; total_sessions: number };
+  top_flows: { from_page: string; to_page: string; count: number }[];
+  dow_weekly: { dow: number; pageviews: number; clicks: number; forms: number; sessions: number; conversion_rate: number }[];
+  weekly_trend: { week_start: string; pageviews: number; clicks: number; forms: number; sessions: number }[];
+  page_performance: { page_path: string; pageviews: number; clicks: number; forms: number; unique_sessions: number; bounce_rate: number; conversion_rate: number; exit_rate: number }[];
+  entry_pages: { page_path: string; entries: number }[];
+  exit_pages: { page_path: string; exits: number }[];
+  device_breakdown: { device_type: string; sessions: number; pageviews: number; forms: number; conversion_rate: number }[];
+  dow_hourly: { dow: number; hour: number; pageviews: number }[];
+  period_comparison: { current_pageviews: number; prev_pageviews: number; current_sessions: number; prev_sessions: number; current_forms: number; prev_forms: number; current_clicks: number; prev_clicks: number };
+  engagement_segments: { one_page_sessions: number; two_page_sessions: number; three_plus_sessions: number; clicked_sessions: number; converted_sessions: number };
+  date_range: { start: string; end: string; days: number };
 }
 
 /* ─── Helpers ─── */
@@ -429,6 +450,8 @@ export default function AnalyticsDashboard() {
   const [leadsLoading, setLeadsLoading] = useState(false);
   const [aiInsights, setAiInsights] = useState<{ title: string; body: string; action: string; priority: string; category: string }[] | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
+  const [advancedData, setAdvancedData] = useState<AdvancedData | null>(null);
+  const [advancedLoading, setAdvancedLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [days, setDays] = useState(30);
@@ -499,8 +522,23 @@ export default function AnalyticsDashboard() {
     finally { setAiLoading(false); }
   }, [data, leadsData]);
 
+  const fetchAdvancedData = useCallback(async (d: number) => {
+    setAdvancedLoading(true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_advanced_analytics`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+        body: JSON.stringify({ p_password: null, p_days: d }),
+      });
+      if (!res.ok) { console.error('Advanced RPC error:', res.status); return; }
+      const result = await res.json();
+      setAdvancedData(result);
+    } catch (e) { console.error('Advanced fetch error:', e); }
+    finally { setAdvancedLoading(false); }
+  }, []);
+
   const handleLogin = (e: React.FormEvent) => { e.preventDefault(); passwordRef.current = password; fetchData(password, days); };
-  const changeDays = (d: number) => { setDays(d); fetchData(passwordRef.current, d); setLeadsData(null); };
+  const changeDays = (d: number) => { setDays(d); fetchData(passwordRef.current, d); setLeadsData(null); setAdvancedData(null); };
   const toggleSort = (key: string) => setPageSort(prev => ({ key, dir: prev.key === key && prev.dir === 'desc' ? 'asc' : 'desc' }));
 
   // Auto-refresh
@@ -515,6 +553,12 @@ export default function AnalyticsDashboard() {
     if (activeTab !== 'leads' || !isAuthed || leadsData) return;
     fetchLeadsData(passwordRef.current, days);
   }, [activeTab, isAuthed, days, leadsData, fetchLeadsData]);
+
+  // Fetch advanced data when behavior tab opens
+  useEffect(() => {
+    if (activeTab !== 'behavior' || !isAuthed || advancedData) return;
+    fetchAdvancedData(days);
+  }, [activeTab, isAuthed, days, advancedData, fetchAdvancedData]);
 
   // Real-time tab polling (30s)
   useEffect(() => {
@@ -1287,6 +1331,784 @@ export default function AnalyticsDashboard() {
                   </div>
                 </Card>
               )}
+            </>
+          )}
+
+          {/* ═══ BEHAVIOR TAB ═══ */}
+          {activeTab === 'behavior' && (
+            <>
+              {advancedLoading && !advancedData && (
+                <div style={{ display: 'grid', gap: '16px' }}>
+                  <Skeleton height={200} />
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <Skeleton height={180} /><Skeleton height={180} />
+                  </div>
+                </div>
+              )}
+              {advancedData && (
+                <>
+                  {/* ── Period Comparison KPIs ── */}
+                  {advancedData.period_comparison && (() => {
+                    const pc = advancedData.period_comparison;
+                    return (
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '14px', marginBottom: '24px' }}>
+                        <KPI label="צפיות" value={pc.current_pageviews} trend={calcTrend(pc.current_pageviews, pc.prev_pageviews)} icon="👁" />
+                        <KPI label="סשנים" value={pc.current_sessions} trend={calcTrend(pc.current_sessions, pc.prev_sessions)} color={T.cyan} icon="👤" />
+                        <KPI label="טפסים" value={pc.current_forms} trend={calcTrend(pc.current_forms, pc.prev_forms)} color={T.green} icon="📝" />
+                        <KPI label="לחיצות" value={pc.current_clicks} trend={calcTrend(pc.current_clicks, pc.prev_clicks)} color={T.orange} icon="🖱" />
+                        {advancedData.session_depth_stats && (
+                          <>
+                            <KPI label="עומק ממוצע" displayValue={`${advancedData.session_depth_stats.avg_depth} דפים`} color={T.cyan} icon="📑" />
+                            <KPI label="סשנים עמוקים (3+)" displayValue={`${advancedData.session_depth_stats.deep_sessions_pct}%`} color={T.green} icon="🎯" />
+                          </>
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                  {/* ── Heatmap: DOW × Hour ── */}
+                  <Card title="מפת חום — יום ושעה">
+                    <div style={{ direction: 'rtl' }}>
+                      <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '16px' }}>
+                        מתי הגולשים הכי פעילים? צבע כהה = פעילות גבוהה
+                      </p>
+                      {(() => {
+                        const matrix: Record<string, number> = {};
+                        let maxCount = 1;
+                        (advancedData.heatmap || []).forEach(h => {
+                          const key = `${h.dow}-${h.hour}`;
+                          matrix[key] = h.count;
+                          if (h.count > maxCount) maxCount = h.count;
+                        });
+                        const hours = Array.from({ length: 24 }, (_, i) => i);
+                        const days = [0, 1, 2, 3, 4, 5, 6];
+                        return (
+                          <div style={{ overflowX: 'auto' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: `60px repeat(24, 1fr)`, gap: '2px', minWidth: '700px' }}>
+                              {/* Hour headers */}
+                              <div />
+                              {hours.map(h => (
+                                <div key={h} style={{ fontSize: '10px', color: T.textMuted, textAlign: 'center', padding: '4px 0' }}>
+                                  {h}
+                                </div>
+                              ))}
+                              {/* Rows */}
+                              {days.map(dow => (
+                                <React.Fragment key={dow}>
+                                  <div style={{ fontSize: '12px', color: T.textSecondary, display: 'flex', alignItems: 'center', justifyContent: 'flex-start', paddingRight: '8px' }}>
+                                    {DOW_LABELS[dow]}
+                                  </div>
+                                  {hours.map(h => {
+                                    const val = matrix[`${dow}-${h}`] || 0;
+                                    const intensity = val / maxCount;
+                                    const bg = val === 0
+                                      ? 'rgba(255,255,255,0.02)'
+                                      : `rgba(168,85,247,${0.1 + intensity * 0.7})`;
+                                    return (
+                                      <div key={`${dow}-${h}`} title={`${DOW_LABELS[dow]} ${h}:00 — ${val} אירועים`} style={{
+                                        background: bg, borderRadius: '3px', aspectRatio: '1',
+                                        minHeight: '20px', cursor: 'default', transition: 'transform 0.1s',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        fontSize: '9px', color: intensity > 0.5 ? '#fff' : 'transparent',
+                                        fontWeight: 600,
+                                      }}>
+                                        {val > 0 ? val : ''}
+                                      </div>
+                                    );
+                                  })}
+                                </React.Fragment>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  </Card>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                    {/* ── Session Depth Distribution ── */}
+                    <Card title="עומק סשן — כמה דפים לביקור">
+                      <div style={{ direction: 'rtl' }}>
+                        {advancedData.session_depth_stats && (
+                          <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                            <div style={{ padding: '10px 16px', borderRadius: '10px', background: T.purpleBg, border: `1px solid rgba(168,85,247,0.2)` }}>
+                              <div style={{ fontSize: '11px', color: T.textSecondary }}>דף אחד בלבד</div>
+                              <div style={{ fontSize: '22px', fontWeight: 700, color: T.red }}>{advancedData.session_depth_stats.single_page_pct}%</div>
+                            </div>
+                            <div style={{ padding: '10px 16px', borderRadius: '10px', background: T.greenBg, border: `1px solid rgba(16,185,129,0.2)` }}>
+                              <div style={{ fontSize: '11px', color: T.textSecondary }}>3 דפים ומעלה</div>
+                              <div style={{ fontSize: '22px', fontWeight: 700, color: T.green }}>{advancedData.session_depth_stats.deep_sessions_pct}%</div>
+                            </div>
+                          </div>
+                        )}
+                        <div style={{ height: '200px', direction: 'ltr' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={(advancedData.session_depth || []).map(d => ({
+                              depth: d.depth === 10 ? '10+' : `${d.depth}`,
+                              sessions: d.sessions,
+                            }))}>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} />
+                              <XAxis dataKey="depth" tick={{ fill: T.axisText, fontSize: 12 }} axisLine={false} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} />
+                              <Tooltip content={<ChartTooltip suffix="סשנים" />} />
+                              <Bar dataKey="sessions" radius={[4, 4, 0, 0]} maxBarSize={36}>
+                                {(advancedData.session_depth || []).map((d, i) => (
+                                  <Cell key={i} fill={d.depth === 1 ? 'rgba(239,68,68,0.5)' : d.depth >= 3 ? T.green : T.purple} />
+                                ))}
+                              </Bar>
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </Card>
+
+                    {/* ── Engagement Segments ── */}
+                    <Card title="מעורבות גולשים">
+                      <div style={{ direction: 'rtl' }}>
+                        {advancedData.engagement_segments && (() => {
+                          const seg = advancedData.engagement_segments;
+                          const total = seg.one_page_sessions + seg.two_page_sessions + seg.three_plus_sessions;
+                          const segments = [
+                            { label: 'דף אחד', value: seg.one_page_sessions, color: T.red, icon: '🔴' },
+                            { label: '2 דפים', value: seg.two_page_sessions, color: T.orange, icon: '🟡' },
+                            { label: '3+ דפים', value: seg.three_plus_sessions, color: T.green, icon: '🟢' },
+                            { label: 'לחצו', value: seg.clicked_sessions, color: T.cyan, icon: '🖱' },
+                            { label: 'מילאו טופס', value: seg.converted_sessions, color: T.purple, icon: '📝' },
+                          ];
+                          return (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                              {segments.map(s => {
+                                const pct = total > 0 ? Math.round((s.value / total) * 100) : 0;
+                                return (
+                                  <div key={s.label}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                      <span style={{ fontSize: '13px', color: T.textSecondary }}>{s.icon} {s.label}</span>
+                                      <span style={{ fontSize: '13px', color: s.color, fontWeight: 600 }}>
+                                        {s.value.toLocaleString('he-IL')} ({pct}%)
+                                      </span>
+                                    </div>
+                                    <div style={{ height: '8px', background: 'rgba(255,255,255,0.04)', borderRadius: '4px', overflow: 'hidden' }}>
+                                      <div style={{ height: '100%', width: `${Math.max(pct, 1)}%`, background: s.color, borderRadius: '4px', transition: 'width 0.4s' }} />
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* ── DOW Weekly Pattern ── */}
+                  <Card title="ביצועים לפי יום בשבוע">
+                    <div style={{ direction: 'rtl' }}>
+                      <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '16px' }}>
+                        איזה ימים הכי אפקטיביים? ההשוואה מראה צפיות, לחיצות, טפסים ואחוז המרה
+                      </p>
+                      <div style={{ overflowX: 'auto' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                          <thead>
+                            <tr>
+                              {['יום', 'צפיות', 'לחיצות', 'טפסים', 'סשנים', 'המרה'].map(h => (
+                                <th key={h} style={{ padding: '10px 8px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontWeight: 500, fontSize: '12px', textAlign: 'center' }}>{h}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {(advancedData.dow_weekly || []).map(row => {
+                              const maxPv = Math.max(...(advancedData.dow_weekly || []).map(r => r.pageviews), 1);
+                              const intensity = row.pageviews / maxPv;
+                              return (
+                                <tr key={row.dow} style={{ background: `rgba(168,85,247,${intensity * 0.08})` }}
+                                  onMouseEnter={e => (e.currentTarget.style.background = `rgba(168,85,247,${Math.max(intensity * 0.12, 0.04)})`)}
+                                  onMouseLeave={e => (e.currentTarget.style.background = `rgba(168,85,247,${intensity * 0.08})`)}>
+                                  <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, fontWeight: 600, color: T.textPrimary, textAlign: 'center' }}>
+                                    {DOW_LABELS[row.dow]}
+                                  </td>
+                                  <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.purple, fontWeight: 600 }}>
+                                    {row.pageviews.toLocaleString('he-IL')}
+                                  </td>
+                                  <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.cyan }}>
+                                    {row.clicks.toLocaleString('he-IL')}
+                                  </td>
+                                  <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.green, fontWeight: 600 }}>
+                                    {row.forms}
+                                  </td>
+                                  <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.textSecondary }}>
+                                    {row.sessions.toLocaleString('he-IL')}
+                                  </td>
+                                  <td style={{ padding: '10px 8px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center' }}>
+                                    <span style={{
+                                      padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600,
+                                      background: row.conversion_rate > 2 ? T.greenBg : row.conversion_rate > 0 ? T.orangeBg : T.redBg,
+                                      color: row.conversion_rate > 2 ? T.green : row.conversion_rate > 0 ? T.orange : T.red,
+                                    }}>
+                                      {row.conversion_rate}%
+                                    </span>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                    {/* ── Top User Flows ── */}
+                    <Card title="מסלולי גלישה נפוצים">
+                      <div style={{ direction: 'rtl' }}>
+                        <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '12px' }}>
+                          מאיפה לאן: הדפים שגולשים עוברים ביניהם
+                        </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {(advancedData.top_flows || []).slice(0, 12).map((flow, i) => {
+                            const maxFlow = Math.max(...(advancedData.top_flows || []).map(f => f.count), 1);
+                            const pct = (flow.count / maxFlow) * 100;
+                            return (
+                              <div key={i} style={{ position: 'relative', padding: '10px 14px', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', overflow: 'hidden' }}>
+                                <div style={{ position: 'absolute', inset: 0, width: `${pct}%`, background: `linear-gradient(90deg, rgba(168,85,247,0.08), transparent)`, borderRadius: '8px' }} />
+                                <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px' }}>
+                                  <span style={{ color: T.textPrimary, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                    {decodePath(flow.from_page)}
+                                  </span>
+                                  <span style={{ color: T.purple, fontSize: '14px', flexShrink: 0 }}>→</span>
+                                  <span style={{ color: T.textPrimary, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'left' }}>
+                                    {decodePath(flow.to_page)}
+                                  </span>
+                                  <span style={{ color: T.purple, fontWeight: 700, fontSize: '14px', flexShrink: 0, minWidth: '28px', textAlign: 'left' }}>
+                                    {flow.count}
+                                  </span>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </Card>
+
+                    {/* ── Page Performance ── */}
+                    <Card title="ביצועי דפים" exportData={advancedData.page_performance} exportName="page-performance">
+                      <div style={{ direction: 'rtl', overflowX: 'auto' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                          <thead>
+                            <tr>
+                              {['דף', 'צפיות', 'נטישה', 'המרה', 'יציאה'].map(h => (
+                                <th key={h} style={{ padding: '8px 6px', borderBottom: `1px solid ${T.headerBorder}`, color: T.textSecondary, fontWeight: 500, fontSize: '11px', textAlign: h === 'דף' ? 'right' : 'center' }}>{h}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {(advancedData.page_performance || []).slice(0, 15).map((p, i) => (
+                              <tr key={i}
+                                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(168,85,247,0.04)')}
+                                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                                <td style={{ padding: '8px 6px', borderBottom: `1px solid ${T.rowBorder}`, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: T.textPrimary }}>
+                                  {decodePath(p.page_path)}
+                                </td>
+                                <td style={{ padding: '8px 6px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.purple, fontWeight: 600 }}>
+                                  {p.pageviews}
+                                </td>
+                                <td style={{ padding: '8px 6px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center' }}>
+                                  <span style={{ color: p.bounce_rate > 70 ? T.red : p.bounce_rate > 50 ? T.orange : T.green, fontWeight: 600 }}>
+                                    {p.bounce_rate}%
+                                  </span>
+                                </td>
+                                <td style={{ padding: '8px 6px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center' }}>
+                                  <span style={{
+                                    padding: '2px 6px', borderRadius: '4px', fontSize: '11px', fontWeight: 600,
+                                    background: p.conversion_rate > 0 ? T.greenBg : 'transparent',
+                                    color: p.conversion_rate > 0 ? T.green : T.textMuted,
+                                  }}>
+                                    {p.conversion_rate}%
+                                  </span>
+                                </td>
+                                <td style={{ padding: '8px 6px', borderBottom: `1px solid ${T.rowBorder}`, textAlign: 'center', color: T.textMuted }}>
+                                  {p.exit_rate}%
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </Card>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
+                    {/* ── Entry Pages ── */}
+                    <Card title="דפי כניסה">
+                      <div style={{ direction: 'rtl' }}>
+                        <p style={{ fontSize: '11px', color: T.textMuted, marginBottom: '10px' }}>מאיפה גולשים מתחילים את הביקור</p>
+                        {(advancedData.entry_pages || []).slice(0, 10).map((p, i) => {
+                          const maxEntries = Math.max(...(advancedData.entry_pages || []).map(e => e.entries), 1);
+                          return (
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                              <span style={{ flex: 1, fontSize: '12px', color: T.textPrimary, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {decodePath(p.page_path)}
+                              </span>
+                              <div style={{ width: '80px', height: '6px', background: 'rgba(255,255,255,0.04)', borderRadius: '3px', overflow: 'hidden' }}>
+                                <div style={{ height: '100%', width: `${(p.entries / maxEntries) * 100}%`, background: T.green, borderRadius: '3px' }} />
+                              </div>
+                              <span style={{ fontSize: '12px', color: T.green, fontWeight: 600, minWidth: '30px', textAlign: 'left' }}>{p.entries}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </Card>
+
+                    {/* ── Exit Pages ── */}
+                    <Card title="דפי יציאה">
+                      <div style={{ direction: 'rtl' }}>
+                        <p style={{ fontSize: '11px', color: T.textMuted, marginBottom: '10px' }}>מאיפה גולשים עוזבים את האתר</p>
+                        {(advancedData.exit_pages || []).slice(0, 10).map((p, i) => {
+                          const maxExits = Math.max(...(advancedData.exit_pages || []).map(e => e.exits), 1);
+                          return (
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                              <span style={{ flex: 1, fontSize: '12px', color: T.textPrimary, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {decodePath(p.page_path)}
+                              </span>
+                              <div style={{ width: '80px', height: '6px', background: 'rgba(255,255,255,0.04)', borderRadius: '3px', overflow: 'hidden' }}>
+                                <div style={{ height: '100%', width: `${(p.exits / maxExits) * 100}%`, background: T.red, borderRadius: '3px' }} />
+                              </div>
+                              <span style={{ fontSize: '12px', color: T.red, fontWeight: 600, minWidth: '30px', textAlign: 'left' }}>{p.exits}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* ── Weekly Trend ── */}
+                  {(advancedData.weekly_trend || []).length > 1 && (
+                    <Card title="מגמה שבועית">
+                      <div style={{ direction: 'rtl' }}>
+                        <p style={{ fontSize: '12px', color: T.textMuted, marginBottom: '12px' }}>
+                          ביצועים שבוע אחרי שבוע — זיהוי צמיחה או ירידה
+                        </p>
+                        <div style={{ height: '250px', direction: 'ltr' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={(advancedData.weekly_trend || []).map(w => ({
+                              ...w,
+                              week: new Date(w.week_start).toLocaleDateString('he-IL', { day: 'numeric', month: 'short' }),
+                            }))}>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} />
+                              <XAxis dataKey="week" tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} axisLine={false} />
+                              <Tooltip content={<ChartTooltip />} />
+                              <Legend wrapperStyle={{ fontSize: '12px', color: T.textSecondary }} />
+                              <Bar dataKey="pageviews" name="צפיות" fill={T.purple} radius={[4, 4, 0, 0]} maxBarSize={40} />
+                              <Bar dataKey="clicks" name="לחיצות" fill={T.cyan} radius={[4, 4, 0, 0]} maxBarSize={40} />
+                              <Bar dataKey="forms" name="טפסים" fill={T.green} radius={[4, 4, 0, 0]} maxBarSize={40} />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </Card>
+                  )}
+
+                  {/* ── Device Breakdown ── */}
+                  {(advancedData.device_breakdown || []).length > 0 && (
+                    <Card title="התפלגות מכשירים">
+                      <div style={{ direction: 'rtl', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+                        {advancedData.device_breakdown.map((d, i) => {
+                          const totalSessions = advancedData.device_breakdown.reduce((s, x) => s + x.sessions, 0);
+                          const pct = totalSessions > 0 ? Math.round((d.sessions / totalSessions) * 100) : 0;
+                          const icon = DEVICE_ICONS[d.device_type] || '🖥';
+                          const label = DEVICE_LABELS[d.device_type] || d.device_type;
+                          return (
+                            <div key={i} style={{
+                              padding: '16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
+                              border: `1px solid ${T.cardBorder}`, textAlign: 'center',
+                            }}>
+                              <div style={{ fontSize: '28px', marginBottom: '8px' }}>{icon}</div>
+                              <div style={{ fontSize: '14px', fontWeight: 600, color: T.textPrimary, marginBottom: '4px' }}>{label}</div>
+                              <div style={{ fontSize: '24px', fontWeight: 700, color: T.purple }}>{pct}%</div>
+                              <div style={{ fontSize: '12px', color: T.textSecondary, marginTop: '4px' }}>
+                                {d.sessions.toLocaleString('he-IL')} סשנים
+                              </div>
+                              {d.conversion_rate > 0 && (
+                                <div style={{ fontSize: '11px', color: T.green, marginTop: '4px', fontWeight: 600 }}>
+                                  {d.conversion_rate}% המרה
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </Card>
+                  )}
+
+                  {/* ── Smart Insights ── */}
+                  <Card title="תובנות חכמות">
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+                      {(() => {
+                        const insights: { text: string; type: 'success' | 'warning' | 'info' }[] = [];
+                        const seg = advancedData.engagement_segments;
+                        const stats = advancedData.session_depth_stats;
+                        const pc = advancedData.period_comparison;
+                        const dowData = advancedData.dow_weekly || [];
+
+                        // Session depth insight
+                        if (stats && stats.single_page_pct > 70) {
+                          insights.push({ text: `${stats.single_page_pct}% מהסשנים רואים דף אחד בלבד. שקול להוסיף קישורים פנימיים ו-CTA שמובילים לדפים נוספים`, type: 'warning' });
+                        } else if (stats && stats.deep_sessions_pct > 30) {
+                          insights.push({ text: `${stats.deep_sessions_pct}% מהגולשים צופים ב-3 דפים ומעלה. הגולשים מעורבים ומעוניינים בתוכן`, type: 'success' });
+                        }
+
+                        // Conversion trend
+                        if (pc && pc.prev_forms > 0) {
+                          const formChange = Math.round(((pc.current_forms - pc.prev_forms) / pc.prev_forms) * 100);
+                          if (formChange > 20) {
+                            insights.push({ text: `עלייה של ${formChange}% בטפסים לעומת התקופה הקודמת`, type: 'success' });
+                          } else if (formChange < -20) {
+                            insights.push({ text: `ירידה של ${Math.abs(formChange)}% בטפסים לעומת התקופה הקודמת. בדוק שינויים אחרונים בדפי הנחיתה`, type: 'warning' });
+                          }
+                        }
+
+                        // Best day
+                        if (dowData.length > 0) {
+                          const bestDay = [...dowData].sort((a, b) => b.forms - a.forms)[0];
+                          const bestTrafficDay = [...dowData].sort((a, b) => b.pageviews - a.pageviews)[0];
+                          if (bestDay.forms > 0) {
+                            insights.push({ text: `יום ${DOW_LABELS[bestDay.dow]} הוא הטוב ביותר להמרות (${bestDay.forms} טפסים). שקול לפרסם קמפיינים ביום זה`, type: 'info' });
+                          }
+                          if (bestTrafficDay.dow !== bestDay.dow) {
+                            insights.push({ text: `יום ${DOW_LABELS[bestTrafficDay.dow]} מביא הכי הרבה תנועה (${bestTrafficDay.pageviews} צפיות) אבל לא הכי הרבה המרות`, type: 'info' });
+                          }
+                        }
+
+                        // Entry vs exit mismatch
+                        const topEntry = (advancedData.entry_pages || [])[0];
+                        const topExit = (advancedData.exit_pages || [])[0];
+                        if (topEntry && topExit && topEntry.page_path === topExit.page_path) {
+                          insights.push({ text: `הדף ${decodePath(topEntry.page_path)} הוא גם דף הכניסה וגם דף היציאה הנפוץ ביותר. גולשים נוטשים לפני שהם ממשיכים. שפר את ה-CTA בדף`, type: 'warning' });
+                        }
+
+                        // Engagement
+                        if (seg && seg.converted_sessions > 0) {
+                          const total = seg.one_page_sessions + seg.two_page_sessions + seg.three_plus_sessions;
+                          const convPct = total > 0 ? ((seg.converted_sessions / total) * 100).toFixed(1) : '0';
+                          insights.push({ text: `${convPct}% מהסשנים הסתיימו בהמרה (מילוי טופס)`, type: seg.converted_sessions > 10 ? 'success' : 'info' });
+                        }
+
+                        // Top flow insight
+                        const topFlow = (advancedData.top_flows || [])[0];
+                        if (topFlow) {
+                          insights.push({ text: `המסלול הנפוץ ביותר: ${decodePath(topFlow.from_page)} → ${decodePath(topFlow.to_page)} (${topFlow.count} פעמים)`, type: 'info' });
+                        }
+
+                        if (insights.length === 0) {
+                          insights.push({ text: 'אין מספיק נתונים לתובנות. נסה טווח ימים ארוך יותר', type: 'info' });
+                        }
+
+                        const typeStyles = {
+                          success: { bg: T.greenBg, border: 'rgba(16,185,129,0.2)', icon: '✅' },
+                          warning: { bg: T.orangeBg, border: 'rgba(245,158,11,0.2)', icon: '⚠️' },
+                          info: { bg: T.purpleBg, border: 'rgba(168,85,247,0.2)', icon: '💡' },
+                        };
+
+                        return insights.map((ins, i) => {
+                          const style = typeStyles[ins.type];
+                          return (
+                            <div key={i} style={{
+                              display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '12px',
+                              background: style.bg, borderRadius: '10px', border: `1px solid ${style.border}`,
+                            }}>
+                              <span style={{ fontSize: '18px', flexShrink: 0 }}>{style.icon}</span>
+                              <span style={{ fontSize: '13px', color: T.textPrimary, lineHeight: 1.7 }}>{ins.text}</span>
+                            </div>
+                          );
+                        });
+                      })()}
+                    </div>
+                  </Card>
+                </>
+              )}
+            </>
+          )}
+
+          {/* ═══ BEHAVIOR TAB ═══ */}
+          {activeTab === 'behavior' && (
+            <>
+              {advancedLoading && <><Skeleton height={100} /><Skeleton height={300} /><Skeleton height={300} /></>}
+              {advancedData && (() => {
+                const ad = advancedData;
+                const pc = ad.period_comparison;
+                const pcTrend = (cur: number, prev: number) => calcTrend(cur, prev);
+                const maxHeat = Math.max(...(ad.heatmap || []).map(h => h.count), 1);
+                const heatColor = (count: number) => {
+                  const intensity = count / maxHeat;
+                  if (intensity === 0) return 'rgba(255,255,255,0.02)';
+                  return `rgba(168,85,247,${0.1 + intensity * 0.7})`;
+                };
+                return (
+                  <>
+                    {/* Period comparison KPIs */}
+                    {pc && (
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+                        <KPI label="צפיות" value={pc.current_pageviews} trend={pcTrend(pc.current_pageviews, pc.prev_pageviews)} icon="👁" />
+                        <KPI label="סשנים" value={pc.current_sessions} trend={pcTrend(pc.current_sessions, pc.prev_sessions)} icon="🧑" color={T.cyan} />
+                        <KPI label="טפסים" value={pc.current_forms} trend={pcTrend(pc.current_forms, pc.prev_forms)} icon="📝" color={T.green} />
+                        <KPI label="לחיצות" value={pc.current_clicks} trend={pcTrend(pc.current_clicks, pc.prev_clicks)} icon="👆" color={T.orange} />
+                      </div>
+                    )}
+
+                    {/* Heatmap: day × hour */}
+                    <Card title="מפת חום — יום × שעה">
+                      <div style={{ overflowX: 'auto', direction: 'rtl' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '50px repeat(24, 1fr)', gap: '2px', minWidth: '650px' }}>
+                          {/* Header row - hours */}
+                          <div />
+                          {Array.from({ length: 24 }, (_, h) => (
+                            <div key={h} style={{ fontSize: '10px', color: T.textMuted, textAlign: 'center', padding: '2px 0' }}>{h}</div>
+                          ))}
+                          {/* Data rows - days */}
+                          {[0, 1, 2, 3, 4, 5, 6].map(dow => (
+                            <React.Fragment key={dow}>
+                              <div style={{ fontSize: '12px', color: T.textSecondary, display: 'flex', alignItems: 'center', paddingLeft: '4px' }}>
+                                {DOW_LABELS[dow]}
+                              </div>
+                              {Array.from({ length: 24 }, (_, hour) => {
+                                const cell = (ad.heatmap || []).find(h => h.dow === dow && h.hour === hour);
+                                const count = cell?.count || 0;
+                                return (
+                                  <div key={hour} title={`${DOW_LABELS[dow]} ${hour}:00 — ${count} אירועים`} style={{
+                                    background: heatColor(count), borderRadius: '3px', aspectRatio: '1',
+                                    minHeight: '18px', cursor: 'default', transition: 'transform 0.15s',
+                                  }}
+                                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.2)')}
+                                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                                  />
+                                );
+                              })}
+                            </React.Fragment>
+                          ))}
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '10px', justifyContent: 'center' }}>
+                          <span style={{ fontSize: '11px', color: T.textMuted }}>פחות</span>
+                          {[0.05, 0.2, 0.4, 0.6, 0.8].map((v, i) => (
+                            <div key={i} style={{ width: '16px', height: '12px', borderRadius: '2px', background: `rgba(168,85,247,${0.1 + v * 0.7})` }} />
+                          ))}
+                          <span style={{ fontSize: '11px', color: T.textMuted }}>יותר</span>
+                        </div>
+                      </div>
+                    </Card>
+
+                    {/* Session Depth + Engagement Segments */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                      <Card title="עומק סשן — דפים לביקור">
+                        {ad.session_depth_stats && (
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginBottom: '16px', direction: 'rtl' }}>
+                            <div style={{ padding: '10px', borderRadius: '10px', background: T.purpleBg }}>
+                              <div style={{ fontSize: '11px', color: T.textSecondary }}>ממוצע דפים</div>
+                              <div style={{ fontSize: '22px', fontWeight: 700, color: T.purple }}>{ad.session_depth_stats.avg_depth}</div>
+                            </div>
+                            <div style={{ padding: '10px', borderRadius: '10px', background: T.cyanBg }}>
+                              <div style={{ fontSize: '11px', color: T.textSecondary }}>דף בודד</div>
+                              <div style={{ fontSize: '22px', fontWeight: 700, color: T.cyan }}>{ad.session_depth_stats.single_page_pct}%</div>
+                            </div>
+                            <div style={{ padding: '10px', borderRadius: '10px', background: T.greenBg }}>
+                              <div style={{ fontSize: '11px', color: T.textSecondary }}>3+ דפים</div>
+                              <div style={{ fontSize: '22px', fontWeight: 700, color: T.green }}>{ad.session_depth_stats.deep_sessions_pct}%</div>
+                            </div>
+                            <div style={{ padding: '10px', borderRadius: '10px', background: T.orangeBg }}>
+                              <div style={{ fontSize: '11px', color: T.textSecondary }}>סה״כ סשנים</div>
+                              <div style={{ fontSize: '22px', fontWeight: 700, color: T.orange }}>{ad.session_depth_stats.total_sessions?.toLocaleString('he-IL')}</div>
+                            </div>
+                          </div>
+                        )}
+                        <div style={{ height: '180px', direction: 'ltr' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={ad.session_depth || []}>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} />
+                              <XAxis dataKey="depth" tick={{ fill: T.axisText, fontSize: 11 }} tickFormatter={(v: number) => v >= 10 ? '10+' : `${v}`} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} />
+                              <Tooltip content={<ChartTooltip suffix="סשנים" />} />
+                              <Bar dataKey="sessions" fill={T.purple} radius={[4, 4, 0, 0]} />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </Card>
+
+                      <Card title="פילוח מעורבות">
+                        {ad.engagement_segments && (() => {
+                          const seg = ad.engagement_segments;
+                          const total = seg.one_page_sessions + seg.two_page_sessions + seg.three_plus_sessions;
+                          const segments = [
+                            { label: 'דף בודד', value: seg.one_page_sessions, color: T.textMuted },
+                            { label: '2 דפים', value: seg.two_page_sessions, color: T.cyan },
+                            { label: '3+ דפים', value: seg.three_plus_sessions, color: T.green },
+                            { label: 'לחצו', value: seg.clicked_sessions, color: T.orange },
+                            { label: 'המירו', value: seg.converted_sessions, color: T.purple },
+                          ];
+                          return (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+                              {segments.map((s, i) => (
+                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                  <span style={{ fontSize: '13px', color: T.textSecondary, minWidth: '70px' }}>{s.label}</span>
+                                  <div style={{ flex: 1, height: '22px', background: 'rgba(255,255,255,0.04)', borderRadius: '6px', overflow: 'hidden', position: 'relative' }}>
+                                    <div style={{
+                                      height: '100%', borderRadius: '6px', background: s.color,
+                                      width: `${total > 0 ? Math.max((s.value / total) * 100, 2) : 0}%`,
+                                      transition: 'width 0.5s ease',
+                                    }} />
+                                  </div>
+                                  <span style={{ fontSize: '13px', fontWeight: 600, color: s.color, minWidth: '50px', textAlign: 'left' }}>
+                                    {s.value?.toLocaleString('he-IL')}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          );
+                        })()}
+                      </Card>
+                    </div>
+
+                    {/* Weekly Trend */}
+                    {ad.weekly_trend && ad.weekly_trend.length > 1 && (
+                      <Card title="מגמה שבועית">
+                        <div style={{ height: '240px', direction: 'ltr' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={ad.weekly_trend}>
+                              <defs>
+                                <linearGradient id="weeklyPV" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="0%" stopColor={T.purple} stopOpacity={0.3} />
+                                  <stop offset="100%" stopColor={T.purple} stopOpacity={0} />
+                                </linearGradient>
+                              </defs>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} />
+                              <XAxis dataKey="week_start" tick={{ fill: T.axisText, fontSize: 11 }} tickFormatter={formatDate} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} />
+                              <Tooltip content={<ChartTooltip />} />
+                              <Legend formatter={(v: string) => v === 'pageviews' ? 'צפיות' : v === 'sessions' ? 'סשנים' : v === 'forms' ? 'טפסים' : v} />
+                              <Area type="monotone" dataKey="pageviews" stroke={T.purple} fill="url(#weeklyPV)" strokeWidth={2} name="pageviews" />
+                              <Area type="monotone" dataKey="sessions" stroke={T.cyan} fill="transparent" strokeWidth={2} strokeDasharray="5 5" name="sessions" />
+                              <Area type="monotone" dataKey="forms" stroke={T.green} fill="transparent" strokeWidth={2} name="forms" />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </Card>
+                    )}
+
+                    {/* DOW Weekly Pattern */}
+                    {ad.dow_weekly && ad.dow_weekly.length > 0 && (
+                      <Card title="ביצועים לפי יום בשבוע">
+                        <div style={{ height: '220px', direction: 'ltr' }}>
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={ad.dow_weekly}>
+                              <CartesianGrid strokeDasharray="3 3" stroke={T.grid} />
+                              <XAxis dataKey="dow" tick={{ fill: T.axisText, fontSize: 11 }} tickFormatter={(v: number) => DOW_SHORT[v] || ''} />
+                              <YAxis tick={{ fill: T.axisText, fontSize: 11 }} />
+                              <Tooltip content={<ChartTooltip />} />
+                              <Legend formatter={(v: string) => v === 'pageviews' ? 'צפיות' : v === 'sessions' ? 'סשנים' : v === 'forms' ? 'טפסים' : v} />
+                              <Bar dataKey="pageviews" fill={T.purple} radius={[4, 4, 0, 0]} name="pageviews" />
+                              <Bar dataKey="sessions" fill={T.cyan} radius={[4, 4, 0, 0]} name="sessions" />
+                              <Bar dataKey="forms" fill={T.green} radius={[4, 4, 0, 0]} name="forms" />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </Card>
+                    )}
+
+                    {/* Page Performance Table */}
+                    {ad.page_performance && ad.page_performance.length > 0 && (
+                      <Card title="ביצועי דפים" exportData={ad.page_performance} exportName="page-performance">
+                        <DataTable
+                          rows={ad.page_performance}
+                          columns={[
+                            { key: 'page_path', label: 'דף', render: (v: string) => <span title={v}>{decodePath(v)}</span> },
+                            { key: 'pageviews', label: 'צפיות', align: 'center' },
+                            { key: 'unique_sessions', label: 'סשנים', align: 'center' },
+                            { key: 'bounce_rate', label: 'נטישה %', align: 'center', render: (v: number) => (
+                              <span style={{ color: v > 70 ? T.red : v > 50 ? T.orange : T.green, fontWeight: 600 }}>{v}%</span>
+                            )},
+                            { key: 'conversion_rate', label: 'המרה %', align: 'center', render: (v: number) => (
+                              <span style={{ color: v > 0 ? T.green : T.textMuted, fontWeight: 600 }}>{v}%</span>
+                            )},
+                            { key: 'exit_rate', label: 'יציאה %', align: 'center', render: (v: number) => (
+                              <span style={{ color: v > 60 ? T.red : T.textSecondary }}>{v}%</span>
+                            )},
+                          ]}
+                        />
+                      </Card>
+                    )}
+
+                    {/* Top User Flows */}
+                    {ad.top_flows && ad.top_flows.length > 0 && (
+                      <Card title="מסלולי משתמשים מובילים" exportData={ad.top_flows} exportName="user-flows">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', direction: 'rtl' }}>
+                          {ad.top_flows.slice(0, 15).map((f, i) => (
+                            <div key={i} style={{
+                              display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px',
+                              background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: `1px solid ${T.rowBorder}`,
+                            }}>
+                              <span style={{ fontSize: '13px', color: T.purple, fontWeight: 600, minWidth: '24px' }}>#{i + 1}</span>
+                              <span style={{ fontSize: '12px', color: '#ccc', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {decodePath(f.from_page)}
+                              </span>
+                              <span style={{ fontSize: '14px', color: T.textMuted }}>←</span>
+                              <span style={{ fontSize: '12px', color: '#ccc', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {decodePath(f.to_page)}
+                              </span>
+                              <span style={{ fontSize: '12px', fontWeight: 600, color: T.purple, minWidth: '40px', textAlign: 'left' }}>
+                                {f.count}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </Card>
+                    )}
+
+                    {/* Entry & Exit Pages */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                      {ad.entry_pages && ad.entry_pages.length > 0 && (
+                        <Card title="דפי כניסה">
+                          <DataTable
+                            rows={ad.entry_pages}
+                            columns={[
+                              { key: 'page_path', label: 'דף', render: (v: string) => <span title={v}>{decodePath(v)}</span> },
+                              { key: 'entries', label: 'כניסות', align: 'center' },
+                            ]}
+                          />
+                        </Card>
+                      )}
+                      {ad.exit_pages && ad.exit_pages.length > 0 && (
+                        <Card title="דפי יציאה">
+                          <DataTable
+                            rows={ad.exit_pages}
+                            columns={[
+                              { key: 'page_path', label: 'דף', render: (v: string) => <span title={v}>{decodePath(v)}</span> },
+                              { key: 'exits', label: 'יציאות', align: 'center' },
+                            ]}
+                          />
+                        </Card>
+                      )}
+                    </div>
+
+                    {/* Device Breakdown */}
+                    {ad.device_breakdown && ad.device_breakdown.length > 0 && (
+                      <Card title="פילוח מכשירים">
+                        <DataTable
+                          rows={ad.device_breakdown}
+                          columns={[
+                            { key: 'device_type', label: 'מכשיר', render: (v: string) => (
+                              <span>{DEVICE_ICONS[v] || ''} {DEVICE_LABELS[v] || v}</span>
+                            )},
+                            { key: 'sessions', label: 'סשנים', align: 'center' },
+                            { key: 'pageviews', label: 'צפיות', align: 'center' },
+                            { key: 'forms', label: 'טפסים', align: 'center' },
+                            { key: 'conversion_rate', label: 'המרה %', align: 'center', render: (v: number) => (
+                              <span style={{ color: v > 0 ? T.green : T.textMuted, fontWeight: 600 }}>{v}%</span>
+                            )},
+                          ]}
+                        />
+                      </Card>
+                    )}
+                  </>
+                );
+              })()}
             </>
           )}
 
