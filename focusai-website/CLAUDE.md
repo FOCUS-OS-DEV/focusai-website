@@ -1240,9 +1240,9 @@ Specialized subagents for specific tasks:
 
 ### Changelog (MANDATORY)
 
-Every significant commit MUST also be logged to the `public.changelog` table in Supabase. This feeds the "שינויים" tab in the analytics dashboard.
+EVERY commit MUST also be logged to the `public.changelog` table in Supabase. No exceptions. This feeds the "שינויים" tab in the analytics dashboard and serves as the project owner's complete audit trail.
 
-**When to log:** Every `feat`, `fix`, `refactor`, `content`, `style` commit that changes user-facing behavior, adds/removes pages, fixes bugs, or restructures code. Skip: pure `docs`, `chore`, or build-only commits with no functional change.
+**When to log:** EVERY commit — `feat`, `fix`, `refactor`, `content`, `style`, `docs`, `chore`, `build` — everything.
 
 **How to log:**
 ```sql
