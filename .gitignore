@@ -38,3 +38,8 @@ focusai-website/dist/**/*.webm
 # Large local-only files
 *.pdf
 !focusai-website/public/.htaccess
+
+# Scripts with API keys (Google AI, N8N) — NEVER commit
+_fix_webhooks.mjs
+_create_workflows.mjs
+focusai-website/generate-*.mjs

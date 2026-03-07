@@ -1042,7 +1042,16 @@ User-invocable workflows (use `/skill-name`):
 | `/new-article` | Blog article creation with frontmatter template |
 | `/audit` | Comprehensive site audit (SEO, links, schema, a11y) |
 | `/copywriting` | Brand writing guide — voice, tone, frameworks, copy rules for all pages |
-| `/creating-skills` | Scaffolds a new skill following Anthropic best practices (frontmatter, progressive disclosure, descriptions) |
+| `/creating-skills` | Scaffolds a new skill following Anthropic best practices |
+| `/security-audit` | OWASP Top 10, Supabase RPCs, public repo risks, forms/webhooks |
+| `/code-review` | Quality review with Focus AI conventions (glass cards, RTL, iOS video rules) |
+| `/refactor` | Refactor with behavior preservation, specialized for Astro + React islands |
+| `/performance-review` | Bundle size, Lighthouse, Supabase RPC efficiency, image optimization |
+| `/tech-debt` | Identify and prioritize technical debt with scoring matrix |
+| `/dependency-audit` | npm audit, unused packages, bundle bloat, supply chain risks |
+| `/folder-structure` | Evaluate and improve components/ organization |
+| `/architecture-review` | Deep architectural analysis with ADR output format |
+| `/env-security` | Secrets audit for public repo — git history, .env, Supabase keys |
 
 ### Agents (`.claude/agents/`)
 Specialized subagents for specific tasks:
