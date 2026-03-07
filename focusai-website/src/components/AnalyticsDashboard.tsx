@@ -868,7 +868,7 @@ export default function AnalyticsDashboard() {
   const [customStart, setCustomStart] = useState('');
   const [customEnd, setCustomEnd] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
-  const [pageFilter, setPageFilter] = useState('');
+  const [pageFilter, setPageFilter] = useState<string[]>([]);
   const [deviceFilter, setDeviceFilter] = useState('');
   const [utmSourceFilter, setUtmSourceFilter] = useState('');
   const [sourceFilter, setSourceFilter] = useState<'all' | 'paid' | 'organic'>('all');
@@ -883,13 +883,13 @@ export default function AnalyticsDashboard() {
   const [showForms, setShowForms] = useState(true);
   const passwordRef = useRef('');
 
-  const fetchData = useCallback(async (pw: string, d: number, device?: string, utm?: string, page?: string, startDate?: string, endDate?: string) => {
+  const fetchData = useCallback(async (pw: string, d: number, device?: string, utm?: string, page?: string[], startDate?: string, endDate?: string) => {
     setLoading(true); setError('');
     try {
       const body: Record<string, unknown> = { p_password: pw, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
-      if (page) body.p_page_filter = page;
+      if (page && page.length > 0) body.p_page_filter = page;
       if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_analytics_v2`, {
         method: 'POST',
@@ -946,13 +946,13 @@ export default function AnalyticsDashboard() {
     finally { setAiLoading(false); }
   }, [data, leadsData]);
 
-  const fetchAdvancedData = useCallback(async (d: number, device?: string, utm?: string, page?: string, startDate?: string, endDate?: string) => {
+  const fetchAdvancedData = useCallback(async (d: number, device?: string, utm?: string, page?: string[], startDate?: string, endDate?: string) => {
     setAdvancedLoading(true);
     try {
       const body: Record<string, unknown> = { p_password: null, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
-      if (page) body.p_page_filter = page;
+      if (page && page.length > 0) body.p_page_filter = page[0];
       if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_advanced_analytics`, {
         method: 'POST',
@@ -966,13 +966,13 @@ export default function AnalyticsDashboard() {
     finally { setAdvancedLoading(false); }
   }, []);
 
-  const fetchCroData = useCallback(async (d: number, device?: string, utm?: string, page?: string, startDate?: string, endDate?: string) => {
+  const fetchCroData = useCallback(async (d: number, device?: string, utm?: string, page?: string[], startDate?: string, endDate?: string) => {
     setCroLoading(true);
     try {
       const body: Record<string, unknown> = { p_password: passwordRef.current, p_days: d };
       if (device) body.p_device_type = device;
       if (utm) body.p_utm_source = utm;
-      if (page) body.p_page_filter = page;
+      if (page && page.length > 0) body.p_page_filter = page[0];
       if (startDate && endDate) { body.p_start_date = startDate; body.p_end_date = endDate; }
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_cro_data`, {
         method: 'POST',
@@ -1012,23 +1012,23 @@ export default function AnalyticsDashboard() {
     const end = new Date().toISOString().split('T')[0];
     const start = new Date(Date.now() - (d - 1) * 86400000).toISOString().split('T')[0];
     setDays(d); setCustomStart(start); setCustomEnd(end); setLeadsData(null); setAdvancedData(null); setCroData(null);
-    fetchData(passwordRef.current, d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
+    fetchData(passwordRef.current, d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, start, end);
     if (activeTab === 'leads') fetchLeadsData(passwordRef.current, d, start, end);
-    if (activeTab === 'behavior') fetchAdvancedData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
-    if (activeTab === 'cro' || activeTab === 'journeys') fetchCroData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
+    if (activeTab === 'behavior') fetchAdvancedData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, start, end);
+    if (activeTab === 'cro' || activeTab === 'journeys') fetchCroData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, start, end);
   };
   const applyCustomRange = (start: string, end: string) => {
     setCustomStart(start); setCustomEnd(end); setDays(0); setLeadsData(null); setAdvancedData(null); setCroData(null);
-    fetchData(passwordRef.current, 30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
+    fetchData(passwordRef.current, 30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, start, end);
     if (activeTab === 'leads') fetchLeadsData(passwordRef.current, 30, start, end);
-    if (activeTab === 'behavior') fetchAdvancedData(30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
-    if (activeTab === 'cro' || activeTab === 'journeys') fetchCroData(30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
+    if (activeTab === 'behavior') fetchAdvancedData(30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, start, end);
+    if (activeTab === 'cro' || activeTab === 'journeys') fetchCroData(30, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, start, end);
   };
   const applyFilters = (device: string, utm: string) => {
     setDeviceFilter(device); setUtmSourceFilter(utm);
     setLeadsData(null); setAdvancedData(null); setCroData(null);
     const [sd, ed] = getDateParams();
-    fetchData(passwordRef.current, days, device || undefined, utm || undefined, pageFilter || undefined, sd, ed);
+    fetchData(passwordRef.current, days, device || undefined, utm || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed);
   };
   const toggleSort = (key: string) => setPageSort(prev => ({ key, dir: prev.key === key && prev.dir === 'desc' ? 'asc' : 'desc' }));
 
@@ -1036,7 +1036,7 @@ export default function AnalyticsDashboard() {
   useEffect(() => {
     if (!autoRefresh || !isAuthed) return;
     const [sd, ed] = getDateParams();
-    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed), 60000);
+    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed), 60000);
     return () => clearInterval(id);
   }, [autoRefresh, isAuthed, days, customStart, customEnd, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 
@@ -1051,14 +1051,14 @@ export default function AnalyticsDashboard() {
   useEffect(() => {
     if ((activeTab !== 'behavior' && activeTab !== 'insights') || !isAuthed || advancedData) return;
     const [sd, ed] = getDateParams();
-    fetchAdvancedData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed);
+    fetchAdvancedData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed);
   }, [activeTab, isAuthed, days, customStart, customEnd, advancedData, deviceFilter, utmSourceFilter, pageFilter, fetchAdvancedData]);
 
   // Fetch CRO data when CRO tab opens
   useEffect(() => {
     if (activeTab !== 'cro' || !isAuthed || croData) return;
     const [sd, ed] = getDateParams();
-    fetchCroData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed);
+    fetchCroData(days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed);
   }, [activeTab, isAuthed, days, customStart, customEnd, croData, deviceFilter, utmSourceFilter, pageFilter, fetchCroData]);
 
   // Fetch changelog when changelog tab opens
@@ -1071,7 +1071,7 @@ export default function AnalyticsDashboard() {
   useEffect(() => {
     if (activeTab !== 'realtime' || !isAuthed) return;
     const [sd, ed] = getDateParams();
-    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed), 30000);
+    const id = setInterval(() => fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed), 30000);
     return () => clearInterval(id);
   }, [activeTab, isAuthed, days, customStart, customEnd, deviceFilter, utmSourceFilter, pageFilter, fetchData]);
 
@@ -1085,7 +1085,7 @@ export default function AnalyticsDashboard() {
 
   const filteredPageDetails = useMemo(() => {
     if (!data?.page_details) return [];
-    let arr = pageFilter ? data.page_details.filter(r => r.page_path === pageFilter) : data.page_details;
+    let arr = data.page_details;
     if (tableSearch) {
       const q = tableSearch.toLowerCase();
       arr = arr.filter(r => decodePath(r.page_path).toLowerCase().includes(q));
@@ -1099,7 +1099,7 @@ export default function AnalyticsDashboard() {
 
   const filteredSourcePages = useMemo(() => {
     if (!data?.source_pages) return [];
-    let arr = pageFilter ? data.source_pages.filter(r => r.page_path === pageFilter) : data.source_pages;
+    let arr = data.source_pages;
     if (sourceFilter === 'paid') arr = arr.filter(r => r.utm_medium === 'paid');
     else if (sourceFilter === 'organic') arr = arr.filter(r => !r.utm_medium || r.utm_medium !== 'paid');
     return arr;
@@ -1208,16 +1208,16 @@ export default function AnalyticsDashboard() {
             <option value="">כל המקורות</option>
             {utmSources.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
-          <select value={pageFilter} onChange={e => { setPageFilter(e.target.value); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, e.target.value || undefined, sd, ed); }} dir="rtl" style={{
-            padding: '8px 12px', borderRadius: '8px', border: `1px solid ${pageFilter ? T.purple : T.cardBorder}`,
-            background: pageFilter ? T.purpleBg : T.cardBg, color: pageFilter ? T.purple : T.textSecondary,
+          <select value={pageFilter.length === 1 ? pageFilter[0] : ''} onChange={e => { const val = e.target.value ? [e.target.value] : []; setPageFilter(val); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, val.length > 0 ? val : undefined, sd, ed); }} dir="rtl" style={{
+            padding: '8px 12px', borderRadius: '8px', border: `1px solid ${pageFilter.length > 0 ? T.purple : T.cardBorder}`,
+            background: pageFilter.length > 0 ? T.purpleBg : T.cardBg, color: pageFilter.length > 0 ? T.purple : T.textSecondary,
             fontSize: '13px', cursor: 'pointer', outline: 'none', maxWidth: '200px', fontFamily: 'Heebo, sans-serif',
           }}>
             <option value="">כל הדפים</option>
             {allPages.map(p => <option key={p} value={p}>{decodePath(p)}</option>)}
           </select>
-          {(deviceFilter || utmSourceFilter || pageFilter) && (
-            <button onClick={() => { setDeviceFilter(''); setUtmSourceFilter(''); setPageFilter(''); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, undefined, undefined, undefined, sd, ed); }} style={{
+          {(deviceFilter || utmSourceFilter || pageFilter.length > 0) && (
+            <button onClick={() => { setDeviceFilter(''); setUtmSourceFilter(''); setPageFilter([]); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, undefined, undefined, undefined, sd, ed); }} style={{
               padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.red}`,
               background: T.redBg, color: T.red, cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
             }}>✕ נקה פילטרים</button>
@@ -1227,7 +1227,7 @@ export default function AnalyticsDashboard() {
             background: autoRefresh ? T.greenBg : T.cardBg, color: autoRefresh ? T.green : T.textMuted,
             cursor: 'pointer', fontSize: '12px', fontFamily: 'Heebo, sans-serif',
           }}>{autoRefresh ? '⏸ עצור' : '▶ רענון אוטומטי'}</button>
-          <button onClick={() => { const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, sd, ed); }} disabled={loading} style={{
+          <button onClick={() => { const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter.length > 0 ? pageFilter : undefined, sd, ed); }} disabled={loading} style={{
             padding: '8px 12px', borderRadius: '8px', border: `1px solid ${T.cardBorder}`,
             background: T.cardBg, color: loading ? T.textMuted : T.green, cursor: loading ? 'default' : 'pointer', fontSize: '14px',
           }}>{loading ? '⏳' : '🔄'}</button>
@@ -1307,15 +1307,20 @@ export default function AnalyticsDashboard() {
       </div>
 
       {/* Active Filters Indicator */}
-      {(deviceFilter || utmSourceFilter || pageFilter) && (
+      {(deviceFilter || utmSourceFilter || pageFilter.length > 0) && (
         <div style={{
-          display: 'flex', gap: '8px', marginBottom: '16px', direction: 'rtl', alignItems: 'center',
+          display: 'flex', gap: '8px', marginBottom: '16px', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap',
           padding: '8px 16px', borderRadius: '10px', background: T.purpleBg, border: `1px solid ${T.purple}30`,
         }}>
           <span style={{ fontSize: '12px', color: T.purple, fontWeight: 600 }}>🔍 פילטרים פעילים:</span>
           {deviceFilter && <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(0,0,0,0.04)' }}>{DEVICE_LABELS[deviceFilter] || deviceFilter}</span>}
           {utmSourceFilter && <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(0,0,0,0.04)' }}>{utmSourceFilter}</span>}
-          {pageFilter && <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(0,0,0,0.04)' }}>{decodePath(pageFilter)}</span>}
+          {pageFilter.length > 0 && (() => {
+            const matchedAsset = ASSETS.find(a => a.paths.length > 0 && a.paths.every(p => pageFilter.includes(p)) && pageFilter.every(p => a.paths.includes(p)));
+            return <span style={{ fontSize: '12px', color: T.textPrimary, padding: '2px 10px', borderRadius: '6px', background: 'rgba(0,0,0,0.04)', display: 'inline-flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }} onClick={() => { setPageFilter([]); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, undefined, sd, ed); }}>
+              {matchedAsset ? `${matchedAsset.icon} ${matchedAsset.name}` : pageFilter.map(p => decodePath(p)).join(', ')} ✕
+            </span>;
+          })()}
         </div>
       )}
 
@@ -1844,9 +1849,9 @@ export default function AnalyticsDashboard() {
 
               {/* Forms breakdown */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '16px' }}>
-                <Card title="טפסים" exportData={(pageFilter ? data.form_details?.filter(r => r.page_path === pageFilter) : data.form_details) ?? undefined} exportName="form-submissions">
+                <Card title="טפסים" exportData={data.form_details ?? undefined} exportName="form-submissions">
                   <DataTable
-                    rows={pageFilter ? (data.form_details || []).filter(r => r.page_path === pageFilter) : (data.form_details || [])}
+                    rows={data.form_details || []}
                     columns={[
                       { key: 'page_path', label: 'דף', render: (v: string) => decodePath(v) },
                       { key: 'button_text', label: 'כפתור' },
@@ -1857,7 +1862,7 @@ export default function AnalyticsDashboard() {
 
                 <Card title="דפי נחיתה" exportData={data.landing_pages ?? undefined} exportName="landing-pages">
                   <DataTable
-                    rows={pageFilter ? (data.landing_pages || []).filter(r => r.page_path === pageFilter) : (data.landing_pages || [])}
+                    rows={data.landing_pages || []}
                     columns={[
                       { key: 'page_path', label: 'דף', render: (v: string) => decodePath(v) },
                       { key: 'external_entries', label: 'כניסות', align: 'center', render: (v: number) => <span style={{ color: T.purple, fontWeight: 600 }}>{v}</span> },
@@ -1887,26 +1892,29 @@ export default function AnalyticsDashboard() {
                     ? (data.source_pages || []).filter(sp => asset.paths.includes(sp.page_path)).sort((a, b) => b.visits - a.visits)[0]?.source
                     : null;
 
+                  const isSelected = asset.paths.length > 0 && asset.paths.length === pageFilter.length && asset.paths.every(p => pageFilter.includes(p));
+                  const isWhatsapp = asset.id === 'whatsapp';
+
                   return (
                     <div key={asset.id} onClick={() => {
-                      if (!asset.paths[0]) return;
+                      if (asset.paths.length === 0 && !isWhatsapp) return;
                       // Toggle: click same asset again to deselect
-                      if (pageFilter === asset.paths[0]) {
-                        setPageFilter(''); setLeadsData(null); setAdvancedData(null);
+                      if (isSelected) {
+                        setPageFilter([]); setLeadsData(null); setAdvancedData(null);
                         const [sd, ed] = getDateParams();
                         fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, undefined, sd, ed);
                       } else {
-                        setPageFilter(asset.paths[0]); setLeadsData(null); setAdvancedData(null);
+                        setPageFilter(asset.paths); setLeadsData(null); setAdvancedData(null);
                         const [sd, ed] = getDateParams();
-                        fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, asset.paths[0], sd, ed);
+                        fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, asset.paths.length > 0 ? asset.paths : undefined, sd, ed);
                       }
                     }} style={{
-                      background: pageFilter && asset.paths.includes(pageFilter) ? 'rgba(124,58,237,0.06)' : T.cardBg,
+                      background: isSelected ? 'rgba(124,58,237,0.06)' : T.cardBg,
                       backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-                      border: `2px solid ${pageFilter && asset.paths.includes(pageFilter) ? T.purple : T.cardBorder}`,
-                      borderRadius: '16px', padding: '20px', cursor: asset.paths[0] ? 'pointer' : 'default',
-                      boxShadow: pageFilter && asset.paths.includes(pageFilter) ? `0 4px 20px rgba(124,58,237,0.15)` : T.cardShadow,
-                      transition: 'all 0.2s', transform: pageFilter && asset.paths.includes(pageFilter) ? 'scale(1.02)' : 'scale(1)',
+                      border: `2px solid ${isSelected ? T.purple : T.cardBorder}`,
+                      borderRadius: '16px', padding: '20px', cursor: (asset.paths.length > 0 || isWhatsapp) ? 'pointer' : 'default',
+                      boxShadow: isSelected ? `0 4px 20px rgba(124,58,237,0.15)` : T.cardShadow,
+                      transition: 'all 0.2s', transform: isSelected ? 'scale(1.02)' : 'scale(1)',
                     }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                         <span style={{ fontSize: '24px' }}>{asset.icon}</span>
@@ -1935,12 +1943,12 @@ export default function AnalyticsDashboard() {
               </div>
 
               {/* Selected Asset Drill-Down */}
-              {pageFilter && (() => {
-                const selectedAsset = ASSETS.find(a => a.paths.includes(pageFilter));
+              {pageFilter.length > 0 && (() => {
+                const selectedAsset = ASSETS.find(a => a.paths.length > 0 && a.paths.every(p => pageFilter.includes(p)));
                 if (!selectedAsset) return null;
-                const assetSources = (data.source_pages || []).filter(sp => selectedAsset.paths.includes(sp.page_path)).sort((a, b) => b.visits - a.visits);
-                const assetForms = (data.form_details || []).filter(f => selectedAsset.paths.includes(f.page_path));
-                const assetLandings = (data.landing_pages || []).filter(l => selectedAsset.paths.includes(l.page_path));
+                const assetSources = (data.source_pages || []).sort((a, b) => b.visits - a.visits);
+                const assetForms = data.form_details || [];
+                const assetLandings = data.landing_pages || [];
                 const totalPaid = assetLandings.reduce((s, l) => s + l.paid_entries, 0);
                 const totalOrganic = assetLandings.reduce((s, l) => s + l.organic_entries, 0);
                 return (
@@ -1952,9 +1960,9 @@ export default function AnalyticsDashboard() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <span style={{ fontSize: '24px' }}>{selectedAsset.icon}</span>
                         <span style={{ fontSize: '18px', fontWeight: 700, color: T.textPrimary }}>{selectedAsset.name}</span>
-                        <span style={{ fontSize: '13px', color: T.textMuted, fontFamily: 'monospace' }}>{pageFilter}</span>
+                        <span style={{ fontSize: '13px', color: T.textMuted, fontFamily: 'monospace' }}>{pageFilter.join(', ')}</span>
                       </div>
-                      <button onClick={() => { setPageFilter(''); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, undefined, sd, ed); }} style={{
+                      <button onClick={() => { setPageFilter([]); setLeadsData(null); setAdvancedData(null); const [sd, ed] = getDateParams(); fetchData(passwordRef.current, days, deviceFilter || undefined, utmSourceFilter || undefined, undefined, sd, ed); }} style={{
                         padding: '6px 14px', borderRadius: '8px', border: `1px solid ${T.purple}30`, background: T.purpleBg,
                         color: T.purple, cursor: 'pointer', fontSize: '13px', fontWeight: 600, fontFamily: 'Heebo, sans-serif',
                       }}>✕ סגור</button>
@@ -1995,8 +2003,8 @@ export default function AnalyticsDashboard() {
                         </div>
                       )}
                     </div>
-                    <p style={{ fontSize: '12px', color: T.textMuted, marginTop: '12px', marginBottom: 0 }}>
-                      הטבלאות למטה מסוננות לנכס הנבחר. לחץ על הנכס שוב או על "סגור" כדי לחזור לתצוגה הכללית.
+                    <p style={{ fontSize: '12px', color: T.green, marginTop: '12px', marginBottom: 0 }}>
+                      כל הנתונים בדשבורד מסוננים לנכס הנבחר. לחץ על הנכס שוב או על "סגור" כדי לחזור לתצוגה הכללית.
                     </p>
                   </div>
                 );
