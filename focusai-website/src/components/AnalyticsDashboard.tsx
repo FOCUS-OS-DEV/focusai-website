@@ -472,10 +472,14 @@ export default function AnalyticsDashboard() {
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
         body: JSON.stringify({ p_password: pw, p_days: d }),
       });
-      if (!res.ok) return; // silently fail — main analytics still works
+      if (!res.ok) {
+        const err = await res.text().catch(() => '');
+        console.error('Leads RPC error:', res.status, err);
+        return;
+      }
       const result = await res.json();
       setLeadsData(result);
-    } catch { /* ignore */ }
+    } catch (e) { console.error('Leads fetch error:', e); }
     finally { setLeadsLoading(false); }
   }, []);
 
@@ -1049,7 +1053,8 @@ export default function AnalyticsDashboard() {
 
               {!leadsLoading && !leadsData && (
                 <div style={{ textAlign: 'center', padding: '60px 20px', color: T.textMuted }}>
-                  <p style={{ fontSize: '16px' }}>טוען נתוני לידים...</p>
+                  <p style={{ fontSize: '16px' }}>לא ניתן לטעון נתוני לידים</p>
+                  <p style={{ fontSize: '13px', marginTop: '4px' }}>בדוק ב-Console לפרטי השגיאה</p>
                   <button onClick={() => fetchLeadsData(passwordRef.current, days)} style={{
                     marginTop: '12px', padding: '8px 20px', borderRadius: '8px', border: `1px solid ${T.purple}`,
                     background: T.purpleBg, color: T.purple, cursor: 'pointer', fontSize: '14px', fontFamily: 'Heebo, sans-serif',
