@@ -634,11 +634,13 @@ export default function AnalyticsDashboard() {
   const getDateParams = (): [string | undefined, string | undefined] => customStart && customEnd ? [customStart, customEnd] : [undefined, undefined];
   const handleLogin = (e: React.FormEvent) => { e.preventDefault(); passwordRef.current = password; fetchData(password, days); };
   const changeDays = (d: number) => {
-    setDays(d); setCustomStart(''); setCustomEnd(''); setLeadsData(null); setAdvancedData(null); setCroData(null);
-    fetchData(passwordRef.current, d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
-    if (activeTab === 'leads') fetchLeadsData(passwordRef.current, d);
-    if (activeTab === 'behavior') fetchAdvancedData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
-    if (activeTab === 'cro') fetchCroData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined);
+    const end = new Date().toISOString().split('T')[0];
+    const start = new Date(Date.now() - (d - 1) * 86400000).toISOString().split('T')[0];
+    setDays(d); setCustomStart(start); setCustomEnd(end); setLeadsData(null); setAdvancedData(null); setCroData(null);
+    fetchData(passwordRef.current, d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
+    if (activeTab === 'leads') fetchLeadsData(passwordRef.current, d, start, end);
+    if (activeTab === 'behavior') fetchAdvancedData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
+    if (activeTab === 'cro') fetchCroData(d, deviceFilter || undefined, utmSourceFilter || undefined, pageFilter || undefined, start, end);
   };
   const applyCustomRange = (start: string, end: string) => {
     setCustomStart(start); setCustomEnd(end); setDays(0); setLeadsData(null); setAdvancedData(null); setCroData(null);
@@ -856,27 +858,32 @@ export default function AnalyticsDashboard() {
           }}>{loading ? '⏳' : '🔄'}</button>
           {(() => {
             const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-            const isYesterday = customStart === yesterday && customEnd === yesterday;
-            return <>
-              {[1, 3, 7, 14, 30, 90].map(d => (
-                <button key={d} onClick={() => changeDays(d)} style={{
+            const presets: { d: number; label: string; start?: string; end?: string }[] = [
+              { d: 1, label: 'היום' },
+              { d: -1, label: 'אתמול', start: yesterday, end: yesterday },
+              { d: 3, label: '3 ימים' },
+              { d: 7, label: '7 ימים' },
+              { d: 14, label: '14 ימים' },
+              { d: 30, label: '30 ימים' },
+              { d: 90, label: '90 ימים' },
+            ];
+            return presets.map(p => {
+              const isActive = p.d === -1
+                ? (customStart === yesterday && customEnd === yesterday && days === 0)
+                : days === p.d;
+              return (
+                <button key={p.d} onClick={() => p.d === -1 ? applyCustomRange(yesterday, yesterday) : changeDays(p.d)} style={{
                   padding: '8px 16px', borderRadius: '8px',
-                  border: days === d && !customStart ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
-                  background: days === d && !customStart ? T.purpleBg : T.cardBg,
-                  color: days === d && !customStart ? T.purple : T.textSecondary, cursor: 'pointer', fontSize: '14px', fontWeight: days === d && !customStart ? 600 : 400,
-                }}>{d === 1 ? 'היום' : d === 3 ? '3 ימים' : `${d} ימים`}</button>
-              ))}
-              <button onClick={() => applyCustomRange(yesterday, yesterday)} style={{
-                padding: '8px 16px', borderRadius: '8px',
-                border: isYesterday ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
-                background: isYesterday ? T.purpleBg : T.cardBg,
-                color: isYesterday ? T.purple : T.textSecondary, cursor: 'pointer', fontSize: '14px', fontWeight: isYesterday ? 600 : 400,
-              }}>אתמול</button>
-            </>;
+                  border: isActive ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
+                  background: isActive ? T.purpleBg : T.cardBg,
+                  color: isActive ? T.purple : T.textSecondary, cursor: 'pointer', fontSize: '14px', fontWeight: isActive ? 600 : 400,
+                }}>{p.label}</button>
+              );
+            });
           })()}
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 10px', borderRadius: '8px',
-            border: customStart ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
-            background: customStart ? T.purpleBg : T.cardBg }}>
+            border: days === 0 ? `1px solid ${T.purple}` : `1px solid ${T.cardBorder}`,
+            background: days === 0 ? T.purpleBg : T.cardBg }}>
             <input type="date" value={customStart} onChange={e => {
               const v = e.target.value;
               setCustomStart(v);
@@ -896,8 +903,8 @@ export default function AnalyticsDashboard() {
               fontSize: '13px', outline: 'none', cursor: 'pointer', fontFamily: 'monospace',
               colorScheme: 'dark', width: '130px',
             }} />
-            {customStart && (
-              <button onClick={() => { setCustomStart(''); setCustomEnd(''); changeDays(30); }} style={{
+            {days === 0 && (
+              <button onClick={() => changeDays(30)} style={{
                 background: 'none', border: 'none', color: T.red, cursor: 'pointer', fontSize: '12px', padding: '0 4px',
               }}>✕</button>
             )}
